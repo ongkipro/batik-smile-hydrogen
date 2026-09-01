@@ -13,6 +13,8 @@ import {
 import { AddToCartButton } from '~/components/AddToCartButton';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { BatikDivider, BatikCorner } from '~/components/BatikOrnaments';
+import { FamilyBundleBuilder } from '~/components/FamilyBundleBuilder';
+import { StickyMobileBar } from '~/components/StickyMobileBar';
 
 /**
  * @type {Route.MetaFunction}
@@ -89,15 +91,15 @@ export default function Product() {
 
   // Accordion state
   const [openSection, setOpenSection] = useState('filosofi');
-
   const toggleSection = (id) => {
     setOpenSection((prev) => (prev === id ? null : id));
   };
 
   const isAvailable = selectedVariant?.availableForSale;
+  const isSarimbit = title.toLowerCase().includes('sarimbit') || title.toLowerCase().includes('couple');
 
   return (
-    <div className="bg-[#FAF7F2] min-h-screen text-neutral-900 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-neutral-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumb */}
         <nav className="text-[11px] text-neutral-500 uppercase tracking-widest mb-6 flex items-center gap-2">
@@ -124,7 +126,7 @@ export default function Product() {
                     key={img.id || idx}
                     type="button"
                     onClick={() => setActiveImage(img)}
-                    className={`relative w-16 sm:w-20 aspect-[4/5] rounded overflow-hidden flex-shrink-0 border-2 transition-all ${
+                    className={`relative w-16 sm:w-20 aspect-[4/5] rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all ${
                       activeImage?.url === img.url
                         ? 'border-[#9E4719] shadow'
                         : 'border-neutral-200 opacity-70 hover:opacity-100'
@@ -137,7 +139,7 @@ export default function Product() {
             )}
 
             {/* Main Featured Image */}
-            <div className="flex-1 bg-white rounded-xl overflow-hidden border border-neutral-200/80 shadow-md relative group">
+            <div className="flex-1 bg-white rounded-2xl overflow-hidden border border-neutral-200/80 shadow-md relative group">
               <BatikCorner position="top-left" variant="gold" size={36} className="top-3 left-3 z-10" />
               <BatikCorner position="bottom-right" variant="gold" size={36} className="bottom-3 right-3 z-10" />
 
@@ -155,38 +157,55 @@ export default function Product() {
             </div>
           </div>
 
-          {/* Right: Sticky Product Info & Actions */}
-          <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-xl border border-neutral-200/80 shadow-sm sticky top-28">
+          {/* Right: Sticky Product Info & Purchasing Column */}
+          <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-neutral-200/80 shadow-sm sticky top-28">
             <div className="mb-4">
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E4719] font-bold">
-                Karya Butik Asli
+                Karya Butik Asli Jawa Tengah
               </span>
               <h1 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 mt-1 mb-2 leading-tight">
                 {title}
               </h1>
 
-              {/* Price */}
+              {/* Price & Objection Snapping Badge */}
               <div className="flex items-baseline gap-3 my-3">
-                <span className="text-xl sm:text-2xl font-bold text-[#9E4719]">
+                <span className="text-xl sm:text-2xl font-bold text-[#9E4719] font-sans">
                   {selectedVariant?.price && <Money data={selectedVariant.price} />}
                 </span>
                 {selectedVariant?.compareAtPrice && (
-                  <span className="text-sm line-through text-neutral-400">
+                  <span className="text-sm line-through text-neutral-400 font-sans">
                     <Money data={selectedVariant.compareAtPrice} />
                   </span>
                 )}
+              </div>
+
+              {/* Contextual Reassurance Microcopy */}
+              <div className="flex items-center gap-2 text-[11px] text-emerald-700 font-medium py-1.5 px-3 rounded-lg bg-emerald-50 border border-emerald-200/60 w-fit">
+                <span>✓ Lapis Furing Hero Halus</span>
+                <span>•</span>
+                <span>Garansi Tukar Size 100%</span>
               </div>
             </div>
 
             <BatikDivider variant="soga" className="my-4" />
 
-            {/* Variant Options Pills */}
+            {/* Single Variant Option Pills (Ukuran) */}
             <div className="space-y-4 mb-6">
               {productOptions.map((option) => (
                 <div key={option.name}>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
-                    {option.name}: <span className="font-normal text-neutral-500">{option.value}</span>
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-neutral-700">
+                      {option.name}: <span className="font-normal text-neutral-500">{option.value}</span>
+                    </label>
+                    <a
+                      href="https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20butuh%20panduan%20ukuran"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[11px] text-[#9E4719] hover:underline font-medium"
+                    >
+                      Panduan Ukuran (Size Guide) &rarr;
+                    </a>
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {option.optionValues.map((val) => {
                       const isSelected = val.name === option.value;
@@ -196,7 +215,7 @@ export default function Product() {
                           to={val.to}
                           preventScrollReset
                           replace
-                          className={`px-3.5 py-2 rounded text-xs font-semibold uppercase tracking-wider transition-all border ${
+                          className={`px-3.5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all border ${
                             isSelected
                               ? 'bg-neutral-900 text-white border-neutral-900 shadow'
                               : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-500'
@@ -211,7 +230,12 @@ export default function Product() {
               ))}
             </div>
 
-            {/* Dual CTA: Add to Cart & WhatsApp */}
+            {/* Model Fit Reference */}
+            <div className="text-[11px] text-neutral-500 bg-neutral-50 p-3 rounded-lg mb-6 border border-neutral-200/60">
+              💡 <strong>Referensi Model:</strong> Pria TB 178cm / BB 75kg memakai size L (Reguler Fit).
+            </div>
+
+            {/* Dual Actions: Add to Cart & WhatsApp */}
             <div className="space-y-3 mb-8">
               <AddToCartButton
                 disabled={!isAvailable}
@@ -226,18 +250,18 @@ export default function Product() {
                       ]
                     : []
                 }
-                className="w-full py-4 px-6 rounded bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-widest transition-all shadow-md disabled:bg-neutral-300 disabled:cursor-not-allowed"
+                className="w-full py-4 px-6 rounded-lg bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-widest transition-all shadow-md disabled:bg-neutral-300 disabled:cursor-not-allowed"
               >
-                {isAvailable ? 'Tambah ke Tas Belanja' : 'Habis Terjual'}
+                {isAvailable ? 'Tambah ke Tas Belanja 🛍️' : 'Habis Terjual'}
               </AddToCartButton>
 
               <a
-                href={`https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20tanya%20produk%3A%20${encodeURIComponent(
+                href={`https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20dengan%20produk%3A%20${encodeURIComponent(
                   title,
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-3.5 px-6 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs uppercase tracking-widest text-center block transition-colors shadow-sm"
+                className="w-full py-3 px-6 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs uppercase tracking-widest text-center block transition-colors shadow-sm"
               >
                 Tanya Konsultan via WhatsApp
               </a>
@@ -245,7 +269,7 @@ export default function Product() {
 
             {/* Accordions */}
             <div className="border-t border-neutral-200 divide-y divide-neutral-200 text-xs">
-              {/* Accordion 1: Filosofi & Deskripsi */}
+              {/* Accordion 1: Filosofi & Cerita */}
               <div className="py-3.5">
                 <button
                   type="button"
@@ -269,7 +293,7 @@ export default function Product() {
                 )}
               </div>
 
-              {/* Accordion 2: Detail Bahan & Furing */}
+              {/* Accordion 2: Bahan & Furing */}
               <div className="py-3.5">
                 <button
                   type="button"
@@ -301,16 +325,23 @@ export default function Product() {
                 {openSection === 'care' && (
                   <div className="mt-3 text-neutral-600 leading-relaxed space-y-1.5">
                     <p>• Cuci menggunakan sabun khusus lerak atau sampo bayi lembut.</p>
-                    <p>• Hindari memeras terlalu keras dan jangan gunakan mesin cuci berkecepatan tinggi.</p>
-                    <p>• Jemur di tempat teduh (angin-anginkan) tanpa terkena sinar matahari langsung.</p>
-                    <p>• Setrika dengan suhu sedang atau lapisi dengan kain tipis.</p>
+                    <p>• Hindari memeras terlalu keras dan jemur di tempat teduh tanpa sinar matahari langsung.</p>
+                    <p>• Setrika dengan suhu sedang atau lapisi kain pelindung.</p>
                   </div>
                 )}
               </div>
             </div>
           </div>
         </div>
+
+        {/* 2. Family Bundle Builder (If it's a Sarimbit product) */}
+        {isSarimbit && (
+          <FamilyBundleBuilder product={product} selectedVariant={selectedVariant} />
+        )}
       </div>
+
+      {/* Floating Smart Mobile Action Bar */}
+      <StickyMobileBar product={product} selectedVariant={selectedVariant} />
 
       <Analytics.ProductView
         data={{

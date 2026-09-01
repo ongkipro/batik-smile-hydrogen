@@ -1,10 +1,12 @@
 import React, { Suspense } from 'react';
 import { Await, useLoaderData, NavLink } from 'react-router';
 import { Image, Money } from '@shopify/hydrogen';
-import { HeroSlider } from '~/components/HeroSlider';
-import { SarimbitSpotlight } from '~/components/SarimbitSpotlight';
+import { HeroEditorial } from '~/components/HeroEditorial';
+import { TierExperience } from '~/components/TierExperience';
+import { ShoppableLookbook } from '~/components/ShoppableLookbook';
+import { CraftsmanshipZoom } from '~/components/CraftsmanshipZoom';
 import { ShowroomO2O } from '~/components/ShowroomO2O';
-import { BatikDivider } from '~/components/BatikOrnaments';
+import { BatikDivider, BatikCorner } from '~/components/BatikOrnaments';
 
 /**
  * @type {Route.MetaFunction}
@@ -60,46 +62,37 @@ export default function Homepage() {
   const data = useLoaderData();
 
   return (
-    <div className="w-full bg-white text-neutral-900">
-      {/* 1. Hero Carousel Slider */}
-      <HeroSlider />
+    <div className="w-full bg-[#FAF8F5] text-neutral-900">
+      {/* 1. Master Split Editorial Hero */}
+      <HeroEditorial />
 
-      {/* 2. Brand Prologue */}
-      <section className="py-16 px-6 sm:px-8 max-w-4xl mx-auto text-center">
-        <span className="text-xs uppercase tracking-[0.25em] text-[#9E4719] font-bold">
-          Prolog Tradisi
-        </span>
-        <h2 className="font-serif text-2xl sm:text-3xl font-bold mt-2 mb-3 text-neutral-900 leading-snug">
-          Menjaga Warisan Luhur, Menenun Keharmonisan Keluarga
-        </h2>
-        <BatikDivider variant="soga" className="my-3" />
-        <p className="text-xs sm:text-sm text-neutral-600 font-sans leading-relaxed">
-          Sejak 2007, Batik Smile mendedikasikan karya pada ketelitian canting, tenun ATBM, dan
-          potongan pola presisi berlapis furing hero halus. Setiap helai kain membawa doa kebaikan,
-          kewibawaan, dan kehangatan bagi yang mengenakannya.
-        </p>
-      </section>
+      {/* 2. Interactive 3-Tier Experience Switcher */}
+      <TierExperience />
 
-      {/* 3. 3-Tier Sarimbit Bento Grid Spotlight */}
-      <SarimbitSpotlight />
+      {/* 3. Shoppable Lookbook with Interactive Hotspots */}
+      <ShoppableLookbook />
 
-      {/* 4. Lorong Corak: Curated Products Grid */}
-      <section className="py-20 px-6 sm:px-8 lg:px-12 bg-white border-t border-neutral-100">
+      {/* 4. Craftsmanship Macro Zoom (3 Proof Cards) */}
+      <CraftsmanshipZoom />
+
+      {/* 5. Lorong Corak: Live Curated Products Grid */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-neutral-200/60">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-14">
             <div>
-              <span className="text-xs uppercase tracking-[0.2em] text-[#9E4719] font-bold">
+              <span className="text-[11px] uppercase tracking-[0.25em] text-[#9E4719] font-bold">
                 Karya Pilihan Terkini
               </span>
-              <h2 className="font-serif text-3xl font-bold mt-1 text-neutral-900">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-1 text-neutral-900">
                 Lorong Corak Nusantara
               </h2>
             </div>
             <NavLink
               to="/collections/sarimbit-batik-couple"
-              className="text-xs font-semibold uppercase tracking-wider text-[#9E4719] hover:underline"
+              className="text-xs font-semibold uppercase tracking-wider text-[#9E4719] hover:underline flex items-center gap-1.5"
             >
-              Lihat Seluruh Katalog &rarr;
+              <span>Lihat Seluruh Katalog Butik</span>
+              <span>&rarr;</span>
             </NavLink>
           </div>
 
@@ -107,7 +100,7 @@ export default function Homepage() {
             fallback={
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[...Array(4)].map((_, i) => (
-                  <div key={i} className="aspect-[4/5] bg-neutral-100 animate-pulse rounded-lg" />
+                  <div key={i} className="aspect-[4/5] bg-neutral-100 animate-pulse rounded-xl" />
                 ))}
               </div>
             }
@@ -118,7 +111,7 @@ export default function Homepage() {
                 if (!products.length) {
                   return (
                     <div className="text-center py-12 text-neutral-500 text-xs">
-                      Sedang memuat koleksi terbaru dari butik...
+                      Sedang memuat koleksi busana dari butik...
                     </div>
                   );
                 }
@@ -136,14 +129,14 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* 5. Showroom 3 Lantai & Layanan Kustom */}
+      {/* 6. Showroom 3 Lantai Semarang & Solo O2O */}
       <ShowroomO2O />
     </div>
   );
 }
 
 /**
- * Product Card with 4:5 Aspect Ratio & Luxury Styling
+ * Product Card with 4:5 Aspect Ratio, Hover Zoom & Anti-Slop Styling
  */
 function ProductCard({ product }) {
   const image = product.featuredImage;
@@ -151,7 +144,12 @@ function ProductCard({ product }) {
 
   return (
     <div className="group flex flex-col justify-between">
-      <NavLink to={`/products/${product.handle}`} className="block relative overflow-hidden rounded-lg bg-neutral-100 mb-3">
+      <NavLink
+        to={`/products/${product.handle}`}
+        className="block relative overflow-hidden rounded-xl bg-neutral-100 mb-3 border border-neutral-200/80 group-hover:border-[#9E4719]/40 transition-all shadow-sm"
+      >
+        <BatikCorner position="top-left" variant="gold" size={24} className="top-2 left-2 z-10 opacity-0 group-hover:opacity-70 transition-opacity" />
+
         {image ? (
           <Image
             data={image}
@@ -167,7 +165,7 @@ function ProductCard({ product }) {
         )}
 
         <div className="absolute top-2.5 left-2.5">
-          <span className="px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider bg-black/70 text-white backdrop-blur-sm">
+          <span className="px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider bg-black/75 text-white backdrop-blur-sm">
             Ready Stock
           </span>
         </div>
@@ -181,7 +179,7 @@ function ProductCard({ product }) {
           {product.title}
         </NavLink>
         {price && (
-          <div className="text-xs font-bold text-[#9E4719]">
+          <div className="text-xs font-bold text-[#9E4719] font-sans">
             <Money data={price} />
           </div>
         )}
