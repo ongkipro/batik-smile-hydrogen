@@ -37,12 +37,12 @@
 
 ```
 [Storefront Root: /]
-  ├── [AnnouncementBar]: Promo ongkir, garansi tukar size, WhatsApp CS
+  ├── [AnnouncementBar]: Promo ongkir, garansi tukar size, WhatsApp CS (Metaobject: announcement_bar)
   ├── [Header & MegaMenu]: Navigasi asimetris 4 kategori + preview lookbook 4:5
   ├── [/] (Homepage):
-  │     ├── HeroEditorial: Split hero wibawa + 4:5 portrait card + quick tier pills
+  │     ├── HeroEditorial: Split hero wibawa + 4:5 portrait card (Metaobject: hero_banner)
   │     ├── TierExperience: 3-Tier interactive switcher (Mahakarya, Signature, Essential)
-  │     ├── ShoppableLookbook: Hotspot pins pada foto keluarga (+ Ayah, + Ibu, + Anak)
+  │     ├── ShoppableLookbook: Hotspot pins pada foto keluarga (Metaobject: lookbook_spotlight)
   │     ├── CraftsmanshipZoom: 3 bukti kualitas butik (Furing, Sambung Saku, Pewarnaan)
   │     ├── Lorong Corak: Live grid produk terkurasi dari Storefront API
   │     └── ShowroomO2O: Keunggulan 3S 1C 1T 1H & peta showroom Semarang & Solo
@@ -67,7 +67,24 @@
 
 ---
 
-## 4. Technical Non-Negotiables
+## 4. Merchant Dynamic Content Engine (Shopify Metaobjects Strategy)
+
+Untuk memberikan kebebasan penuh kepada pemilik butik/marketing agar bisa **mengganti banner, promo musiman, dan konten visual tanpa menyentuh kode program**, seluruh bagian dinamis di-mapping ke **Shopify Metaobjects**:
+
+| Section Frontend | Tipe Metaobject | Lokasi di Shopify Admin | Field yang Bisa Diganti Merchant |
+|---|---|---|---|
+| **Hero Slider & Banner Utama** | `hero_banner` | **Content $\rightarrow$ Metaobjects $\rightarrow$ Hero Banner** | `title`, `subtitle`, `tier_badge`, `image` (4:5), `cta_text`, `cta_link`, `is_active` |
+| **Top Announcement Bar** | `announcement_bar` | **Content $\rightarrow$ Metaobjects $\rightarrow$ Announcement Bar** | `message`, `highlight_text`, `link_url`, `whatsapp_number` |
+| **Shoppable Lookbook Spotlight** | `lookbook_spotlight` | **Content $\rightarrow$ Metaobjects $\rightarrow$ Lookbook Spotlight** | `headline`, `family_photo` (16:9), `hotspots_json` (titik pin, nama baju, harga, handle produk) |
+| **Mid-Page Promo Banner** | `promo_banner` | **Content $\rightarrow$ Metaobjects $\rightarrow$ Promo Banner** | `badge`, `title`, `description`, `bg_image`, `button_label`, `button_url` |
+| **Showroom & Jam Operasional** | `showroom_info` | **Content $\rightarrow$ Metaobjects $\rightarrow$ Showroom Info** | `city`, `address`, `hours`, `facilities`, `google_maps_url`, `whatsapp_contact` |
+
+### Fallback Resilience Guarantee:
+Setiap komponen Hydrogen dilengkapi **Graceful Fallback Defaults**. Jika Metaobject belum diisi oleh merchant atau koneksi API mengalami gangguan sementara, komponen akan menampilkan konten default butik yang elegan tanpa merusak layout atau menampilkan layar kosong.
+
+---
+
+## 5. Technical Non-Negotiables
 
 1. **100% Shopify-Native**: Semua konten dinamis (Banner, Hero, Lookbook, Cerita Motif) dikelola lewat **Shopify Metaobjects** dan **Metafields**.
 2. **Zero-Cost Edge Hosting**: Berjalan di atas **Shopify Oxygen Edge Runtime** (termasuk dalam langganan Shopify).
