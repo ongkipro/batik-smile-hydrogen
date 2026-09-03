@@ -14,6 +14,37 @@ import { StickyMobileBar } from '~/components/StickyMobileBar';
 import { ProductItem } from '~/components/ProductItem';
 
 /**
+ * Parse Shopify product description HTML into narrative story and structured specifications
+ * @param {string} html
+ */
+function parseShopifyDescription(html) {
+  if (!html) return { story: '', specs: [] };
+
+  // Extract paragraphs (excluding ul)
+  const pMatches = html.match(/<p[^>]*>([\s\S]*?)<\/p>/gi) || [];
+  const story = pMatches
+    .map((p) => p.replace(/<[^>]+>/g, '').trim())
+    .filter(Boolean)
+    .join('\n\n');
+
+  // Extract li items
+  const liMatches = html.match(/<li[^>]*>([\s\S]*?)<\/li>/gi) || [];
+  const specs = liMatches.map((li) => {
+    const raw = li.replace(/<\/?li[^>]*>/gi, '').trim();
+    const strongMatch = raw.match(/<strong[^>]*>([\s\S]*?)<\/strong>/i);
+    const label = strongMatch ? strongMatch[1].replace(/[:\s]+$/, '').trim() : '';
+    const value = raw
+      .replace(/<strong[^>]*>[\s\S]*?<\/strong>/i, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/^[:\s]+/, '')
+      .trim();
+    return { label, value: value || raw.replace(/<[^>]+>/g, '').trim() };
+  });
+
+  return { story, specs };
+}
+
+/**
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
@@ -140,12 +171,8 @@ export default function Product() {
   // Size Guide Modal state
   const [showSizeGuide, setShowSizeGuide] = useState(false);
 
-  // Tailoring add-on state
-  const [isTailoringAdded, setIsTailoringAdded] = useState(false);
-  const [measurements, setMeasurements] = useState('');
-
-  // Accordion state
-  const [openSection, setOpenSection] = useState('filosofi');
+  // Policy accordion state
+  const [openSection, setOpenSection] = useState(null);
   const toggleSection = (id) => {
     setOpenSection((prev) => (prev === id ? null : id));
   };
@@ -156,22 +183,19 @@ export default function Product() {
     'https://wa.me/6281390888809?text=' +
     encodeURIComponent(`Halo Butik Batik Smile Nusantara, saya ingin konsultasi ukuran & corak produk: ${title}`);
 
-  // Construct line item with optional custom tailoring attributes
+  // Clean cart lines
   const cartLines = selectedVariant
     ? [
         {
           merchandiseId: selectedVariant.id,
           quantity: 1,
           selectedVariant,
-          attributes: isTailoringAdded
-            ? [
-                { key: '_tailoring_service', value: 'yes' },
-                { key: '_tailoring_measurements', value: measurements || 'Standard Tailoring Requested' },
-              ]
-            : [],
         },
       ]
     : [];
+
+  // Parse structured description from Shopify
+  const parsedDescription = parseShopifyDescription(descriptionHtml);
 
   // Resolve related products from the exact same collection
   const rawCollections = product.collections?.nodes || [];
@@ -271,7 +295,7 @@ export default function Product() {
             </div>
           </div>
 
-          {/* Right: Frameless Quiet Luxury Product Details (5 Cols on Desktop, No Boxed Card!) */}
+          {/* Right: Frameless Quiet Luxury Product Details (5 Cols on Desktop) */}
           <div className="lg:col-span-5 space-y-6">
             {/* Header Block */}
             <div>
@@ -439,77 +463,37 @@ export default function Product() {
                   </table>
                 </div>
                 <div className="mt-3 pt-2.5 border-t border-[#E2DFD8] flex items-center justify-between text-[10px] text-[#5A5550]">
-                  <span>Ukuran di luar tabel? Pilih layanan jahit kustom.</span>
+                  <span>Ukuran di luar tabel? Konsultasikan bersama penjahit butik.</span>
                   <a
                     href={officialWaUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[#9E7D3B] font-semibold uppercase tracking-wider hover:underline"
                   >
-                    TANYA KONSULTAN &rarr;
+                    KONSULTASI UKURAN &rarr;
                   </a>
                 </div>
               </div>
             )}
 
-            {/* Bespoke Tailoring Atelier Add-on */}
-            <div className="p-4 bg-white border border-[#E2DFD8] hover:border-[#C5A059] transition-colors">
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={isTailoringAdded}
-                  onChange={(e) => setIsTailoringAdded(e.target.checked)}
-                  className="mt-0.5 text-[#C5A059] focus:ring-0 cursor-pointer accent-[#C5A059]"
-                />
-                <div>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#111111] block">
-                    TAMBAH JASA JAHIT BESPOKE TAILORING (+Rp 150.000)
-                  </span>
-                  <span className="text-[10px] text-[#5A5550] block mt-0.5 leading-relaxed font-light">
-                    Kustomisasi ukuran badan (Lingkar Dada, Panjang Baju, Lengan) dijahit langsung oleh penjahit butik tanpa minimal order.
-                  </span>
-                </div>
-              </label>
-
-              {isTailoringAdded && (
-                <div className="mt-3 pt-3 border-t border-[#E2DFD8]">
-                  <label className="text-[10px] font-semibold uppercase tracking-wider text-[#111111] block mb-1">
-                    CATATAN UKURAN BADAN (OPSIONAL):
-                  </label>
-                  <input
-                    type="text"
-                    value={measurements}
-                    onChange={(e) => setMeasurements(e.target.value)}
-                    placeholder="Contoh: LD 108cm, PB 74cm, Lengan Panjang"
-                    className="w-full text-xs p-2.5 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] outline-none"
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Model Fit Reference */}
-            <div className="text-[10px] text-[#5A5550] bg-white p-3 border border-[#E2DFD8] tracking-wide uppercase">
-              REFERENSI FITTING: TB 178 cm &bull; BB 74 kg mengenakan ukuran L (Regular Fit).
-            </div>
-
-            {/* Purchase & WhatsApp CTAs */}
+            {/* Direct Purchase Actions (BELI SEKARANG as Direct Checkout, TAMBAH KE TAS as Add to Cart) */}
             <div className="space-y-3 pt-2">
               <AddToCartButton
                 disabled={!isAvailable}
                 lines={cartLines}
+                redirectTo="checkout"
                 className="w-full py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:bg-[#E2DFD8] disabled:!text-[#5A5550] disabled:cursor-not-allowed cursor-pointer shadow-md"
               >
-                {isAvailable ? 'TAMBAH KE TAS BELANJA' : 'HABIS TERJUAL'}
+                {isAvailable ? 'BELI SEKARANG' : 'HABIS TERJUAL'}
               </AddToCartButton>
 
-              <a
-                href={officialWaUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full py-3.5 px-6 bg-white hover:bg-[#FAF8F5] text-[#111111] font-semibold text-[10px] uppercase tracking-[0.18em] text-center block border border-[#111111] transition-colors no-underline"
+              <AddToCartButton
+                disabled={!isAvailable}
+                lines={cartLines}
+                className="w-full py-3.5 px-6 bg-white hover:bg-[#FAF8F5] !text-[#111111] hover:!text-[#9E7D3B] font-semibold text-[10px] uppercase tracking-[0.18em] text-center block border border-[#111111] transition-colors cursor-pointer"
               >
-                KONSULTASI FITTING &amp; CORAK VIA WHATSAPP &rarr;
-              </a>
+                + TAMBAH KE TAS BELANJA
+              </AddToCartButton>
             </div>
 
             {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H) */}
@@ -532,85 +516,67 @@ export default function Product() {
               </div>
             </div>
 
-            {/* Accordions */}
-            <div className="border-t border-[#E2DFD8] divide-y divide-[#E2DFD8] text-xs pt-2">
-              {/* Accordion 1: Filosofi & Cerita */}
-              <div className="py-4">
-                <button
-                  type="button"
-                  onClick={() => toggleSection('filosofi')}
-                  className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
-                >
-                  <span>FILOSOFI CORAK &amp; MAKNA KARYA</span>
-                  <span className="text-sm">{openSection === 'filosofi' ? '−' : '+'}</span>
-                </button>
-                {openSection === 'filosofi' && (
-                  <div className="mt-3 text-[#5A5550] leading-relaxed font-light space-y-2">
-                    {descriptionHtml ? (
-                      <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
-                    ) : (
-                      <p>
-                        Karya busana batik klasik sarat makna doa kemakmuran, wibawa, dan keharmonisan keluarga,
-                        dirancang dengan ketelitian maestro canting lokal Semarang sejak 2007.
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
+            {/* Full Dynamic Shopify Description & Specifications (Rendered directly as 1 unified entity) */}
+            <div className="pt-2 border-t border-[#E2DFD8]">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] block mb-3">
+                DESKRIPSI &amp; SPESIFIKASI KARYA
+              </span>
 
-              {/* Accordion 2: Bahan & Furing */}
-              <div className="py-4">
-                <button
-                  type="button"
-                  onClick={() => toggleSection('material')}
-                  className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
-                >
-                  <span>DETAIL MATERIAL &amp; JAHITAN BUTIK</span>
-                  <span className="text-sm">{openSection === 'material' ? '−' : '+'}</span>
-                </button>
-                {openSection === 'material' && (
-                  <div className="mt-3 text-[#5A5550] leading-relaxed font-light space-y-2">
-                    <p>&bull; <strong>Bahan Utama:</strong> Katun Primisima Halus / Tenun Dobby Timbul bermutu tinggi.</p>
-                    <p>&bull; <strong>Lapis Furing:</strong> Furing hero katun lembut adem yang menyerap keringat seharian.</p>
-                    <p>&bull; <strong>Presisi Pola:</strong> Sambung motif simetris pada saku dan belahan kancing depan.</p>
-                  </div>
-                )}
-              </div>
+              {/* Story Narrative */}
+              {parsedDescription.story && (
+                <p className="text-xs sm:text-sm text-[#444444] font-light leading-relaxed mb-4 italic font-serif">
+                  &ldquo;{parsedDescription.story}&rdquo;
+                </p>
+              )}
 
-              {/* Accordion 3: Panduan Perawatan */}
-              <div className="py-4">
-                <button
-                  type="button"
-                  onClick={() => toggleSection('care')}
-                  className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
-                >
-                  <span>PANDUAN PERAWATAN WASTRA</span>
-                  <span className="text-sm">{openSection === 'care' ? '−' : '+'}</span>
-                </button>
-                {openSection === 'care' && (
-                  <div className="mt-3 text-[#5A5550] leading-relaxed font-light space-y-2">
-                    <p>&bull; Cuci terpisah menggunakan sabun khusus lerak atau sampo bayi lembut.</p>
-                    <p>&bull; Hindari memeras terlalu kuat dan jemur di tempat teduh tanpa terik matahari langsung.</p>
-                    <p>&bull; Setrika dari bagian dalam menggunakan panas suhu sedang.</p>
-                  </div>
-                )}
-              </div>
+              {/* Dynamic Specifications Grid from Shopify UL/LI */}
+              {parsedDescription.specs.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+                  {parsedDescription.specs.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 bg-white border border-[#E2DFD8] flex items-start gap-2.5 transition-colors hover:border-[#C5A059]"
+                    >
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                      <div className="min-w-0">
+                        {item.label && (
+                          <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                            {item.label}
+                          </span>
+                        )}
+                        <span className="text-xs text-[#5A5550] font-light leading-snug block">
+                          {item.value}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                descriptionHtml && (
+                  <div
+                    className="text-xs text-[#5A5550] leading-relaxed font-light mb-4 space-y-2"
+                    dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+                  />
+                )
+              )}
+            </div>
 
-              {/* Accordion 4: Pengiriman & Garansi */}
-              <div className="py-4">
+            {/* Store Service & Delivery Accordion */}
+            <div className="border-t border-[#E2DFD8] divide-y divide-[#E2DFD8] text-xs">
+              <div className="py-3.5">
                 <button
                   type="button"
                   onClick={() => toggleSection('shipping')}
                   className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
                 >
-                  <span>PENGIRIMAN &amp; JAMINAN TUKAR UKURAN</span>
+                  <span>PENGIRIMAN RESMI &amp; JAMINAN TUKAR UKURAN 7 HARI</span>
                   <span className="text-sm">{openSection === 'shipping' ? '−' : '+'}</span>
                 </button>
                 {openSection === 'shipping' && (
                   <div className="mt-3 text-[#5A5550] leading-relaxed font-light space-y-2">
-                    <p>&bull; <strong>Pengiriman Cepat:</strong> Dikirim dari Flagship Showroom Simongan Semarang ke seluruh Nusantara.</p>
-                    <p>&bull; <strong>Garansi Ukuran:</strong> Bebas tukar ukuran dalam 7 hari setelah barang diterima jika ukuran kurang pas.</p>
-                    <p>&bull; <strong>Layanan 3S 1C 1T &amp; 1H:</strong> Hubungi WhatsApp Concierge 081-390-8888-09 untuk panduan penukaran.</p>
+                    <p>&bull; <strong>Pengiriman Cepat:</strong> Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.</p>
+                    <p>&bull; <strong>Garansi Bebas Tukar Ukuran:</strong> Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas.</p>
+                    <p>&bull; <strong>Layanan Konsultasi 3S 1C 1T &amp; 1H:</strong> Tim penjahit dan konsultan kami siap mendampingi panduan ukuran melalui WhatsApp Concierge 081-390-8888-09.</p>
                   </div>
                 )}
               </div>

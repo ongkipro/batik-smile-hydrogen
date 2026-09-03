@@ -80,7 +80,11 @@ export async function action({ request, context }) {
   const redirectTo = formData.get('redirectTo') ?? null;
   if (typeof redirectTo === 'string') {
     status = 303;
-    actionResponseHeaders.set('Location', redirectTo);
+    const targetUrl =
+      redirectTo === 'checkout'
+        ? cartResult?.checkoutUrl || '/cart'
+        : redirectTo;
+    actionResponseHeaders.set('Location', targetUrl);
   }
 
   return data(

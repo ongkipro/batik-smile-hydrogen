@@ -673,12 +673,22 @@
 ### 3. Sizing Architecture & Interactive Size Guide Modal
 - Built an interactive Size Guide drawer displaying the official boutique regular-fit sizing table (S, M, L, XL, XXL) with measurements (Lingkar Dada, Panjang Baju, Panjang Lengan).
 - Made size guide and WhatsApp fitting consultation available for all products including single-variant items.
-- Refined the Bespoke Tailoring Atelier add-on card with zero-radius inputs.
+- Eliminated the cluttered bespoke tailoring and model fitting boxes to create a clean, pristine purchasing interface.
 
-### 4. Verification Evidence
+### 4. Direct "BELI SEKARANG" Action & Dynamic Shopify Description Grid
+- Upgraded purchasing actions:
+  - Primary CTA: `BELI SEKARANG` with instant 303 redirect to Shopify hosted checkout via `redirectTo="checkout"`.
+  - Secondary CTA: `+ TAMBAH KE TAS BELANJA` adding items to cart seamlessly.
+- Re-architected monolithic Shopify `descriptionHtml` into a cohesive, high-fashion presentation:
+  - Cormorant Garamond serif italic narrative quote.
+  - Dynamic 2-column specifications cards for all `<li>` elements (`◆ Bahan`, `◆ Furing`, `◆ Konstruksi`, `◆ Perawatan`).
+  - Unified delivery & 7-day size guarantee accordion.
+
+### 5. Verification Evidence
 - `npm run lint`: 0 warnings, 0 errors.
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
-- HTTP 200 OK verified on live product routes.
+- HTTP 200 OK verified on `/products/sarimbit-royal-navy` and `/products/kebaya-encim-modern`.
+
 
 
 

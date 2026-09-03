@@ -16,6 +16,7 @@ export function AddToCartButton({
   lines,
   onClick,
   className = '',
+  redirectTo,
 }) {
   return (
     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
@@ -26,13 +27,20 @@ export function AddToCartButton({
             type="hidden"
             value={JSON.stringify(analytics)}
           />
+          {redirectTo && (
+            <input
+              name="redirectTo"
+              type="hidden"
+              value={redirectTo}
+            />
+          )}
           <button
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
             className={className}
           >
-            {fetcher.state !== 'idle' ? 'Menambahkan...' : children}
+            {fetcher.state !== 'idle' ? 'Memproses...' : children}
           </button>
         </>
       )}

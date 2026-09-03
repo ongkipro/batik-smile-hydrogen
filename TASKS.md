@@ -687,6 +687,10 @@
 - [x] **Task 28.3: Sizing Architecture & Interactive Size Guide Modal**
   - *Action*: Added an interactive Size Guide drawer displaying the official boutique regular-fit sizing table (S, M, L, XL, XXL) with measurements (LD, PB, PL). Made size guide and fitting consultation available for all products including single-variant/bespoke items.
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, HTTP 200 OK verified on `/products/kebaya-encim-modern`.
+- [x] **Task 28.4: Direct BELI SEKARANG Action & Dynamic Shopify Description Grid**
+  - *Action*: Replaced WhatsApp secondary CTA with high-conversion direct checkout `BELI SEKARANG` button (redirects instantly to Shopify hosted checkout with 303 Location header). Removed cluttered bespoke tailoring and fitting boxes. Transformed monolithic Shopify `descriptionHtml` into an elegant, unified visual layout: poetic narrative quote + dynamic 2-column specifications cards (`◆ Bahan`, `◆ Furing`, `◆ Konstruksi`, `◆ Perawatan`).
+  - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, verified on `/products/sarimbit-royal-navy`.
+
 
 
 
