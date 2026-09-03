@@ -634,14 +634,18 @@
   - Hides automatically when reaching the Footer (detected via `IntersectionObserver`) to prevent overlapping footer contact links and addresses.
   - Uses fluid CSS opacity and vertical translate transitions.
 
-### 3. Dynamic Single Article Editorial UI/UX (`blogs.$blogHandle.$articleHandle.jsx`)
-- Locked hero article image and related article cards strictly to **3:2** (`aspect-[3/2]`).
-- Elevated reading typography:
-  - Cormorant Garamond display headlines (`leading-[1.18]`).
+### 3. Master Frameless Luxury Editorial Article UI/UX (`blogs.$blogHandle.$articleHandle.jsx`)
+- Locked hero article image and related article cards strictly to **3:2** (`aspect-[3/2]`), validated against 35mm full-frame photography principles.
+- Completely purged the boxed container anti-pattern (`bg-white` card and border lines removed), allowing the article to flow organically on the warm Mori Linen canvas.
+- Implemented a comfortable 680px (`max-w-2xl`) intimate reading column (45-75 characters per line) to eliminate reader eye fatigue.
+- Elevated reading typography & features:
+  - Hairline Antique Gold scroll progress indicator fixed at window top.
+  - Centered majestic Cormorant Garamond display headlines (`leading-[1.14]`).
   - Drop cap initial letter on opening paragraph in ochre gold.
   - Elegant serif blockquotes with antique gold accent borders.
-  - Editorial signature stamp and provenance footnote.
+  - Curator signature stamp and provenance footnote.
   - Minimalist WhatsApp share link with pre-filled greeting.
+  - Curated "Shop The Story" collection showcasing 3 related pieces in 4:5 vertical portrait with live IDR pricing.
   - Frameless related articles grid with 3:2 locked aspect ratio.
   - Obsidian dark concierge banner with WhatsApp CTA to `081-390-8888-09`.
 
@@ -649,6 +653,7 @@
 - `npm run lint`: 0 warnings, 0 errors.
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - HTTP 200 OK verified on `/blogs/news/:articleHandle`.
+
 
 
 

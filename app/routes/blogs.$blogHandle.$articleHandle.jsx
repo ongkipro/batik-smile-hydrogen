@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoaderData, NavLink, Link } from 'react-router';
-import { Image } from '@shopify/hydrogen';
+import { Image, Money } from '@shopify/hydrogen';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 
 /**
@@ -36,7 +36,7 @@ async function loadCriticalData({ context, request, params }) {
     throw new Response('Not found', { status: 404 });
   }
 
-  const [{ blog }] = await Promise.all([
+  const [{ blog, products }] = await Promise.all([
     context.storefront.query(ARTICLE_QUERY, {
       variables: { blogHandle, articleHandle },
     }),
@@ -63,14 +63,32 @@ async function loadCriticalData({ context, request, params }) {
   const relatedArticles = rawRelated
     .filter((a) => a.handle !== articleHandle)
     .slice(0, 3);
+  const curatedProducts = products?.nodes || [];
 
-  return { article, relatedArticles, blogHandle };
+  return { article, relatedArticles, curatedProducts, blogHandle };
 }
 
 export default function Article() {
   /** @type {LoaderReturnData} */
-  const { article, relatedArticles, blogHandle } = useLoaderData();
+  const { article, relatedArticles, curatedProducts, blogHandle } = useLoaderData();
   const { title, image, contentHtml, author, publishedAt } = article;
+
+  // Reading Progress Bar
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const updateScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const currentProgress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
+      }
+    };
+
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    updateScroll();
+    return () => window.removeEventListener('scroll', updateScroll);
+  }, []);
 
   const publishedDate = new Intl.DateTimeFormat('id-ID', {
     year: 'numeric',
@@ -84,10 +102,18 @@ export default function Article() {
   const readingTime = Math.max(1, Math.ceil(wordCount / 180));
 
   return (
-    <article className="bg-[#FAF8F5] min-h-screen text-[#111111] py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16">
-      <div className="max-w-4xl mx-auto">
-        {/* Minimalist Breadcrumbs */}
-        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+    <article className="bg-[#FAF8F5] min-h-screen text-[#111111] py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 relative">
+      {/* Hairline Antique Gold Reading Progress Indicator */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-[2.5px] bg-transparent pointer-events-none">
+        <div
+          className="h-full bg-[#C5A059] transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      <div className="max-w-5xl mx-auto">
+        {/* Minimalist Centered Breadcrumbs */}
+        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-10 sm:mb-12 flex items-center justify-center gap-2">
           <NavLink to="/" className="hover:text-[#9E7D3B] transition-colors">
             BERANDA
           </NavLink>
@@ -96,37 +122,33 @@ export default function Article() {
             JURNAL
           </NavLink>
           <span>/</span>
-          <span className="text-[#111111] font-semibold uppercase truncate max-w-xs sm:max-w-md">
+          <span className="text-[#111111] font-semibold uppercase truncate max-w-[180px] sm:max-w-xs">
             {title}
           </span>
         </nav>
 
-        {/* Article Editorial Header */}
-        <header className="mb-10 sm:mb-12 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2.5 text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold mb-3">
-            <span>CATATAN BUDAYA</span>
-            <span className="text-[#A69F96]">•</span>
-            <time dateTime={publishedAt} className="text-[#5A5550]">
-              {publishedDate}
-            </time>
-            <span className="text-[#A69F96]">•</span>
-            <span className="text-[#5A5550]">{readingTime} MENIT BACA</span>
-          </div>
+        {/* Grand Editorial Header (Centered in max-w-3xl) */}
+        <header className="mb-12 sm:mb-14 text-center max-w-3xl mx-auto">
+          <span className="inline-block text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-bold mb-4">
+            CATATAN &amp; FILOSOFI WASTRA
+          </span>
 
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-[#111111] leading-[1.18] mb-4">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-[#111111] leading-[1.14] mb-6">
             {title}
           </h1>
 
-          {author?.name && (
-            <p className="text-xs text-[#5A5550] font-light">
-              Ditulis oleh <span className="font-medium text-[#111111]">{author.name}</span> &bull; Kurasi Butik Batik Smile
-            </p>
-          )}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#5A5550]">
+            <span className="font-semibold text-[#111111]">{author?.name || 'Batik Smile Editorial'}</span>
+            <span>&bull;</span>
+            <time dateTime={publishedAt}>{publishedDate}</time>
+            <span>&bull;</span>
+            <span className="text-[#9E7D3B] font-semibold">{readingTime} MENIT BACA</span>
+          </div>
         </header>
 
-        {/* Hero Featured Media (Strictly Locked to 3:2 Ratio) */}
+        {/* Hero Featured Media (Strictly Locked to 3:2 Ratio in max-w-4xl) */}
         {image && (
-          <figure className="mb-10 sm:mb-12">
+          <figure className="max-w-4xl mx-auto mb-14 sm:mb-16">
             <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#111111] shadow-sm">
               <Image
                 data={image}
@@ -135,60 +157,88 @@ export default function Article() {
                 className="w-full h-full object-cover object-center"
               />
             </div>
-            <figcaption className="text-[10px] text-[#A69F96] tracking-[0.16em] uppercase mt-2.5 text-center font-light">
-              Dokumentasi Resmi Wastra &bull; Butik Batik Smile Nusantara Semarang
+            <figcaption className="text-[10px] sm:text-[11px] text-[#888888] uppercase tracking-[0.16em] mt-3 text-center font-light">
+              Dokumentasi Arsip Wastra &bull; Butik Batik Smile Nusantara Semarang
             </figcaption>
           </figure>
         )}
 
-        {/* Editorial Body Canvas */}
-        <div className="bg-white p-6 sm:p-12 lg:p-14 border border-[#E2DFD8] shadow-sm mb-12 sm:mb-14">
+        {/* Frameless Article Reading Canvas (Intimate max-w-2xl ~ 680px for Maximum Comfort) */}
+        <div className="max-w-2xl mx-auto mb-16 sm:mb-20">
           <div
-            className="prose prose-neutral max-w-none text-sm sm:text-base text-[#3A3835] font-light leading-relaxed [&>p:first-of-type::first-letter]:text-5xl sm:[&>p:first-of-type::first-letter]:text-6xl [&>p:first-of-type::first-letter]:font-serif [&>p:first-of-type::first-letter]:mr-3 [&>p:first-of-type::first-letter]:float-left [&>p:first-of-type::first-letter]:text-[#9E7D3B] [&>p:first-of-type::first-letter]:leading-none [&>h2]:font-serif [&>h2]:text-2xl sm:[&>h2]:text-3xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-10 [&>h2]:mb-4 [&>h3]:font-serif [&>h3]:text-xl sm:[&>h3]:text-2xl [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-8 [&>h3]:mb-3 [&>p]:mb-6 [&>p]:leading-relaxed [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>blockquote]:border-l-2 [&>blockquote]:border-[#C5A059] [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-[#111111] [&>blockquote]:font-serif [&>blockquote]:text-lg sm:[&>blockquote]:text-xl [&>blockquote]:my-8 [&>blockquote]:bg-[#FAF8F5] [&>blockquote]:p-4"
+            className="prose prose-neutral max-w-none text-[15px] sm:text-[17px] text-[#2C2A28] font-light leading-[1.85] [&>p:first-of-type::first-letter]:text-5xl sm:[&>p:first-of-type::first-letter]:text-6xl [&>p:first-of-type::first-letter]:font-serif [&>p:first-of-type::first-letter]:mr-3.5 [&>p:first-of-type::first-letter]:float-left [&>p:first-of-type::first-letter]:text-[#9E7D3B] [&>p:first-of-type::first-letter]:leading-none [&>h2]:font-serif [&>h2]:text-2xl sm:[&>h2]:text-3xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:tracking-wide [&>h3]:font-serif [&>h3]:text-xl sm:[&>h3]:text-2xl [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-10 [&>h3]:mb-3 [&>p]:mb-6 [&>p]:leading-[1.85] [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>blockquote]:border-l-2 [&>blockquote]:border-[#C5A059] [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-[#111111] [&>blockquote]:font-serif [&>blockquote]:text-xl sm:[&>blockquote]:text-2xl [&>blockquote]:my-10 [&>blockquote]:py-1"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
 
-          {/* Author Footnote Signature */}
-          <div className="mt-12 pt-8 border-t border-[#E2DFD8] flex items-center justify-between text-xs text-[#5A5550]">
+          {/* Curator Provenance Signature Stamp */}
+          <div className="mt-14 pt-8 border-t border-[#E2DFD8] flex items-start justify-between gap-4">
             <div>
-              <span className="font-semibold text-[#111111] block mb-1 uppercase tracking-wider text-[11px]">
-                Redaksi Jurnal Butik Batik Smile Nusantara
+              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] block mb-1">
+                Kurasi Redaksi Butik Batik Smile Nusantara
               </span>
-              <p className="font-light text-[#777777]">
-                Didedikasikan untuk riset, pelestarian, dan edukasi adiluhung wastra batik Jawa Tengah sejak 2007 di Semarang.
+              <p className="text-xs text-[#5A5550] font-light leading-relaxed max-w-md">
+                Didedikasikan untuk riset canting malam, pelestarian filosofi motif keraton, serta panduan keserasian busana sarimbit keluarga sejak 2007 di Semarang.
               </p>
             </div>
-            <span className="text-xl text-[#C5A059] shrink-0 ml-4">◆</span>
+            <span className="text-2xl text-[#C5A059] font-serif shrink-0">◆</span>
+          </div>
+
+          {/* Refined Minimalist Action & Share Toolbar */}
+          <div className="mt-8 pt-4 border-t border-[#E2DFD8] flex items-center justify-between text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
+            <Link
+              to="/blogs"
+              className="hover:text-[#9E7D3B] transition-colors flex items-center gap-1.5 no-underline"
+            >
+              &larr; ARSIP JURNAL
+            </Link>
+
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(
+                `Baca catatan wastra "${title}" dari Butik Batik Smile Nusantara:\nhttps://cart.batiksmile.com/blogs/${blogHandle}/${article.handle}`,
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#25D366] transition-colors flex items-center gap-1.5 no-underline"
+            >
+              BAGIKAN KE WHATSAPP &rarr;
+            </a>
           </div>
         </div>
 
-        {/* Social Share & Back Navigation Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 sm:p-6 bg-[#FAF8F5] border border-[#E2DFD8] mb-14">
-          <Link
-            to="/blogs"
-            className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] hover:text-[#9E7D3B] transition-colors flex items-center gap-2 no-underline"
-          >
-            &larr; KEMBALI KE SELURUH ARSIP
-          </Link>
+        {/* Shop The Story: Curated Pieces Linked to This Article */}
+        {curatedProducts.length > 0 && (
+          <section className="max-w-4xl mx-auto mb-16 sm:mb-20">
+            <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
+              <div>
+                <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-0.5">
+                  SHOP THE STORY
+                </span>
+                <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#111111]">
+                  Karya Wastra Terkait Catatan Ini
+                </h3>
+              </div>
+              <Link
+                to="/collections/all"
+                className="text-[10px] uppercase tracking-[0.18em] text-[#5A5550] hover:text-[#111111] transition-colors no-underline font-medium"
+              >
+                SEMUA KOLEKSI &rarr;
+              </Link>
+            </div>
 
-          <a
-            href={`https://wa.me/?text=${encodeURIComponent(
-              `Baca artikel menarik "${title}" dari Butik Batik Smile Nusantara:\nhttps://cart.batiksmile.com/blogs/${blogHandle}/${article.handle}`,
-            )}`}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] hover:text-[#25D366] transition-colors flex items-center gap-1.5 no-underline"
-          >
-            BAGIKAN KE WHATSAPP &rarr;
-          </a>
-        </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {curatedProducts.map((prod) => (
+                <ProductStoryCard key={prod.id} product={prod} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Related Articles Section (Frameless Minimalist with Locked 3:2 Ratio) */}
         {relatedArticles.length > 0 && (
-          <section className="mb-14">
-            <div className="flex items-center justify-between pb-3 mb-6 border-b border-[#E2DFD8]">
+          <section className="max-w-4xl mx-auto mb-16 sm:mb-20">
+            <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
               <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
-                REKOMENDASI JURNAL TERKAIT
+                REKOMENDASI JURNAL LAINNYA
               </span>
               <Link
                 to="/blogs"
@@ -252,8 +302,8 @@ export default function Article() {
           </section>
         )}
 
-        {/* Concierge Consultation Card */}
-        <div className="p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
+        {/* Bespoke Concierge Consultation Banner */}
+        <div className="max-w-4xl mx-auto p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
           <div>
             <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
               LAYANAN KONSULTASI WASTRA
@@ -278,6 +328,60 @@ export default function Article() {
         </div>
       </div>
     </article>
+  );
+}
+
+/**
+ * ProductStoryCard: Curated Product linked from the story (Strict 4:5 Portrait Media)
+ */
+function ProductStoryCard({ product }) {
+  const targetUrl = `/products/${product.handle}`;
+  const price = product.priceRange?.minVariantPrice;
+
+  return (
+    <div className="group flex flex-col">
+      <Link to={targetUrl} className="block no-underline">
+        {/* Strict 4:5 Media */}
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#111111] mb-3 border border-[#E2DFD8] group-hover:border-[#C5A059] transition-colors">
+          {product.featuredImage ? (
+            <Image
+              data={product.featuredImage}
+              alt={product.featuredImage.altText || product.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+          ) : (
+            <img
+              src="/banners/hero_editorial_banner.jpg"
+              alt={product.title}
+              className="w-full h-full object-cover"
+            />
+          )}
+          <div className="absolute top-2.5 left-2.5">
+            <span className="px-2 py-0.5 bg-black/75 backdrop-blur-sm text-[8px] uppercase tracking-[0.16em] text-[#C5A059] font-semibold border border-[#C5A059]/30">
+              KARYA TERPILIH
+            </span>
+          </div>
+        </div>
+
+        {/* Title */}
+        <h4 className="font-serif text-base font-normal text-[#111111] group-hover:text-[#9E7D3B] transition-colors line-clamp-1 mb-1">
+          {product.title}
+        </h4>
+
+        {/* Price */}
+        {price && (
+          <div className="text-xs font-semibold text-[#111111] mb-2 tracking-wide">
+            <Money data={price} />
+          </div>
+        )}
+
+        {/* Action Link */}
+        <div className="inline-flex items-center gap-1 text-[9px] uppercase tracking-[0.18em] font-semibold text-[#9E7D3B] group-hover:text-[#111111] transition-colors">
+          <span>LIHAT KARYA</span>
+          <span>&rarr;</span>
+        </div>
+      </Link>
+    </div>
   );
 }
 
@@ -327,6 +431,26 @@ const ARTICLE_QUERY = `#graphql
           author: authorV2 {
             name
           }
+        }
+      }
+    }
+    products(first: 3, sortKey: BEST_SELLING) {
+      nodes {
+        id
+        title
+        handle
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        featuredImage {
+          id
+          url
+          altText
+          width
+          height
         }
       }
     }

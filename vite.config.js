@@ -6,6 +6,7 @@ import {reactRouter} from '@react-router/dev/vite';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  envDir: false,
   plugins: [tailwindcss(), hydrogen(), oxygen(), reactRouter()],
   resolve: {
     alias: {

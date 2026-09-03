@@ -669,9 +669,10 @@
 - [x] **Task 27.2: Smart Desktop Sticky WhatsApp Concierge (`WhatsAppConcierge.jsx`)**
   - *Action*: Upgraded floating WhatsApp concierge to intelligently hide when inside the Hero/top fold (`scrollY < 420px`) and when reaching the Footer (via `IntersectionObserver`). Uses smooth opacity and slide transitions.
   - *Evidence*: Zero visual clutter in hero and zero overlap with footer contact information.
-- [x] **Task 27.3: Perfect Single Article Editorial UI/UX (`blogs.$blogHandle.$articleHandle.jsx`)**
-  - *Action*: Perfected single article post: locked hero image and related articles strictly to **3:2 ratio** (`aspect-[3/2]`), removed harsh horizontal lines, added drop cap styling on opening paragraph, elegant serif blockquotes, author footprint, WhatsApp share link, frameless related stories, and bespoke concierge consultation banner.
+- [x] **Task 27.3: Master Frameless Luxury Editorial Article UI/UX (`blogs.$blogHandle.$articleHandle.jsx`)**
+  - *Action*: Re-architected single article into a world-class frameless editorial experience. Purged the boxed card anti-pattern (`bg-white` and border lines removed), locked hero media and related articles strictly to **3:2 ratio** (`aspect-[3/2]`), implemented a 680px (`max-w-2xl`) intimate reading measure for optimal eye comfort, added a hairline gold scroll progress bar, drop cap on opening paragraph, provenance signature stamp, and integrated "Shop The Story" (curated 4:5 products linked to the story).
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, HTTP 200 OK verified on live article routes.
+
 
 
 
