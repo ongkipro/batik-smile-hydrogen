@@ -144,25 +144,46 @@ export default function FasilitasStorePage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center text-xs">
-            <div className="p-4 bg-[#FAF8F5] border border-[#E2DFD8]">
-              <span className="text-xl block mb-2">🚗</span>
-              <strong className="block text-[#111111] mb-1">Area Parkir Luas</strong>
-              <p className="text-[11px] text-[#5A5550]">Aman untuk mobil pribadi maupun rombongan bus.</p>
+            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
+                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17l-2 3h18l-2-3M7 7l2-4h6l2 4" />
+                </svg>
+              </div>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Area Parkir Luas</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed">Aman untuk mobil pribadi maupun bus pariwisata.</p>
             </div>
-            <div className="p-4 bg-[#FAF8F5] border border-[#E2DFD8]">
-              <span className="text-xl block mb-2">❄️</span>
-              <strong className="block text-[#111111] mb-1">Full AC Seluruh Lantai</strong>
-              <p className="text-[11px] text-[#5A5550]">Suhu ruangan sejuk nyaman untuk fitting berlama-lama.</p>
+
+            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
+                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              </div>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Full AC 3 Lantai</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed">Suhu sejuk untuk kenyamanan fitting keluarga.</p>
             </div>
-            <div className="p-4 bg-[#FAF8F5] border border-[#E2DFD8]">
-              <span className="text-xl block mb-2">🕌</span>
-              <strong className="block text-[#111111] mb-1">Mushola Bersih</strong>
-              <p className="text-[11px] text-[#5A5550]">Fasilitas ibadah lengkap bagi pengunjung.</p>
+
+            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
+                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 3a9 9 0 0 0 9 9 9 9 0 1 1-9-9z" />
+                  <polygon points="17 4 18 7 21 7 18.5 9 19.5 12 17 10 14.5 12 15.5 9 13 7 16 7" />
+                </svg>
+              </div>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Mushola Bersih</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed">Sarana ibadah lengkap dan wudhu nyaman.</p>
             </div>
-            <div className="p-4 bg-[#FAF8F5] border border-[#E2DFD8]">
-              <span className="text-xl block mb-2">💳</span>
-              <strong className="block text-[#111111] mb-1">Pembayaran Lengkap</strong>
-              <p className="text-[11px] text-[#5A5550]">Menerima QRIS, Debit, Kartu Kredit, dan Transfer.</p>
+
+            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
+                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="1" y="4" width="22" height="16" rx="0" ry="0" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+              </div>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Pembayaran Lengkap</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed">Menerima QRIS, Debit, Kartu Kredit, &amp; Transfer.</p>
             </div>
           </div>
         </div>

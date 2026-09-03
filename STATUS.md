@@ -58,6 +58,12 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
    - New `FeaturedCollections.jsx` component directly fetching and rendering live CDN collection images from Shopify.
    - Root-cause resolution of CSS cascade layer button contrast defect: restructured `reset.css` into `@layer base` and locked `!text-white` on dark CTA buttons.
 
+7. **Quiet Luxury SVG Icons Upgrade & Mobile Navigation De-clutter**:
+   - Upgraded `Footer.jsx` and all linked information pages (`/pages/tentang-kami`, `/pages/fasilitas-store`, `/pages/lokasi-toko`, `/pages/layanan-seragam`, `/policies`) with custom 1.5px fine-line Quiet Luxury SVG icons.
+   - Purged all raw emojis (`🚗`, `❄️`, `🕌`, `💳`) from `fasilitas-store.jsx`.
+   - Hidden floating WhatsApp widget on mobile (`hidden lg:block` in `WhatsAppConcierge.jsx`) to avoid collision with the bottom mobile app navigation bar.
+   - Polished `MobileNavigation.jsx` with Quiet Luxury design tokens, zero-radius badge, and direct WhatsApp concierge integration.
+
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0 (`dist/server/index.js: 691.06 kB | gzip: 193.54 kB`).

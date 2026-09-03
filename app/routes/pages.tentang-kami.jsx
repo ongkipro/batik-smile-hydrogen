@@ -64,43 +64,92 @@ export default function TentangKamiPage() {
             Di Batik Smile, senyum bukan sekadar nama, melainkan janji tulus dalam setiap interaksi kami dengan Anda:
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-            <div className="border-l border-[#C5A059] pl-4">
-              <span className="text-xs font-bold text-[#C5A059] block">SENYUM, SALAM, SAPA (3S)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1">Sambutan hangat penuh kekeluargaan sejak langkah pertama.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
+              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
+                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                  <line x1="9" y1="9" x2="9.01" y2="9" />
+                  <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+              </div>
+              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">SENYUM &bull; SALAM &bull; SAPA</span>
+              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Sambutan hangat penuh kekeluargaan sejak langkah pertama Anda.</p>
             </div>
-            <div className="border-l border-[#C5A059] pl-4">
-              <span className="text-xs font-bold text-[#C5A059] block">CEPAT (1C)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1">Responsif dalam melayani kebutuhan motif dan ukuran kustom.</p>
+
+            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
+              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
+                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+              </div>
+              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">CEPAT (1C)</span>
+              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Responsif dalam melayani kebutuhan motif, ukuran, &amp; katalog.</p>
             </div>
-            <div className="border-l border-[#C5A059] pl-4">
-              <span className="text-xs font-bold text-[#C5A059] block">TANGGAP (1T)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1">Solutif terhadap detail fitting dan pengiriman kilat acara.</p>
+
+            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
+              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
+                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">TANGGAP (1T)</span>
+              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Solutif terhadap fitting personal, kustom ukuran, &amp; jadwal acara.</p>
             </div>
-            <div className="border-l border-[#C5A059] pl-4 sm:col-span-3">
-              <span className="text-xs font-bold text-[#C5A059] block">HATI (1H)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1">Ketulusan hati dalam setiap jahitan dan layanan purna jual.</p>
+
+            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
+              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
+                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
+              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">HATI (1H)</span>
+              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Ketulusan hati dalam setiap jahitan rapi dan layanan purna jual.</p>
             </div>
           </div>
         </div>
 
         {/* 3 Nilai Inti */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center mb-14">
-          <div className="bg-white p-6 border border-[#E2DFD8]">
+          <div className="bg-white p-8 border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+            <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center border border-[#C5A059]/50 group-hover:bg-[#C5A059] transition-colors">
+              <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#111111] mb-2">KEASLIAN MOTIF</h3>
-            <p className="text-[11px] text-[#5A5550] leading-relaxed">
+            <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
               Menjaga pakem filosofi corak batik klasik Jawa Tengah dan ketelitian goresan canting malam.
             </p>
           </div>
-          <div className="bg-white p-6 border border-[#E2DFD8]">
+
+          <div className="bg-white p-8 border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+            <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center border border-[#C5A059]/50 group-hover:bg-[#C5A059] transition-colors">
+              <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z" />
+                <path d="M7 12a5 5 0 0 1 10 0" />
+              </svg>
+            </div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9E7D3B] mb-2">KENYAMANAN SEJATI</h3>
-            <p className="text-[11px] text-[#5A5550] leading-relaxed">
+            <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
               Pemilihan kain mori primisima adem dan jahitan lapis furing katun hero standar butik haute.
             </p>
           </div>
-          <div className="bg-white p-6 border border-[#E2DFD8]">
+
+          <div className="bg-white p-8 border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
+            <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center border border-[#C5A059]/50 group-hover:bg-[#C5A059] transition-colors">
+              <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="6" cy="6" r="3" />
+                <circle cx="6" cy="18" r="3" />
+                <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                <line x1="8.12" y1="8.12" x2="12" y2="12" />
+              </svg>
+            </div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#7C3F1D] mb-2">BEBAS MINIMAL ORDER</h3>
-            <p className="text-[11px] text-[#5A5550] leading-relaxed">
+            <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
               Layanan jahit seragam keluarga maupun instansi tanpa batasan kuota minimum pemesanan.
             </p>
           </div>

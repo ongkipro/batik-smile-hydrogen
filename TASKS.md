@@ -349,3 +349,34 @@
   - *Action*: Executed `npm run lint` (0 warnings, 0 errors) and `npm run build` (Exit Code 0).
   - *Evidence*: Client, SSR bundle, and typegen verified. Dev server running on `http://localhost:3005/`.
 
+---
+
+## Phase 10: Quiet Luxury SVG Icons Upgrade & Mobile Navigation De-clutter (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: Footer, Information Pages, Mobile Navigation, WhatsApp Concierge*
+
+- [x] **Task 10.1: Master Footer Quiet Luxury SVG Icons (`Footer.jsx`)**
+  - *Action*: Integrated fine-line 1.5px Quiet Luxury SVG icons for showroom buildings, operating clocks, catalog collections, boutique services, WhatsApp concierge, Instagram, and trust badges (100% Asli, Bebas Tukar, Bebas Ongkir).
+  - *Evidence*: Rendered cleanly across desktop and mobile.
+- [x] **Task 10.2: Showroom Amenities & Facilities Page Upgrade (`pages.fasilitas-store.jsx`)**
+  - *Action*: Replaced raw emojis (`🚗`, `❄️`, `🕌`, `💳`) with custom SVG icons (parking, AC airflow, clean prayer room, payment methods), verified authentic showroom photography, and fortified button text contrast.
+  - *Evidence*: Probed `/pages/fasilitas-store` -> HTTP 200.
+- [x] **Task 10.3: Culture & Core Values Page Upgrade (`pages.tentang-kami.jsx`)**
+  - *Action*: Integrated tailored SVG icons for 3S 1C 1T & 1H service culture and 3 core values (Keaslian Motif, Kenyamanan Sejati, Bebas Minimal Order).
+  - *Evidence*: Probed `/pages/tentang-kami` -> HTTP 200.
+- [x] **Task 10.4: Showroom Directory & Maps Upgrade (`pages.lokasi-toko.jsx`)**
+  - *Action*: Added bespoke location pin, clock, facility, and WhatsApp icons to Simongan and Banyumanik store cards with high-contrast buttons.
+  - *Evidence*: Probed `/pages/lokasi-toko` -> HTTP 200.
+- [x] **Task 10.5: Bespoke Tailoring & Uniform Page Upgrade (`pages.layanan-seragam.jsx`)**
+  - *Action*: Added tailored SVG icons to 3 core advantages (No MOQ, Hero Lining, Digital Sizing), corporate client portfolios (RS Bhayangkara, RSUD Tugurejo), and 4-step workflow.
+  - *Evidence*: Probed `/pages/layanan-seragam` -> HTTP 200.
+- [x] **Task 10.6: Dynamic Legal Policies Index Cards (`policies._index.jsx`)**
+  - *Action*: Added dynamic SVG icons for refund, shipping, privacy, and terms documents.
+  - *Evidence*: Probed `/policies` -> HTTP 200.
+- [x] **Task 10.7: Mobile Navigation De-clutter & Sticky WhatsApp Concierge (`WhatsAppConcierge.jsx` + `MobileNavigation.jsx`)**
+  - *Action*: Hid floating sticky WhatsApp widget on mobile/tablet (`hidden lg:block`) to prevent collision with the bottom sticky app navigation bar; polished `MobileNavigation.jsx` with Quiet Luxury design tokens, zero-radius cart badge, and unified WA CS link.
+  - *Evidence*: Verified 0 visual collisions on mobile screens.
+- [x] **Task 10.8: Quality Verification & Zero-Error Check**
+  - *Action*: Ran `npm run lint` (0 errors) and `npm run build` (Exit Code 0).
+  - *Evidence*: Production build succeeded.
+
+

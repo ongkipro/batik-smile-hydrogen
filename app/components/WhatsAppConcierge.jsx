@@ -14,7 +14,7 @@ export function WhatsAppConcierge() {
   const waUrl = `https://wa.me/${officialNumber}?text=${defaultMessage}`;
 
   return (
-    <aside aria-label="Batik Smile WhatsApp Concierge" className="fixed bottom-6 right-6 z-40">
+    <aside aria-label="Batik Smile WhatsApp Concierge" className="hidden lg:block fixed bottom-6 right-6 z-40">
       {/* Expanded Consultation Card */}
       {isOpen && (
         <div className="mb-3 w-80 bg-white border border-[#E2DFD8] shadow-2xl p-5 animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -44,7 +44,7 @@ export function WhatsAppConcierge() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-2.5 px-4 bg-[#111111] text-white text-[11px] uppercase font-semibold tracking-[0.18em] text-center block hover:bg-[#C5A059] transition-colors"
+            className="w-full py-2.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] text-center block transition-colors shadow-sm"
           >
             CHAT WHATSAPP RESMI &rarr;
           </a>

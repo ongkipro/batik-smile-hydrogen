@@ -142,3 +142,28 @@
 - Linter: 0 warnings, 0 errors (`npm run lint`).
 - Production Build: Clean client & SSR bundle, typegen verified (`npm run build` — Exit Code 0).
 
+---
+
+## Milestone 4: Quiet Luxury SVG Icons Upgrade & Mobile Navigation Polish
+**Date**: 2026-09-03 | **Commit Target**: `feat: upgrade quiet luxury svg icons across footer pages & declutter mobile navigation`
+
+### 1. Master Footer Quiet Luxury SVG Icons
+- Upgraded `app/components/Footer.jsx` with handcrafted 1.5px fine-line Quiet Luxury SVG icons for showrooms, opening clocks, collection categories, boutique services, WhatsApp concierge, Instagram, and trust badges (100% Asli shield, Bebas Tukar repeat, Bebas Ongkir truck).
+
+### 2. Information Pages Upgrade
+- **Fasilitas Store (`pages.fasilitas-store.jsx`)**: Replaced raw emojis (`🚗`, `❄️`, `🕌`, `💳`) with architectural SVG icons in golden border containers (Parking, AC airflow, clean prayer room, payment methods), verified authentic showroom photography, and fortified button text contrast.
+- **Tentang Kami (`pages.tentang-kami.jsx`)**: Embedded tailored SVG icons for 3S 1C 1T & 1H culture cards and 3 core value cards (Keaslian Motif, Kenyamanan Sejati, Bebas Minimal Order).
+- **Lokasi Toko (`pages.lokasi-toko.jsx`)**: Added bespoke location pin, clock, facility, and WhatsApp icons to Simongan and Banyumanik store cards with high-contrast buttons.
+- **Layanan Seragam (`pages.layanan-seragam.jsx`)**: Added tailored SVG icons to 3 core advantages (No MOQ, Hero Lining, Digital Sizing), corporate client portfolios (RS Bhayangkara, RSUD Tugurejo), and 4-step workflow.
+- **Policies Index (`policies._index.jsx`)**: Dynamic SVG icons for refund, shipping, privacy, and terms documents.
+
+### 3. Mobile Navigation De-clutter
+- Hid floating sticky WhatsApp widget on mobile/tablet (`hidden lg:block` in `WhatsAppConcierge.jsx`) to avoid collision with the bottom mobile app navigation bar.
+- Polished `MobileNavigation.jsx` with Quiet Luxury design tokens, zero-radius cart badge, and unified WA CS link.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0.
+- All footer routes return HTTP 200 OK locally.
+
+
