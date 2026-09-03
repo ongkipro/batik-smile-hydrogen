@@ -1,3 +1,4 @@
+import {useFetcher} from 'react-router';
 import {CartForm} from '@shopify/hydrogen';
 
 /**
@@ -7,6 +8,9 @@ import {CartForm} from '@shopify/hydrogen';
  *   disabled?: boolean;
  *   lines: Array<OptimisticCartLineInput>;
  *   onClick?: () => void;
+ *   className?: string;
+ *   wrapperClassName?: string;
+ *   redirectTo?: string;
  * }}
  */
 export function AddToCartButton({
@@ -16,35 +20,46 @@ export function AddToCartButton({
   lines,
   onClick,
   className = '',
+  wrapperClassName = '',
   redirectTo,
 }) {
+  const fetcher = useFetcher();
+
   return (
-    <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
-      {(fetcher) => (
-        <>
-          <input
-            name="analytics"
-            type="hidden"
-            value={JSON.stringify(analytics)}
-          />
-          {redirectTo && (
-            <input
-              name="redirectTo"
-              type="hidden"
-              value={redirectTo}
-            />
-          )}
-          <button
-            type="submit"
-            onClick={onClick}
-            disabled={disabled ?? fetcher.state !== 'idle'}
-            className={className}
-          >
-            {fetcher.state !== 'idle' ? 'Memproses...' : children}
-          </button>
-        </>
+    <fetcher.Form
+      method="post"
+      action="/cart"
+      className={wrapperClassName}
+    >
+      <input
+        type="hidden"
+        name={CartForm.INPUT_NAME}
+        value={JSON.stringify({
+          action: CartForm.ACTIONS.LinesAdd,
+          inputs: {lines},
+        })}
+      />
+      <input
+        name="analytics"
+        type="hidden"
+        value={JSON.stringify(analytics)}
+      />
+      {redirectTo && (
+        <input
+          name="redirectTo"
+          type="hidden"
+          value={redirectTo}
+        />
       )}
-    </CartForm>
+      <button
+        type="submit"
+        onClick={onClick}
+        disabled={disabled ?? fetcher.state !== 'idle'}
+        className={className}
+      >
+        {fetcher.state !== 'idle' ? 'Memproses...' : children}
+      </button>
+    </fetcher.Form>
   );
 }
 

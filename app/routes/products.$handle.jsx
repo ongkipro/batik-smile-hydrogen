@@ -168,8 +168,9 @@ export default function Product() {
   const imageList = images?.nodes || (product.featuredImage ? [product.featuredImage] : []);
   const [activeImage, setActiveImage] = useState(selectedVariant?.image || imageList[0]);
 
-  // Size Guide Modal state
-  const [showSizeGuide, setShowSizeGuide] = useState(false);
+
+  // Quantity order state
+  const [quantity, setQuantity] = useState(1);
 
   // Policy & description accordion state (auto show deskripsi by default)
   const [openSections, setOpenSections] = useState({ deskripsi: true, shipping: false });
@@ -179,16 +180,17 @@ export default function Product() {
 
   const isAvailable = selectedVariant?.availableForSale;
 
-  const officialWaUrl =
-    'https://wa.me/6281390888809?text=' +
-    encodeURIComponent(`Halo Butik Batik Smile Nusantara, saya ingin konsultasi ukuran & corak produk: ${title}`);
+  // Only show variant selector if product has multiple selectable variants
+  const hasMultipleVariants =
+    productOptions.length > 0 &&
+    productOptions.some((opt) => opt.optionValues && opt.optionValues.length > 1);
 
-  // Clean cart lines
+  // Clean cart lines with dynamic quantity
   const cartLines = selectedVariant
     ? [
         {
           merchandiseId: selectedVariant.id,
-          quantity: 1,
+          quantity,
           selectedVariant,
         },
       ]
@@ -309,8 +311,8 @@ export default function Product() {
                 {title}
               </h1>
 
-              {/* Price & Stock Status (Frameless Minimalist) */}
-              <div className="flex items-baseline gap-4 mb-3">
+              {/* Price Display */}
+              <div className="flex items-baseline gap-3 mb-1.5">
                 <span className="text-2xl sm:text-3xl font-medium text-[#111111] tracking-wide font-sans">
                   {selectedVariant?.price && <Money data={selectedVariant.price} />}
                 </span>
@@ -319,12 +321,14 @@ export default function Product() {
                     <Money data={selectedVariant.compareAtPrice} />
                   </span>
                 )}
-                <div className="ml-auto flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em]">
-                  <span className={`inline-block w-1.5 h-1.5 rounded-full ${isAvailable ? 'bg-[#2E6B3E]' : 'bg-[#8A2525]'}`} />
-                  <span className={isAvailable ? 'text-[#2E6B3E]' : 'text-[#8A2525]'}>
-                    {isAvailable ? 'Tersedia di Butik' : 'Habis Terjual'}
-                  </span>
-                </div>
+              </div>
+
+              {/* Stock Status Indicator (Placed directly under price) */}
+              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] mb-3">
+                <span className={`inline-block w-1.5 h-1.5 rounded-full ${isAvailable ? 'bg-[#2E6B3E]' : 'bg-[#8A2525]'}`} />
+                <span className={isAvailable ? 'text-[#2E6B3E]' : 'text-[#8A2525]'}>
+                  {isAvailable ? 'Tersedia di Butik' : 'Habis Terjual'}
+                </span>
               </div>
 
               {/* Value Props (Seamless Typography, Zero Box) */}
@@ -339,22 +343,15 @@ export default function Product() {
 
             <div className="w-full h-px bg-[#E2DFD8]" />
 
-            {/* Variant Option Selection (Ukuran / Size - Frameless Minimalist) */}
-            <div>
-              {productOptions.length > 0 ? (
-                productOptions.map((option) => (
+            {/* Variant Option Selection (Only rendered if multiple variants exist) */}
+            {hasMultipleVariants && (
+              <div>
+                {productOptions.map((option) => (
                   <div key={option.name}>
-                    <div className="flex items-center justify-between mb-2.5">
+                    <div className="mb-2">
                       <label className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#111111]">
                         {option.name}: <span className="font-normal text-[#5A5550]">{option.value}</span>
                       </label>
-                      <button
-                        type="button"
-                        onClick={() => setShowSizeGuide(!showSizeGuide)}
-                        className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] transition-colors font-medium underline underline-offset-4 cursor-pointer"
-                      >
-                        PANDUAN UKURAN (SIZE GUIDE) {showSizeGuide ? '−' : '+'}
-                      </button>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
@@ -378,108 +375,58 @@ export default function Product() {
                       })}
                     </div>
                   </div>
-                ))
-              ) : (
-                <div className="flex items-baseline justify-between text-xs py-1">
-                  <div className="text-[11px] text-[#111111]">
-                    <span className="text-[#888888] uppercase tracking-wider text-[9px] block mb-0.5">Ukuran</span>
-                    <span className="font-normal tracking-wide text-[#111111]">All Size &bull; Regular Fit Butik</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowSizeGuide(!showSizeGuide)}
-                    className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] transition-colors font-medium underline underline-offset-4 cursor-pointer"
-                  >
-                    PANDUAN UKURAN (SIZE GUIDE) {showSizeGuide ? '−' : '+'}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Expandable Sizing Table Drawer */}
-            {showSizeGuide && (
-              <div className="p-4 bg-white border border-[#C5A059]/50 text-xs animate-in fade-in slide-in-from-top-2 duration-300">
-                <div className="flex items-center justify-between pb-2 mb-3 border-b border-[#E2DFD8]">
-                  <span className="font-semibold uppercase tracking-[0.16em] text-[#111111] text-[10px]">
-                    TABEL UKURAN STANDAR BUTIK (REGULAR FIT)
-                  </span>
-                  <span className="text-[9px] text-[#9E7D3B] uppercase tracking-wider">Toleransi &plusmn;1-2cm</span>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-[11px] text-[#444444]">
-                    <thead>
-                      <tr className="border-b border-[#E2DFD8] text-[10px] uppercase tracking-wider text-[#111111]">
-                        <th className="py-1.5 pr-3">Ukuran</th>
-                        <th className="py-1.5 px-3">Lingkar Dada (LD)</th>
-                        <th className="py-1.5 px-3">Panjang Baju (PB)</th>
-                        <th className="py-1.5 pl-3">Panjang Lengan</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-[#E2DFD8]/60">
-                      <tr>
-                        <td className="py-1.5 pr-3 font-semibold text-[#111111]">S</td>
-                        <td className="py-1.5 px-3">100 cm</td>
-                        <td className="py-1.5 px-3">70 cm</td>
-                        <td className="py-1.5 pl-3">58 cm</td>
-                      </tr>
-                      <tr>
-                        <td className="py-1.5 pr-3 font-semibold text-[#111111]">M</td>
-                        <td className="py-1.5 px-3">104 cm</td>
-                        <td className="py-1.5 px-3">72 cm</td>
-                        <td className="py-1.5 pl-3">60 cm</td>
-                      </tr>
-                      <tr>
-                        <td className="py-1.5 pr-3 font-semibold text-[#111111]">L</td>
-                        <td className="py-1.5 px-3">108 cm</td>
-                        <td className="py-1.5 px-3">74 cm</td>
-                        <td className="py-1.5 pl-3">61 cm</td>
-                      </tr>
-                      <tr>
-                        <td className="py-1.5 pr-3 font-semibold text-[#111111]">XL</td>
-                        <td className="py-1.5 px-3">112 cm</td>
-                        <td className="py-1.5 px-3">76 cm</td>
-                        <td className="py-1.5 pl-3">62 cm</td>
-                      </tr>
-                      <tr>
-                        <td className="py-1.5 pr-3 font-semibold text-[#111111]">XXL</td>
-                        <td className="py-1.5 px-3">118 cm</td>
-                        <td className="py-1.5 px-3">78 cm</td>
-                        <td className="py-1.5 pl-3">63 cm</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-[#E2DFD8] flex items-center justify-between text-[10px] text-[#5A5550]">
-                  <span>Ukuran di luar tabel? Konsultasikan bersama penjahit butik.</span>
-                  <a
-                    href={officialWaUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[#9E7D3B] font-semibold uppercase tracking-wider hover:underline"
-                  >
-                    KONSULTASI UKURAN &rarr;
-                  </a>
-                </div>
+                ))}
               </div>
             )}
 
-            {/* Direct Purchase Actions (BELI SEKARANG as Direct Checkout, TAMBAH KE TAS as Add to Cart) */}
-            <div className="space-y-3 pt-2">
+            {/* Purchase Actions: Row 1 (Quantity + Tambah ke Tas), Row 2 (Beli Sekarang) */}
+            <div className="space-y-2.5 pt-2">
+              <div className="flex items-center gap-2.5">
+                {/* Quantity Selector */}
+                <div className="flex items-center border border-[#111111] bg-white h-12 w-28 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    disabled={quantity <= 1 || !isAvailable}
+                    className="w-9 h-full flex items-center justify-center text-sm font-medium text-[#111111] hover:bg-black/5 disabled:opacity-30 cursor-pointer transition-colors"
+                    aria-label="Kurangi Jumlah"
+                  >
+                    −
+                  </button>
+                  <span className="flex-1 text-center text-xs font-semibold text-[#111111] font-sans">
+                    {quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((prev) => prev + 1)}
+                    disabled={!isAvailable}
+                    className="w-9 h-full flex items-center justify-center text-sm font-medium text-[#111111] hover:bg-black/5 disabled:opacity-30 cursor-pointer transition-colors"
+                    aria-label="Tambah Jumlah"
+                  >
+                    +
+                  </button>
+                </div>
+
+                {/* Tambah ke Tas Belanja Button (Stretches across remaining row width) */}
+                <AddToCartButton
+                  disabled={!isAvailable}
+                  lines={cartLines}
+                  wrapperClassName="flex-1"
+                  className="w-full h-12 px-4 bg-white hover:bg-[#FAF8F5] !text-[#111111] hover:!text-[#9E7D3B] font-semibold text-[10px] uppercase tracking-[0.18em] text-center flex items-center justify-center border border-[#111111] transition-colors cursor-pointer"
+                >
+                  + TAMBAH KE TAS BELANJA
+                </AddToCartButton>
+              </div>
+
+              {/* Beli Sekarang (Direct Instant Checkout under Tambah ke Tas, 100% matching width) */}
               <AddToCartButton
                 disabled={!isAvailable}
                 lines={cartLines}
                 redirectTo="checkout"
-                className="w-full py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:bg-[#E2DFD8] disabled:!text-[#5A5550] disabled:cursor-not-allowed cursor-pointer shadow-md"
+                wrapperClassName="w-full block"
+                className="w-full h-12 py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:bg-[#E2DFD8] disabled:!text-[#5A5550] disabled:cursor-not-allowed cursor-pointer shadow-md flex items-center justify-center"
               >
                 {isAvailable ? 'BELI SEKARANG' : 'HABIS TERJUAL'}
-              </AddToCartButton>
-
-              <AddToCartButton
-                disabled={!isAvailable}
-                lines={cartLines}
-                className="w-full py-3.5 px-6 bg-white hover:bg-[#FAF8F5] !text-[#111111] hover:!text-[#9E7D3B] font-semibold text-[10px] uppercase tracking-[0.18em] text-center block border border-[#111111] transition-colors cursor-pointer"
-              >
-                + TAMBAH KE TAS BELANJA
               </AddToCartButton>
             </div>
 
@@ -563,10 +510,50 @@ export default function Product() {
                 </button>
 
                 {openSections.shipping && (
-                  <div className="mt-3 text-[#5A5550] leading-relaxed font-light space-y-2">
-                    <p>&bull; <strong>Pengiriman Cepat:</strong> Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.</p>
-                    <p>&bull; <strong>Garansi Bebas Tukar Ukuran:</strong> Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas.</p>
-                    <p>&bull; <strong>Layanan Konsultasi 3S 1C 1T &amp; 1H:</strong> Tim penjahit dan konsultan kami siap mendampingi panduan ukuran melalui WhatsApp Concierge 081-390-8888-09.</p>
+                  <div className="mt-3 divide-y divide-[#E2DFD8]/80 text-xs">
+                    <div className="py-2.5 flex items-start gap-3">
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                      <div className="min-w-0">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                          Pengiriman Cepat &amp; Terlindungi
+                        </span>
+                        <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                          Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="py-2.5 flex items-start gap-3">
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                      <div className="min-w-0">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                          Garansi Bebas Tukar Ukuran 7 Hari
+                        </span>
+                        <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                          Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas di badan.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="py-2.5 flex items-start gap-3">
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                      <div className="min-w-0">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                          Layanan Konsultasi 3S 1C 1T &amp; 1H
+                        </span>
+                        <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                          Tim penjahit dan konsultan kami siap mendampingi panduan ukuran melalui WhatsApp Concierge{' '}
+                          <a
+                            href="https://wa.me/6281390888809"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-[#9E7D3B] font-medium underline underline-offset-2 hover:text-[#111111] transition-colors"
+                          >
+                            081-390-8888-09
+                          </a>.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
