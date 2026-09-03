@@ -1,8 +1,10 @@
 # PRD: Batik Smile Nusantara — Headless Shopify Hydrogen Storefront
 
 > **Repository**: `ongkipro/batik-smile-hydrogen`  
-> **Store Domain (Internal)**: `23ahbp-sq.myshopify.com`  
-> **Production Custom Domain**: `https://batiksmile.com` (and `www.batiksmile.com`)  
+> **Hydrogen Storefront (Production)**: `https://batiksmile.com` (and `www.batiksmile.com`)  
+> **Checkout Domain (Online Store)**: `https://checkout.batiksmile.com`  
+> **Customer Account Domain**: `https://account.batiksmile.com`  
+> **Internal Store Domain**: `23ahbp-sq.myshopify.com`  
 > **Hosting & Edge Runtime**: Shopify Oxygen Edge (Cloudflare Workers Runtime)  
 > **Framework**: `@shopify/hydrogen` (^2026.4.x) + React Router v7 + Tailwind CSS v4  
 > **Design Archetype**: Quiet Luxury Nusantara (Benchmarked against Engrasia / Prestige 9.3.0)

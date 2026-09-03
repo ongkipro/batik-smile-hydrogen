@@ -8,21 +8,23 @@
 ## 1. System Context & Runtime Architecture
 
 ```
-[Buyer Web Browser / Mobile Device] (https://batiksmile.com)
-                │
-                ▼ (HTTPS / HTTP/3 Anycast via Cloudflare Edge)
-[Shopify Oxygen Global Edge Network] (server.js - Worker Runtime)
-   ├── Route Handler & SSR: React Router v7
-   ├── UI Components & Tailwind v4 Styles
-   ├── Subrequest Profiler & Edge Cache Layer (CacheLong, CacheShort)
-   └── Server Session Storage (Opaque Cart Cookie)
-                │
-                ▼ (GraphQL Storefront API with Private Access Token)
-[Shopify Core Commerce Cloud] (23ahbp-sq.myshopify.com)
-   ├── Products, Variants, Inventory & Collections
-   ├── Metaobjects (Hero Banners, Lookbooks) & Metafields (Tier, Furing, Filosofi)
-   ├── Cart Engine & Discounts
-   └── Hosted Checkout & Web Pixels (Meta CAPI)
+[Buyer Web Browser / Mobile Device]
+       │
+       ├──► https://batiksmile.com (Shopify Oxygen Edge / Headless Storefront)
+       │       ├── Route Handler & SSR: React Router v7
+       │       ├── UI Components & Tailwind v4 Styles
+       │       ├── Subrequest Profiler & Edge Cache Layer (CacheLong, CacheShort)
+       │       └── Server Session Storage (Opaque Cart Cookie)
+       │
+       ├──► https://checkout.batiksmile.com (Shopify Online Store Hosted Checkout)
+       │       ├── Payment Gateways & Secure Credit Card / QRIS / VA
+       │       ├── Indonesian Expedition Shipping & Address Autocomplete
+       │       └── Order Confirmation & Receipt Hand-off
+       │
+       └──► https://account.batiksmile.com (Shopify New Customer Accounts)
+               ├── Passwordless OTP / Email Customer Authentication
+               ├── Order History & Real-Time Tracking
+               └── Address Book & Customer Profile Management
 ```
 
 ---
