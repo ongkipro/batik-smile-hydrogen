@@ -490,6 +490,44 @@
   - *Action*: Run `npm run lint` and `npm run build`. Commit and push to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
   - *Evidence*: GitHub Actions Oxygen deployment workflow verified green.
 
+---
 
+## Phase 17: Scattered Atelier Moodboard & Luxury Pagination (`collections._index.jsx`) (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: All Collections Route, Pagination Component*
 
+- [x] **Task 17.1: Artistic Scattered Moodboard Architecture & 5:4 Landscape Ratio (`collections._index.jsx`)**
+  - *Action*: Configured landscape 5:4 aspect ratio (`aspect-[5/4]`) for full-bleed photography cards. Implemented 12 cyclic `SCATTER_STYLES` giving each card an artful organic tilt, vertical staggered offset, translucent washi tape accent, serial plate (`ARC-01` to `ARC-12`), and atelier wax stamp. Added tactile hover motion (straightens to `rotate-0`, expands with ambient gold glow). Added mobile-optimized 1-column layout and horizontal category anchor swipe bar. Set `pageBy: 9` for lightweight initial loading and 9-item pagination increments.
+  - *Evidence*: Tested locally on `http://localhost:3005/collections`, verified rendering and transitions.
+- [x] **Task 17.2: Quiet Luxury Zero-Radius Load More Engine (`PaginatedResourceSection.jsx`)**
+  - *Action*: Upgraded hydrogen pagination into an architectural expansion bar with gold diamond motif, `JELAJAHI LEBIH BANYAK KOLEKSI ↓` button with animated gold spinner (`MEMUAT ARSIP KOLEKSI...`), and previous link support.
+  - *Evidence*: `npm run lint` (0 errors) and `npm run build` (Exit Code 0).
+- [x] **Task 17.3: Production Build & Automated Edge Deployment**
+  - *Action*: Run `npm run lint` and `npm run build`. Commit and push to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
+  - *Evidence*: GitHub Actions Oxygen deployment workflow verified green.
 
+---
+
+## Phase 18: Live Catalog Optimization, WhatsApp Sarimbit Partitioning, Standard Taxonomy & Semantic Blog Engine (COMPLETED ✅)
+*Semantic Risk: R0 (Catalog Sync & Content Engine) | Primary Boundary: Shopify Admin GraphQL, Storefront Catalog, Blog Articles*
+
+- [x] **Task 18.1: Complete Store Product Purge & Clean Slate**
+  - *Action*: Purged all 20 legacy products and verified automatic deletion of 100 attached media items. Deleted obsolete collection `sarimbit-batik-couple` (`ID: 480516145209`).
+  - *Evidence*: `productsCount: 0` verified, zero orphaned media remaining.
+- [x] **Task 18.2: 20 Minimalist 3-Word RTW Products Upload & 100 Image Ingestion**
+  - *Action*: Ingested 100 4:5 lookbook images from `/Users/ongki/Downloads/Batik Smile/product_images/`. Applied strictly 3-word minimalist titles, rich SEO metadata, and quiet luxury HTML descriptions.
+  - *Evidence*: 20 products verified with exactly 5 images each and 3-word titles.
+- [x] **Task 18.3: WhatsApp High-Ticket Sarimbit 50/50 Partitioning (Zero Duplication)**
+  - *Action*: Analyzed `/Users/ongki/Downloads/WhatsApp Unknown 2026-09-03 at 11.43.35` and created 3 couple sets: 2 sets in `sarimbit-exclusive` (*Mustard Gold*, *Royal Navy*) and 1 set in `sarimbit-premium` (*Charcoal Hitam*). Enforced zero cross-tier duplicate collections.
+  - *Evidence*: Verified `sarimbit-exclusive` has 2 products, `sarimbit-premium` has 1 product, overlap = 0.
+- [x] **Task 18.4: Zero-Product Collection Auto-Population (Zero Sarimbit Added)**
+  - *Action*: Populated 7 empty collections (`Blazer Batik Wanita`, `Inner Busana Batik`, `Gamis Batik Anak`, `Kebaya Batik Anak`, `Jarik Anak`, `Babydoll Batik Anak`, `Sarung Batik Anak`) using non-sarimbit RTW items.
+  - *Evidence*: 0 empty collections remaining, 0 Sarimbit items in these 7 collections.
+- [x] **Task 18.5: Standard Product Taxonomy / Google Category 100% Configuration**
+  - *Action*: Mapped and updated all 23 live products to official Shopify/Google Standard Product Taxonomy categories (`Tunics`, `Blouses`, `Cardigans`, `Dresses`, `Nightgowns`, `Dress Shirts`, `Shirts`, `Pants`, `Outfit Sets`, `Baby & Children's Dresses`, `Baby & Children's Outfits`, `Fabric`, `Hats`).
+  - *Evidence*: Verified `All Categories Configured: True` via GraphQL query.
+- [x] **Task 18.6: 11 Official Shopify Pages Deployed from Company Profile**
+  - *Action*: Extracted `COMPANY PROFILE.pdf` and updated/created 11 live published pages on Shopify: `tentang-kami`, `layanan-seragam`, `fasilitas-store`, `lokasi-toko`, `contact`, `hubungi-kami`, `panduan-ukuran`, `panduan-perawatan`, `kebijakan-pengembalian`, `kebijakan-pengiriman`, `syarat-dan-ketentuan`.
+  - *Evidence*: Verified 11 published pages on `23ahbp-sq.myshopify.com`.
+- [x] **Task 18.7: 12 Plain-Text Semantic Blog Articles Deployed to Shopify**
+  - *Action*: Created 12 plain-text editorial articles in `gid://shopify/Blog/108131713081` without custom inline HTML/CSS, attached Shopify CDN featured images, and set author `Batik Smile Editorial`.
+  - *Evidence*: Verified 12 articles live in `news` blog with `All 12 Articles Valid, Published, and Image Attached: True`.

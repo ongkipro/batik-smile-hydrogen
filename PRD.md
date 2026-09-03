@@ -114,6 +114,9 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
         ├── /pages/kebijakan-pengembalian (Garansi Kepuasan & Tukar Size 100%)
         ├── /pages/kebijakan-pengiriman (Kebijakan Pengiriman & Free Delivery)
         └── /pages/syarat-dan-ketentuan (Ketentuan Layanan Resmi)
+  └── [/blogs/:blogHandle]:
+        ├── /blogs/news (Jurnal Batik Nusantara — Index Grid 12 Artikel Editorial)
+        └── /blogs/news/:articleHandle (Single Article Editorial View dengan dynamic typography prose)
 ```
 
 ---

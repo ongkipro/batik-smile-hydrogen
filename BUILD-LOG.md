@@ -350,11 +350,54 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
 
+---
 
+## Milestone 11: Dynamic Plain-Text Blog Editorial Engine Deployment (2026-09-03)
 
+### 1. Plain-Text Semantic Blog Architecture
+- Adhered to strict dynamic styling rule: Zero inline styles (`style="..."`) and zero hardcoded CSS classes (`class="..."`) inside blog article bodies.
+- Utilized pure semantic `<p>` paragraphs to allow Hydrogen's Tailwind typography engine (`prose prose-neutral`) to style blog posts dynamically and natively.
 
+### 2. 12 Thematic Editorial Articles Published
+- Created 12 comprehensive articles in `gid://shopify/Blog/108131713081`:
+  1. *Kisah Canting & Filosofi Batik Tulis Jawa*
+  2. *5 Tips Memadukan Sarimbit Pasangan untuk Kondangan*
+  3. *Mengenal Perbedaan Katun Primisima, Dobby, dan Sutra*
+  4. *Makna Mendalam di Balik Motif Parang Kusumo dan Kawung*
+  5. *Pentingnya Lapisan Furing Katun Hero pada Kemeja Batik*
+  6. *Panduan Memilih Seragam Batik Kantor & Instansi*
+  7. *Eksplorasi Batik Pesisiran: Dinamika Warna Cirebon & Pekalongan*
+  8. *Cara Merawat Kain Batik Tulis Berharga Tinggi*
+  9. *Kiat Tampil Percaya Diri dengan Tunik dan Outer Batik Modern*
+  10. *Sejarah Batik Lasem: Akulturasi Budaya Tionghoa & Jawa*
+  11. *Etika Mengenakan Busana Batik pada Acara Resmi Kenegaraan*
+  12. *Mengenalkan Nilai Budaya Batik kepada Anak Sejak Dini*
+- Each article features an official Shopify CDN featured image, author `Batik Smile Editorial`, summary, and `isPublished: true`.
 
+---
 
+## Milestone 12: Scattered Atelier Archival Cards, 5:4 Aspect Ratio & Quiet Luxury Load More (`collections._index.jsx`)
+**Date**: 2026-09-03 | **Execution**: Atelier Moodboard Card Geometry (5:4 Landscape Ratio), Organic Tilt/Stagger, Mobile Optimization, and Zero-Radius Load More Pagination (pageBy: 9)
 
+### 1. Artistic "Kartu Berantakan" Atelier Moodboard Architecture (`collections._index.jsx`)
+- Re-architected `/collections` All Collections catalog from a rigid grid into an organic **Atelier Curated Archival Moodboard**:
+  - Configured strict landscape 5:4 aspect ratio (`aspect-[5/4]`) for each archival card, delivering a panoramic, photographic editorial plate feel.
+  - Implemented `SCATTER_STYLES` cycle: 12 distinct card personalities with subtle organic tilt angles (`-rotate-1` to `rotate-2`), vertical desktop offsets (`lg:translate-y-5`, `lg:-translate-y-4`), and translucent washi tape accents (`bg-[#F3EDE2]/85 border-[#C5A059]/40`).
+  - **Tactile Interactive Physicality**: Unhovered cards sit casually like lookbook plates on an artisan cutting table; on hover, each card smoothly straightens up (`group-hover:rotate-0 group-hover:scale-[1.02]`), elevates with an ambient gold glow (`group-hover:shadow-[0_20px_45px_rgba(197,160,89,0.20)]`), and highlights with an antique gold border (`group-hover:border-[#C5A059]`).
+  - **Archival Metadata Plates**: Each card features a serial badge (`ARC-01` to `ARC-12`), atelier stamp (`SERI I`, `HAUTE`, `WARISAN`, `ATELIER`, etc.), and curated fabric note.
+  - Quick Category Anchors provided at top for rapid navigation (`SARIMBIT EXCLUSIVE`, `SARIMBIT PREMIUM`, `BATIK PRIA`, `BATIK WANITA`, `BATIK ANAK`), horizontally scrollable on mobile.
+  - Optimized for mobile view: 1 column of 5:4 cards on mobile with safe micro-tilt (no overflow-x), transitioning to 2 columns on tablet and 3 columns on desktop.
+
+### 2. Quiet Luxury Load More & Pagination Engine (`PaginatedResourceSection.jsx`)
+- Overhauled unstyled hydrogen pagination links into an architectural zero-radius curated expansion bar:
+  - Adjusted pagination batching to `pageBy: 9` for faster initial payload and consistent 3x3 grid increments.
+  - Added gold diamond motif and curatorial label `KURASI ARSIP BUTIK`.
+  - Upgraded NextLink to an obsidian & gold action button `JELAJAHI LEBIH BANYAK KOLEKSI ↓` with loading spinner animation (`MEMUAT ARSIP KOLEKSI...`).
+  - Provided matching `LIHAT KOLEKSI SEBELUMNYA ↑` button when previous cursor exists.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
 
 

@@ -62,10 +62,14 @@
 │   │   ├── collections.$handle.jsx  # Tier-Differentiated PLP (Exclusive, Premium, Ekonomis & Raw Fabric)
 │   │   ├── products.$handle.jsx     # Tier-Differentiated PDP (Exclusive vs Premium vs Standard Layouts)
 │   │   ├── cart.jsx                 # Full cart page fallback
-│   │   ├── pages.layanan-seragam.jsx
-│   │   ├── pages.tentang-kami.jsx
-│   │   ├── pages.fasilitas-store.jsx
-│   │   └── pages.lokasi-toko.jsx
+│   │   ├── pages.layanan-seragam.jsx # Bespoke tailoring & uniform service interactive route
+│   │   ├── pages.tentang-kami.jsx   # Interactive brand story & 3S 1C 1T & 1H culture
+│   │   ├── pages.fasilitas-store.jsx # 3-Storey Simongan Showroom visual tour
+│   │   ├── pages.lokasi-toko.jsx    # Store locator, hours & interactive Google Maps
+│   │   ├── pages.$handle.jsx        # Dynamic Shopify CMS Pages fallback loader
+│   │   ├── blogs._index.jsx         # All blogs directory
+│   │   ├── blogs.$blogHandle._index.jsx # Jurnal Batik editorial index (12 articles grid)
+│   │   └── blogs.$blogHandle.$articleHandle.jsx # Dynamic article reader (prose typography)
 │   ├── styles/
 │   │   ├── app.css            # Tailwind CSS v4 entry & Quiet Luxury theme tokens
 │   │   └── reset.css          # CSS reset

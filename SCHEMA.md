@@ -68,6 +68,7 @@ Managed at: **Shopify Admin $\rightarrow$ Settings $\rightarrow$ Custom Data $\r
 | `custom` | `model_fit_reference` | Single line text | Sizing cue (e.g. "Model Pria TB 178cm / BB 75kg mengenakan Size L"). |
 | `custom` | `tailoring_eligible` | Boolean | True if item can be ordered with custom bespoke tailoring. |
 | `custom` | `bundle_eligible` | Boolean | Enables `FamilyBundleBuilder` on Sarimbit PDPs. |
+| *(Shopify)* | `category` | TaxonomyCategory | Standard Product Taxonomy / Google Category (`id`, `name`, `fullName`). Auto-determines tax, metafields, and cross-channel listings. |
 
 ---
 
@@ -204,6 +205,39 @@ mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
       field
       message
     }
+  }
+}
+```
+
+---
+
+## 5. Article & Blog Editorial Fragment (`ARTICLE_ITEM_FRAGMENT`)
+
+```graphql
+fragment ArticleItem on Article {
+  id
+  title
+  handle
+  publishedAt
+  contentHtml
+  excerptHtml
+  author: authorV2 {
+    name
+  }
+  image {
+    id
+    altText
+    url
+    width
+    height
+  }
+  blog {
+    handle
+    title
+  }
+  seo {
+    title
+    description
   }
 }
 ```

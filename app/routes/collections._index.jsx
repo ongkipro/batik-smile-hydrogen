@@ -29,7 +29,7 @@ export async function loader(args) {
  */
 async function loadCriticalData({ context, request }) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 12,
+    pageBy: 9,
   });
 
   const [{ collections }] = await Promise.all([
@@ -41,31 +41,174 @@ async function loadCriticalData({ context, request }) {
   return { collections };
 }
 
+/**
+ * Scatter styles array to create the artistic atelier "kartu berantakan" moodboard effect.
+ * Each card gets a deliberate organic tilt, vertical stagger offset, translucent washi tape accent,
+ * and serial plate stamp. On hover, the card smoothly straightens up (rotate-0) and scales up.
+ */
+const SCATTER_STYLES = [
+  {
+    tilt: '-rotate-1 sm:-rotate-2',
+    offset: 'lg:translate-y-2',
+    tapePos: 'left-8 -top-2.5',
+    tapeAngle: '-rotate-2',
+    stamp: 'SERI I',
+    plate: 'ARC-01',
+    note: 'Sarimbit Sutra ATBM 3 Kasta',
+  },
+  {
+    tilt: 'rotate-1 sm:rotate-2',
+    offset: 'lg:-translate-y-4',
+    tapePos: 'right-8 -top-2.5',
+    tapeAngle: 'rotate-3',
+    stamp: 'HAUTE',
+    plate: 'ARC-02',
+    note: 'Tenun Dobby & Katun Prima',
+  },
+  {
+    tilt: '-rotate-1.5 sm:-rotate-2.5',
+    offset: 'lg:translate-y-5',
+    tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
+    tapeAngle: '-rotate-1',
+    stamp: 'MASTERPIECE',
+    plate: 'ARC-03',
+    note: 'Canting Tembaga & Soga Alami',
+  },
+  {
+    tilt: 'rotate-1.5 sm:rotate-2',
+    offset: 'lg:-translate-y-3',
+    tapePos: 'left-6 -top-2.5',
+    tapeAngle: 'rotate-2',
+    stamp: 'WARISAN',
+    plate: 'ARC-04',
+    note: 'Kemeja Furing Hero Halus',
+  },
+  {
+    tilt: '-rotate-2 sm:-rotate-1.5',
+    offset: 'lg:translate-y-4',
+    tapePos: 'right-6 -top-2.5',
+    tapeAngle: '-rotate-3',
+    stamp: 'ATELIER',
+    plate: 'ARC-05',
+    note: 'Blus & Dress Pesta Modern',
+  },
+  {
+    tilt: 'rotate-1 sm:rotate-1.5',
+    offset: 'lg:-translate-y-2',
+    tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
+    tapeAngle: 'rotate-1',
+    stamp: 'LIMITED',
+    plate: 'ARC-06',
+    note: 'Koleksi Balita & Anak Tradisional',
+  },
+  {
+    tilt: '-rotate-1 sm:-rotate-2',
+    offset: 'lg:translate-y-3',
+    tapePos: 'left-8 -top-2.5',
+    tapeAngle: '-rotate-2',
+    stamp: 'EXCLUSIVE',
+    plate: 'ARC-07',
+    note: 'Blazer & Outerwear Elegan',
+  },
+  {
+    tilt: 'rotate-2 sm:rotate-2.5',
+    offset: 'lg:-translate-y-4',
+    tapePos: 'right-8 -top-2.5',
+    tapeAngle: 'rotate-2',
+    stamp: 'PREMIUM',
+    plate: 'ARC-08',
+    note: 'Tunik & Gamis Pesta Mewah',
+  },
+  {
+    tilt: '-rotate-1.5 sm:-rotate-1',
+    offset: 'lg:translate-y-5',
+    tapePos: 'left-6 -top-2.5',
+    tapeAngle: '-rotate-1',
+    stamp: 'SEMARANG',
+    plate: 'ARC-09',
+    note: 'Jarik Wiru & Sarung Batik',
+  },
+  {
+    tilt: 'rotate-1 sm:rotate-2',
+    offset: 'lg:-translate-y-3',
+    tapePos: 'right-6 -top-2.5',
+    tapeAngle: 'rotate-3',
+    stamp: 'ORIGINAL',
+    plate: 'ARC-10',
+    note: 'Kebaya Bordir & Encim Pesisir',
+  },
+  {
+    tilt: '-rotate-2 sm:-rotate-1.5',
+    offset: 'lg:translate-y-2',
+    tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
+    tapeAngle: '-rotate-2',
+    stamp: 'BUTIK',
+    plate: 'ARC-11',
+    note: 'Inner Busana & Manset Lembut',
+  },
+  {
+    tilt: 'rotate-1.5 sm:rotate-2',
+    offset: 'lg:-translate-y-5',
+    tapePos: 'right-8 -top-2.5',
+    tapeAngle: 'rotate-1',
+    stamp: 'KLASIK',
+    plate: 'ARC-12',
+    note: 'Kain Panjang Pola Keraton',
+  },
+];
+
 export default function Collections() {
   /** @type {LoaderReturnData} */
   const { collections } = useLoaderData();
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-12 pb-24 sm:pb-28 lg:pb-24 px-3 sm:px-6 lg:px-12 overflow-x-hidden">
       <div className="w-full max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
-            KATALOG BUTIK SEMARANG &bull; SEJAK 2007
-          </span>
-          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
-            Seluruh Koleksi Batik Nusantara
+        {/* Curated Editorial Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E2DFD8] text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#9E7D3B] font-semibold mb-3 sm:mb-4 shadow-xs">
+            <span className="w-1.5 h-1.5 bg-[#C5A059]"></span>
+            <span>PAPAN KURASI ARSIP &bull; BUTIK SIMONGAN</span>
+          </div>
+
+          <h1 className="font-serif text-2xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-[#111111] mb-3 sm:mb-5 leading-tight">
+            Katalog Koleksi Busana &amp; Kain Batik
           </h1>
-          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
-          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
-            Temukan busana sarimbit keluarga harmonis, busana wanita modern, kemeja pria furing hero, dan lembaran kain batik tulis pilihan pengrajin Jawa Tengah.
+
+          <div className="flex items-center justify-center gap-3 my-3 sm:my-4">
+            <div className="w-10 sm:w-12 h-px bg-[#E2DFD8]" />
+            <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[#C5A059] rotate-45" />
+            <div className="w-10 sm:w-12 h-px bg-[#E2DFD8]" />
+          </div>
+
+          <p className="text-[11px] sm:text-sm text-[#5A5550] font-light leading-relaxed max-w-2xl mx-auto px-2">
+            Lembar arsip kurasi mahakarya Batik Smile Nusantara. Dari kemegahan Sarimbit Tiga Kasta berfuring hero halus, kemeja pria pola simetris, hingga helaian kain batik tulis canting tembaga asli Jawa Tengah.
           </p>
+
+          {/* Quick Category Anchors (Horizontal swipeable on mobile) */}
+          <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2.5 mt-6 sm:mt-8 overflow-x-auto no-scrollbar pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
+            {[
+              { label: 'SARIMBIT EXCLUSIVE', href: '/collections/sarimbit-exclusive' },
+              { label: 'SARIMBIT PREMIUM', href: '/collections/sarimbit-premium' },
+              { label: 'BATIK PRIA', href: '/collections/batik-pria' },
+              { label: 'BATIK WANITA', href: '/collections/batik-wanita' },
+              { label: 'BATIK ANAK', href: '/collections/batik-anak' },
+            ].map((cat, idx) => (
+              <Link
+                key={idx}
+                to={cat.href}
+                className="whitespace-nowrap px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white hover:bg-[#111111] text-[#111111] hover:text-white border border-[#E2DFD8] hover:border-[#C5A059] text-[8px] sm:text-[9px] uppercase font-semibold tracking-[0.14em] sm:tracking-[0.16em] transition-all no-underline shadow-xs flex-shrink-0"
+              >
+                {cat.label}
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Collections Grid (0px Radius, Quiet Luxury) */}
+        {/* Scattered Atelier Moodboard Grid: 5:4 Aspect Ratio Cards */}
         <PaginatedResourceSection
           connection={collections}
-          resourcesClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          resourcesClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 py-4 sm:py-6"
         >
           {({ node: collection, index }) => (
             <CollectionItem
@@ -96,6 +239,17 @@ function CollectionItem({ collection, index }) {
     'batik-pria': '/banners/hero_editorial_banner.jpg',
     'kain-batik-tulis': '/banners/collection_kain_tulis_banner.jpg',
     'jarik-kain-batik': '/banners/collection_kain_tulis_banner.jpg',
+    'blazer-batik-wanita': '/brand/models/model_teak_door.jpg',
+    'blus-batik-wanita': '/brand/models/model_teak_door.jpg',
+    'dress-batik-wanita': '/brand/models/model_teak_door.jpg',
+    'gamis-batik-wanita': '/brand/models/model_teak_door.jpg',
+    'outer-batik-wanita': '/brand/models/model_teak_door.jpg',
+    'outer-tunik-batik': '/brand/models/model_teak_door.jpg',
+    'tunik-batik-wanita': '/brand/models/model_teak_door.jpg',
+    'kebaya-batik-modern': '/brand/models/model_teak_door.jpg',
+    'inner-busana-batik': '/brand/models/model_teak_door.jpg',
+    'batik-anak':
+      'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_ba593dd2-e198-489c-adb4-60c3be2cd938.jpg?v=1788413033',
   };
 
   const imageUrl =
@@ -103,37 +257,75 @@ function CollectionItem({ collection, index }) {
     fallbackImages[collection.handle] ||
     '/banners/hero_editorial_banner.jpg';
 
+  const style = SCATTER_STYLES[index % SCATTER_STYLES.length];
+
   return (
-    <Link
-      className="group block bg-white border border-[#E2DFD8] shadow-sm hover:shadow-md transition-all overflow-hidden"
-      key={collection.id}
-      to={`/collections/${collection.handle}`}
-      prefetch="intent"
+    <div
+      className={`relative group transition-all duration-500 ease-out ${style.offset} hover:z-30`}
     >
-      <div className="relative aspect-[4/3] bg-[#111111] overflow-hidden">
+      {/* Translucent Archival Washi Tape Accent */}
+      <div
+        aria-hidden="true"
+        className={`absolute ${style.tapePos} ${style.tapeAngle} z-20 w-12 sm:w-16 h-3 sm:h-3.5 bg-[#F3EDE2]/85 border border-[#C5A059]/40 backdrop-blur-xs shadow-xs pointer-events-none group-hover:opacity-60 transition-opacity`}
+      />
+
+      {/* Strict 5:4 Landscape Aspect Ratio Curated Card */}
+      <Link
+        className={`block relative aspect-[5/4] bg-[#111111] overflow-hidden border border-[#E2DFD8] shadow-[0_6px_22px_rgba(0,0,0,0.06)] group-hover:shadow-[0_20px_45px_rgba(197,160,89,0.20)] group-hover:border-[#C5A059] transition-all duration-500 transform ${style.tilt} group-hover:rotate-0 group-hover:scale-[1.02] no-underline`}
+        key={collection.id}
+        to={`/collections/${collection.handle}`}
+        prefetch="intent"
+      >
+        {/* Full-bleed 5:4 Curated Photography */}
         <img
           src={imageUrl}
           alt={collection.image?.altText || collection.title}
           loading={index < 4 ? 'eager' : 'lazy'}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+          className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700 opacity-85 group-hover:opacity-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-          <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-medium block mb-1">
-            KOLEKSI BUTIK
-          </span>
-          <h2 className="font-serif text-2xl font-normal leading-tight text-white group-hover:text-[#C5A059] transition-colors">
-            {collection.title}
-          </h2>
-        </div>
-      </div>
 
-      <div className="p-5 flex items-center justify-between bg-white border-t border-[#E2DFD8]">
-        <span className="text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold group-hover:text-[#C5A059] transition-colors">
-          JELAJAHI KOLEKSI &rarr;
-        </span>
-        <span className="text-xs text-[#A69F96]">&bull;</span>
-      </div>
-    </Link>
+        {/* Full-bleed Editorial Gradient Overlay (Quiet Luxury Scrim) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 p-4 sm:p-6 flex flex-col justify-between text-white">
+          {/* Top Bar: Archival Plate & Stamp */}
+          <div className="flex items-center justify-between">
+            <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#C5A059] bg-black/75 px-2 py-0.5 border border-[#C5A059]/30 backdrop-blur-xs">
+              {style.plate}
+            </span>
+            <span className="text-[8px] sm:text-[9px] font-bold tracking-[0.16em] uppercase text-white bg-[#C5A059] px-2 py-0.5 shadow-xs">
+              {style.stamp}
+            </span>
+          </div>
+
+          {/* Bottom Bar: Collection Editorial Info */}
+          <div>
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+              ARSIP BUTIK &bull; {style.note}
+            </span>
+
+            <h2 className="font-serif text-xl sm:text-2xl lg:text-2xl font-normal leading-tight text-white group-hover:text-[#C5A059] transition-colors mb-1.5 line-clamp-1">
+              {collection.title}
+            </h2>
+
+            {collection.description && (
+              <p className="text-[11px] text-[#E2DFD8]/80 font-light line-clamp-1 mb-2 hidden sm:block">
+                {collection.description}
+              </p>
+            )}
+
+            {/* Action Line */}
+            <div className="flex items-center justify-between pt-2 border-t border-white/20">
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-[#C5A059] group-hover:rotate-45 transition-transform duration-300" />
+                <span>JELAJAHI KOLEKSI</span>
+              </span>
+              <span className="text-[#C5A059] text-xs font-bold group-hover:translate-x-1 transition-transform duration-300">
+                &rarr;
+              </span>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 }
 
