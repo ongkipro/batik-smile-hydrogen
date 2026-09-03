@@ -1119,6 +1119,26 @@
 - `npm run build`: Exit code 0.
 - Verified elimination of `<select>` element and proper mobile layout rendering.
 
+---
+
+## Milestone 40: Store & Checkout Domain Environment Configuration (2026-09-04)
+**Date**: 2026-09-04 | **Execution**: `PUBLIC_STORE_DOMAIN` and `PUBLIC_CHECKOUT_DOMAIN` configuration
+
+### 1. Environment Variables Configuration
+- Configured `.env` and `.env.example`:
+  - `PUBLIC_STORE_DOMAIN="batiksmile.com"`
+  - `PUBLIC_CHECKOUT_DOMAIN="checkout.batiksmile.com"`
+- Updated `root.jsx` loader to expose `publicCheckoutDomain` and pass `consent.checkoutDomain`.
+- Updated `CartSummary.jsx` (`CartCheckoutActions`) to resolve checkout URLs to `checkout.batiksmile.com`.
+
+### 2. Verification Evidence
+- Tested Storefront API GraphQL queries against `https://batiksmile.com/api/2026-01/graphql.json` (Status 200).
+- Verified cart generation returning `checkoutUrl` directly on `checkout.batiksmile.com`.
+- Verified HTTP 302 redirect from `/cart/c/...` to live checkout session `/checkouts/cn/.../id-id`.
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+
+
 
 
 

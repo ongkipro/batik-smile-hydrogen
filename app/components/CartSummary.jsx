@@ -83,12 +83,21 @@ export function CartSummary({ cart, layout: _layout }) {
  * @param {{checkoutUrl?: string}}
  */
 function CartCheckoutActions({ checkoutUrl }) {
-  if (!checkoutUrl) return null;
+  let resolvedCheckoutUrl = checkoutUrl;
+  try {
+    const url = new URL(checkoutUrl);
+    if (url.hostname.includes('myshopify.com')) {
+      url.hostname = 'checkout.batiksmile.com';
+      resolvedCheckoutUrl = url.toString();
+    }
+  } catch {
+    // Keep original if parsing fails
+  }
 
   return (
     <div className="mt-6 pt-5 border-t border-[#E2DFD8]">
       <a
-        href={checkoutUrl}
+        href={resolvedCheckoutUrl}
         target="_self"
         className="w-full block text-center py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-all shadow-sm cursor-pointer"
       >

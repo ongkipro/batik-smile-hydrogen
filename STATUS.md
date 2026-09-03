@@ -131,11 +131,15 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Standardized all input and textarea fields across the app to 16px (`text-base`) on mobile to prevent iOS Safari auto-zoom upon focus.
     - Replaced clunky native OS `<select>` with custom Quiet Luxury controls: Desktop popover menu and Mobile Sort Bottom Sheet drawer with backdrop blur and 48px touch targets.
     - Restructured mobile filter view with top count/reset chip bar and horizontal touch-scroll ribbon.
+24. **Store & Checkout Domain Environment Configuration**:
+    - Configured `PUBLIC_STORE_DOMAIN="batiksmile.com"` and `PUBLIC_CHECKOUT_DOMAIN="checkout.batiksmile.com"` in `.env` and `.env.example`.
+    - Integrated with Hydrogen CSP, privacy consent, and `CartCheckoutActions` checkout URL resolution.
+    - Verified GraphQL query execution on `batiksmile.com` and 302 redirection to active checkout session on `checkout.batiksmile.com`.
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
-- **Comprehensive Route Audit**: All collection, catalog, cart, 404, and in-modal search routes tested and returning proper HTTP status codes on local dev server (`localhost:3005`).
-- **Deployment Status**: Ready for deployment.
+- **Domain Verification**: Direct Storefront API GraphQL and checkout session verified on `checkout.batiksmile.com`.
+- **Deployment Status**: Configured and verified.
 
