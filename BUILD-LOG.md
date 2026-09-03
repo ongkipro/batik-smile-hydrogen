@@ -761,6 +761,59 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
 
+---
+
+## Milestone 26: Currency Decimal Removal & Minimalist Dynamic Breadcrumbs (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Storefront-Wide Currency Decimal Removal (,00) & Single-Line Fluid Responsive Breadcrumbs with Zero-Radius Home Icon & Minimalist Chevron
+
+### 1. Decimal Trailing Zero Elimination (,00 Removal)
+- Added `withoutTrailingZeros as="span"` to `<Money>` components across the entire storefront:
+  - PDP Primary Price and Compare At Price (`products.$handle.jsx`)
+  - Sticky Mobile Checkout Bar (`StickyMobileBar.jsx`)
+  - Product Grid & Related Item Cards (`ProductItem.jsx`)
+  - Standalone Product Price (`ProductPrice.jsx`)
+  - Luxury Search Modal (`LuxurySearchModal.jsx`)
+  - Search Catalog & Predictive Results (`SearchResults.jsx`, `SearchResultsPredictive.jsx`)
+  - Shopping Bag Subtotal (`CartSummary.jsx`)
+- Completely eliminates ugly `,00` and `.00` fractional decimals across desktop and mobile while preserving clean integer currency formatting (e.g. `IDR 1,250,000` / `Rp 1.250.000`).
+
+### 2. Minimalist Single-Line Dynamic Breadcrumbs
+- Replaced the word "BERANDA" with a clean zero-radius geometric Home SVG icon with hover transition.
+- Replaced slash separators (`/`) with minimalist chevrons (`>`).
+- Implemented `overflow-hidden whitespace-nowrap` on container and `truncate min-w-0` on product title to guarantee breadcrumbs fit seamlessly on exactly ONE horizontal line across all device screen widths (360px Android, 375px iPhone, 430px iPhone Pro Max, widescreen desktop).
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check on `sarimbit-royal-navy-1` verified `Price without decimals: true` and single-line breadcrumb with Home icon active.
+
+---
+
+## Milestone 27: Indonesian Rupiah (Rp) Standardization & Dedicated 2-Column Tier Differentiation (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Deterministic Indonesian Rupiah (Rp) Formatting, Bespoke 2-Column Editorial Differentiation for Sarimbit Exclusive & Premium, and Concise Single-Line Collection CTA
+
+### 1. Indonesian Rupiah (Rp) Currency Standardization (`currency.js`)
+- Replaced foreign `IDR` currency prefixes with native `Rp` format familiar to Indonesian shoppers (e.g. `Rp 1.250.000` and `Rp 1.750.000`).
+- Mathematical zero-decimal formatting eliminates all `,00` and `.00` across all devices without hydration mismatch.
+- Applied across PDP, Sticky Mobile Action Bar, Catalog Cards, and Standalone Price components.
+
+### 2. 2-Column Bespoke Editorial Tier Section (`ProductTierStorySection.jsx`)
+- Rendered exclusively for **Sarimbit Exclusive** and **Sarimbit Premium** products.
+- **Sarimbit Exclusive**: Obsidian Noir canvas with 4:5 canting & prada emas artisan imagery, mulberry silk ATBM narrative, and 3 technical pillars (Batik Tulis Prada Emas Murni, Presisi Sambung Pola 100% Simetris, and Layanan VIP Bespoke Tailoring).
+- **Sarimbit Premium**: Warm Mori Linen canvas with 4:5 family harmony imagery, dobby timbul weave narrative, and 3 technical pillars (Tekstur Tenun Dobby Timbul, Lapis Furing Katun Hero Sejuk Tropis, and Garansi Bebas Tukar Ukuran 7 Hari).
+- Excluded on standard products to preserve minimalist catalog flow.
+- Prepared for direct Metaobject binding in future iterations.
+
+### 3. Concise Single-Line Collection Navigation
+- Shortened bottom collection button from `LIHAT SEMUA KOLEKSI SARIMBIT EXCLUSIVE →` to concise `LIHAT SEMUA KOLEKSI →`, guaranteeing zero text clipping or 2-line wraps on mobile viewports.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check on `sarimbit-royal-navy-1` and `sarimbit-charcoal-hitam` verified `Renders Rp format: true`, `Has 2-Column Tier Section: true`, and `LIHAT SEMUA KOLEKSI →` single-line button.
+
+
+
 
 
 

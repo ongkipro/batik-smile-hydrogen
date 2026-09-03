@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
-import { Image, Money } from '@shopify/hydrogen';
+import { Image } from '@shopify/hydrogen';
 import { useVariantUrl } from '~/lib/variants';
+import { formatRupiah } from '~/lib/currency';
 
 /**
  * Quiet Luxury Nusantara Product Card
@@ -137,12 +138,12 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
                     : 'text-[11px] sm:text-xs font-semibold text-[#111111]'
                 }`}
               >
-                <Money data={price} />
+                {formatRupiah(price)}
               </span>
             )}
             {isOnSale && compareAtPrice && (
               <span className="text-[10px] line-through text-[#5A5550]">
-                <Money data={compareAtPrice} />
+                {formatRupiah(compareAtPrice)}
               </span>
             )}
           </div>

@@ -1,4 +1,4 @@
-import { Money } from '@shopify/hydrogen';
+import { formatRupiah } from '~/lib/currency';
 
 /**
  * @param {{
@@ -13,16 +13,16 @@ export function ProductPrice({ price, compareAtPrice }) {
         <div className="flex items-baseline gap-2">
           {price ? (
             <span className="text-[#111111] font-normal">
-              <Money data={price} />
+              {formatRupiah(price)}
             </span>
           ) : null}
           <s className="text-xs text-[#A69F96] font-light line-through">
-            <Money data={compareAtPrice} />
+            {formatRupiah(compareAtPrice)}
           </s>
         </div>
       ) : price ? (
         <span className="text-[#111111] font-normal">
-          <Money data={price} />
+          {formatRupiah(price)}
         </span>
       ) : (
         <span>&nbsp;</span>

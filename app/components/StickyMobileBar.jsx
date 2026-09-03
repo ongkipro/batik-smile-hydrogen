@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Money } from '@shopify/hydrogen';
 import { AddToCartButton } from './AddToCartButton';
+import { formatRupiah } from '~/lib/currency';
 
 export function StickyMobileBar({ product, selectedVariant, isExclusive = false, isPremium = false }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,7 +40,7 @@ export function StickyMobileBar({ product, selectedVariant, isExclusive = false,
             {product.title}
           </p>
           <div className={`text-xs font-bold ${isExclusive ? 'text-[#C5A059]' : 'text-[#9E7D3B]'}`}>
-            {selectedVariant?.price && <Money data={selectedVariant.price} />}
+            {selectedVariant?.price && formatRupiah(selectedVariant.price)}
           </div>
         </div>
 

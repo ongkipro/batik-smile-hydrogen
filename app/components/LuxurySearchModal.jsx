@@ -284,7 +284,7 @@ export function LuxurySearchModal() {
                         {product.title}
                       </h5>
                       <div className="mt-1 text-[11px] font-semibold text-[#111111]">
-                        {price && <Money data={price} />}
+                        {price && <Money data={price} withoutTrailingZeros as="span" />}
                       </div>
                     </Link>
                   );
@@ -365,7 +365,7 @@ export function LuxurySearchModal() {
                             {product.title}
                           </h5>
                           <div className="mt-1 text-[11px] font-semibold text-[#111111]">
-                            {price && <Money data={price} />}
+                            {price && <Money data={price} withoutTrailingZeros as="span" />}
                           </div>
                         </Link>
                       );

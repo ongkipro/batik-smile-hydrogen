@@ -74,6 +74,15 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
    - Cohesive related products ("Koleksi Selaras") rendering obsidian luxury cards (`variant="exclusive"`) and theme-aware `StickyMobileBar.jsx`.
    - Comprehensive cross-device audit: 100% of 16 key routes returning HTTP 200 OK.
 
+9. **Decimal Elimination & Single-Line Minimalist Dynamic Breadcrumbs**:
+   - Eliminated `,00` and `.00` fractional decimals storefront-wide by configuring `withoutTrailingZeros as="span"` across all `<Money>` components (PDP price/compareAtPrice, Sticky Mobile Bar, product cards, standalone prices, search modals, and cart summary).
+   - Upgraded breadcrumbs from text "BERANDA" to a zero-radius geometric Home icon, replaced slashes with minimalist chevrons (`>`), and implemented `overflow-hidden whitespace-nowrap` with `truncate min-w-0` on product title to guarantee single-line fluid responsiveness across all mobile and desktop screen sizes.
+
+10. **Indonesian Rupiah (Rp) Standardization & Dedicated 2-Column Tier Differentiation**:
+    - Replaced foreign `IDR` currency prefixes with native `Rp` formatting (`currency.js`), eliminating `,00` and `.00` fractional decimals across all desktop and mobile viewports.
+    - Integrated `ProductTierStorySection.jsx` offering bespoke 2-column editorial differentiation (image + technical storytelling) exclusively for **Sarimbit Exclusive** (Sutra ATBM & Canting Prada Emas) and **Sarimbit Premium** (Tenun Dobby Timbul & Furing Hero Sejuk).
+    - Shortened bottom collection navigation button to concise `LIHAT SEMUA KOLEKSI →` to ensure crisp single-line presentation on all mobile viewports.
+
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.

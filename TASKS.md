@@ -727,6 +727,35 @@
   - *Action*: Configured "Koleksi Selaras" (Related Products) on Sarimbit Exclusive PDP to render `ProductItem` with `variant="exclusive"` (obsidian cards with gold border) and updated `StickyMobileBar.jsx` to render matching obsidian and gold styling with instant direct checkout.
   - *Evidence*: `npm run lint` 0 errors, `npm run build` Exit code 0, 16/16 routes 200 OK.
 
+---
+
+## Phase 31: Decimal Elimination & Minimalist Dynamic Breadcrumbs (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, StickyMobileBar.jsx, ProductItem.jsx, ProductPrice.jsx, LuxurySearchModal.jsx, SearchResults.jsx, SearchResultsPredictive.jsx, CartSummary.jsx, Oxygen Deployment*
+
+- [x] **Task 31.1: Storefront-Wide Currency Decimal Removal (,00 Elimination)**
+  - *Action*: Configured `withoutTrailingZeros as="span"` across all storefront `<Money>` components (PDP price/compareAtPrice, Sticky Mobile Bar, ProductItem cards, ProductPrice, Luxury Search Modal, Search Results, and Cart Summary). This cleans up all `,00` and `.00` fractional decimals across desktop and mobile while preserving clean integer currency formatting (e.g. `IDR 1,250,000` / `Rp 1.250.000`).
+  - *Evidence*: Local SSR check on `/products/sarimbit-royal-navy-1` verified `Price without decimals: true` and `Has ,00 or .00 decimal in primary price: false`.
+- [x] **Task 31.2: Minimalist Single-Line Dynamic Breadcrumbs**
+  - *Action*: Replaced the word "BERANDA" with a clean zero-radius geometric Home SVG icon. Replaced slash separators (`/`) with minimalist chevrons (`>`). Configured container with `overflow-hidden whitespace-nowrap` and applied `truncate min-w-0` to the current product title. This guarantees the breadcrumb adapts fluidly to all device widths (from 360px mobile up to widescreen desktop) on exactly one clean horizontal line without awkward multi-line wrapping.
+  - *Evidence*: Local SSR check verified `Has Home icon: true`, `Has text BERANDA: false`, `Has chevron separator: true`, and `Breadcrumb is single line with overflow-hidden whitespace-nowrap: true`.
+
+---
+
+## Phase 32: Indonesian Rupiah (Rp) Standardization, 2-Column Tier Differentiation & Concise CTAs (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, ProductTierStorySection.jsx, currency.js, StickyMobileBar.jsx, ProductItem.jsx, ProductPrice.jsx, Oxygen Deployment*
+
+- [x] **Task 32.1: Indonesian Rupiah (Rp) Currency Standardization**
+  - *Action*: Created `app/lib/currency.js` providing deterministic `formatRupiah` without decimal fractions (e.g. `Rp 1.250.000` instead of `IDR 1,250,000.00`). Applied across PDP, Sticky Mobile Bar, Product Cards, and Standalone Price components to match Indonesian consumer expectations.
+  - *Evidence*: Local SSR check on `sarimbit-royal-navy-1` verified `Renders Rp format (e.g. Rp 1.250.000): true`.
+- [x] **Task 32.2: Dedicated 2-Column Editorial Tier Differentiation Section**
+  - *Action*: Created `app/components/ProductTierStorySection.jsx` rendered exclusively on **Sarimbit Exclusive** (Obsidian Noir theme, Sutra ATBM & canting prada emas story, canting banner image) and **Sarimbit Premium** (Warm Mori Linen theme, tenun dobby timbul & furing hero sejuk story, family harmony banner image). Standard products remain unaffected. Ready for future Metaobject binding.
+  - *Evidence*: Verified 2-column section active on `/products/sarimbit-royal-navy-1` and `/products/sarimbit-charcoal-hitam`, absent on standard `/products/gamis-parang-kusumo`.
+- [x] **Task 32.3: Concise Mobile-Friendly Collection Button**
+  - *Action*: Shortened bottom related collection button from `LIHAT SEMUA KOLEKSI SARIMBIT EXCLUSIVE →` to concise `LIHAT SEMUA KOLEKSI →`, eliminating text overflow and multi-line wrapping on mobile viewports.
+  - *Evidence*: Verified single-line layout and exact text in rendered SSR output.
+
+
+
 
 
 

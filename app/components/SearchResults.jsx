@@ -194,7 +194,7 @@ function SearchResultsProducts({ term, products }) {
 
                           <div className="mt-3 pt-3 border-t border-[#E2DFD8] flex items-center justify-between">
                             <span className="text-xs font-semibold text-[#111111]">
-                              {price && <Money data={price} />}
+                              {price && <Money data={price} withoutTrailingZeros as="span" />}
                             </span>
                             <span className="text-[10px] text-[#A69F96] group-hover:text-[#111111] transition-colors">
                               LIHAT &rarr;

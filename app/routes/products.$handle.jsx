@@ -6,12 +6,13 @@ import {
   useOptimisticVariant,
   getProductOptions,
   getAdjacentAndFirstAvailableVariants,
-  Money,
 } from '@shopify/hydrogen';
 import { AddToCartButton } from '~/components/AddToCartButton';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { StickyMobileBar } from '~/components/StickyMobileBar';
 import { ProductItem } from '~/components/ProductItem';
+import { ProductTierStorySection } from '~/components/ProductTierStorySection';
+import { BoutiqueMoney } from '~/lib/currency';
 
 /**
  * Parse Shopify product description HTML into narrative story and structured specifications
@@ -256,29 +257,63 @@ export default function Product() {
   return (
     <div className={`min-h-screen py-8 sm:py-12 px-4 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-500 ${themeClasses}`}>
       <div className="w-full max-w-7xl mx-auto">
-        {/* Dynamic Breadcrumb Navigation */}
+        {/* Dynamic Breadcrumb Navigation (Single-line fluid responsive across all device sizes) */}
         <nav
-          className={`text-[10px] uppercase tracking-[0.2em] mb-8 sm:mb-10 flex items-center gap-2 flex-wrap ${
+          aria-label="Breadcrumb"
+          className={`text-[10px] sm:text-[11px] uppercase tracking-[0.16em] mb-6 sm:mb-8 flex items-center gap-1.5 sm:gap-2 overflow-hidden whitespace-nowrap min-w-0 ${
             isExclusiveTier ? 'text-[#A9A49C]' : 'text-[#5A5550]'
           }`}
         >
           <NavLink
             to="/"
-            className={isExclusiveTier ? 'hover:text-[#C5A059] transition-colors' : 'hover:text-[#9E7D3B] transition-colors'}
+            aria-label="Beranda"
+            className={`flex items-center shrink-0 transition-colors ${
+              isExclusiveTier ? 'text-[#A9A49C] hover:text-[#C5A059]' : 'text-[#5A5550] hover:text-[#9E7D3B]'
+            }`}
           >
-            BERANDA
+            <svg
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[1.6]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="square" strokeLinejoin="miter" d="M3 10.5L12 3l9 7.5V21H4V10.5z" />
+              <path strokeLinecap="square" strokeLinejoin="miter" d="M9 21v-7h6v7" />
+            </svg>
           </NavLink>
-          <span className={isExclusiveTier ? 'text-[#444444]' : 'text-[#CCCCCC]'}>/</span>
+
+          <svg
+            className={`w-2.5 h-2.5 shrink-0 ${isExclusiveTier ? 'text-[#C5A059]/60' : 'text-[#A69F96]'}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M9 5l7 7-7 7" />
+          </svg>
+
           <NavLink
             to={relatedCollectionHandle ? `/collections/${relatedCollectionHandle}` : '/collections/all'}
-            className={isExclusiveTier ? 'hover:text-[#C5A059] transition-colors' : 'hover:text-[#9E7D3B] transition-colors'}
+            className={`shrink-0 transition-colors ${
+              isExclusiveTier ? 'hover:text-[#C5A059]' : 'hover:text-[#9E7D3B]'
+            }`}
           >
             {relatedCollectionTitle || 'KOLEKSI'}
           </NavLink>
-          <span className={isExclusiveTier ? 'text-[#444444]' : 'text-[#CCCCCC]'}>/</span>
+
+          <svg
+            className={`w-2.5 h-2.5 shrink-0 ${isExclusiveTier ? 'text-[#C5A059]/60' : 'text-[#A69F96]'}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M9 5l7 7-7 7" />
+          </svg>
+
           <span
-            className={`truncate max-w-[200px] sm:max-w-xs ${
-              isExclusiveTier ? 'text-white font-medium' : 'text-[#111111] font-semibold'
+            className={`truncate font-medium min-w-0 ${
+              isExclusiveTier ? 'text-white/90' : 'text-[#111111]'
             }`}
           >
             {title}
@@ -390,18 +425,20 @@ export default function Product() {
                 {title}
               </h1>
 
-              {/* Price Display */}
+              {/* Price Display (Indonesian Rp format, no decimal fractions) */}
               <div className="flex items-baseline gap-3 mb-1.5">
                 <span
                   className={`text-2xl sm:text-3xl font-medium tracking-wide font-sans ${
                     isExclusiveTier ? 'text-white' : 'text-[#111111]'
                   }`}
                 >
-                  {selectedVariant?.price && <Money data={selectedVariant.price} />}
+                  {selectedVariant?.price && (
+                    <BoutiqueMoney data={selectedVariant.price} />
+                  )}
                 </span>
                 {selectedVariant?.compareAtPrice && (
                   <span className="text-sm line-through text-[#888888]">
-                    <Money data={selectedVariant.compareAtPrice} />
+                    <BoutiqueMoney data={selectedVariant.compareAtPrice} />
                   </span>
                 )}
               </div>
@@ -775,6 +812,12 @@ export default function Product() {
           </div>
         </div>
 
+        {/* Tier-Specific 2-Column Bespoke Differentiation Section (Sarimbit Exclusive & Premium) */}
+        <ProductTierStorySection
+          tier={isExclusiveTier ? 'exclusive' : isPremiumTier ? 'premium' : 'standard'}
+          productTitle={title}
+        />
+
         {/* Related Products: "Koleksi Selaras" (Strict 4:5 Vertical Cards, Calibrated Spacing) */}
         {relatedProducts.length > 0 && (
           <div
@@ -820,7 +863,7 @@ export default function Product() {
                       : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111]'
                   }`}
                 >
-                  LIHAT SEMUA KOLEKSI {relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : ''} &rarr;
+                  LIHAT SEMUA KOLEKSI &rarr;
                 </Link>
               </div>
             )}

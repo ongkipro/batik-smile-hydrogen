@@ -21,7 +21,7 @@ export function CartSummary({cart, layout}) {
         <dt>Subtotal</dt>
         <dd>
           {cart?.cost?.subtotalAmount?.amount ? (
-            <Money data={cart?.cost?.subtotalAmount} />
+            <Money data={cart?.cost?.subtotalAmount} withoutTrailingZeros as="span" />
           ) : (
             '-'
           )}
