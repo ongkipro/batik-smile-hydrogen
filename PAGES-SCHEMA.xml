@@ -33,7 +33,7 @@
           <component name="Header" file="app/components/Header.jsx" sticky="true" />
           <outlet />
           <component name="Footer" file="app/components/Footer.jsx" />
-          <component name="CartDrawer" file="app/components/CartDrawer.jsx" side="right" />
+          <component name="LuxurySearchModal" file="app/components/LuxurySearchModal.jsx" side="top" />
           <component name="WhatsAppConcierge" file="app/components/WhatsAppConcierge.jsx" position="bottom-right" />
         </body>
       </html-structure>
@@ -343,46 +343,68 @@
     </route>
 
     <!-- ================================================================== -->
-    <!-- 5. SLIDE-OVER DRAWER CART & CHECKOUT                               -->
+    <!-- 5. DEDICATED 2-COLUMN ZERO-BOX CART (/cart)                        -->
     <!-- ================================================================== -->
-    <route path="/cart" file="app/routes/cart.jsx" type="cart-action">
-      <description>Slide-over drawer cart with optimistic UI and line item attributes</description>
-      <component name="CartDrawer" file="app/components/CartDrawer.jsx" />
+    <route path="/cart" file="app/routes/cart.jsx" type="cart-page">
+      <description>Dedicated 2-column zero-box cart page with optimistic mutations, synthetic variant suppression, and direct Shopify Checkout</description>
+      <component name="CartMain" file="app/components/CartMain.jsx" />
+      <component name="CartLineItem" file="app/components/CartLineItem.jsx" />
+      <component name="CartSummary" file="app/components/CartSummary.jsx" />
       <mutation-contracts>
-        <mutation name="CartLinesAdd" file="app/lib/fragments.js">
-          <input type="CartLineInput">
-            <field name="merchandiseId" type="ID!" />
-            <field name="quantity" type="Int!" />
-            <field name="attributes" type="[AttributeInput!]">
-              <attr key="_tailoring_service" value="yes/no" />
-              <attr key="_tailoring_sizing" value="custom dimensions" />
-              <attr key="_furing_choice" value="katun_hero" />
-            </field>
-          </input>
-        </mutation>
-        <mutation name="CartLinesUpdate" />
-        <mutation name="CartLinesRemove" />
+        <mutation name="CartLinesAdd" file="app/lib/fragments.js" />
+        <mutation name="CartLinesUpdate" file="app/lib/fragments.js" />
+        <mutation name="CartLinesRemove" file="app/lib/fragments.js" />
       </mutation-contracts>
       <features>
-        <feature name="FreeShippingProgressBar">Free shipping threshold across Indonesia</feature>
-        <feature name="BespokeNotesTextarea">Order note for tailor and body measurement specs</feature>
+        <feature name="TwoColumnLayout">Line items stream on left, sticky order summary on right</feature>
+        <feature name="ZeroBoxQuietLuxury">Eliminated heavy card frames, shadow bezels, and boxed chips</feature>
+        <feature name="SyntheticVariantSuppression">Suppresses non-informative 'Title: Default Title' variants</feature>
+        <feature name="UnifiedSingleCTA">Single focused 'Lanjutkan Belanja →' link in header</feature>
+        <feature name="StandardRupiahPricing">Clean formatRupiah without trailing decimals ,00</feature>
+        <feature name="WhisperedAssuranceLine">Horizontal assurance: Keaslian 100%, Bebas Penyesuaian Ukuran, Asuransi</feature>
+        <feature name="PureTypographicPaymentStrip">QRIS • BCA • Mandiri • BNI • BRI • Visa • Mastercard</feature>
         <feature name="HostedCheckoutHandoff">Direct URL redirect to Shopify Checkout</feature>
       </features>
     </route>
 
     <!-- ================================================================== -->
-    <!-- 6. PREDICTIVE SEARCH MODAL                                         -->
+    <!-- 6. IN-MODAL LIVE PREDICTIVE SEARCH ENGINE                          -->
     <!-- ================================================================== -->
-    <route path="/search" file="app/routes/search.jsx" type="search-modal">
-      <description>Predictive typeahead search modal</description>
-      <component name="SearchResultsPredictive" file="app/components/SearchResultsPredictive.jsx" />
+    <route path="/search" file="app/routes/search.jsx" type="search-engine">
+      <description>Live in-modal predictive search engine with zero redirects to /search page, 250ms debounce, and multi-entity output</description>
+      <component name="LuxurySearchModal" file="app/components/LuxurySearchModal.jsx" />
       <query-contracts>
         <graphql-query name="PredictiveSearchQuery">
-          <field name="predictiveSearch.products(first: 6)" />
-          <field name="predictiveSearch.collections(first: 3)" />
-          <field name="predictiveSearch.queries(first: 3)" />
+          <constraint name="LimitRange">Strictly 1..10 clamped via Math.min(10, Math.max(1, limit))</constraint>
+          <field name="predictiveSearch.products(limit: 10)" withTags="true" withSelectedVariant="true" />
+          <field name="predictiveSearch.collections(limit: 10)" withImage="true" />
+          <field name="predictiveSearch.articles(limit: 10)" />
+          <field name="predictiveSearch.queries(limit: 10)" />
         </graphql-query>
       </query-contracts>
+      <features>
+        <feature name="InModalInstantSearch">No page navigation; instant live results inside modal dialog</feature>
+        <feature name="DebouncedLiveTyping">250ms smooth debounce on keystrokes + instant Enter/CARI submit</feature>
+        <feature name="MultiEntityOutput">Collections, Tags (#chips), Products (4:5 portrait), Articles</feature>
+        <feature name="TabbedFiltering">Instant in-modal tabs: Semua, Busana, Koleksi, Tag, Warta</feature>
+        <feature name="TrendingKeywords">Clickable shortcuts: Daster Batik Solo, Sarimbit Mahakarya, etc.</feature>
+      </features>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 7. MODERN ZERO-BOX 404 EXPERIENCE (/*)                             -->
+    <!-- ================================================================== -->
+    <route path="/*" file="app/routes/$.jsx" type="catch-all-404">
+      <description>Modern, card-free, zero-box 404 experience with animated heritage emblem, watermark numeral, in-modal search trigger, and strict noindex/nofollow</description>
+      <component name="NotFoundView" file="app/routes/$.jsx" />
+      <features>
+        <feature name="ZeroBoxStreaming">Spacious Mori Linen (#FAF8F5) canvas free of heavy card boxes or frames</feature>
+        <feature name="WatermarkNumeral">Oversized subtle background 404 in Cormorant Garamond font</feature>
+        <feature name="AnimatedHeritageEmblem">Floating rotating geometric batik diamond monogram in antique gold</feature>
+        <feature name="FocusedDualCTAs">Kembali ke Beranda → and Jelajahi Koleksi buttons</feature>
+        <feature name="InModalSearchTrigger">Whispered text shortcut triggering in-modal search via useAside</feature>
+        <feature name="DualLayerSEODefense">HTML meta tag 'noindex, nofollow' + HTTP response header 'X-Robots-Tag: noindex, nofollow' via entry.server.jsx</feature>
+      </features>
     </route>
   </routes>
 </storefront-architecture>

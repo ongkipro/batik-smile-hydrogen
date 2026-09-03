@@ -10,6 +10,8 @@
 
 Inspired by the refined minimalism of **Engrasia** blended with the warmth of Indonesian Batik Heritage:
 - **Zero-Radius Precision**: Sharp `border-radius: 0px` on all buttons, input fields, and luxury containers. We reject cartoonish pill shapes in favor of architectural high-fashion edges.
+- **Zero-Box & Anti-Framing Streaming**: Content flows naturally on the unbleached Mori Linen (`#FAF8F5`) surface, separated by delicate hairline dividers (`#E2DFD8`) rather than nested boxed cards, drop-shadow bezels, or boxed badges.
+- **Currency Purity (`formatRupiah`)**: All prices are formatted cleanly in Indonesian Rupiah without decimals `,00` (e.g. `Rp 1.680.000`), avoiding noisy trailing zeros.
 - **Micro-Tracking & Whispered Caps**: Uppercase headings, navigation links, and button labels featuring `letter-spacing: 0.18em` to `0.22em`.
 - **Restraint Over Clutter**: No neon countdown timers, no aggressive spin-to-win popups, no badge pollution. White/cream space is treated as a luxury material.
 - **Tactile Material Honesty**: Every product card, video banner, and fabric swatch celebrates raw texture—from canting wax drips to cotton hero furing.
@@ -105,10 +107,17 @@ Structural, UI, Microcopy & Buttons: Instrument Sans / Plus Jakarta Sans (Modern
 
 ## 4. Benchmark Components from Engrasia & Batik Smile Synthesis
 
-### A. Minimalist Editorial Header
-- **Logo**: Official brand asset (`public/brand/batik-smile-logo.png`) featuring stylized "Batik", rounded "Smile" with signature smile-bracket `)`, and the floral mandala batik emblem. In text-only mode: wide-tracked uppercase serif `B A T I K  S M I L E` in Antique Champagne (`#A68A56`) or Obsidian (`#1C1C1C`).
-- **Navigation**: Clean uppercase tracking (`VOGUE` • `SARIMBIT` • `KAIN TULIS` • `JASA JAHIT` • `TENTANG KAMI`).
-- **Utility Icons**: Hairline SVG icons for Customer Account, Search Modal, and Slide-Over Drawer Cart.
+### A. Minimalist Editorial Header & Mobile Calibration
+- **Desktop Header**:
+  - Logo left-aligned (`public/brand/batik-smile-logo.png`).
+  - Navigation: Clean uppercase tracking (`VOGUE` • `SARIMBIT` • `KAIN TULIS` • `JASA JAHIT` • `TENTANG KAMI`).
+  - Right Actions: In-Modal Search Trigger, Customer Account (`/account`), and Direct Cart Page Link (`/cart` with counter badge).
+- **Mobile Header (Tripartite & Clutter-Free)**:
+  - Left: Hamburger Menu Button (`lg:hidden`).
+  - Center: Dead-center enlarged brand logo (`h-10 sm:h-11 w-auto max-w-[170px] sm:max-w-[200px]`, `absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`).
+  - Right: Cart Badge Icon (`Link to="/cart"`).
+  - Search icon hidden on mobile (accessible via mobile sticky bottom bar `MobileNavigation.jsx`).
+  - Account icon hidden on mobile header; relocated as a **Sticky bottom bar** inside the burger drawer (`[AKUN SAYA & STATUS PESANAN →]`).
 - **Sticky Announcement Bar**: Subtle warm cream bar with single-sentence announcement or concierge WhatsApp link (`081-390-8888-09`).
 
 ### B. Full-Bleed Editorial Hero & Ambient Media
@@ -166,9 +175,20 @@ Structural, UI, Microcopy & Buttons: Instrument Sans / Plus Jakarta Sans (Modern
    - Microcopy fit note: *"Model TB 178cm / BB 75kg mengenakan Size L • Garansi Tukar Size 100%"*.
    - Pre-order transparency: *"Pre-order products are generally shipped within 10-14 days after payment"*.
    - Fabric / Tailoring disclaimer: *"Notes: The price includes premium cotton hero lining"*.
-3. **Slide-Over Drawer Cart**:
-   - Matches Prestige theme drawer behavior (`cartType: "drawer"`).
-   - Displays free shipping tier progress bar, order notes for bespoke sizing/alteration notes, and direct Shopify checkout button.
+3. **Dedicated 2-Column Zero-Box Cart Page (`/cart`)**:
+   - 2-Column architectural split: Line items stream on the left, sticky order summary on the right.
+   - Zero-box Quiet Luxury streaming: Content flows directly on the unbleached Mori Linen canvas separated by hairline dividers (`#E2DFD8`).
+   - Synthetic variant suppression: Automatically filters out non-informative `Title: Default Title`.
+   - Single focused CTA: `Lanjutkan Belanja →` in the header, eliminating competing back links.
+   - Whispered horizontal assurance line: *• Garansi Keaslian Butik 100% • Bebas Penyesuaian Ukuran • Pengiriman Terproteksi Asuransi*.
+   - Pure typographic payment method display: *QRIS • BCA • Mandiri • BNI • BRI • Visa • Mastercard*.
+
+4. **In-Modal Live Predictive Search (`LuxurySearchModal.jsx`)**:
+   - Zero redirects to `/search`; search queries execute in-modal with results displayed immediately.
+   - 250ms debounced live search + instant Enter/CARI submit.
+   - Clamped limit (1..10) strictly honoring Storefront API GraphQL constraints.
+   - Multi-entity display: Koleksi Butik Terkait (collections), Tag Busana (tags), Busana & Produk (4:5 vertical portrait with `formatRupiah`), Warta Budaya (articles).
+   - In-modal tabbed filtering: `Semua`, `Busana`, `Koleksi`, `Tag`, `Warta`.
 
 ---
 

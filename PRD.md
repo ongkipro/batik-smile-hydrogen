@@ -57,19 +57,27 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
 [Storefront Root: /]
   ├── [AnnouncementBar]: Minimalist single-line notification & direct WhatsApp link
   ├── [Header]:
-  │     ├── Logo: Tracked luxury serif "B A T I K  S M I L E"
+  │     ├── Logo: Tracked luxury serif "B A T I K  S M I L E" (Desktop left-aligned, Mobile dead-center enlarged h-10/h-11)
   │     ├── Desktop Nav: VOGUE | SARIMBIT | KAIN TULIS | JASA JAHIT | TENTANG KAMI
-  │     └── Actions: User Account, Search Modal, Drawer Cart Trigger
+  │     ├── Mobile Burger Drawer: Accordion collections, cultural journals, boutique services & sticky customer account footer
+  │     └── Actions:
+  │           ├── Desktop: Search Trigger (Modal), Customer Account (/account), Direct Cart (/cart)
+  │           └── Mobile: Clean Tripartite (Hamburger Left, Center Logo, Direct Cart Right)
   ├── [/] (Homepage Editorial Flow):
   │     ├── HeroEditorial: Full-bleed lifestyle imagery/video + centered down-arrow scroll cue
+  │     ├── SarimbitBentoSection: 3 Scattered atelier moodboard cards (Exclusive, Premium, Ekonomis)
   │     ├── BestSellersTabs: "OUR BEST SELLERS" tabbed switcher (WOMEN | MEN | SARIMBIT) in 3-col portrait grid
-  │     ├── HeritageVideoBanner: "FINEST HANDMADE" / "PROUDLY MADE IN INDONESIA" video section with player controls
+  │     ├── HeritageVideoBanner: "FINEST HANDMADE" craftsmanship video with player controls
   │     ├── ChooseYourBatik: "CHOOSE YOUR BATIK" 4-col raw fabric grid (Pekalongan, Solo, Cirebon)
   │     ├── ShoppableLookbook: Hotspot pins pada foto keluarga (Metaobject: lookbook_spotlight)
   │     ├── LoveNotesTestimonials: "LOVE NOTES FROM OUR CUSTOMER" quote slider
   │     ├── TrustGuarantees: 4 core pillars (Free Delivery, Tukar Size, Top Support, Secure Payment)
   │     └── ShowroomO2O: Flagship Simongan (3 Lantai) & Cabang Banyumanik Semarang
-  ├── [/collections/:handle] (PLP — Tier-Differentiated UI/UX):
+  ├── [/collections/:handle] & [/collections/all] (Dynamic PLP — Tier-Differentiated UI/UX):
+  │     ├── Pure Typographic Filter Bar (SEMUA, TERBARU, HARGA RENDAH, HARGA TINGGI)
+  │     ├── 2-Column Split Hero (Title & sub-narrative separated by hairline vertical border)
+  │     ├── Single-Line Breadcrumb (BERANDA / KOLEKSI / [TITLE])
+  │     ├── Grid-Proportional Pagination (12 items per page = 4 columns x 3 rows)
   │     ├── [Exclusive Collection: /collections/sarimbit-exclusive]:
   │     │     ├── Dark-Luxe / Antique Champagne Gold Hero Banner (`#A68A56`)
   │     │     ├── 2-Column to 3-Column expansive editorial card layout with generous whitespace
@@ -78,11 +86,13 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
   │     ├── [Premium Collection: /collections/sarimbit-premium]:
   │     │     ├── Mori Linen canvas (`#FAF8F5`) with crisp Obsidian borders (`#1C1C1C`)
   │     │     ├── 3-Column to 4-Column responsive grid with "Signature Dobby" tier badge
-  │     │     └── Fast Family Sarimbit Filter & Quick Fabric Preview Drawer
+  │     │     └── Fast Family Sarimbit Filter & Quick Fabric Preview
   │     └── [Standard / Ekonomis Collections]:
   │           ├── High-speed conversion grid with direct add-to-bag cues
   │           └── Regional and garment type filter chips
-  ├── [/products/:handle] (PDP — Tier-Differentiated UI/UX):
+  ├── [/products/:handle] (Dynamic PDP — Tier-Differentiated UI/UX):
+  │     ├── Mobile Touch-Swipe Gallery (snap-x horizontal scroll) & 4:5 vertical portrait thumbnails
+  │     ├── Indonesian Rupiah currency formatting without decimals `,00` (`formatRupiah`)
   │     ├── [Exclusive Tier PDP (Sutra / Mahakarya)]:
   │     │     ├── Full-bleed 4:5 vertical portrait viewer with micro-zoom & fabric drape video
   │     │     ├── Antique Champagne Gold trim badge: "MAHAKARYA EXCLUSIVE • SUTRA ATBM"
@@ -97,12 +107,30 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
   │     └── [Ekonomis / Daily Tier PDP]:
   │           ├── Minimalist 3-word product title display (`NAME [TYPE]`)
   │           ├── Rectangular variant selector pills with instant stock feedback
-  │           └── Fast 1-click cart drawer addition
-  ├── [Drawer Cart] (Prestige Slide-Over UX):
-  │     ├── Free Shipping tier progress bar
-  │     ├── Optimistic line quantity mutations
-  │     ├── Bespoke tailoring notes field (Catatan Jahitan & Ukuran)
-  │     └── Direct Shopify Hosted Checkout
+  │           └── Sticky Mobile Buy Bar for friction-free conversion
+  ├── [/cart] (Dedicated 2-Column Zero-Box Cart Page):
+  │     ├── 2-Column Architectural Split (Line Items Left, Sticky Order Summary Right)
+  │     ├── Zero-Box Streaming (Stripped nested card boxes, borders, and shadows)
+  │     ├── Synthetic Variant Suppression (Automatically hides `Title: Default Title`)
+  │     ├── Unified Single Focused CTA (`Lanjutkan Belanja →`)
+  │     ├── Free Shipping progress indicator & Bespoke tailoring notes field
+  │     ├── Whispered Horizontal Assurance Line (*• Garansi Keaslian Butik 100% • Bebas Penyesuaian Ukuran • Pengiriman Terproteksi Asuransi*)
+  │     ├── Pure Typographic Payment Method Trust Strip (*QRIS • BCA • Mandiri • BNI • BRI • Visa • Mastercard*)
+  │     └── Direct handoff to Shopify Hosted Checkout
+  ├── [In-Modal Live Predictive Search Engine] (LuxurySearchModal.jsx):
+  │     ├── Pure in-modal instant search (Zero redirects to /search page)
+  │     ├── 250ms debounced live search + instant Enter/CARI submit
+  │     ├── Clamped limit (1..10) honoring Storefront API GraphQL constraints
+  │     ├── Multi-Entity Output: Koleksi Butik Terkait, Tag Busana, Busana & Produk (4:5 portrait), Warta Budaya
+  │     ├── Tabbed In-Modal Filtering: `Semua`, `Busana`, `Koleksi`, `Tag`, `Warta`
+  │     └── Popular trending wastra keywords (*Daster Batik Solo*, *Sarimbit Mahakarya*, etc.)
+  ├── [/*] (Modern Zero-Box 404 Experience — $.jsx):
+  │     ├── Ethereal Quiet Luxury layout with oversized background watermark numeral ("404")
+  │     ├── Delicate rotating/floating geometric batik diamond monogram emblem in antique gold
+  │     ├── Card-free and frame-free open Mori Linen canvas
+  │     ├── Two focused primary buttons (`KEMBALI KE BERANDA →`, `JELAJAHI KOLEKSI`)
+  │     ├── Whispered in-modal live search trigger and WhatsApp concierge link
+  │     └── Strict dual-layer SEO protection: HTML `<meta name="robots" content="noindex, nofollow" />` + HTTP `X-Robots-Tag: noindex, nofollow`
   └── [/pages/:handle]:
         ├── /pages/tentang-kami (Kisah Butik Sejak 2007 & Budaya 3S 1C 1T 1H)
         ├── /pages/layanan-seragam (Layanan Jahit Kustom & Korporat Tanpa Minimal Order)
@@ -136,8 +164,10 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
 
 ## 5. Technical Non-Negotiables
 
-1. **Quiet Luxury Visual Standards**: Zero border radius (`0px`), uppercase tracked typography (`0.18em`), 4:5 vertical portrait aspect ratio.
+1. **Quiet Luxury Visual Standards**: Zero border radius (`0px`), uppercase tracked typography (`0.18em`), 4:5 vertical portrait aspect ratio (`aspect-[4/5]`), zero-box card streaming.
 2. **100% Shopify-Native**: Semua konten dinamis dikelola via Metaobjects & Metafields tanpa ketergantungan CMS luar.
 3. **Zero-Cost Edge Hosting**: Berjalan di atas **Shopify Oxygen Edge Runtime** (Cloudflare Workers platform).
-4. **Slide-Over Drawer Cart**: Optimistic mutations tanpa layout shift, didukung free shipping threshold bar dan kolom catatan jahit custom.
-5. **Interactive WhatsApp Concierge**: Integrasi seamless untuk konsultasi motif, fitting, dan pemesanan keluarga/seragam.
+4. **Dedicated Full-Page Cart (`/cart`)**: 2-Column layout dengan zero-box streaming, synthetic variant suppression, dan direct handoff ke Shopify Hosted Checkout.
+5. **In-Modal Live Predictive Search**: Instan tanpa page reload, clamped limit (1..10), multi-entity output (koleksi, tag, busana, warta).
+6. **Strict 404 Noindex/Nofollow**: Dual-layer SEO protection (HTML `<meta name="robots">` + HTTP `X-Robots-Tag` header).
+7. **Interactive WhatsApp Concierge**: Integrasi seamless untuk konsultasi motif, fitting, dan pemesanan keluarga/seragam (`081-390-8888-09`).

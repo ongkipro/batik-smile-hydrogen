@@ -241,3 +241,130 @@ fragment ArticleItem on Article {
   }
 }
 ```
+
+---
+
+## 6. Predictive Search Multi-Entity Contract (`PREDICTIVE_SEARCH_QUERY`)
+
+> **Critical Constraint**:  
+> In Shopify Storefront API, the `limit` argument for `predictiveSearch` **MUST be between 1 and 10** (`limit: Int, 1..10`). Any value `> 10` causes a GraphQL runtime exception. The loader clamps all inputs to `Math.min(10, Math.max(1, limit))`.
+
+```graphql
+query PredictiveSearch(
+  $country: CountryCode
+  $language: LanguageCode
+  $limit: Int!
+  $limitScope: PredictiveSearchLimitScope!
+  $searchTerm: String!
+  $types: [PredictiveSearchType!]
+) @inContext(country: $country, language: $language) {
+  predictiveSearch(
+    limit: $limit
+    limitScope: $limitScope
+    query: $searchTerm
+    types: $types
+  ) {
+    products {
+      __typename
+      id
+      title
+      handle
+      tags
+      trackingParameters
+      selectedOrFirstAvailableVariant {
+        id
+        price {
+          amount
+          currencyCode
+        }
+        image {
+          url
+          altText
+        }
+      }
+    }
+    collections {
+      __typename
+      id
+      title
+      handle
+      image {
+        url
+        altText
+      }
+      trackingParameters
+    }
+    articles {
+      __typename
+      id
+      title
+      handle
+      trackingParameters
+    }
+    pages {
+      __typename
+      id
+      title
+      handle
+      trackingParameters
+    }
+    queries {
+      __typename
+      text
+      styledText
+      trackingParameters
+    }
+  }
+}
+```
+
+---
+
+## 7. Dynamic Collection Pagination Contract (`COLLECTION_QUERY`)
+
+> **Layout Harmony**:  
+> Paginated at **12 items per page** (`pageBy: 12`), matching a 4-column x 3-row grid perfectly without trailing single orphaned cards.
+
+```graphql
+query Collection(
+  $handle: String!
+  $first: Int
+  $last: Int
+  $startCursor: String
+  $endCursor: String
+  $sortKey: ProductCollectionSortKeys
+  $reverse: Boolean
+) {
+  collection(handle: $handle) {
+    id
+    handle
+    title
+    description
+    image {
+      id
+      url
+      altText
+      width
+      height
+    }
+    products(
+      first: $first
+      last: $last
+      before: $startCursor
+      after: $endCursor
+      sortKey: $sortKey
+      reverse: $reverse
+    ) {
+      nodes {
+        ...ProductItem
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+```
