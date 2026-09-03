@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 export const meta = () => {
   return [
@@ -14,14 +15,17 @@ export const meta = () => {
 
 export default function TentangKamiPage() {
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb items={[{ label: 'TENTANG KAMI' }]} />
+
         {/* Header */}
-        <div className="text-center mb-14">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+        <div className="text-center mb-12 sm:mb-14">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
             SEMARANG &bull; ESTABLISHED 2007
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl text-[#111111] font-normal tracking-wide">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight">
             Perjalanan Menenun Senyum &amp; Martabat
           </h1>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4" />

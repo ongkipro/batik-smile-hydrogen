@@ -57,6 +57,34 @@
   letter-spacing: 0.22em;
 }
 
+/* Quiet Luxury Typography Hierarchy Patterns */
+.editorial-hero-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.editorial-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.editorial-eyebrow {
+  font-family: 'Instrument Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.editorial-body {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

@@ -764,7 +764,61 @@
   - *Evidence*: Local SSR verified `Has Prev Arrow: true`, `Has Next Arrow: true`, `Has mini thumbnail grid for mobile: true`.
 - [x] **Task 33.2: Frameless & Borderless Tier Differentiation Section**
   - *Action*: Refactored `ProductTierStorySection.jsx` to completely eliminate the heavy outer card border and isolated box padding. Replaced with an open, architectural editorial layout separated by a subtle hairline top border (`pt-12 sm:pt-16 border-t`) matching the exact width and margin geometry of the product section across all mobile and desktop viewports.
-  - *Evidence*: Local SSR check confirmed heavy box border removed and clean `border-t` layout active.
+---
+
+## Phase 34: Grid-Proportional Pagination (3x3=9, 4x3=12), Single-Line Breadcrumb & Typography Calibration (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: Breadcrumb.jsx, collections.$handle.jsx, collections.all.jsx, collections._index.jsx, search.jsx, PaginatedResourceSection.jsx, TierExperience.jsx, CraftsmanshipZoom.jsx, CustomerLoveNotes.jsx, ChooseYourBatikGrid.jsx*
+
+- [x] **Task 34.1: Grid-Proportional Pagination (4x3=12 & 3x3=9)**
+  - *Action*: Calibrated product list pagination across all catalog listing routes:
+    - When catalog grid is 4 columns (desktop standard e.g. `/collections/all`, general `/collections/$handle`, `/search`): configured 3 rows = exactly **12 items** before "LIHAT LEBIH BANYAK" (Load More).
+    - When catalog grid is 3 columns (e.g. `/collections/sarimbit-exclusive`, `/collections`, `/blogs`): configured 3 rows = exactly **9 items** before "LIHAT LEBIH BANYAK".
+    - Streamlined default load more button text to concise `LIHAT LEBIH BANYAK` / `LIHAT SEBELUMNYA` to eliminate multi-line text breaking on mobile devices.
+  - *Evidence*: Configured `pageBy: 12` in `collections.all.jsx` and `search.jsx`; dynamic `isExclusiveCollection ? 9 : 12` in `collections.$handle.jsx`.
+- [x] **Task 34.2: Unified Single-Line Breadcrumb Component (`Breadcrumb.jsx`)**
+  - *Action*: Created `app/components/Breadcrumb.jsx` and integrated it across all 15 storefront routes (`collections.$handle.jsx`, `collections.all.jsx`, `collections._index.jsx`, `products.$handle.jsx`, `blogs._index.jsx`, `blogs.$blogHandle._index.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `pages.tentang-kami.jsx`, `pages.fasilitas-store.jsx`, `pages.layanan-seragam.jsx`, `pages.lokasi-toko.jsx`, `pages.$handle.jsx`, `cart.jsx`, `search.jsx`, `policies._index.jsx`, `policies.$handle.jsx`, `account.jsx`).
+  - *Precision Engineering*: Strictly guaranteed **maximum 1 line** on all mobile devices (from 320px up to widescreen) using `flex-nowrap whitespace-nowrap overflow-hidden`, `shrink-0` on Home icon & chevrons, and progressive truncation (`truncate min-w-0 flex-1 sm:flex-initial`).
+  - *Evidence*: Audited entire codebase: 0 raw `BERANDA` or `/` breadcrumb text remaining.
+- [x] **Task 34.3: Storefront-Wide Screening & Zero-Radius Typography Calibration**
+  - *Action*: Refactored `TierExperience.jsx` to eliminate `rounded-full`, `rounded-2xl`, and non-harmonic blue colors, aligning with Quiet Luxury Quad-Harmonic palette (`#111111`, `#FAF8F5`, `#C5A059`, `#7C3F1D`) and Cormorant Garamond `font-normal`. Removed `rounded-2xl` from `CraftsmanshipZoom.jsx`. Calibrated `CustomerLoveNotes.jsx` with Indonesian title and zero-radius pagination bars. Shortened button CTA in `ChooseYourBatikGrid.jsx`. Added typography utility classes to `app.css`.
+  - *Evidence*: Zero-radius architecture verified.
+---
+
+## Phase 35: Standard Collection 2-Column Split Hero (Title & Narrative Left, 3:2 Image Right) (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: collections.$handle.jsx, Breadcrumb.jsx, Local Development Verification*
+
+- [x] **Task 35.1: 2-Column Split Hero for General Collections (`collections.$handle.jsx`)**
+  - *Action*: Re-architected standard collection page hero (`/collections/*`) into a 2-column Quiet Luxury editorial layout:
+    - **Left Column**: Eyebrow `KATALOG BUSANA BATIK NUSANTARA`, collection title (`collection.title`), hairline gold divider, and description fetched directly from live Shopify Storefront API (`collection.description`), followed by atelier service highlights (`Jahit Bespoke Tanpa MOQ • Konsultasi Ukuran via WA • Garansi Butik Resmi`).
+    - **Right Column**: Featured image with calibrated 3:2 landscape aspect ratio (`aspect-[3/2]`) preventing excessive vertical height, zero-radius architecture (`rounded-none`), subtle hover zoom (`group-hover:scale-105 duration-700`), hairline border `#E2DFD8`, and discreet atelier title tag.
+    - **Exception Preserved**: `sarimbit-exclusive` and `sarimbit-premium` retain their full-bleed cinematic haute heritage hero sections intact.
+    - **Breadcrumb Alignment**: Cleanly integrated `<Breadcrumb>` on its own row directly above the split hero layout.
+  - *Evidence*: SSR node testing on `batik-pria` and `sarimbit-ekonomis` verified `Has aspect-[3/2]: true`, `Has 2-column grid: true`; on `sarimbit-exclusive` verified `Has HAUTE HERITAGE: true` and `Has aspect-[3/2]: false`.
+- [x] **Task 35.2: Local Production Verification**
+  - *Action*: Executed `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit code 0). Tested all collection routes on `localhost:3005` returning HTTP 200. Local development state strictly maintained without auto-push or deploy.
+  - *Evidence*: 100% verified locally.
+
+---
+
+## Phase 36: Pure Typographic Floating Filter & Sort Bar (Zero-Box, Zero-Frame) (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: CollectionFilterBar.jsx, collections.$handle.jsx, collections.all.jsx, Edge Deploy*
+
+- [x] **Task 36.1: Zero-Box Pure Typographic Floating Bar (`CollectionFilterBar.jsx`)**
+  - *Action*: Engineered an ultra-minimalist, Quiet Luxury filter and sort bar positioned directly above the product catalog:
+    - **100% Zero-Box, Zero-Frame, Zero-Background**: Eliminated all form boxes, button borders, and grey container strips.
+    - **Pure Typographic Text Tabs**: Left side renders airy, horizontal typographic tabs (`Semua`, `Siap Kirim`, `< Rp 500rb`, `Rp 500rb – 1jt`, `> Rp 1jt`) with a discrete gold hairline underline on the active tab (`border-b-2 border-[#C5A059]`) and smooth touch scroll on mobile.
+    - **Frameless Sort Trigger**: Right side provides a borderless typographic sort selector (`Urutkan: Rekomendasi ↓`) with options for latest, price ascending/descending, and alphabetical ordering.
+    - **Reset Filter Action**: Whispered text action (`Reset Filter`) appears seamlessly when active filters exist.
+    - **Dark Theme Adaptation**: Fully harmonized for `sarimbit-exclusive` Noir styling with antique gold accents.
+  - *Evidence*: Component compiled and integrated into `collections.$handle.jsx` and `collections.all.jsx`.
+- [x] **Task 36.2: Storefront API Integration (`collections.$handle.jsx` & `collections.all.jsx`)**
+  - *Action*: Wired URL search params (`sort`, `available`, `minPrice`, `maxPrice`) to Storefront API queries:
+    - In `collections.$handle.jsx`: Injected `$sortKey`, `$reverse`, and `$filters: [ProductFilter!]` into `COLLECTION_QUERY`.
+    - In `collections.all.jsx`: Injected `$sortKey`, `$reverse`, and `$query: String` (Storefront query syntax) into `CATALOG_QUERY`.
+  - *Evidence*: Tested `/collections/all?sort=price-asc`, `/collections/all?available=true`, and `/collections/batik-pria?sort=latest` on `localhost:3005`, all returning HTTP 200 with dynamic filtered results.
+- [x] **Task 36.3: Verification & Edge Deployment Authorization**
+  - *Action*: Executed `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit code 0). Staged only modified project files, committed with clean message (no AI attribution trailers), and pushed to `main` for Oxygen edge deployment.
+
 
 
 

@@ -86,16 +86,24 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
 11. **Mobile Gallery Touch Swipe, Precision Mini-Thumbnails & Frameless Tier Section**:
     - Implemented horizontal touch swipe gestures (`onTouchStart`, `onTouchMove`, `onTouchEnd`) and subtle arrow controls on the main product featured image.
     - Calibrated mini-thumbnails on mobile to dynamically distribute across exactly 100% of the main image width (`grid-cols-5 gap-2 w-full`) when up to 5 images exist, with smooth horizontal scrolling for >5 images.
-    - Refactored `ProductTierStorySection.jsx` to be completely frameless and borderless, matching the product section width and layout across all devices.
+12. **Grid-Proportional Pagination (3x3=9, 4x3=12) & Single-Line Breadcrumbs**:
+    - Product list pagination dynamically calibrated across all catalog routes:
+      - 4 columns x 3 rows = exactly **12 items** before "LIHAT LEBIH BANYAK" (Load More) on standard catalog pages (`/collections/all`, general `/collections/$handle`, `/search`).
+      - 3 columns x 3 rows = exactly **9 items** before "LIHAT LEBIH BANYAK" on luxury tier pages (`/collections/sarimbit-exclusive`, `/collections`, `/blogs`).
+      - Default Load More buttons streamlined to concise `LIHAT LEBIH BANYAK` / `LIHAT SEBELUMNYA` for mobile layout stability.
+    - Created unified `Breadcrumb.jsx` component and deployed across all 15 application routes. Strictly guarantees **maximum 1 line** on all mobile devices (from 320px up to widescreen) using `flex-nowrap whitespace-nowrap overflow-hidden` and progressive truncation.
+    - Refactored `TierExperience.jsx` to Zero-Radius architecture, Quad-Harmonic palette, and Cormorant Garamond `font-normal`.
+    - Removed `rounded-2xl` from `CraftsmanshipZoom.jsx` and calibrated `CustomerLoveNotes.jsx` and `ChooseYourBatikGrid.jsx`.
+14. **Pure Typographic Floating Filter & Sort Bar (Zero-Box, Zero-Frame)**:
+    - Designed and implemented `CollectionFilterBar.jsx`: 100% zero-box, zero-frame, zero-background.
+    - Pure typographic tabs (`Semua`, `Siap Kirim`, `< Rp 500rb`, `Rp 500rb – 1jt`, `> Rp 1jt`) with gold hairline active indicator (`border-b-2 border-[#C5A059]`) and seamless horizontal swipe on mobile devices.
+    - Frameless sort selector (`Urutkan: Rekomendasi ↓`) with dynamic Storefront API integration (`$sortKey`, `$reverse`, `$filters`, `$query`).
+    - Deployed on all collection routes (`/collections/*`) and catalog index (`/collections/all`).
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
-- **Comprehensive Route Audit**: 16/16 key routes returning HTTP 200 OK.
-- **Authoritative Coding Blueprint**: Synchronized with [PAGES-SCHEMA.xml](file:///Users/ongki/Projects/batik-smile-hydrogen/PAGES-SCHEMA.xml).
-
-## Next verified action
-
-Changes committed and pushed to `main` branch. GitHub Actions workflow (`Storefront 1000176204`) triggers automated production deployment to Shopify Oxygen Global Edge Network. Monitor edge telemetry in Shopify Hydrogen Channel.
+- **Comprehensive Route Audit**: All collection and catalog routes tested and returning HTTP 200 OK on local dev server (`localhost:3005`).
+- **Deployment Status**: Authorized by Paduka Ongki for commit, push, and deployment to Shopify Oxygen Global Edge Network.
 

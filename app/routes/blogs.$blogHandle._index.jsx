@@ -1,7 +1,8 @@
-import { Link, useLoaderData, NavLink, redirect } from 'react-router';
+import { Link, useLoaderData, redirect } from 'react-router';
 import { Image, getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 /**
  * @type {Route.MetaFunction}
@@ -62,17 +63,12 @@ export default function Blog() {
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Minimalist Breadcrumbs */}
-        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
-          <NavLink to="/" className="hover:text-[#9E7D3B] transition-colors">
-            BERANDA
-          </NavLink>
-          <span>/</span>
-          <NavLink to="/blogs" className="hover:text-[#9E7D3B] transition-colors">
-            JURNAL
-          </NavLink>
-          <span>/</span>
-          <span className="text-[#111111] font-semibold uppercase">{blog.title}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: 'JURNAL', to: '/blogs' },
+            { label: blog.title.toUpperCase() },
+          ]}
+        />
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">

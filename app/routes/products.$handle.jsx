@@ -13,6 +13,7 @@ import { StickyMobileBar } from '~/components/StickyMobileBar';
 import { ProductItem } from '~/components/ProductItem';
 import { ProductTierStorySection } from '~/components/ProductTierStorySection';
 import { BoutiqueMoney } from '~/lib/currency';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 /**
  * Parse Shopify product description HTML into narrative story and structured specifications
@@ -300,67 +301,18 @@ export default function Product() {
     <div className={`min-h-screen py-8 sm:py-12 px-4 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-500 ${themeClasses}`}>
       <div className="w-full max-w-7xl mx-auto">
         {/* Dynamic Breadcrumb Navigation (Single-line fluid responsive across all device sizes) */}
-        <nav
-          aria-label="Breadcrumb"
-          className={`text-[10px] sm:text-[11px] uppercase tracking-[0.16em] mb-6 sm:mb-8 flex items-center gap-1.5 sm:gap-2 overflow-hidden whitespace-nowrap min-w-0 ${
-            isExclusiveTier ? 'text-[#A9A49C]' : 'text-[#5A5550]'
-          }`}
-        >
-          <NavLink
-            to="/"
-            aria-label="Beranda"
-            className={`flex items-center shrink-0 transition-colors ${
-              isExclusiveTier ? 'text-[#A9A49C] hover:text-[#C5A059]' : 'text-[#5A5550] hover:text-[#9E7D3B]'
-            }`}
-          >
-            <svg
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[1.6]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="square" strokeLinejoin="miter" d="M3 10.5L12 3l9 7.5V21H4V10.5z" />
-              <path strokeLinecap="square" strokeLinejoin="miter" d="M9 21v-7h6v7" />
-            </svg>
-          </NavLink>
-
-          <svg
-            className={`w-2.5 h-2.5 shrink-0 ${isExclusiveTier ? 'text-[#C5A059]/60' : 'text-[#A69F96]'}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M9 5l7 7-7 7" />
-          </svg>
-
-          <NavLink
-            to={relatedCollectionHandle ? `/collections/${relatedCollectionHandle}` : '/collections/all'}
-            className={`shrink-0 transition-colors ${
-              isExclusiveTier ? 'hover:text-[#C5A059]' : 'hover:text-[#9E7D3B]'
-            }`}
-          >
-            {relatedCollectionTitle || 'KOLEKSI'}
-          </NavLink>
-
-          <svg
-            className={`w-2.5 h-2.5 shrink-0 ${isExclusiveTier ? 'text-[#C5A059]/60' : 'text-[#A69F96]'}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M9 5l7 7-7 7" />
-          </svg>
-
-          <span
-            className={`truncate font-medium min-w-0 ${
-              isExclusiveTier ? 'text-white/90' : 'text-[#111111]'
-            }`}
-          >
-            {title}
-          </span>
-        </nav>
+        <Breadcrumb
+          isDark={isExclusiveTier}
+          items={[
+            {
+              label: relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : 'KOLEKSI',
+              to: relatedCollectionHandle ? `/collections/${relatedCollectionHandle}` : '/collections/all',
+            },
+            {
+              label: title,
+            },
+          ]}
+        />
 
         {/* Main PDP Grid (Left: 4:5 Vertical Gallery, Right: Frameless Quiet Luxury Panel) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">

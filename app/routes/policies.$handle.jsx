@@ -1,4 +1,5 @@
-import { useLoaderData, NavLink } from 'react-router';
+import { useLoaderData } from 'react-router';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 /**
  * @type {Route.MetaFunction}
@@ -112,18 +113,13 @@ export default function Policy() {
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Breadcrumb */}
-        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
-          <NavLink to="/" className="hover:text-[#9E7D3B]">
-            BERANDA
-          </NavLink>
-          <span>/</span>
-          <NavLink to="/policies" className="hover:text-[#9E7D3B]">
-            KEBIJAKAN
-          </NavLink>
-          <span>/</span>
-          <span className="text-[#111111] font-semibold uppercase">{policy.title}</span>
-        </nav>
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb
+          items={[
+            { label: 'KEBIJAKAN', to: '/policies' },
+            { label: policy.title.toUpperCase() },
+          ]}
+        />
 
         {/* Header */}
         <div className="border-b border-[#E2DFD8] pb-6 mb-10">

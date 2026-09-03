@@ -1,6 +1,7 @@
 import { useLoaderData, Link } from 'react-router';
 import { getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 /**
  * @type {Route.MetaFunction}
@@ -162,8 +163,11 @@ export default function Collections() {
   const { collections } = useLoaderData();
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-12 pb-24 sm:pb-28 lg:pb-24 px-3 sm:px-6 lg:px-12 overflow-x-hidden">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-10 pb-24 sm:pb-28 lg:pb-24 px-3 sm:px-6 lg:px-12 overflow-x-hidden">
       <div className="w-full max-w-7xl mx-auto">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb items={[{ label: 'SEMUA KOLEKSI' }]} />
+
         {/* Curated Editorial Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E2DFD8] text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#9E7D3B] font-semibold mb-3 sm:mb-4 shadow-xs">

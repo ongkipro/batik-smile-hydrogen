@@ -1,77 +1,68 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router';
-import { BatikDivider, BatikCorner } from './BatikOrnaments';
 
 const TIERS = [
   {
     id: 'mahakarya',
     tierNumber: 'KASTA I',
-    name: 'Mahakarya Heritage',
+    name: 'Sarimbit Eksklusif (Mahakarya)',
     subname: 'Sutra ATBM & Prada Emas Tradisional',
     priceRange: 'Rp 1.500.000 – Rp 3.500.000+',
-    badge: 'Koleksi Eksklusif Terbatas',
+    badge: 'MAHAKARYA 1-OF-1',
     accentColor: '#C5A059',
-    bgClass: 'bg-[#0F0F0F] text-white border-neutral-800',
+    bgClass: 'bg-[#111111] text-white border-[#C5A059]/40',
     description:
-      'Kasta tertinggi busana batik Nusantara. Ditenun tangan di atas sutra alam ATBM dengan sentuhan prada emas asli dan dilapisi furing sutra halus. Diciptakan khusus untuk resepsi pernikahan agung, jamuan kenegaraan, dan momen bersejarah keluarga.',
+      'Kasta tertinggi busana batik Nusantara. Ditenun tangan di atas serat sutra alam ATBM dengan sentuhan canting prada emas asli dan dilapisi furing sutra sejuk. Diciptakan khusus untuk resepsi pernikahan agung, akad sakral, dan jamuan kenegaraan.',
     specs: [
-      { label: 'Material', value: 'Sutra Alam ATBM & Prada Tulis Tangan' },
-      { label: 'Furing', value: 'Lapis Furing Sutra Halus Super Adem' },
-      { label: 'Ketelitian', value: 'Canting Tulis Manual 3-4 Bulan Pengerjaan' },
-      { label: 'Karakter', value: 'Kilau Mewah, Jatuh Elegan, Sangat Berwibawa' },
+      { label: 'Material Utama', value: 'Sutra Alam ATBM & Canting Prada Emas' },
+      { label: 'Lapisan Furing', value: 'Lapis Furing Sutra Halus Super Adem' },
+      { label: 'Tingkat Ketelitian', value: 'Pola Sambung Presisi 100% Simetris' },
+      { label: 'Karakter Busana', value: 'Kilau Ningrat Alami, Anggun & Berwibawa' },
     ],
-    image:
-      'https://cdn.shopify.com/s/files/1/0669/5606/7032/files/sarimbit-mahakarya.webp?v=1740920000',
-    fallbackImage:
-      'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=800&auto=format&fit=crop',
+    image: '/banners/craftsmanship_canting_banner.jpg',
+    fallbackImage: '/banners/hero_editorial_banner.jpg',
     collectionUrl: '/collections/sarimbit-exclusive',
   },
   {
     id: 'signature',
     tierNumber: 'KASTA II',
-    name: 'Signature Elegance',
-    subname: 'Tenun Dobby Timbul & Desainer Modern',
-    priceRange: 'Rp 450.000 – Rp 1.200.000',
-    badge: 'Pilihan Terfavorit (Best Seller)',
-    accentColor: '#38BDF8',
-    bgClass: 'bg-[#14213D] text-white border-blue-900/40',
+    name: 'Sarimbit Premium (Signature)',
+    subname: 'Tenun Dobby Timbul & Furing Hero',
+    priceRange: 'Rp 500.000 – Rp 950.000',
+    badge: 'STANDAR RESEPSI RESMI',
+    accentColor: '#C5A059',
+    bgClass: 'bg-[#181818] text-white border-white/15',
     description:
-      'Harmoni sempurna antara tekstur motif dobby timbul dan desain kontemporer modern. Dilengkapi furing hero katun yang adem dan menyerap keringat, menjadikannya pilihan favorit keluarga untuk wisuda, lamaran, dan hari raya.',
+      'Harmoni kemewahan tekstur anyaman dobby timbul dan kenyamanan furing katun hero tropis. Tahan kusut untuk perhelatan pesta seharian, menjadikannya pilihan favorit keluarga untuk wisuda, lamaran, dan resepsi pernikahan.',
     specs: [
-      { label: 'Material', value: 'Tenun Katun Dobby Bertekstur Timbul' },
-      { label: 'Furing', value: 'Lapis Furing Hero Katun Adem Anti-Gerah' },
-      { label: 'Material', value: 'Bahan Katun Primisima & Dobby Premium' },
-      { label: 'Furing', value: 'Furing Katun Arrow Adem & Menyerap Keringat' },
-      { label: 'Ketelitian', value: 'Pola Pasangan Selaras Sempurna' },
-      { label: 'Karakter', value: 'Garansi Tukar Ukuran 7 Hari Bebas Ongkir' },
+      { label: 'Material Utama', value: 'Tenun Katun Dobby Tekstur Timbul Mewah' },
+      { label: 'Lapisan Furing', value: 'Lapis Furing Hero Katun Halus & Sejuk' },
+      { label: 'Tingkat Ketelitian', value: 'Potongan Pola Presisi Antar Anggota' },
+      { label: 'Garansi Butik', value: 'Bebas Tukar Ukuran 7 Hari Kalender' },
     ],
-    image:
-      'https://cdn.shopify.com/s/files/1/0669/5606/7032/files/sarimbit-signature.webp?v=1740920000',
-    fallbackImage:
-      'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop',
+    image: '/banners/sarimbit_family_banner.jpg',
+    fallbackImage: '/banners/hero_editorial_banner.jpg',
     collectionUrl: '/collections/sarimbit-premium',
   },
   {
     id: 'essential',
     tierNumber: 'KASTA III',
-    name: 'Essential Daily',
-    subname: 'Katun Primisima Halus & Nyaman Harian',
-    priceRange: 'Rp 350.000 – Rp 650.000 / Pasang',
-    badge: 'Kenyamanan Harian',
-    accentColor: '#9E4719',
-    bgClass: 'bg-white text-neutral-900 border-neutral-200/80 shadow-sm',
+    name: 'Sarimbit Ekonomis (Essential)',
+    subname: 'Katun Primisima Halus Sejuk Harian',
+    priceRange: 'Rp 350.000 – Rp 485.000',
+    badge: 'KENYAMANAN HARIAN',
+    accentColor: '#9E7D3B',
+    bgClass: 'bg-white text-[#111111] border-[#E2DFD8]',
     description:
-      'Koleksi busana batik esensial berbahan 100% Katun Primisima Sanforized. Lembut di kulit, tidak mudah kusut, dan tidak susut setelah dicuci. Sangat ideal untuk busana kerja kantor harian, mengajar, dan pertemuan santai.',
+      'Koleksi busana sarimbit esensial berbahan 100% Katun Primisima halus yang sejuk dan menyerap keringat. Nyaman untuk agenda silaturahmi keluarga besar, seragam arisan, dan perayaan hari raya santai.',
     specs: [
-      { label: 'Material', value: 'Bahan Katun Halus Nyaman Dipakai Seharian' },
-      { label: 'Furing', value: 'Mudah Disetrika & Tidak Luntur' },
-      { label: 'Ketelitian', value: 'Tersedia Lengkap dari Ukuran Anak hingga 5XL' },
-      { label: 'Karakter', value: 'Pilihan Motif Tradisional & Kontemporer' },
+      { label: 'Material Utama', value: '100% Katun Primisima Sanforized Halus' },
+      { label: 'Kenyamanan', value: 'Adem, Ringan, & Menyerap Keringat' },
+      { label: 'Pilihan Ukuran', value: 'Tersedia Lengkap Anak hingga Dewasa 5XL' },
+      { label: 'Perawatan', value: 'Mudah Disetrika & Warna Tidak Pudar' },
     ],
-    image:
-      'https://cdn.shopify.com/s/files/1/0669/5606/7032/files/sarimbit-essential.webp?v=1740920000',
-    fallbackImage:
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
+    image: '/brand/models/model_teak_door.jpg',
+    fallbackImage: '/banners/hero_editorial_banner.jpg',
     collectionUrl: '/collections/sarimbit-ekonomis',
   },
 ];
@@ -79,28 +70,29 @@ const TIERS = [
 export function TierExperience() {
   const [activeTierId, setActiveTierId] = useState('signature');
   const activeTier = TIERS.find((t) => t.id === activeTierId) || TIERS[1];
+  const isDark = activeTier.id === 'mahakarya' || activeTier.id === 'signature';
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5] border-t border-neutral-200/60">
+    <section className="py-16 sm:py-24 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-t border-[#E2DFD8]">
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#9E4719] font-bold">
-            Pembeda Nilai Utama
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+            PANDUAN KASTA MATERIAL BUTIK
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-2 mb-3 text-neutral-900 leading-tight">
-            Sarimbit Nusantara 3 Kasta
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111] leading-tight mb-3">
+            Sarimbit Nusantara Tiga Kasta
           </h2>
-          <BatikDivider variant="soga" className="my-3" />
-          <p className="text-xs sm:text-sm text-neutral-600 font-sans leading-relaxed">
-            Pahami perbedaan material kain, furing, dan tingkat ketelitian karya kami agar Paduka
-            menemukan pilihan sarimbit yang paling sesuai untuk setiap momen sakral keluarga.
+          <div className="w-12 h-px bg-[#C5A059] mx-auto mb-4" />
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+            Pahami perbedaan mutu material kain, furing, dan tingkat ketelitian karya kami agar Anda
+            menemukan pilihan sarimbit yang paling sesuai untuk momen sakral keluarga.
           </p>
         </div>
 
-        {/* 3-Tier Interactive Switcher Tabs */}
+        {/* 3-Tier Interactive Switcher Tabs (Zero-radius architectural bar) */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 rounded-full bg-neutral-200/70 border border-neutral-300/60 shadow-inner max-w-full overflow-x-auto">
+          <div className="inline-flex border border-[#E2DFD8] bg-white p-1 max-w-full overflow-x-auto scrollbar-none">
             {TIERS.map((tier) => {
               const isActive = tier.id === activeTierId;
               return (
@@ -108,31 +100,28 @@ export function TierExperience() {
                   key={tier.id}
                   type="button"
                   onClick={() => setActiveTierId(tier.id)}
-                  className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
+                  className={`px-4 sm:px-6 py-2.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer ${
                     isActive
-                      ? 'bg-neutral-900 text-white shadow-md'
-                      : 'text-neutral-700 hover:text-neutral-900 hover:bg-white/50'
+                      ? 'bg-[#111111] text-white shadow-xs'
+                      : 'text-[#5A5550] hover:text-[#111111] hover:bg-[#FAF8F5]'
                   }`}
                 >
-                  <span className="opacity-70 text-[10px] mr-1.5">{tier.tierNumber}</span>
-                  <span>{tier.name}</span>
+                  <span className="text-[#C5A059] mr-1.5">{tier.tierNumber}</span>
+                  <span>{tier.name.split(' (')[0]}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Active Tier Showcase Card (Dynamic 2-Column Luxury Bento) */}
+        {/* Active Tier Showcase Card (Zero-Radius 2-Column Luxury Bento) */}
         <div
-          className={`rounded-2xl border p-8 sm:p-12 transition-all duration-500 relative overflow-hidden ${activeTier.bgClass}`}
+          className={`border p-6 sm:p-10 lg:p-12 transition-all duration-500 relative overflow-hidden ${activeTier.bgClass}`}
         >
-          <BatikCorner position="top-left" variant="gold" size={40} className="top-4 left-4 z-10 opacity-70" />
-          <BatikCorner position="bottom-right" variant="gold" size={40} className="bottom-4 right-4 z-10 opacity-70" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left: 4:5 Portrait Model Image */}
-            <div className="lg:col-span-5 relative group">
-              <div className="relative aspect-[4/5] rounded-xl overflow-hidden shadow-2xl bg-neutral-800">
+            <div className="lg:col-span-5 relative group overflow-hidden">
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#111111]">
                 <img
                   src={activeTier.image}
                   onError={(e) => {
@@ -141,12 +130,12 @@ export function TierExperience() {
                   alt={activeTier.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4">
-                  <span
-                    className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-black/80 backdrop-blur-md text-white border border-white/10"
-                    style={{ color: activeTier.accentColor }}
-                  >
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                  <span className="px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.2em] bg-black/85 text-white border border-white/20 backdrop-blur-xs">
                     {activeTier.badge}
+                  </span>
+                  <span className="text-[10px] font-mono tracking-widest text-[#C5A059] bg-black/85 px-2 py-1 border border-[#C5A059]/40">
+                    {activeTier.tierNumber}
                   </span>
                 </div>
               </div>
@@ -155,59 +144,66 @@ export function TierExperience() {
             {/* Right: Detailed Specification & Narrative */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                <span
-                  className="text-xs font-bold uppercase tracking-[0.2em] block mb-1"
-                  style={{ color: activeTier.accentColor }}
-                >
-                  {activeTier.tierNumber} • {activeTier.subname}
+                <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] text-[#C5A059] block mb-1.5">
+                  {activeTier.tierNumber} &bull; {activeTier.subname}
                 </span>
 
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold mb-3 leading-snug">
+                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal mb-2 leading-snug">
                   {activeTier.name}
                 </h3>
 
-                <div className="text-xl sm:text-2xl font-bold mb-6 font-sans" style={{ color: activeTier.accentColor }}>
+                <div className="text-lg sm:text-2xl font-medium mb-5 font-sans text-[#C5A059]">
                   {activeTier.priceRange}
                 </div>
 
-                <p className="text-xs sm:text-sm leading-relaxed mb-8 opacity-90 font-sans">
+                <p className={`text-xs sm:text-sm leading-relaxed mb-6 font-light ${isDark ? 'text-[#E2DFD8]/85' : 'text-[#5A5550]'}`}>
                   {activeTier.description}
                 </p>
 
-                {/* Specs Matrix */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-xs">
+                {/* Specs Matrix (Zero-Radius) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 text-xs">
                   {activeTier.specs.map((spec, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-lg bg-black/10 dark:bg-white/5 border border-white/10 backdrop-blur-sm"
+                      className={`p-3.5 border ${
+                        isDark ? 'bg-white/5 border-white/10' : 'bg-[#FAF8F5] border-[#E2DFD8]'
+                      }`}
                     >
-                      <span className="block text-[10px] uppercase tracking-wider font-semibold opacity-60 mb-0.5">
+                      <span className="block text-[9px] uppercase tracking-wider font-semibold opacity-60 mb-0.5">
                         {spec.label}
                       </span>
-                      <span className="font-medium">{spec.value}</span>
+                      <span className="font-medium text-[11px]">{spec.value}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4">
+              {/* Action Buttons (Zero-Radius) */}
+              <div className="flex flex-wrap items-center gap-3.5">
                 <NavLink
                   to={activeTier.collectionUrl}
-                  className="px-8 py-4 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] font-semibold text-xs uppercase tracking-[0.18em] transition-all shadow-lg"
+                  className={`px-7 py-3.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] transition-all no-underline ${
+                    isDark
+                      ? 'bg-[#C5A059] hover:bg-white text-[#111111]'
+                      : 'bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111]'
+                  }`}
                 >
-                  Jelajahi Katalog {activeTier.name} &rarr;
+                  LIHAT KOLEKSI &rarr;
                 </NavLink>
 
                 <a
-                  href={`https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20dengan%20koleksi%20${encodeURIComponent(
+                  href={`https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20konsultasi%20koleksi%20${encodeURIComponent(
                     activeTier.name,
                   )}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-6 py-4 bg-white/10 hover:bg-white/20 text-xs font-semibold uppercase tracking-[0.18em] border border-white/20 transition-all text-center"
+                  className={`px-6 py-3.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] border transition-all no-underline ${
+                    isDark
+                      ? 'border-white/30 hover:border-white text-white hover:bg-white/10'
+                      : 'border-[#111111]/30 hover:border-[#111111] text-[#111111] hover:bg-black/5'
+                  }`}
                 >
-                  Tanya Konsultan Kasta Ini
+                  KONSULTASI VIA WHATSAPP &rarr;
                 </a>
               </div>
             </div>

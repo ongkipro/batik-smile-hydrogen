@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 export const meta = () => {
   return [
@@ -18,14 +19,17 @@ export default function LokasiTokoPage() {
     encodeURIComponent('Halo Batik Smile, saya ingin menanyakan rute lokasi butik.');
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb items={[{ label: 'LOKASI TOKO' }]} />
+
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
             KUNJUNGI BUTIK KAMI DI SEMARANG
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl text-[#111111] font-normal tracking-wide">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight">
             Lokasi Butik &amp; Showroom Resmi
           </h1>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />

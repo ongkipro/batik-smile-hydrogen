@@ -46,11 +46,11 @@ export function CustomerLoveNotes({ testimonials }) {
     <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
       <div className="max-w-4xl mx-auto text-center">
         {/* Eyebrow & Title */}
-        <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-3">
-          TESTIMONI PELANGGAN SETIA
+        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+          TESTIMONI RESMI BUTIK
         </span>
-        <h2 className="font-serif text-2xl sm:text-4xl text-[#111111] tracking-wide font-normal mb-8">
-          LOVE NOTES FROM OUR CUSTOMER
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] tracking-wide font-normal mb-8 leading-tight">
+          Kisah &amp; Apresiasi Pelanggan
         </h2>
 
         {/* 5-Star Rating Icons */}
@@ -63,27 +63,27 @@ export function CustomerLoveNotes({ testimonials }) {
         </div>
 
         {/* Testimonial Quote in Cormorant Garamond Serif Italic */}
-        <blockquote className="font-serif italic text-lg sm:text-2xl text-[#1C1C1C] leading-relaxed mb-8 max-w-3xl mx-auto font-light">
+        <blockquote className="font-serif italic text-lg sm:text-2xl lg:text-3xl text-[#111111] leading-relaxed mb-8 max-w-3xl mx-auto font-light">
           &ldquo;{currentNote.quote || currentNote?.text?.value}&rdquo;
         </blockquote>
 
         {/* Author & Location Attribution */}
-        <div className="text-[11px] uppercase tracking-[0.2em] font-semibold text-[#111111] mb-1">
+        <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-semibold text-[#111111] mb-1">
           {currentNote.author || currentNote?.author_name?.value}
         </div>
-        <div className="text-[10px] uppercase tracking-[0.16em] text-[#7C3F1D]">
+        <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#7C3F1D]">
           {currentNote.location || currentNote?.city_occasion?.value}
         </div>
 
-        {/* Carousel Pagination Dots */}
-        <div className="flex justify-center items-center gap-2.5 mt-10">
+        {/* Carousel Pagination Dots (Zero-radius bars) */}
+        <div className="flex justify-center items-center gap-2 mt-8">
           {notes.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`h-1.5 transition-all duration-300 cursor-pointer ${
-                activeIndex === idx ? 'w-8 bg-[#111111]' : 'w-2 bg-[#E2DFD8] hover:bg-[#C5A059]'
+              aria-label={`Lihat ulasan ${idx + 1}`}
+              className={`h-1 transition-all duration-300 cursor-pointer ${
+                activeIndex === idx ? 'w-8 bg-[#111111]' : 'w-2.5 bg-[#E2DFD8] hover:bg-[#C5A059]'
               }`}
             />
           ))}

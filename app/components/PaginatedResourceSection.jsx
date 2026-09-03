@@ -21,8 +21,8 @@ export function PaginatedResourceSection({
   children,
   ariaLabel,
   resourcesClassName,
-  loadMoreText = 'JELAJAHI LEBIH BANYAK KOLEKSI',
-  loadPreviousText = 'LIHAT KOLEKSI SEBELUMNYA',
+  loadMoreText = 'LIHAT LEBIH BANYAK',
+  loadPreviousText = 'LIHAT SEBELUMNYA',
   badgeText = 'KURASI ARSIP',
   captionText,
 }) {

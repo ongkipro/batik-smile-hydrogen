@@ -3,6 +3,7 @@ import { getPaginationVariables, Analytics } from '@shopify/hydrogen';
 import { SearchForm } from '~/components/SearchForm';
 import { SearchResults } from '~/components/SearchResults';
 import { getEmptyPredictiveSearchResult } from '~/lib/search';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 /**
  * @type {Route.MetaFunction}
@@ -48,14 +49,8 @@ export default function SearchPage() {
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb */}
-        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
-          <NavLink to="/" className="hover:text-[#9E7D3B]">
-            BERANDA
-          </NavLink>
-          <span>/</span>
-          <span className="text-[#111111] font-semibold">PENCARIAN</span>
-        </nav>
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb items={[{ label: 'PENCARIAN' }]} />
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
@@ -156,7 +151,8 @@ export default function SearchPage() {
 async function regularSearch({ request, context }) {
   const { storefront } = context;
   const url = new URL(request.url);
-  const variables = getPaginationVariables(request, { pageBy: 16 });
+  // 4 columns x 3 rows = 12 search results per page, remaining via Load More
+  const variables = getPaginationVariables(request, { pageBy: 12 });
   const term = String(url.searchParams.get('q') || '').trim();
 
   if (!term) {

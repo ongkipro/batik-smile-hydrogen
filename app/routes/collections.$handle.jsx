@@ -4,6 +4,8 @@ import { getPaginationVariables, Analytics } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { ProductItem } from '~/components/ProductItem';
+import { Breadcrumb } from '~/components/Breadcrumb';
+import { CollectionFilterBar } from '~/components/CollectionFilterBar';
 
 /**
  * @type {Route.MetaFunction}
@@ -24,6 +26,7 @@ export const meta = ({ data }) => {
  * @param {Route.LoaderArgs} args
  */
 export async function loader(args) {
+  redirectIfHandleIsLocalized(args);
   const criticalData = await loadCriticalData(args);
   return { ...criticalData };
 }
@@ -34,8 +37,15 @@ export async function loader(args) {
 async function loadCriticalData({ context, params, request }) {
   const { handle } = params;
   const { storefront } = context;
+
+  // Quiet Luxury grid calibration:
+  // 3 columns x 3 rows = 9 items for Exclusive/Mahakarya, 4 columns x 3 rows = 12 items for general
+  const isExclusiveCollection =
+    handle && (handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra'));
+  const pageSize = isExclusiveCollection ? 9 : 12;
+
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 24,
+    pageBy: pageSize,
   });
 
   if (!handle) {
@@ -56,9 +66,71 @@ async function loadCriticalData({ context, params, request }) {
     throw redirect(collectionRedirects[handle], 301);
   }
 
+  // Parse Sort parameters from URL
+  const url = new URL(request.url);
+  const searchParams = url.searchParams;
+  const sortParam = searchParams.get('sort');
+
+  let sortKey = 'COLLECTION_DEFAULT';
+  let reverse = false;
+
+  switch (sortParam) {
+    case 'price-asc':
+      sortKey = 'PRICE';
+      reverse = false;
+      break;
+    case 'price-desc':
+      sortKey = 'PRICE';
+      reverse = true;
+      break;
+    case 'latest':
+      sortKey = 'CREATED';
+      reverse = true;
+      break;
+    case 'title-asc':
+      sortKey = 'TITLE';
+      reverse = false;
+      break;
+    case 'title-desc':
+      sortKey = 'TITLE';
+      reverse = true;
+      break;
+    default:
+      sortKey = 'COLLECTION_DEFAULT';
+      reverse = false;
+      break;
+  }
+
+  // Parse Filter parameters from URL
+  const filters = [];
+  if (searchParams.get('available') === 'true') {
+    filters.push({ available: true });
+  }
+
+  const minPrice = searchParams.get('minPrice');
+  const maxPrice = searchParams.get('maxPrice');
+  if (minPrice || maxPrice) {
+    const priceFilter = {};
+    if (minPrice && !isNaN(Number(minPrice))) {
+      priceFilter.min = Number(minPrice);
+    }
+    if (maxPrice && !isNaN(Number(maxPrice))) {
+      priceFilter.max = Number(maxPrice);
+    }
+    if (Object.keys(priceFilter).length > 0) {
+      filters.push({ price: priceFilter });
+    }
+  }
+
   const [{ collection }] = await Promise.all([
     storefront.query(COLLECTION_QUERY, {
-      variables: { handle, ...paginationVariables },
+      variables: {
+        handle,
+        ...paginationVariables,
+        sortKey,
+        reverse,
+        filters: filters.length > 0 ? filters : undefined,
+      },
     }),
   ]);
 
@@ -114,6 +186,13 @@ export default function Collection() {
       ? '/banners/sarimbit_family_banner.jpg'
       : null);
 
+  // Featured image resolution for 2-column split hero (Shopify image with graceful fallbacks)
+  const collectionFeaturedImage =
+    collection.image?.url ||
+    bannerImageUrl ||
+    collection.products?.nodes?.[0]?.featuredImage?.url ||
+    '/banners/hero_editorial_banner.jpg';
+
   return (
     <div className={`min-h-screen pb-24 lg:pb-16 transition-colors duration-500 ${themeClasses}`}>
       {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR EXCLUSIVE & PREMIUM */}
@@ -145,6 +224,13 @@ export default function Collection() {
 
           {/* Hero Content Overlay */}
           <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center">
+            {/* Breadcrumb Navigation (Fluid single-line) */}
+            <Breadcrumb
+              isDark={true}
+              items={[{ label: 'KOLEKSI', to: '/collections' }, { label: collection.title.toUpperCase() }]}
+              className="justify-center mb-6"
+            />
+
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
               {isExclusive
                 ? 'HAUTE HERITAGE • MAHAKARYA SUTRA ATBM'
@@ -189,38 +275,69 @@ export default function Collection() {
           </div>
         </section>
       ) : (
-        /* STANDARD EDITORIAL HEADER FOR GENERAL COLLECTIONS */
-        <div className="pt-10 px-4 sm:px-6 lg:px-8">
+        /* STANDARD 2-COLUMN LUXURY EDITORIAL HERO FOR GENERAL COLLECTIONS */
+        <section className="pt-6 sm:pt-8 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 border-b border-[#E2DFD8] bg-[#FAF8F5]">
           <div className="w-full max-w-7xl mx-auto">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-2 text-[#7C3F1D]">
-                KATALOG BUSANA BATIK NUSANTARA
-              </span>
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide mt-2 mb-3 leading-tight">
-                {collection.title}
-              </h1>
-              <div className="w-14 h-px mx-auto mt-2 mb-5 bg-[#111111]" />
-              {collection.description && (
-                <p className="text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto mb-8 text-[#5A5550]">
-                  {collection.description}
-                </p>
-              )}
-              {bannerImageUrl && (
-                <div className="w-full aspect-[21/9] sm:aspect-[24/9] overflow-hidden shadow-sm bg-[#111111] border border-[#E2DFD8]">
-                  <img
-                    src={bannerImageUrl}
-                    alt={collection.image?.altText || collection.title}
-                    className="w-full h-full object-cover object-center"
-                  />
+            {/* Breadcrumb Navigation (Strictly Single-Line on Mobile) */}
+            <Breadcrumb
+              items={[{ label: 'KOLEKSI', to: '/collections' }, { label: collection.title.toUpperCase() }]}
+              className="mb-6 sm:mb-8"
+            />
+
+            {/* 2-Column Split: Left (Shopify Title & Narrative), Right (Shopify Featured Image 5:4) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
+              {/* Left Column: Collection Title & Shopify Description */}
+              <div className="lg:col-span-7 flex flex-col justify-center">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] block mb-2 sm:mb-3">
+                  KATALOG BUSANA BATIK NUSANTARA
+                </span>
+
+                <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] leading-tight mb-3 sm:mb-4">
+                  {collection.title}
+                </h1>
+
+                <div className="w-12 h-px bg-[#C5A059] mb-4 sm:mb-5" />
+
+                {collection.description ? (
+                  <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
+                    {collection.description}
+                  </p>
+                ) : (
+                  <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
+                    Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Nusantara Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.
+                  </p>
+                )}
+
+                {/* Service Highlights */}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#7C3F1D] font-medium pt-4 border-t border-[#E2DFD8]">
+                  <span>Jahit Bespoke Tanpa MOQ</span>
+                  <span className="text-[#C5A059]">&bull;</span>
+                  <span>Konsultasi Ukuran via WA</span>
+                  <span className="text-[#C5A059]">&bull;</span>
+                  <span>Garansi Butik Resmi</span>
                 </div>
-              )}
+              </div>
+
+              {/* Right Column: Collection Featured Image (3:2 Aspect Ratio, Zero Radius) */}
+              <div className="lg:col-span-5">
+                <div className="relative w-full aspect-[3/2] bg-[#111111] overflow-hidden border border-[#E2DFD8] shadow-sm group">
+                  <img
+                    src={collectionFeaturedImage}
+                    alt={collection.image?.altText || collection.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute bottom-3 left-3 bg-black/85 text-white text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 border border-white/15 backdrop-blur-xs">
+                    {collection.title}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       )}
 
       {/* BODY CONTENT (Pillars & Grid) */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
+      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isExclusive || isPremium ? 'mt-12 sm:mt-16' : 'mt-8 sm:mt-12'}`}>
 
         {/* EXCLUSIVE TEMPLATE: 3 Pillars of Haute Artistry */}
         {isExclusive && (
@@ -294,20 +411,40 @@ export default function Collection() {
           </div>
         )}
 
+        {/* Minimalist Horizontal Filter & Sort Bar (Before Product List) */}
+        <CollectionFilterBar
+          isDark={isExclusive}
+          totalCount={collection.products?.nodes?.length}
+        />
+
         {/* Tier-Differentiated Products Grid (4:5 Aspect Ratio) */}
-        <PaginatedResourceSection
-          connection={collection.products}
-          resourcesClassName={`grid ${gridColumns}`}
-        >
-          {({ node: product, index }) => (
-            <ProductItem
-              key={product.id}
-              product={product}
-              variant={isExclusive ? 'exclusive' : isPremium ? 'premium' : 'default'}
-              loading={index < 4 ? 'eager' : 'lazy'}
-            />
-          )}
-        </PaginatedResourceSection>
+        {collection.products?.nodes?.length === 0 ? (
+          <div className="text-center py-16 px-4 border border-dashed border-[#E2DFD8] bg-[#FAF8F5]/60 mb-12">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
+              FILTER TIDAK MENEMUKAN HASIL
+            </span>
+            <p className="font-serif text-xl text-[#111111] mb-2">
+              Tidak ada busana yang sesuai dengan kriteria filter.
+            </p>
+            <p className="text-xs text-[#5A5550] max-w-md mx-auto mb-6">
+              Silakan sesuaikan rentang harga, reset filter, atau hubungi konsultan kami untuk pesanan khusus.
+            </p>
+          </div>
+        ) : (
+          <PaginatedResourceSection
+            connection={collection.products}
+            resourcesClassName={`grid ${gridColumns}`}
+          >
+            {({ node: product, index }) => (
+              <ProductItem
+                key={product.id}
+                product={product}
+                variant={isExclusive ? 'exclusive' : isPremium ? 'premium' : 'default'}
+                loading={index < 4 ? 'eager' : 'lazy'}
+              />
+            )}
+          </PaginatedResourceSection>
+        )}
 
         {/* Bottom Callouts: Tailored per Tier */}
         {isExclusive ? (
@@ -431,6 +568,9 @@ const COLLECTION_QUERY = `#graphql
     $last: Int
     $startCursor: String
     $endCursor: String
+    $sortKey: ProductCollectionSortKeys
+    $reverse: Boolean
+    $filters: [ProductFilter!]
   ) @inContext(country: $country, language: $language) {
     collection(handle: $handle) {
       id
@@ -448,7 +588,10 @@ const COLLECTION_QUERY = `#graphql
         first: $first,
         last: $last,
         before: $startCursor,
-        after: $endCursor
+        after: $endCursor,
+        sortKey: $sortKey,
+        reverse: $reverse,
+        filters: $filters
       ) {
         nodes {
           ...ProductItem

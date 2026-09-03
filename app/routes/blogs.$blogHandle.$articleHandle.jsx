@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLoaderData, NavLink, Link, redirect } from 'react-router';
+import { useLoaderData, Link, redirect } from 'react-router';
 import { Image, Money } from '@shopify/hydrogen';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 /**
  * @type {Route.MetaFunction}
@@ -123,19 +124,13 @@ export default function Article() {
 
       <div className="max-w-5xl mx-auto">
         {/* Minimalist Centered Breadcrumbs */}
-        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-10 sm:mb-12 flex items-center justify-center gap-2">
-          <NavLink to="/" className="hover:text-[#9E7D3B] transition-colors">
-            BERANDA
-          </NavLink>
-          <span>/</span>
-          <NavLink to="/blogs" className="hover:text-[#9E7D3B] transition-colors">
-            JURNAL
-          </NavLink>
-          <span>/</span>
-          <span className="text-[#111111] font-semibold uppercase truncate max-w-[180px] sm:max-w-xs">
-            {title}
-          </span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: 'JURNAL', to: '/blogs' },
+            { label: title.toUpperCase() },
+          ]}
+          className="justify-center mb-10 sm:mb-12"
+        />
 
         {/* Grand Editorial Header (Centered in max-w-3xl) */}
         <header className="mb-12 sm:mb-14 text-center max-w-3xl mx-auto">

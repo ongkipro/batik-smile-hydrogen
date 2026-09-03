@@ -6,6 +6,7 @@ import {
   useLoaderData,
 } from 'react-router';
 import { CUSTOMER_DETAILS_QUERY } from '~/graphql/customer-account/CustomerDetailsQuery';
+import { Breadcrumb } from '~/components/Breadcrumb';
 
 export function shouldRevalidate() {
   return true;
@@ -45,8 +46,11 @@ export default function AccountLayout() {
     : 'Pelanggan Butik';
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-10 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb items={[{ label: 'AKUN SAYA' }]} />
+
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">

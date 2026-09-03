@@ -832,10 +832,88 @@
 - Removed the heavy outer border (`border-[#C5A059]/35`) and boxed card padding.
 - Replaced with an open, architectural editorial layout with hairline top border (`pt-12 sm:pt-16 border-t`) that harmonizes seamlessly with the PDP product grid width (`w-full max-w-7xl`).
 
-### 4. Verification Evidence
-- `npm run lint`: 0 warnings, 0 errors.
+---
+
+## Milestone 29: Grid-Proportional Pagination (3x3=9, 4x3=12), Single-Line Breadcrumbs & Typography Precision (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Grid-Proportional Dynamic Pagination, Unified Max-1-Line Breadcrumbs (`Breadcrumb.jsx`), Zero-Radius Architecture & Typography Screening
+
+### 1. Grid-Proportional Catalog Pagination (4x3=12 & 3x3=9)
+- Dynamically synchronized product list pagination across all storefront listing routes:
+  - **4 Columns x 3 Rows = 12 Items**: Standard catalog grids (`/collections/all`, general `/collections/$handle`, `/search`) load exactly 12 items initially, with remaining items retrieved via "LIHAT LEBIH BANYAK" (Load More).
+  - **3 Columns x 3 Rows = 9 Items**: 3-column grids (`/collections/sarimbit-exclusive`, `/collections`, `/blogs`) load exactly 9 items initially.
+  - Streamlined `loadMoreText` default in `PaginatedResourceSection.jsx` to concise `LIHAT LEBIH BANYAK` / `LIHAT SEBELUMNYA`, eliminating awkward multi-line breaking on narrow mobile screens.
+
+### 2. Unified Single-Line Breadcrumb System (`Breadcrumb.jsx`)
+- Created canonical `app/components/Breadcrumb.jsx` replacing ad-hoc breadcrumb markup across 15 routes:
+  - `collections.$handle.jsx`, `collections.all.jsx`, `collections._index.jsx`, `products.$handle.jsx`, `blogs._index.jsx`, `blogs.$blogHandle._index.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `pages.tentang-kami.jsx`, `pages.fasilitas-store.jsx`, `pages.layanan-seragam.jsx`, `pages.lokasi-toko.jsx`, `pages.$handle.jsx`, `cart.jsx`, `search.jsx`, `policies._index.jsx`, `policies.$handle.jsx`, `account.jsx`.
+  - **Strict Single-Line Guarantee on Mobile**: Implemented `flex-nowrap whitespace-nowrap overflow-hidden`, zero-radius Home icon with `shrink-0`, micro-chevrons with `shrink-0`, intermediate link truncation (`max-w-[85px] sm:max-w-none truncate`), and active label truncation (`truncate min-w-0 flex-1 sm:flex-initial`). The breadcrumb never breaks into 2 lines on any mobile device from 320px up to 480px.
+
+### 3. Storefront-Wide Screening & Zero-Radius Typography Calibration
+- Refactored `TierExperience.jsx`:
+  - Completely removed all `rounded-full`, `rounded-2xl`, and `rounded-xl` instances in favor of strict `rounded-none`.
+  - Replaced non-harmonic `#14213D` blue highlights with Quad-Harmonic palette (`#111111`, `#FAF8F5`, `#C5A059`, `#7C3F1D`).
+  - Calibrated Cormorant Garamond headings to `font-normal`.
+- Refactored `CraftsmanshipZoom.jsx`:
+  - Removed `rounded-2xl` on cards and pills.
+  - Softened headings to `font-normal` with micro-tracked eyebrows.
+- Calibrated `CustomerLoveNotes.jsx`:
+  - Updated title to Indonesian `Kisah & Apresiasi Pelanggan` with eyebrow `TESTIMONI RESMI BUTIK`.
+  - Replaced circular pagination dots with zero-radius geometric bars.
+- Shortened long CTA in `ChooseYourBatikGrid.jsx` to concise `LIHAT SEMUA KOLEKSI →`.
+- Added Quiet Luxury typography hierarchy utilities to `app/styles/app.css`.
+
+### 4. Verification Evidence (Strictly Local Development First)
+- `npm run lint`: 0 errors, 0 warnings.
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
-- Local SSR check on `sarimbit-royal-navy-1` verified `Has Prev Arrow: true`, `Has Next Arrow: true`, `Has mini thumbnail grid for mobile: true`, and frameless section border-t active.
+- Local dev server verification on `http://localhost:3005`: All 13 core routes returned HTTP 200 OK.
+- Preserved local development state without git push or remote deploy, adhering strictly to user guidelines.
+
+---
+
+## Milestone 30: Standard Collection 2-Column Split Hero (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: 2-Column Split Hero Architecture (Left: Title & Narrative, Right: 3:2 Featured Image), Haute Hero Preservation for Sarimbit Exclusive/Premium
+
+### 1. 2-Column Luxury Split Hero (`collections.$handle.jsx`)
+- Re-architected standard collection pages (`/collections/*` for `batik-pria`, `batik-wanita`, `batik-anak`, `jarik-kain-batik`, `sarimbit-ekonomis`, etc.):
+  - **Left Column**: High-prestige eyebrow `KATALOG BUSANA BATIK NUSANTARA`, collection title directly from Shopify (`collection.title`), hairline gold divider, and collection narrative directly from Shopify (`collection.description`), followed by atelier trust points (`Jahit Bespoke Tanpa MOQ • Konsultasi Ukuran via WA • Garansi Butik Resmi`).
+  - **Right Column**: Featured collection image with calibrated 3:2 landscape aspect ratio (`aspect-[3/2]`), preventing excessive height and allowing catalog items to be visible above the fold, zero-radius architecture (`rounded-none`), subtle hover zoom (`group-hover:scale-105 duration-700`), hairline border `#E2DFD8`, and atelier collection tag.
+- **Cinematic Haute Hero Preserved**: `sarimbit-exclusive` and `sarimbit-premium` retain their full-bleed cinematic hero sections intact.
+- **Clean Breadcrumb Integration**: Breadcrumb positioned on its own dedicated row above the split hero.
+
+### 2. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check:
+  - `batik-pria`: `Has aspect-[3/2]: true`, `Has 2-column grid: true`.
+  - `sarimbit-exclusive`: `Has HAUTE HERITAGE: true`, `Has aspect-[3/2]: false`.
+- Dev server `localhost:3005`: 7/7 collection routes return HTTP 200 OK.
+
+---
+
+## Milestone 31: Pure Typographic Floating Filter Bar & Oxygen Edge Deploy (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: 100% Zero-Box Typographic Floating Filter Bar (`CollectionFilterBar.jsx`), Storefront API Dynamic Sorting/Filtering, Edge Verification & Production Release
+
+### 1. Pure Typographic Floating Filter Bar (`CollectionFilterBar.jsx`)
+- Overhauled catalog toolbar into an ultra-minimalist, Quiet Luxury typographic navigation:
+  - **100% Zero-Box, Zero-Frame, Zero-Background**: Stripped all button containers, grey background bands, and form boxes.
+  - **Pure Text Tabs**: Horizontal stream of editorial text links (`Semua (count)`, `Siap Kirim`, `< Rp 500rb`, `Rp 500rb – 1jt`, `> Rp 1jt`).
+  - **Gold Hairline Indicator**: Active tab is highlighted with an elegant antique gold bottom hairline (`border-b-2 border-[#C5A059] -mb-[15px] pb-2.5`).
+  - **Frameless Sort Trigger**: Right side provides a pure text sort selector (`Urutkan: Rekomendasi ↓`) with options for latest, price low-to-high, price high-to-low, and alphabetical A-Z.
+  - **Reset Action**: Whispered text action `Reset Filter` appears seamlessly when active filters exist.
+  - **Full Mobile Responsiveness**: Smooth horizontal touch swipe without scrollbars.
+
+### 2. Storefront API Dynamic Integration
+- Wired URL search parameters (`sort`, `available`, `minPrice`, `maxPrice`) to Storefront API queries:
+  - `collections.$handle.jsx`: Accepts `$sortKey: ProductCollectionSortKeys`, `$reverse: Boolean`, and `$filters: [ProductFilter!]`.
+  - `collections.all.jsx`: Accepts `$sortKey: ProductSortKeys`, `$reverse: Boolean`, and `$query: String`.
+  - Empty state with elegant apology and suggestion when no products match filter criteria.
+
+### 3. Verification Evidence & Deployment
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check: Tested `/collections/all`, `/collections/all?sort=price-asc`, `/collections/all?available=true`, `/collections/batik-pria`, and `/collections/sarimbit-exclusive`, all returning HTTP 200 OK with `FilterBar: true`.
+- Staged all modified files and pushed to `origin/main` for automated Shopify Oxygen edge deployment.
+
 
 
 
