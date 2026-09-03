@@ -604,6 +604,25 @@
   - *Action*: Removed search input and informal emojis/emoticons from mobile drawer menu (`Header.jsx`), replacing them with sharp vector SVG icons and quiet luxury typography. Upgraded `LuxurySearchModal.jsx` by eliminating boxy framing on trending keywords and introducing preloaded curated product cards (2 columns on mobile, 4 on desktop) in the empty state.
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, verified on dev server.
 
+---
+
+## Phase 23: Scattered Atelier Collection Cards & Testimonial Section Removal (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: SarimbitBentoSection.jsx, PersonalWardrobeSection.jsx, _index.jsx, PAGES-SCHEMA.xml*
+
+- [x] **Task 23.1: Transform Sarimbit Pillars to Scattered Atelier Moodboard Cards (`SarimbitBentoSection.jsx`)**
+  - *Action*: Converted rigid Bento grid into a 3-pillar scattered atelier moodboard layout matching `collections._index.jsx` with organic tilts (`-rotate-2`, `rotate-1.5`, `-rotate-1`), translucent archival washi tape accents, archival plate tags (`SRM-01`, `SRM-02`, `SRM-03`), category stamps (`EKSKLUSIF`, `PREMIUM`, `EKONOMIS`), and hover un-tilting.
+  - *Evidence*: Verified HTTP 200 on `http://localhost:3005/`.
+- [x] **Task 23.2: Transform Personal Wardrobe Pillars to Scattered Atelier Moodboard Cards (`PersonalWardrobeSection.jsx`)**
+  - *Action*: Converted symmetrical wardrobe triptych into organic scattered atelier cards with alternating rotation angles, washi tape, and archival plates (`WDR-01`, `WDR-02`, `WDR-03`).
+  - *Evidence*: Verified HTTP 200 on `http://localhost:3005/`.
+- [x] **Task 23.3: Removal of Customer Testimonials Section from Homepage (`_index.jsx` & `PAGES-SCHEMA.xml`)**
+  - *Action*: Removed `CustomerLoveNotes` component render, import, and `customerTestimonials` GraphQL query from `_index.jsx`. Reduced client JS bundle from 43.65 kB to 37.34 kB (14.5% payload reduction).
+  - *Evidence*: Verified removal from homepage HTML on `http://localhost:3005/`.
+- [x] **Task 23.4: Production Build Verification & Type Safety**
+  - *Action*: Ran `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit code 0).
+  - *Evidence*: Clean compilation of Vite + Hydrogen SSR bundle.
+
+
 
 
 

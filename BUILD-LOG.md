@@ -536,6 +536,28 @@
 - `npm run lint`: 0 warnings, 0 errors.
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 
+---
+
+## Milestone 18: Scattered Atelier Collection Cards & Testimonial Section Removal (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: 3-Pillar Scattered Moodboard Cards for Sarimbit & Personal Wardrobe + Testimonial Pruning
+
+### 1. Scattered Atelier Cards for Trilogi Sarimbit (`SarimbitBentoSection.jsx`)
+- Replaced the rigid Bento grid with a 3-pillar scattered atelier moodboard design matching `collections._index.jsx`.
+- Features organic card rotation angles (`-rotate-2`, `rotate-1.5`, `-rotate-1`), washi tape overlay accents (`bg-[#F3EDE2]/85`), archival plates (`SRM-01`, `SRM-02`, `SRM-03`), category stamps (`EKSKLUSIF`, `PREMIUM`, `EKONOMIS`), and smooth hover un-tilting with gold glow shadows.
+
+### 2. Scattered Atelier Cards for Busana Personal (`PersonalWardrobeSection.jsx`)
+- Upgraded the 3 personal wardrobe pillars (Batik Pria, Batik Wanita, Batik Anak & Tradisional) to organic scattered cards with alternating tilts, washi tape pins, archival plates (`WDR-01`, `WDR-02`, `WDR-03`), and high-contrast editorial scrims.
+
+### 3. Removal of Customer Testimonials Section (`_index.jsx` & `PAGES-SCHEMA.xml`)
+- Completely pruned `CustomerLoveNotes` component render, import, and `customerTestimonials` GraphQL query from homepage.
+- Reduced client JavaScript bundle from 43.65 kB to **37.34 kB** (14.5% payload reduction).
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- All endpoints tested and verified returning HTTP 200 OK.
+
+
 
 
 

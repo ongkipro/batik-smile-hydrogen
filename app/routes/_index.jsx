@@ -7,7 +7,6 @@ import { EditorialJournalSection } from '~/components/EditorialJournalSection';
 import { BestSellersTabs } from '~/components/BestSellersTabs';
 import { HeritageVideoBanner } from '~/components/HeritageVideoBanner';
 import { ChooseYourBatikGrid } from '~/components/ChooseYourBatikGrid';
-import { CustomerLoveNotes } from '~/components/CustomerLoveNotes';
 import { TrustGuaranteeBar } from '~/components/TrustGuaranteeBar';
 import { ShowroomO2O } from '~/components/ShowroomO2O';
 
@@ -83,7 +82,6 @@ export async function loader({ context }) {
   // Extract metaobjects
   const heroData = data?.heroBanners?.nodes?.[0] || null;
   const videoData = data?.heritageVideos?.nodes?.[0] || null;
-  const testimonials = data?.customerTestimonials?.nodes || [];
   const featuredCollections = data?.featuredCollections?.nodes || [];
 
   // Extract editorial articles
@@ -94,7 +92,6 @@ export async function loader({ context }) {
   return {
     heroData,
     videoData,
-    testimonials,
     featuredCollections,
     womenProducts,
     menProducts,
@@ -110,7 +107,6 @@ export default function Homepage() {
   const {
     _heroData,
     videoData,
-    testimonials,
     featuredCollections,
     womenProducts,
     menProducts,
@@ -125,7 +121,7 @@ export default function Homepage() {
       {/* 1. Master Full-Bleed 5-Slide Quiet Luxury Hero Carousel */}
       <HeroSlider />
 
-      {/* 2. Signature Sarimbit Asymmetric Bento Grid (Exclusive, Premium, Ekonomis) */}
+      {/* 2. Signature Sarimbit 3-Pillar Scattered Atelier Moodboard */}
       <SarimbitBentoSection collections={featuredCollections} />
 
       {/* 3. Best Sellers Tabbed Switcher (Women | Men | Sarimbit) */}
@@ -138,25 +134,22 @@ export default function Homepage() {
       {/* 4. Heritage Craftsmanship Video Banner */}
       <HeritageVideoBanner videoData={videoData} />
 
-      {/* 5. Busana Personal & Lintas Generasi (Pria, Wanita, Anak) */}
+      {/* 5. Busana Personal & Lintas Generasi 3-Pillar Scattered Atelier Moodboard */}
       <PersonalWardrobeSection collections={featuredCollections} />
 
       {/* 6. Choose Your Batik / Koleksi Terbaru: 8 Produk Pilihan Non-Sarimbit */}
       <ChooseYourBatikGrid products={newestProducts} />
 
-      {/* 7. Customer Love Notes Testimonial Carousel */}
-      <CustomerLoveNotes testimonials={testimonials} />
-
-      {/* 8. Warta & Jurnal Kebudayaan (Latest Editorial Articles) */}
+      {/* 7. Warta & Jurnal Kebudayaan (Latest Editorial Articles) */}
       <EditorialJournalSection
         articles={editorialArticles}
         blogHandle={editorialBlogHandle}
       />
 
-      {/* 9. 4 Core Trust Pillars */}
+      {/* 8. 4 Core Trust Pillars */}
       <TrustGuaranteeBar />
 
-      {/* 10. Showroom O2O (Simongan 109 & Banyumanik 23) */}
+      {/* 9. Showroom O2O (Simongan 109 & Banyumanik 23) */}
       <ShowroomO2O />
     </div>
   );
@@ -279,16 +272,6 @@ const HOMEPAGE_QUERY = `#graphql
       }
     }
     heritageVideos: metaobjects(type: "heritage_video", first: 1) {
-      nodes {
-        id
-        handle
-        fields {
-          key
-          value
-        }
-      }
-    }
-    customerTestimonials: metaobjects(type: "customer_testimonial", first: 5) {
       nodes {
         id
         handle

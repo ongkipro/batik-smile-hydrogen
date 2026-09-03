@@ -64,8 +64,6 @@
           <!-- Native Metaobjects with Graceful Fallbacks -->
           <metaobject type="hero_banner" as="heroData" fallback="public/banners/hero_editorial_banner.jpg" />
           <metaobject type="heritage_video" as="videoData" fallback="public/banners/craftsmanship_canting_banner.jpg" />
-          <metaobject type="lookbook_spotlight" as="lookbookData" fallback="public/banners/sarimbit_family_banner.jpg" />
-          <metaobject type="customer_testimonial" limit="5" as="testimonials" />
         </graphql-query>
       </loader-contracts>
 
@@ -80,13 +78,13 @@
           <features>Full-bleed imagery/video, centered circular down-arrow scroll cue, pagination dots</features>
         </section>
 
-        <!-- Section 2: Signature Sarimbit Asymmetric Bento Grid -->
+        <!-- Section 2: Signature Sarimbit Scattered Atelier Moodboard -->
         <section id="sarimbit-bento" component="app/components/SarimbitBentoSection.jsx" order="2">
-          <design-token scheme="Scheme 1 (Mori Linen)" bg="#FAF8F5" grid="12-column asymmetric bento" />
+          <design-token scheme="Scheme 1 (Mori Linen)" bg="#FAF8F5" grid="grid-cols-1 md:grid-cols-3" />
           <props>
             <prop name="collections" source="featuredCollections" />
           </props>
-          <features>Asymmetric 12-col bento: 7-col dominant Sarimbit Exclusive, 5-col stacked Sarimbit Premium &amp; Ekonomis, 0px radius, hover glow</features>
+          <features>3 Scattered atelier moodboard cards: Exclusive (Sutra ATBM), Premium (Dobby), Ekonomis (Primisima), organic tilts, washi tape, archival plates, hover un-tilting</features>
         </section>
 
         <!-- Section 3: Best Sellers Switcher -->
@@ -118,13 +116,13 @@
           <controls>play/pause toggle, time counter (e.g. 0:08 / 0:18)</controls>
         </section>
 
-        <!-- Section 5: Busana Personal & Lintas Generasi (Pria, Wanita, Anak) -->
+        <!-- Section 5: Busana Personal Scattered Atelier Moodboard -->
         <section id="personal-wardrobe" component="app/components/PersonalWardrobeSection.jsx" order="5">
           <design-token scheme="Scheme 1 (Mori Linen)" bg="#FAF8F5" grid="grid-cols-1 md:grid-cols-3" gap="gap-8" />
           <props>
             <prop name="collections" source="featuredCollections" />
           </props>
-          <features>3-Column symmetrical triptych: Batik Pria (Sambung Motif), Batik Wanita (Modern), Batik Anak (Tradisional), aspect-[4/5]</features>
+          <features>3 Scattered atelier moodboard cards: Batik Pria (Sambung Motif), Batik Wanita (Modern), Batik Anak (Tradisional), aspect-[4/5], washi tape, archival plates</features>
         </section>
 
         <!-- Section 6: Choose Your Batik / New Arrivals Grid -->
@@ -138,17 +136,8 @@
           </item-card>
         </section>
 
-        <!-- Section 7: Customer Love Notes -->
-        <section id="customer-love-notes" component="app/components/CustomerLoveNotes.jsx" order="7">
-          <design-token scheme="Scheme 1" bg="#FAF8F5" />
-          <props>
-            <prop name="testimonials" source="testimonials" />
-          </props>
-          <elements>5-star rating icons (#C5A059), quote serif typography, customer name in uppercase, pagination dots</elements>
-        </section>
-
-        <!-- Section 8: Warta & Jurnal Kebudayaan -->
-        <section id="editorial-journal" component="app/components/EditorialJournalSection.jsx" order="8">
+        <!-- Section 7: Warta & Jurnal Kebudayaan -->
+        <section id="editorial-journal" component="app/components/EditorialJournalSection.jsx" order="7">
           <design-token scheme="Scheme 1" bg="#FAF8F5" grid="grid-cols-1 md:grid-cols-3" gap="gap-8" />
           <props>
             <prop name="articles" source="editorialArticles" />
@@ -157,8 +146,8 @@
           <features>3-Column quiet luxury editorial cards with 16:10 photography, Indonesian dates, excerpts, and read links</features>
         </section>
 
-        <!-- Section 9: 4 Core Trust Pillars -->
-        <section id="trust-guarantees" component="app/components/TrustGuaranteeBar.jsx" order="9">
+        <!-- Section 8: 4 Core Trust Pillars -->
+        <section id="trust-guarantees" component="app/components/TrustGuaranteeBar.jsx" order="8">
           <design-token scheme="Scheme 4" bg="#F4EFEA" border="#E2DFD8" />
           <pillars>
             <pillar icon="truck" label="LOCAL FREE DELIVERY" desc="Bebas Ongkir Seluruh Nusantara" />
@@ -168,8 +157,8 @@
           </pillars>
         </section>
 
-        <!-- Section 10: Showroom O2O -->
-        <section id="showroom-o2o" component="app/components/ShowroomO2O.jsx" order="10">
+        <!-- Section 9: Showroom O2O -->
+        <section id="showroom-o2o" component="app/components/ShowroomO2O.jsx" order="9">
           <design-token scheme="Scheme 1" />
           <showrooms>
             <showroom name="Flagship Simongan (3 Lantai)" address="Jl. Simongan Raya No. 109, Pamularsih, Semarang" />
