@@ -89,7 +89,7 @@ export default function Collection() {
   const themeClasses = isExclusive
     ? 'bg-[#111111] text-white'
     : isPremium
-    ? 'bg-[#FAF8F5] text-[#111111]'
+    ? 'bg-[#F3EDE2] text-[#111111]'
     : 'bg-[#FFFFFF] text-[#111111]';
 
   const gridColumns = isExclusive
@@ -101,86 +101,196 @@ export default function Collection() {
     'https://wa.me/6281390888809?text=' +
     encodeURIComponent(`Halo Batik Smile, saya ingin menanyakan koleksi ${collection.title}`);
 
-  // Banner image resolution: Shopify collection image or local generated fallback
+  // Banner image resolution: Shopify collection image or curated local editorial banner
   const bannerImageUrl =
     collection.image?.url ||
-    (handle.includes('kain')
+    (isExclusive
+      ? '/banners/hero_slider_1.jpg'
+      : isPremium
+      ? '/banners/sarimbit_family_banner.jpg'
+      : handle.includes('kain')
       ? '/banners/collection_kain_tulis_banner.jpg'
       : handle.includes('sarimbit')
       ? '/banners/sarimbit_family_banner.jpg'
       : null);
 
   return (
-    <div className={`min-h-screen pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8 transition-colors duration-500 ${themeClasses}`}>
-      <div className="w-full max-w-7xl mx-auto">
-        {/* Collection Editorial Header Banner */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span
-            className={`text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-2 ${
-              isExclusive ? 'text-[#C5A059]' : isPremium ? 'text-[#9E7D3B]' : 'text-[#7C3F1D]'
-            }`}
-          >
-            {isExclusive
-              ? 'KOLEKSI EXCLUSIVE &bull; MAHAKARYA HERITAGE'
-              : isPremium
-              ? 'KOLEKSI BUTIK &bull; SIGNATURE ELEGANCE'
-              : 'KATALOG BUSANA BATIK NUSANTARA'}
-          </span>
-
-          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide mt-2 mb-4 leading-tight">
-            {collection.title}
-          </h1>
-
-          <div
-            className={`w-12 h-px mx-auto mt-4 mb-4 ${
-              isExclusive ? 'bg-[#C5A059]' : 'bg-[#111111]'
-            }`}
-          />
-
-          {collection.description && (
-            <p
-              className={`text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto mb-8 ${
-                isExclusive ? 'text-[#E2DFD8]' : 'text-[#5A5550]'
-              }`}
-            >
-              {collection.description}
-            </p>
-          )}
-
-          {/* Collection Header Banner with Graceful Fallback */}
+    <div className={`min-h-screen pb-24 lg:pb-16 transition-colors duration-500 ${themeClasses}`}>
+      {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR EXCLUSIVE & PREMIUM */}
+      {isExclusive || isPremium ? (
+        <section
+          className={`relative w-full overflow-hidden flex items-center justify-center text-center ${
+            isExclusive
+              ? 'h-[62vh] min-h-[500px] max-h-[660px] bg-[#111111] border-b border-[#C5A059]/40'
+              : 'h-[58vh] min-h-[460px] max-h-[600px] bg-[#1C1813] border-b border-[#C5A059]/40'
+          }`}
+        >
+          {/* Background Image with Cinematic Scrim */}
           {bannerImageUrl && (
-            <div className="w-full aspect-[21/9] sm:aspect-[24/9] bg-[#111111] border border-[#E2DFD8] overflow-hidden shadow-sm">
+            <>
               <img
                 src={bannerImageUrl}
                 alt={collection.image?.altText || collection.title}
-                className="w-full h-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-center scale-105"
               />
-            </div>
+              <div
+                className={`absolute inset-0 ${
+                  isExclusive
+                    ? 'bg-gradient-to-t from-[#111111] via-[#111111]/75 to-[#111111]/45'
+                    : 'bg-gradient-to-t from-[#1A1612] via-[#2A2016]/75 to-[#C5A059]/25'
+                }`}
+              />
+            </>
           )}
-        </div>
 
-        {/* Exclusive VIP Concierge Banner (Only on Exclusive PLP) */}
-        {isExclusive && (
-          <div className="mb-14 p-6 sm:p-8 bg-[#1C1C1C] border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div>
-              <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-1">
-                PRIVATE VIP CONCIERGE
+          {/* Hero Content Overlay */}
+          <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
+              {isExclusive
+                ? 'HAUTE HERITAGE • MAHAKARYA SUTRA ATBM'
+                : 'SIGNATURE ATELIER • RESEPSI & FORMAL'}
+            </span>
+
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-white leading-tight mb-3">
+              {collection.title}
+            </h1>
+
+            {isExclusive && (
+              <p className="font-serif italic text-sm sm:text-lg text-[#C5A059] mb-4 max-w-2xl leading-relaxed">
+                Keagungan Sutra ATBM &amp; Prada Emas Murni untuk Momen Sakral Keluarga
+              </p>
+            )}
+
+            {isPremium && (
+              <p className="font-serif italic text-sm sm:text-lg text-[#E2DFD8] mb-4 max-w-2xl leading-relaxed">
+                Harmoni Tenun Dobby Timbul &amp; Kenyamanan Furing Pesta Sejuk
+              </p>
+            )}
+
+            <div className="w-16 h-px mb-5 bg-[#C5A059]" />
+
+            {collection.description && (
+              <p className="text-xs sm:text-sm font-light leading-relaxed max-w-2xl text-[#E2DFD8]/90 mb-6">
+                {collection.description}
+              </p>
+            )}
+
+            {/* Quick Action in Hero */}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={officialWaUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="px-7 py-3 text-[10px] uppercase font-bold tracking-[0.2em] shadow-lg transition-colors bg-[#C5A059] hover:bg-white text-[#111111]"
+              >
+                {isExclusive ? 'RESERVASI VIP CONCIERGE →' : 'KONSULTASI BUSANA RESEPSI →'}
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : (
+        /* STANDARD EDITORIAL HEADER FOR GENERAL COLLECTIONS */
+        <div className="pt-10 px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-2 text-[#7C3F1D]">
+                KATALOG BUSANA BATIK NUSANTARA
               </span>
-              <h3 className="font-serif text-xl text-white font-normal">
-                Layanan Khusus Mahakarya Sutra Tulis
-              </h3>
-              <p className="text-xs text-[#A69F96] font-light mt-1">
-                Tiap lembar karya hanya diproduksi 1 helai. Dapatkan video detail kain atau jadwalkan fitting privat di VIP lounge Semarang.
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide mt-2 mb-3 leading-tight">
+                {collection.title}
+              </h1>
+              <div className="w-14 h-px mx-auto mt-2 mb-5 bg-[#111111]" />
+              {collection.description && (
+                <p className="text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto mb-8 text-[#5A5550]">
+                  {collection.description}
+                </p>
+              )}
+              {bannerImageUrl && (
+                <div className="w-full aspect-[21/9] sm:aspect-[24/9] overflow-hidden shadow-sm bg-[#111111] border border-[#E2DFD8]">
+                  <img
+                    src={bannerImageUrl}
+                    alt={collection.image?.altText || collection.title}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* BODY CONTENT (Pillars & Grid) */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
+
+        {/* EXCLUSIVE TEMPLATE: 3 Pillars of Haute Artistry */}
+        {isExclusive && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 p-6 sm:p-8 bg-[#161616] border border-[#C5A059]/35">
+            <div className="text-center p-4">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+                PILAR 01 • KAIN PUSAKA
+              </span>
+              <h4 className="font-serif text-lg text-white font-normal mb-2">Sutra Alam ATBM 1-of-1</h4>
+              <p className="text-xs text-[#E2DFD8]/80 font-light leading-relaxed">
+                Ditenun manual dengan alat tenun bukan mesin, menghasilkan kilau serat alami bernapas yang bertekstur anggun.
               </p>
             </div>
-            <a
-              href={officialWaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-[#C5A059] hover:bg-white text-[#111111] font-semibold text-[10px] uppercase tracking-[0.18em] transition-colors whitespace-nowrap"
-            >
-              BOOKING VIP CONCIERGE &rarr;
-            </a>
+            <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#C5A059]/20">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+                PILAR 02 • SENTUHAN MAESTRO
+              </span>
+              <h4 className="font-serif text-lg text-white font-normal mb-2">Canting Prada Emas</h4>
+              <p className="text-xs text-[#E2DFD8]/80 font-light leading-relaxed">
+                Aksen prada emas murni digoreskan teliti pada motif sakral, memancarkan wibawa ningrat di bawah lampu resepsi malam.
+              </p>
+            </div>
+            <div className="text-center p-4">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+                PILAR 03 • LAYANAN SULTAN
+              </span>
+              <h4 className="font-serif text-lg text-white font-normal mb-2">VIP Fitting &amp; Bespoke</h4>
+              <p className="text-xs text-[#E2DFD8]/80 font-light leading-relaxed">
+                Ruang ukur privat di VIP Lounge Lantai 2 Simongan Semarang atau konsultasi privat via video concierge tanpa antre.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* PREMIUM TEMPLATE: 3 Signature Quality Guarantees */}
+        {isPremium && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 p-6 sm:p-8 bg-white/90 backdrop-blur-sm border border-[#C5A059]/40 shadow-[0_4px_20px_rgba(197,160,89,0.08)]">
+            <div className="text-center p-4">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+                STANDAR BUTIK 01
+              </span>
+              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+                Tenun Dobby Timbul
+              </h4>
+              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                Karakter bahan bermotif timbul bertekstur mewah, kokoh, dan tahan cuci tanpa kehilangan kilau anggunnya.
+              </p>
+            </div>
+            <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#C5A059]/25">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+                STANDAR BUTIK 02
+              </span>
+              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+                Furing Katun Hero Sejuk
+              </h4>
+              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                Lapis furing katun hero premium yang menyerap keringat dan adem, menjamin kenyamanan maksimal sepanjang acara.
+              </p>
+            </div>
+            <div className="text-center p-4">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+                STANDAR BUTIK 03
+              </span>
+              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+                Presisi Sambung Pola
+              </h4>
+              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                Potongan motif simetris selaras pada saku depan, kerah, dan belahan kancing untuk wibawa busana yang rapi.
+              </p>
+            </div>
           </div>
         )}
 
@@ -193,33 +303,68 @@ export default function Collection() {
             <ProductItem
               key={product.id}
               product={product}
+              variant={isExclusive ? 'exclusive' : isPremium ? 'premium' : 'default'}
               loading={index < 4 ? 'eager' : 'lazy'}
             />
           )}
         </PaginatedResourceSection>
 
-        {/* Bottom Consultation Assistance */}
-        <div
-          className={`mt-20 text-center pt-10 border-t ${
-            isExclusive ? 'border-white/10' : 'border-[#E2DFD8]'
-          }`}
-        >
-          <p
-            className={`text-xs mb-4 font-light tracking-wide ${
-              isExclusive ? 'text-[#A69F96]' : 'text-[#5A5550]'
-            }`}
-          >
-            Butuh bantuan ukuran sarimbit keluarga atau pemesanan seragam dinas tanpa minimal order?
-          </p>
-          <a
-            href={officialWaUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
-          >
-            KONSULTASI DENGAN KONSULTAN BUTIK &rarr;
-          </a>
-        </div>
+        {/* Bottom Callouts: Tailored per Tier */}
+        {isExclusive ? (
+          <div className="mt-20 text-center pt-14 border-t border-[#C5A059]/30">
+            <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-2">
+              PRIVATE VIP ATELIER
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-3">
+              Fitting Privat di VIP Lounge Simongan Semarang
+            </h3>
+            <p className="text-xs mb-6 font-light tracking-wide text-[#A69F96] max-w-xl mx-auto leading-relaxed">
+              Nikmati layanan concierge privat berstandar 3S 1C 1T &amp; 1H di Lantai 2 Flagship Butik Batik Smile Simongan dengan ruang ukur privat dan pendamping busana pribadi.
+            </p>
+            <a
+              href={officialWaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-lg"
+            >
+              RESERVASI VIP CONCIERGE &rarr;
+            </a>
+          </div>
+        ) : isPremium ? (
+          <div className="mt-20 text-center pt-14 border-t border-[#C5A059]/40">
+            <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2">
+              LAYANAN JAHIT SERAGAM KELUARGA
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-3">
+              Pemesanan Seragam Resepsi &amp; Acara Keluarga
+            </h3>
+            <p className="text-xs mb-6 font-light tracking-wide text-[#5A5550] max-w-xl mx-auto leading-relaxed">
+              Tersedia penyesuaian ukuran dari balita hingga 4XL tanpa minimal pemesanan. Konsultasikan kebutuhan seragam keluarga besar Anda bersama konsultan butik kami.
+            </p>
+            <a
+              href={officialWaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
+            >
+              KONSULTASI SERAGAM RESEPSI &rarr;
+            </a>
+          </div>
+        ) : (
+          <div className="mt-20 text-center pt-10 border-t border-[#E2DFD8]">
+            <p className="text-xs mb-4 font-light tracking-wide text-[#5A5550]">
+              Butuh bantuan ukuran sarimbit keluarga atau pemesanan seragam dinas tanpa minimal order?
+            </p>
+            <a
+              href={officialWaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
+            >
+              KONSULTASI DENGAN KONSULTAN BUTIK &rarr;
+            </a>
+          </div>
+        )}
       </div>
 
       <Analytics.CollectionView

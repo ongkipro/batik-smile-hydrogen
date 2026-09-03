@@ -305,6 +305,29 @@
 - `npm run build`: Exit code 0.
 - Pushed to `origin/main` for automated Shopify Oxygen Global Edge Network deployment.
 
+---
+
+## Milestone 9: Tailored Tier Architecture for Sarimbit Exclusive & Premium
+**Date**: 2026-09-03 | **Execution**: High-Luxury Tier Separation & Card Specialization
+
+### 1. Full-Bleed Cinematic Hero Banners with Background Image (`collections.$handle.jsx`)
+- Re-architected collection header for `sarimbit-exclusive` and `sarimbit-premium` into full-bleed cinematic hero sections with background images and dramatic gradient scrims.
+- Exclusive: Obsidian Dark Luxe (`#111111`) with `hero_slider_1.jpg`, dark gold gradient, and `RESERVASI VIP CONCIERGE →` CTA.
+- Premium: Golden Hour Ambient Scrim with `sarimbit_family_banner.jpg` over a warm Champagne Gold Silk canvas (`#F3EDE2`), and `KONSULTASI BUSANA RESEPSI →` CTA.
+
+### 2. Differentiated Product Card Architecture (`ProductItem.jsx`)
+- Introduced `variant="exclusive" | "premium" | "default"` prop into `ProductItem`.
+- Exclusive Card: Obsidian dark card (`bg-[#181818] border border-[#C5A059]/35 hover:border-[#C5A059]`), Cormorant Garamond title, gold serif price, and `SUTRA ATBM • PRADA EMAS` badge.
+- Premium Card: White studio card floating over champagne gold canvas with ambient gold glow (`shadow-[0_4px_20px_rgba(197,160,89,0.10)]`), border `border-[#C5A059]/40`, and `TENUN DOBBY • FURING HERO` badge.
+- Default Card: Retained clean minimalist catalog presentation for `sarimbit-ekonomis` and general collections.
+
+### 3. Verification Evidence & Deployment
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local verification on `http://localhost:3005` returning correct markup for each tier.
+- Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
+
+
 
 
 

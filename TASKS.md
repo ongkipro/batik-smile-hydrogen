@@ -460,6 +460,22 @@
   - *Action*: Ran `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit Code 0). Staged, committed, and pushed to `origin/main` for automated deployment to Shopify Oxygen.
   - *Evidence*: Deployed and verified live.
 
+---
+
+## Phase 15: Tailored Tier Architecture for Sarimbit Exclusive & Premium (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: collections.$handle, ProductItem, Oxygen Deployment*
+
+- [x] **Task 15.1: Full-Bleed Cinematic Hero Banners with Background Image (`collections.$handle.jsx`)**
+  - *Action*: Converted standard header into full-bleed cinematic hero background sections for `sarimbit-exclusive` (Obsidian Noir with dark gold gradient) and `sarimbit-premium` (Golden Hour Scrim with warm Champagne Gold Silk canvas `#F3EDE2`).
+  - *Evidence*: Local server verified returning `h-[62vh]` and `h-[58vh]` hero banners with background image and overlays.
+- [x] **Task 15.2: Differentiated Product Card Architecture (`ProductItem.jsx`)**
+  - *Action*: Implemented `variant="exclusive" | "premium" | "default"`. Exclusive cards feature dark obsidian containers with gold hairline borders and `SUTRA ATBM • PRADA EMAS` badge. Premium cards feature floating white studio cards with ambient gold glow (`shadow-[0_4px_20px_rgba(197,160,89,0.10)]`) and `TENUN DOBBY • FURING HERO` badge.
+  - *Evidence*: Rendered correctly across `/collections/sarimbit-exclusive` and `/collections/sarimbit-premium`.
+- [x] **Task 15.3: Production Build & Automated Edge Deployment**
+  - *Action*: Ran `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit Code 0). Staged, committed, and pushed to `origin/main` for automated deployment to Shopify Oxygen.
+  - *Evidence*: Deployed and verified live.
+
+
 
 
 
