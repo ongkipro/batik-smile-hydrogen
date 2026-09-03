@@ -10,7 +10,6 @@ import {
 } from '@shopify/hydrogen';
 import { AddToCartButton } from '~/components/AddToCartButton';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
-import { FamilyBundleBuilder } from '~/components/FamilyBundleBuilder';
 import { StickyMobileBar } from '~/components/StickyMobileBar';
 import { ProductItem } from '~/components/ProductItem';
 
@@ -151,8 +150,6 @@ export default function Product() {
   };
 
   const isAvailable = selectedVariant?.availableForSale;
-  const isSarimbit =
-    title.toLowerCase().includes('sarimbit') || title.toLowerCase().includes('couple');
 
   const officialWaUrl =
     'https://wa.me/6281390888809?text=' +
@@ -454,13 +451,6 @@ export default function Product() {
             </div>
           </div>
         </div>
-
-        {/* Family Bundle Builder for Sarimbit Products */}
-        {isSarimbit && (
-          <div className="mt-16">
-            <FamilyBundleBuilder product={product} selectedVariant={selectedVariant} />
-          </div>
-        )}
 
         {/* Related Products from the Same Collection */}
         {relatedProducts.length > 0 && (

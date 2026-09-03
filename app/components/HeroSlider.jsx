@@ -1,73 +1,86 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router';
+import { Link } from 'react-router';
 
 const SLIDES = [
   {
-    id: 'mahakarya',
-    tierBadge: 'Kasta Tertinggi • Sutra Prada',
-    tagline: 'Sejak 2007 • Butik Semarang & Solo',
-    title: 'Sarimbit Mahakarya',
-    subtitle: 'Keagungan Sutra & Prada Emas Murni',
+    id: 'sarimbit-exclusive',
+    eyebrow: 'SEMARANG • ESTABLISHED 2007',
+    title: 'Mahakarya Sarimbit Nusantara',
+    subtitle: 'Keagungan Sutra ATBM & Canting Prada Emas',
     description:
-      'Mahakarya sutra ATBM eksklusif berpadu canting prada emas murni, dipersembahkan khusus untuk momen sakral resepsi pernikahan keluarga.',
-    ctaText: 'Eksplorasi Mahakarya',
+      'Menenun keselarasan busana pasangan dan keluarga agung dengan jahitan butik berstandar tinggi untuk momen sakral resepsi pernikahan.',
+    ctaText: 'JELAJAHI SARIMBIT',
     ctaLink: '/collections/sarimbit-exclusive',
-    image:
-      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_51f1e349-35df-4896-b08d-6290f84897d9.jpg?v=1786005734',
+    secondaryCtaText: 'KONSULTASI WA',
+    secondaryCtaLink:
+      'https://wa.me/6281390888809?text=' +
+      encodeURIComponent('Halo Batik Smile, saya ingin konsultasi koleksi Sarimbit Exclusive.'),
+    image: '/banners/hero_slider_1.jpg',
   },
   {
-    id: 'signature',
-    tierBadge: 'Koleksi Desainer • Tenun Dobby',
-    tagline: 'Filosofi Modern • Butik Semarang',
+    id: 'batik-wanita',
+    eyebrow: 'HAUTE COUTURE WANITA',
     title: 'Kemewahan Yang Bersahaja',
-    subtitle: 'Signature Elegance • Katun Primisima Halus',
+    subtitle: 'Gaun, Gamis & Kebaya Sutra Modern',
     description:
-      'Harmoni motif batik klasik berpadu siluet modern. Pilihan tepat untuk resepsi pernikahan dan jamuan resmi keluarga.',
-    ctaText: 'Lihat Signature',
-    ctaLink: '/collections/sarimbit-premium',
-    image:
-      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_d8691b10-ece8-4430-a8c6-d184fa0c467a.jpg?v=1786004716',
+      'Siluet anggun kontemporer berpadu warisan canting soga Jawa. Dirancang khusus untuk memancarkan pesona ningrat yang abadi dan memikat.',
+    ctaText: 'KOLEKSI WANITA',
+    ctaLink: '/collections/batik-wanita',
+    secondaryCtaText: 'LIHAT LOOKBOOK',
+    secondaryCtaLink: '#lookbook',
+    image: '/banners/hero_slider_2.jpg',
   },
   {
-    id: 'essential',
-    tierBadge: 'Keluarga Harmonis • Katun Primisima',
-    tagline: 'Kenyamanan Harian & Hari Raya',
-    title: 'Kesejukan Dalam Setiap Langkah',
-    subtitle: 'Essential Daily • Kenyamanan Harian',
+    id: 'batik-pria',
+    eyebrow: 'PRESISI POLA & FURING HERO',
+    title: 'Karisma Kemeja Pria Eksekutif',
+    subtitle: 'Jahitan Sambung Motif & Furing Katun Sejuk',
     description:
-      'Bahan katun adem bernapas dengan ketahanan warna prima. Sahabat setia momen kumpul keluarga dan silaturahmi.',
-    ctaText: 'Jelajahi Essential',
+      'Kenyamanan sejuk sepanjang hari dengan potongan presisi simetris pada saku dan belahan kancing, mencerminkan wibawa sang pemimpin.',
+    ctaText: 'KOLEKSI KEMEJA PRIA',
+    ctaLink: '/collections/batik-pria',
+    secondaryCtaText: 'LAYANAN JAHIT',
+    secondaryCtaLink: '/pages/layanan-seragam',
+    image: '/banners/hero_slider_3.jpg',
+  },
+  {
+    id: 'sarimbit-keluarga',
+    eyebrow: 'HARMONI KELUARGA BESAR',
+    title: 'Kehangatan Silaturahmi Keluarga',
+    subtitle: 'Koleksi Sarimbit Ayah, Ibu & Anak',
+    description:
+      'Koleksi busana serasi untuk seluruh anggota keluarga tercinta dengan bahan katun primisima yang sejuk, nyaman, dan ramah di kulit anak.',
+    ctaText: 'SARIMBIT KELUARGA',
     ctaLink: '/collections/sarimbit-ekonomis',
-    image:
-      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749',
+    secondaryCtaText: 'BATIK ANAK',
+    secondaryCtaLink: '/collections/batik-anak',
+    image: '/banners/hero_slider_4.jpg',
   },
   {
-    id: 'all',
-    tierBadge: 'Koleksi Lengkap • Pria, Wanita & Anak',
-    tagline: 'O2O Showroom 3 Lantai Semarang',
-    title: 'Koleksi Pasangan & Keluarga',
-    subtitle: 'Katalog Lengkap Sarimbit Nusantara',
+    id: 'kain-tulis',
+    eyebrow: 'WARISAN ADILUHUNG PENGRAJIN',
+    title: 'Kain Batik Tulis Mahakarya',
+    subtitle: 'Goresan Canting Tangan Asli Pengrajin Solo & Pekalongan',
     description:
-      'Temukan keharmonisan berbusana dengan beragam pilihan motif eksklusif khas Solo dan Pekalongan.',
-    ctaText: 'Lihat Semua Katalog',
-    ctaLink: '/collections/sarimbit-exclusive',
-    image:
-      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_shop_all_1786007684766.jpg?v=1786007711',
+      'Setiap goresan lilin malam panas di atas kain Mori adalah doa dan ketekunan maestro batik. Tersedia lembaran kain atau dipadukan dengan jasa jahit butik.',
+    ctaText: 'PILIH LEMBARAN KAIN',
+    ctaLink: '/collections/jarik-kain-batik',
+    secondaryCtaText: 'KISAH PENGRAJIN',
+    secondaryCtaLink: '/pages/tentang-kami',
+    image: '/banners/hero_slider_5.jpg',
   },
 ];
 
 export function HeroSlider() {
   const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(null);
 
   useEffect(() => {
-    if (isPaused) return;
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % SLIDES.length);
-    }, 6500);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, []);
 
   const prevSlide = () => {
     setCurrent((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
@@ -94,11 +107,10 @@ export function HeroSlider() {
 
   return (
     <section
-      className="relative w-full h-[88vh] min-h-[580px] max-h-[820px] overflow-hidden bg-[#0D0D0D] select-none"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      className="relative w-full h-[85vh] sm:h-[90vh] lg:h-[95vh] min-h-[580px] max-h-[920px] overflow-hidden bg-[#111111] select-none border-b border-[#1C1C1C]"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      aria-label="Carousel Hero Butik Batik Smile"
     >
       {/* Background Slides with Cross-Fade */}
       {SLIDES.map((slide, index) => {
@@ -110,59 +122,73 @@ export function HeroSlider() {
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
-            {/* Background Image */}
+            {/* Background Image with Subtle Slow Pan */}
             <img
               src={slide.image}
               alt={slide.title}
-              className={`w-full h-full object-cover object-center transform transition-transform duration-10000 ease-out ${
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
                 isActive ? 'scale-105' : 'scale-100'
               }`}
             />
 
-            {/* Dark & Gold Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/30" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/40" />
+            {/* Quiet Luxury Dark & Amber Gradients */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/35" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30" />
 
-            {/* Content Box */}
+            {/* Content Container */}
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                <div className="max-w-2xl text-white pt-12 sm:pt-0">
-                  {/* Tagline & Tier Badge */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-amber-400/40 backdrop-blur-sm mb-4">
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                    <span className="text-[11px] uppercase tracking-widest text-amber-200 font-semibold">
-                      {slide.tierBadge}
-                    </span>
-                  </div>
+              <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
+                <div className="max-w-2xl text-white pt-8 sm:pt-0">
+                  {/* Eyebrow Label */}
+                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium block mb-3 drop-shadow-sm">
+                    {slide.eyebrow}
+                  </span>
 
-                  {/* Title & Subtitle */}
-                  <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-2 leading-[1.1]">
+                  {/* Headline */}
+                  <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-2">
                     {slide.title}
                   </h1>
-                  <p className="font-serif text-lg sm:text-2xl text-amber-100/90 italic font-normal mb-4 leading-relaxed">
+
+                  {/* Subtitle */}
+                  <p className="font-serif text-base sm:text-xl text-[#FAF8F5]/90 italic font-light mb-4">
                     {slide.subtitle}
                   </p>
 
-                  <p className="text-xs sm:text-sm text-neutral-300 max-w-lg mb-8 leading-relaxed font-sans">
+                  <div className="w-12 h-px bg-[#C5A059] mb-5" />
+
+                  {/* Narrative Description */}
+                  <p className="text-xs sm:text-sm text-[#E2DFD8] max-w-lg mb-8 leading-relaxed font-light">
                     {slide.description}
                   </p>
 
-                  {/* CTA Buttons */}
+                  {/* CTA Buttons with Zero-Radius */}
                   <div className="flex flex-wrap items-center gap-4">
-                    <NavLink
+                    <Link
                       to={slide.ctaLink}
-                      className="px-6 py-3.5 bg-[#C5A059] hover:bg-[#b08c45] text-black font-semibold text-xs uppercase tracking-widest rounded transition-all transform hover:-translate-y-0.5 shadow-lg shadow-amber-900/30"
+                      className="px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
                     >
                       {slide.ctaText} &rarr;
-                    </NavLink>
-                    <a
-                      href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20dengan%20koleksi%20sarimbit"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs uppercase tracking-widest rounded border border-white/30 backdrop-blur-sm transition-all"
-                    >
-                      Konsultasi WhatsApp
-                    </a>
+                    </Link>
+
+                    {slide.secondaryCtaLink.startsWith('http') ? (
+                      <a
+                        href={slide.secondaryCtaLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-8 py-3.5 bg-transparent hover:bg-white/10 text-white rounded-none border border-white/40 hover:border-white text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors"
+                      >
+                        {slide.secondaryCtaText}
+                      </a>
+                    ) : (
+                      <Link
+                        to={slide.secondaryCtaLink}
+                        className="px-8 py-3.5 bg-transparent hover:bg-white/10 text-white rounded-none border border-white/40 hover:border-white text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors"
+                      >
+                        {slide.secondaryCtaText}
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -171,39 +197,33 @@ export function HeroSlider() {
         );
       })}
 
-      {/* Slide Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        aria-label="Previous slide"
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 border border-white/20 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+      {/* Bottom Bar: Indicators & Counter */}
+      <div className="absolute bottom-8 inset-x-0 z-20">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 flex items-center justify-between">
+          {/* Progress Indicator Lines */}
+          <div className="flex items-center gap-2">
+            {SLIDES.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setCurrent(idx)}
+                aria-label={`Pindah ke slide ${idx + 1}`}
+                className={`h-0.5 transition-all duration-500 rounded-none cursor-pointer ${
+                  idx === current
+                    ? 'w-10 sm:w-14 bg-[#C5A059]'
+                    : 'w-4 sm:w-6 bg-white/30 hover:bg-white/60'
+                }`}
+              />
+            ))}
+          </div>
 
-      <button
-        onClick={nextSlide}
-        aria-label="Next slide"
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 border border-white/20 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {SLIDES.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrent(idx)}
-            aria-label={`Go to slide ${idx + 1}`}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              idx === current ? 'w-8 bg-[#C5A059]' : 'w-2 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        ))}
+          {/* Numerical Slide Counter */}
+          <div className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium font-serif">
+            <span>0{current + 1}</span>
+            <span className="text-white/40 mx-1.5">/</span>
+            <span className="text-white/40">0{SLIDES.length}</span>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
-import { HeroEditorial } from '~/components/HeroEditorial';
+import { HeroSlider } from '~/components/HeroSlider';
 import { FeaturedCollections } from '~/components/FeaturedCollections';
 import { BestSellersTabs } from '~/components/BestSellersTabs';
 import { HeritageVideoBanner } from '~/components/HeritageVideoBanner';
@@ -102,7 +102,7 @@ export async function loader({ context }) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const {
-    heroData,
+    _heroData,
     videoData,
     lookbookData,
     testimonials,
@@ -115,8 +115,8 @@ export default function Homepage() {
 
   return (
     <div className="w-full bg-[#FAF8F5] text-[#111111]">
-      {/* 1. Master Full-Bleed Editorial Hero */}
-      <HeroEditorial data={heroData} scrollAnchorId="#best-sellers" />
+      {/* 1. Master Full-Bleed 5-Slide Quiet Luxury Hero Carousel */}
+      <HeroSlider />
 
       {/* 2. Curated Featured Collections (Real Shopify Images) */}
       <FeaturedCollections collections={featuredCollections} />

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Await, NavLink, useAsyncValue } from 'react-router';
 import { useAnalytics, useOptimisticCart } from '@shopify/hydrogen';
 import { useAside } from '~/components/Aside';
@@ -8,17 +8,43 @@ import { MegaMenu } from './MegaMenu';
 /**
  * Header: Quiet Luxury Nusantara Master Header
  * Official brand logo, zero border radius, micro-tracking navigation
+ * Dynamic Glass Effect on scroll & solid white canvas on hover/mega-menu
  *
  * @param {HeaderProps} props
  */
 export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
   const { open } = useAside();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const isWhite = isHovered || isMenuOpen;
 
   return (
-    <div className="sticky top-0 z-40 w-full">
+    <div className="sticky top-0 z-40 w-full transition-all">
       <AnnouncementBar />
 
-      <header className="w-full bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E2DFD8] transition-all relative z-50">
+      <header
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={`w-full transition-all duration-300 relative z-50 hover:bg-white ${
+          isWhite
+            ? 'bg-white shadow-md border-b border-[#E2DFD8]'
+            : isScrolled
+            ? 'bg-white/80 backdrop-blur-xl border-b border-[#E2DFD8]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)]'
+            : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
+        }`}
+      >
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 flex items-center justify-between gap-4 relative">
           {/* Mobile Menu Trigger & Brand Logo */}
           <div className="flex items-center gap-4">
@@ -45,7 +71,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
 
           {/* Desktop Mega Menu Navigation */}
           <div className="hidden lg:flex items-center justify-center flex-1">
-            <MegaMenu />
+            <MegaMenu onMenuStateChange={setIsMenuOpen} />
           </div>
 
           {/* Right Action Icons: Search, Account, Cart */}

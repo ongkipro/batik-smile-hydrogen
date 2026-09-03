@@ -63,7 +63,7 @@ export function WhatsAppConcierge() {
       >
         <span className="w-2 h-2 bg-[#C5A059] animate-ping" />
         <span className="text-[10px] uppercase font-bold tracking-[0.18em]">
-          KONSULTASI JAHIT &bull; WA
+          KONSULTASI VIA WHATSAPP
         </span>
       </button>
     </aside>

@@ -260,7 +260,7 @@ const SHOPIFY_MENU = {
   },
 };
 
-export function MegaMenu() {
+export function MegaMenu({ onMenuStateChange }) {
   const [activeTab, setActiveTab] = useState(null);
   const closeTimeoutRef = useRef(null);
 
@@ -274,12 +274,14 @@ export function MegaMenu() {
   const handleMouseEnter = (key) => {
     clearCloseTimeout();
     setActiveTab(key);
+    onMenuStateChange?.(true);
   };
 
   const handleMouseLeave = () => {
     clearCloseTimeout();
     closeTimeoutRef.current = setTimeout(() => {
       setActiveTab(null);
+      onMenuStateChange?.(false);
     }, 200);
   };
 

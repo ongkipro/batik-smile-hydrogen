@@ -280,6 +280,32 @@
 - All 14 tested canonical storefront routes return HTTP 200 OK.
 - Pushed to GitHub repository `ongkipro/batik-smile-hydrogen` (`origin/main`) triggering automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
 
+---
+
+## Milestone 8: 5-Slide Editorial Hero Slider, Header Glass Effect & Microcopy Polish
+**Date**: 2026-09-03 | **Execution**: Hero Visual Upgrade & Concierge Polish
+
+### 1. 5-Slide Editorial Hero Slider (`HeroSlider.jsx`)
+- Generated 5 high-fashion 16:9 photography assets saved at `public/banners/hero_slider_1.jpg` through `hero_slider_5.jpg` representing Royal Sarimbit, Haute Couture Women, Executive Men, Family Sarimbit, and Heritage Artisan Canting.
+- Configured 4-second continuous smooth auto-rotation.
+- Removed arrow buttons for clean cinematic immersion; retained zero-radius indicator bars and numerical counter `01 / 05`.
+- Supported touch swipe gestures for mobile ergonomics.
+
+### 2. Sticky Header Glassmorphism & Solid White Hover Synergy (`Header.jsx` & `MegaMenu.jsx`)
+- Added scroll listener: when `scrollY > 20`, header activates dynamic frosted glass effect (`bg-white/80 backdrop-blur-xl border-b border-[#E2DFD8]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)]`).
+- Added hover & menu-open detection: transitions smoothly to pure solid white (`bg-white shadow-md border-b border-[#E2DFD8]`), aligning seamlessly with the Mega Menu dropdown panel.
+
+### 3. De-cluttering & Microcopy Refinements
+- Removed Family Bundle Builder from product details page (`products.$handle.jsx`).
+- Cleaned Footer WhatsApp button to display only the official number (`081-390-8888-09`) without "WHATSAPP:" text prefix (`Footer.jsx`).
+- Updated floating concierge button text to "KONSULTASI VIA WHATSAPP" (`WhatsAppConcierge.jsx`).
+
+### 4. Verification & Production Deployment
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0.
+- Pushed to `origin/main` for automated Shopify Oxygen Global Edge Network deployment.
+
+
 
 
 
