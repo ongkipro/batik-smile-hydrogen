@@ -689,6 +689,52 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - HTTP 200 OK verified on `/products/sarimbit-royal-navy` and `/products/kebaya-encim-modern`.
 
+---
+
+## Milestone 24: PDP Master Frameless Architecture, Quantity Geometry & Tier-Differentiated Experience (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Frame Clutter, Auto-Show Dropdowns, Mathematical Width Alignment, Tier-Differentiated Showcase, and Full Cross-Device Audit
+
+### 1. Total Purge of Box/Card Clutter on PDP (`products.$handle.jsx`)
+- Stripped heavy boxed badge on stock availability (`TERSEDIA DI BUTIK` -> elegant borderless `● Tersedia di Butik` positioned directly beneath price).
+- Replaced 3 boxed rectangular pills with a single continuous typographic value-prop line with antique gold middle dots.
+- Converted boxed description specification cards into a frameless atelier definition list with delicate hairline dividers (`divide-y divide-[#E2DFD8]/80`).
+
+### 2. Auto-Show Dual Dropdowns & Concise Service Guarantees
+- Converted description and atelier specifications into an accordion with `auto show` (open by default) state, enabling instant reading while preserving collapse option.
+- Shortened shipping accordion title from `PENGIRIMAN RESMI & JAMINAN TUKAR UKURAN 7 HARI` to punchy, elegant `PENGIRIMAN & GARANSI TUKAR`.
+- Re-architected shipping content into 3 quiet luxury service rows with gold diamond markers (`◆ Pengiriman Cepat & Terlindungi`, `◆ Garansi Bebas Tukar Ukuran 7 Hari`, `◆ Layanan Konsultasi 3S 1C 1T & 1H`).
+
+### 3. Single-Variant Clean State & Mathematical Width Precision (`AddToCartButton.jsx`)
+- Hidden variant selector completely on single-variant or all-size products (`hasMultipleVariants === false`), eliminating empty containers or redundant buttons.
+- Enhanced `AddToCartButton.jsx` to pass `wrapperClassName` onto Hydrogen's `fetcher.Form`.
+- Row 1: Quantity Selector (`w-28 h-12`) + Tambah ke Tas Belanja (`flex-1 h-12`).
+- Row 2: Beli Sekarang (`w-full h-12`).
+- Result: Row 1 and Row 2 share mathematically identical widths (100% aligned left and right).
+
+### 4. Tier-Differentiated Showcase for Sarimbit Exclusive & Premium
+- Built automated tier classification based on parent collection, product handle, title, and price threshold (>= IDR 1M for Exclusive, IDR 500k-999k for Premium).
+- **Sarimbit Exclusive**:
+  - Eyebrow: `HAUTE HERITAGE • SARIMBIT EXCLUSIVE` with gold diamond badge.
+  - Value Props: `Sutra Alam ATBM • Canting Prada Emas • Sambung Motif Presisi`.
+  - Obsidian Heritage Showcase Pavilion (`bg-[#111111]`): 3 Pillars of Haute Artistry (Sutra ATBM 1-of-1, Canting Prada Emas, VIP Fitting) + VIP Concierge WhatsApp CTA.
+- **Sarimbit Premium**:
+  - Eyebrow: `SIGNATURE ATELIER • SARIMBIT PREMIUM` with ochre badge.
+  - Value Props: `Tenun Dobby Timbul • Furing Katun Hero Adem • Sambung Motif Presisi`.
+  - Champagne Linen Showcase Pavilion (`bg-[#F3EDE2]`): 3 Signature Standards (Dobby Timbul, Furing Katun Hero, Garansi 7 Hari) + Reception Consultation CTA.
+- **Standard Batik**: Clean minimalist Mori Linen palette without superfluous tier banners.
+
+### 5. Mobile Dynamic Action Bar & Comprehensive Multi-Device Audit
+- Updated `StickyMobileBar.jsx` to trigger instant checkout via `BELI SEKARANG` with safe-area bottom insets above `MobileNavigation`.
+- Audited all 16 key routes across homepage, collections, products, articles, informative pages, and cart.
+- Added 301 permanent redirect from `/blogs/jurnal` to `/blogs` and `/blogs/jurnal/:handle` to `/blogs/news/:handle`.
+- Verified 100% of routes return HTTP 200 OK.
+
+### 6. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
+
+
 
 
 

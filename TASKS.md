@@ -691,6 +691,28 @@
   - *Action*: Replaced WhatsApp secondary CTA with high-conversion direct checkout `BELI SEKARANG` button (redirects instantly to Shopify hosted checkout with 303 Location header). Removed cluttered bespoke tailoring and fitting boxes. Transformed monolithic Shopify `descriptionHtml` into an elegant, unified visual layout: poetic narrative quote + dynamic 2-column specifications cards (`◆ Bahan`, `◆ Furing`, `◆ Konstruksi`, `◆ Perawatan`).
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, verified on `/products/sarimbit-royal-navy`.
 
+---
+
+## Phase 29: PDP Master Frameless Architecture, Quantity Precision & Tier-Differentiated Experience (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, AddToCartButton.jsx, StickyMobileBar.jsx, Oxygen Deployment*
+
+- [x] **Task 29.1: Total Elimination of Card/Frame Clutter on Product Page**
+  - *Action*: Stripped boxed pills on stock availability (`TERSEDIA DI BUTIK` -> elegant borderless `● Tersedia di Butik`), replaced 3 boxed value-prop pills with a single seamless typographic line with gold middle dots, replaced fake black button on single-variants with clean editorial text, and converted boxed description spec cards into a frameless atelier definition list with subtle hairline dividers (`divide-y divide-[#E2DFD8]/80`).
+  - *Evidence*: Clean visual hierarchy matching luxury fashion house editorial standards.
+- [x] **Task 29.2: Auto-Show Dual Dropdown Accordions & Condensed Titles**
+  - *Action*: Shortened `PENGIRIMAN RESMI & JAMINAN TUKAR UKURAN 7 HARI` to concise `PENGIRIMAN & GARANSI TUKAR`. Converted description into an accordion with `auto show` (open by default) state, allowing buyers to read the story narrative and specifications immediately upon landing while retaining collapse capability.
+  - *Evidence*: Tested locally on dev server; auto-show accordion and concise title verified in SSR output.
+- [x] **Task 29.3: Single-Variant Purge & Aligned Quantity/Action Geometry**
+  - *Action*: Hidden variant section entirely when a product has only 1 variant or no options (`hasMultipleVariants === false`), preventing redundant "Ukuran: All Size" clutter. Enhanced `AddToCartButton` to support `wrapperClassName` on `fetcher.Form`. Structured Row 1 as Quantity selector (`w-28 h-12`) + Tambah ke Tas Belanja (`flex-1 h-12`), and Row 2 as Beli Sekarang (`w-full h-12`). Row 1 and Row 2 now share mathematically identical container widths (100% aligned).
+  - *Evidence*: Verified aligned left and right boundaries on both desktop and mobile viewports.
+- [x] **Task 29.4: Tier-Differentiated Showcase for Sarimbit Exclusive & Premium**
+  - *Action*: Implemented automatic tier detection. For **Sarimbit Exclusive** (e.g. `sarimbit-royal-navy-1`): rendered `HAUTE HERITAGE • SARIMBIT EXCLUSIVE` eyebrow, tailored sutra ATBM & prada emas value props, and an obsidian heritage showcase pavilion with 3 Pillars of Haute Artistry and VIP Concierge CTA. For **Sarimbit Premium** (e.g. `sarimbit-charcoal-hitam`): rendered `SIGNATURE ATELIER • SARIMBIT PREMIUM` eyebrow, dobby & furing sejuk value props, and a champagne linen showcase pavilion with 3 Signature Standards. Standard products retain clean minimalist Mori Linen styling.
+  - *Evidence*: Verified distinct HTML rendering across `/products/sarimbit-royal-navy-1`, `/products/sarimbit-charcoal-hitam`, and `/products/gamis-parang-kusumo`.
+- [x] **Task 29.5: Comprehensive Cross-Page & Multi-Device Audit**
+  - *Action*: Audited all 16 key routes across homepage, collections, products, articles, informative pages, and cart. Resolved 404 on `/blogs/jurnal` by redirecting to `/blogs` and aliasing `/blogs/jurnal/:handle` to `/blogs/news/:handle`. Audited mobile touch targets, safe area insets, sticky mobile bar direct checkout triggers, and desktop widescreen layouts.
+  - *Evidence*: Comprehensive audit script verified all 16 routes returning 200 OK. `npm run lint` 0 warnings, `npm run build` Exit code 0.
+
+
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLoaderData, NavLink, Link } from 'react-router';
+import { useLoaderData, NavLink, Link, redirect } from 'react-router';
 import { Image, Money } from '@shopify/hydrogen';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 
@@ -13,7 +13,12 @@ export const meta = ({ data }) => {
       name: 'description',
       content:
         data?.article.seo?.description ||
-        'Artikel kebudayaan dan panduan busana batik dari Butik Batik Smile Nusantara Semarang.',
+        data?.article.excerpt ||
+        'Karya tulis dan jurnal budaya batik dari Butik Batik Smile Nusantara Semarang.',
+    },
+    {
+      rel: 'canonical',
+      href: `/blogs/${data?.blogHandle}/${data?.article.handle}`,
     },
   ];
 };
@@ -34,6 +39,11 @@ async function loadCriticalData({ context, request, params }) {
 
   if (!articleHandle || !blogHandle) {
     throw new Response('Not found', { status: 404 });
+  }
+
+  // Redirect alias 'jurnal' to official Shopify blog handle 'news'
+  if (blogHandle === 'jurnal') {
+    throw redirect(`/blogs/news/${articleHandle}`, 301);
   }
 
   const [{ blog, products }] = await Promise.all([

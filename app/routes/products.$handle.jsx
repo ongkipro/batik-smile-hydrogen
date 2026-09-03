@@ -219,6 +219,30 @@ export default function Product() {
   const relatedCollectionTitle = matchedCollection?.title;
   const relatedCollectionHandle = matchedCollection?.handle;
 
+  // Tier-Differentiated Theme Classification (Mirroring Sarimbit Collection Tiers)
+  const collectionHandles = rawCollections.map((c) => c.handle?.toLowerCase() || '');
+  const productHandle = (product.handle || '').toLowerCase();
+  const productTitle = (product.title || '').toLowerCase();
+  const variantPrice = parseFloat(selectedVariant?.price?.amount || '0');
+
+  const isExclusiveTier =
+    collectionHandles.some((h) => h.includes('exclusive') || h.includes('mahakarya') || h.includes('sutra')) ||
+    productHandle.includes('exclusive') ||
+    productHandle === 'sarimbit-royal-navy-1' ||
+    productHandle === 'sarimbit-mustard-gold' ||
+    productTitle.includes('exclusive') ||
+    productTitle.includes('mahakarya') ||
+    (productHandle.startsWith('sarimbit') && variantPrice >= 1000000);
+
+  const isPremiumTier =
+    !isExclusiveTier &&
+    (collectionHandles.some((h) => h.includes('premium') || h.includes('signature') || h.includes('dobby')) ||
+    productHandle.includes('premium') ||
+    productHandle === 'sarimbit-charcoal-hitam' ||
+    productTitle.includes('premium') ||
+    productTitle.includes('signature') ||
+    (productHandle.startsWith('sarimbit') && variantPrice >= 500000 && variantPrice < 1000000));
+
   // Active image index
   const activeIndex = imageList.findIndex((img) => img.url === activeImage?.url);
 
@@ -301,10 +325,23 @@ export default function Product() {
           <div className="lg:col-span-5 space-y-6">
             {/* Header Block */}
             <div>
-              <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold mb-2">
-                <span>KARYA BUTIK SEMARANG</span>
-                <span>&bull;</span>
-                <span>EST. 2007</span>
+              {/* Category & Tier Whispered Eyebrow */}
+              <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.24em] font-bold mb-2">
+                {isExclusiveTier ? (
+                  <span className="text-[#C5A059] flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#C5A059]" />
+                    HAUTE HERITAGE &bull; SARIMBIT EXCLUSIVE
+                  </span>
+                ) : isPremiumTier ? (
+                  <span className="text-[#9E7D3B] flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#9E7D3B]" />
+                    SIGNATURE ATELIER &bull; SARIMBIT PREMIUM
+                  </span>
+                ) : (
+                  <span className="text-[#888888]">
+                    KARYA BUTIK SEMARANG &bull; EST. 2007
+                  </span>
+                )}
               </div>
 
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#111111] leading-[1.14] tracking-wide mb-3">
@@ -331,13 +368,33 @@ export default function Product() {
                 </span>
               </div>
 
-              {/* Value Props (Seamless Typography, Zero Box) */}
+              {/* Value Props (Seamless Typography, Tier-Differentiated) */}
               <div className="flex items-center gap-2 text-[11px] text-[#5A5550] font-light tracking-wide flex-wrap">
-                <span>Lapis Furing Katun Hero</span>
-                <span className="text-[#C5A059]">&bull;</span>
-                <span>Sambung Motif Presisi</span>
-                <span className="text-[#C5A059]">&bull;</span>
-                <span>Bebas Tukar Ukuran</span>
+                {isExclusiveTier ? (
+                  <>
+                    <span>Sutra Alam ATBM</span>
+                    <span className="text-[#C5A059]">&bull;</span>
+                    <span>Canting Prada Emas</span>
+                    <span className="text-[#C5A059]">&bull;</span>
+                    <span>Sambung Motif Presisi</span>
+                  </>
+                ) : isPremiumTier ? (
+                  <>
+                    <span>Tenun Dobby Timbul</span>
+                    <span className="text-[#C5A059]">&bull;</span>
+                    <span>Furing Katun Hero Adem</span>
+                    <span className="text-[#C5A059]">&bull;</span>
+                    <span>Sambung Motif Presisi</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Lapis Furing Katun Hero</span>
+                    <span className="text-[#C5A059]">&bull;</span>
+                    <span>Sambung Motif Presisi</span>
+                    <span className="text-[#C5A059]">&bull;</span>
+                    <span>Bebas Tukar Ukuran</span>
+                  </>
+                )}
               </div>
             </div>
 
@@ -560,6 +617,147 @@ export default function Product() {
             </div>
           </div>
         </div>
+
+        {/* Tier-Differentiated Heritage Showcase Section (Sarimbit Exclusive & Premium) */}
+        {isExclusiveTier && (
+          <section className="mt-16 sm:mt-20 -mx-4 sm:-mx-8 lg:-mx-12 xl:-mx-16 bg-[#111111] text-white py-14 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-[#C5A059]/40 relative overflow-hidden">
+            <div className="w-full max-w-7xl mx-auto">
+              <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold block mb-2">
+                  HAUTE HERITAGE &bull; MAHAKARYA SARIMBIT EXCLUSIVE
+                </span>
+                <h2 className="font-serif text-2xl sm:text-4xl text-white font-normal tracking-wide leading-snug mb-3">
+                  Keagungan Sutra Alam ATBM &amp; Canting Prada Emas Murni
+                </h2>
+                <div className="w-16 h-px mx-auto my-4 bg-[#C5A059]" />
+                <p className="text-xs sm:text-sm text-[#E2DFD8]/80 font-light leading-relaxed">
+                  Koleksi Sarimbit Exclusive diciptakan khusus untuk momen sakral resepsi, akad pernikahan, dan perayaan agung keluarga. Setiap helai kain ditenun dan dibatik dengan ketelitian maestro Butik Batik Smile Simongan Semarang.
+                </p>
+              </div>
+
+              {/* 3 Pillars Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div className="p-6 bg-[#181818] border border-[#C5A059]/30 text-center">
+                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
+                    PILAR 01 &bull; KAIN PUSAKA
+                  </span>
+                  <h3 className="font-serif text-lg text-white font-normal mb-2">
+                    Sutra Alam ATBM 1-of-1
+                  </h3>
+                  <p className="text-xs text-[#E2DFD8]/75 font-light leading-relaxed">
+                    Ditenun manual dengan alat tenun bukan mesin, menghasilkan kilau serat alami yang bernapas, jatuh anggun di badan, dan tidak gerah sepanjang prosesi perayaan.
+                  </p>
+                </div>
+
+                <div className="p-6 bg-[#181818] border border-[#C5A059]/30 text-center">
+                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
+                    PILAR 02 &bull; SENTUHAN MAESTRO
+                  </span>
+                  <h3 className="font-serif text-lg text-white font-normal mb-2">
+                    Canting Prada Emas Murni
+                  </h3>
+                  <p className="text-xs text-[#E2DFD8]/75 font-light leading-relaxed">
+                    Aksen prada emas murni digoreskan teliti pada motif pusaka, memancarkan aura wibawa ningrat yang memikat di bawah pencahayaan ballroom pesta.
+                  </p>
+                </div>
+
+                <div className="p-6 bg-[#181818] border border-[#C5A059]/30 text-center">
+                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
+                    PILAR 03 &bull; LAYANAN CONCIERGE
+                  </span>
+                  <h3 className="font-serif text-lg text-white font-normal mb-2">
+                    VIP Fitting &amp; Harmoni Pasangan
+                  </h3>
+                  <p className="text-xs text-[#E2DFD8]/75 font-light leading-relaxed">
+                    Setiap motif kemeja pria dan gaun wanita dipastikan menyambung simetris sempurna, didampingi konsultan busana langsung dari Flagship Showroom Simongan Semarang.
+                  </p>
+                </div>
+              </div>
+
+              {/* VIP Concierge Link */}
+              <div className="text-center">
+                <a
+                  href={`https://wa.me/6281390888809?text=${encodeURIComponent(`Halo Butik Batik Smile Semarang, saya tertarik konsultasi koleksi Sarimbit Exclusive: ${title}`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] uppercase font-bold tracking-[0.22em] transition-all shadow-lg cursor-pointer"
+                >
+                  KONSULTASI VIP CONCIERGE &rarr;
+                </a>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {isPremiumTier && (
+          <section className="mt-16 sm:mt-20 -mx-4 sm:-mx-8 lg:-mx-12 xl:-mx-16 bg-[#F3EDE2] text-[#111111] py-14 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-[#C5A059]/35 relative overflow-hidden">
+            <div className="w-full max-w-7xl mx-auto">
+              <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-bold block mb-2">
+                  SIGNATURE ATELIER &bull; STANDAR SARIMBIT PREMIUM
+                </span>
+                <h2 className="font-serif text-2xl sm:text-4xl text-[#111111] font-normal tracking-wide leading-snug mb-3">
+                  Kemewahan Tenun Dobby Timbul &amp; Kenyamanan Pesta Tropis
+                </h2>
+                <div className="w-16 h-px mx-auto my-4 bg-[#9E7D3B]" />
+                <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+                  Sarimbit Premium Signature dirancang khusus untuk kenyamanan optimal resepsi dan perhelatan keluarga. Dibuat dari tenun dobby berkarakter timbul yang kokoh dan dilapisi furing katun hero adem sejuk.
+                </p>
+              </div>
+
+              {/* 3 Signature Standards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div className="p-6 bg-white/95 border border-[#C5A059]/30 text-center shadow-sm">
+                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
+                    STANDAR BUTIK 01
+                  </span>
+                  <h3 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+                    Tekstur Tenun Dobby Timbul
+                  </h3>
+                  <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                    Karakter bahan bermotif timbul bertekstur tebal, tidak menerawang, tidak mudah kusut saat duduk lama, dan tahan cuci tanpa kehilangan kilau anggunnya.
+                  </p>
+                </div>
+
+                <div className="p-6 bg-white/95 border border-[#C5A059]/30 text-center shadow-sm">
+                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
+                    STANDAR BUTIK 02
+                  </span>
+                  <h3 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+                    Furing Katun Hero Sejuk
+                  </h3>
+                  <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                    Lapis furing katun hero premium halus yang menyerap keringat dan adem, menjamin kenyamanan maksimal sekeluarga dari awal hingga akhir acara.
+                  </p>
+                </div>
+
+                <div className="p-6 bg-white/95 border border-[#C5A059]/30 text-center shadow-sm">
+                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
+                    STANDAR BUTIK 03
+                  </span>
+                  <h3 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+                    Garansi Bebas Tukar 7 Hari
+                  </h3>
+                  <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                    Layanan purna jual resmi Batik Smile Nusantara dengan garansi bebas tukar ukuran dalam 7 hari kalender apabila ukuran salah satu anggota keluarga kurang pas.
+                  </p>
+                </div>
+              </div>
+
+              {/* Consultation Link */}
+              <div className="text-center">
+                <a
+                  href={`https://wa.me/6281390888809?text=${encodeURIComponent(`Halo Butik Batik Smile Semarang, saya ingin konsultasi ukuran & seragam Sarimbit Premium: ${title}`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#9E7D3B] text-white text-[10px] uppercase font-semibold tracking-[0.2em] transition-all shadow-md cursor-pointer"
+                >
+                  KONSULTASI SARIMBIT RESEPSI &rarr;
+                </a>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Related Products: "Koleksi Selaras" (Strict 4:5 Vertical Cards, Calibrated Spacing) */}
         {relatedProducts.length > 0 && (

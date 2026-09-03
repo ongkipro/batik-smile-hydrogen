@@ -34,7 +34,7 @@ export function StickyMobileBar({ product, selectedVariant }) {
           </div>
         </div>
 
-        {/* Right: Add to Cart CTA */}
+        {/* Right: Direct Checkout CTA */}
         <AddToCartButton
           disabled={!isAvailable}
           lines={
@@ -48,9 +48,10 @@ export function StickyMobileBar({ product, selectedVariant }) {
                 ]
               : []
           }
-          className="px-5 py-2.5 rounded-none bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-bold text-xs uppercase tracking-[0.16em] transition-colors shadow-sm disabled:bg-neutral-300 whitespace-nowrap cursor-pointer"
+          redirectTo="checkout"
+          className="px-5 py-2.5 rounded-none bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-semibold text-xs uppercase tracking-[0.16em] transition-colors shadow-sm disabled:bg-[#E2DFD8] disabled:!text-[#5A5550] whitespace-nowrap cursor-pointer"
         >
-          {isAvailable ? '+ KERANJANG' : 'HABIS'}
+          {isAvailable ? 'BELI SEKARANG' : 'HABIS TERJUAL'}
         </AddToCartButton>
       </div>
     </div>

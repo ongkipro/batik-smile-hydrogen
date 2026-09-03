@@ -1,4 +1,4 @@
-import { Link, useLoaderData, NavLink } from 'react-router';
+import { Link, useLoaderData, NavLink, redirect } from 'react-router';
 import { Image, getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
@@ -28,6 +28,10 @@ async function loadCriticalData({ context, request, params }) {
 
   if (!params.blogHandle) {
     throw new Response('Blog tidak ditemukan', { status: 404 });
+  }
+
+  if (params.blogHandle === 'jurnal') {
+    throw redirect('/blogs', 301);
   }
 
   const [{ blog }] = await Promise.all([
