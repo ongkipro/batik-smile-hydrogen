@@ -634,6 +634,19 @@
   - *Action*: Replaced repetitive 3-box vertical card grid with an Asymmetric Magazine Gazette layout: 7-column Lead Spotlight Article on the left with 16:10 photography and deep excerpt + 5-column Compact Horizontal Editorial Stories on the right with thumbnails, clean dividers, and archive portal.
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, verified on `http://localhost:3005/`.
 
+---
+
+## Phase 25: Frameless Minimalist Editorial Journal & Global Divider Line Purge (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: EditorialJournalSection.jsx, HeroSlider.jsx, SarimbitBentoSection.jsx, PersonalWardrobeSection.jsx, BestSellersTabs.jsx, ChooseYourBatikGrid.jsx, HeritageVideoBanner.jsx, ShowroomO2O.jsx*
+
+- [x] **Task 25.1: Purge Harsh Section Divider Lines Across the Homepage**
+  - *Action*: Removed `border-b border-[#E2DFD8]`, `border-[#1C1C1C]`, and decorative center lines (`<div className="w-12 h-px bg-[#C5A059] ..." />`) across all sections (`HeroSlider`, `SarimbitBentoSection`, `PersonalWardrobeSection`, `BestSellersTabs`, `ChooseYourBatikGrid`, `HeritageVideoBanner`, `ShowroomO2O`). Restored `TrustGuaranteeBar` to exact original styling per explicit directive.
+  - *Evidence*: Clean seamless visual rhythm across homepage without visual barrier lines.
+- [x] **Task 25.2: Dedicated Frameless Minimalist Editorial Journal UI (`EditorialJournalSection.jsx`)**
+  - *Action*: Designed a dedicated, frameless editorial journal experience separate from the collections' scattered cards. Zero card containers (`bg-white` and `border-[#E2DFD8]` purged), frameless photography (16:11 aspect ratio), micro-index tags (`01 / ARSIP BUDAYA`), pure Cormorant Garamond serif titles, gentle excerpts, and subtle underlined text links.
+  - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, bundle size down to 34.89 kB (gzip: 8.90 kB).
+
+
 
 
 

@@ -7,7 +7,7 @@ import { Link } from 'react-router';
  */
 export function ShowroomO2O() {
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#111111] text-white relative overflow-hidden border-b border-[#1C1C1C]">
+    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#111111] text-white relative overflow-hidden">
       <div className="w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-stretch">
           {/* Left Column: Authentic Brand Narrative */}

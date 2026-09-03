@@ -576,6 +576,27 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - Storefront HTTP 200 OK verified on `http://localhost:3005/`.
 
+---
+
+## Milestone 20: Frameless Minimalist Editorial Journal & Global Divider Line Purge (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Harsh Section Dividing Lines & Dedicated Frameless Journal Typography
+
+### 1. Global Divider Line Purge Across Homepage
+- Removed harsh horizontal section borders (`border-b border-[#E2DFD8]`, `border-[#1C1C1C]`) and decorative gold center bars (`<div className="w-12 h-px bg-[#C5A059] ..." />`) from `HeroSlider`, `SarimbitBentoSection`, `PersonalWardrobeSection`, `BestSellersTabs`, `ChooseYourBatikGrid`, `HeritageVideoBanner`, and `ShowroomO2O`.
+- Restored `TrustGuaranteeBar` to exact original styling without alteration per user instruction.
+- The entire homepage now flows seamlessly as one continuous Quiet Luxury canvas on Mori Linen (`#FAF8F5`).
+
+### 2. Dedicated Frameless Minimalist Editorial Journal (`EditorialJournalSection.jsx`)
+- Differentiated the journal from the collections' scattered cards: zero card containers (`bg-white` & `border-[#E2DFD8]` removed), zero box frames, and zero washi tape/tilt effects.
+- Clean editorial 3-column stories featuring frameless 16:11 photography, archival numbering (`01 / ARSIP BUDAYA`), pure Cormorant Garamond serif headlines, and subtle underlined text action links.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Client bundle size reduced to **34.89 kB** (gzip: 8.90 kB).
+- Dev server HTTP 200 OK verified.
+
+
 
 
 

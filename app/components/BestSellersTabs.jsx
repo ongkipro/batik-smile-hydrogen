@@ -44,20 +44,16 @@ export function BestSellersTabs({
   const displayProducts = (currentTabData.products || []).slice(0, 4);
 
   return (
-    <section id="best-sellers" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
+    <section id="best-sellers" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">
       <div className="w-full max-w-7xl mx-auto">
         {/* Editorial Section Header */}
         <div className="text-center mb-10 sm:mb-14">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
-            KURASI PILIHAN TERBAIK
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal">
-            OUR BEST SELLERS
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal mb-6">
+            Koleksi Busana Terlaris
           </h2>
-          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-8" />
 
           {/* Tabbed Category Switcher */}
-          <div className="inline-flex items-center gap-1 border-b border-[#E2DFD8] pb-px">
+          <div className="inline-flex items-center gap-1 pb-px">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (

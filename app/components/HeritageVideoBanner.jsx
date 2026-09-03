@@ -27,7 +27,7 @@ export function HeritageVideoBanner({ videoData }) {
   const videoUrl = videoData?.video_url?.value || null;
 
   return (
-    <section className="relative w-full bg-[#111111] text-white py-24 sm:py-32 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden border-b border-[#1C1C1C]">
+    <section className="relative w-full bg-[#111111] text-white py-24 sm:py-32 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden">
       {/* Background Media with 0px Radius */}
       <div className="absolute inset-0 w-full h-full">
         {videoUrl && isPlaying ? (
@@ -45,21 +45,20 @@ export function HeritageVideoBanner({ videoData }) {
             className="w-full h-full object-cover object-center filter grayscale contrast-125 opacity-70"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent" />
+        {/* Dark Vignette Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
         {/* Left Column: Editorial Storytelling */}
         <div className="lg:col-span-7 flex flex-col items-start">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium mb-3">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-3">
             {eyebrow}
           </span>
 
           <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-6">
             {heading}
           </h2>
-
-          <div className="w-16 h-px bg-[#C5A059] mb-8" />
 
           <p className="text-xs sm:text-sm text-[#E2DFD8] leading-relaxed font-light mb-10">
             {narrative}

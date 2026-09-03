@@ -107,7 +107,7 @@ export function HeroSlider() {
 
   return (
     <section
-      className="relative w-full h-[85vh] sm:h-[90vh] lg:h-[95vh] min-h-[580px] max-h-[920px] overflow-hidden bg-[#111111] select-none border-b border-[#1C1C1C]"
+      className="relative w-full h-[85vh] sm:h-[90vh] lg:h-[95vh] min-h-[580px] max-h-[920px] overflow-hidden bg-[#111111] select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-label="Carousel Hero Butik Batik Smile"

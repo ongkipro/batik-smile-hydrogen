@@ -14,19 +14,15 @@ export function ChooseYourBatikGrid({ products = [] }) {
   const displayProducts = (products || []).slice(0, 8);
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] border-b border-[#E2DFD8]">
+    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-14 sm:mb-16">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-2">
-            LEMBARAN KAIN &amp; KOLEKSI TERBARU
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal">
-            CHOOSE YOUR BATIK &amp; NEW ARRIVALS
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal mb-3">
+            Koleksi Terbaru &amp; Kain Lembaran
           </h2>
-          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] max-w-xl mx-auto font-light leading-relaxed">
-            Eksplorasi pilihan kain batik tulis, tenun tradisional Troso, kemeja pria, dan busana etnik terbaru. Anda dapat membeli busana siap pakai atau memanfaatkan layanan jahit bespoke butik Batik Smile tanpa batasan minimal order.
+            Eksplorasi pilihan kain batik tulis, tenun tradisional Troso, kemeja pria, dan busana etnik terbaru. Beli busana siap pakai atau manfaatkan layanan jahit bespoke butik tanpa batasan minimal order.
           </p>
         </div>
 
