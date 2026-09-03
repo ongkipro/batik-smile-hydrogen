@@ -585,6 +585,23 @@ export function MegaMenu({ onMenuStateChange }) {
           </div>
         );
       })}
+
+      {/* Jurnal Link (Direct Editorial Access) */}
+      <div className="py-4">
+        <NavLink
+          to="/blogs"
+          className={({ isActive }) =>
+            `transition-all duration-200 font-semibold pb-1.5 flex items-center gap-1.5 text-[11px] no-underline border-b-2 ${
+              isActive
+                ? 'text-[#C5A059] border-[#C5A059]'
+                : 'text-[#111111] hover:text-[#C5A059] border-transparent'
+            }`
+          }
+        >
+          <span>JURNAL</span>
+        </NavLink>
+      </div>
     </nav>
   );
 }
+

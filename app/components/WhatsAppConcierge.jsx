@@ -1,11 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
- * WhatsAppConcierge: Floating Personal Sizing & Styling Advisor
- * Links to official Batik Smile concierge: 081-390-8888-09
+ * WhatsAppConcierge: Floating Personal Sizing & Styling Advisor (Desktop)
+ * Smart Visibility:
+ * - Hides when inside the Hero/top fold (scrollY < 420px) to prevent visual clutter
+ * - Hides when reaching the Footer (via IntersectionObserver) to prevent overlapping contact links
+ * - Smooth fade & slide transition with Quiet Luxury 0px architecture
+ * - Links to official Batik Smile concierge: 081-390-8888-09
  */
 export function WhatsAppConcierge() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    let footerObserver = null;
+    let isFooterIntersecting = false;
+    const footerElement = document.querySelector('footer');
+
+    const updateVisibility = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      // Hide when in Hero (top fold) or when footer is visible
+      const isPastHero = scrollY > 420;
+      setIsVisible(isPastHero && !isFooterIntersecting);
+    };
+
+    if (footerElement && typeof IntersectionObserver !== 'undefined') {
+      footerObserver = new IntersectionObserver(
+        ([entry]) => {
+          isFooterIntersecting = entry.isIntersecting;
+          updateVisibility();
+        },
+        { threshold: 0.1 }
+      );
+      footerObserver.observe(footerElement);
+    }
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+
+    return () => {
+      window.removeEventListener('scroll', updateVisibility);
+      if (footerObserver && footerElement) {
+        footerObserver.disconnect();
+      }
+    };
+  }, []);
 
   const officialNumber = '6281390888809';
   const defaultMessage = encodeURIComponent(
@@ -14,7 +53,14 @@ export function WhatsAppConcierge() {
   const waUrl = `https://wa.me/${officialNumber}?text=${defaultMessage}`;
 
   return (
-    <aside aria-label="Batik Smile WhatsApp Concierge" className="hidden lg:block fixed bottom-6 right-6 z-40">
+    <aside
+      aria-label="Batik Smile WhatsApp Concierge"
+      className={`hidden lg:block fixed bottom-6 right-6 z-40 transition-all duration-400 ease-out ${
+        isVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-6 pointer-events-none'
+      }`}
+    >
       {/* Expanded Consultation Card */}
       {isOpen && (
         <div className="mb-3 w-80 bg-white border border-[#E2DFD8] shadow-2xl p-5 animate-in fade-in slide-in-from-bottom-2 duration-300">

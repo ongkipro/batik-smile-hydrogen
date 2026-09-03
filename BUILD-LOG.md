@@ -619,6 +619,38 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - HTTP 200 verified on `/blogs` and `/blogs/news`.
 
+---
+
+## Milestone 22: Header Jurnal Menu, Smart Desktop WhatsApp, & Single Article UI/UX (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Header Jurnal Integration, Smart Sticky WhatsApp, & High-Heritage Article Page Redesign
+
+### 1. Header Desktop Navigation Integration (`MegaMenu.jsx`)
+- Added direct permanent `JURNAL` link to the desktop master navigation bar in `MegaMenu.jsx`.
+- Styled with active ochre gold border indicators, zero duplicate underlines, and uppercase micro-tracking.
+
+### 2. Smart Desktop Sticky WhatsApp Concierge (`WhatsAppConcierge.jsx`)
+- Implemented smart viewport visibility for the floating WhatsApp concierge in desktop view:
+  - Hides automatically when inside the top Hero region (`scrollY < 420px`) to eliminate visual clutter on the main brand banner.
+  - Hides automatically when reaching the Footer (detected via `IntersectionObserver`) to prevent overlapping footer contact links and addresses.
+  - Uses fluid CSS opacity and vertical translate transitions.
+
+### 3. Dynamic Single Article Editorial UI/UX (`blogs.$blogHandle.$articleHandle.jsx`)
+- Locked hero article image and related article cards strictly to **3:2** (`aspect-[3/2]`).
+- Elevated reading typography:
+  - Cormorant Garamond display headlines (`leading-[1.18]`).
+  - Drop cap initial letter on opening paragraph in ochre gold.
+  - Elegant serif blockquotes with antique gold accent borders.
+  - Editorial signature stamp and provenance footnote.
+  - Minimalist WhatsApp share link with pre-filled greeting.
+  - Frameless related articles grid with 3:2 locked aspect ratio.
+  - Obsidian dark concierge banner with WhatsApp CTA to `081-390-8888-09`.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- HTTP 200 OK verified on `/blogs/news/:articleHandle`.
+
+
 
 
 

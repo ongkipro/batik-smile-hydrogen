@@ -655,8 +655,24 @@
   - *Action*: Screened all homepage sections and eliminated excessive whitespace. Reduced consecutive section padding from bloated `py-20 sm:py-28` down to dynamic, calibrated `py-12 sm:py-16`. Tightened header margins from `mb-14 sm:mb-20` to `mb-8 sm:mb-10`. Adjusted contrast banners (`HeritageVideoBanner` & `ShowroomO2O`) to `py-16 sm:py-20`.
   - *Evidence*: Eliminated ~140px+ of dead space per boundary, creating a cohesive, unbroken vertical reading rhythm.
 - [x] **Task 26.2: Redesign Blog List Pages with Locked 3:2 Media Ratio (`blogs._index.jsx` & `blogs.$blogHandle._index.jsx`)**
-  - *Action*: Replaced old boxed cards with Frameless Minimalist Editorial layouts. Locked article media ratio strictly to **3:2** (`aspect-[3/2]`), eliminated clunky borders and card containers, added clean curatorial archive bars, micro-category stamps, Cormorant Garamond typography, and subtle underlined read actions.
+  - *Action*: Replaced old boxed cards with Frameless Minimalist Editorial layouts. Locked article media ratio strictly to **3:2** (`aspect-[3/2]`), eliminated clunky borders and card containers, added clean curatorial archive bars, micro-category stamps, Cormorant Garamond typography, and subtle underlined read actions. Configured 3x3 mathematical pagination quota (`pageBy: 9`).
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, HTTP 200 OK verified on `/blogs` and `/blogs/news`.
+
+---
+
+## Phase 27: Header Jurnal Menu, Smart Desktop WhatsApp, & Single Article UI/UX (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: MegaMenu.jsx, WhatsAppConcierge.jsx, blogs.$blogHandle.$articleHandle.jsx*
+
+- [x] **Task 27.1: Add Jurnal Menu to Desktop Header Navigation (`MegaMenu.jsx`)**
+  - *Action*: Added direct, permanent `JURNAL` link to the main desktop navigation bar in `MegaMenu.jsx` with active border indicator matching the Quiet Luxury navigation tokens.
+  - *Evidence*: Desktop navigation bar provides direct access to `/blogs`.
+- [x] **Task 27.2: Smart Desktop Sticky WhatsApp Concierge (`WhatsAppConcierge.jsx`)**
+  - *Action*: Upgraded floating WhatsApp concierge to intelligently hide when inside the Hero/top fold (`scrollY < 420px`) and when reaching the Footer (via `IntersectionObserver`). Uses smooth opacity and slide transitions.
+  - *Evidence*: Zero visual clutter in hero and zero overlap with footer contact information.
+- [x] **Task 27.3: Perfect Single Article Editorial UI/UX (`blogs.$blogHandle.$articleHandle.jsx`)**
+  - *Action*: Perfected single article post: locked hero image and related articles strictly to **3:2 ratio** (`aspect-[3/2]`), removed harsh horizontal lines, added drop cap styling on opening paragraph, elegant serif blockquotes, author footprint, WhatsApp share link, frameless related stories, and bespoke concierge consultation banner.
+  - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, HTTP 200 OK verified on live article routes.
+
 
 
 
