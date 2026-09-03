@@ -45,9 +45,9 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
         }`}
       >
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 flex items-center justify-between gap-4 relative">
-          {/* Mobile Menu Trigger & Brand Logo */}
-          <div className="flex items-center gap-4">
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 flex items-center justify-between relative">
+          {/* Mobile Menu Trigger & Brand Logo (Left-aligned, flex-1) */}
+          <div className="flex items-center gap-4 flex-1 justify-start">
             <button
               type="button"
               className="lg:hidden p-2 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
@@ -60,7 +60,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             </button>
 
             {/* Brand Logo */}
-            <NavLink to="/" className="flex items-center group">
+            <NavLink to="/" className="flex items-center group flex-shrink-0">
               <img
                 src="/brand/batik-smile-logo.png"
                 alt="Batik Smile Nusantara"
@@ -69,29 +69,31 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             </NavLink>
           </div>
 
-          {/* Desktop Mega Menu Navigation */}
-          <div className="hidden lg:flex items-center justify-center flex-1">
+          {/* Desktop Mega Menu Navigation (Middle Center Precision) */}
+          <div className="hidden lg:flex items-center justify-center flex-shrink-0">
             <MegaMenu onMenuStateChange={setIsMenuOpen} />
           </div>
 
-          {/* Right Action Icons: Search, Account, Cart */}
-          <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+          {/* Right Action Icons: Search, Account, Cart (Right-aligned, flex-1) */}
+          <div className="flex items-center justify-end flex-1">
+            <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+          </div>
         </div>
       </header>
     </div>
   );
 }
 
-function HeaderCtas({ isLoggedIn, cart }) {
+function HeaderCtas({ cart }) {
   const { open } = useAside();
 
   return (
-    <div className="flex items-center gap-1.5 sm:gap-3">
-      {/* Search Trigger (Hidden on Mobile, already in sticky bottom bar) */}
+    <div className="flex items-center gap-1 sm:gap-2">
+      {/* Search Trigger (Icon Only) */}
       <button
         type="button"
         onClick={() => open('search')}
-        className="hidden lg:block p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+        className="hidden lg:flex items-center justify-center p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
         aria-label="Cari produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,13 +101,13 @@ function HeaderCtas({ isLoggedIn, cart }) {
         </svg>
       </button>
 
-      {/* Customer Account Link (Visible on Mobile & Desktop) */}
+      {/* Customer Account Link (Icon Only - Pure Precision) */}
       <NavLink
         to="/account"
-        className="flex items-center gap-1.5 p-2 text-[#111111] hover:text-[#C5A059] transition-colors text-[10px] uppercase font-semibold tracking-[0.16em]"
+        className="flex items-center justify-center p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors"
         aria-label="Akun saya"
       >
-        <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="square"
             strokeLinejoin="miter"
@@ -113,13 +115,6 @@ function HeaderCtas({ isLoggedIn, cart }) {
             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
           />
         </svg>
-        <span className="hidden sm:inline">
-          <Suspense fallback="AKUN">
-            <Await resolve={isLoggedIn}>
-              {(logged) => (logged ? 'AKUN' : 'MASUK')}
-            </Await>
-          </Suspense>
-        </span>
       </NavLink>
 
       {/* Cart Drawer Trigger Button */}
@@ -161,7 +156,7 @@ function CartBadge({ count }) {
           url: window.location.href || '',
         });
       }}
-      className="flex items-center gap-2 px-3.5 py-2 bg-[#111111] text-[#C5A059] hover:bg-[#C5A059] hover:text-[#111111] transition-all cursor-pointer border border-[#C5A059]/40"
+      className="flex items-center justify-center gap-2 h-9 px-3.5 bg-[#111111] text-[#C5A059] hover:bg-[#C5A059] hover:text-[#111111] transition-all cursor-pointer border border-[#C5A059]/40 shadow-sm ml-1"
       aria-label={`Tas Belanja (${count} item)`}
     >
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

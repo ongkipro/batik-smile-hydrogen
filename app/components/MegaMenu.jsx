@@ -2,12 +2,80 @@ import React, { useState, useRef } from 'react';
 import { NavLink } from 'react-router';
 
 /**
- * High-End Luxury Mega Menu for Batik Smile Nusantara
- * 3-Column Balanced Architecture:
- * - Col 1: Real Shopify Collections & Subcategories (Clean list with badges)
- * - Col 2: Curated Best-Seller Product Highlights (Thumbnails, titles, prices)
- * - Col 3: Editorial Heritage Story & Concierge Card (Compact proportion)
- * - Bottom Bar: Quality guarantees & official O2O WhatsApp hotline
+ * Minimalist Zero-Radius Quiet Luxury Category Icon
+ * Crisp 1.5px hairline strokes for high-end boutique aesthetics
+ */
+function CategoryIcon({ type, className = 'w-3.5 h-3.5 text-[#C5A059] flex-shrink-0' }) {
+  switch (type) {
+    case 'crown':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M3 18h18v2H3v-2zM4 15l2-8 5 4 5-4 2 8H4z" />
+          <circle cx="12" cy="6" r="1" fill="currentColor" />
+        </svg>
+      );
+    case 'sparkle':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M12 3v18M3 12h18M6.5 6.5l11 11M17.5 6.5l-11 11" />
+        </svg>
+      );
+    case 'leaf':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M6 18c6 0 12-6 12-12-6 0-12 6-12 12zM6 18c3-3 6-5 12-6" />
+        </svg>
+      );
+    case 'scissors':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <circle cx="6" cy="6" r="3" />
+          <circle cx="6" cy="18" r="3" />
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M20 4L8.7 15.3M8.7 8.7L20 20" />
+        </svg>
+      );
+    case 'shirt':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
+        </svg>
+      );
+    case 'dress':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M9 3h6v4l4 14H5l4-14V3zM9 7h6" />
+        </svg>
+      );
+    case 'gem':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M6 3h12l4 6-10 12L2 9l4-6z" />
+        </svg>
+      );
+    case 'family':
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="square" strokeLinejoin="miter" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
+    default:
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+      );
+  }
+}
+
+/**
+ * Curated Luxury Navigation Architecture
+ * Strict 3-Column Symmetrical Grid:
+ * - Col 1: Categories + Icons + Direct Link to All Collections (/collections)
+ * - Col 2: Recent Products (Strict 3 Items max, Zero Scroll)
+ * - Col 3: Featured Collection Spotlight (Modular, Metaobject-Ready)
  */
 const SHOPIFY_MENU = {
   Sarimbit: {
@@ -17,32 +85,22 @@ const SHOPIFY_MENU = {
     allHref: '/collections/sarimbit-exclusive',
     subcategories: [
       {
-        name: 'Sarimbit Exclusive (Sutra & Tulis Halus)',
+        name: 'Sarimbit Exclusive',
         href: '/collections/sarimbit-exclusive',
-        badge: 'Sutra',
+        icon: 'crown',
+        badge: 'Sutra ATBM',
       },
       {
-        name: 'Sarimbit Premium (Katun Furing Pesta)',
+        name: 'Sarimbit Premium',
         href: '/collections/sarimbit-premium',
-        badge: 'Resepsi',
+        icon: 'sparkle',
+        badge: 'Dobby Pesta',
       },
       {
-        name: 'Sarimbit Ekonomis (Katun Harian Adem)',
+        name: 'Sarimbit Ekonomis',
         href: '/collections/sarimbit-ekonomis',
-        badge: 'Harian',
-      },
-      {
-        name: 'Sarimbit Pasangan & Keluarga Inti',
-        href: '/collections/sarimbit-exclusive',
-      },
-      {
-        name: 'Konsultasi Custom Ukuran & Jahit',
-        href: '/pages/layanan-seragam',
-        badge: 'Bespoke',
-      },
-      {
-        name: 'Lihat Seluruh Koleksi Sarimbit',
-        href: '/collections/sarimbit-exclusive',
+        icon: 'leaf',
+        badge: 'Katun Adem',
       },
     ],
     featuredProducts: [
@@ -60,14 +118,21 @@ const SHOPIFY_MENU = {
         image: 'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/WhatsApp_Image_2026-09-01_at_18.47.24.jpg?v=1788413906',
         tag: 'Premium',
       },
+      {
+        title: 'Sarimbit Soga Lawasan',
+        price: 'Rp 385.000',
+        href: '/collections/sarimbit-ekonomis',
+        image: '/banners/sarimbit_family_banner.jpg',
+        tag: 'Ekonomis',
+      },
     ],
     editorial: {
       image: '/banners/sarimbit_family_banner.jpg',
-      eyebrow: 'KOLEKSI RESMI BUTIK',
-      headline: 'Harmoni Busana Keluarga',
+      eyebrow: 'SPOTLIGHT SARIMBIT',
+      headline: 'Harmoni Momen Sakral Keluarga',
       description:
-        'Koleksi sarimbit keluarga pilihan: Exclusive, Premium, dan Ekonomis dengan furing katun adem. Tersedia fitting room privat di Simongan.',
-      ctaText: 'KONSULTASI UKURAN KELUARGA',
+        'Koleksi sarimbit 3 kasta (Exclusive, Premium, Ekonomis) berpadu furing katun hero adem. Tersedia ruang ukur privat VIP di Simongan.',
+      ctaText: 'KONSULTASI BUSANA KELUARGA',
       ctaHref: 'https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20sarimbit%20keluarga',
       isExternal: true,
     },
@@ -79,32 +144,28 @@ const SHOPIFY_MENU = {
     allHref: '/collections/batik-pria',
     subcategories: [
       {
+        name: 'Kemeja Lengan Panjang Furing Hero',
+        href: '/collections/batik-pria',
+        icon: 'shirt',
+        badge: 'Formal',
+      },
+      {
+        name: 'Hem Lengan Pendek Dobby Halus',
+        href: '/collections/batik-pria',
+        icon: 'sparkle',
+        badge: 'Casual',
+      },
+      {
         name: 'Kemeja Motif Semarangan (Khas 2007)',
         href: '/products/kemeja-motif-semarangan',
+        icon: 'gem',
         badge: 'Signature',
       },
       {
-        name: 'Kemeja Sido Asih Tradisional',
-        href: '/products/kemeja-sido-asih',
-        badge: 'Klasik Halus',
-      },
-      {
-        name: 'Hem Dobby Maroon Lengan Pendek',
-        href: '/products/hem-dobby-maroon',
-        badge: 'Casual Formal',
-      },
-      {
-        name: 'Hem Lurik Hitam Nusantara',
-        href: '/products/hem-lurik-hitam',
-      },
-      {
-        name: 'Celana Sirwal Etnik Batik',
-        href: '/products/celana-sirwal-etnik',
-        badge: 'Etnik',
-      },
-      {
-        name: 'Lihat Seluruh Kemeja Batik Pria',
-        href: '/collections/batik-pria',
+        name: 'Jahit Kemeja Kustom Ukuran Pria',
+        href: '/pages/layanan-seragam',
+        icon: 'scissors',
+        badge: 'Bespoke',
       },
     ],
     featuredProducts: [
@@ -113,22 +174,29 @@ const SHOPIFY_MENU = {
         price: 'Rp 525.000',
         href: '/products/kemeja-motif-semarangan',
         image: '/banners/hero_editorial_banner.jpg',
-        tag: 'Best Seller',
+        tag: 'Signature',
       },
       {
         title: 'Hem Dobby Maroon',
         price: 'Rp 420.000',
         href: '/products/hem-dobby-maroon',
         image: '/banners/hero_editorial_banner.jpg',
-        tag: 'Dobby Halus',
+        tag: 'Casual Formal',
+      },
+      {
+        title: 'Kemeja Sido Asih Tradisional',
+        price: 'Rp 475.000',
+        href: '/products/kemeja-sido-asih',
+        image: '/banners/hero_editorial_banner.jpg',
+        tag: 'Klasik Halus',
       },
     ],
     editorial: {
       image: '/banners/hero_editorial_banner.jpg',
       eyebrow: 'JAHITAN SAMBUNG MOTIF',
-      headline: 'Saku & Pola Presisi',
+      headline: 'Saku & Pola Presisi Tanpa Putus',
       description:
-        'Setiap helai kemeja dirancang dengan saku sambung motif yang tidak terputus dan furing hero katun sejuk.',
+        'Setiap helai kemeja dirancang dengan saku sambung motif simetris dan furing hero katun sejuk yang menjaga wibawa penampilan.',
       ctaText: 'JELAJAHI KEMEJA PRIA',
       ctaHref: '/collections/batik-pria',
       isExternal: false,
@@ -141,32 +209,28 @@ const SHOPIFY_MENU = {
     allHref: '/collections/batik-wanita',
     subcategories: [
       {
-        name: 'Blus Batik Wanita Lapis Furing',
-        href: '/collections/blus-batik-wanita',
-        badge: 'Kerja/Dinas',
+        name: 'Blus & Atasan Batik Furing Halus',
+        href: '/collections/batik-wanita',
+        icon: 'dress',
+        badge: 'Dinas/Kerja',
       },
       {
-        name: 'Gamis Batik Parang Muslimah',
-        href: '/collections/gamis-batik-wanita',
-        badge: 'Elegan',
+        name: 'Gamis Batik Parang Muslimah Modern',
+        href: '/collections/batik-wanita',
+        icon: 'gem',
+        badge: 'Resepsi',
       },
       {
-        name: 'Dress & Terusan Batik Modern',
-        href: '/collections/dress-batik-wanita',
-      },
-      {
-        name: 'Outer & Tunik Batik Modern',
-        href: '/collections/outer-batik-wanita',
+        name: 'Outer & Tunik Siluet Kontemporer',
+        href: '/collections/batik-wanita',
+        icon: 'sparkle',
         badge: 'Modern',
       },
       {
-        name: 'Kebaya Encim & Adat Modern',
-        href: '/collections/kebaya-batik-modern',
-        badge: 'Klasik',
-      },
-      {
-        name: 'Lihat Seluruh Busana Wanita',
-        href: '/collections/batik-wanita',
+        name: 'Jahit Gaun & Kebaya Butik Wanita',
+        href: '/pages/layanan-seragam',
+        icon: 'scissors',
+        badge: 'Bespoke',
       },
     ],
     featuredProducts: [
@@ -175,22 +239,29 @@ const SHOPIFY_MENU = {
         price: 'Rp 685.000',
         href: '/products/gamis-parang-kusumo',
         image: '/brand/models/model_teak_door.jpg',
-        tag: 'Koleksi Mewah',
+        tag: 'Resepsi',
       },
       {
         title: 'Outer Terracotta Gold',
         price: 'Rp 450.000',
         href: '/products/outer-terracotta-gold',
         image: '/brand/models/model_outdoor_sunlight.jpg',
-        tag: 'Desain Modern',
+        tag: 'Modern',
+      },
+      {
+        title: 'Blus Batik Furing Katun',
+        price: 'Rp 395.000',
+        href: '/collections/batik-wanita',
+        image: '/brand/models/model_teak_door.jpg',
+        tag: 'Dinas/Kerja',
       },
     ],
     editorial: {
       image: '/brand/models/model_teak_door.jpg',
       eyebrow: 'SILUET KONTEMPORER',
-      headline: 'Potongan Anggun & Nyaman',
+      headline: 'Potongan Anggun, Nyaman & Berwibawa',
       description:
-        'Busana batik wanita dengan furing katun adem, dirancang untuk keanggunan jamuan resmi maupun kantor.',
+        'Busana batik wanita berfuring katun sejuk, dirancang anggun untuk jamuan resmi, dinas harian, hingga pesta keluarga.',
       ctaText: 'LIHAT SEMUA BUSANA WANITA',
       ctaHref: '/collections/batik-wanita',
       isExternal: false,
@@ -205,30 +276,26 @@ const SHOPIFY_MENU = {
       {
         name: 'Setelan Surjan Tradisional Anak',
         href: '/products/setelan-surjan-anak',
+        icon: 'family',
         badge: 'Adat Jawa',
       },
       {
-        name: 'Hem Batik Katun Anak Cowok',
+        name: 'Hem Batik Katun Anak Laki-Laki',
         href: '/products/hem-anak-pesisir',
+        icon: 'shirt',
         badge: 'Adem',
       },
       {
-        name: 'Dress & Terusan Batik Anak Cewek',
-        href: '/products/dress-anak-bunga',
+        name: 'Dress & Terusan Batik Anak Perempuan',
+        href: '/collections/batik-anak',
+        icon: 'dress',
         badge: 'Ceria',
       },
       {
-        name: 'Blangkon Tradisional Semarang',
-        href: '/products/set-blangkon-semarang',
-        badge: 'Aksesoris',
-      },
-      {
-        name: 'Jarik & Sarung Batik Anak',
-        href: '/collections/jarik-anak',
-      },
-      {
-        name: 'Lihat Semua Koleksi Batik Anak',
-        href: '/collections/batik-anak',
+        name: 'Panduan Ukuran Umur Anak (2–13 Th)',
+        href: '/pages/fasilitas-store',
+        icon: 'sparkle',
+        badge: 'Panduan',
       },
     ],
     featuredProducts: [
@@ -246,13 +313,20 @@ const SHOPIFY_MENU = {
         image: 'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_3938e8ab-eda3-4a36-8537-c26cc470f869.jpg?v=1788412999',
         tag: 'Katun Adem',
       },
+      {
+        title: 'Dress Anak Bunga Parang',
+        price: 'Rp 145.000',
+        href: '/collections/batik-anak',
+        image: 'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_ac3a4584-3e94-4fdd-ad0d-0a699714b9d9.jpg?v=1788412963',
+        tag: 'Ceria Lembut',
+      },
     ],
     editorial: {
       image: 'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_ac3a4584-3e94-4fdd-ad0d-0a699714b9d9.jpg?v=1788412963',
       eyebrow: 'WARISAN SEJAK DINI',
       headline: 'Batik Anak Nyaman & Bernyawa',
       description:
-        'Koleksi busana batik anak katun lembut adem, dirancang agar si kecil tetap bebas bergerak ceria di setiap momen keluarga.',
+        'Koleksi busana anak katun lembut adem, dirancang agar si kecil tetap bebas bergerak ceria di setiap momen penting keluarga.',
       ctaText: 'JELAJAHI BATIK ANAK',
       ctaHref: '/collections/batik-anak',
       isExternal: false,
@@ -330,23 +404,19 @@ export function MegaMenu({ onMenuStateChange }) {
                 onMouseEnter={() => clearCloseTimeout()}
                 onMouseLeave={handleMouseLeave}
               >
-                {/* Main 3-Column Balanced Grid */}
+                {/* Main 3-Column Symmetrical Grid (4 - 4 - 4) */}
                 <div className="grid grid-cols-12 gap-8 items-start">
                   
-                  {/* Column 1: Subkategori & Koleksi Resmi (5 Kolom) */}
-                  <div className="col-span-12 lg:col-span-5 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#E2DFD8] pb-6 lg:pb-0 lg:pr-8">
+                  {/* Column 1: Pilihan Kategori + Icon + Pintu All Collections (4 Kolom) */}
+                  <div className="col-span-12 lg:col-span-4 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#E2DFD8] pb-6 lg:pb-0 lg:pr-8">
                     <div>
                       <div className="flex items-center justify-between border-b border-[#E2DFD8] pb-2 mb-4">
                         <span className="text-[10px] font-bold tracking-[0.2em] text-[#9E7D3B] uppercase">
-                          KATALOG KOLEKSI RESMI
+                          PILIHAN KATEGORI
                         </span>
-                        <NavLink
-                          to={item.allHref}
-                          onClick={() => setActiveTab(null)}
-                          className="text-[10px] text-[#5A5550] hover:text-[#C5A059] font-medium uppercase tracking-[0.16em] no-underline"
-                        >
-                          LIHAT SEMUA &rarr;
-                        </NavLink>
+                        <span className="text-[9px] text-[#A69F96] tracking-wider uppercase font-semibold">
+                          RESMI BUTIK
+                        </span>
                       </div>
 
                       <ul className="space-y-1.5">
@@ -355,13 +425,16 @@ export function MegaMenu({ onMenuStateChange }) {
                             <NavLink
                               to={sub.href}
                               onClick={() => setActiveTab(null)}
-                              className="group flex items-center justify-between py-2 px-3 border border-transparent hover:border-[#E2DFD8] hover:bg-[#FAF8F5] transition-all normal-case text-xs text-[#111111] hover:text-[#9E7D3B] no-underline"
+                              className="group flex items-center justify-between py-2 px-2.5 border border-transparent hover:border-[#E2DFD8] hover:bg-[#FAF8F5] transition-all normal-case text-xs text-[#111111] hover:text-[#9E7D3B] no-underline"
                             >
-                              <span className="font-light group-hover:translate-x-1 transition-transform">
-                                {sub.name}
-                              </span>
+                              <div className="flex items-center gap-2.5 min-w-0">
+                                <CategoryIcon type={sub.icon} className="w-3.5 h-3.5 text-[#C5A059] flex-shrink-0" />
+                                <span className="font-medium truncate group-hover:translate-x-0.5 transition-transform text-[11px] sm:text-xs">
+                                  {sub.name}
+                                </span>
+                              </div>
                               {sub.badge && (
-                                <span className="text-[9px] px-2 py-0.5 bg-[#FAF8F5] text-[#9E7D3B] border border-[#E2DFD8] font-semibold uppercase tracking-wider">
+                                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 bg-[#FAF8F5] text-[#9E7D3B] border border-[#E2DFD8] font-semibold uppercase tracking-wider flex-shrink-0 ml-2">
                                   {sub.badge}
                                 </span>
                               )}
@@ -370,41 +443,58 @@ export function MegaMenu({ onMenuStateChange }) {
                         ))}
                       </ul>
                     </div>
+
+                    {/* Clean Architectural Gateway to All Collections */}
+                    <div className="mt-5 pt-3.5 border-t border-[#E2DFD8]">
+                      <NavLink
+                        to="/collections"
+                        onClick={() => setActiveTab(null)}
+                        className="group flex items-center justify-between w-full py-2.5 px-3 border border-[#E2DFD8] hover:border-[#C5A059] bg-[#FAF8F5] hover:bg-[#111111] text-[#111111] hover:text-white transition-all duration-300 no-underline text-[10px] uppercase font-semibold tracking-[0.18em]"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:rotate-45 transition-transform duration-300" />
+                          <span>JELAJAHI SELURUH KOLEKSI</span>
+                        </span>
+                        <span className="text-[#C5A059] group-hover:translate-x-1 transition-transform duration-300">
+                          &rarr;
+                        </span>
+                      </NavLink>
+                    </div>
                   </div>
 
-                  {/* Column 2: Produk Pilihan Butik / Highlight Unggulan (4 Kolom) */}
+                  {/* Column 2: Rilis Terbaru / Recent Products (Strict 3 Items) (4 Kolom) */}
                   <div className="col-span-12 lg:col-span-4 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#E2DFD8] pb-6 lg:pb-0 lg:pr-8">
                     <div>
                       <div className="flex items-center justify-between border-b border-[#E2DFD8] pb-2 mb-4">
                         <span className="text-[10px] font-bold tracking-[0.2em] text-[#9E7D3B] uppercase">
-                          PRODUK UNGGULAN BUTIK
+                          RILIS TERBARU
                         </span>
-                        <span className="text-[9px] text-[#A69F96] uppercase tracking-wider">
-                          READY STOCK
+                        <span className="text-[9px] text-[#C5A059] font-bold tracking-wider uppercase bg-[#111111] px-2 py-0.5">
+                          NEW ARRIVALS
                         </span>
                       </div>
 
-                      <div className="space-y-3">
-                        {item.featuredProducts.map((prod, idx) => (
+                      <div className="space-y-2.5">
+                        {item.featuredProducts.slice(0, 3).map((prod, idx) => (
                           <NavLink
                             key={idx}
                             to={prod.href}
                             onClick={() => setActiveTab(null)}
-                            className="group flex items-center gap-3.5 p-2 border border-[#E2DFD8] hover:border-[#C5A059] bg-[#FAF8F5] hover:bg-white transition-all no-underline"
+                            className="group flex items-center gap-3 p-2 border border-[#E2DFD8] hover:border-[#C5A059] bg-[#FAF8F5] hover:bg-white transition-all no-underline"
                           >
                             <img
                               src={prod.image}
                               alt={prod.title}
-                              className="w-14 h-16 object-cover aspect-[4/5] border border-[#E2DFD8] flex-shrink-0"
+                              className="w-12 h-14 object-cover aspect-[4/5] border border-[#E2DFD8] flex-shrink-0"
                             />
                             <div className="flex flex-col flex-1 min-w-0">
-                              <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-[#C5A059] mb-0.5">
+                              <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-[#C5A059]">
                                 {prod.tag}
                               </span>
                               <h5 className="font-serif text-xs font-medium text-[#111111] group-hover:text-[#9E7D3B] transition-colors truncate normal-case">
                                 {prod.title}
                               </h5>
-                              <span className="text-[11px] text-[#5A5550] font-light mt-0.5">
+                              <span className="text-[11px] text-[#5A5550] font-light mt-0.5 font-sans">
                                 {prod.price}
                               </span>
                             </div>
@@ -417,14 +507,23 @@ export function MegaMenu({ onMenuStateChange }) {
                     </div>
                   </div>
 
-                  {/* Column 3: Compact Editorial Heritage Story & Concierge (3 Kolom) */}
-                  <div className="col-span-12 lg:col-span-3 flex flex-col justify-between">
+                  {/* Column 3: Featured Spotlight / Metaobject-Ready Banner (4 Kolom) */}
+                  <div className="col-span-12 lg:col-span-4 flex flex-col justify-between">
                     <div>
+                      <div className="flex items-center justify-between border-b border-[#E2DFD8] pb-2 mb-4">
+                        <span className="text-[10px] font-bold tracking-[0.2em] text-[#9E7D3B] uppercase">
+                          FEATURED SPOTLIGHT
+                        </span>
+                        <span className="text-[9px] text-[#A69F96] uppercase tracking-wider">
+                          PILIHAN BUTIK
+                        </span>
+                      </div>
+
                       <div className="border border-[#E2DFD8] relative group overflow-hidden bg-[#111111] aspect-[16/10] mb-3">
                         <img
                           src={item.editorial.image}
                           alt={item.editorial.headline}
-                          className="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-700"
+                          className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3.5 flex flex-col justify-end text-white">
                           <span className="text-[8px] uppercase tracking-[0.2em] text-[#C5A059] font-bold mb-0.5">
@@ -436,7 +535,7 @@ export function MegaMenu({ onMenuStateChange }) {
                         </div>
                       </div>
 
-                      <p className="text-[11px] text-[#5A5550] leading-relaxed font-light mb-4 normal-case">
+                      <p className="text-[11px] text-[#5A5550] leading-relaxed font-light mb-3 normal-case line-clamp-2">
                         {item.editorial.description}
                       </p>
                     </div>
@@ -446,7 +545,7 @@ export function MegaMenu({ onMenuStateChange }) {
                         href={item.editorial.ctaHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.18em] transition-colors text-center block no-underline shadow-sm cursor-pointer"
+                        className="w-full py-2.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.18em] transition-colors text-center block no-underline shadow-sm cursor-pointer"
                       >
                         {item.editorial.ctaText} &rarr;
                       </a>
@@ -454,7 +553,7 @@ export function MegaMenu({ onMenuStateChange }) {
                       <NavLink
                         to={item.editorial.ctaHref}
                         onClick={() => setActiveTab(null)}
-                        className="w-full py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.18em] transition-colors text-center block no-underline shadow-sm cursor-pointer"
+                        className="w-full py-2.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.18em] transition-colors text-center block no-underline shadow-sm cursor-pointer"
                       >
                         {item.editorial.ctaText} &rarr;
                       </NavLink>
