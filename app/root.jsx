@@ -211,14 +211,35 @@ export function ErrorBoundary() {
   }
 
   return (
-    <div className="route-error">
-      <h1>Oops</h1>
-      <h2>{errorStatus}</h2>
-      {errorMessage && (
-        <fieldset>
-          <pre>{errorMessage}</pre>
-        </fieldset>
-      )}
+    <div className="min-h-screen bg-[#FAF8F5] text-[#111111] flex flex-col items-center justify-center p-6 text-center">
+      <div className="max-w-xl mx-auto border border-[#E2DFD8] bg-white p-10 sm:p-16">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold block mb-4">
+          KESALAHAN SISTEM BUTIK {errorStatus}
+        </span>
+        <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-6">
+          Halaman Tidak Ditemukan
+        </h1>
+        <div className="w-12 h-px bg-[#C5A059] mx-auto mb-6" />
+        <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-8">
+          Mohon maaf, halaman yang Anda tuju tidak tersedia atau telah dipindahkan.
+          Silakan kembali ke beranda untuk menjelajahi koleksi busana kami.
+        </p>
+
+        {errorMessage && process.env.NODE_ENV === 'development' && (
+          <div className="text-left bg-red-50 p-4 border border-red-200 mt-6 mb-8 text-xs overflow-auto max-w-full text-red-800">
+            <p className="font-mono">{errorMessage}</p>
+          </div>
+        )}
+
+        <div className="mt-8">
+          <a
+            href="/"
+            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-bold tracking-[0.18em] transition-colors"
+          >
+            KEMBALI KE BERANDA &rarr;
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

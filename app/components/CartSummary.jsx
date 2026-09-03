@@ -49,16 +49,16 @@ function CartCheckoutActions({checkoutUrl}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div className="mt-4 pt-4 border-t border-neutral-200">
+    <div className="mt-4 pt-4 border-t border-[#E2DFD8]">
       <a
         href={checkoutUrl}
         target="_self"
-        className="w-full block text-center py-3.5 px-6 rounded bg-[#9E4719] hover:bg-[#7A320C] text-white text-xs uppercase font-bold tracking-widest transition-all shadow-md"
+        className="w-full block text-center py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-all shadow-sm"
       >
-        Lanjut ke Pembayaran (Checkout) &rarr;
+        LANJUT KE PEMBAYARAN &rarr;
       </a>
-      <p className="text-[10px] text-center text-neutral-500 mt-2">
-        🔒 Pembayaran Aman &amp; Terenkripsi Resmi Shopify
+      <p className="text-[10px] text-center text-[#5A5550] mt-2 tracking-wide uppercase">
+        PEMBAYARAN RESMI TERENKRIPSI SHOPIFY
       </p>
     </div>
   );
@@ -116,8 +116,12 @@ function CartDiscounts({
             placeholder="Discount code"
           />
           &nbsp;
-          <button type="submit" aria-label="Apply discount code">
-            Apply
+          <button
+            type="submit"
+            aria-label="Apply discount code"
+            className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-wider transition-colors cursor-pointer"
+          >
+            Terapkan
           </button>
         </div>
       </UpdateDiscountForm>

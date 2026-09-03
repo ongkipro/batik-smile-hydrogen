@@ -1,138 +1,145 @@
 import React from 'react';
 import { NavLink } from 'react-router';
-import { BatikDivider } from './BatikOrnaments';
 
+/**
+ * Footer: Quiet Luxury Nusantara Master Footer
+ * Official Showroom locations (Simongan 109 & Banyumanik 23), WhatsApp 081-390-8888-09
+ */
 export function Footer() {
   return (
-    <footer className="bg-[#0D0D0D] text-white pt-16 pb-24 lg:pb-12 border-t border-neutral-800">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Top Heritage Statement */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-white block mb-1">
-            BATIK SMILE
+    <footer className="bg-[#111111] text-white pt-16 pb-20 border-t border-[#1C1C1C]">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+        {/* Brand Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="font-serif text-2xl sm:text-3xl font-normal tracking-[0.16em] text-white block mb-1">
+            BATIK SMILE NUSANTARA
           </span>
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-semibold">
-            Mahakarya Busana Nusantara Sejak 2007
+          <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-medium">
+            SEMARANG &bull; ESTABLISHED 2007 &bull; BUDAYA 3S 1C 1T &amp; 1H
           </span>
-          <BatikDivider variant="gold" className="my-4 opacity-40" />
+          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4" />
         </div>
 
-        {/* 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 text-xs">
-          {/* Col 1: Brand & Showroom */}
+        {/* 4-Column Directory */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14 text-xs font-light">
+          {/* Col 1: Verified Showrooms */}
           <div>
-            <h4 className="font-serif text-sm font-bold uppercase tracking-widest text-[#C5A059] mb-4">
-              Butik &amp; Showroom
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+              BUTIK &amp; SHOWROOM RESMI
             </h4>
-            <p className="text-neutral-400 leading-relaxed mb-3">
-              <strong>Semarang Flagship:</strong><br />
-              Jl. Majapahit No. 128, Gayamsari, Semarang<br />
-              Buka: 09.00 - 21.00 WIB
-            </p>
-            <p className="text-neutral-400 leading-relaxed">
-              <strong>Solo Gallery:</strong><br />
-              Kawasan Laweyan Heritage, Surakarta<br />
-              Buka: 09.00 - 20.00 WIB
-            </p>
+            <div className="space-y-4 text-[#A69F96] leading-relaxed text-[11px]">
+              <div>
+                <strong className="text-white block font-medium">Flagship Store (Gedung 3 Lantai):</strong>
+                Jl. Simongan Raya No. 109, Pamularsih, Semarang<br />
+                <span className="text-[#C5A059]">Buka Setiap Hari: 09.00 - 21.00 WIB</span>
+              </div>
+              <div>
+                <strong className="text-white block font-medium">Cabang Banyumanik:</strong>
+                Jl. Sukun Raya No. 23, Banyumanik, Semarang<br />
+                <span className="text-[#C5A059]">Buka Setiap Hari: 09.00 - 21.00 WIB</span>
+              </div>
+            </div>
           </div>
 
-          {/* Col 2: Koleksi Unggulan */}
+          {/* Col 2: Katalog Pilihan */}
           <div>
-            <h4 className="font-serif text-sm font-bold uppercase tracking-widest text-[#C5A059] mb-4">
-              Koleksi Unggulan
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+              KOLEKSI UNGGULAN
             </h4>
-            <ul className="space-y-2.5 text-neutral-400">
+            <ul className="space-y-2.5 text-[#A69F96] text-[11px]">
               <li>
-                <NavLink to="/collections/sarimbit-mahakarya-heritage" className="hover:text-white transition-colors">
-                  Sarimbit Mahakarya (Sutra Prada)
+                <NavLink to="/collections/sarimbit-exclusive" className="hover:text-white transition-colors">
+                  Sarimbit Keluarga (3 Kasta)
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/collections/sarimbit-signature-elegance" className="hover:text-white transition-colors">
-                  Signature Elegance (Tenun Dobby)
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/collections/sarimbit-essential-daily" className="hover:text-white transition-colors">
-                  Essential Daily (Katun Primisima)
+                <NavLink to="/collections/jarik-kain-batik" className="hover:text-white transition-colors">
+                  Kain Batik &amp; Jarik Nusantara
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/collections/batik-wanita" className="hover:text-white transition-colors">
-                  Busana Batik Wanita &amp; Gamis
+                  Busana Batik Wanita (Blus &amp; Gamis)
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/collections/batik-pria" className="hover:text-white transition-colors">
-                  Kemeja Batik Pria Furing Halus
+                  Kemeja Batik Pria Lapis Furing
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/collections/batik-anak" className="hover:text-white transition-colors">
+                  Koleksi Batik Anak Nusantara
                 </NavLink>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Layanan Kustom & Bantuan */}
+          {/* Col 3: Layanan & Informasi */}
           <div>
-            <h4 className="font-serif text-sm font-bold uppercase tracking-widest text-[#C5A059] mb-4">
-              Layanan &amp; Bantuan
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+              LAYANAN BUTIK &amp; O2O
             </h4>
-            <ul className="space-y-2.5 text-neutral-400">
+            <ul className="space-y-2.5 text-[#A69F96] text-[11px]">
               <li>
                 <NavLink to="/pages/layanan-seragam" className="hover:text-white transition-colors">
-                  Jahit Kustom &amp; Seragam Kantor/Keluarga
+                  Pemesanan Seragam (Tanpa Minimal Order)
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/pages/fasilitas-store" className="hover:text-white transition-colors">
+                  Fasilitas Gedung Simongan 3 Lantai
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/pages/tentang-kami" className="hover:text-white transition-colors">
-                  Filosofi &amp; Cerita Butik
+                  Kisah &amp; Filosofi Batik Smile Sejak 2007
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/pages/lokasi-toko" className="hover:text-white transition-colors">
-                  Petunjuk Arah Showroom
+                  Petunjuk Arah Google Maps
                 </NavLink>
               </li>
               <li>
-                <a
-                  href="https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20butuh%20panduan%20ukuran"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[#C5A059] transition-colors"
-                >
-                  Panduan Ukuran (Size Guide) &rarr;
-                </a>
+                <NavLink to="/policies/refund-policy" className="hover:text-white transition-colors">
+                  Kebijakan Garansi &amp; Tukar Ukuran
+                </NavLink>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Layanan Pelanggan & WA */}
+          {/* Col 4: Official Concierge & WhatsApp */}
           <div>
-            <h4 className="font-serif text-sm font-bold uppercase tracking-widest text-[#C5A059] mb-4">
-              Konsultan Batik
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+              KONSULTAN BATIK RESMI
             </h4>
-            <p className="text-neutral-400 leading-relaxed mb-4">
-              Konsultasikan kebutuhan sarimbit pernikahan, seragam keluarga, atau pengiriman kilat
-              dengan tim konsultan kami.
+            <p className="text-[#A69F96] leading-relaxed mb-4 text-[11px]">
+              Konsultasikan ukuran sarimbit keluarga atau pemesanan seragam dinas Anda langsung dengan tim konsultan kami.
             </p>
             <a
-              href="https://wa.me/6281234567890?text=Halo%20Batik%20Smile"
+              href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs tracking-wider uppercase transition-colors"
+              className="w-full py-3 px-4 bg-[#C5A059] hover:bg-white text-[#111111] font-semibold text-[10px] tracking-[0.18em] uppercase transition-colors text-center block"
             >
-              WhatsApp Customer Care
+              WHATSAPP: 081-390-8888-09
             </a>
+            <div className="mt-3 text-[10px] text-[#5A5550]">
+              Instagram: @batiksmile.official
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Payment Marks */}
-        <div className="pt-8 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
-          <p>&copy; {new Date().getFullYear()} Batik Smile Nusantara. Seluruh Hak Cipta Dilindungi.</p>
-          <div className="flex items-center gap-4 text-neutral-400">
-            <span>Batik Asli Indonesia</span>
-            <span>•</span>
-            <span>100% Produk Berkualitas</span>
-            <span>•</span>
-            <span>Garansi Retur &amp; Tukar Size</span>
+        {/* Bottom Bar: Copyright & Guarantees */}
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-[#5A5550] uppercase tracking-[0.14em]">
+          <p>&copy; {new Date().getFullYear()} BATIK SMILE NUSANTARA. SELURUH HAK CIPTA DILINDUNGI.</p>
+          <div className="flex items-center gap-3 text-[#A69F96]">
+            <span>100% BATIK ASLI INDONESIA</span>
+            <span>&bull;</span>
+            <span>BEBAS TUKAR UKURAN</span>
+            <span>&bull;</span>
+            <span>BEBAS ONGKIR NUSANTARA</span>
           </div>
         </div>
       </div>

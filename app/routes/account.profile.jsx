@@ -1,4 +1,4 @@
-import {CUSTOMER_UPDATE_MUTATION} from '~/graphql/customer-account/CustomerUpdateMutation';
+import { CUSTOMER_UPDATE_MUTATION } from '~/graphql/customer-account/CustomerUpdateMutation';
 import {
   data,
   Form,
@@ -11,26 +11,25 @@ import {
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Profile'}];
+  return [{ title: 'Profil Pelanggan — Butik Batik Smile Nusantara' }];
 };
 
 /**
  * @param {Route.LoaderArgs}
  */
-export async function loader({context}) {
+export async function loader({ context }) {
   await context.customerAccount.handleAuthStatus();
-
   return {};
 }
 
 /**
  * @param {Route.ActionArgs}
  */
-export async function action({request, context}) {
-  const {customerAccount} = context;
+export async function action({ request, context }) {
+  const { customerAccount } = context;
 
   if (request.method !== 'PUT') {
-    return data({error: 'Method not allowed'}, {status: 405});
+    return data({ error: 'Method not allowed' }, { status: 405 });
   }
 
   const form = await request.formData();
@@ -47,8 +46,7 @@ export async function action({request, context}) {
       }
     }
 
-    // update customer and possibly password
-    const {data, errors} = await customerAccount.mutate(
+    const { data: mutationData, errors } = await customerAccount.mutate(
       CUSTOMER_UPDATE_MUTATION,
       {
         variables: {
@@ -62,17 +60,17 @@ export async function action({request, context}) {
       throw new Error(errors[0].message);
     }
 
-    if (!data?.customerUpdate?.customer) {
+    if (!mutationData?.customerUpdate?.customer) {
       throw new Error('Customer profile update failed.');
     }
 
     return {
       error: null,
-      customer: data?.customerUpdate?.customer,
+      customer: mutationData.customerUpdate.customer,
     };
   } catch (error) {
     return data(
-      {error: error.message, customer: null},
+      { error: error.message, customer: null },
       {
         status: 400,
       },
@@ -82,53 +80,78 @@ export async function action({request, context}) {
 
 export default function AccountProfile() {
   const account = useOutletContext();
-  const {state} = useNavigation();
+  const { state } = useNavigation();
   /** @type {ActionReturnData} */
-  const action = useActionData();
-  const customer = action?.customer ?? account?.customer;
+  const actionData = useActionData();
+  const customer = actionData?.customer ?? account?.customer;
 
   return (
-    <div className="account-profile">
-      <h2>My profile</h2>
-      <br />
-      <Form method="PUT">
-        <legend>Personal information</legend>
-        <fieldset>
-          <label htmlFor="firstName">First name</label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            autoComplete="given-name"
-            placeholder="First name"
-            aria-label="First name"
-            defaultValue={customer.firstName ?? ''}
-            minLength={2}
-          />
-          <label htmlFor="lastName">Last name</label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            autoComplete="family-name"
-            placeholder="Last name"
-            aria-label="Last name"
-            defaultValue={customer.lastName ?? ''}
-            minLength={2}
-          />
-        </fieldset>
-        {action?.error ? (
-          <p>
-            <mark>
-              <small>{action.error}</small>
-            </mark>
-          </p>
-        ) : (
-          <br />
+    <div className="max-w-xl">
+      <div className="border-b border-[#E2DFD8] pb-4 mb-8">
+        <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+          DATA PRIBADI
+        </span>
+        <h2 className="font-serif text-2xl font-normal text-[#111111]">
+          Informasi Akun Anda
+        </h2>
+      </div>
+
+      <Form method="PUT" className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label
+              htmlFor="firstName"
+              className="text-[10px] uppercase font-semibold tracking-[0.16em] text-[#111111] block mb-2"
+            >
+              NAMA DEPAN
+            </label>
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              autoComplete="given-name"
+              placeholder="Nama depan"
+              defaultValue={customer?.firstName ?? ''}
+              minLength={2}
+              className="w-full text-xs p-3 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] focus:bg-white outline-none transition-colors"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="lastName"
+              className="text-[10px] uppercase font-semibold tracking-[0.16em] text-[#111111] block mb-2"
+            >
+              NAMA BELAKANG
+            </label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              autoComplete="family-name"
+              placeholder="Nama belakang"
+              defaultValue={customer?.lastName ?? ''}
+              minLength={2}
+              className="w-full text-xs p-3 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] focus:bg-white outline-none transition-colors"
+            />
+          </div>
+        </div>
+
+        {actionData?.error && (
+          <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs">
+            {actionData.error}
+          </div>
         )}
-        <button type="submit" disabled={state !== 'idle'}>
-          {state !== 'idle' ? 'Updating' : 'Update'}
-        </button>
+
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={state !== 'idle'}
+            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
+          >
+            {state !== 'idle' ? 'MENYIMPAN PERUBAHAN...' : 'SIMPAN PERUBAHAN &rarr;'}
+          </button>
+        </div>
       </Form>
     </div>
   );

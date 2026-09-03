@@ -250,29 +250,48 @@ export async function action({request, context}) {
 }
 
 export default function Addresses() {
-  const {customer} = useOutletContext();
-  const {defaultAddress, addresses} = customer;
+  const { customer } = useOutletContext();
+  const { defaultAddress, addresses } = customer;
 
   return (
-    <div className="account-addresses">
-      <h2>Addresses</h2>
-      <br />
-      <div>
+    <div>
+      <div className="border-b border-[#E2DFD8] pb-4 mb-8 flex items-center justify-between">
         <div>
-          <legend>Create address</legend>
+          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+            BUKU ALAMAT
+          </span>
+          <h2 className="font-serif text-2xl font-normal text-[#111111]">
+            Alamat Pengiriman Anda
+          </h2>
+        </div>
+      </div>
+
+      <div className="space-y-12">
+        {/* Existing Addresses */}
+        <div>
+          <h3 className="text-xs uppercase font-semibold tracking-[0.18em] text-[#111111] mb-6">
+            Daftar Alamat Tersimpan
+          </h3>
+
+          {!addresses.nodes.length ? (
+            <div className="p-8 text-center bg-[#FAF8F5] border border-[#E2DFD8] text-xs text-[#5A5550]">
+              Belum ada alamat tersimpan di akun Anda.
+            </div>
+          ) : (
+            <ExistingAddresses
+              addresses={addresses}
+              defaultAddress={defaultAddress}
+            />
+          )}
+        </div>
+
+        {/* Add New Address Form */}
+        <div className="pt-8 border-t border-[#E2DFD8]">
+          <h3 className="text-xs uppercase font-semibold tracking-[0.18em] text-[#111111] mb-6">
+            Tambah Alamat Baru
+          </h3>
           <NewAddressForm key={addresses.nodes.length} />
         </div>
-        <br />
-        <hr />
-        <br />
-        {!addresses.nodes.length ? (
-          <p>You have no addresses saved.</p>
-        ) : (
-          <ExistingAddresses
-            addresses={addresses}
-            defaultAddress={defaultAddress}
-          />
-        )}
       </div>
     </div>
   );
@@ -284,7 +303,7 @@ function NewAddressForm() {
     address2: '',
     city: '',
     company: '',
-    territoryCode: '',
+    territoryCode: 'ID',
     firstName: '',
     id: 'new',
     lastName: '',
@@ -299,14 +318,15 @@ function NewAddressForm() {
       address={newAddress}
       defaultAddress={null}
     >
-      {({stateForMethod}) => (
-        <div>
+      {({ stateForMethod }) => (
+        <div className="pt-2">
           <button
             disabled={stateForMethod('POST') !== 'idle'}
             formMethod="POST"
             type="submit"
+            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
           >
-            {stateForMethod('POST') !== 'idle' ? 'Creating' : 'Create'}
+            {stateForMethod('POST') !== 'idle' ? 'MENYIMPAN...' : 'TAMBAH ALAMAT BARU &rarr;'}
           </button>
         </div>
       )}
@@ -317,36 +337,38 @@ function NewAddressForm() {
 /**
  * @param {Pick<CustomerFragment, 'addresses' | 'defaultAddress'>}
  */
-function ExistingAddresses({addresses, defaultAddress}) {
+function ExistingAddresses({ addresses, defaultAddress }) {
   return (
-    <div>
-      <legend>Existing addresses</legend>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {addresses.nodes.map((address) => (
-        <AddressForm
-          key={address.id}
-          addressId={address.id}
-          address={address}
-          defaultAddress={defaultAddress}
-        >
-          {({stateForMethod}) => (
-            <div>
-              <button
-                disabled={stateForMethod('PUT') !== 'idle'}
-                formMethod="PUT"
-                type="submit"
-              >
-                {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save'}
-              </button>
-              <button
-                disabled={stateForMethod('DELETE') !== 'idle'}
-                formMethod="DELETE"
-                type="submit"
-              >
-                {stateForMethod('DELETE') !== 'idle' ? 'Deleting' : 'Delete'}
-              </button>
-            </div>
-          )}
-        </AddressForm>
+        <div key={address.id} className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] relative">
+          <AddressForm
+            addressId={address.id}
+            address={address}
+            defaultAddress={defaultAddress}
+          >
+            {({ stateForMethod }) => (
+              <div className="flex items-center gap-3 pt-4 border-t border-[#E2DFD8]">
+                <button
+                  disabled={stateForMethod('PUT') !== 'idle'}
+                  formMethod="PUT"
+                  type="submit"
+                  className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] text-white text-[10px] uppercase font-semibold tracking-[0.16em] transition-colors cursor-pointer"
+                >
+                  {stateForMethod('PUT') !== 'idle' ? '...' : 'SIMPAN'}
+                </button>
+                <button
+                  disabled={stateForMethod('DELETE') !== 'idle'}
+                  formMethod="DELETE"
+                  type="submit"
+                  className="px-4 py-2 bg-transparent hover:bg-red-50 text-red-600 border border-red-200 text-[10px] uppercase font-semibold tracking-[0.16em] transition-colors cursor-pointer"
+                >
+                  {stateForMethod('DELETE') !== 'idle' ? '...' : 'HAPUS'}
+                </button>
+              </div>
+            )}
+          </AddressForm>
+        </div>
       ))}
     </div>
   );
@@ -362,147 +384,161 @@ function ExistingAddresses({addresses, defaultAddress}) {
  *   }) => React.ReactNode;
  * }}
  */
-export function AddressForm({addressId, address, defaultAddress, children}) {
-  const {state, formMethod} = useNavigation();
+export function AddressForm({ addressId, address, defaultAddress, children }) {
+  const { state, formMethod } = useNavigation();
   /** @type {ActionReturnData} */
   const action = useActionData();
   const error = action?.error?.[addressId];
   const isDefaultAddress = defaultAddress?.id === addressId;
+
   return (
-    <Form id={addressId}>
-      <fieldset>
-        <input type="hidden" name="addressId" defaultValue={addressId} />
-        <label htmlFor="firstName">First name*</label>
-        <input
-          aria-label="First name"
-          autoComplete="given-name"
-          defaultValue={address?.firstName ?? ''}
-          id="firstName"
-          name="firstName"
-          placeholder="First name"
-          required
-          type="text"
-        />
-        <label htmlFor="lastName">Last name*</label>
-        <input
-          aria-label="Last name"
-          autoComplete="family-name"
-          defaultValue={address?.lastName ?? ''}
-          id="lastName"
-          name="lastName"
-          placeholder="Last name"
-          required
-          type="text"
-        />
-        <label htmlFor="company">Company</label>
-        <input
-          aria-label="Company"
-          autoComplete="organization"
-          defaultValue={address?.company ?? ''}
-          id="company"
-          name="company"
-          placeholder="Company"
-          type="text"
-        />
-        <label htmlFor="address1">Address line*</label>
-        <input
-          aria-label="Address line 1"
-          autoComplete="address-line1"
-          defaultValue={address?.address1 ?? ''}
-          id="address1"
-          name="address1"
-          placeholder="Address line 1*"
-          required
-          type="text"
-        />
-        <label htmlFor="address2">Address line 2</label>
-        <input
-          aria-label="Address line 2"
-          autoComplete="address-line2"
-          defaultValue={address?.address2 ?? ''}
-          id="address2"
-          name="address2"
-          placeholder="Address line 2"
-          type="text"
-        />
-        <label htmlFor="city">City*</label>
-        <input
-          aria-label="City"
-          autoComplete="address-level2"
-          defaultValue={address?.city ?? ''}
-          id="city"
-          name="city"
-          placeholder="City"
-          required
-          type="text"
-        />
-        <label htmlFor="zoneCode">State / Province*</label>
-        <input
-          aria-label="State/Province"
-          autoComplete="address-level1"
-          defaultValue={address?.zoneCode ?? ''}
-          id="zoneCode"
-          name="zoneCode"
-          placeholder="State / Province"
-          required
-          type="text"
-        />
-        <label htmlFor="zip">Zip / Postal Code*</label>
-        <input
-          aria-label="Zip"
-          autoComplete="postal-code"
-          defaultValue={address?.zip ?? ''}
-          id="zip"
-          name="zip"
-          placeholder="Zip / Postal Code"
-          required
-          type="text"
-        />
-        <label htmlFor="territoryCode">Country Code*</label>
-        <input
-          aria-label="Country code"
-          autoComplete="country"
-          defaultValue={address?.territoryCode ?? ''}
-          id="territoryCode"
-          name="territoryCode"
-          placeholder="Country"
-          required
-          type="text"
-          maxLength={2}
-        />
-        <label htmlFor="phoneNumber">Phone</label>
-        <input
-          aria-label="Phone Number"
-          autoComplete="tel"
-          defaultValue={address?.phoneNumber ?? ''}
-          id="phoneNumber"
-          name="phoneNumber"
-          placeholder="+16135551111"
-          pattern="^\+?[1-9]\d{3,14}$"
-          type="tel"
-        />
+    <Form id={addressId} className="space-y-4">
+      <input type="hidden" name="addressId" defaultValue={addressId} />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
+          <label htmlFor={`firstName-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            NAMA DEPAN*
+          </label>
           <input
-            defaultChecked={isDefaultAddress}
-            id="defaultAddress"
-            name="defaultAddress"
-            type="checkbox"
+            defaultValue={address?.firstName ?? ''}
+            id={`firstName-${addressId}`}
+            name="firstName"
+            placeholder="Nama depan"
+            required
+            type="text"
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
-          <label htmlFor="defaultAddress">Set as default address</label>
         </div>
-        {error ? (
-          <p>
-            <mark>
-              <small>{error}</small>
-            </mark>
-          </p>
-        ) : (
-          <br />
-        )}
-        {children({
-          stateForMethod: (method) => (formMethod === method ? state : 'idle'),
-        })}
-      </fieldset>
+        <div>
+          <label htmlFor={`lastName-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            NAMA BELAKANG*
+          </label>
+          <input
+            defaultValue={address?.lastName ?? ''}
+            id={`lastName-${addressId}`}
+            name="lastName"
+            placeholder="Nama belakang"
+            required
+            type="text"
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor={`address1-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          ALAMAT LENGKAP*
+        </label>
+        <input
+          defaultValue={address?.address1 ?? ''}
+          id={`address1-${addressId}`}
+          name="address1"
+          placeholder="Jalan, nomor rumah, RT/RW"
+          required
+          type="text"
+          className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label htmlFor={`city-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            KOTA / KABUPATEN*
+          </label>
+          <input
+            defaultValue={address?.city ?? ''}
+            id={`city-${addressId}`}
+            name="city"
+            placeholder="Kota"
+            required
+            type="text"
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          />
+        </div>
+        <div>
+          <label htmlFor={`zoneCode-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            PROVINSI*
+          </label>
+          <input
+            defaultValue={address?.zoneCode ?? ''}
+            id={`zoneCode-${addressId}`}
+            name="zoneCode"
+            placeholder="Provinsi"
+            required
+            type="text"
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          />
+        </div>
+        <div>
+          <label htmlFor={`zip-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            KODE POS*
+          </label>
+          <input
+            defaultValue={address?.zip ?? ''}
+            id={`zip-${addressId}`}
+            name="zip"
+            placeholder="Kode pos"
+            required
+            type="text"
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor={`phoneNumber-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            NO. TELEPON / WHATSAPP
+          </label>
+          <input
+            defaultValue={address?.phoneNumber ?? ''}
+            id={`phoneNumber-${addressId}`}
+            name="phoneNumber"
+            placeholder="081..."
+            type="tel"
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          />
+        </div>
+        <div>
+          <label htmlFor={`territoryCode-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+            KODE NEGARA*
+          </label>
+          <input
+            defaultValue={address?.territoryCode ?? 'ID'}
+            id={`territoryCode-${addressId}`}
+            name="territoryCode"
+            placeholder="ID"
+            required
+            type="text"
+            maxLength={2}
+            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          />
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 pt-1">
+        <input
+          defaultChecked={isDefaultAddress}
+          id={`defaultAddress-${addressId}`}
+          name="defaultAddress"
+          type="checkbox"
+          className="text-[#C5A059] focus:ring-0"
+        />
+        <label htmlFor={`defaultAddress-${addressId}`} className="text-xs text-[#5A5550]">
+          Jadikan sebagai alamat utama pengiriman
+        </label>
+      </div>
+
+      {error && (
+        <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 text-xs">
+          {error}
+        </div>
+      )}
+
+      {children({
+        stateForMethod: (method) => (formMethod === method ? state : 'idle'),
+      })}
     </Form>
   );
 }

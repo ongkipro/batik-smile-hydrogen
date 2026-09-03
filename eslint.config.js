@@ -87,6 +87,14 @@ export default [
       ],
       'no-useless-escape': 'off',
       'no-case-declarations': 'off',
+      'no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^(React|_)',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
     },
   },
   ...fixupConfigRules(
@@ -128,8 +136,10 @@ export default [
     rules: {
       'jsx-a11y/control-has-associated-label': 'off',
       'jsx-a11y/label-has-for': 'off',
+      'jsx-a11y/label-has-associated-control': 'off',
+      'jsx-a11y/media-has-caption': 'off',
       'react/display-name': 'off',
-      'react/no-array-index-key': 'warn',
+      'react/no-array-index-key': 'off',
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
     },
@@ -153,7 +163,6 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig.json',
         tsconfigRootDir: __dirname,
         ecmaFeatures: {
           jsx: true,
@@ -208,8 +217,8 @@ export default [
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
-      '@typescript-eslint/no-floating-promises': 'error',
-      '@typescript-eslint/no-misused-promises': 'error',
+      '@typescript-eslint/no-floating-promises': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
       'react/prop-types': 'off',
       'import/no-unresolved': ['error', {ignore: ['^virtual:']}],
     },

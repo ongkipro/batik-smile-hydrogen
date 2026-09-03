@@ -40,19 +40,40 @@ export function Aside({children, heading, type}) {
   return (
     <div
       aria-modal
-      className={`overlay ${expanded ? 'expanded' : ''}`}
+      className={`fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
+        expanded ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
+      }`}
       role="dialog"
       aria-labelledby={id}
     >
-      <button className="close-outside" onClick={close} />
-      <aside>
-        <header>
-          <h3 id={id}>{heading}</h3>
-          <button className="close reset" onClick={close} aria-label="Close">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+        onClick={close} 
+        aria-hidden="true"
+      />
+      
+      {/* Drawer Container */}
+      <aside
+        className={`absolute top-0 right-0 h-full w-full sm:w-[400px] bg-[#FAF8F5] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
+          expanded ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <header className="flex flex-shrink-0 items-center justify-between h-20 px-6 border-b border-[#E2DFD8] bg-[#FAF8F5] z-10">
+          <h3 id={id} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9E7D3B] m-0">
+            {heading}
+          </h3>
+          <button 
+            className="text-3xl leading-none text-[#111111] hover:text-[#C5A059] transition-colors pb-1 cursor-pointer"
+            onClick={close} 
+            aria-label="Tutup"
+          >
             &times;
           </button>
         </header>
-        <main>{children}</main>
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">
+          {children}
+        </main>
       </aside>
     </div>
   );

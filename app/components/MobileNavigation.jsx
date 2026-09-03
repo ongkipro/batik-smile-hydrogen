@@ -96,7 +96,7 @@ export function MobileNavigation({ cart }) {
 
       {/* WhatsApp CS */}
       <a
-        href="https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20butuh%20bantuan"
+        href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20butuh%20bantuan"
         target="_blank"
         rel="noreferrer"
         className="flex flex-col items-center gap-1 text-[10px] font-medium text-emerald-600 hover:text-emerald-700 transition-colors"

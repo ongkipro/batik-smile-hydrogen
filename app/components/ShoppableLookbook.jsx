@@ -1,73 +1,88 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router';
-import { BatikDivider, BatikCorner } from './BatikOrnaments';
+import { Link } from 'react-router';
 
-const HOTSPOTS = [
+const DEFAULT_HOTSPOTS = [
   {
-    id: 'ayah',
-    title: 'Kemeja Pria Furing Halus',
-    subtitle: 'Signature Tenun Dobby Timbul',
+    id: 'pria',
+    title: 'KEMEJA SARIMBIT PRIA',
+    subtitle: 'Signature Dobby & Furing Hero Halus',
     price: 'Rp 450.000',
     topPercent: 32,
-    leftPercent: 38,
-    url: '/products/batik-smile-kemeja-signature-dobby',
+    leftPercent: 36,
+    url: '/collections/sarimbit-exclusive',
   },
   {
-    id: 'ibu',
-    title: 'Gamis Brokat Prada Silk',
-    subtitle: 'Mahakarya Gold Edition',
-    price: 'Rp 850.000',
-    topPercent: 44,
-    leftPercent: 68,
-    url: '/products/batik-smile-gamis-mahakarya-silk',
+    id: 'wanita',
+    title: 'DRESS SARIMBIT WANITA',
+    subtitle: 'Motif Sekar Jagad Imperial',
+    price: 'Rp 650.000',
+    topPercent: 42,
+    leftPercent: 64,
+    url: '/collections/sarimbit-exclusive',
   },
   {
     id: 'anak',
-    title: 'Kemeja Anak Laki Furing',
-    subtitle: 'Essential Katun Adem',
+    title: 'KEMEJA BATIK ANAK',
+    subtitle: 'Katun Primisima Halus & Nyaman',
     price: 'Rp 225.000',
-    topPercent: 65,
-    leftPercent: 48,
-    url: '/products/batik-smile-kemeja-anak-batik',
+    topPercent: 66,
+    leftPercent: 50,
+    url: '/collections/batik-anak',
   },
 ];
 
-export function ShoppableLookbook() {
-  const [activePin, setActivePin] = useState(HOTSPOTS[0]);
+/**
+ * ShoppableLookbook: Engrasia Hotspot Archetype
+ * Interactive hotspot pins over family photography with Graceful Fallback
+ *
+ * @param {{
+ *   lookbook?: any;
+ * }} props
+ */
+export function ShoppableLookbook({ lookbook }) {
+  const [activePin, setActivePin] = useState(DEFAULT_HOTSPOTS[0]);
+
+  const heading = lookbook?.heading?.value || 'SHOP THE FAMILY LOOK';
+  const eyebrow = lookbook?.eyebrow?.value || 'INSPIRASI BUSANA SARIMBIT';
+  const narrative =
+    lookbook?.narrative?.value ||
+    'Sentuh titik interaktif pada foto keluarga di bawah ini untuk melihat rincian busana setiap anggota keluarga dan temukan harmoni corak yang sempurna.';
+
+  const imageUrl =
+    lookbook?.image?.reference?.image?.url ||
+    lookbook?.image?.value ||
+    '/banners/sarimbit_family_banner.jpg';
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5]">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#9E4719] font-bold">
-            Inspirasi Busana Terpadu
+    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
+      <div className="w-full">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
+            {eyebrow}
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-2 mb-3 text-neutral-900 leading-tight">
-            Shop The Family Look
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal">
+            {heading}
           </h2>
-          <BatikDivider variant="soga" className="my-3" />
-          <p className="text-xs sm:text-sm text-neutral-600 font-sans leading-relaxed">
-            Sentuh titik interaktif pada foto keluarga di bawah ini untuk melihat rincian busana
-            setiap anggota keluarga dan langsung membeli satu set sarimbit serasi.
+          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+            {narrative}
           </p>
         </div>
 
-        {/* Interactive Lookbook Canvas */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Main Photo with Pulsing Hotspot Pins */}
-          <div className="lg:col-span-8 relative rounded-2xl overflow-hidden shadow-2xl bg-neutral-900 border border-neutral-200">
-            <BatikCorner position="top-left" variant="gold" size={36} className="top-3 left-3 z-10" />
-            <BatikCorner position="bottom-right" variant="gold" size={36} className="bottom-3 right-3 z-10" />
-
+        {/* Interactive Canvas Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Main Photo Container with 0px Radius */}
+          <div className="lg:col-span-8 relative bg-[#111111] border border-[#E2DFD8] overflow-hidden shadow-sm aspect-[16/10] sm:aspect-[16/9]">
             <img
-              src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1400&auto=format&fit=crop"
+              src={imageUrl}
               alt="Sarimbit Keluarga Batik Smile"
-              className="w-full aspect-[16/10] sm:aspect-[16/9] object-cover object-top"
+              loading="lazy"
+              className="w-full h-full object-cover object-center"
             />
 
-            {/* Hotspot Pins */}
-            {HOTSPOTS.map((pin) => {
+            {/* Pulsing Hotspot Pins (Square Quiet Luxury) */}
+            {DEFAULT_HOTSPOTS.map((pin) => {
               const isSelected = activePin?.id === pin.id;
               return (
                 <button
@@ -75,18 +90,20 @@ export function ShoppableLookbook() {
                   type="button"
                   onClick={() => setActivePin(pin)}
                   style={{ top: `${pin.topPercent}%`, left: `${pin.leftPercent}%` }}
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2 group z-20"
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 group z-20 cursor-pointer"
                   aria-label={`Lihat ${pin.title}`}
                 >
                   <span className="relative flex h-8 w-8 items-center justify-center">
                     <span
-                      className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                      className={`animate-ping absolute inline-flex h-full w-full opacity-75 ${
                         isSelected ? 'bg-[#C5A059]' : 'bg-white'
                       }`}
                     />
                     <span
-                      className={`relative inline-flex rounded-full h-6 w-6 items-center justify-center text-xs font-bold shadow-lg border-2 border-white transition-transform duration-300 ${
-                        isSelected ? 'bg-[#9E4719] text-white scale-125' : 'bg-neutral-900 text-white group-hover:scale-110'
+                      className={`relative inline-flex h-6 w-6 items-center justify-center text-[10px] font-bold shadow-md border border-white transition-transform duration-300 ${
+                        isSelected
+                          ? 'bg-[#111111] text-[#C5A059] scale-110'
+                          : 'bg-white text-[#111111] group-hover:scale-110'
                       }`}
                     >
                       +
@@ -97,42 +114,51 @@ export function ShoppableLookbook() {
             })}
           </div>
 
-          {/* Active Hotspot Preview Sidebar */}
-          <div className="lg:col-span-4 bg-white p-8 rounded-2xl border border-neutral-200/80 shadow-md flex flex-col justify-between h-full">
+          {/* Active Hotspot Preview Card (0px Radius) */}
+          <div className="lg:col-span-4 bg-white p-8 border border-[#E2DFD8] flex flex-col justify-between">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
-                Karya Pilihan Terpilih
+              <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
+                DETAIL KARYA PILIHAN
               </span>
-              <h3 className="font-serif text-2xl font-bold text-neutral-900 mb-1">
+              <h3 className="font-serif text-2xl text-[#111111] font-normal mb-1">
                 {activePin?.title}
               </h3>
-              <p className="text-xs text-neutral-500 mb-4">{activePin?.subtitle}</p>
+              <p className="text-xs text-[#5A5550] mb-4 font-light">{activePin?.subtitle}</p>
 
-              <div className="text-2xl font-bold text-[#9E4719] mb-6 font-sans">
+              <div className="text-xl font-semibold text-[#111111] mb-6 tracking-wide">
                 {activePin?.price}
               </div>
 
-              <div className="space-y-3 text-xs text-neutral-600 border-t border-b border-neutral-100 py-4 mb-6">
-                <p>• <strong>Karakter:</strong> Jahitan butik furing halus adem.</p>
-                <p>• <strong>Pilihan Ukuran:</strong> S, M, L, XL, XXL, Custom Sizing.</p>
-                <p>• <strong>Garansi:</strong> 100% Bebas Tukar Size jika tidak pas.</p>
+              <div className="space-y-2.5 text-xs text-[#5A5550] border-t border-b border-[#E2DFD8] py-5 mb-8">
+                <p className="flex items-center justify-between">
+                  <span>Konstruksi:</span>
+                  <strong className="text-[#111111] font-medium">Jahitan butik furing katun hero</strong>
+                </p>
+                <p className="flex items-center justify-between">
+                  <span>Pilihan Ukuran:</span>
+                  <strong className="text-[#111111] font-medium">S, M, L, XL, XXL, Custom</strong>
+                </p>
+                <p className="flex items-center justify-between">
+                  <span>Garansi:</span>
+                  <strong className="text-[#111111] font-medium">100% Bebas Tukar Ukuran</strong>
+                </p>
               </div>
             </div>
 
             <div className="space-y-3">
-              <NavLink
-                to={activePin?.url || '/collections/sarimbit-batik-couple'}
-                className="w-full py-3.5 px-6 rounded bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-widest text-center block transition-all shadow-md"
+              <Link
+                to={activePin?.url || '/collections/sarimbit-exclusive'}
+                className="w-full py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] text-center block transition-colors duration-300 shadow-sm"
               >
-                Pilih Ukuran &amp; Beli &rarr;
-              </NavLink>
+                LIHAT DETAIL PRODUK &rarr;
+              </Link>
 
-              <NavLink
-                to="/collections/sarimbit-batik-couple"
-                className="w-full py-3 px-6 rounded bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-semibold text-xs uppercase tracking-wider text-center block transition-colors"
+              <Link
+                to="/collections/sarimbit-exclusive"
+                className="w-full py-3 px-6 bg-[#FAF8F5] hover:bg-[#111111] !text-[#111111] hover:!text-white text-[11px] uppercase font-semibold tracking-[0.18em] text-center block border border-[#E2DFD8] hover:border-[#111111] transition-colors duration-300"
               >
-                Beli 1 Paket Keluarga Lengkap
-              </NavLink>
+                LIHAT SELURUH SARIMBIT PASANGAN &rarr;
+              </Link>
             </div>
           </div>
         </div>

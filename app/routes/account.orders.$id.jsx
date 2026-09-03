@@ -1,25 +1,25 @@
-import {redirect, useLoaderData} from 'react-router';
-import {Money, Image} from '@shopify/hydrogen';
-import {CUSTOMER_ORDER_QUERY} from '~/graphql/customer-account/CustomerOrderQuery';
+import { redirect, useLoaderData, Link } from 'react-router';
+import { Money, Image } from '@shopify/hydrogen';
+import { CUSTOMER_ORDER_QUERY } from '~/graphql/customer-account/CustomerOrderQuery';
 
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = ({data}) => {
-  return [{title: `Order ${data?.order?.name}`}];
+export const meta = ({ data }) => {
+  return [{ title: `Pesanan ${data?.order?.name} — Butik Batik Smile Nusantara` }];
 };
 
 /**
  * @param {Route.LoaderArgs}
  */
-export async function loader({params, context}) {
-  const {customerAccount} = context;
+export async function loader({ params, context }) {
+  const { customerAccount } = context;
   if (!params.id) {
     return redirect('/account/orders');
   }
 
   const orderId = atob(params.id);
-  const {data, errors} = await customerAccount.query(CUSTOMER_ORDER_QUERY, {
+  const { data, errors } = await customerAccount.query(CUSTOMER_ORDER_QUERY, {
     variables: {
       orderId,
       language: customerAccount.i18n.language,
@@ -30,25 +30,14 @@ export async function loader({params, context}) {
     throw new Error('Order not found');
   }
 
-  const {order} = data;
-
-  // Extract line items directly from nodes array
+  const { order } = data;
   const lineItems = order.lineItems.nodes;
-
-  // Extract discount applications directly from nodes array
   const discountApplications = order.discountApplications.nodes;
+  const fulfillmentStatus = order.fulfillments.nodes[0]?.status ?? 'Sedang Diproses';
 
-  // Get fulfillment status from first fulfillment node
-  const fulfillmentStatus = order.fulfillments.nodes[0]?.status ?? 'N/A';
-
-  // Get first discount value with proper type checking
   const firstDiscount = discountApplications[0]?.value;
-
-  // Type guard for MoneyV2 discount
   const discountValue =
     firstDiscount?.__typename === 'MoneyV2' ? firstDiscount : null;
-
-  // Type guard for percentage discount
   const discountPercentage =
     firstDiscount?.__typename === 'PricingPercentageValue'
       ? firstDiscount.percentage
@@ -72,146 +61,167 @@ export default function OrderRoute() {
     discountPercentage,
     fulfillmentStatus,
   } = useLoaderData();
+
   return (
-    <div className="account-order">
-      <h2>Order {order.name}</h2>
-      <p>Placed on {new Date(order.processedAt).toDateString()}</p>
-      {order.confirmationNumber && (
-        <p>Confirmation: {order.confirmationNumber}</p>
-      )}
-      <br />
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lineItems.map((lineItem, lineItemIndex) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <OrderLineRow key={lineItemIndex} lineItem={lineItem} />
-            ))}
-          </tbody>
-          <tfoot>
-            {((discountValue && discountValue.amount) ||
-              discountPercentage) && (
-              <tr>
-                <th scope="row" colSpan={3}>
-                  <p>Discounts</p>
-                </th>
-                <th scope="row">
-                  <p>Discounts</p>
-                </th>
-                <td>
-                  {discountPercentage ? (
-                    <span>-{discountPercentage}% OFF</span>
-                  ) : (
-                    discountValue && <Money data={discountValue} />
-                  )}
-                </td>
-              </tr>
-            )}
-            <tr>
-              <th scope="row" colSpan={3}>
-                <p>Subtotal</p>
-              </th>
-              <th scope="row">
-                <p>Subtotal</p>
-              </th>
-              <td>
-                <Money data={order.subtotal} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" colSpan={3}>
-                Tax
-              </th>
-              <th scope="row">
-                <p>Tax</p>
-              </th>
-              <td>
-                <Money data={order.totalTax} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" colSpan={3}>
-                Total
-              </th>
-              <th scope="row">
-                <p>Total</p>
-              </th>
-              <td>
-                <Money data={order.totalPrice} />
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+    <div>
+      {/* Back Button */}
+      <div className="mb-6">
+        <Link
+          to="/account/orders"
+          className="text-[10px] uppercase font-semibold tracking-[0.18em] text-[#5A5550] hover:text-[#111111] transition-colors"
+        >
+          &larr; KEMBALI KE RIWAYAT PESANAN
+        </Link>
+      </div>
+
+      {/* Header */}
+      <div className="border-b border-[#E2DFD8] pb-4 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3>Shipping Address</h3>
-          {order?.shippingAddress ? (
-            <address>
-              <p>{order.shippingAddress.name}</p>
-              {order.shippingAddress.formatted ? (
-                <p>{order.shippingAddress.formatted}</p>
-              ) : (
-                ''
-              )}
-              {order.shippingAddress.formattedArea ? (
-                <p>{order.shippingAddress.formattedArea}</p>
-              ) : (
-                ''
-              )}
-            </address>
-          ) : (
-            <p>No shipping address defined</p>
-          )}
-          <h3>Status</h3>
-          <div>
-            <p>{fulfillmentStatus}</p>
-          </div>
+          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+            DETAIL TRANSAKSI
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
+            Pesanan #{order.name}
+          </h2>
+          <p className="text-xs text-[#A69F96] mt-1">
+            Dipesan pada{' '}
+            {new Date(order.processedAt).toLocaleDateString('id-ID', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] px-3 py-1 bg-[#FAF8F5] border border-[#E2DFD8] text-[#111111] uppercase font-medium tracking-wider">
+            {order.financialStatus}
+          </span>
+          <span className="text-[10px] px-3 py-1 bg-[#FAF8F5] border border-[#C5A059] text-[#9E7D3B] uppercase font-semibold tracking-wider">
+            {fulfillmentStatus}
+          </span>
         </div>
       </div>
-      <br />
-      <p>
-        <a target="_blank" href={order.statusPageUrl} rel="noreferrer">
-          View Order Status →
-        </a>
-      </p>
-    </div>
-  );
-}
 
-/**
- * @param {{lineItem: OrderLineItemFullFragment}}
- */
-function OrderLineRow({lineItem}) {
-  return (
-    <tr key={lineItem.id}>
-      <td>
-        <div>
-          {lineItem?.image && (
-            <div>
-              <Image data={lineItem.image} width={96} height={96} />
-            </div>
-          )}
-          <div>
-            <p>{lineItem.title}</p>
-            <small>{lineItem.variantTitle}</small>
-          </div>
+      {/* Order Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        {/* Line Items Table */}
+        <div className="lg:col-span-2 overflow-x-auto">
+          <table className="w-full text-left text-xs border border-[#E2DFD8]">
+            <thead className="bg-[#FAF8F5] border-b border-[#E2DFD8] text-[10px] uppercase tracking-wider text-[#5A5550]">
+              <tr>
+                <th className="py-3 px-4 font-semibold">Produk Batik</th>
+                <th className="py-3 px-4 font-semibold text-center">Jumlah</th>
+                <th className="py-3 px-4 font-semibold text-right">Harga</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#E2DFD8]">
+              {lineItems.map((lineItem, idx) => (
+                <tr key={idx} className="hover:bg-[#FAF8F5]/50 transition-colors">
+                  <td className="py-4 px-4">
+                    <div className="flex items-center gap-3">
+                      {lineItem?.image && (
+                        <div className="w-14 h-16 bg-[#111111] overflow-hidden shrink-0">
+                          <Image
+                            data={lineItem.image}
+                            width={56}
+                            height={64}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                      <div>
+                        <p className="font-serif text-sm font-normal text-[#111111]">
+                          {lineItem.title}
+                        </p>
+                        {lineItem.variantTitle && (
+                          <span className="text-[10px] text-[#A69F96] block uppercase tracking-wider">
+                            Ukuran/Varian: {lineItem.variantTitle}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="py-4 px-4 text-center font-medium text-[#111111]">
+                    {lineItem.quantity}
+                  </td>
+                  <td className="py-4 px-4 text-right font-semibold text-[#111111]">
+                    <Money data={lineItem.price} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot className="bg-[#FAF8F5] border-t border-[#E2DFD8] text-xs">
+              {discountValue && (
+                <tr>
+                  <td colSpan={2} className="py-2.5 px-4 text-[#9E7D3B]">
+                    Diskon Butik
+                  </td>
+                  <td className="py-2.5 px-4 text-right text-[#9E7D3B] font-semibold">
+                    {discountPercentage ? (
+                      <span>-{discountPercentage}%</span>
+                    ) : (
+                      <Money data={discountValue} />
+                    )}
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <td colSpan={2} className="py-2.5 px-4 text-[#5A5550]">
+                  Subtotal
+                </td>
+                <td className="py-2.5 px-4 text-right font-medium text-[#111111]">
+                  <Money data={order.subtotal} />
+                </td>
+              </tr>
+              <tr className="border-t border-[#E2DFD8] text-sm">
+                <td colSpan={2} className="py-3 px-4 font-semibold text-[#111111]">
+                  Total Pembayaran
+                </td>
+                <td className="py-3 px-4 text-right font-bold text-[#111111]">
+                  <Money data={order.totalPrice} />
+                </td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
-      </td>
-      <td>
-        <Money data={lineItem.price} />
-      </td>
-      <td>{lineItem.quantity}</td>
-      <td>
-        <Money data={lineItem.totalDiscount} />
-      </td>
-    </tr>
+
+        {/* Shipping & Delivery Sidebar */}
+        <div className="space-y-6">
+          <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8]">
+            <h4 className="text-[10px] uppercase font-semibold tracking-[0.18em] text-[#9E7D3B] mb-3">
+              ALAMAT PENGIRIMAN
+            </h4>
+            {order?.shippingAddress ? (
+              <div className="text-xs text-[#5A5550] leading-relaxed space-y-1">
+                <strong className="block text-[#111111] font-medium">
+                  {order.shippingAddress.name}
+                </strong>
+                {order.shippingAddress.formatted && (
+                  <p>{order.shippingAddress.formatted}</p>
+                )}
+                {order.shippingAddress.formattedArea && (
+                  <p>{order.shippingAddress.formattedArea}</p>
+                )}
+              </div>
+            ) : (
+              <p className="text-xs text-[#A69F96]">Tidak ada alamat tercatat</p>
+            )}
+          </div>
+
+          {order.statusPageUrl && (
+            <a
+              target="_blank"
+              href={order.statusPageUrl}
+              rel="noreferrer"
+              className="block w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] font-semibold uppercase tracking-[0.18em] text-center transition-colors"
+            >
+              LACAK STATUS PENGIRIMAN &rarr;
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -6,38 +6,40 @@ import { AnnouncementBar } from './AnnouncementBar';
 import { MegaMenu } from './MegaMenu';
 
 /**
- * @param {HeaderProps}
+ * Header: Quiet Luxury Nusantara Master Header
+ * Official brand logo, zero border radius, micro-tracking navigation
+ *
+ * @param {HeaderProps} props
  */
-export function Header({ header, isLoggedIn, cart, publicStoreDomain }) {
-  const { shop } = header;
+export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
+  const { open } = useAside();
 
   return (
     <div className="sticky top-0 z-40 w-full">
       <AnnouncementBar />
 
-      <header className="w-full bg-white/95 backdrop-blur-md border-b border-neutral-200/80 shadow-sm transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          {/* Mobile Menu Button & Brand Logo */}
+      <header className="w-full bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E2DFD8] transition-all relative z-50">
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 flex items-center justify-between gap-4 relative">
+          {/* Mobile Menu Trigger & Brand Logo */}
           <div className="flex items-center gap-4">
             <button
               type="button"
-              className="lg:hidden p-2 text-neutral-800 hover:text-[#9E4719] transition-colors"
-              onClick={() => openAside('mobile')}
-              aria-label="Open mobile menu"
+              className="lg:hidden p-2 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+              onClick={() => open('mobile')}
+              aria-label="Buka menu navigasi"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
 
-            {/* Brand Logo & Wordmark */}
-            <NavLink to="/" className="flex flex-col items-start group">
-              <span className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 group-hover:text-[#9E4719] transition-colors">
-                BATIK SMILE
-              </span>
-              <span className="text-[9px] uppercase tracking-[0.25em] text-[#C5A059] font-semibold -mt-1">
-                Mahakarya Nusantara
-              </span>
+            {/* Brand Logo */}
+            <NavLink to="/" className="flex items-center group">
+              <img
+                src="/brand/batik-smile-logo.png"
+                alt="Batik Smile Nusantara"
+                className="h-10 sm:h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
+              />
             </NavLink>
           </div>
 
@@ -58,35 +60,35 @@ function HeaderCtas({ isLoggedIn, cart }) {
   const { open } = useAside();
 
   return (
-    <div className="flex items-center gap-2 sm:gap-4">
-      {/* Search Button */}
+    <div className="flex items-center gap-1 sm:gap-3">
+      {/* Search Trigger */}
       <button
         type="button"
         onClick={() => open('search')}
-        className="p-2 text-neutral-700 hover:text-[#9E4719] transition-colors rounded-full hover:bg-neutral-100"
-        aria-label="Search"
+        className="p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+        aria-label="Cari produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </button>
 
-      {/* Account Link */}
+      {/* Customer Account Link */}
       <NavLink
         to="/account"
-        className="hidden sm:flex items-center gap-1.5 p-2 text-neutral-700 hover:text-[#9E4719] transition-colors rounded-full hover:bg-neutral-100 text-xs font-medium"
+        className="hidden sm:flex items-center gap-1.5 p-2 text-[#111111] hover:text-[#C5A059] transition-colors text-[10px] uppercase font-semibold tracking-[0.16em]"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.8"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            strokeWidth="1.5"
             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
           />
         </svg>
-        <Suspense fallback="Akun">
+        <Suspense fallback="AKUN">
           <Await resolve={isLoggedIn}>
-            {(logged) => (logged ? 'Akun' : 'Masuk')}
+            {(logged) => (logged ? 'AKUN' : 'MASUK')}
           </Await>
         </Suspense>
       </NavLink>
@@ -130,18 +132,18 @@ function CartBadge({ count }) {
           url: window.location.href || '',
         });
       }}
-      className="flex items-center gap-2 px-3 py-2 rounded-full bg-neutral-900 text-white hover:bg-[#9E4719] transition-all shadow-sm"
+      className="flex items-center gap-2 px-3.5 py-2 bg-[#111111] text-[#C5A059] hover:bg-[#C5A059] hover:text-[#111111] transition-all cursor-pointer border border-[#C5A059]/40"
       aria-label={`Tas Belanja (${count} item)`}
     >
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+          strokeWidth="1.5"
           d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
         />
       </svg>
-      <span className="text-xs font-semibold">{count}</span>
+      <span className="text-[11px] font-bold tracking-wider">{count}</span>
     </button>
   );
 }
@@ -149,24 +151,26 @@ function CartBadge({ count }) {
 /**
  * Mobile Navigation Drawer Link Helper
  */
-export function HeaderMenu({ menu, viewport, publicStoreDomain, primaryDomainUrl }) {
+export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomainUrl }) {
   const { close } = useAside();
 
   const mobileCategories = [
-    { title: 'Sarimbit 3 Kasta (Couple)', url: '/collections/sarimbit-batik-couple' },
-    { title: 'Batik Wanita (Blus, Tunik, Gamis)', url: '/collections/batik-wanita' },
-    { title: 'Batik Pria (Kemeja Furing & Hem)', url: '/collections/batik-pria' },
-    { title: 'Batik Anak & Adat Jawa', url: '/collections/batik-anak' },
-    { title: 'Layanan Jahit Kustom & Seragam', url: '/pages/layanan-seragam' },
-    { title: 'Tentang Butik & Showroom', url: '/pages/tentang-kami' },
-    { title: 'Lokasi Butik Semarang & Solo', url: '/pages/lokasi-toko' },
+    { title: 'SARIMBIT 3 KASTA (COUPLE)', url: '/collections/sarimbit-exclusive' },
+    { title: 'BATIK WANITA (BLUS & GAMIS)', url: '/collections/batik-wanita' },
+    { title: 'BATIK PRIA (KEMEJA FURING)', url: '/collections/batik-pria' },
+    { title: 'BATIK ANAK & ADAT JAWA', url: '/collections/batik-anak' },
+    { title: 'KAIN BATIK TULIS (LEMBARAN)', url: '/collections/jarik-kain-batik' },
+    { title: 'LAYANAN SERAGAM & JAHIT', url: '/pages/layanan-seragam' },
+    { title: 'FASILITAS GEDUNG 3 LANTAI', url: '/pages/fasilitas-store' },
+    { title: 'TENTANG KAMI SEJAK 2007', url: '/pages/tentang-kami' },
+    { title: 'LOKASI OUTLET (SIMONGAN & BANYUMANIK)', url: '/pages/lokasi-toko' },
   ];
 
   return (
-    <nav className="flex flex-col gap-2 p-6" role="navigation">
-      <div className="mb-4 pb-3 border-b border-neutral-200">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#9E4719]">
-          Kategori Pilihan
+    <nav className="flex flex-col gap-1 p-6 bg-[#FAF8F5] min-h-full" role="navigation">
+      <div className="mb-4 pb-3 border-b border-[#E2DFD8]">
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#9E7D3B]">
+          NAVIGASI UTAMA BUTIK
         </span>
       </div>
 
@@ -175,21 +179,21 @@ export function HeaderMenu({ menu, viewport, publicStoreDomain, primaryDomainUrl
           key={idx}
           to={item.url}
           onClick={close}
-          className="py-2.5 px-3 rounded-lg text-sm font-medium text-neutral-800 hover:bg-amber-50 hover:text-[#9E4719] transition-colors flex items-center justify-between"
+          className="py-3 px-3 text-[11px] font-medium tracking-[0.14em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40"
         >
           <span>{item.title}</span>
-          <span className="text-neutral-400">&rarr;</span>
+          <span className="text-[#A69F96]">&rarr;</span>
         </NavLink>
       ))}
 
-      <div className="mt-8 pt-4 border-t border-neutral-200">
+      <div className="mt-8 pt-4 border-t border-[#E2DFD8]">
         <a
-          href="https://wa.me/6281234567890?text=Halo%20Batik%20Smile"
+          href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
           target="_blank"
-          rel="noreferrer"
-          className="w-full py-3 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2"
+          rel="noopener noreferrer"
+          className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.18em] flex items-center justify-center gap-2 transition-colors shadow-sm"
         >
-          Chat Konsultan via WhatsApp
+          KONSULTASI WHATSAPP RESMI &rarr;
         </a>
       </div>
     </nav>

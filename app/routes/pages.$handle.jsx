@@ -1,76 +1,91 @@
-import {useLoaderData} from 'react-router';
-import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import { useLoaderData, NavLink } from 'react-router';
+import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.page.title ?? ''}`}];
+export const meta = ({ data }) => {
+  return [
+    {
+      title: `${data?.page.title ?? 'Halaman'} — Butik Batik Smile Nusantara`,
+    },
+    {
+      name: 'description',
+      content: data?.page.seo?.description || 'Halaman informasi resmi Butik Batik Smile Semarang.',
+    },
+  ];
 };
 
 /**
  * @param {Route.LoaderArgs} args
  */
 export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-
-  return {...deferredData, ...criticalData};
+  return { ...criticalData };
 }
 
 /**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {Route.LoaderArgs}
  */
-async function loadCriticalData({context, request, params}) {
+async function loadCriticalData({ context, request, params }) {
   if (!params.handle) {
     throw new Error('Missing page handle');
   }
 
-  const [{page}] = await Promise.all([
+  const [{ page }] = await Promise.all([
     context.storefront.query(PAGE_QUERY, {
       variables: {
         handle: params.handle,
       },
     }),
-    // Add other queries here, so that they are loaded in parallel
   ]);
 
   if (!page) {
-    throw new Response('Not Found', {status: 404});
+    throw new Response('Not Found', { status: 404 });
   }
 
-  redirectIfHandleIsLocalized(request, {handle: params.handle, data: page});
+  redirectIfHandleIsLocalized(request, { handle: params.handle, data: page });
 
   return {
     page,
   };
 }
 
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {Route.LoaderArgs}
- */
-function loadDeferredData({context}) {
-  return {};
-}
-
 export default function Page() {
   /** @type {LoaderReturnData} */
-  const {page} = useLoaderData();
+  const { page } = useLoaderData();
 
   return (
-    <div className="page">
-      <header>
-        <h1>{page.title}</h1>
-      </header>
-      <main dangerouslySetInnerHTML={{__html: page.body}} />
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Breadcrumb */}
+        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+          <NavLink to="/" className="hover:text-[#9E7D3B]">
+            BERANDA
+          </NavLink>
+          <span>/</span>
+          <span className="text-[#111111] font-semibold uppercase">{page.title}</span>
+        </nav>
+
+        {/* Header */}
+        <div className="border-b border-[#E2DFD8] pb-6 mb-10">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+            BATIK SMILE NUSANTARA
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-2">
+            {page.title}
+          </h1>
+          <div className="w-12 h-px bg-[#C5A059] mt-4" />
+        </div>
+
+        {/* Content Box */}
+        <div className="bg-white p-8 sm:p-12 border border-[#E2DFD8] shadow-sm mb-12">
+          <main
+            className="prose prose-neutral max-w-none text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed [&>h2]:font-serif [&>h2]:text-xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-8 [&>h2]:mb-3 [&>h3]:font-serif [&>h3]:text-lg [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-6 [&>h3]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:space-y-1 [&>p]:mb-4"
+            dangerouslySetInnerHTML={{ __html: page.body }}
+          />
+        </div>
+      </div>
     </div>
   );
 }

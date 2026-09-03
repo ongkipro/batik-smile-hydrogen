@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ==========================================================================
+  PAGES-SCHEMA.XML: CODING & COMPONENT MAP FOR BATIK SMILE NUSANTARA
+  ==========================================================================
+  Authoritative structural and data-flow map for all routes, components,
+  GraphQL queries, Metaobjects, and interactions.
+  Use this map during development, editing, revisions, and debugging.
+-->
+<storefront-architecture version="1.0.0" project="batik-smile-hydrogen">
+  <meta>
+    <store-name>Batik Smile Nusantara</store-name>
+    <internal-domain>23ahbp-sq.myshopify.com</internal-domain>
+    <production-domain>https://batiksmile.com</production-domain>
+    <framework>Shopify Hydrogen (^2026.4.x) + React Router v7</framework>
+    <styling>Tailwind CSS v4 (Quiet Luxury Nusantara)</styling>
+    <color-system>Quad-Harmonic: Hitam (#111111 / #1C1C1C), Putih (#FFFFFF / #FAF8F5), Gold (#C5A059), Brown (#7C3F1D / #4A2E1B)</color-system>
+  </meta>
+
+  <routes>
+    <!-- ================================================================== -->
+    <!-- 0. ROOT LAYOUT (Wrapper across all pages)                          -->
+    <!-- ================================================================== -->
+    <route path="/*" file="app/root.jsx" type="root-layout">
+      <description>Master document wrapper, typography preloading, cart provider, and global drawer</description>
+      <html-structure>
+        <head>
+          <font-preload family="Instrument Sans" weight="400;500;600" />
+          <font-preload family="Cormorant Garamond" weight="400;500;600;700" italic="true" />
+          <stylesheet href="app/styles/app.css" />
+        </head>
+        <body>
+          <component name="Header" file="app/components/Header.jsx" sticky="true" />
+          <outlet />
+          <component name="Footer" file="app/components/Footer.jsx" />
+          <component name="CartDrawer" file="app/components/CartDrawer.jsx" side="right" />
+          <component name="WhatsAppConcierge" file="app/components/WhatsAppConcierge.jsx" position="bottom-right" />
+        </body>
+      </html-structure>
+      <data-contracts>
+        <query name="LayoutQuery">
+          <field name="shop.name" />
+          <field name="shop.primaryDomain" />
+          <field name="cart" handler="getCartIdFromSession" />
+        </query>
+      </data-contracts>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 1. HOMEPAGE ROUTE (/)                                              -->
+    <!-- ================================================================== -->
+    <route path="/" file="app/routes/_index.jsx" type="editorial-homepage">
+      <title>Batik Smile Nusantara — Butik Batik Modern &amp; Spesialis Sarimbit Keluarga</title>
+      <cache-strategy mode="CacheLong" max-age="3600" stale-while-revalidate="86400" />
+      
+      <loader-contracts>
+        <graphql-query name="HomepageQuery">
+          <!-- Live Shopify Collections -->
+          <collection handle="batik-wanita" first="6" as="womenProducts" />
+          <collection handle="batik-pria" first="6" as="menProducts" />
+          <collection handle="sarimbit-ekonomis" first="6" as="sarimbitProducts" />
+          <collection handle="jarik-kain-batik" first="6" as="rawFabricProducts" />
+          <collections limit="10" sortKey="UPDATED_AT" as="featuredCollections" withImage="true" />
+          <!-- Native Metaobjects with Graceful Fallbacks -->
+          <metaobject type="hero_banner" as="heroData" fallback="public/banners/hero_editorial_banner.jpg" />
+          <metaobject type="heritage_video" as="videoData" fallback="public/banners/craftsmanship_canting_banner.jpg" />
+          <metaobject type="lookbook_spotlight" as="lookbookData" fallback="public/banners/sarimbit_family_banner.jpg" />
+          <metaobject type="customer_testimonial" limit="5" as="testimonials" />
+        </graphql-query>
+      </loader-contracts>
+
+      <sections-hierarchy>
+        <!-- Section 1: Hero Editorial -->
+        <section id="hero-editorial" component="app/components/HeroEditorial.jsx" order="1">
+          <design-token scheme="Scheme 1 (Mori Linen)" height="100vh" aspect="16:9" />
+          <props>
+            <prop name="data" source="heroData" />
+            <prop name="scrollAnchorId" value="#best-sellers" />
+          </props>
+          <features>Full-bleed imagery/video, centered circular down-arrow scroll cue, pagination dots</features>
+        </section>
+
+        <!-- Section 2: Curated Featured Collections (Real Shopify Images) -->
+        <section id="featured-collections" component="app/components/FeaturedCollections.jsx" order="2">
+          <design-token scheme="Scheme 1 (Mori Linen)" bg="#FAF8F5" aspect="16:10" />
+          <props>
+            <prop name="collections" source="featuredCollections" />
+          </props>
+          <features>6-Card responsive boutique grid, live Shopify CDN collection covers, 0px radius, hover scale-105</features>
+        </section>
+
+        <!-- Section 3: Best Sellers Switcher -->
+        <section id="best-sellers" component="app/components/BestSellersTabs.jsx" order="3">
+          <design-token scheme="Scheme 1" grid="grid-cols-1 md:grid-cols-3" gap="gap-8" />
+          <tabs>
+            <tab id="women" label="WOMEN" source="womenProducts" />
+            <tab id="men" label="MEN" source="menProducts" />
+            <tab id="sarimbit" label="SARIMBIT" source="sarimbitProducts" />
+          </tabs>
+          <item-card component="app/components/ProductItem.jsx">
+            <container-aspect>aspect-[4/5]</container-aspect>
+            <title-syntax>NAME [TYPE]</title-syntax>
+            <price-format>RP {{amount}}</price-format>
+            <hover-effect>secondary image crossfade + smooth scale-105</hover-effect>
+          </item-card>
+        </section>
+
+        <!-- Section 4: Heritage Craftsmanship Video -->
+        <section id="heritage-craftsmanship" component="app/components/HeritageVideoBanner.jsx" order="4">
+          <design-token scheme="Scheme 3 (Mahakarya Obsidian Gold)" bg="#111111" text="#FFFFFF" />
+          <props>
+            <prop name="videoData" source="videoData" />
+          </props>
+          <typography>
+            <eyebrow>PROUDLY MADE IN INDONESIA</eyebrow>
+            <headline font="Cormorant Garamond">FINEST HANDMADE</headline>
+          </typography>
+          <controls>play/pause toggle, time counter (e.g. 0:08 / 0:18)</controls>
+        </section>
+
+        <!-- Section 5: Choose Your Batik (Raw Fabric Gallery) -->
+        <section id="choose-your-batik" component="app/components/ChooseYourBatikGrid.jsx" order="5">
+          <design-token scheme="Scheme 2 (Pure Studio)" grid="grid-cols-2 md:grid-cols-4" gap="gap-6" />
+          <props>
+            <prop name="products" source="rawFabricProducts" />
+          </props>
+          <item-card component="app/components/ProductItem.jsx">
+            <badge>Batik Tulis Asli</badge>
+            <pathway>Beli Lembaran Kain / Tambah Jasa Jahit</pathway>
+          </item-card>
+        </section>
+
+        <!-- Section 6: Shoppable Lookbook Spotlight -->
+        <section id="shoppable-lookbook" component="app/components/ShoppableLookbook.jsx" order="6">
+          <design-token scheme="Scheme 1" aspect="16:9" />
+          <props>
+            <prop name="lookbook" source="lookbookData" />
+          </props>
+          <interaction>Interactive pulsing hotspot pins over family photography; click opens product mini-modal</interaction>
+        </section>
+
+        <!-- Section 7: Customer Love Notes -->
+        <section id="customer-love-notes" component="app/components/CustomerLoveNotes.jsx" order="7">
+          <design-token scheme="Scheme 1" bg="#FAF8F5" />
+          <props>
+            <prop name="testimonials" source="testimonials" />
+          </props>
+          <elements>5-star rating icons (#C5A059), quote serif typography, customer name in uppercase, pagination dots</elements>
+        </section>
+
+        <!-- Section 8: 4 Core Trust Pillars -->
+        <section id="trust-guarantees" component="app/components/TrustGuaranteeBar.jsx" order="8">
+          <design-token scheme="Scheme 4" bg="#F4EFEA" border="#E2DFD8" />
+          <pillars>
+            <pillar icon="truck" label="LOCAL FREE DELIVERY" desc="Bebas Ongkir Seluruh Nusantara" />
+            <pillar icon="refresh" label="SATISFIED OR REFUNDED" desc="Jaminan Kepuasan &amp; Tukar Size" />
+            <pillar icon="support" label="TOP-NOTCH SUPPORT" desc="Konsultan Batik &amp; Styling Pribadi" />
+            <pillar icon="lock" label="SECURE PAYMENTS" desc="Pembayaran Resmi Terenkripsi" />
+          </pillars>
+        </section>
+
+        <!-- Section 9: Showroom O2O -->
+        <section id="showroom-o2o" component="app/components/ShowroomO2O.jsx" order="9">
+          <design-token scheme="Scheme 1" />
+          <showrooms>
+            <showroom name="Flagship Simongan (3 Lantai)" address="Jl. Simongan Raya No. 109, Pamularsih, Semarang" />
+            <showroom name="Cabang Banyumanik" address="Jl. Sukun Raya No. 23, Banyumanik, Semarang" />
+          </showrooms>
+        </section>
+      </sections-hierarchy>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 2. COLLECTIONS PLP ROUTE (/collections/:handle)                    -->
+    <!-- ================================================================== -->
+    <route path="/collections/:handle" file="app/routes/collections.$handle.jsx" type="catalog-plp">
+      <description>Tier-differentiated collection page supporting Exclusive, Premium, and Standard grids</description>
+      <cache-strategy mode="CacheLong" max-age="3600" />
+      
+      <loader-contracts>
+        <graphql-query name="CollectionDetailsQuery">
+          <field name="collection.title" />
+          <field name="collection.description" />
+          <field name="collection.products(first: 24)" />
+          <field name="collection.metafields(tier_kasta, banner_hero)" />
+        </graphql-query>
+      </loader-contracts>
+
+      <tier-branches>
+        <!-- Branch A: Exclusive Collection (Kasta I) -->
+        <tier id="sarimbit-exclusive" condition="handle == 'sarimbit-exclusive'">
+          <component name="CollectionExclusive" file="app/components/CollectionExclusive.jsx" />
+          <design-token scheme="Scheme 3 (Dark Luxe)" bg="#111111" text="#FFFFFF" accent="#C5A059" />
+          <layout>2-to-3 column expansive editorial layout, wide whitespace, artisan storytelling block</layout>
+          <banner>Private VIP WhatsApp Concierge Booking Banner</banner>
+        </tier>
+
+        <!-- Branch B: Premium Collection (Kasta II) -->
+        <tier id="sarimbit-premium" condition="handle == 'sarimbit-premium'">
+          <component name="CollectionPremium" file="app/components/CollectionPremium.jsx" />
+          <design-token scheme="Scheme 1 (Mori Linen)" bg="#FAF8F5" text="#1C1C1C" />
+          <layout>3-to-4 column balanced boutique grid, Signature Dobby badges, couple angle hover preview</layout>
+          <filter>Family Sarimbit Filter Drawer &amp; Fabric Drape Selector</filter>
+        </tier>
+
+        <!-- Branch C: Standard / RTW Collections (Kasta III) -->
+        <tier id="default-rtw" condition="default">
+          <design-token scheme="Scheme 2 (Pure Studio)" bg="#FFFFFF" text="#1C1C1C" />
+          <layout>4-column high-speed conversion grid with direct add-to-bag cues</layout>
+          <filter>Category and garment type filter chips (Kemeja, Dress, Blus, Outer, Gamis)</filter>
+        </tier>
+      </tier-branches>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 3. PRODUCT DETAIL PDP ROUTE (/products/:handle)                    -->
+    <!-- ================================================================== -->
+    <route path="/products/:handle" file="app/routes/products.$handle.jsx" type="product-pdp">
+      <description>Tier-differentiated PDP supporting single variants, family bundle builder, and tailoring addons</description>
+      
+      <loader-contracts>
+        <graphql-query name="ProductDetailsQuery">
+          <field name="product.title" />
+          <field name="product.descriptionHtml" />
+          <field name="product.priceRange" />
+          <field name="product.variants(first: 50)" />
+          <field name="product.images(first: 20)" />
+          <!-- Metafields -->
+          <metafield namespace="custom" key="tier_kasta" as="tierKasta" />
+          <metafield namespace="custom" key="product_type_label" as="typeLabel" />
+          <metafield namespace="custom" key="fabric_origin" as="fabricOrigin" />
+          <metafield namespace="custom" key="motif_code" as="motifCode" />
+          <metafield namespace="custom" key="material_furing" as="furingType" />
+          <metafield namespace="custom" key="model_fit_reference" as="modelFit" />
+          <metafield namespace="custom" key="tailoring_eligible" as="tailoringEligible" />
+          <metafield namespace="custom" key="bundle_eligible" as="bundleEligible" />
+        </graphql-query>
+      </loader-contracts>
+
+      <tier-branches>
+        <!-- Branch A: Exclusive PDP (Mahakarya / Sutra ATBM) -->
+        <tier id="exclusive-pdp" condition="tierKasta == 'mahakarya' || tags.includes('exclusive')">
+          <component name="ProductExclusiveLayout" file="app/components/ProductExclusiveLayout.jsx" />
+          <features>
+            <feature name="UltraZoomViewer">Full-height 4:5 gallery with micro-zoom on fabric grain</feature>
+            <feature name="DigitalCertificateModal">Sertifikat Keaslian Motif &amp; Garansi Bahan Asli</feature>
+            <feature name="VIPConciergeModal">Private fitting di showroom atau home-visit booking via WhatsApp</feature>
+            <feature name="WoodenGiftBoxToggle">Opsi kotak kayu ukir premium Batik Smile</feature>
+          </features>
+        </tier>
+
+        <!-- Branch B: Premium PDP (Sarimbit / Dobby Signature) -->
+        <tier id="premium-pdp" condition="bundleEligible == true || tags.includes('sarimbit')">
+          <component name="ProductPremiumLayout" file="app/components/ProductPremiumLayout.jsx" />
+          <features>
+            <feature name="FamilyBundleBuilder">Form multi-select kemeja pria + dress wanita dalam 1 halaman PDP</feature>
+            <feature name="ModelFitReference">Widget visual tinggi/berat badan model (e.g. Model TB 168 cm, BB 52 kg memakai size M)</feature>
+            <feature name="FullFuringBadge">Jaminan furing katun hero adem &amp; menyerap keringat</feature>
+            <feature name="SizeChartDrawer">Tabel panduan ukuran butik cm (Lingkar Dada, Panjang Baju, Panjang Lengan)</feature>
+          </features>
+        </tier>
+
+        <!-- Branch C: Standard RTW PDP (Katun Primisima Daily) -->
+        <tier id="standard-pdp" condition="default">
+          <features>
+            <feature name="ProductGallery">Vertical thumbnail strip + 4:5 main image</feature>
+            <feature name="RectangularVariantPills">Size buttons (S, M, L, XL, XXL) with 0px radius</feature>
+            <feature name="AddToCartAction">Instant 0ms drawer cart trigger via optimistic action</feature>
+          </features>
+        </tier>
+
+        <!-- Branch D: Raw Fabric PDP ("Choose Your Batik") -->
+        <tier id="raw-fabric-pdp" condition="productType == 'Kain Batik Tulis' || tags.includes('kain-tulis')">
+          <features>
+            <feature name="ArtisanProvenance">Kota asal pengrajin (Pekalongan, Solo, Cirebon, Lasem)</feature>
+            <feature name="MotifCodeDisplay">Kode motif unik tercetak di kain</feature>
+            <feature name="TailoringServiceToggle">
+              Checkbox: "Jahit dengan Jasa Tailoring Butik Batik Smile (+Rp 150.000 - Rp 350.000)"
+              Form input: Model kemeja/dress, lingkar dada, dan panjang lengan
+              Line Item Attributes: _tailoring_service=yes, _tailoring_measurements=LD104_PB74
+            </feature>
+          </features>
+        </tier>
+      </tier-branches>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 4. CONTENT & O2O SHOWROOM PAGES (/pages/:handle)                   -->
+    <!-- ================================================================== -->
+    <route path="/pages/:handle" file="app/routes/pages.$handle.jsx" type="static-editorial">
+      <description>Rich brand storytelling, O2O showroom guide, and corporate uniform tailoring</description>
+      
+      <pages-catalog>
+        <!-- Page 1: Tentang Kami -->
+        <page handle="tentang-kami">
+          <title>Tentang Kami — Menjaga Warisan Luhur Batik Sejak 2007</title>
+          <sections>
+            <section name="BrandHistory">Sejarah pendirian di Semarang tahun 2007</section>
+            <section name="VisiMisi">Visi pelestarian budaya Jawa Tengah &amp; pemberdayaan pengrajin</section>
+            <section name="ServiceValues">Budaya layanan 3S 1C 1T &amp; 1H (Senyum, Salam, Sapa, Cepat, Tanggap, Hati)</section>
+            <section name="MaturNuwun">Ucapan rasa syukur dan dedikasi kepada pelanggan setia</section>
+          </sections>
+        </page>
+
+        <!-- Page 2: Layanan Seragam & Jahit Kustom -->
+        <page handle="layanan-seragam">
+          <title>Layanan Seragam &amp; Jahit Kustom — Tanpa Minimal Order</title>
+          <sections>
+            <section name="UniformHero">Solusi seragam instansi, rumah sakit, kantor, resepsi, dan wisuda</section>
+            <section name="ClientPortfolio">Portofolio terpercaya: RS Bhayangkara, RSUD dr. Adhyatma, perbankan</section>
+            <section name="WorkflowSteps">4 langkah mudah: Konsultasi motif -> Pengukuran ukuran -> Proses jahit -> Pengiriman</section>
+            <section name="WhatsAppUniformCTA">Direct booking form ke WhatsApp Concierge 081-390-8888-09</section>
+          </sections>
+        </page>
+
+        <!-- Page 3: Fasilitas Gedung 3 Lantai Simongan -->
+        <page handle="fasilitas-store">
+          <title>Showroom &amp; Fasilitas Belanja 3 Lantai — Simongan Semarang</title>
+          <gallery-source>public/brand/showroom/*.jpeg</gallery-source>
+          <floors>
+            <floor level="1" name="Lantai 1: Ready-to-Wear Eksklusif">Koleksi busana siap pakai pria, wanita, anak, dan ruang ganti (fitting room) nyaman</floor>
+            <floor level="2" name="Lantai 2: Galeri Kain Batik &amp; Lounge">Koleksi kain batik tulis, cap, dobby, sutra ATBM, dan sofa konsultasi personal</floor>
+            <floor level="3" name="Lantai 3: Kerajinan &amp; Oleh-oleh Semarang">Pusat kerajinan rotan, kalung, bros etnik, blangkon, dan souvenir khas</floor>
+          </floors>
+        </page>
+
+        <!-- Page 4: Lokasi Outlet & Jam Operasional -->
+        <page handle="lokasi-toko">
+          <title>Lokasi Butik &amp; Galeri Resmi — Semarang</title>
+          <stores>
+            <store id="store-simongan">
+              <name>Flagship Store Simongan (3 Lantai)</name>
+              <address>Jl. Simongan Raya No. 109, Pamularsih, Semarang</address>
+              <hours>Setiap Hari: 09.00 - 21.00 WIB</hours>
+              <maps-url>Google Maps link</maps-url>
+            </store>
+            <store id="store-banyumanik">
+              <name>Cabang Banyumanik</name>
+              <address>Jl. Sukun Raya No. 23, Banyumanik, Semarang</address>
+              <hours>Setiap Hari: 09.00 - 21.00 WIB</hours>
+            </store>
+          </stores>
+        </page>
+      </pages-catalog>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 5. SLIDE-OVER DRAWER CART & CHECKOUT                               -->
+    <!-- ================================================================== -->
+    <route path="/cart" file="app/routes/cart.jsx" type="cart-action">
+      <description>Slide-over drawer cart with optimistic UI and line item attributes</description>
+      <component name="CartDrawer" file="app/components/CartDrawer.jsx" />
+      <mutation-contracts>
+        <mutation name="CartLinesAdd" file="app/lib/fragments.js">
+          <input type="CartLineInput">
+            <field name="merchandiseId" type="ID!" />
+            <field name="quantity" type="Int!" />
+            <field name="attributes" type="[AttributeInput!]">
+              <attr key="_tailoring_service" value="yes/no" />
+              <attr key="_tailoring_sizing" value="custom dimensions" />
+              <attr key="_furing_choice" value="katun_hero" />
+            </field>
+          </input>
+        </mutation>
+        <mutation name="CartLinesUpdate" />
+        <mutation name="CartLinesRemove" />
+      </mutation-contracts>
+      <features>
+        <feature name="FreeShippingProgressBar">Free shipping threshold across Indonesia</feature>
+        <feature name="BespokeNotesTextarea">Order note for tailor and body measurement specs</feature>
+        <feature name="HostedCheckoutHandoff">Direct URL redirect to Shopify Checkout</feature>
+      </features>
+    </route>
+
+    <!-- ================================================================== -->
+    <!-- 6. PREDICTIVE SEARCH MODAL                                         -->
+    <!-- ================================================================== -->
+    <route path="/search" file="app/routes/search.jsx" type="search-modal">
+      <description>Predictive typeahead search modal</description>
+      <component name="SearchResultsPredictive" file="app/components/SearchResultsPredictive.jsx" />
+      <query-contracts>
+        <graphql-query name="PredictiveSearchQuery">
+          <field name="predictiveSearch.products(first: 6)" />
+          <field name="predictiveSearch.collections(first: 3)" />
+          <field name="predictiveSearch.queries(first: 3)" />
+        </graphql-query>
+      </query-contracts>
+    </route>
+  </routes>
+</storefront-architecture>

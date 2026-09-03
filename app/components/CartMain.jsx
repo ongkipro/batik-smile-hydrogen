@@ -87,18 +87,24 @@ export function CartMain({layout, cart: originalCart}) {
  *   layout?: CartMainProps['layout'];
  * }}
  */
-function CartEmpty({hidden = false}) {
-  const {close} = useAside();
+function CartEmpty({ hidden = false }) {
+  const { close } = useAside();
   return (
-    <div hidden={hidden}>
-      <br />
-      <p>
-        Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-        started!
+    <div hidden={hidden} className="text-center py-12 px-4">
+      <span className="text-3xl block mb-3">🛍️</span>
+      <h3 className="font-serif text-xl font-normal text-[#111111] mb-2">
+        Tas Belanja Anda Masih Kosong
+      </h3>
+      <p className="text-xs text-[#5A5550] font-light max-w-sm mx-auto mb-6 leading-relaxed">
+        Jelajahi mahakarya sarimbit keluarga 3 kasta, busana batik wanita, atau kemeja pria lapis furing hero kami.
       </p>
-      <br />
-      <Link to="/collections" onClick={close} prefetch="viewport">
-        Continue shopping →
+      <Link
+        to="/collections/sarimbit-exclusive"
+        onClick={close}
+        prefetch="viewport"
+        className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+      >
+        JELAJAHI KOLEKSI BUTIK &rarr;
       </Link>
     </div>
   );

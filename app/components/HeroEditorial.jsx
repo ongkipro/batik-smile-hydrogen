@@ -1,102 +1,109 @@
 import React from 'react';
-import { NavLink } from 'react-router';
-import { BatikCorner } from './BatikOrnaments';
+import { Link } from 'react-router';
 
-export function HeroEditorial() {
+/**
+ * HeroEditorial: Engrasia / Prestige 9.3.0 Full-Bleed Archetype
+ * Graceful Fallback Contract: Consumes hero_banner metaobject or falls back to local generated banner
+ *
+ * @param {{
+ *   data?: any;
+ *   scrollAnchorId?: string;
+ * }} props
+ */
+export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
+  // Graceful Fallback Strategy
+  const heading = data?.heading?.value || 'MAHAKARYA BATIK NUSANTARA';
+  const subheading =
+    data?.subheading?.value ||
+    'Menenun Keanggunan Klasik & Keselarasan Busana Keluarga Sejak 2007';
+  const ctaText = data?.cta_text?.value || 'JELAJAHI KOLEKSI';
+  const ctaLink = data?.cta_link?.value || '/collections/sarimbit-exclusive';
+  const secondaryCtaText = data?.secondary_cta_text?.value || 'KONSULTASI JAHIT';
+  const secondaryCtaLink = data?.secondary_cta_link?.value || '/pages/layanan-seragam';
+
+  // Image source: Metaobject image URL or local fallback banner
+  const imageUrl =
+    data?.image?.reference?.image?.url ||
+    data?.image?.value ||
+    '/banners/hero_editorial_banner.jpg';
+
+  const handleScrollDown = (e) => {
+    e.preventDefault();
+    const element = document.querySelector(scrollAnchorId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden bg-[#FAF8F5] pt-12 pb-20 lg:pt-16 lg:pb-28 px-4 sm:px-6 lg:px-8 border-b border-neutral-200/60">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-          {/* Left Column: Editorial Headline & Actions */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Top Brand Heritage Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/70 border border-amber-300/50 w-fit mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#9E4719] animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#9E4719]">
-                Butik Asli Nusantara • Sejak 2007
-              </span>
-            </div>
+    <section className="relative w-full h-[85vh] sm:h-[90vh] lg:h-[95vh] min-h-[580px] bg-[#111111] overflow-hidden">
+      {/* Background Media Container with 0px Radius */}
+      <div className="absolute inset-0 w-full h-full">
+        <img
+          src={imageUrl}
+          alt="Batik Smile Editorial Hero"
+          fetchPriority="high"
+          loading="eager"
+          className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-1000 ease-out"
+        />
+        {/* Subtle Luxury Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/85 via-[#111111]/30 to-[#111111]/40" />
+      </div>
 
-            {/* Main Editorial Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 leading-[1.15] tracking-tight mb-6">
-              Mahakarya Busana &amp;{' '}
-              <span className="italic font-normal text-[#9E4719]">Sarimbit Keluarga</span>
-            </h1>
+      {/* Editorial Content Center-Bottom */}
+      <div className="relative z-10 h-full w-full px-4 sm:px-8 lg:px-12 xl:px-16 flex flex-col justify-end pb-16 sm:pb-20 text-center items-center">
+        {/* Whispered Eyebrow */}
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium mb-3 sm:mb-4 drop-shadow-sm">
+          SEMARANG • ESTABLISHED 2007
+        </span>
 
-            {/* Sub-narrative */}
-            <p className="text-sm sm:text-base text-neutral-600 font-sans leading-relaxed max-w-xl mb-8">
-              Menenun keanggunan motif klasik dan kenyamanan furing hero halus. Hadirkan kehangatan,
-              wibawa, dan keserasian sejati untuk setiap resepsi, jamuan resmi, dan hari raya keluarga.
-            </p>
+        {/* Cormorant Garamond Main Headline */}
+        <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide max-w-3xl leading-[1.15] mb-4 sm:mb-6">
+          {heading}
+        </h1>
 
-            {/* Quick 3-Tier Badges */}
-            <div className="flex flex-wrap items-center gap-2.5 mb-10">
-              <span className="text-xs font-semibold text-neutral-400 mr-1">Koleksi:</span>
-              <NavLink
-                to="/collections/sarimbit-mahakarya-heritage"
-                className="px-3 py-1.5 rounded-full text-[11px] font-semibold bg-neutral-900 text-amber-300 border border-amber-400/30 hover:bg-neutral-800 transition-colors"
-              >
-                ✦ Mahakarya Sutra
-              </NavLink>
-              <NavLink
-                to="/collections/sarimbit-signature-elegance"
-                className="px-3 py-1.5 rounded-full text-[11px] font-semibold bg-sky-950 text-sky-200 border border-sky-400/30 hover:bg-sky-900 transition-colors"
-              >
-                ✦ Signature Dobby
-              </NavLink>
-              <NavLink
-                to="/collections/sarimbit-essential-daily"
-                className="px-3 py-1.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-900 border border-amber-300/50 hover:bg-amber-100 transition-colors"
-              >
-                ✦ Essential Katun
-              </NavLink>
-            </div>
+        {/* Sub-narrative */}
+        <p className="text-xs sm:text-sm text-[#FAF8F5]/90 font-sans tracking-wide max-w-xl leading-relaxed mb-8 sm:mb-10 font-light">
+          {subheading}
+        </p>
 
-            {/* Primary & Secondary Dual CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
-              <NavLink
-                to="/collections/sarimbit-batik-couple"
-                className="px-8 py-4 rounded bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-widest transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-              >
-                Jelajahi Koleksi Sarimbit &rarr;
-              </NavLink>
+        {/* Dual Zero-Radius Luxury CTAs */}
+        <div className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-5 w-full sm:w-auto">
+          <Link
+            to={ctaLink}
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#FFFFFF] text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] border border-white hover:bg-[#C5A059] hover:text-white hover:border-[#C5A059] transition-all duration-300 shadow-sm"
+          >
+            {ctaText}
+          </Link>
 
-              <NavLink
-                to="/pages/layanan-seragam"
-                className="px-6 py-4 rounded bg-white hover:bg-neutral-50 text-neutral-800 font-semibold text-xs uppercase tracking-wider border border-neutral-300 transition-all text-center shadow-sm"
-              >
-                Konsultasi Jahit Seragam
-              </NavLink>
-            </div>
-          </div>
-
-          {/* Right Column: High-Fashion 4:5 Portrait Lookbook */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-neutral-900 border border-neutral-200/80 group">
-              <BatikCorner position="top-left" variant="gold" size={40} className="top-4 left-4 z-10" />
-              <BatikCorner position="bottom-right" variant="gold" size={40} className="bottom-4 right-4 z-10" />
-
-              <img
-                src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop"
-                alt="Model Sarimbit Batik Smile"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-
-              {/* Floating Reassurance Overlay Tag */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 text-white flex items-center justify-between">
-                <div>
-                  <span className="text-[9px] uppercase tracking-widest text-[#C5A059] font-bold block">
-                    Sarimbit Signature Edition
-                  </span>
-                  <span className="font-serif text-sm font-semibold">
-                    Corak Sekar Jagad &amp; Dobby Timbul
-                  </span>
-                </div>
-                <span className="text-xs font-bold text-[#C5A059]">Rp 1.2jt / Set</span>
-              </div>
-            </div>
-          </div>
+          <Link
+            to={secondaryCtaLink}
+            className="w-full sm:w-auto px-8 py-3.5 bg-transparent text-white text-[11px] uppercase font-semibold tracking-[0.18em] border border-white/70 hover:bg-white/10 hover:border-white transition-all duration-300"
+          >
+            {secondaryCtaText}
+          </Link>
         </div>
+
+        {/* Circular Down-Arrow Scroll Cue */}
+        <button
+          onClick={handleScrollDown}
+          aria-label="Scroll to Best Sellers"
+          className="mt-10 sm:mt-12 w-9 h-9 border border-white/40 flex items-center justify-center text-white/70 hover:text-[#C5A059] hover:border-[#C5A059] transition-all duration-300 group cursor-pointer"
+        >
+          <svg
+            className="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              strokeWidth="1.5"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </button>
       </div>
     </section>
   );

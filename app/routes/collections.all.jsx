@@ -1,77 +1,96 @@
-import {useLoaderData} from 'react-router';
-import {getPaginationVariables} from '@shopify/hydrogen';
-import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
-import {ProductItem} from '~/components/ProductItem';
+import { useLoaderData, NavLink } from 'react-router';
+import { getPaginationVariables } from '@shopify/hydrogen';
+import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
+import { ProductItem } from '~/components/ProductItem';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [{title: `Hydrogen | Products`}];
+  return [
+    { title: 'Katalog Lengkap Busana Batik — Butik Batik Smile Semarang' },
+    {
+      name: 'description',
+      content:
+        'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga, kemeja pria lapis furing, dan kain batik tulis asli Batik Smile.',
+    },
+  ];
 };
 
 /**
  * @param {Route.LoaderArgs} args
  */
 export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-
-  return {...deferredData, ...criticalData};
+  return { ...criticalData };
 }
 
 /**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {Route.LoaderArgs}
  */
-async function loadCriticalData({context, request}) {
-  const {storefront} = context;
+async function loadCriticalData({ context, request }) {
+  const { storefront } = context;
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 8,
+    pageBy: 24,
   });
 
-  const [{products}] = await Promise.all([
+  const [{ products }] = await Promise.all([
     storefront.query(CATALOG_QUERY, {
-      variables: {...paginationVariables},
+      variables: { ...paginationVariables },
     }),
-    // Add other queries here, so that they are loaded in parallel
   ]);
-  return {products};
+
+  return { products };
 }
 
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {Route.LoaderArgs}
- */
-function loadDeferredData({context}) {
-  return {};
-}
-
-export default function Collection() {
+export default function CollectionAll() {
   /** @type {LoaderReturnData} */
-  const {products} = useLoaderData();
+  const { products } = useLoaderData();
 
   return (
-    <div className="collection">
-      <h1>Products</h1>
-      <PaginatedResourceSection
-        connection={products}
-        resourcesClassName="products-grid"
-      >
-        {({node: product, index}) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-          />
-        )}
-      </PaginatedResourceSection>
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[100vw] mx-auto">
+        {/* Breadcrumb */}
+        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+          <NavLink to="/" className="hover:text-[#9E7D3B]">
+            BERANDA
+          </NavLink>
+          <span>/</span>
+          <NavLink to="/collections" className="hover:text-[#9E7D3B]">
+            KOLEKSI
+          </NavLink>
+          <span>/</span>
+          <span className="text-[#111111] font-semibold">SEMUA PRODUK</span>
+        </nav>
+
+        {/* Editorial Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+            KATALOG BUTIK LENGKAP
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
+            Katalog Busana Batik Nusantara
+          </h1>
+          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+            Setiap karya batik dijahit dengan ketelitian tinggi dan dilapisi furing hero katun yang sejuk.
+          </p>
+        </div>
+
+        {/* 4:5 Products Grid */}
+        <PaginatedResourceSection
+          connection={products}
+          resourcesClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
+        >
+          {({ node: product, index }) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              loading={index < 4 ? 'eager' : 'lazy'}
+            />
+          )}
+        </PaginatedResourceSection>
+      </div>
     </div>
   );
 }
@@ -85,12 +104,22 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
     id
     handle
     title
+    productType
     featuredImage {
       id
       altText
       url
       width
       height
+    }
+    images(first: 2) {
+      nodes {
+        id
+        altText
+        url
+        width
+        height
+      }
     }
     priceRange {
       minVariantPrice {
@@ -100,10 +129,14 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
         ...MoneyCollectionItem
       }
     }
+    compareAtPriceRange {
+      minVariantPrice {
+        ...MoneyCollectionItem
+      }
+    }
   }
 `;
 
-// NOTE: https://shopify.dev/docs/api/storefront/latest/objects/product
 const CATALOG_QUERY = `#graphql
   query Catalog(
     $country: CountryCode

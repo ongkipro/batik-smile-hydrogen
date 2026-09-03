@@ -1,4 +1,4 @@
-import {Money} from '@shopify/hydrogen';
+import { Money } from '@shopify/hydrogen';
 
 /**
  * @param {{
@@ -6,18 +6,24 @@ import {Money} from '@shopify/hydrogen';
  *   compareAtPrice?: MoneyV2 | null;
  * }}
  */
-export function ProductPrice({price, compareAtPrice}) {
+export function ProductPrice({ price, compareAtPrice }) {
   return (
-    <div aria-label="Price" className="product-price" role="group">
+    <div aria-label="Price" className="product-price flex items-baseline gap-2 font-serif" role="group">
       {compareAtPrice ? (
-        <div className="product-price-on-sale">
-          {price ? <Money data={price} /> : null}
-          <s>
+        <div className="flex items-baseline gap-2">
+          {price ? (
+            <span className="text-[#111111] font-normal">
+              <Money data={price} />
+            </span>
+          ) : null}
+          <s className="text-xs text-[#A69F96] font-light line-through">
             <Money data={compareAtPrice} />
           </s>
         </div>
       ) : price ? (
-        <Money data={price} />
+        <span className="text-[#111111] font-normal">
+          <Money data={price} />
+        </span>
       ) : (
         <span>&nbsp;</span>
       )}

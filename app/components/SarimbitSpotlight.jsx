@@ -5,7 +5,7 @@ import { BatikDivider, BatikCorner } from './BatikOrnaments';
 export function SarimbitSpotlight() {
   return (
     <section className="py-20 px-6 sm:px-8 lg:px-12 bg-[#FDFBF7] text-[#121212]">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-[100vw] mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="text-xs uppercase tracking-[0.2em] text-[#9E4719] font-bold">
@@ -59,7 +59,7 @@ export function SarimbitSpotlight() {
               <div className="pt-4 border-t border-neutral-800 flex items-center justify-between">
                 <span className="text-xs text-neutral-400">Mulai dari Rp 1.850.000 / Pasang</span>
                 <NavLink
-                  to="/collections/sarimbit-mahakarya-heritage"
+                  to="/collections/sarimbit-exclusive"
                   className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C5A059] hover:text-amber-200 transition-colors"
                 >
                   Eksplorasi Mahakarya &rarr;
@@ -99,7 +99,7 @@ export function SarimbitSpotlight() {
                   </p>
                 </div>
                 <NavLink
-                  to="/collections/sarimbit-signature-elegance"
+                  to="/collections/sarimbit-premium"
                   className="text-xs font-semibold uppercase tracking-wider text-sky-300 hover:text-white transition-colors"
                 >
                   Lihat Signature &rarr;
@@ -136,7 +136,7 @@ export function SarimbitSpotlight() {
                   </p>
                 </div>
                 <NavLink
-                  to="/collections/sarimbit-essential-daily"
+                  to="/collections/sarimbit-ekonomis"
                   className="text-xs font-semibold uppercase tracking-wider text-[#9E4719] hover:text-[#7A320C] transition-colors"
                 >
                   Jelajahi Essential &rarr;

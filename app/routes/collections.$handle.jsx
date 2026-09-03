@@ -1,21 +1,21 @@
 import React from 'react';
-import { redirect, useLoaderData, NavLink } from 'react-router';
-import { getPaginationVariables, Analytics, Image, Money } from '@shopify/hydrogen';
+import { redirect, useLoaderData } from 'react-router';
+import { getPaginationVariables, Analytics } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
-import { BatikDivider, BatikCorner } from '~/components/BatikOrnaments';
+import { ProductItem } from '~/components/ProductItem';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
   return [
-    { title: `${data?.collection.title ?? 'Koleksi'} — Batik Smile Nusantara` },
+    { title: `${data?.collection?.title ?? 'Katalog'} — Batik Smile Nusantara` },
     {
       name: 'description',
       content:
-        data?.collection.description ||
-        'Koleksi busana batik premium dan sarimbit keluarga dari Batik Smile.',
+        data?.collection?.description ||
+        'Koleksi busana batik premium dan sarimbit keluarga dari Butik Batik Smile Nusantara Semarang.',
     },
   ];
 };
@@ -35,11 +35,25 @@ async function loadCriticalData({ context, params, request }) {
   const { handle } = params;
   const { storefront } = context;
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 16,
+    pageBy: 24,
   });
 
   if (!handle) {
     throw redirect('/collections');
+  }
+
+  // Handle redirect untuk koleksi yang tidak ada atau berganti slug resmi
+  const collectionRedirects = {
+    'sarimbit': '/collections/sarimbit-exclusive',
+    'kain-batik-tulis': '/collections/jarik-kain-batik',
+    'sarimbit-mahakarya-heritage': '/collections/sarimbit-exclusive',
+    'sarimbit-signature-elegance': '/collections/sarimbit-premium',
+    'sarimbit-essential-daily': '/collections/sarimbit-ekonomis',
+    'sarimbit-batik-couple': '/collections/sarimbit-exclusive',
+  };
+
+  if (collectionRedirects[handle]) {
+    throw redirect(collectionRedirects[handle], 301);
   }
 
   const [{ collection }] = await Promise.all([
@@ -64,83 +78,152 @@ async function loadCriticalData({ context, params, request }) {
 export default function Collection() {
   /** @type {LoaderReturnData} */
   const { collection } = useLoaderData();
-  const handle = collection.handle || '';
+  const handle = collection?.handle || '';
 
-  // 3-Tier Dynamic Theme Detection
-  const isMahakarya = handle.includes('mahakarya') || handle.includes('sutra');
-  const isSignature = handle.includes('signature') || handle.includes('dobby');
+  // Tier-Differentiated Theme Classification
+  const isExclusive =
+    handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra');
+  const isPremium =
+    handle.includes('premium') || handle.includes('signature') || handle.includes('dobby');
 
-  const themeClasses = isMahakarya
-    ? 'bg-[#0D0D0D] text-white'
-    : isSignature
-    ? 'bg-[#1B2A4A] text-white'
-    : 'bg-[#FDFBF7] text-neutral-900';
+  const themeClasses = isExclusive
+    ? 'bg-[#111111] text-white'
+    : isPremium
+    ? 'bg-[#FAF8F5] text-[#111111]'
+    : 'bg-[#FFFFFF] text-[#111111]';
 
-  const accentColor = isMahakarya ? '#C5A059' : isSignature ? '#38BDF8' : '#9E4719';
+  const gridColumns = isExclusive
+    ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10'
+    : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8';
+
+  const badgeText = isExclusive
+    ? 'Haute Mahakarya'
+    : isPremium
+    ? 'Signature Dobby'
+    : undefined;
+
+  const officialWaUrl =
+    'https://wa.me/6281390888809?text=' +
+    encodeURIComponent(`Halo Batik Smile, saya ingin menanyakan koleksi ${collection.title}`);
+
+  // Banner image resolution: Shopify collection image or local generated fallback
+  const bannerImageUrl =
+    collection.image?.url ||
+    (handle.includes('kain')
+      ? '/banners/collection_kain_tulis_banner.jpg'
+      : handle.includes('sarimbit')
+      ? '/banners/sarimbit_family_banner.jpg'
+      : null);
 
   return (
-    <div className={`min-h-screen py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-500 ${themeClasses}`}>
-      <div className="max-w-7xl mx-auto">
-        {/* Collection Header Banner */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+    <div className={`min-h-screen py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-500 ${themeClasses}`}>
+      <div className="w-full max-w-[100vw] mx-auto">
+        {/* Collection Editorial Header Banner */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <span
-            className="text-[11px] uppercase tracking-[0.25em] font-bold"
-            style={{ color: accentColor }}
+            className={`text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-2 ${
+              isExclusive ? 'text-[#C5A059]' : isPremium ? 'text-[#9E7D3B]' : 'text-[#7C3F1D]'
+            }`}
           >
-            {isMahakarya
-              ? 'Kasta Tertinggi • Mahakarya Heritage'
-              : isSignature
-              ? 'Koleksi Desainer • Signature Elegance'
-              : 'Katalog Busana Batik'}
+            {isExclusive
+              ? 'KASTA TERTINGGI &bull; MAHAKARYA HERITAGE'
+              : isPremium
+              ? 'KOLEKSI BUTIK &bull; SIGNATURE ELEGANCE'
+              : 'KATALOG BUSANA BATIK NUSANTARA'}
           </span>
 
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold mt-2 mb-4 leading-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide mt-2 mb-4 leading-tight">
             {collection.title}
           </h1>
 
-          <BatikDivider
-            variant={isMahakarya ? 'gold' : isSignature ? 'light' : 'soga'}
-            className="my-3"
+          <div
+            className={`w-12 h-px mx-auto mt-4 mb-4 ${
+              isExclusive ? 'bg-[#C5A059]' : 'bg-[#111111]'
+            }`}
           />
 
           {collection.description && (
             <p
-              className={`text-xs sm:text-sm font-sans leading-relaxed max-w-2xl mx-auto ${
-                isMahakarya || isSignature ? 'text-neutral-300' : 'text-neutral-600'
+              className={`text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto mb-8 ${
+                isExclusive ? 'text-[#E2DFD8]' : 'text-[#5A5550]'
               }`}
             >
               {collection.description}
             </p>
           )}
+
+          {/* Collection Header Banner with Graceful Fallback */}
+          {bannerImageUrl && (
+            <div className="w-full aspect-[21/9] sm:aspect-[24/9] bg-[#111111] border border-[#E2DFD8] overflow-hidden shadow-sm">
+              <img
+                src={bannerImageUrl}
+                alt={collection.image?.altText || collection.title}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          )}
         </div>
 
-        {/* Products Grid */}
+        {/* Exclusive VIP Concierge Banner (Only on Exclusive PLP) */}
+        {isExclusive && (
+          <div className="mb-14 p-6 sm:p-8 bg-[#1C1C1C] border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-1">
+                PRIVATE VIP CONCIERGE
+              </span>
+              <h3 className="font-serif text-xl text-white font-normal">
+                Layanan Khusus Mahakarya Sutra Tulis
+              </h3>
+              <p className="text-xs text-[#A69F96] font-light mt-1">
+                Tiap lembar karya hanya diproduksi 1 helai. Dapatkan video detail kain atau jadwalkan fitting privat di VIP lounge Semarang.
+              </p>
+            </div>
+            <a
+              href={officialWaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-[#C5A059] hover:bg-white text-[#111111] font-semibold text-[10px] uppercase tracking-[0.18em] transition-colors whitespace-nowrap"
+            >
+              BOOKING VIP CONCIERGE &rarr;
+            </a>
+          </div>
+        )}
+
+        {/* Tier-Differentiated Products Grid (4:5 Aspect Ratio) */}
         <PaginatedResourceSection
           connection={collection.products}
-          resourcesClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8"
+          resourcesClassName={`grid ${gridColumns}`}
         >
           {({ node: product, index }) => (
-            <CollectionProductCard
+            <ProductItem
               key={product.id}
               product={product}
-              isDark={isMahakarya || isSignature}
-              accentColor={accentColor}
+              loading={index < 4 ? 'eager' : 'lazy'}
+              badge={badgeText}
             />
           )}
         </PaginatedResourceSection>
 
-        {/* Bottom Helper */}
-        <div className="mt-16 text-center pt-8 border-t border-white/10">
-          <p className="text-xs text-neutral-400 mb-3">
-            Butuh seragam keluarga atau pesanan jumlah khusus?
+        {/* Bottom Consultation Assistance */}
+        <div
+          className={`mt-20 text-center pt-10 border-t ${
+            isExclusive ? 'border-white/10' : 'border-[#E2DFD8]'
+          }`}
+        >
+          <p
+            className={`text-xs mb-4 font-light tracking-wide ${
+              isExclusive ? 'text-[#A69F96]' : 'text-[#5A5550]'
+            }`}
+          >
+            Butuh bantuan ukuran sarimbit keluarga atau pemesanan seragam dinas tanpa minimal order?
           </p>
           <a
-            href="https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20dengan%20koleksi%20ini"
+            href={officialWaUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded text-xs font-semibold uppercase tracking-wider bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
+            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
           >
-            Konsultasi dengan Penjahit &amp; Desainer &rarr;
+            KONSULTASI DENGAN KONSULTAN BUTIK &rarr;
           </a>
         </div>
       </div>
@@ -157,66 +240,6 @@ export default function Collection() {
   );
 }
 
-function CollectionProductCard({ product, isDark, accentColor }) {
-  const image = product.featuredImage;
-  const price = product.priceRange?.minVariantPrice;
-
-  return (
-    <div className="group flex flex-col justify-between">
-      <NavLink
-        to={`/products/${product.handle}`}
-        className={`block relative overflow-hidden rounded-xl mb-3 border transition-all ${
-          isDark
-            ? 'bg-neutral-900 border-white/10 group-hover:border-amber-400/40 shadow-xl'
-            : 'bg-white border-neutral-200/80 group-hover:border-[#9E4719]/40 shadow-sm'
-        }`}
-      >
-        {isDark && (
-          <BatikCorner position="top-left" variant="gold" size={28} className="top-2 left-2 z-10 opacity-70" />
-        )}
-
-        {image ? (
-          <Image
-            data={image}
-            aspectRatio="4/5"
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            alt={image.altText || product.title}
-          />
-        ) : (
-          <div className="aspect-[4/5] w-full flex items-center justify-center bg-neutral-800 text-neutral-400 text-xs">
-            Batik Smile
-          </div>
-        )}
-
-        <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none">
-          <span className="px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider bg-black/75 text-white backdrop-blur-sm">
-            Ready Stock
-          </span>
-        </div>
-      </NavLink>
-
-      <div>
-        <NavLink
-          to={`/products/${product.handle}`}
-          className={`font-medium text-xs sm:text-sm line-clamp-2 mb-1 transition-colors ${
-            isDark
-              ? 'text-neutral-100 group-hover:text-[#C5A059]'
-              : 'text-neutral-900 group-hover:text-[#9E4719]'
-          }`}
-        >
-          {product.title}
-        </NavLink>
-        {price && (
-          <div className="text-xs font-bold" style={{ color: accentColor }}>
-            <Money data={price} />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 const PRODUCT_ITEM_FRAGMENT = `#graphql
   fragment MoneyProductItem on MoneyV2 {
     amount
@@ -226,6 +249,7 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     id
     handle
     title
+    productType
     featuredImage {
       id
       altText
@@ -233,11 +257,25 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
       width
       height
     }
+    images(first: 2) {
+      nodes {
+        id
+        altText
+        url
+        width
+        height
+      }
+    }
     priceRange {
       minVariantPrice {
         ...MoneyProductItem
       }
       maxVariantPrice {
+        ...MoneyProductItem
+      }
+    }
+    compareAtPriceRange {
+      minVariantPrice {
         ...MoneyProductItem
       }
     }
@@ -260,6 +298,13 @@ const COLLECTION_QUERY = `#graphql
       handle
       title
       description
+      image {
+        id
+        altText
+        url
+        width
+        height
+      }
       products(
         first: $first,
         last: $last,

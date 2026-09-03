@@ -1,99 +1,103 @@
 import React from 'react';
-import { NavLink } from 'react-router';
-import { BatikDivider } from './BatikOrnaments';
+import { Link } from 'react-router';
 
+/**
+ * ShowroomO2O: Authentic Physical Showrooms
+ * Flagship Simongan (3 Floors) & Banyumanik Branch with 3S 1C 1T & 1H service
+ */
 export function ShowroomO2O() {
   return (
-    <section className="py-20 px-6 sm:px-8 lg:px-12 bg-neutral-900 text-white relative overflow-hidden">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:24px_24px]" />
+    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#111111] text-white relative overflow-hidden border-b border-[#1C1C1C]">
+      <div className="w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-stretch">
+          {/* Left Column: Authentic Brand Narrative */}
+          <div className="lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
+                PENGALAMAN OFFLINE-TO-ONLINE (O2O)
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white mb-6 leading-tight">
+                Showroom Butik 3 Lantai &amp; Layanan Bespoke
+              </h2>
+              <div className="w-16 h-px bg-[#C5A059] mb-6" />
+              <p className="text-[#E2DFD8] text-xs sm:text-sm leading-relaxed mb-8 font-light">
+                Didirikan sejak 2007 di Semarang, Batik Smile menghadirkan butik fisik 3 lantai yang
+                nyaman di Simongan serta cabang Banyumanik. Rasakan langsung kemewahan tenun sutra ATBM
+                dan konsultasikan kebutuhan seragam keluarga Anda dengan standar layanan <strong>3S 1C 1T &amp; 1H</strong> (Senyum, Salam, Sapa, Cepat, Tanggap, Hati).
+              </p>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Text & Features */}
-          <div className="lg:col-span-7">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold">
-              Pengalaman Offline-to-Online (O2O)
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold mt-2 mb-4 text-white">
-              Showroom Butik 3 Lantai &amp; Layanan Jahit Kustom
-            </h2>
-            <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-8">
-              Batik Smile hadir memberikan pengalaman belanja terpadu. Kunjungi butik fisik kami di
-              Semarang dan Solo untuk merasakan langsung kelembutan kain sutra ATBM, atau pesan seragam
-              keluarga secara online dengan panduan ukuran terstandarisasi.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="w-8 h-8 rounded-lg bg-[#9E4719] text-white flex items-center justify-center font-serif text-sm font-bold mb-3">
-                  3S
+              {/* 3 Floors Breakdown Cards (0px radius) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="p-6 bg-[#1C1C1C] border border-white/10 hover:border-[#C5A059]/40 transition-colors">
+                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
+                    LANTAI 1 &bull; RTW &amp; FITTING
+                  </span>
+                  <h3 className="font-serif text-base font-semibold text-white mb-1.5">
+                    Ready-to-Wear Eksklusif
+                  </h3>
+                  <p className="text-[11px] text-[#A69F96] leading-relaxed font-light">
+                    Koleksi sarimbit keluarga, kemeja pria lapis furing hero, blus &amp; dress wanita siap pakai dengan ruang ganti privat.
+                  </p>
                 </div>
-                <h4 className="font-semibold text-sm text-white mb-1">
-                  1 Toko, 1 Custom, 1 Tailor, 1 Hari
-                </h4>
-                <p className="text-[11px] text-neutral-400 leading-relaxed">
-                  Layanan ukur badan di tempat, pilihan ribuan motif kain, dan jahit kilat tanpa
-                  minimal pemesanan.
-                </p>
-              </div>
 
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="w-8 h-8 rounded-lg bg-[#C5A059] text-black flex items-center justify-center font-serif text-sm font-bold mb-3">
-                  VIP
+                <div className="p-6 bg-[#1C1C1C] border border-white/10 hover:border-[#C5A059]/40 transition-colors">
+                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
+                    LANTAI 2 &bull; KAIN &amp; BESPOKE
+                  </span>
+                  <h3 className="font-serif text-base font-semibold text-white mb-1.5">
+                    Galeri Kain Tulis &amp; VIP Lounge
+                  </h3>
+                  <p className="text-[11px] text-[#A69F96] leading-relaxed font-light">
+                    Ribuan lembaran kain batik tulis, cap, dobby timbul, sutra ATBM, dan lounge konsultasi jahit tanpa minimal order.
+                  </p>
                 </div>
-                <h4 className="font-semibold text-sm text-white mb-1">
-                  Private Fitting Room
-                </h4>
-                <p className="text-[11px] text-neutral-400 leading-relaxed">
-                  Ruang fitting eksklusif lantai 3 ber-AC untuk keluarga besar mencoba busana sarimbit
-                  pernikahan dengan nyaman.
-                </p>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <NavLink
-                to="/pages/layanan-seragam"
-                className="px-6 py-3.5 bg-[#C5A059] hover:bg-[#b08c45] text-black font-semibold text-xs uppercase tracking-widest rounded transition-colors"
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link
+                to="/pages/fasilitas-store"
+                className="px-8 py-4 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white font-semibold text-[11px] uppercase tracking-[0.18em] transition-colors"
               >
-                Konsultasi Seragam Keluarga &rarr;
-              </NavLink>
-              <NavLink
+                JELAJAHI FASILITAS STORE 3 LANTAI &rarr;
+              </Link>
+              <Link
                 to="/pages/lokasi-toko"
-                className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs uppercase tracking-widest rounded border border-white/20 transition-colors"
+                className="px-8 py-4 bg-transparent text-white font-semibold text-[11px] uppercase tracking-[0.18em] border border-white/30 hover:border-white hover:bg-white/10 transition-colors"
               >
-                Petunjuk Lokasi Butik
-              </NavLink>
+                PETUNJUK LOKASI OUTLET
+              </Link>
             </div>
           </div>
 
-          {/* Right Column: Showroom Card */}
-          <div className="lg:col-span-5 relative">
-            <div className="rounded-2xl overflow-hidden border border-amber-500/20 shadow-2xl relative group">
+          {/* Right Column: Showroom Visual Card Full Height */}
+          <div className="lg:col-span-5 relative flex">
+            <div className="border border-[#C5A059]/40 relative group overflow-hidden bg-[#1C1C1C] w-full min-h-[440px] sm:min-h-[500px] flex flex-col justify-end">
               <img
-                src="https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_shop_all_1786007684766.jpg?v=1786007711"
-                alt="Showroom Batik Smile"
-                className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-85"
+                src="/brand/showroom/showroom_interior_textiles.jpeg"
+                alt="Showroom Butik Batik Smile Simongan"
+                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-80"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-6 flex flex-col justify-end">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#C5A059] mb-1">
-                  Semarang Flagship Store
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end z-10">
+                <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-[#C5A059] mb-1">
+                  SEMARANG FLAGSHIP SHOWROOM
                 </span>
-                <h3 className="font-serif text-xl font-bold text-white mb-2">
-                  Jl. Majapahit No. 128, Semarang
+                <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-1.5">
+                  Gedung Batik Smile 3 Lantai
                 </h3>
-                <p className="text-xs text-neutral-300 mb-3">
+                <p className="text-xs text-[#E2DFD8] mb-2 font-light">
+                  Jl. Simongan Raya No. 109, Pamularsih, Semarang
+                </p>
+                <p className="text-[11px] text-[#A69F96] mb-4">
                   Buka Setiap Hari: 09.00 - 21.00 WIB
                 </p>
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs font-semibold text-[#C5A059] hover:underline"
+                <Link
+                  to="/pages/lokasi-toko"
+                  className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#C5A059] hover:text-white flex items-center gap-1.5"
                 >
-                  Buka di Google Maps &rarr;
-                </a>
+                  <span>Lihat Petunjuk Arah &amp; Cabang Banyumanik</span>
+                  <span>&rarr;</span>
+                </Link>
               </div>
             </div>
           </div>

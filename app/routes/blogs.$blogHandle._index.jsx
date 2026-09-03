@@ -1,86 +1,95 @@
-import {Link, useLoaderData} from 'react-router';
-import {Image, getPaginationVariables} from '@shopify/hydrogen';
-import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
-import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import { Link, useLoaderData, NavLink } from 'react-router';
+import { Image, getPaginationVariables } from '@shopify/hydrogen';
+import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
+import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.blog.title ?? ''} blog`}];
+export const meta = ({ data }) => {
+  return [{ title: `${data?.blog.title ?? 'Jurnal'} — Butik Batik Smile Nusantara` }];
 };
 
 /**
  * @param {Route.LoaderArgs} args
  */
 export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-
-  return {...deferredData, ...criticalData};
+  return { ...criticalData };
 }
 
 /**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {Route.LoaderArgs}
  */
-async function loadCriticalData({context, request, params}) {
+async function loadCriticalData({ context, request, params }) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 4,
+    pageBy: 12,
   });
 
   if (!params.blogHandle) {
-    throw new Response(`blog not found`, {status: 404});
+    throw new Response('Blog tidak ditemukan', { status: 404 });
   }
 
-  const [{blog}] = await Promise.all([
+  const [{ blog }] = await Promise.all([
     context.storefront.query(BLOGS_QUERY, {
       variables: {
         blogHandle: params.blogHandle,
         ...paginationVariables,
       },
     }),
-    // Add other queries here, so that they are loaded in parallel
   ]);
 
   if (!blog?.articles) {
-    throw new Response('Not found', {status: 404});
+    throw new Response('Not found', { status: 404 });
   }
 
-  redirectIfHandleIsLocalized(request, {handle: params.blogHandle, data: blog});
+  redirectIfHandleIsLocalized(request, { handle: params.blogHandle, data: blog });
 
-  return {blog};
-}
-
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {Route.LoaderArgs}
- */
-function loadDeferredData({context}) {
-  return {};
+  return { blog };
 }
 
 export default function Blog() {
   /** @type {LoaderReturnData} */
-  const {blog} = useLoaderData();
-  const {articles} = blog;
+  const { blog } = useLoaderData();
+  const { articles } = blog;
 
   return (
-    <div className="blog">
-      <h1>{blog.title}</h1>
-      <div className="blog-grid">
-        <PaginatedResourceSection connection={articles}>
-          {({node: article, index}) => (
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Breadcrumb */}
+        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+          <NavLink to="/" className="hover:text-[#9E7D3B]">
+            BERANDA
+          </NavLink>
+          <span>/</span>
+          <NavLink to="/blogs" className="hover:text-[#9E7D3B]">
+            JURNAL
+          </NavLink>
+          <span>/</span>
+          <span className="text-[#111111] font-semibold uppercase">{blog.title}</span>
+        </nav>
+
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+            ARSIP TULISAN RESMI
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
+            {blog.title}
+          </h1>
+          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
+        </div>
+
+        {/* Articles Grid (0px Radius) */}
+        <PaginatedResourceSection
+          connection={articles}
+          resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {({ node: article, index }) => (
             <ArticleItem
               article={article}
               key={article.id}
-              loading={index < 2 ? 'eager' : 'lazy'}
+              loading={index < 3 ? 'eager' : 'lazy'}
             />
           )}
         </PaginatedResourceSection>
@@ -95,34 +104,49 @@ export default function Blog() {
  *   loading?: HTMLImageElement['loading'];
  * }}
  */
-function ArticleItem({article, loading}) {
-  const publishedAt = new Intl.DateTimeFormat('en-US', {
+function ArticleItem({ article, loading }) {
+  const publishedAt = new Intl.DateTimeFormat('id-ID', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   }).format(new Date(article.publishedAt));
+
   return (
-    <div className="blog-article" key={article.id}>
-      <Link to={`/blogs/${article.blog.handle}/${article.handle}`}>
-        {article.image && (
-          <div className="blog-article-image">
+    <article className="bg-white border border-[#E2DFD8] hover:border-[#111111] shadow-sm hover:shadow-md transition-all group block overflow-hidden">
+      <Link to={`/blogs/${article.blog.handle}/${article.handle}`} className="block">
+        <div className="relative aspect-[16/10] bg-[#111111] overflow-hidden">
+          {article.image ? (
             <Image
               alt={article.image.altText || article.title}
-              aspectRatio="3/2"
               data={article.image}
               loading={loading}
-              sizes="(min-width: 768px) 50vw, 100vw"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-          </div>
-        )}
-        <h3>{article.title}</h3>
-        <small>{publishedAt}</small>
+          ) : (
+            <img
+              src="/banners/hero_editorial_banner.jpg"
+              alt={article.title}
+              className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+            />
+          )}
+        </div>
+
+        <div className="p-6">
+          <time className="text-[10px] uppercase tracking-wider text-[#9E7D3B] font-medium block mb-2">
+            {publishedAt}
+          </time>
+          <h2 className="font-serif text-xl font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors leading-snug mb-3">
+            {article.title}
+          </h2>
+          <span className="text-[10px] uppercase tracking-[0.16em] text-[#111111] font-semibold inline-flex items-center gap-1 group-hover:text-[#9E7D3B] transition-colors">
+            BACA SELENGKAPNYA &rarr;
+          </span>
+        </div>
       </Link>
-    </div>
+    </article>
   );
 }
 
-// NOTE: https://shopify.dev/docs/api/storefront/latest/objects/blog
 const BLOGS_QUERY = `#graphql
   query Blog(
     $language: LanguageCode
@@ -151,11 +175,9 @@ const BLOGS_QUERY = `#graphql
         pageInfo {
           hasPreviousPage
           hasNextPage
-          hasNextPage
           endCursor
           startCursor
         }
-
       }
     }
   }

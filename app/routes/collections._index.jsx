@@ -1,69 +1,81 @@
-import {useLoaderData, Link} from 'react-router';
-import {getPaginationVariables, Image} from '@shopify/hydrogen';
-import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
+import { useLoaderData, Link } from 'react-router';
+import { getPaginationVariables } from '@shopify/hydrogen';
+import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
+
+/**
+ * @type {Route.MetaFunction}
+ */
+export const meta = () => {
+  return [
+    { title: 'Koleksi Busana Batik & Sarimbit — Butik Batik Smile Nusantara' },
+    {
+      name: 'description',
+      content:
+        'Koleksi lengkap busana batik modern, sarimbit keluarga 3 kasta, dan kain batik tulis asli dari Butik Batik Smile Semarang.',
+    },
+  ];
+};
 
 /**
  * @param {Route.LoaderArgs} args
  */
 export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-
-  return {...deferredData, ...criticalData};
+  return { ...criticalData };
 }
 
 /**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {Route.LoaderArgs}
  */
-async function loadCriticalData({context, request}) {
+async function loadCriticalData({ context, request }) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 4,
+    pageBy: 12,
   });
 
-  const [{collections}] = await Promise.all([
+  const [{ collections }] = await Promise.all([
     context.storefront.query(COLLECTIONS_QUERY, {
       variables: paginationVariables,
     }),
-    // Add other queries here, so that they are loaded in parallel
   ]);
 
-  return {collections};
-}
-
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {Route.LoaderArgs}
- */
-function loadDeferredData({context}) {
-  return {};
+  return { collections };
 }
 
 export default function Collections() {
   /** @type {LoaderReturnData} */
-  const {collections} = useLoaderData();
+  const { collections } = useLoaderData();
 
   return (
-    <div className="collections">
-      <h1>Collections</h1>
-      <PaginatedResourceSection
-        connection={collections}
-        resourcesClassName="collections-grid"
-      >
-        {({node: collection, index}) => (
-          <CollectionItem
-            key={collection.id}
-            collection={collection}
-            index={index}
-          />
-        )}
-      </PaginatedResourceSection>
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[100vw] mx-auto">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+            KATALOG BUTIK SEMARANG &bull; SEJAK 2007
+          </span>
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
+            Seluruh Koleksi Batik Nusantara
+          </h1>
+          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+            Temukan busana sarimbit keluarga harmonis, busana wanita modern, kemeja pria furing hero, dan lembaran kain batik tulis pilihan pengrajin Jawa Tengah.
+          </p>
+        </div>
+
+        {/* Collections Grid (0px Radius, Quiet Luxury) */}
+        <PaginatedResourceSection
+          connection={collections}
+          resourcesClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {({ node: collection, index }) => (
+            <CollectionItem
+              key={collection.id}
+              collection={collection}
+              index={index}
+            />
+          )}
+        </PaginatedResourceSection>
+      </div>
     </div>
   );
 }
@@ -74,24 +86,53 @@ export default function Collections() {
  *   index: number;
  * }}
  */
-function CollectionItem({collection, index}) {
+function CollectionItem({ collection, index }) {
+  const fallbackImages = {
+    'sarimbit': '/banners/sarimbit_family_banner.jpg',
+    'sarimbit-exclusive': '/banners/sarimbit_family_banner.jpg',
+    'sarimbit-premium': '/banners/sarimbit_family_banner.jpg',
+    'sarimbit-ekonomis': '/banners/sarimbit_family_banner.jpg',
+    'batik-wanita': '/brand/models/model_teak_door.jpg',
+    'batik-pria': '/banners/hero_editorial_banner.jpg',
+    'kain-batik-tulis': '/banners/collection_kain_tulis_banner.jpg',
+    'jarik-kain-batik': '/banners/collection_kain_tulis_banner.jpg',
+  };
+
+  const imageUrl =
+    collection.image?.url ||
+    fallbackImages[collection.handle] ||
+    '/banners/hero_editorial_banner.jpg';
+
   return (
     <Link
-      className="collection-item"
+      className="group block bg-white border border-[#E2DFD8] shadow-sm hover:shadow-md transition-all overflow-hidden"
       key={collection.id}
       to={`/collections/${collection.handle}`}
       prefetch="intent"
     >
-      {collection?.image && (
-        <Image
-          alt={collection.image.altText || collection.title}
-          aspectRatio="1/1"
-          data={collection.image}
-          loading={index < 3 ? 'eager' : undefined}
-          sizes="(min-width: 45em) 400px, 100vw"
+      <div className="relative aspect-[4/3] bg-[#111111] overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={collection.image?.altText || collection.title}
+          loading={index < 4 ? 'eager' : 'lazy'}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
         />
-      )}
-      <h5>{collection.title}</h5>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-medium block mb-1">
+            KOLEKSI BUTIK
+          </span>
+          <h2 className="font-serif text-2xl font-normal leading-tight text-white group-hover:text-[#C5A059] transition-colors">
+            {collection.title}
+          </h2>
+        </div>
+      </div>
+
+      <div className="p-5 flex items-center justify-between bg-white border-t border-[#E2DFD8]">
+        <span className="text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold group-hover:text-[#C5A059] transition-colors">
+          JELAJAHI KOLEKSI &rarr;
+        </span>
+        <span className="text-xs text-[#A69F96]">&bull;</span>
+      </div>
     </Link>
   );
 }
@@ -101,6 +142,7 @@ const COLLECTIONS_QUERY = `#graphql
     id
     title
     handle
+    description
     image {
       id
       url

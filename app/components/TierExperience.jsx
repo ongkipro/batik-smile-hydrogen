@@ -24,7 +24,7 @@ const TIERS = [
       'https://cdn.shopify.com/s/files/1/0669/5606/7032/files/sarimbit-mahakarya.webp?v=1740920000',
     fallbackImage:
       'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=800&auto=format&fit=crop',
-    collectionUrl: '/collections/sarimbit-mahakarya-heritage',
+    collectionUrl: '/collections/sarimbit-exclusive',
   },
   {
     id: 'signature',
@@ -40,37 +40,39 @@ const TIERS = [
     specs: [
       { label: 'Material', value: 'Tenun Katun Dobby Bertekstur Timbul' },
       { label: 'Furing', value: 'Lapis Furing Hero Katun Adem Anti-Gerah' },
-      { label: 'Ketelitian', value: 'Batik Cap Kombinasi Tulis Presisi' },
-      { label: 'Karakter', value: 'Tekstur Mewah, Tegap Berstruktur, Elegan' },
+      { label: 'Material', value: 'Bahan Katun Primisima & Dobby Premium' },
+      { label: 'Furing', value: 'Furing Katun Arrow Adem & Menyerap Keringat' },
+      { label: 'Ketelitian', value: 'Pola Pasangan Selaras Sempurna' },
+      { label: 'Karakter', value: 'Garansi Tukar Ukuran 7 Hari Bebas Ongkir' },
     ],
     image:
       'https://cdn.shopify.com/s/files/1/0669/5606/7032/files/sarimbit-signature.webp?v=1740920000',
     fallbackImage:
       'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop',
-    collectionUrl: '/collections/sarimbit-signature-elegance',
+    collectionUrl: '/collections/sarimbit-premium',
   },
   {
     id: 'essential',
     tierNumber: 'KASTA III',
     name: 'Essential Daily',
     subname: 'Katun Primisima Halus & Nyaman Harian',
-    priceRange: 'Rp 225.000 – Rp 450.000',
-    badge: 'Kenyamanan Harian Maksimal',
+    priceRange: 'Rp 350.000 – Rp 650.000 / Pasang',
+    badge: 'Kenyamanan Harian',
     accentColor: '#9E4719',
     bgClass: 'bg-white text-neutral-900 border-neutral-200/80 shadow-sm',
     description:
       'Koleksi busana batik esensial berbahan 100% Katun Primisima Sanforized. Lembut di kulit, tidak mudah kusut, dan tidak susut setelah dicuci. Sangat ideal untuk busana kerja kantor harian, mengajar, dan pertemuan santai.',
     specs: [
-      { label: 'Material', value: '100% Katun Primisima Unggul 50s' },
-      { label: 'Furing', value: 'Tersedia Pilihan Non-Furing & Furing Ringan' },
-      { label: 'Ketelitian', value: 'Batik Cetak Tradisional Halus Anti-Luntur' },
-      { label: 'Karakter', value: 'Ringan, Dingin di Kulit, Mudah Disetrika' },
+      { label: 'Material', value: 'Bahan Katun Halus Nyaman Dipakai Seharian' },
+      { label: 'Furing', value: 'Mudah Disetrika & Tidak Luntur' },
+      { label: 'Ketelitian', value: 'Tersedia Lengkap dari Ukuran Anak hingga 5XL' },
+      { label: 'Karakter', value: 'Pilihan Motif Tradisional & Kontemporer' },
     ],
     image:
       'https://cdn.shopify.com/s/files/1/0669/5606/7032/files/sarimbit-essential.webp?v=1740920000',
     fallbackImage:
       'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop',
-    collectionUrl: '/collections/sarimbit-essential-daily',
+    collectionUrl: '/collections/sarimbit-ekonomis',
   },
 ];
 
@@ -80,7 +82,7 @@ export function TierExperience() {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5] border-t border-neutral-200/60">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-[100vw] mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-[11px] uppercase tracking-[0.25em] text-[#9E4719] font-bold">
@@ -192,18 +194,18 @@ export function TierExperience() {
               <div className="flex flex-wrap items-center gap-4">
                 <NavLink
                   to={activeTier.collectionUrl}
-                  className="px-8 py-4 rounded bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-widest transition-all shadow-lg"
+                  className="px-8 py-4 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] font-semibold text-xs uppercase tracking-[0.18em] transition-all shadow-lg"
                 >
                   Jelajahi Katalog {activeTier.name} &rarr;
                 </NavLink>
 
                 <a
-                  href={`https://wa.me/6281234567890?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20dengan%20koleksi%20${encodeURIComponent(
+                  href={`https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20tertarik%20dengan%20koleksi%20${encodeURIComponent(
                     activeTier.name,
                   )}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-6 py-4 rounded bg-white/10 hover:bg-white/20 text-xs font-semibold uppercase tracking-wider border border-white/20 transition-all text-center"
+                  className="px-6 py-4 bg-white/10 hover:bg-white/20 text-xs font-semibold uppercase tracking-[0.18em] border border-white/20 transition-all text-center"
                 >
                   Tanya Konsultan Kasta Ini
                 </a>
