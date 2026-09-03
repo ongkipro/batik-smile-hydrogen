@@ -673,6 +673,22 @@
   - *Action*: Re-architected single article into a world-class frameless editorial experience. Purged the boxed card anti-pattern (`bg-white` and border lines removed), locked hero media and related articles strictly to **3:2 ratio** (`aspect-[3/2]`), implemented a 680px (`max-w-2xl`) intimate reading measure for optimal eye comfort, added a hairline gold scroll progress bar, drop cap on opening paragraph, provenance signature stamp, and integrated "Shop The Story" (curated 4:5 products linked to the story).
   - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, HTTP 200 OK verified on live article routes.
 
+---
+
+## Phase 28: PDP Precision UI/UX & Cohesive Straight-Line Architecture (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, StickyMobileBar.jsx*
+
+- [x] **Task 28.1: Eliminate Boxed Card Anti-Pattern on PDP Right Column**
+  - *Action*: Removed `bg-white border border-[#E2DFD8] shadow-sm` from the right purchasing column in `products.$handle.jsx`. The product details now flow organically on the warm Mori Linen canvas (`#FAF8F5`), perfectly consistent with the frameless Quiet Luxury standard across the store.
+  - *Evidence*: Seamless visual flow between gallery and product details without artificial card enclosures.
+- [x] **Task 28.2: 4:5 Gallery Enhancement & Dynamic Breadcrumbs**
+  - *Action*: Locked all product images strictly to **4:5 aspect ratio** (`aspect-[4/5]`), added image counter badge (`1 / 5`), and updated breadcrumbs to dynamically link to the product's actual collection instead of hardcoded paths.
+  - *Evidence*: Strict 4:5 portrait proportions verified on gallery, thumbnails, and related products grid.
+- [x] **Task 28.3: Sizing Architecture & Interactive Size Guide Modal**
+  - *Action*: Added an interactive Size Guide drawer displaying the official boutique regular-fit sizing table (S, M, L, XL, XXL) with measurements (LD, PB, PL). Made size guide and fitting consultation available for all products including single-variant/bespoke items.
+  - *Evidence*: `npm run lint` 0 warnings, `npm run build` Exit code 0, HTTP 200 OK verified on `/products/kebaya-encim-modern`.
+
+
 
 
 

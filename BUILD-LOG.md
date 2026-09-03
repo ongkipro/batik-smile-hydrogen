@@ -654,6 +654,33 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - HTTP 200 OK verified on `/blogs/news/:articleHandle`.
 
+---
+
+## Milestone 23: PDP Precision UI/UX & Cohesive Straight-Line Architecture (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of PDP Boxed Container, 4:5 Vertical Gallery, and Interactive Sizing System
+
+### 1. Frameless Quiet Luxury Purchasing Panel (`products.$handle.jsx`)
+- Purged the boxed card anti-pattern (`bg-white border border-[#E2DFD8] shadow-sm`) from the right purchase column.
+- Product information now flows seamlessly and directly on the Mori Linen canvas (`#FAF8F5`), perfectly pulling a straight visual line with the rest of the store.
+- Elevated Cormorant Garamond display typography (`text-3xl sm:text-4xl lg:text-[42px] font-normal leading-[1.14]`).
+- Clear price presentation with IDR currency formatting, compare-at strike-through, and boutique stock availability badge.
+
+### 2. Strict 4:5 Vertical Gallery System
+- Locked all product media containers strictly to **4:5 portrait ratio** (`aspect-[4/5]`) across main viewer, thumbnails, and related products grid.
+- Added smooth thumbnail switching with antique gold active ring and image counter badge (`1 / 5`).
+- Dynamically resolved breadcrumbs based on the product's actual parent collection.
+
+### 3. Sizing Architecture & Interactive Size Guide Modal
+- Built an interactive Size Guide drawer displaying the official boutique regular-fit sizing table (S, M, L, XL, XXL) with measurements (Lingkar Dada, Panjang Baju, Panjang Lengan).
+- Made size guide and WhatsApp fitting consultation available for all products including single-variant items.
+- Refined the Bespoke Tailoring Atelier add-on card with zero-radius inputs.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- HTTP 200 OK verified on live product routes.
+
+
 
 
 
