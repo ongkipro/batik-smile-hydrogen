@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 
+const SORT_OPTIONS = [
+  { value: 'featured', label: 'Rekomendasi Butik', shortLabel: 'Rekomendasi' },
+  { value: 'latest', label: 'Koleksi Terbaru', shortLabel: 'Terbaru' },
+  { value: 'price-asc', label: 'Harga: Terendah → Tertinggi', shortLabel: 'Harga Terendah' },
+  { value: 'price-desc', label: 'Harga: Tertinggi → Terendah', shortLabel: 'Harga Tertinggi' },
+  { value: 'title-asc', label: 'Abjad: A – Z', shortLabel: 'Abjad A–Z' },
+];
+
 /**
- * Pure Typographic Floating Filter & Sort Bar (Quiet Luxury)
- * 100% Zero-Box, Zero-Frame, Zero-Background.
- * Uses clean typographic text tabs with gold hairline active indicator.
+ * Bespoke Quiet Luxury Collection Filter & Sort Bar
+ * - Zero-Box, Zero-Radius Precision (0px).
+ * - Custom Anti-Slop Dropdown & Mobile Bottom Sheet (No native OS select, No iOS Safari zoom).
+ * - Responsive touch-friendly horizontal ribbon for price brackets.
+ * - Single-tap filter reset chips and count badges.
  *
  * @param {{
  *   totalCount?: number;
@@ -14,6 +24,8 @@ import { useSearchParams } from 'react-router';
  */
 export function CollectionFilterBar({ totalCount, isDark = false, className = '' }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Read active state from URL
   const currentSort = searchParams.get('sort') || 'featured';
@@ -26,6 +38,8 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
   const isAbove1M = minPrice === '1000000' && !maxPrice;
   const isAllActive = !minPrice && !maxPrice;
 
+  const currentSortObj = SORT_OPTIONS.find((opt) => opt.value === currentSort) || SORT_OPTIONS[0];
+
   // Helper to update search params while clearing pagination cursor
   const updateParams = (updater) => {
     const nextParams = new URLSearchParams(searchParams);
@@ -35,8 +49,7 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
     setSearchParams(nextParams, { preventScrollReset: true });
   };
 
-  const handleSortChange = (e) => {
-    const val = e.target.value;
+  const handleSortSelect = (val) => {
     updateParams((params) => {
       if (val === 'featured') {
         params.delete('sort');
@@ -44,11 +57,11 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
         params.set('sort', val);
       }
     });
+    setIsSortOpen(false);
   };
 
   const setFilterMode = (mode) => {
     updateParams((params) => {
-      // Reset filter params
       params.delete('minPrice');
       params.delete('maxPrice');
 
@@ -72,131 +85,375 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
     });
   };
 
+  // Close desktop popover on outside click
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsSortOpen(false);
+      }
+    }
+    if (isSortOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSortOpen]);
+
+  // Lock body scroll on mobile bottom sheet open
+  useEffect(() => {
+    if (isSortOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isSortOpen]);
+
   return (
     <div
+      ref={dropdownRef}
       className={`w-full mb-8 sm:mb-10 border-b pb-3.5 transition-colors ${
         isDark ? 'border-white/15' : 'border-[#E2DFD8]/80'
       } ${className}`}
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        {/* Left Side: Pure Typographic Text Tabs (Horizontal Scrollable on Mobile) */}
-        <nav
-          aria-label="Filter Katalog"
-          className="flex items-center gap-5 sm:gap-7 overflow-x-auto no-scrollbar scroll-smooth -mb-[15px] pb-3"
-        >
-          {/* Tab: SEMUA */}
+      {/* TOP CONTROL ROW: Mobile & Desktop Responsive Bar */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 sm:gap-4">
+        
+        {/* DESKTOP VIEW: Clean Typographic Filter Tabs */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav aria-label="Filter Katalog Desktop" className="flex items-center gap-6 lg:gap-8">
+            <button
+              type="button"
+              onClick={() => setFilterMode('all')}
+              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
+                isAllActive
+                  ? isDark
+                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
+                    : 'text-[#111111] border-[#C5A059] font-semibold'
+                  : isDark
+                  ? 'text-[#A69F96] border-transparent hover:text-white'
+                  : 'text-[#777777] border-transparent hover:text-[#111111]'
+              }`}
+            >
+              Semua {typeof totalCount === 'number' && `(${totalCount})`}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setFilterMode(isUnder500 ? 'all' : 'under500')}
+              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
+                isUnder500
+                  ? isDark
+                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
+                    : 'text-[#111111] border-[#C5A059] font-semibold'
+                  : isDark
+                  ? 'text-[#A69F96] border-transparent hover:text-white'
+                  : 'text-[#777777] border-transparent hover:text-[#111111]'
+              }`}
+            >
+              &lt; Rp 500rb
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setFilterMode(is500To1M ? 'all' : '500to1m')}
+              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
+                is500To1M
+                  ? isDark
+                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
+                    : 'text-[#111111] border-[#C5A059] font-semibold'
+                  : isDark
+                  ? 'text-[#A69F96] border-transparent hover:text-white'
+                  : 'text-[#777777] border-transparent hover:text-[#111111]'
+              }`}
+            >
+              Rp 500rb – 1jt
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setFilterMode(isAbove1M ? 'all' : 'above1m')}
+              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
+                isAbove1M
+                  ? isDark
+                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
+                    : 'text-[#111111] border-[#C5A059] font-semibold'
+                  : isDark
+                  ? 'text-[#A69F96] border-transparent hover:text-white'
+                  : 'text-[#777777] border-transparent hover:text-[#111111]'
+              }`}
+            >
+              &gt; Rp 1jt
+            </button>
+          </nav>
+        </div>
+
+        {/* MOBILE VIEW TOP ROW: Count + Active Filter Summary + Sort Button */}
+        <div className="flex md:hidden items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] uppercase tracking-[0.18em] text-[#5A5550] font-medium">
+              {typeof totalCount === 'number' ? `${totalCount} Busana` : 'Koleksi'}
+            </span>
+            {!isAllActive && (
+              <button
+                type="button"
+                onClick={clearAllFilters}
+                className="inline-flex items-center gap-1 text-[9px] uppercase tracking-wider text-[#9E7D3B] bg-[#FAF8F5] border border-[#E2DFD8] px-2 py-0.5"
+              >
+                <span>{isUnder500 ? '<500rb' : is500To1M ? '500rb–1jt' : '>1jt'}</span>
+                <span className="text-[#111111] font-bold">&times;</span>
+              </button>
+            )}
+          </div>
+
+          {/* Mobile Sort Trigger Button */}
           <button
             type="button"
-            onClick={() => setFilterMode('all')}
-            className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2.5 border-b-2 bg-transparent ${
-              isAllActive
-                ? isDark
-                  ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                  : 'text-[#111111] border-[#C5A059] font-semibold'
-                : isDark
-                ? 'text-[#A69F96] border-transparent hover:text-white'
-                : 'text-[#777777] border-transparent hover:text-[#111111]'
+            onClick={() => setIsSortOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={isSortOpen}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 border text-[10px] uppercase tracking-[0.18em] font-medium transition-colors cursor-pointer ${
+              isDark
+                ? 'border-[#C5A059]/40 text-[#C5A059] bg-[#111111]'
+                : 'border-[#E2DFD8] text-[#111111] bg-white active:bg-[#FAF8F5]'
             }`}
           >
-            Semua {typeof totalCount === 'number' && `(${totalCount})`}
+            <span>Urutkan: {currentSortObj.shortLabel}</span>
+            <svg className="w-3 h-3 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
           </button>
+        </div>
 
-          {/* Tab: < RP 500RB */}
-          <button
-            type="button"
-            onClick={() => setFilterMode(isUnder500 ? 'all' : 'under500')}
-            className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2.5 border-b-2 bg-transparent ${
-              isUnder500
-                ? isDark
-                  ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                  : 'text-[#111111] border-[#C5A059] font-semibold'
-                : isDark
-                ? 'text-[#A69F96] border-transparent hover:text-white'
-                : 'text-[#777777] border-transparent hover:text-[#111111]'
-            }`}
-          >
-            &lt; Rp 500rb
-          </button>
+        {/* MOBILE VIEW BOTTOM ROW: Clean Horizontal Touch-Scroll Tabs */}
+        <div className="md:hidden overflow-x-auto no-scrollbar -mx-4 px-4">
+          <nav aria-label="Filter Katalog Mobile" className="flex items-center gap-2 py-1">
+            <button
+              type="button"
+              onClick={() => setFilterMode('all')}
+              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                isAllActive
+                  ? isDark
+                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
+                    : 'bg-[#111111] text-white border-[#111111] font-bold'
+                  : isDark
+                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
+                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
+              }`}
+            >
+              Semua {typeof totalCount === 'number' && `(${totalCount})`}
+            </button>
 
-          {/* Tab: RP 500RB – 1JT */}
-          <button
-            type="button"
-            onClick={() => setFilterMode(is500To1M ? 'all' : '500to1m')}
-            className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2.5 border-b-2 bg-transparent ${
-              is500To1M
-                ? isDark
-                  ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                  : 'text-[#111111] border-[#C5A059] font-semibold'
-                : isDark
-                ? 'text-[#A69F96] border-transparent hover:text-white'
-                : 'text-[#777777] border-transparent hover:text-[#111111]'
-            }`}
-          >
-            Rp 500rb – 1jt
-          </button>
+            <button
+              type="button"
+              onClick={() => setFilterMode(isUnder500 ? 'all' : 'under500')}
+              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                isUnder500
+                  ? isDark
+                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
+                    : 'bg-[#111111] text-white border-[#111111] font-bold'
+                  : isDark
+                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
+                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
+              }`}
+            >
+              &lt; Rp 500rb
+            </button>
 
-          {/* Tab: > RP 1JT */}
-          <button
-            type="button"
-            onClick={() => setFilterMode(isAbove1M ? 'all' : 'above1m')}
-            className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2.5 border-b-2 bg-transparent ${
-              isAbove1M
-                ? isDark
-                  ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                  : 'text-[#111111] border-[#C5A059] font-semibold'
-                : isDark
-                ? 'text-[#A69F96] border-transparent hover:text-white'
-                : 'text-[#777777] border-transparent hover:text-[#111111]'
-            }`}
-          >
-            &gt; Rp 1jt
-          </button>
-        </nav>
+            <button
+              type="button"
+              onClick={() => setFilterMode(is500To1M ? 'all' : '500to1m')}
+              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                is500To1M
+                  ? isDark
+                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
+                    : 'bg-[#111111] text-white border-[#111111] font-bold'
+                  : isDark
+                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
+                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
+              }`}
+            >
+              Rp 500rb – 1jt
+            </button>
 
-        {/* Right Side: Pure Typographic Sort Selector (Frameless, Borderless) */}
-        <div className="flex items-center justify-between sm:justify-end gap-4 ml-auto md:ml-0 shrink-0">
+            <button
+              type="button"
+              onClick={() => setFilterMode(isAbove1M ? 'all' : 'above1m')}
+              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                isAbove1M
+                  ? isDark
+                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
+                    : 'bg-[#111111] text-white border-[#111111] font-bold'
+                  : isDark
+                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
+                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
+              }`}
+            >
+              &gt; Rp 1jt
+            </button>
+          </nav>
+        </div>
+
+        {/* DESKTOP RIGHT CONTROLS: Reset Filter & Custom Dropdown Popover */}
+        <div className="hidden md:flex items-center gap-4 shrink-0 relative">
           {!isAllActive && (
             <button
               type="button"
               onClick={clearAllFilters}
-              className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-4 cursor-pointer"
+              className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-4 cursor-pointer transition-colors"
             >
               Reset Filter
             </button>
           )}
 
-          <div className="relative inline-flex items-center">
-            <label htmlFor="pure-sort-select" className="sr-only">
-              Urutkan Koleksi
-            </label>
-            <select
-              id="pure-sort-select"
-              value={currentSort}
-              onChange={handleSortChange}
-              className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium pr-5 py-0.5 bg-transparent border-none appearance-none cursor-pointer focus:outline-hidden transition-colors ${
+          {/* Desktop Sort Dropdown Button */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsSortOpen(!isSortOpen)}
+              className={`inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium py-1 px-2.5 transition-colors cursor-pointer ${
                 isDark
                   ? 'text-[#C5A059] hover:text-white'
                   : 'text-[#5A5550] hover:text-[#111111]'
               }`}
             >
-              <option value="featured" className="text-black bg-white">Urutkan: Rekomendasi</option>
-              <option value="latest" className="text-black bg-white">Urutkan: Koleksi Terbaru</option>
-              <option value="price-asc" className="text-black bg-white">Harga: Terendah &rarr; Tertinggi</option>
-              <option value="price-desc" className="text-black bg-white">Harga: Tertinggi &rarr; Terendah</option>
-              <option value="title-asc" className="text-black bg-white">Abjad: A &ndash; Z</option>
-            </select>
-            {/* Minimalist Micro Arrow */}
-            <span
-              aria-hidden="true"
-              className={`pointer-events-none text-[10px] ml-1 ${
-                isDark ? 'text-[#C5A059]' : 'text-[#888888]'
-              }`}
-            >
-              &darr;
-            </span>
+              <span>Urutkan: {currentSortObj.shortLabel}</span>
+              <svg
+                className={`w-3 h-3 text-[#9E7D3B] transition-transform duration-200 ${
+                  isSortOpen ? 'rotate-180' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Desktop Popover Menu (0px Radius, Quiet Luxury) */}
+            {isSortOpen && (
+              <div
+                className={`absolute right-0 top-full mt-2 w-64 border shadow-xl z-50 p-1 rounded-none transition-all ${
+                  isDark
+                    ? 'bg-[#1C1C1C] border-[#C5A059]/40 text-white'
+                    : 'bg-white border-[#E2DFD8] text-[#111111]'
+                }`}
+              >
+                <div className="py-1">
+                  {SORT_OPTIONS.map((opt) => {
+                    const isSelected = opt.value === currentSort;
+                    return (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => handleSortSelect(opt.value)}
+                        className={`w-full text-left px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] flex items-center justify-between transition-colors cursor-pointer ${
+                          isSelected
+                            ? isDark
+                              ? 'bg-white/10 text-[#C5A059] font-semibold'
+                              : 'bg-[#FAF8F5] text-[#111111] font-semibold'
+                            : isDark
+                            ? 'text-[#A69F96] hover:bg-white/5 hover:text-white'
+                            : 'text-[#5A5550] hover:bg-[#FAF8F5] hover:text-[#111111]'
+                        }`}
+                      >
+                        <span>{opt.label}</span>
+                        {isSelected && (
+                          <span className="text-[#C5A059] text-xs font-bold">&bull;</span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
+
       </div>
+
+      {/* MOBILE SORT BOTTOM SHEET DRAWER (Zero-Zoom, Pure Touch UX) */}
+      {isSortOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
+          {/* Dark Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+            onClick={() => setIsSortOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Bottom Sheet Modal */}
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Urutkan Koleksi"
+            className={`relative z-10 w-full max-h-[80vh] overflow-y-auto border-t p-5 shadow-2xl rounded-none transition-transform ${
+              isDark
+                ? 'bg-[#181716] border-[#C5A059]/40 text-white'
+                : 'bg-white border-[#E2DFD8] text-[#111111]'
+            }`}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between pb-4 mb-3 border-b border-[#E2DFD8]/60">
+              <span className="text-xs uppercase tracking-[0.22em] font-bold text-[#9E7D3B]">
+                URUTKAN KOLEKSI
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsSortOpen(false)}
+                className="w-8 h-8 flex items-center justify-center text-[#888888] hover:text-[#111111] cursor-pointer text-lg leading-none"
+                aria-label="Tutup"
+              >
+                &times;
+              </button>
+            </div>
+
+            {/* Options List (15px/16px font size to guarantee ZERO mobile zoom!) */}
+            <div className="space-y-1">
+              {SORT_OPTIONS.map((opt) => {
+                const isSelected = opt.value === currentSort;
+                return (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => handleSortSelect(opt.value)}
+                    className={`w-full text-left px-4 py-3.5 text-[15px] sm:text-base tracking-wide flex items-center justify-between border-b border-[#E2DFD8]/30 transition-colors cursor-pointer ${
+                      isSelected
+                        ? isDark
+                          ? 'text-[#C5A059] font-semibold bg-white/5'
+                          : 'text-[#111111] font-semibold bg-[#FAF8F5]'
+                        : isDark
+                        ? 'text-[#CCCCCC] hover:text-white'
+                        : 'text-[#5A5550] hover:text-[#111111]'
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                    {isSelected && (
+                      <svg className="w-4 h-4 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Bottom Safe Action */}
+            <div className="mt-5 pt-3">
+              <button
+                type="button"
+                onClick={() => setIsSortOpen(false)}
+                className="w-full py-3 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs font-bold uppercase tracking-[0.2em] transition-colors text-center"
+              >
+                TUTUP
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

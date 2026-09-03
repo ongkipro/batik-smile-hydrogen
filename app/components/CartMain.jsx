@@ -112,7 +112,7 @@ export function CartMain({ layout, cart: originalCart }) {
                 name="note"
                 rows={2}
                 placeholder="Tuliskan catatan pesanan Anda di sini..."
-                className="w-full p-3 text-xs text-[#111111] placeholder:text-[#888888] bg-white/70 border border-[#E2DFD8] focus:border-[#111111] focus:bg-white focus:outline-hidden transition-colors"
+                className="w-full p-3 text-base sm:text-xs text-[#111111] placeholder:text-[#888888] bg-white/70 border border-[#E2DFD8] focus:border-[#111111] focus:bg-white focus:outline-hidden transition-colors"
               />
             </div>
 

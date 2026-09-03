@@ -173,7 +173,7 @@ function CartDiscounts({
             type="text"
             name="discountCode"
             placeholder="Masukkan kode voucher..."
-            className="w-full px-3 py-2 text-xs text-[#111111] placeholder:text-[#888888] bg-transparent focus:outline-hidden"
+            className="w-full px-3 py-2 text-base sm:text-xs text-[#111111] placeholder:text-[#888888] bg-transparent focus:outline-hidden"
           />
           <button
             type="submit"

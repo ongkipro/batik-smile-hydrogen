@@ -113,7 +113,7 @@ export default function AccountProfile() {
               placeholder="Nama depan"
               defaultValue={customer?.firstName ?? ''}
               minLength={2}
-              className="w-full text-xs p-3 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] focus:bg-white outline-none transition-colors"
+              className="w-full text-base sm:text-xs p-3 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] focus:bg-white outline-none transition-colors"
             />
           </div>
 
@@ -132,7 +132,7 @@ export default function AccountProfile() {
               placeholder="Nama belakang"
               defaultValue={customer?.lastName ?? ''}
               minLength={2}
-              className="w-full text-xs p-3 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] focus:bg-white outline-none transition-colors"
+              className="w-full text-base sm:text-xs p-3 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] focus:bg-white outline-none transition-colors"
             />
           </div>
         </div>

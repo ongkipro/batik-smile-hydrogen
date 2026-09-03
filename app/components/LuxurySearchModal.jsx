@@ -215,7 +215,7 @@ export function LuxurySearchModal() {
               value={searchTerm}
               onChange={handleInputChange}
               placeholder="Cari daster, sarimbit, kemeja pria, kain..."
-              className="w-full text-sm sm:text-lg font-serif text-[#111111] placeholder-[#A69F96] bg-transparent outline-none tracking-wide"
+              className="w-full text-base sm:text-lg font-serif text-[#111111] placeholder-[#A69F96] bg-transparent outline-none tracking-wide"
               autoComplete="off"
             />
 

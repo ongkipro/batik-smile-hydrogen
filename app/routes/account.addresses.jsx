@@ -407,7 +407,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             placeholder="Nama depan"
             required
             type="text"
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
         <div>
@@ -421,7 +421,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             placeholder="Nama belakang"
             required
             type="text"
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
       </div>
@@ -437,7 +437,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
           placeholder="Jalan, nomor rumah, RT/RW"
           required
           type="text"
-          className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+          className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
         />
       </div>
 
@@ -453,7 +453,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             placeholder="Kota"
             required
             type="text"
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
         <div>
@@ -467,7 +467,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             placeholder="Provinsi"
             required
             type="text"
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
         <div>
@@ -481,7 +481,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             placeholder="Kode pos"
             required
             type="text"
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
       </div>
@@ -497,7 +497,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             name="phoneNumber"
             placeholder="081..."
             type="tel"
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
         <div>
@@ -512,7 +512,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
             required
             type="text"
             maxLength={2}
-            className="w-full text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
+            className="w-full text-base sm:text-xs p-2.5 bg-white border border-[#E2DFD8] focus:border-[#111111] outline-none"
           />
         </div>
       </div>

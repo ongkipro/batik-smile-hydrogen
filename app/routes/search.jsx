@@ -74,7 +74,7 @@ export default function SearchPage() {
                   placeholder="Ketik motif, jenis busana, atau koleksi..."
                   ref={inputRef}
                   type="search"
-                  className="flex-1 min-w-0 px-3.5 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm bg-transparent outline-none placeholder-[#A69F96] text-[#111111]"
+                  className="flex-1 min-w-0 px-3.5 sm:px-5 py-3 sm:py-4 text-base sm:text-sm bg-transparent outline-none placeholder-[#A69F96] text-[#111111]"
                 />
                 <button
                   type="submit"

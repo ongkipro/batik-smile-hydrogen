@@ -127,11 +127,15 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Features oversized background watermark numeral ("404"), delicate animated geometric batik diamond emblem, and 2 focused primary buttons.
     - Integrated whispered in-modal live search trigger and WhatsApp hotline.
     - Dual-layer SEO protection: HTML `<meta name="robots" content="noindex, nofollow" />` + HTTP response header `X-Robots-Tag: noindex, nofollow`.
+23. **Mobile Zero-Zoom Input Scaling & Collection Filter UI/UX Overhaul**:
+    - Standardized all input and textarea fields across the app to 16px (`text-base`) on mobile to prevent iOS Safari auto-zoom upon focus.
+    - Replaced clunky native OS `<select>` with custom Quiet Luxury controls: Desktop popover menu and Mobile Sort Bottom Sheet drawer with backdrop blur and 48px touch targets.
+    - Restructured mobile filter view with top count/reset chip bar and horizontal touch-scroll ribbon.
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
 - **Comprehensive Route Audit**: All collection, catalog, cart, 404, and in-modal search routes tested and returning proper HTTP status codes on local dev server (`localhost:3005`).
-- **Deployment Status**: Local verification complete; awaiting deployment authorization.
+- **Deployment Status**: Ready for deployment.
 

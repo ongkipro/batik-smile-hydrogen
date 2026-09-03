@@ -907,6 +907,19 @@
   - *Action*: Implemented dual-layer SEO protection: (1) HTML meta tag `<meta name="robots" content="noindex, nofollow" />` in route meta, and (2) HTTP response header `X-Robots-Tag: noindex, nofollow` on all 404 responses in `entry.server.jsx`.
   - *Evidence*: Node SSR test verified HTTP status 404, `X-Robots-Tag: noindex, nofollow` header, and HTML `<meta name="robots" content="noindex, nofollow">`.
 
+---
+
+## Phase 41: Mobile View Zero-Zoom Input Scaling & Collection Filter UI/UX Overhaul (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: CollectionFilterBar.jsx, LuxurySearchModal.jsx, CartMain.jsx, CartSummary.jsx, search.jsx, account.*.jsx*
+
+- [x] **Task 41.1: Mobile Input 16px Font Scaling (`text-base sm:text-*`)**
+  - *Action*: Standardized all `<input>` and `<textarea>` fields across the application to have at least `16px` (`text-base`) on mobile viewports, avoiding iOS Safari and mobile browser auto-zoom upon focus. Updated search bar in `LuxurySearchModal.jsx`, cart note textarea in `CartMain.jsx`, voucher code input in `CartSummary.jsx`, search input in `search.jsx`, and profile/address/order form inputs in `routes/account.*.jsx`.
+  - *Evidence*: Verified 16px mobile styling; zero auto-zoom on mobile devices.
+- [x] **Task 41.2: Collection Filter & Sort Mobile Overhaul (`CollectionFilterBar.jsx`)**
+  - *Action*: Completely eliminated AI-slop clunky OS native `<select>` dropdown. Replaced with bespoke Quiet Luxury controls: (1) Desktop custom popover menu with gold bullet indicators, (2) Mobile Sort Bottom Sheet drawer with backdrop blur, 48px thumb touch targets, and antique gold checkmarks, (3) Mobile top status bar with item count and active filter reset chips, (4) Touch-friendly horizontal ribbon for price tabs with edge bleed and no scrollbar.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings), `npm run build` (Exit code 0), and SSR test verified `<select>` elimination and mobile bottom sheet integration.
+
+
 
 
 

@@ -157,7 +157,7 @@ function OrderSearchForm({ currentFilters }) {
         name={ORDER_FILTER_FIELDS.NAME}
         placeholder="Cari no. pesanan..."
         defaultValue={currentFilters.name || ''}
-        className="text-xs px-3 py-2 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] outline-none w-44"
+        className="text-base sm:text-xs px-3 py-2 bg-[#FAF8F5] border border-[#E2DFD8] focus:border-[#111111] outline-none w-44"
       />
       <button
         type="submit"

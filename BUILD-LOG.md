@@ -1092,6 +1092,34 @@
 - `npm run build`: Exit code 0.
 - SSR node test verified: HTTP 404 status, `X-Robots-Tag: noindex, nofollow`, HTML `<meta name="robots" content="noindex, nofollow">`, and zero boxed cards.
 
+---
+
+## Milestone 39: Mobile Input Zero-Zoom Scaling & Collection Filter UI/UX Overhaul (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: 16px Mobile Input Scaling, Anti-Slop Filter & Sort Overhaul, Mobile Sort Bottom Sheet, Desktop Custom Popover
+
+### 1. Mobile Input & Textarea 16px Font Scaling (`text-base sm:text-*`)
+- Standardized all input and textarea fields across the app to use `text-base` (16px) on mobile viewports to prevent iOS Safari auto-zoom upon focus.
+- Updated fields:
+  - `LuxurySearchModal.jsx`: Search input scaled from `text-sm` to `text-base sm:text-lg`.
+  - `CartMain.jsx`: Cart note textarea scaled from `text-xs` to `text-base sm:text-xs`.
+  - `CartSummary.jsx`: Discount code input scaled from `text-xs` to `text-base sm:text-xs`.
+  - `routes/search.jsx`: Standalone search input scaled from `text-xs` to `text-base sm:text-sm`.
+  - `routes/account.profile.jsx`: Name inputs scaled from `text-xs` to `text-base sm:text-xs`.
+  - `routes/account.addresses.jsx`: Address form inputs scaled from `text-xs` to `text-base sm:text-xs`.
+  - `routes/account.orders._index.jsx`: Order search input scaled from `text-xs` to `text-base sm:text-xs`.
+
+### 2. Collection Filter & Sort Mobile Overhaul (`CollectionFilterBar.jsx`)
+- Replaced native OS `<select>` dropdown with bespoke Quiet Luxury components:
+  - **Desktop**: Custom popover menu with sharp 0px corners, gold bullet indicators, and outside click listener.
+  - **Mobile**: Touch-first Sort Bottom Sheet drawer with backdrop blur, 48px touch targets, antique gold checkmarks, and body scroll locking.
+  - **Mobile Layout**: Split into top status row (count + active filter reset chip + sort trigger button) and bottom horizontal touch-scroll filter ribbon.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- Verified elimination of `<select>` element and proper mobile layout rendering.
+
+
 
 
 
