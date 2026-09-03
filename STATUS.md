@@ -96,14 +96,42 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Removed `rounded-2xl` from `CraftsmanshipZoom.jsx` and calibrated `CustomerLoveNotes.jsx` and `ChooseYourBatikGrid.jsx`.
 14. **Pure Typographic Floating Filter & Sort Bar (Zero-Box, Zero-Frame)**:
     - Designed and implemented `CollectionFilterBar.jsx`: 100% zero-box, zero-frame, zero-background.
-    - Pure typographic tabs (`Semua`, `Siap Kirim`, `< Rp 500rb`, `Rp 500rb – 1jt`, `> Rp 1jt`) with gold hairline active indicator (`border-b-2 border-[#C5A059]`) and seamless horizontal swipe on mobile devices.
+    - Pure typographic tabs (`Semua`, `< Rp 500rb`, `Rp 500rb – 1jt`, `> Rp 1jt`) with gold hairline active indicator (`border-b-2 border-[#C5A059]`) and seamless horizontal swipe on mobile devices (Removed "Siap Kirim" per user directive).
     - Frameless sort selector (`Urutkan: Rekomendasi ↓`) with dynamic Storefront API integration (`$sortKey`, `$reverse`, `$filters`, `$query`).
     - Deployed on all collection routes (`/collections/*`) and catalog index (`/collections/all`).
+15. **Architectural 404 Experience (`$.jsx` & `root.jsx`)**:
+    - Re-architected 404 page within `PageLayout` with single-line Breadcrumb, Cormorant Garamond headline (*"Jejak Warisan yang Dicari Belum Tersedia"*), integrated search, 3 curated pillar cards with 4:5 imagery, and WhatsApp concierge link.
+16. **Cart Page Anti-AI-Slop & 2-Column Split (`cart.jsx`, `CartMain.jsx`, `CartSummary.jsx`)**:
+    - Expanded cart to 2-column architectural split layout (Line items left, Sticky summary right).
+    - Completely eliminated emojis (`📦`, `✨`, `🔒`, `🛍️`) in favor of Quiet Luxury trust pillars and monogram diamond SVG.
+    - Standardized all pricing to Indonesian Rupiah without decimals `,00` (`formatRupiah`).
+    - Translated all English terms to Indonesian luxury terminology (*Ringkasan Pesanan*, *Subtotal Busana*, *Gunakan*, *Lanjut ke Pembayaran Resmi Shopify*).
+17. **Header Cart Direct Navigation (`Header.jsx`)**:
+    - Re-routed header cart button to a direct `<Link to="/cart">` with prefetching, bypassing the aside drawer.
+18. **Zero-Box Cart, Variant Suppression & CTA Unification**:
+    - Stripped all nested box cards and heavy borders; content flows naturally on the Mori Linen canvas separated by hairline dividers.
+    - Suppressed synthetic Shopify `"Title: Default Title"` variant tags.
+    - Unified navigation to a single, focused `Lanjutkan Belanja →` link at the top-right header, eliminating duplicate and competing CTAs.
+19. **Hyper-Minimalist Mobile Header & Sticky Burger Account (`Header.jsx`)**:
+    - Cleaned mobile header to pure tripartite essentials: Left Hamburger, Center Enlarged Logo (`h-10 sm:h-11`), Right Cart.
+    - Removed Semarang showroom card and duplicate WhatsApp button from mobile burger drawer.
+    - Placed dedicated sticky account button (`AKUN SAYA & STATUS PESANAN →`) pinned at the bottom of the burger drawer.
+20. **In-Modal Live Predictive Search Engine (`LuxurySearchModal.jsx`, `routes/search.jsx`)**:
+    - Re-architected search modal so results appear live directly inside the modal with zero full-page redirects to `/search`.
+    - Integrated 250ms debounced live search and instant manual Enter/CARI submit.
+21. **Storefront API Limit Fix & Multi-Entity Search Output**:
+    - Resolved Storefront API limit constraint (clamped strictly to 1..10) that caused query crashes.
+    - Added multi-entity display: Koleksi Butik Terkait, Tag Busana, Busana & Produk (4:5 vertical portrait), dan Warta Budaya dengan tab filter instan.
+22. **Modern Zero-Box 404 Page & Strict Noindex/Nofollow**:
+    - Redesigned 404 route to a clean, modern Quiet Luxury stream without card frames, boxes, or lines.
+    - Features oversized background watermark numeral ("404"), delicate animated geometric batik diamond emblem, and 2 focused primary buttons.
+    - Integrated whispered in-modal live search trigger and WhatsApp hotline.
+    - Dual-layer SEO protection: HTML `<meta name="robots" content="noindex, nofollow" />` + HTTP response header `X-Robots-Tag: noindex, nofollow`.
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
-- **Comprehensive Route Audit**: All collection and catalog routes tested and returning HTTP 200 OK on local dev server (`localhost:3005`).
-- **Deployment Status**: Authorized by Paduka Ongki for commit, push, and deployment to Shopify Oxygen Global Edge Network.
+- **Comprehensive Route Audit**: All collection, catalog, cart, 404, and in-modal search routes tested and returning proper HTTP status codes on local dev server (`localhost:3005`).
+- **Deployment Status**: Local verification complete; awaiting deployment authorization.
 

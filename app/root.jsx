@@ -212,31 +212,40 @@ export function ErrorBoundary() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#111111] flex flex-col items-center justify-center p-6 text-center">
-      <div className="max-w-xl mx-auto border border-[#E2DFD8] bg-white p-10 sm:p-16">
-        <span className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold block mb-4">
-          KESALAHAN SISTEM BUTIK {errorStatus}
+      <div className="max-w-xl mx-auto border border-[#E2DFD8] bg-white p-10 sm:p-14 shadow-sm">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-bold block mb-4">
+          BUTIK BATIK SMILE &bull; STATUS {errorStatus}
         </span>
-        <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-6">
-          Halaman Tidak Ditemukan
+        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-4">
+          {errorStatus === 404 ? 'Jejak Warisan Belum Tersedia' : 'Pembaruan Layanan Butik'}
         </h1>
         <div className="w-12 h-px bg-[#C5A059] mx-auto mb-6" />
         <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-8">
-          Mohon maaf, halaman yang Anda tuju tidak tersedia atau telah dipindahkan.
-          Silakan kembali ke beranda untuk menjelajahi koleksi busana kami.
+          {errorStatus === 404
+            ? 'Mohon maaf, halaman atau arsip koleksi yang Anda tuju tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda atau hubungi konsultan butik kami.'
+            : 'Sistem butik sedang melakukan sinkronisasi data arsip. Silakan muat ulang atau hubungi concierge kami.'}
         </p>
 
         {errorMessage && process.env.NODE_ENV === 'development' && (
-          <div className="text-left bg-red-50 p-4 border border-red-200 mt-6 mb-8 text-xs overflow-auto max-w-full text-red-800">
+          <div className="text-left bg-[#FAF8F5] p-3 border border-[#E2DFD8] mt-4 mb-6 text-[11px] overflow-auto max-w-full text-[#7C3F1D]">
             <p className="font-mono">{errorMessage}</p>
           </div>
         )}
 
-        <div className="mt-8">
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
           <a
             href="/"
-            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-bold tracking-[0.18em] transition-colors"
+            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-bold tracking-[0.18em] transition-colors"
           >
             KEMBALI KE BERANDA &rarr;
+          </a>
+          <a
+            href="https://wa.me/6281390888809"
+            target="_blank"
+            rel="noreferrer"
+            className="px-6 py-3.5 border border-[#111111] hover:bg-[#111111] text-[#111111] hover:text-white text-[10px] uppercase font-bold tracking-[0.18em] transition-colors"
+          >
+            KONSULTASI VIA WHATSAPP
           </a>
         </div>
       </div>

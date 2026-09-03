@@ -1,12 +1,15 @@
+import React from 'react';
 import { CartForm, Image } from '@shopify/hydrogen';
 import { useVariantUrl } from '~/lib/variants';
 import { Link } from 'react-router';
-import { ProductPrice } from './ProductPrice';
 import { useAside } from './Aside';
+import { formatRupiah } from '~/lib/currency';
 
 /**
- * A single line item in the cart. It displays the product image, title, price.
- * It also provides controls to update the quantity or remove the line item.
+ * Architectural Shopify Cart Line Item Component
+ * Designed for seamless, un-boxed Quiet Luxury flow.
+ * Proportioned with precision for both mobile (iPhone/Android) and desktop.
+ *
  * @param {{
  *   layout: CartLayout;
  *   line: CartLine;
@@ -15,72 +18,101 @@ import { useAside } from './Aside';
  */
 export function CartLineItem({ layout, line, childrenMap }) {
   const { id, merchandise } = line;
-  const { product, title, image, selectedOptions } = merchandise;
+  const { product, title, image, selectedOptions, price: unitPrice } = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
   const { close } = useAside();
   const lineItemChildren = childrenMap[id];
   const childrenLabelId = `cart-line-children-${id}`;
 
+  // Hide synthetic Shopify "Title: Default Title" option
+  const realOptions =
+    selectedOptions?.filter(
+      (option) =>
+        option.name !== 'Title' &&
+        option.value !== 'Default Title' &&
+        option.value?.trim() !== '',
+    ) || [];
+
   return (
-    <li key={id} className="py-5 border-b border-[#E2DFD8] first:pt-0 last:border-b-0">
-      <div className="flex gap-4 items-start">
+    <li key={id} className="py-4 sm:py-5 border-b border-[#E2DFD8] first:pt-2 last:border-b-0">
+      <div className="flex gap-3 sm:gap-4 items-start">
+        {/* 4:5 Vertical Portrait Thumbnail */}
         {image && (
-          <div className="w-20 h-24 sm:w-24 sm:h-30 shrink-0 bg-[#111111] overflow-hidden border border-[#E2DFD8]">
+          <Link
+            prefetch="intent"
+            to={lineItemUrl}
+            onClick={() => {
+              if (layout === 'aside') close();
+            }}
+            className="w-18 h-22 sm:w-22 sm:h-28 aspect-[4/5] shrink-0 bg-[#111111] overflow-hidden border border-[#E2DFD8] group block"
+          >
             <Image
               alt={title}
               aspectRatio="4/5"
               data={image}
               loading="lazy"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-          </div>
+          </Link>
         )}
 
+        {/* Product Details & Stepper Row */}
         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
           <div>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-0.5">
+            <span className="text-[8px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-0.5">
               BATIK SMILE
             </span>
             <Link
               prefetch="intent"
               to={lineItemUrl}
               onClick={() => {
-                if (layout === 'aside') {
-                  close();
-                }
+                if (layout === 'aside') close();
               }}
-              className="font-serif text-sm sm:text-base font-normal text-[#111111] hover:text-[#C5A059] transition-colors leading-snug line-clamp-2"
+              className="font-serif text-sm sm:text-base font-normal text-[#111111] hover:text-[#C5A059] transition-colors leading-snug line-clamp-2 block mb-1"
             >
               {product.title}
             </Link>
 
-            <div className="mt-1 text-xs font-semibold text-[#111111]">
-              <ProductPrice price={line?.cost?.totalAmount} />
-            </div>
-
-            {selectedOptions?.length > 0 && (
-              <ul className="mt-1.5 space-y-0.5">
-                {selectedOptions.map((option) => (
-                  <li key={option.name} className="text-[10px] text-[#5A5550] uppercase tracking-wider">
-                    {option.name}: <span className="font-semibold text-[#111111]">{option.value}</span>
-                  </li>
+            {/* Variant specifications (Size, Color/Pattern) - Hidden if Default Title or empty */}
+            {realOptions.length > 0 && (
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[10px] text-[#5A5550] uppercase tracking-wider mb-1">
+                {realOptions.map((option) => (
+                  <span key={option.name}>
+                    {option.name}: <strong className="text-[#111111]">{option.value}</strong>
+                  </span>
                 ))}
-              </ul>
+              </div>
             )}
+
+            {/* Unit Price */}
+            <div className="text-[11px] sm:text-xs text-[#777777]">
+              {unitPrice ? formatRupiah(unitPrice) : '-'}
+            </div>
           </div>
 
-          <div className="mt-3 pt-2">
-            <CartLineQuantity line={line} />
+          {/* Stepper + Subtotal Row */}
+          <div className="mt-2.5 pt-2 border-t border-[#E2DFD8]/60 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <CartLineQuantity line={line} />
+              <CartLineRemoveButton lineIds={[id]} disabled={!!line.isOptimistic} />
+            </div>
+
+            <div className="text-right">
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#111111]">
+                {line?.cost?.totalAmount ? formatRupiah(line.cost.totalAmount) : '-'}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Children Bundle Components */}
       {lineItemChildren ? (
-        <div className="mt-3 pl-6 border-l border-[#C5A059]/40">
+        <div className="mt-2.5 pl-5 border-l border-[#C5A059]/40">
           <p id={childrenLabelId} className="sr-only">
-            Line items with {product.title}
+            Komponen pesanan {product.title}
           </p>
-          <ul aria-labelledby={childrenLabelId} className="space-y-2">
+          <ul aria-labelledby={childrenLabelId} className="space-y-1.5">
             {lineItemChildren.map((childLine) => (
               <CartLineItem
                 childrenMap={childrenMap}
@@ -97,7 +129,11 @@ export function CartLineItem({ layout, line, childrenMap }) {
 }
 
 /**
- * @param {{line: CartLine}}
+ * Compact Zero-Radius Stepper
+ *
+ * @param {{
+ *   line: CartLine;
+ * }}
  */
 function CartLineQuantity({ line }) {
   if (!line || typeof line?.quantity === 'undefined') return null;
@@ -106,45 +142,41 @@ function CartLineQuantity({ line }) {
   const nextQuantity = Number((quantity + 1).toFixed(0));
 
   return (
-    <div className="flex items-center justify-between gap-4">
-      {/* Quantity Stepper (0px Radius) */}
-      <div className="flex items-center border border-[#E2DFD8] bg-white">
-        <CartLineUpdateButton lines={[{ id: lineId, quantity: prevQuantity }]}>
-          <button
-            aria-label="Kurangi jumlah"
-            disabled={quantity <= 1 || !!isOptimistic}
-            name="decrease-quantity"
-            value={prevQuantity}
-            className="w-7 h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer"
-          >
-            &#8722;
-          </button>
-        </CartLineUpdateButton>
+    <div className="flex items-center border border-[#E2DFD8] bg-white">
+      <CartLineUpdateButton lines={[{ id: lineId, quantity: prevQuantity }]}>
+        <button
+          aria-label="Kurangi jumlah"
+          disabled={quantity <= 1 || !!isOptimistic}
+          name="decrease-quantity"
+          value={prevQuantity}
+          className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+        >
+          &#8722;
+        </button>
+      </CartLineUpdateButton>
 
-        <span className="w-8 text-center text-xs font-semibold text-[#111111]">
-          {quantity}
-        </span>
+      <span className="w-6 sm:w-7 text-center text-xs font-semibold text-[#111111]">
+        {quantity}
+      </span>
 
-        <CartLineUpdateButton lines={[{ id: lineId, quantity: nextQuantity }]}>
-          <button
-            aria-label="Tambah jumlah"
-            name="increase-quantity"
-            value={nextQuantity}
-            disabled={!!isOptimistic}
-            className="w-7 h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer"
-          >
-            &#43;
-          </button>
-        </CartLineUpdateButton>
-      </div>
-
-      {/* Remove Button */}
-      <CartLineRemoveButton lineIds={[lineId]} disabled={!!isOptimistic} />
+      <CartLineUpdateButton lines={[{ id: lineId, quantity: nextQuantity }]}>
+        <button
+          aria-label="Tambah jumlah"
+          name="increase-quantity"
+          value={nextQuantity}
+          disabled={!!isOptimistic}
+          className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+        >
+          &#43;
+        </button>
+      </CartLineUpdateButton>
     </div>
   );
 }
 
 /**
+ * Whispered Remove Button
+ *
  * @param {{
  *   lineIds: string[];
  *   disabled: boolean;
@@ -161,9 +193,9 @@ function CartLineRemoveButton({ lineIds, disabled }) {
       <button
         disabled={disabled}
         type="submit"
-        className="text-[10px] uppercase tracking-wider text-[#A69F96] hover:text-red-600 transition-colors cursor-pointer"
+        className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#888888] hover:text-red-700 transition-colors cursor-pointer underline underline-offset-2"
       >
-        HAPUS
+        Hapus
       </button>
     </CartForm>
   );

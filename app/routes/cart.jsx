@@ -1,4 +1,4 @@
-import { useLoaderData, data } from 'react-router';
+import { useLoaderData, data, Link } from 'react-router';
 import { CartForm } from '@shopify/hydrogen';
 import { CartMain } from '~/components/CartMain';
 import { Breadcrumb } from '~/components/Breadcrumb';
@@ -114,43 +114,52 @@ export default function Cart() {
   const cart = useLoaderData();
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-5xl mx-auto">
         {/* Breadcrumb Navigation */}
-        <Breadcrumb items={[{ label: 'TAS BELANJA' }]} />
+        <Breadcrumb items={[{ label: 'TAS BELANJA' }]} className="mb-6 sm:mb-8" />
 
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
-            PESANAN BUTIK ANDA
-          </span>
-          <h1 className="font-serif text-3xl sm:text-4xl font-normal tracking-wide text-[#111111] mb-2">
-            Tas Belanja Busana Batik
-          </h1>
-          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-3" />
-        </div>
+        {/* Classic Shopify Cart Header (Only rendered when items exist) */}
+        {Boolean(cart?.totalQuantity) && (
+          <div className="flex flex-wrap items-end justify-between gap-4 pb-5 mb-8 border-b border-[#111111]">
+            <div>
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-1">
+                PESANAN BUTIK RESMI
+              </span>
+              <h1 className="font-serif text-3xl sm:text-4xl font-normal tracking-wide text-[#111111]">
+                Tas Belanja ({cart.totalQuantity})
+              </h1>
+            </div>
+            <Link
+              to="/collections/all"
+              className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#111111] hover:text-[#C5A059] transition-colors pb-1 inline-flex items-center gap-1.5"
+            >
+              <span>Lanjutkan Belanja</span>
+              <span>&rarr;</span>
+            </Link>
+          </div>
+        )}
 
-        {/* Cart Main Component Container (0px Radius) */}
-        <div className="bg-white p-6 sm:p-10 border border-[#E2DFD8] shadow-sm mb-12">
+        {/* Cart Main 2-Column Layout */}
+        <div className="mb-8">
           <CartMain layout="page" cart={cart} />
         </div>
 
-        {/* Reassurance Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-xs text-[#5A5550]">
-          <div className="p-4 bg-white border border-[#E2DFD8]">
-            <span className="text-lg block mb-1">📦</span>
-            <strong className="block text-[#111111] mb-0.5">Gratis Ongkir se-Indonesia</strong>
-            <p className="text-[10px] text-[#A69F96]">Pengiriman aman bergaransi ke seluruh kota.</p>
-          </div>
-          <div className="p-4 bg-white border border-[#E2DFD8]">
-            <span className="text-lg block mb-1">✨</span>
-            <strong className="block text-[#111111] mb-0.5">Garansi Bebas Tukar Size 100%</strong>
-            <p className="text-[10px] text-[#A69F96]">Jika ukuran kurang pas, kami tukar dengan senang hati.</p>
-          </div>
-          <div className="p-4 bg-white border border-[#E2DFD8]">
-            <span className="text-lg block mb-1">🔒</span>
-            <strong className="block text-[#111111] mb-0.5">Pembayaran Resmi Terenkripsi</strong>
-            <p className="text-[10px] text-[#A69F96]">Keamanan data pelanggan terjamin standar Shopify.</p>
+        {/* Whispered Quiet Luxury Assurance Line (Zero Box, Zero Frame) */}
+        <div className="pt-8 sm:pt-10 mt-8 sm:mt-10 border-t border-[#E2DFD8] text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] sm:text-[11px] uppercase tracking-[0.16em] text-[#777777]">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1 h-1 bg-[#C5A059]" />
+              <span>Garansi Keaslian Butik 100%</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1 h-1 bg-[#C5A059]" />
+              <span>Bebas Penyesuaian Ukuran</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1 h-1 bg-[#C5A059]" />
+              <span>Pengiriman Terproteksi Asuransi</span>
+            </span>
           </div>
         </div>
       </div>

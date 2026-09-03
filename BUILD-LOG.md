@@ -914,6 +914,191 @@
 - Local SSR check: Tested `/collections/all`, `/collections/all?sort=price-asc`, `/collections/all?available=true`, `/collections/batik-pria`, and `/collections/sarimbit-exclusive`, all returning HTTP 200 OK with `FilterBar: true`.
 - Staged all modified files and pushed to `origin/main` for automated Shopify Oxygen edge deployment.
 
+---
+
+## Milestone 32: Architectural 404 Page, 2-Column Split Cart & Anti-AI-Slop Overhaul (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Removal of "Siap Kirim" Tab, High-Prestige 404 Experience (`$.jsx` & `root.jsx`), 2-Column Split Cart Suite (`cart.jsx`, `CartMain.jsx`, `CartSummary.jsx`), Oxygen Edge Deploy
+
+### 1. Removal of "Siap Kirim" Filter Tab (`CollectionFilterBar.jsx`)
+- Streamlined pure typographic floating bar to clean price brackets and catalog count:
+  - `Semua (count)`, `< Rp 500rb`, `Rp 500rb – 1jt`, `> Rp 1jt`.
+  - Removed "Siap Kirim" and related availability URL param mutation.
+
+### 2. Architectural 404 Gallery Experience (`$.jsx` & `root.jsx`)
+- Implemented dedicated luxury 404 view within `PageLayout`:
+  - **Single-Line Breadcrumb**: `[Home Icon] > KODE GALERI 404`.
+  - **Cormorant Garamond Display**: *"Jejak Warisan yang Dicari Belum Tersedia"* with gold hairline divider.
+  - **Embedded Search**: Clean zero-radius search bar targeting `/search`.
+  - **Atelier Curated Triptych**: 3 vertical 4:5 image cards directing lost visitors to *Sarimbit Exclusive*, *Sarimbit Premium*, and *Kemeja Batik Pria*.
+  - **Concierge Channel**: Direct WhatsApp link (`081-390-8888-09`) for personal assistance.
+  - **Harmonized Root ErrorBoundary**: Refactored `root.jsx` to eliminate technical error jargon in favor of polished Quiet Luxury typography.
+
+### 3. Cart Page Anti-AI-Slop & 2-Column Split (`cart.jsx`, `CartMain.jsx`, `CartSummary.jsx`)
+- Overhauled cart into a 2-column Quiet Luxury suite:
+  - **Desktop 2-Column Split**: Line items on left (`lg:col-span-7 xl:col-span-8`), sticky order summary on right (`lg:col-span-5 xl:col-span-4`).
+  - **Zero Emojis**: Removed cartoon emojis (`📦`, `✨`, `🔒`, `🛍️`) in favor of Quiet Luxury trust pillars (*Garansi Keaslian Butik 100%*, *Bebas Penyesuaian Ukuran*, *Pembayaran & Proteksi Pengiriman*) and monogram diamond SVG.
+  - **Indonesian Language Localization**: Replaced all English starter words (*Totals*, *Discounts*, *Remove*, *Subtotal*) with refined Indonesian atelier terminology (*Ringkasan Pesanan*, *Subtotal Busana*, *Voucher / Kode Promo*, *Gunakan*, *Hapus*, *Lanjut ke Pembayaran Resmi Shopify*).
+  - **Deterministic Price Formatting**: Standardized subtotal and total to Indonesian Rupiah without decimals `,00` (`formatRupiah`).
+  - **Atelier Empty State**: Displays inviting empty state with 3 recommended collection cards.
+
+### 4. Verification Evidence & Deployment
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check: Tested `/cart` (200 OK, 0 emojis, trust pillars verified) and `/koleksi-tidak-ada-xyz` (404 OK, editorial suite verified).
+- Pushed to `origin/main` for automated Shopify Oxygen edge deployment.
+
+---
+
+## Milestone 33: Header Cart Direct Link, Zero-Box Cart & Variant Suppression (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Header Cart Link Routing, Zero-Box Cart Refactor, Synthetic Variant Option Suppression, CTA Unification, Mobile UI Calibration
+
+### 1. Direct Header Cart Navigation (`Header.jsx`)
+- Replaced the cart drawer button with an intentional `<Link to="/cart" prefetch="intent">`.
+- Touching or clicking the header cart icon now instantly opens the `/cart` page without drawer animation.
+
+### 2. Zero-Box & Anti-Framing Cart Overhaul (`CartMain.jsx` & `cart.jsx`)
+- Stripped all nested box cards, heavy bezels, and widget frames (`bg-white border ... shadow-xs`).
+- Left column flows organically on the Mori Linen canvas separated only by hairline dividers (`#E2DFD8`).
+- Converted bottom boxed assurance cards into a single whispered horizontal line with gold dots.
+- Replaced boxed payment chips in the order summary with clean typographic text.
+
+### 3. Synthetic Variant Option Suppression (`CartLineItem.jsx`)
+- Filtered out Shopify synthetic `"Title: Default Title"` option tags.
+- Products with no custom variant options or with a single default variant now cleanly suppress the variant line rather than displaying raw technical text.
+
+### 4. CTA Unification & Mobile Proportions
+- Eliminated redundant duplicate calls to action ("Tambah Busana", duplicate "Lanjutkan Belanja" inside the list).
+- Retained a single primary `Lanjutkan Belanja →` link at the top-right of the cart header.
+- Calibrated mobile thumbnail proportions (`w-18 h-22 sm:w-22 sm:h-28 aspect-[4/5]`) and stepper dimensions (`w-6 h-6 sm:w-7 sm:h-7`) for comfortable touch usability without text clipping.
+
+### 5. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check: Tested `/cart` with zero duplicate CTAs, no "Default Title", and calibrated mobile responsiveness.
+
+---
+
+## Milestone 34: Mobile Header Logo Enlargement & Account Icon Swap (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Mobile Center Logo Calibration, Redundant Search Replacement, Account Icon Visibility
+
+### 1. Mobile Logo Enlargement (`Header.jsx`)
+- Scaled the mobile dead-center Batik Smile logo from `h-8 sm:h-9` up to `h-10 sm:h-11 w-auto max-w-[170px] sm:max-w-[200px]`.
+- Fits with balanced authority inside the 80px (`h-20`) header, providing high-contrast brand recognition without spilling over the navigation actions.
+
+### 2. Search Button Swap for Account Icon (`Header.jsx`)
+- Replaced the redundant mobile search trigger (`hidden lg:flex`) with the Customer Account icon (`/account`), since search is already prominently housed in the mobile sticky bottom navigation bar (`MobileNavigation.jsx`).
+- Mobile header now presents a clean tripartite layout:
+  - Left: Hamburger Menu (`lg:hidden`).
+  - Center: Enlarged Batik Smile Brand Logo.
+  - Right: Customer Account Icon + Cart Navigation Badge.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- SSR node audit: `Has enlarged mobile logo: true`, `Search is hidden on mobile: true`.
+
+---
+
+## Milestone 35: Hyper-Minimalist Mobile Header & Sticky Burger Account (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Account Icon Removal from Mobile Header, Burger Drawer Showroom & WA Card Removal, Sticky Account Action Addition
+
+### 1. Hyper-Minimalist Mobile Header (`Header.jsx`)
+- Removed the account icon from mobile header (`hidden lg:flex`).
+- Mobile header now achieves pure Quiet Luxury minimalism with zero icon clutter:
+  - Left: Hamburger Menu (`lg:hidden`).
+  - Center: Enlarged Batik Smile Brand Logo (Dead-center, `h-10 sm:h-11`).
+  - Right: Cart Badge Icon (`Link to="/cart"`).
+
+### 2. Burger Drawer Cleanup & Sticky Account Bar (`Header.jsx`)
+- Removed the Semarang showroom card and duplicate WhatsApp button from the mobile burger navigation drawer.
+- Implemented a dedicated sticky bottom bar in the burger drawer:
+  - Fixed above the drawer bottom: `AKUN SAYA & STATUS PESANAN →` (`NavLink to="/account"`).
+  - Users can browse all collections and services, while their account access remains permanently anchored and accessible at the bottom of the drawer.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- SSR node audit: `Showroom card removed: true`, `WA button removed: true`, `Sticky account in burger menu: true`, `Account icon hidden on mobile header: true`.
+
+---
+
+## Milestone 36: In-Modal Live Predictive Search Engine (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Pure In-Modal Search Architecture, Data Contract Normalization, Tabbed Category Filtering, Mobile UX Polish
+
+### 1. In-Modal Search Engine (`LuxurySearchModal.jsx`)
+- Eliminated all full-page redirects (`navigate('/search')`). When users type or submit (Enter or "CARI" button), results appear instantly directly inside the modal dialog without reloading or leaving the active screen.
+- Integrated a smooth 250ms debounce for responsive live typing + instant manual trigger.
+- Added in-modal category filter tabs (`Semua`, `Busana`, `Koleksi`, `Warta`).
+- Direct product navigation: clicking any search result item navigates straight to its detail page (`/products/${handle}`) and dismisses the modal.
+
+### 2. Data Contract Normalization (`routes/search.jsx`)
+- Normalized `predictiveSearch` return payload so both direct properties (`result.products`, `result.collections`, `result.articles`) and nested `result.items` are returned consistently.
+
+### 3. Quiet Luxury Search UI & Mobile Calibration
+- Strict 4:5 vertical imagery (`aspect-[4/5]`) for all product search cards with `formatRupiah` pricing and brand eyebrows.
+- Full-screen responsive layout on mobile with thumb-friendly sticky search bar and clear button.
+- Trending wastra keyword shortcuts (`Sarimbit Mahakarya`, `Kemeja Furing Hero`, etc.) that execute search on click.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- Verified in-modal search execution with zero page reloads.
+
+---
+
+## Milestone 37: Predictive Search Limit Clamping & Multi-Entity Output (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Storefront API Limit Fix (1..10), Multi-Entity Output (Products, Collections, Tags, Articles), Quiet Luxury Polish
+
+### 1. Root Cause Diagnosis & Fix
+- Storefront API strictly requires `limit` for `predictiveSearch` to be between 1 and 10. The previous parameter of `limit: 12` caused Shopify to return a GraphQL error, leading to `Cannot convert undefined or null to object` and returning HTTP 500 on live search requests.
+- Clamped `limit` to `Math.min(10, Math.max(1, limit))` in both backend loader and frontend modal.
+
+### 2. Multi-Entity Search Output (`LuxurySearchModal.jsx`, `routes/search.jsx`)
+- Added `tags` to `PREDICTIVE_SEARCH_PRODUCT_FRAGMENT` and extracted unique tags from matching items.
+- Enhanced in-modal display to feature:
+  1. **Koleksi Butik Terkait**: Dedicated cards with collection banner/monogram and direct links (e.g. "Daster Batik Solo").
+  2. **Tag Busana**: Clickable tag pills to refine search.
+  3. **Busana & Produk**: Strict 4:5 vertical portrait cards with `formatRupiah` pricing and brand eyebrows (e.g. "Daster Solo Series").
+  4. **Warta & Jurnal Budaya**: Editorial links.
+  5. **Tabbed Filtering**: `Semua`, `Busana`, `Koleksi`, `Tag`, `Warta`.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- Verified live query: `q=daster` returns HTTP 200 with "Daster Solo Series" and "Daster Batik Solo". Verified "sarimbit", "kemeja", "wanita" all returning HTTP 200 and live results.
+
+---
+
+## Milestone 38: Modern Zero-Box 404 Page & Strict Noindex/Nofollow (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Zero-Box 404 Redesign, Background Watermark & Animated Monogram, In-Modal Search Shortcut, Noindex/Nofollow Dual Enforcement
+
+### 1. Modern Clean 404 Experience (`routes/$.jsx`)
+- Stripped all cluttered recommendation cards, nested boxes, and border frames.
+- Replaced with a spacious Quiet Luxury stream:
+  - Background: Oversized semi-transparent watermark numeral ("404") in Cormorant Garamond.
+  - Delicate floating/rotating geometric diamond monogram emblem in antique gold (`#C5A059`).
+  - Cormorant Garamond headline: *"Jejak Wastra Belum Tersedia"*.
+  - Hairline gold divider and poetic explanatory narrative.
+  - Two focused primary CTA buttons: `KEMBALI KE BERANDA →` and `JELAJAHI KOLEKSI`.
+  - Whispered live search trigger: `Atau Cari Busana Tertentu →` (seamlessly triggers in-modal search via `open('search')`).
+  - WhatsApp concierge hotline: `081-390-8888-09`.
+
+### 2. Dual-Layer Noindex, Nofollow SEO Enforcement
+- In `routes/$.jsx`: Configured HTML `<meta name="robots" content="noindex, nofollow" />`.
+- In `entry.server.jsx`: Added automated HTTP response header `X-Robots-Tag: noindex, nofollow` on all 404 status codes.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- SSR node test verified: HTTP 404 status, `X-Robots-Tag: noindex, nofollow`, HTML `<meta name="robots" content="noindex, nofollow">`, and zero boxed cards.
+
+
+
+
+
+
+
+
 
 
 

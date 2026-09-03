@@ -28,12 +28,12 @@ export async function loader({ request, context }) {
     ? predictiveSearch({ request, context })
     : regularSearch({ request, context });
 
-  searchPromise.catch((error) => {
-    console.error(error);
+  try {
+    return await searchPromise;
+  } catch (error) {
+    console.error('search loader error:', error);
     return { term: '', result: null, error: error.message };
-  });
-
-  return await searchPromise;
+  }
 }
 
 /**
@@ -181,24 +181,60 @@ async function predictiveSearch({ request, context }) {
   const { storefront } = context;
   const url = new URL(request.url);
   const term = String(url.searchParams.get('q') || '').trim();
-  const limit = Number(url.searchParams.get('limit') || 10);
+  // Shopify Storefront API limit for predictiveSearch is strictly 1..10
+  const limit = Math.min(10, Math.max(1, Number(url.searchParams.get('limit') || 10)));
   const type = 'predictive';
 
   if (!term) return { type, term, result: getEmptyPredictiveSearchResult() };
 
-  const { predictiveSearch: result } = await storefront.query(
-    PREDICTIVE_SEARCH_QUERY,
-    {
-      variables: { limit, limitScope: 'EACH', searchTerm: term },
-    },
-  );
+  try {
+    const { predictiveSearch: result } = await storefront.query(
+      PREDICTIVE_SEARCH_QUERY,
+      {
+        variables: { limit, limitScope: 'EACH', searchTerm: term },
+      },
+    );
 
-  const total = Object.values(result).reduce(
-    (acc, cur) => acc + (cur?.length || 0),
-    0,
-  );
+    const safeResult = result || {};
+    const products = safeResult.products || [];
+    const collections = safeResult.collections || [];
+    const articles = safeResult.articles || [];
+    const pages = safeResult.pages || [];
+    const queries = safeResult.queries || [];
 
-  return { type, term, result: { ...result, total } };
+    // Extract unique tags from products
+    const tags = Array.from(
+      new Set(products.flatMap((p) => p.tags || []))
+    ).filter(Boolean);
+
+    const total = products.length + collections.length + articles.length + pages.length;
+
+    return {
+      type,
+      term,
+      result: {
+        ...safeResult,
+        total,
+        tags,
+        items: {
+          articles,
+          collections,
+          pages,
+          products,
+          queries,
+          tags,
+        },
+      },
+    };
+  } catch (error) {
+    console.error('predictiveSearch error:', error);
+    return {
+      type,
+      term,
+      result: getEmptyPredictiveSearchResult(),
+      error: error.message,
+    };
+  }
 }
 
 const SEARCH_PRODUCT_FRAGMENT = `#graphql
@@ -312,6 +348,7 @@ const PREDICTIVE_SEARCH_PRODUCT_FRAGMENT = `#graphql
     id
     title
     handle
+    tags
     trackingParameters
     selectedOrFirstAvailableVariant {
       id

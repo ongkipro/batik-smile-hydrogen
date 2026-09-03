@@ -17,7 +17,6 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
 
   // Read active state from URL
   const currentSort = searchParams.get('sort') || 'featured';
-  const isAvailableOnly = searchParams.get('available') === 'true';
   const minPrice = searchParams.get('minPrice') || '';
   const maxPrice = searchParams.get('maxPrice') || '';
 
@@ -25,7 +24,7 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
   const isUnder500 = !minPrice && maxPrice === '500000';
   const is500To1M = minPrice === '500000' && maxPrice === '1000000';
   const isAbove1M = minPrice === '1000000' && !maxPrice;
-  const isAllActive = !isAvailableOnly && !minPrice && !maxPrice;
+  const isAllActive = !minPrice && !maxPrice;
 
   // Helper to update search params while clearing pagination cursor
   const updateParams = (updater) => {
@@ -50,13 +49,10 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
   const setFilterMode = (mode) => {
     updateParams((params) => {
       // Reset filter params
-      params.delete('available');
       params.delete('minPrice');
       params.delete('maxPrice');
 
-      if (mode === 'available') {
-        params.set('available', 'true');
-      } else if (mode === 'under500') {
+      if (mode === 'under500') {
         params.set('maxPrice', '500000');
       } else if (mode === '500to1m') {
         params.set('minPrice', '500000');
@@ -70,7 +66,6 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
   const clearAllFilters = () => {
     updateParams((params) => {
       params.delete('sort');
-      params.delete('available');
       params.delete('minPrice');
       params.delete('maxPrice');
       params.delete('productType');
@@ -104,23 +99,6 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
             }`}
           >
             Semua {typeof totalCount === 'number' && `(${totalCount})`}
-          </button>
-
-          {/* Tab: SIAP KIRIM */}
-          <button
-            type="button"
-            onClick={() => setFilterMode(isAvailableOnly ? 'all' : 'available')}
-            className={`text-[10px] sm:text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2.5 border-b-2 bg-transparent ${
-              isAvailableOnly
-                ? isDark
-                  ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                  : 'text-[#111111] border-[#C5A059] font-semibold'
-                : isDark
-                ? 'text-[#A69F96] border-transparent hover:text-white'
-                : 'text-[#777777] border-transparent hover:text-[#111111]'
-            }`}
-          >
-            Siap Kirim
           </button>
 
           {/* Tab: < RP 500RB */}

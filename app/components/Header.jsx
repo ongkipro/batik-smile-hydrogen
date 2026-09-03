@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { Await, NavLink, useAsyncValue } from 'react-router';
+import { Await, NavLink, Link, useAsyncValue } from 'react-router';
 import { useAnalytics, useOptimisticCart } from '@shopify/hydrogen';
 import { useAside } from '~/components/Aside';
 import { AnnouncementBar } from './AnnouncementBar';
@@ -45,12 +45,12 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
         }`}
       >
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 flex items-center justify-between relative">
-          {/* Mobile Menu Trigger & Brand Logo (Left-aligned, flex-1) */}
-          <div className="flex items-center gap-4 flex-1 justify-start">
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-18 sm:h-20 flex items-center justify-between relative">
+          {/* Left: Mobile Menu Trigger / Desktop Brand Logo */}
+          <div className="flex items-center lg:flex-1 justify-start">
             <button
               type="button"
-              className="lg:hidden p-2 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+              className="lg:hidden p-2 -ml-2 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
               onClick={() => open('mobile')}
               aria-label="Buka menu navigasi"
             >
@@ -59,12 +59,23 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
               </svg>
             </button>
 
-            {/* Brand Logo */}
-            <NavLink to="/" className="flex items-center group flex-shrink-0">
+            {/* Desktop Brand Logo (Left-aligned on lg screens) */}
+            <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
               <img
                 src="/brand/batik-smile-logo.png"
                 alt="Batik Smile Nusantara"
                 className="h-10 sm:h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
+              />
+            </NavLink>
+          </div>
+
+          {/* Mobile Centered Brand Logo (Dead Center on Mobile Viewports - Calibrated Size) */}
+          <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-auto">
+            <NavLink to="/" className="flex items-center group">
+              <img
+                src="/brand/batik-smile-logo.png"
+                alt="Batik Smile Nusantara"
+                className="h-10 sm:h-11 w-auto max-w-[170px] sm:max-w-[200px] object-contain group-hover:opacity-90 transition-opacity"
               />
             </NavLink>
           </div>
@@ -74,7 +85,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             <MegaMenu onMenuStateChange={setIsMenuOpen} />
           </div>
 
-          {/* Right Action Icons: Search, Account, Cart (Right-aligned, flex-1) */}
+          {/* Right Action Icons: Search (Desktop), Account, Cart */}
           <div className="flex items-center justify-end flex-1">
             <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
           </div>
@@ -89,11 +100,11 @@ function HeaderCtas({ cart }) {
 
   return (
     <div className="flex items-center gap-1 sm:gap-2">
-      {/* Search Trigger (Mobile & Desktop) */}
+      {/* Search Trigger (Desktop Only, since Search already exists in Mobile Sticky Navigation) */}
       <button
         type="button"
         onClick={() => open('search')}
-        className="flex items-center justify-center p-2 sm:p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+        className="hidden lg:flex items-center justify-center p-2 sm:p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
         aria-label="Cari produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,10 +112,10 @@ function HeaderCtas({ cart }) {
         </svg>
       </button>
 
-      {/* Customer Account Link (Icon Only - Pure Precision) */}
+      {/* Customer Account Link (Desktop Only, on mobile it is sticky in burger menu) */}
       <NavLink
         to="/account"
-        className="flex items-center justify-center p-2 sm:p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors"
+        className="hidden lg:flex items-center justify-center p-2 sm:p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors"
         aria-label="Akun saya"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,15 +151,13 @@ function CartBanner() {
 }
 
 function CartBadge({ count }) {
-  const { open } = useAside();
   const { publish, shop, cart, prevCart } = useAnalytics();
 
   return (
-    <button
-      type="button"
-      onClick={(e) => {
-        e.preventDefault();
-        open('cart');
+    <Link
+      to="/cart"
+      prefetch="intent"
+      onClick={() => {
         publish('cart_viewed', {
           cart,
           prevCart,
@@ -168,7 +177,7 @@ function CartBadge({ count }) {
         />
       </svg>
       <span className="text-[11px] font-bold tracking-wider">{count}</span>
-    </button>
+    </Link>
   );
 }
 
@@ -180,8 +189,9 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
   const [sarimbitOpen, setSarimbitOpen] = useState(true);
 
   return (
-    <nav className="flex flex-col p-5 sm:p-6 bg-[#FAF8F5] min-h-full pb-24" role="navigation">
-      {/* Brand Heritage Stamp */}
+    <nav className="flex flex-col min-h-full bg-[#FAF8F5]" role="navigation">
+      <div className="flex-1 p-5 sm:p-6 pb-6">
+        {/* Brand Heritage Stamp */}
       <div className="pb-4 border-b border-[#E2DFD8] mb-6 flex items-center justify-between">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block">
@@ -436,39 +446,26 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
         </div>
       </div>
 
-      {/* Showroom Footprint Card */}
-      <div className="p-4 bg-white border border-[#E2DFD8] mb-6 shadow-sm">
-        <div className="flex items-center gap-2 mb-2">
-          <svg className="w-3.5 h-3.5 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold">
-            SHOWROOM KAMI DI SEMARANG
-          </span>
-        </div>
-        <p className="text-[11px] text-[#111111] font-medium leading-relaxed">
-          Showroom 3 Lantai: Jl. Simongan Raya No. 109<br />
-          Cabang: Jl. Sukun Raya No. 23, Banyumanik
-        </p>
-        <div className="flex items-center gap-1.5 text-[10px] text-[#5A5550] mt-2 pt-2 border-t border-[#E2DFD8]/60">
-          <svg className="w-3 h-3 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span>Buka Setiap Hari: 08:00 – 21:00 WIB</span>
-        </div>
       </div>
 
-      {/* WhatsApp Concierge Action Button */}
-      <div>
-        <a
-          href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 transition-colors shadow-sm"
+      {/* Sticky Account Action at Bottom of Mobile Burger Drawer */}
+      <div className="sticky bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <NavLink
+          to="/account"
+          onClick={close}
+          className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-sm"
         >
-          KONSULTASI WHATSAPP RESMI &rarr;
-        </a>
+          <svg className="w-4 h-4 text-[#C5A059]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              strokeWidth="1.5"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          <span>AKUN SAYA &amp; STATUS PESANAN</span>
+          <span>&rarr;</span>
+        </NavLink>
       </div>
     </nav>
   );

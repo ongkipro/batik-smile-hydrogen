@@ -1,42 +1,79 @@
-import {CartForm, Money} from '@shopify/hydrogen';
-import {useEffect, useId, useRef, useState} from 'react';
-import {useFetcher} from 'react-router';
+import React, { useId } from 'react';
+import { CartForm } from '@shopify/hydrogen';
+import { formatRupiah } from '~/lib/currency';
 
 /**
+ * Architectural Quiet Luxury Cart Summary Component
+ * Zero-radius design with authentic Indonesian terminology and clean Rupiah formatting.
+ *
  * @param {CartSummaryProps}
  */
-export function CartSummary({cart, layout}) {
-  const className =
-    layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
+export function CartSummary({ cart, layout: _layout }) {
   const summaryId = useId();
   const discountsHeadingId = useId();
   const discountCodeInputId = useId();
-  const giftCardHeadingId = useId();
-  const giftCardInputId = useId();
 
   return (
-    <div aria-labelledby={summaryId} className={className}>
-      <h4 id={summaryId}>Totals</h4>
-      <dl role="group" className="cart-subtotal">
-        <dt>Subtotal</dt>
-        <dd>
-          {cart?.cost?.subtotalAmount?.amount ? (
-            <Money data={cart?.cost?.subtotalAmount} withoutTrailingZeros as="span" />
-          ) : (
-            '-'
-          )}
-        </dd>
-      </dl>
+    <div aria-labelledby={summaryId} className="w-full">
+      {/* Header */}
+      <div className="pb-4 mb-5 border-b border-[#E2DFD8]">
+        <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+          IKHTISAR BELANJA
+        </span>
+        <h3 id={summaryId} className="font-serif text-xl sm:text-2xl font-normal text-[#111111]">
+          Ringkasan Pesanan
+        </h3>
+      </div>
+
+      {/* Cost Breakdown */}
+      <div className="space-y-3 text-xs mb-6">
+        <div className="flex justify-between items-baseline py-1 text-[#5A5550]">
+          <span className="uppercase tracking-wider text-[10px]">Subtotal Busana</span>
+          <span className="text-sm font-semibold text-[#111111]">
+            {cart?.cost?.subtotalAmount?.amount
+              ? formatRupiah(cart.cost.subtotalAmount)
+              : '-'}
+          </span>
+        </div>
+
+        <div className="flex justify-between items-baseline py-1 text-[#5A5550]">
+          <span className="uppercase tracking-wider text-[10px]">Estimasi Ongkos Kirim</span>
+          <span className="text-xs text-[#7C3F1D] font-medium">
+            Dihitung saat Checkout
+          </span>
+        </div>
+
+        <div className="flex justify-between items-baseline py-1 text-[#5A5550]">
+          <span className="uppercase tracking-wider text-[10px]">Proteksi & Asuransi Paket</span>
+          <span className="text-xs text-[#9E7D3B] font-semibold">
+            GRATIS
+          </span>
+        </div>
+
+        {/* Hairline Divider */}
+        <div className="pt-3 border-t border-[#E2DFD8]" />
+
+        {/* Total */}
+        <div className="flex justify-between items-baseline pt-1">
+          <span className="text-xs uppercase tracking-[0.18em] font-bold text-[#111111]">
+            Total Pembayaran
+          </span>
+          <span className="font-serif text-xl sm:text-2xl font-normal text-[#111111]">
+            {cart?.cost?.totalAmount?.amount
+              ? formatRupiah(cart.cost.totalAmount)
+              : '-'}
+          </span>
+        </div>
+      </div>
+
+      {/* Voucher / Promo Code Input */}
       <CartDiscounts
         discountCodes={cart?.discountCodes}
         discountsHeadingId={discountsHeadingId}
         discountCodeInputId={discountCodeInputId}
       />
-      <CartGiftCard
-        giftCardCodes={cart?.appliedGiftCards}
-        giftCardHeadingId={giftCardHeadingId}
-        giftCardInputId={giftCardInputId}
-      />
+
+      {/* Checkout Action Button */}
       <CartCheckoutActions checkoutUrl={cart?.checkoutUrl} />
     </div>
   );
@@ -45,21 +82,30 @@ export function CartSummary({cart, layout}) {
 /**
  * @param {{checkoutUrl?: string}}
  */
-function CartCheckoutActions({checkoutUrl}) {
+function CartCheckoutActions({ checkoutUrl }) {
   if (!checkoutUrl) return null;
 
   return (
-    <div className="mt-4 pt-4 border-t border-[#E2DFD8]">
+    <div className="mt-6 pt-5 border-t border-[#E2DFD8]">
       <a
         href={checkoutUrl}
         target="_self"
-        className="w-full block text-center py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-all shadow-sm"
+        className="w-full block text-center py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-all shadow-sm cursor-pointer"
       >
-        LANJUT KE PEMBAYARAN &rarr;
+        LANJUT KE PEMBAYARAN RESMI &rarr;
       </a>
-      <p className="text-[10px] text-center text-[#5A5550] mt-2 tracking-wide uppercase">
-        PEMBAYARAN RESMI TERENKRIPSI SHOPIFY
-      </p>
+      <div className="flex items-center justify-center gap-2 mt-3 text-[9px] text-[#5A5550] tracking-[0.14em] uppercase">
+        <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
+        <span>Pembayaran Terenkripsi 256-Bit Resmi Shopify</span>
+      </div>
+      <div className="mt-4 pt-3 border-t border-[#E2DFD8]/80 text-center">
+        <span className="text-[8px] uppercase tracking-[0.2em] text-[#888888] font-semibold block mb-1">
+          METODE PEMBAYARAN RESMI TERSEDIA
+        </span>
+        <p className="text-[9px] uppercase tracking-[0.14em] text-[#777777] font-medium">
+          QRIS &bull; BCA &bull; Mandiri &bull; BNI &bull; BRI &bull; Visa &bull; Mastercard
+        </p>
+      </div>
     </div>
   );
 }
@@ -79,53 +125,66 @@ function CartDiscounts({
   const codes =
     discountCodes
       ?.filter((discount) => discount.applicable)
-      ?.map(({code}) => code) || [];
+      ?.map(({ code }) => code) || [];
 
   return (
-    <section aria-label="Discounts">
-      {/* Have existing discount, display it with a remove option */}
-      <dl hidden={!codes.length}>
-        <div>
-          <dt id={discountsHeadingId}>Discounts</dt>
-          <UpdateDiscountForm>
-            <div
-              className="cart-discount"
-              role="group"
-              aria-labelledby={discountsHeadingId}
-            >
-              <code>{codes?.join(', ')}</code>
-              &nbsp;
-              <button type="submit" aria-label="Remove discount">
-                Remove
-              </button>
-            </div>
-          </UpdateDiscountForm>
-        </div>
-      </dl>
+    <div className="my-5 pt-4 border-t border-[#E2DFD8]/80">
+      <span
+        id={discountsHeadingId}
+        className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2"
+      >
+        KODE PROMO / VOUCHER BUTIK
+      </span>
 
-      {/* Show an input to apply a discount */}
+      {/* Applied voucher tags */}
+      {codes.length > 0 && (
+        <div className="mb-3 space-y-1.5">
+          {codes.map((code) => (
+            <div
+              key={code}
+              className="flex items-center justify-between py-1.5 px-3 bg-white border border-[#C5A059]/40 text-xs"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] uppercase tracking-wider font-bold text-[#7C3F1D]">VOUCHER:</span>
+                <code className="text-xs font-mono font-bold text-[#111111]">{code}</code>
+              </div>
+              <UpdateDiscountForm>
+                <button
+                  type="submit"
+                  aria-label="Hapus kode promo"
+                  className="text-[10px] uppercase tracking-wider text-[#A69F96] hover:text-red-700 transition-colors cursor-pointer"
+                >
+                  Hapus &times;
+                </button>
+              </UpdateDiscountForm>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Input form */}
       <UpdateDiscountForm discountCodes={codes}>
-        <div>
+        <div className="flex items-stretch border border-[#E2DFD8] bg-white focus-within:border-[#111111] transition-colors">
           <label htmlFor={discountCodeInputId} className="sr-only">
-            Discount code
+            Kode Promo
           </label>
           <input
             id={discountCodeInputId}
             type="text"
             name="discountCode"
-            placeholder="Discount code"
+            placeholder="Masukkan kode voucher..."
+            className="w-full px-3 py-2 text-xs text-[#111111] placeholder:text-[#888888] bg-transparent focus:outline-hidden"
           />
-          &nbsp;
           <button
             type="submit"
-            aria-label="Apply discount code"
-            className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-wider transition-colors cursor-pointer"
+            aria-label="Gunakan kode promo"
+            className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-wider transition-colors shrink-0 cursor-pointer"
           >
-            Terapkan
+            GUNAKAN
           </button>
         </div>
       </UpdateDiscountForm>
-    </section>
+    </div>
   );
 }
 
@@ -135,7 +194,7 @@ function CartDiscounts({
  *   children: React.ReactNode;
  * }}
  */
-function UpdateDiscountForm({discountCodes, children}) {
+function UpdateDiscountForm({ discountCodes, children }) {
   return (
     <CartForm
       route="/cart"
@@ -149,177 +208,11 @@ function UpdateDiscountForm({discountCodes, children}) {
   );
 }
 
-/**
- * @param {{
- *   giftCardCodes: CartApiQueryFragment['appliedGiftCards'] | undefined;
- *   giftCardHeadingId: string;
- *   giftCardInputId: string;
- * }}
- */
-function CartGiftCard({giftCardCodes, giftCardHeadingId, giftCardInputId}) {
-  const giftCardCodeInput = useRef(null);
-  const removeButtonRefs = useRef(new Map());
-  const previousCardIdsRef = useRef([]);
-  const giftCardAddFetcher = useFetcher({key: 'gift-card-add'});
-  const [removedCardIndex, setRemovedCardIndex] = useState(null);
-
-  useEffect(() => {
-    if (giftCardAddFetcher.data) {
-      if (giftCardCodeInput.current !== null) {
-        giftCardCodeInput.current.value = '';
-      }
-    }
-  }, [giftCardAddFetcher.data]);
-
-  useEffect(() => {
-    const currentCardIds = giftCardCodes?.map((card) => card.id) || [];
-
-    if (removedCardIndex !== null && giftCardCodes) {
-      const focusTargetIndex = Math.min(
-        removedCardIndex,
-        giftCardCodes.length - 1,
-      );
-      const focusTargetCard = giftCardCodes[focusTargetIndex];
-      const focusButton = focusTargetCard
-        ? removeButtonRefs.current.get(focusTargetCard.id)
-        : null;
-
-      if (focusButton) {
-        focusButton.focus();
-      } else if (giftCardCodeInput.current) {
-        giftCardCodeInput.current.focus();
-      }
-
-      setRemovedCardIndex(null);
-    }
-
-    previousCardIdsRef.current = currentCardIds;
-  }, [giftCardCodes, removedCardIndex]);
-
-  const handleRemoveClick = (cardId) => {
-    const index = previousCardIdsRef.current.indexOf(cardId);
-    if (index !== -1) {
-      setRemovedCardIndex(index);
-    }
-  };
-
-  return (
-    <section aria-label="Gift cards">
-      {giftCardCodes && giftCardCodes.length > 0 && (
-        <dl>
-          <dt id={giftCardHeadingId}>Applied Gift Card(s)</dt>
-          {giftCardCodes.map((giftCard) => (
-            <dd key={giftCard.id} className="cart-discount">
-              <RemoveGiftCardForm
-                giftCardId={giftCard.id}
-                lastCharacters={giftCard.lastCharacters}
-                onRemoveClick={() => handleRemoveClick(giftCard.id)}
-                buttonRef={(el) => {
-                  if (el) {
-                    removeButtonRefs.current.set(giftCard.id, el);
-                  } else {
-                    removeButtonRefs.current.delete(giftCard.id);
-                  }
-                }}
-              >
-                <code>***{giftCard.lastCharacters}</code>
-                &nbsp;
-                <Money data={giftCard.amountUsed} />
-              </RemoveGiftCardForm>
-            </dd>
-          ))}
-        </dl>
-      )}
-
-      <AddGiftCardForm fetcherKey="gift-card-add">
-        <div>
-          <label htmlFor={giftCardInputId} className="sr-only">
-            Gift card code
-          </label>
-          <input
-            id={giftCardInputId}
-            type="text"
-            name="giftCardCode"
-            placeholder="Gift card code"
-            ref={giftCardCodeInput}
-          />
-          &nbsp;
-          <button
-            type="submit"
-            disabled={giftCardAddFetcher.state !== 'idle'}
-            aria-label="Apply gift card code"
-          >
-            Apply
-          </button>
-        </div>
-      </AddGiftCardForm>
-    </section>
-  );
-}
-
-/**
- * @param {{
- *   fetcherKey?: string;
- *   children: React.ReactNode;
- * }}
- */
-function AddGiftCardForm({fetcherKey, children}) {
-  return (
-    <CartForm
-      fetcherKey={fetcherKey}
-      route="/cart"
-      action={CartForm.ACTIONS.GiftCardCodesAdd}
-    >
-      {children}
-    </CartForm>
-  );
-}
-
-/**
- * @param {{
- *   giftCardId: string;
- *   lastCharacters: string;
- *   children: React.ReactNode;
- *   onRemoveClick?: () => void;
- *   buttonRef?: (el: HTMLButtonElement | null) => void;
- * }}
- */
-function RemoveGiftCardForm({
-  giftCardId,
-  lastCharacters,
-  children,
-  onRemoveClick,
-  buttonRef,
-}) {
-  return (
-    <CartForm
-      route="/cart"
-      action={CartForm.ACTIONS.GiftCardCodesRemove}
-      inputs={{
-        giftCardCodes: [giftCardId],
-      }}
-    >
-      {children}
-      &nbsp;
-      <button
-        type="submit"
-        aria-label={`Remove gift card ending in ${lastCharacters}`}
-        onClick={onRemoveClick}
-        ref={buttonRef}
-      >
-        Remove
-      </button>
-    </CartForm>
-  );
-}
-
+/** @typedef {import('~/components/CartMain').CartLayout} CartLayout */
 /**
  * @typedef {{
- *   cart: OptimisticCart<CartApiQueryFragment | null>;
+ *   cart: CartApiQueryFragment | null;
  *   layout: CartLayout;
  * }} CartSummaryProps
  */
-
 /** @typedef {import('storefrontapi.generated').CartApiQueryFragment} CartApiQueryFragment */
-/** @typedef {import('~/components/CartMain').CartLayout} CartLayout */
-/** @typedef {import('@shopify/hydrogen').OptimisticCart} OptimisticCart */
