@@ -812,6 +812,32 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - Local SSR check on `sarimbit-royal-navy-1` and `sarimbit-charcoal-hitam` verified `Renders Rp format: true`, `Has 2-Column Tier Section: true`, and `LIHAT SEMUA KOLEKSI →` single-line button.
 
+---
+
+## Milestone 28: Mobile Gallery Touch Swipe, Precision Mini-Thumbnails & Frameless Tier Section (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Horizontal Touch Swipe Gestures on Main Product Image, Precision 100% Width 5-Column Mini-Thumbnails on Mobile, and Frameless Tier Editorial Section
+
+### 1. Mobile Touch Swipe & Interactive Navigation
+- Added horizontal touch swipe gesture detection (`onTouchStart`, `onTouchMove`, `onTouchEnd`) with 40px threshold to navigate between product lookbook images seamlessly on mobile touchscreens.
+- Added subtle, accessible `‹` and `›` arrow buttons for instant one-tap navigation on both mobile and desktop.
+- Integrated active photo counter badge (e.g. `1 / 5`) in the lower corner of the main image.
+
+### 2. Precision Mobile Mini-Thumbnails
+- Engineered responsive thumbnail distribution on mobile:
+  - If `<= 5` images: dynamically rendered as an exact multi-column grid (`grid-cols-5 gap-2 w-full`) spanning 100% of the main image width without horizontal scrollbars, gaps, or misalignments.
+  - If `> 5` images: enables smooth horizontal scrolling (`overflow-x-auto scrollbar-none`) with 5 visible thumbnails per viewport width.
+  - Desktop view preserves the elegant vertical column on the left (`sm:flex-col sm:w-20 sm:max-h-[660px]`).
+
+### 3. Frameless & Borderless Tier Editorial Section (`ProductTierStorySection.jsx`)
+- Removed the heavy outer border (`border-[#C5A059]/35`) and boxed card padding.
+- Replaced with an open, architectural editorial layout with hairline top border (`pt-12 sm:pt-16 border-t`) that harmonizes seamlessly with the PDP product grid width (`w-full max-w-7xl`).
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Local SSR check on `sarimbit-royal-navy-1` verified `Has Prev Arrow: true`, `Has Next Arrow: true`, `Has mini thumbnail grid for mobile: true`, and frameless section border-t active.
+
+
 
 
 

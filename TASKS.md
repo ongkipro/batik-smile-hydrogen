@@ -754,6 +754,19 @@
   - *Action*: Shortened bottom related collection button from `LIHAT SEMUA KOLEKSI SARIMBIT EXCLUSIVE →` to concise `LIHAT SEMUA KOLEKSI →`, eliminating text overflow and multi-line wrapping on mobile viewports.
   - *Evidence*: Verified single-line layout and exact text in rendered SSR output.
 
+---
+
+## Phase 33: Touch Swipe Gallery, Precision Thumbnail Grid & Frameless Tier Section (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, ProductTierStorySection.jsx, Oxygen Deployment*
+
+- [x] **Task 33.1: Mobile Touch Swipe & Precision 5-Column Mini-Thumbnails**
+  - *Action*: Implemented horizontal touch swipe gestures (`onTouchStart`, `onTouchMove`, `onTouchEnd`) and subtle arrow buttons on the main featured product image. Engineered the mini-thumbnail row to dynamically span exactly 100% of the main image width on mobile when up to 5 images exist (`grid-cols-5 gap-2 w-full`), perfectly aligning the left and right edges. For collections with >5 images, enabled smooth horizontal scrolling (`overflow-x-auto scrollbar-none`).
+  - *Evidence*: Local SSR verified `Has Prev Arrow: true`, `Has Next Arrow: true`, `Has mini thumbnail grid for mobile: true`.
+- [x] **Task 33.2: Frameless & Borderless Tier Differentiation Section**
+  - *Action*: Refactored `ProductTierStorySection.jsx` to completely eliminate the heavy outer card border and isolated box padding. Replaced with an open, architectural editorial layout separated by a subtle hairline top border (`pt-12 sm:pt-16 border-t`) matching the exact width and margin geometry of the product section across all mobile and desktop viewports.
+  - *Evidence*: Local SSR check confirmed heavy box border removed and clean `border-t` layout active.
+
+
 
 
 

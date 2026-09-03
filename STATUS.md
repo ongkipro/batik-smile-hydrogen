@@ -83,6 +83,11 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Integrated `ProductTierStorySection.jsx` offering bespoke 2-column editorial differentiation (image + technical storytelling) exclusively for **Sarimbit Exclusive** (Sutra ATBM & Canting Prada Emas) and **Sarimbit Premium** (Tenun Dobby Timbul & Furing Hero Sejuk).
     - Shortened bottom collection navigation button to concise `LIHAT SEMUA KOLEKSI →` to ensure crisp single-line presentation on all mobile viewports.
 
+11. **Mobile Gallery Touch Swipe, Precision Mini-Thumbnails & Frameless Tier Section**:
+    - Implemented horizontal touch swipe gestures (`onTouchStart`, `onTouchMove`, `onTouchEnd`) and subtle arrow controls on the main product featured image.
+    - Calibrated mini-thumbnails on mobile to dynamically distribute across exactly 100% of the main image width (`grid-cols-5 gap-2 w-full`) when up to 5 images exist, with smooth horizontal scrolling for >5 images.
+    - Refactored `ProductTierStorySection.jsx` to be completely frameless and borderless, matching the product section width and layout across all devices.
+
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.

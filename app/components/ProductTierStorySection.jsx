@@ -2,7 +2,7 @@ import React from 'react';
 
 /**
  * ProductTierStorySection
- * 2-Column Bespoke Editorial Differentiation Section
+ * 2-Column Bespoke Editorial Differentiation Section (Frameless)
  * Exclusively rendered for Sarimbit Exclusive & Sarimbit Premium
  *
  * @param {{
@@ -20,16 +20,18 @@ export function ProductTierStorySection({ tier, productTitle }) {
   return (
     <section
       aria-label="Keistimewaan Karya Butik"
-      className={`mt-14 sm:mt-18 p-6 sm:p-10 lg:p-12 transition-all ${
-        isExclusive
-          ? 'bg-[#181818] border border-[#C5A059]/35 text-white'
-          : 'bg-[#F7F3EB] border border-[#C5A059]/30 text-[#111111]'
+      className={`mt-16 sm:mt-24 pt-12 sm:pt-16 border-t ${
+        isExclusive ? 'border-[#262626] text-white' : 'border-[#E2DFD8] text-[#111111]'
       }`}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        {/* Left Column: 4:5 Editorial Image Container */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        {/* Column 1: 4:5 Vertical Editorial Image (Zero-frame) */}
         <div className="lg:col-span-5 relative group overflow-hidden">
-          <div className="aspect-[4/5] w-full bg-[#111111] relative overflow-hidden">
+          <div
+            className={`aspect-[4/5] w-full relative overflow-hidden ${
+              isExclusive ? 'bg-[#181818]' : 'bg-[#EFECE6]'
+            }`}
+          >
             <img
               src={
                 isExclusive
@@ -59,7 +61,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
           </div>
         </div>
 
-        {/* Right Column: Narrative Storytelling & Technical Differentiation */}
+        {/* Column 2: Narrative Storytelling & Technical Differentiation */}
         <div className="lg:col-span-7 flex flex-col justify-center">
           {/* Eyebrow */}
           <span
@@ -84,7 +86,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
           </h3>
 
           <div
-            className={`w-12 h-px my-3 ${
+            className={`w-12 h-px my-3.5 ${
               isExclusive ? 'bg-[#C5A059]' : 'bg-[#9E7D3B]'
             }`}
           />
@@ -102,7 +104,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
 
           {/* 3 Pillars of Distinction */}
           <div
-            className={`space-y-3.5 pt-4 border-t ${
+            className={`space-y-4 pt-4 border-t ${
               isExclusive ? 'border-[#262626]' : 'border-[#E2DFD8]'
             }`}
           >

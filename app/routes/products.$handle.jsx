@@ -245,7 +245,49 @@ export default function Product() {
     (productHandle.startsWith('sarimbit') && variantPrice >= 500000 && variantPrice < 1000000));
 
   // Active image index
-  const activeIndex = imageList.findIndex((img) => img.url === activeImage?.url);
+  const activeIndex = Math.max(
+    0,
+    imageList.findIndex((img) => img.url === (activeImage?.url || imageList[0]?.url))
+  );
+
+  // Swipe navigation state & handlers
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const handlePrevImage = () => {
+    if (imageList.length <= 1) return;
+    const prevIdx = (activeIndex - 1 + imageList.length) % imageList.length;
+    setActiveImage(imageList[prevIdx]);
+  };
+
+  const handleNextImage = () => {
+    if (imageList.length <= 1) return;
+    const nextIdx = (activeIndex + 1) % imageList.length;
+    setActiveImage(imageList[nextIdx]);
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchEndX(null);
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchEndX === null) return;
+    const deltaX = touchStartX - touchEndX;
+    const minSwipeDistance = 40;
+
+    if (deltaX > minSwipeDistance) {
+      // Swiped left -> next
+      handleNextImage();
+    } else if (deltaX < -minSwipeDistance) {
+      // Swiped right -> prev
+      handlePrevImage();
+    }
+  };
 
   // Theme classes mirroring collection theme
   const themeClasses = isExclusiveTier
@@ -323,24 +365,43 @@ export default function Product() {
         {/* Main PDP Grid (Left: 4:5 Vertical Gallery, Right: Frameless Quiet Luxury Panel) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           {/* Left: 4:5 Vertical Gallery System (7 Cols on Desktop) */}
-          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-4 lg:sticky lg:top-24">
-            {/* Thumbnails Column */}
+          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 lg:sticky lg:top-24">
+            {/* Thumbnails Column (Precision-aligned on Mobile to match Main Thumbnail width, Vertical on Desktop) */}
             {imageList.length > 1 && (
-              <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-y-auto sm:max-h-[660px] pb-2 sm:pb-0 scrollbar-none">
+              <div
+                className={`${
+                  imageList.length <= 5
+                    ? `grid ${
+                        imageList.length === 2
+                          ? 'grid-cols-2'
+                          : imageList.length === 3
+                          ? 'grid-cols-3'
+                          : imageList.length === 4
+                          ? 'grid-cols-4'
+                          : 'grid-cols-5'
+                      } gap-2 w-full`
+                    : 'flex gap-2 overflow-x-auto scrollbar-none w-full'
+                } sm:flex sm:flex-col sm:w-20 sm:gap-3 sm:overflow-y-auto sm:max-h-[660px] pb-1 sm:pb-0`}
+              >
                 {imageList.map((img, idx) => {
-                  const isActive = activeImage?.url === img.url;
+                  const isActive = (activeImage?.url || imageList[0]?.url) === img.url;
                   return (
                     <button
                       key={img.id || idx}
                       type="button"
                       onClick={() => setActiveImage(img)}
-                      className={`relative w-16 sm:w-20 aspect-[4/5] overflow-hidden flex-shrink-0 border transition-all cursor-pointer ${
+                      className={`relative aspect-[4/5] overflow-hidden border transition-all cursor-pointer ${
+                        imageList.length > 5
+                          ? 'w-[calc((100%-32px)/5)] shrink-0 sm:w-20'
+                          : 'w-full sm:w-20 sm:shrink-0'
+                      } ${
                         isActive
                           ? 'border-[#C5A059] ring-1 ring-[#C5A059]'
                           : isExclusiveTier
                           ? 'border-[#262626] opacity-60 hover:opacity-100 hover:border-[#C5A059]/60'
                           : 'border-[#E2DFD8] opacity-75 hover:opacity-100 hover:border-[#111111]'
                       }`}
+                      aria-label={`Pilih gambar produk ${idx + 1}`}
                     >
                       <img
                         src={img.url}
@@ -353,9 +414,12 @@ export default function Product() {
               </div>
             )}
 
-            {/* Main Featured Image Container (Strict 4:5 Aspect Ratio) */}
+            {/* Main Featured Image Container (Strict 4:5 Aspect Ratio with Swipe & Arrows) */}
             <div
-              className={`flex-1 relative overflow-hidden group shadow-sm ${
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              className={`flex-1 relative overflow-hidden group shadow-sm select-none ${
                 isExclusiveTier
                   ? 'bg-[#181818] border border-[#C5A059]/30'
                   : 'bg-[#111111]'
@@ -366,7 +430,7 @@ export default function Product() {
                   <img
                     src={activeImage.url}
                     alt={activeImage.altText || title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out pointer-events-none"
                   />
                 ) : (
                   <div
@@ -379,16 +443,44 @@ export default function Product() {
                 )}
               </div>
 
+              {/* Prev / Next Arrows (Desktop hover & Mobile visible) */}
+              {imageList.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePrevImage();
+                    }}
+                    aria-label="Gambar sebelumnya"
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-black/45 hover:bg-black/85 text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-xs opacity-75 sm:opacity-0 sm:group-hover:opacity-100 z-10"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNextImage();
+                    }}
+                    aria-label="Gambar berikutnya"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-black/45 hover:bg-black/85 text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-xs opacity-75 sm:opacity-0 sm:group-hover:opacity-100 z-10"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+
               {/* Counter Badge */}
               {imageList.length > 1 && (
                 <div
-                  className={`absolute bottom-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-medium backdrop-blur-sm ${
+                  className={`absolute bottom-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-medium backdrop-blur-sm z-10 pointer-events-none ${
                     isExclusiveTier
                       ? 'bg-[#111111]/85 text-[#C5A059] border border-[#C5A059]/40'
                       : 'bg-black/70 text-white'
                   }`}
                 >
-                  {activeIndex >= 0 ? activeIndex + 1 : 1} / {imageList.length}
+                  {activeIndex + 1} / {imageList.length}
                 </div>
               )}
             </div>
