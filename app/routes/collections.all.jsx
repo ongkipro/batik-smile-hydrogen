@@ -48,8 +48,8 @@ export default function CollectionAll() {
   const { products } = useLoaderData();
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-[100vw] mx-auto">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Breadcrumb */}
         <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
           <NavLink to="/" className="hover:text-[#9E7D3B]">

@@ -55,10 +55,29 @@ export async function loader({ context }) {
       ? data.sarimbitCollection.products.nodes
       : fallbackProducts;
 
-  const rawFabricProducts =
-    data?.rawFabricCollection?.products?.nodes?.length > 0
-      ? data.rawFabricCollection.products.nodes
-      : fallbackProducts;
+  // 8 Newest Products excluding Sarimbit collection/tags/titles
+  const rawNewest = data?.newestProducts?.nodes || [];
+  const nonSarimbitProducts = rawNewest.filter((product) => {
+    const title = (product.title || '').toLowerCase();
+    const handle = (product.handle || '').toLowerCase();
+    const tags = (product.tags || []).map((t) => t.toLowerCase());
+    const collections = (product.collections?.nodes || []).map((c) =>
+      c.handle.toLowerCase(),
+    );
+
+    const isSarimbit =
+      title.includes('sarimbit') ||
+      handle.includes('sarimbit') ||
+      tags.some((t) => t.includes('sarimbit')) ||
+      collections.some((c) => c.includes('sarimbit'));
+
+    return !isSarimbit;
+  });
+
+  const newestProducts =
+    nonSarimbitProducts.length > 0
+      ? nonSarimbitProducts.slice(0, 8)
+      : fallbackProducts.slice(0, 8);
 
   // Extract metaobjects
   const heroData = data?.heroBanners?.nodes?.[0] || null;
@@ -76,7 +95,7 @@ export async function loader({ context }) {
     womenProducts,
     menProducts,
     sarimbitProducts,
-    rawFabricProducts,
+    newestProducts,
   };
 }
 
@@ -91,7 +110,7 @@ export default function Homepage() {
     womenProducts,
     menProducts,
     sarimbitProducts,
-    rawFabricProducts,
+    newestProducts,
   } = useLoaderData();
 
   return (
@@ -112,8 +131,8 @@ export default function Homepage() {
       {/* 3. Heritage Craftsmanship Video Banner */}
       <HeritageVideoBanner videoData={videoData} />
 
-      {/* 4. Choose Your Batik: 4-Column Raw Fabric Gallery */}
-      <ChooseYourBatikGrid products={rawFabricProducts} />
+      {/* 4. Choose Your Batik / Koleksi Terbaru: 8 Produk Pilihan Non-Sarimbit */}
+      <ChooseYourBatikGrid products={newestProducts} />
 
       {/* 5. Shoppable Lookbook Spotlight with Interactive Hotspots */}
       <ShoppableLookbook lookbook={lookbookData} />
@@ -216,6 +235,18 @@ const HOMEPAGE_QUERY = `#graphql
           altText
           width
           height
+        }
+      }
+    }
+    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {
+      nodes {
+        ...ProductCardItem
+        tags
+        collections(first: 5) {
+          nodes {
+            handle
+            title
+          }
         }
       }
     }

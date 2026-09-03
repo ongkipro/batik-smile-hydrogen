@@ -104,10 +104,16 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
   │     ├── Bespoke tailoring notes field (Catatan Jahitan & Ukuran)
   │     └── Direct Shopify Hosted Checkout
   └── [/pages/:handle]:
-        ├── /pages/layanan-seragam (Layanan Jahit Kustom & Korporat)
-        ├── /pages/tentang-kami (Kisah Butik Sejak 2007)
+        ├── /pages/tentang-kami (Kisah Butik Sejak 2007 & Budaya 3S 1C 1T 1H)
+        ├── /pages/layanan-seragam (Layanan Jahit Kustom & Korporat Tanpa Minimal Order)
         ├── /pages/fasilitas-store (Showroom & Fasilitas Belanja 3 Lantai Simongan)
-        └── /pages/lokasi-toko (Showroom Flagship Simongan & Cabang Banyumanik Semarang)
+        ├── /pages/lokasi-toko (Showroom Simongan & Cabang Banyumanik Semarang)
+        ├── /pages/contact & /pages/hubungi-kami (Customer Care & WhatsApp Concierge)
+        ├── /pages/panduan-ukuran (Panduan Ukuran Pria, Wanita, Anak & Bespoke Fitting)
+        ├── /pages/panduan-perawatan (Panduan Perawatan Batik Tulis, Dobby, & Sutra ATBM)
+        ├── /pages/kebijakan-pengembalian (Garansi Kepuasan & Tukar Size 100%)
+        ├── /pages/kebijakan-pengiriman (Kebijakan Pengiriman & Free Delivery)
+        └── /pages/syarat-dan-ketentuan (Ketentuan Layanan Resmi)
 ```
 
 ---

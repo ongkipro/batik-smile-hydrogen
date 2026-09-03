@@ -11,23 +11,22 @@ import { ProductItem } from './ProductItem';
  * }} props
  */
 export function ChooseYourBatikGrid({ products = [] }) {
-  const displayProducts = (products || []).slice(0, 4);
+  const displayProducts = (products || []).slice(0, 8);
 
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] border-b border-[#E2DFD8]">
-      <div className="w-full">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-14 sm:mb-16">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-2">
-            LEMBARAN KAIN BATIK TULIS ASLI
+            LEMBARAN KAIN &amp; KOLEKSI TERBARU
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal">
-            CHOOSE YOUR BATIK
+            CHOOSE YOUR BATIK &amp; NEW ARRIVALS
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] max-w-xl mx-auto font-light leading-relaxed">
-            Pilih mahakarya kain tulis sutra atau katun primisima. Anda dapat membeli lembaran kainnya
-            saja atau memanfaatkan layanan jahit bespoke butik Batik Smile tanpa batasan minimal order.
+            Eksplorasi pilihan kain batik tulis, tenun tradisional Troso, kemeja pria, dan busana etnik terbaru. Anda dapat membeli busana siap pakai atau memanfaatkan layanan jahit bespoke butik Batik Smile tanpa batasan minimal order.
           </p>
         </div>
 
@@ -37,10 +36,10 @@ export function ChooseYourBatikGrid({ products = [] }) {
             <span className="text-[#C5A059] text-xl font-serif">01.</span>
             <div>
               <h3 className="text-xs uppercase tracking-[0.16em] font-semibold text-[#111111] mb-1">
-                BELI KAIN LEMBARAN
+                BELI PRODUK &amp; KAIN LEMBARAN
               </h3>
               <p className="text-[11px] text-[#5A5550] leading-relaxed">
-                Koleksi lembaran kain tulis eksklusif siap dikirim dengan kotak kemasan kayu aman &amp; sertifikat keaslian.
+                Koleksi busana siap pakai &amp; lembaran kain tulis eksklusif siap dikirim dengan kemasan aman &amp; jaminan mutu butik.
               </p>
             </div>
           </div>
@@ -58,7 +57,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
           </div>
         </div>
 
-        {/* 4-Column Raw Fabric Grid */}
+        {/* 4-Column / 8-Product Showcase Grid (2 Rows of 4 Cards) */}
         {displayProducts.length > 0 ? (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {displayProducts.map((product, idx) => (
@@ -66,14 +65,13 @@ export function ChooseYourBatikGrid({ products = [] }) {
                 key={product.id || idx}
                 product={product}
                 loading="lazy"
-                badge="Kain Tulis Asli"
               />
             ))}
           </div>
         ) : (
           <div className="text-center py-16 border border-dashed border-[#E2DFD8] bg-[#FAF8F5]">
             <p className="text-xs tracking-wider uppercase text-[#5A5550]">
-              Memuat galeri kain batik tulis...
+              Memuat koleksi produk terbaru...
             </p>
           </div>
         )}
@@ -81,10 +79,10 @@ export function ChooseYourBatikGrid({ products = [] }) {
         {/* Footer Link */}
         <div className="text-center mt-12 sm:mt-16">
           <Link
-            to="/collections/jarik-kain-batik"
+            to="/collections/all"
             className="inline-block px-10 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.2em] transition-colors duration-300 shadow-sm"
           >
-            LIHAT SEMUA KAIN BATIK TULIS &rarr;
+            LIHAT SEMUA KOLEKSI TERBARU &rarr;
           </Link>
         </div>
       </div>

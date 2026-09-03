@@ -125,7 +125,7 @@ export function HeroSlider() {
 
             {/* Content Box */}
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full max-w-[100vw] mx-auto px-6 sm:px-8 lg:px-12 w-full">
+              <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                 <div className="max-w-2xl text-white pt-12 sm:pt-0">
                   {/* Tagline & Tier Badge */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-amber-400/40 backdrop-blur-sm mb-4">

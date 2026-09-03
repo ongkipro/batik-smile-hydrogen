@@ -12,7 +12,7 @@ import { useVariantUrl } from '~/lib/variants';
  *   badge?: string;
  * }} props
  */
-export function ProductItem({ product, loading = 'lazy', badge }) {
+export function ProductItem({ product, loading = 'lazy', _badge }) {
   const variantUrl = useVariantUrl(product?.handle);
 
   if (!product) return null;
@@ -60,20 +60,6 @@ export function ProductItem({ product, loading = 'lazy', badge }) {
           </div>
         )}
 
-        {/* Top Badges (Sale / Tulis / Bespoke) */}
-        <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 pointer-events-none">
-          {badge && (
-            <span className="bg-[#111111]/90 text-[#C5A059] text-[9px] uppercase tracking-[0.18em] px-2.5 py-1 font-medium border border-[#C5A059]/30">
-              {badge}
-            </span>
-          )}
-          {isOnSale && (
-            <span className="bg-[#7C3F1D] text-white text-[9px] uppercase tracking-[0.18em] px-2 py-0.5 font-medium">
-              SALE
-            </span>
-          )}
-        </div>
-
         {/* Quick View / Add to Bag Overlay (Slide from bottom) */}
         <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-[#111111]/80 via-[#111111]/40 to-transparent">
           <div className="w-full py-2.5 px-4 bg-[#FFFFFF] text-[#111111] text-[10px] font-bold uppercase tracking-[0.18em] text-center shadow-md hover:bg-[#C5A059] hover:text-white transition-colors">
@@ -82,25 +68,25 @@ export function ProductItem({ product, loading = 'lazy', badge }) {
         </div>
       </Link>
 
-      {/* Typography & Price Metadata */}
-      <div className="pt-3.5 pb-2 flex flex-col flex-grow justify-between">
-        <div>
+      {/* Typography & Price Metadata (Centered for Precision) */}
+      <div className="pt-3.5 pb-2 flex flex-col flex-grow justify-between text-center items-center">
+        <div className="w-full">
           <Link
             to={variantUrl}
             prefetch="intent"
-            className="block text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#1C1C1C] hover:text-[#9E7D3B] transition-colors line-clamp-1"
+            className="block text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#1C1C1C] hover:text-[#9E7D3B] transition-colors line-clamp-1 text-center"
           >
             {displayTitle}
           </Link>
 
           {product.productType && (
-            <span className="block text-[9px] uppercase tracking-[0.2em] text-[#7C3F1D] mt-0.5">
+            <span className="block text-[9px] uppercase tracking-[0.2em] text-[#7C3F1D] mt-0.5 text-center">
               {product.productType}
             </span>
           )}
         </div>
 
-        <div className="mt-2 flex items-baseline gap-2">
+        <div className="mt-2 flex items-baseline justify-center gap-2 text-center">
           {price && (
             <span className="text-[11px] sm:text-xs font-semibold tracking-wide text-[#111111]">
               <Money data={price} />

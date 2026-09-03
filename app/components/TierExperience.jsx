@@ -82,7 +82,7 @@ export function TierExperience() {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5] border-t border-neutral-200/60">
-      <div className="w-full max-w-[100vw] mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-[11px] uppercase tracking-[0.25em] text-[#9E4719] font-bold">

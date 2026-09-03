@@ -73,20 +73,20 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
   }));
 
   return (
-    <div className="bg-[#FAF8F5] p-6 sm:p-8 rounded-2xl border border-neutral-300/80 shadow-sm relative my-8">
+    <div className="bg-[#FAF8F5] p-6 sm:p-8 rounded-none border border-[#E2DFD8] shadow-sm relative my-8">
       <BatikCorner position="top-left" variant="gold" size={32} className="top-3 left-3 opacity-60" />
       <BatikCorner position="bottom-right" variant="gold" size={32} className="bottom-3 right-3 opacity-60" />
 
       {/* Header */}
       <div className="mb-6">
-        <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E4719] font-bold block mb-1">
-          Paket Sarimbit Praktis
+        <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+          PAKET BUSANA KELUARGA
         </span>
-        <h3 className="font-serif text-2xl font-bold text-neutral-900">
+        <h3 className="font-serif text-2xl font-normal text-[#111111]">
           Family Bundle Builder
         </h3>
-        <p className="text-xs text-neutral-600 mt-1">
-          Pilih komposisi dan ukuran baju untuk setiap anggota keluarga di bawah ini dalam satu klik.
+        <p className="text-xs text-[#5A5550] mt-1 font-light">
+          Pilih komposisi dan ukuran busana untuk setiap anggota keluarga di bawah ini dalam satu langkah selaras.
         </p>
       </div>
 
@@ -95,10 +95,10 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
         {members.map((member) => (
           <div
             key={member.id}
-            className={`p-4 rounded-xl border transition-all ${
+            className={`p-4 rounded-none border transition-all ${
               member.enabled
-                ? 'bg-white border-neutral-300 shadow-sm'
-                : 'bg-neutral-100/60 border-neutral-200 opacity-60'
+                ? 'bg-white border-[#C5A059]/40 shadow-sm'
+                : 'bg-neutral-100/60 border-[#E2DFD8] opacity-60'
             }`}
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
@@ -107,27 +107,27 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
                   type="checkbox"
                   checked={member.enabled}
                   onChange={() => toggleMember(member.id)}
-                  className="w-4 h-4 rounded text-[#9E4719] focus:ring-[#9E4719]"
+                  className="w-4 h-4 rounded-none text-[#111111] focus:ring-[#C5A059]"
                 />
-                <span className="font-semibold text-xs text-neutral-900">{member.label}</span>
+                <span className="font-medium text-xs text-[#111111] uppercase tracking-wider">{member.label}</span>
               </label>
-              <span className="text-xs font-bold text-[#9E4719] font-sans">
+              <span className="text-xs font-semibold text-[#111111]">
                 {formatIDR(member.basePrice)}
               </span>
             </div>
 
             {member.enabled && (
-              <div className="pt-2 border-t border-neutral-100 flex flex-wrap items-center gap-2">
-                <span className="text-[11px] text-neutral-500 font-medium mr-1">Pilih Size:</span>
+              <div className="pt-2 border-t border-[#E2DFD8] flex flex-wrap items-center gap-2">
+                <span className="text-[11px] text-[#5A5550] font-medium mr-1">Pilih Size:</span>
                 {member.sizes.map((sz) => (
                   <button
                     key={sz}
                     type="button"
                     onClick={() => updateSize(member.id, sz)}
-                    className={`px-3 py-1.5 rounded text-xs font-semibold uppercase tracking-wider transition-all border ${
+                    className={`px-3 py-1.5 rounded-none text-xs uppercase tracking-wider transition-all border cursor-pointer ${
                       member.selectedSize === sz
-                        ? 'bg-neutral-900 text-white border-neutral-900'
-                        : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-500'
+                        ? 'bg-[#111111] text-[#C5A059] border-[#111111] font-semibold'
+                        : 'bg-white text-[#111111] border-[#E2DFD8] hover:border-[#111111]'
                     }`}
                   >
                     {sz}
@@ -140,12 +140,12 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
       </div>
 
       {/* Live Total & Batch Add Button */}
-      <div className="p-5 rounded-xl bg-neutral-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
+      <div className="p-5 sm:p-6 rounded-none bg-[#111111] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md border border-[#C5A059]/30">
         <div>
-          <span className="text-[10px] uppercase tracking-widest text-neutral-400 block">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-[#E2DFD8] block">
             Total Paket ({activeMembers.length} Pcs Busana)
           </span>
-          <span className="text-xl sm:text-2xl font-bold text-[#C5A059] font-sans">
+          <span className="text-xl sm:text-2xl font-semibold text-[#C5A059]">
             {formatIDR(totalBundlePrice)}
           </span>
         </div>
@@ -153,9 +153,9 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
         <AddToCartButton
           disabled={activeMembers.length === 0}
           lines={bundleLines}
-          className="w-full sm:w-auto px-8 py-3.5 rounded bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-widest transition-all shadow-lg text-center disabled:bg-neutral-600 disabled:cursor-not-allowed"
+          className="w-full sm:w-auto px-8 py-3.5 rounded-none bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white font-semibold text-xs uppercase tracking-[0.18em] transition-all shadow-md text-center disabled:bg-neutral-600 disabled:text-neutral-400 disabled:cursor-not-allowed"
         >
-          Tambah {activeMembers.length} Baju ke Tas Belanja 🛍️
+          TAMBAH {activeMembers.length} BUSANA KE TAS BELANJA
         </AddToCartButton>
       </div>
     </div>

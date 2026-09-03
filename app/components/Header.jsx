@@ -60,12 +60,12 @@ function HeaderCtas({ isLoggedIn, cart }) {
   const { open } = useAside();
 
   return (
-    <div className="flex items-center gap-1 sm:gap-3">
-      {/* Search Trigger */}
+    <div className="flex items-center gap-1.5 sm:gap-3">
+      {/* Search Trigger (Hidden on Mobile, already in sticky bottom bar) */}
       <button
         type="button"
         onClick={() => open('search')}
-        className="p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+        className="hidden lg:block p-2.5 text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
         aria-label="Cari produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,12 +73,13 @@ function HeaderCtas({ isLoggedIn, cart }) {
         </svg>
       </button>
 
-      {/* Customer Account Link */}
+      {/* Customer Account Link (Visible on Mobile & Desktop) */}
       <NavLink
         to="/account"
-        className="hidden sm:flex items-center gap-1.5 p-2 text-[#111111] hover:text-[#C5A059] transition-colors text-[10px] uppercase font-semibold tracking-[0.16em]"
+        className="flex items-center gap-1.5 p-2 text-[#111111] hover:text-[#C5A059] transition-colors text-[10px] uppercase font-semibold tracking-[0.16em]"
+        aria-label="Akun saya"
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="square"
             strokeLinejoin="miter"
@@ -86,11 +87,13 @@ function HeaderCtas({ isLoggedIn, cart }) {
             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
           />
         </svg>
-        <Suspense fallback="AKUN">
-          <Await resolve={isLoggedIn}>
-            {(logged) => (logged ? 'AKUN' : 'MASUK')}
-          </Await>
-        </Suspense>
+        <span className="hidden sm:inline">
+          <Suspense fallback="AKUN">
+            <Await resolve={isLoggedIn}>
+              {(logged) => (logged ? 'AKUN' : 'MASUK')}
+            </Await>
+          </Suspense>
+        </span>
       </NavLink>
 
       {/* Cart Drawer Trigger Button */}
@@ -155,9 +158,9 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
   const { close } = useAside();
 
   const mobileCategories = [
-    { title: 'SARIMBIT 3 KASTA (COUPLE)', url: '/collections/sarimbit-exclusive' },
-    { title: 'BATIK WANITA (BLUS & GAMIS)', url: '/collections/batik-wanita' },
+    { title: 'SARIMBIT KELUARGA', url: '/collections/sarimbit-exclusive' },
     { title: 'BATIK PRIA (KEMEJA FURING)', url: '/collections/batik-pria' },
+    { title: 'BATIK WANITA (BLUS & GAMIS)', url: '/collections/batik-wanita' },
     { title: 'BATIK ANAK & ADAT JAWA', url: '/collections/batik-anak' },
     { title: 'KAIN BATIK TULIS (LEMBARAN)', url: '/collections/jarik-kain-batik' },
     { title: 'LAYANAN SERAGAM & JAHIT', url: '/pages/layanan-seragam' },

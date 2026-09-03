@@ -379,4 +379,70 @@
   - *Action*: Ran `npm run lint` (0 errors) and `npm run build` (Exit Code 0).
   - *Evidence*: Production build succeeded.
 
+---
+
+## Phase 11: All-Page Responsive Screening, Clean Card Badges & Mobile Web App Refinement (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: All Routes, Header/MegaMenu, ProductItem, Mobile Navigation, Safe Area Insets*
+
+- [x] **Task 11.1: Header & Mega Menu 4-Pillar Focus (`Header.jsx` + `MegaMenu.jsx`)**
+  - *Action*: Streamlined header navigation to exactly 4 clean menus: `Sarimbit`, `Batik Pria`, `Batik Wanita`, and `Batik Anak`. Removed all "kasta" and "tier" nomenclature across subcategories and badges. Aligned mobile drawer with the 4 pillars.
+  - *Evidence*: Verified 4 menus rendered in desktop header and mobile drawer.
+- [x] **Task 11.2: Product Card Badges Removal (`ProductItem.jsx`, `ChooseYourBatikGrid.jsx`, `BestSellersTabs.jsx`)**
+  - *Action*: Removed all floating overlay badges (`SALE`, `Terbaru`, `Kain Tradisional`) from all product cards across homepage, collection catalogs, and search results for a pure Quiet Luxury aesthetic.
+  - *Evidence*: Rendered cards show pure 4:5 photography without stickers.
+- [x] **Task 11.3: Mobile Sticky Navigation Bar Refinement (`MobileNavigation.jsx`)**
+  - *Action*: Removed Cart button (already accessible in header); retained Beranda, Kategori, Cari, and WA CS in a clean 4-item bottom bar with `env(safe-area-inset-bottom)` support.
+  - *Evidence*: Mobile bottom bar displays exactly `['Beranda', 'Kategori', 'Cari', 'WA CS']`.
+- [x] **Task 11.4: Elimination of `max-w-[100vw]` Bug Across Codebase**
+  - *Action*: Replaced `max-w-[100vw]` with `max-w-7xl` across all routes and components (`collections.$handle.jsx`, `collections.all.jsx`, `collections._index.jsx`, `products.$handle.jsx`, `TierExperience.jsx`, `SarimbitSpotlight.jsx`, `CraftsmanshipZoom.jsx`, `HeroSlider.jsx`) to prevent unwanted horizontal scrolling on mobile devices.
+  - *Evidence*: Grep search for `max-w-[100vw]` returns 0 matches.
+- [x] **Task 11.5: Sticky Mobile Action Bar Polish (`StickyMobileBar.jsx`)**
+  - *Action*: Upgraded to zero-radius architecture (`rounded-none`), Quiet Luxury tokens (`#111111`/`#C5A059`), and elevated above the bottom bar with safe area padding.
+  - *Evidence*: Mobile PDP displays sticky add-to-cart above bottom bar without overlap.
+- [x] **Task 11.6: All-Page Responsive Mobile Clearance**
+  - *Action*: Upgraded outer padding across `collections.*`, `products.$handle`, `search.jsx`, `cart.jsx`, and all `/pages/*` and `/policies/*` routes to `pt-10 pb-24 lg:pb-16` with safe-area calculations.
+  - *Evidence*: All 14 tested canonical routes return HTTP 200 OK without content cut-off.
+- [x] **Task 11.7: Production Verification**
+  - *Action*: Ran `npm run lint` (0 errors) and `npm run build` (Exit Code 0).
+  - *Evidence*: Production build verified clean.
+
+---
+
+## Phase 12: Card Typography Alignment, Collection-Aware Related Products, & Mobile Header De-clutter (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: ProductItem, PDP products.$handle, HeaderCtas*
+
+- [x] **Task 12.1: Centered Card Typography & Pricing (`ProductItem.jsx`)**
+  - *Action*: Aligned product title, product type, and price to center (`text-center items-center justify-center`) for balanced symmetry.
+  - *Evidence*: Rendered cards show centered title and pricing.
+- [x] **Task 12.2: Dynamic Collection-Aware Related Products on PDP (`products.$handle.jsx`)**
+  - *Action*: Queried `collections(first: 5)` with nested products in `PRODUCT_FRAGMENT`. Implemented matching collection detection (favoring specific categories over generic shop/frontpage). Filtered out current product and rendered up to 4 related products from the exact same collection. Added "Lihat Semua Koleksi" link.
+  - *Evidence*: Tested `/products/kain-tenun-troso` (returns `Rekomendasi Jarik Anak`) and `/products/sarimbit-mustard-gold` (returns `Rekomendasi Sarimbit Exclusive`).
+- [x] **Task 12.3: Mobile Header Simplification (`Header.jsx`)**
+  - *Action*: Hid search button on mobile (`hidden lg:block`) since Search is already in the sticky bottom menu. Surfaced customer Account icon on mobile header alongside Cart.
+  - *Evidence*: Mobile header renders Logo + Account + Cart.
+- [x] **Task 12.4: Production Build & Lint Verification**
+  - *Action*: Ran `npm run lint` (0 errors) and `npm run build` (Exit Code 0).
+  - *Evidence*: Verified 0 lint warnings/errors and clean build bundle.
+
+---
+
+## Phase 13: Desktop Responsiveness Eradication, Container Normalization & Production Edge Deployment (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: ShoppableLookbook, FeaturedCollections, BestSellersTabs, ChooseYourBatikGrid, TrustGuaranteeBar, FamilyBundleBuilder, Oxygen Deployment*
+
+- [x] **Task 13.1: Desktop Overlap Eradication in Shoppable Lookbook (`ShoppableLookbook.jsx`)**
+  - *Action*: Fixed collision on 1024px-1366px desktop viewports. Replaced rigid 16:9 ratio with adaptive `lg:min-h-[480px] lg:aspect-auto` on photo container. Adjusted column split to `lg:col-span-7 xl:col-span-8` (image) and `lg:col-span-5 xl:col-span-4` (card). Re-architected spec rows with `flex-col sm:flex-row sm:items-baseline sm:justify-between` and `shrink-0` labels to prevent horizontal collision. Optimized CTA button font tracking and padding.
+  - *Evidence*: Rendered without overlaps across all viewport widths.
+- [x] **Task 13.2: Universal Container Max-Width Normalization**
+  - *Action*: Wrapped section content in `max-w-7xl mx-auto` across `BestSellersTabs.jsx`, `ChooseYourBatikGrid.jsx`, `FeaturedCollections.jsx`, `HeritageVideoBanner.jsx`, `TrustGuaranteeBar.jsx`, and `ShoppableLookbook.jsx`.
+  - *Evidence*: Verified no unbounded horizontal stretching on screens > 1440px.
+- [x] **Task 13.3: Quiet Luxury Architectural Compliance for Family Bundle Builder (`FamilyBundleBuilder.jsx`)**
+  - *Action*: Replaced non-conforming `rounded-2xl` and `rounded-xl` with Zero-Radius `rounded-none`, aligned colors with brand tokens, and removed emoji.
+  - *Evidence*: Verified 0px border-radius styling.
+- [x] **Task 13.4: Production Build Verification & Edge Deployment**
+  - *Action*: Ran `npm run lint` (0 errors) and `npm run build` (Exit Code 0). Staged, committed, and pushed changes to `origin/main` to trigger automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions (`.github/workflows/oxygen-deployment-1000176204.yml`).
+  - *Evidence*: Build successful, git committed and pushed.
+
+
+
+
 

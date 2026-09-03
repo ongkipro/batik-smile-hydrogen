@@ -44,17 +44,17 @@ export function FeaturedCollections({ collections = [] }) {
     // Fallback descriptors
     const metaMap = {
       'sarimbit-exclusive': {
-        title: 'Sarimbit Exclusive (Tier 1)',
+        title: 'Sarimbit Exclusive',
         subtitle: 'Sutra ATBM & Tulis Prada Emas',
-        badge: 'Kasta Tertinggi',
+        badge: 'Koleksi Mahakarya',
       },
       'sarimbit-premium': {
-        title: 'Sarimbit Premium (Tier 2)',
+        title: 'Sarimbit Premium',
         subtitle: 'Tenun Dobby & Furing Pesta',
         badge: 'Resepsi & Jamuan',
       },
       'sarimbit-ekonomis': {
-        title: 'Sarimbit Ekonomis (Tier 3)',
+        title: 'Sarimbit Ekonomis',
         subtitle: 'Katun Primisima Adem Harian',
         badge: 'Favorit Keluarga',
       },
@@ -85,18 +85,18 @@ export function FeaturedCollections({ collections = [] }) {
 
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
-      <div className="w-full">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
-            KURASI KOLEKSI RESMI SHOPIFY
+            KURASI KOLEKSI RESMI BUTIK
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-4 leading-tight">
             Katalog Koleksi Unggulan Butik
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto my-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
-            Jelajahi 3 kasta sarimbit keluarga, busana wanita modern, kemeja pria lapis furing hero, dan lembaran kain batik tulis asli yang diambil langsung dari katalog resmi kami.
+            Jelajahi koleksi sarimbit keluarga, busana wanita modern, kemeja pria lapis furing hero, dan lembaran kain batik tulis asli yang diambil langsung dari katalog resmi kami.
           </p>
         </div>
 

@@ -55,7 +55,7 @@ export function ShoppableLookbook({ lookbook }) {
 
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
-      <div className="w-full">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
@@ -70,10 +70,10 @@ export function ShoppableLookbook({ lookbook }) {
           </p>
         </div>
 
-        {/* Interactive Canvas Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Main Photo Container with 0px Radius */}
-          <div className="lg:col-span-8 relative bg-[#111111] border border-[#E2DFD8] overflow-hidden shadow-sm aspect-[16/10] sm:aspect-[16/9]">
+        {/* Interactive Canvas Grid (Adaptive 7/5 Desktop & 8/4 Ultrawide) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-stretch">
+          {/* Main Photo Container with 0px Radius and Adaptive Min-Height */}
+          <div className="lg:col-span-7 xl:col-span-8 relative bg-[#111111] border border-[#E2DFD8] overflow-hidden shadow-sm aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:min-h-[480px]">
             <img
               src={imageUrl}
               alt="Sarimbit Keluarga Batik Smile"
@@ -114,13 +114,13 @@ export function ShoppableLookbook({ lookbook }) {
             })}
           </div>
 
-          {/* Active Hotspot Preview Card (0px Radius) */}
-          <div className="lg:col-span-4 bg-white p-8 border border-[#E2DFD8] flex flex-col justify-between">
+          {/* Active Hotspot Preview Card (Adaptive Padding & Wrap Prevention) */}
+          <div className="lg:col-span-5 xl:col-span-4 bg-white p-6 sm:p-7 xl:p-8 border border-[#E2DFD8] flex flex-col justify-between">
             <div>
               <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
                 DETAIL KARYA PILIHAN
               </span>
-              <h3 className="font-serif text-2xl text-[#111111] font-normal mb-1">
+              <h3 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-1">
                 {activePin?.title}
               </h3>
               <p className="text-xs text-[#5A5550] mb-4 font-light">{activePin?.subtitle}</p>
@@ -129,35 +129,35 @@ export function ShoppableLookbook({ lookbook }) {
                 {activePin?.price}
               </div>
 
-              <div className="space-y-2.5 text-xs text-[#5A5550] border-t border-b border-[#E2DFD8] py-5 mb-8">
-                <p className="flex items-center justify-between">
-                  <span>Konstruksi:</span>
-                  <strong className="text-[#111111] font-medium">Jahitan butik furing katun hero</strong>
-                </p>
-                <p className="flex items-center justify-between">
-                  <span>Pilihan Ukuran:</span>
-                  <strong className="text-[#111111] font-medium">S, M, L, XL, XXL, Custom</strong>
-                </p>
-                <p className="flex items-center justify-between">
-                  <span>Garansi:</span>
-                  <strong className="text-[#111111] font-medium">100% Bebas Tukar Ukuran</strong>
-                </p>
+              <div className="space-y-3 text-xs text-[#5A5550] border-t border-b border-[#E2DFD8] py-4 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-[11px] sm:text-xs">
+                  <span className="text-[#7C3F1D] font-medium shrink-0">Konstruksi:</span>
+                  <strong className="text-[#111111] font-medium sm:text-right">Jahitan butik furing katun hero</strong>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-[11px] sm:text-xs">
+                  <span className="text-[#7C3F1D] font-medium shrink-0">Pilihan Ukuran:</span>
+                  <strong className="text-[#111111] font-medium sm:text-right">S, M, L, XL, XXL, Custom</strong>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 text-[11px] sm:text-xs">
+                  <span className="text-[#7C3F1D] font-medium shrink-0">Garansi:</span>
+                  <strong className="text-[#111111] font-medium sm:text-right">100% Bebas Tukar Ukuran</strong>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2.5 pt-2">
               <Link
                 to={activePin?.url || '/collections/sarimbit-exclusive'}
-                className="w-full py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] text-center block transition-colors duration-300 shadow-sm"
+                className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.16em] text-center block transition-colors duration-300 shadow-sm"
               >
                 LIHAT DETAIL PRODUK &rarr;
               </Link>
 
               <Link
                 to="/collections/sarimbit-exclusive"
-                className="w-full py-3 px-6 bg-[#FAF8F5] hover:bg-[#111111] !text-[#111111] hover:!text-white text-[11px] uppercase font-semibold tracking-[0.18em] text-center block border border-[#E2DFD8] hover:border-[#111111] transition-colors duration-300"
+                className="w-full py-3 px-4 bg-[#FAF8F5] hover:bg-[#111111] !text-[#111111] hover:!text-white text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.16em] text-center block border border-[#E2DFD8] hover:border-[#111111] transition-colors duration-300"
               >
-                LIHAT SELURUH SARIMBIT PASANGAN &rarr;
+                LIHAT SELURUH SARIMBIT &rarr;
               </Link>
             </div>
           </div>

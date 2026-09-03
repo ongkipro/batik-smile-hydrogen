@@ -24,12 +24,12 @@ export function StickyMobileBar({ product, selectedVariant }) {
   const isAvailable = selectedVariant?.availableForSale;
 
   return (
-    <div className="lg:hidden fixed bottom-16 left-0 right-0 z-30 p-3 bg-white/95 backdrop-blur-md border-t border-neutral-200 shadow-xl transition-all animate-in slide-in-from-bottom duration-300">
+    <div className="lg:hidden fixed bottom-[max(3.8rem,calc(env(safe-area-inset-bottom)+3.5rem))] left-0 right-0 z-30 p-3 bg-[#FAF8F5]/95 backdrop-blur-md border-t border-[#E2DFD8] shadow-xl transition-all animate-in slide-in-from-bottom duration-300">
       <div className="max-w-md mx-auto flex items-center justify-between gap-3">
         {/* Left: Title & Price */}
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-neutral-900 truncate">{product.title}</p>
-          <div className="text-xs font-bold text-[#9E4719]">
+          <p className="text-xs font-semibold text-[#111111] truncate">{product.title}</p>
+          <div className="text-xs font-bold text-[#9E7D3B]">
             {selectedVariant?.price && <Money data={selectedVariant.price} />}
           </div>
         </div>
@@ -48,9 +48,9 @@ export function StickyMobileBar({ product, selectedVariant }) {
                 ]
               : []
           }
-          className="px-5 py-2.5 rounded-lg bg-[#9E4719] hover:bg-[#7A320C] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md disabled:bg-neutral-300 whitespace-nowrap"
+          className="px-5 py-2.5 rounded-none bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-bold text-xs uppercase tracking-[0.16em] transition-colors shadow-sm disabled:bg-neutral-300 whitespace-nowrap cursor-pointer"
         >
-          {isAvailable ? '+ Tas' : 'Habis'}
+          {isAvailable ? '+ KERANJANG' : 'HABIS'}
         </AddToCartButton>
       </div>
     </div>

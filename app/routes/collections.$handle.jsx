@@ -96,11 +96,6 @@ export default function Collection() {
     ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10'
     : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8';
 
-  const badgeText = isExclusive
-    ? 'Haute Mahakarya'
-    : isPremium
-    ? 'Signature Dobby'
-    : undefined;
 
   const officialWaUrl =
     'https://wa.me/6281390888809?text=' +
@@ -116,8 +111,8 @@ export default function Collection() {
       : null);
 
   return (
-    <div className={`min-h-screen py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-500 ${themeClasses}`}>
-      <div className="w-full max-w-[100vw] mx-auto">
+    <div className={`min-h-screen pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8 transition-colors duration-500 ${themeClasses}`}>
+      <div className="w-full max-w-7xl mx-auto">
         {/* Collection Editorial Header Banner */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span
@@ -126,7 +121,7 @@ export default function Collection() {
             }`}
           >
             {isExclusive
-              ? 'KASTA TERTINGGI &bull; MAHAKARYA HERITAGE'
+              ? 'KOLEKSI EXCLUSIVE &bull; MAHAKARYA HERITAGE'
               : isPremium
               ? 'KOLEKSI BUTIK &bull; SIGNATURE ELEGANCE'
               : 'KATALOG BUSANA BATIK NUSANTARA'}
@@ -199,7 +194,6 @@ export default function Collection() {
               key={product.id}
               product={product}
               loading={index < 4 ? 'eager' : 'lazy'}
-              badge={badgeText}
             />
           )}
         </PaginatedResourceSection>

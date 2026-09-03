@@ -50,7 +50,7 @@ export function TrustGuaranteeBar() {
 
   return (
     <section className="bg-[#F4EFEA] border-b border-[#E2DFD8] py-10 sm:py-12 px-4 sm:px-8 lg:px-12 xl:px-16">
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
         {pillars.map((pillar) => (
           <div
             key={pillar.id}

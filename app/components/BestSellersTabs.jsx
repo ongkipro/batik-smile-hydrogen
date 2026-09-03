@@ -45,7 +45,7 @@ export function BestSellersTabs({
 
   return (
     <section id="best-sellers" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
-      <div className="w-full">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Editorial Section Header */}
         <div className="text-center mb-10 sm:mb-14">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
@@ -88,7 +88,6 @@ export function BestSellersTabs({
                 key={product.id || idx}
                 product={product}
                 loading={idx < 2 ? 'eager' : 'lazy'}
-                badge={activeTab === 'sarimbit' ? 'Sarimbit' : undefined}
               />
             ))}
           </div>

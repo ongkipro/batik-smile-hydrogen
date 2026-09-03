@@ -46,7 +46,7 @@ export default function SearchPage() {
   const popularKeywords = ['Sarimbit', 'Kemeja Pria', 'Batik Wanita', 'Kain Tulis', 'Sutra ATBM', 'Dobby'];
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Breadcrumb */}
         <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
@@ -76,14 +76,14 @@ export default function SearchPage() {
                 <input
                   defaultValue={term}
                   name="q"
-                  placeholder="Ketik motif, jenis busana, atau koleksi (mis. Sarimbit, Kemeja)..."
+                  placeholder="Ketik motif, jenis busana, atau koleksi..."
                   ref={inputRef}
                   type="search"
-                  className="flex-1 px-5 py-4 text-xs sm:text-sm bg-transparent outline-none placeholder-[#A69F96] text-[#111111]"
+                  className="flex-1 min-w-0 px-3.5 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm bg-transparent outline-none placeholder-[#A69F96] text-[#111111]"
                 />
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors cursor-pointer shadow-sm"
+                  className="px-4 sm:px-8 py-3 sm:py-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors cursor-pointer shadow-sm whitespace-nowrap"
                 >
                   CARI &rarr;
                 </button>

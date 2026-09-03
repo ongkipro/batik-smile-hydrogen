@@ -43,7 +43,7 @@ export function PageLayout({
         header={header}
         publicStoreDomain={publicStoreDomain}
       />
-      <MobileNavigation cart={cart} />
+      <MobileNavigation />
       <WhatsAppConcierge />
     </Aside.Provider>
   );

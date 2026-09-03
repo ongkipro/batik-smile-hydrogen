@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLoaderData, NavLink, redirect } from 'react-router';
+import { useLoaderData, NavLink, Link, redirect } from 'react-router';
 import {
   getSelectedProductOptions,
   Analytics,
@@ -12,6 +12,7 @@ import { AddToCartButton } from '~/components/AddToCartButton';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { FamilyBundleBuilder } from '~/components/FamilyBundleBuilder';
 import { StickyMobileBar } from '~/components/StickyMobileBar';
+import { ProductItem } from '~/components/ProductItem';
 
 /**
  * @type {Route.MetaFunction}
@@ -174,9 +175,29 @@ export default function Product() {
       ]
     : [];
 
+  // Resolve related products from the exact same collection
+  const rawCollections = product.collections?.nodes || [];
+  const matchedCollection =
+    rawCollections.find(
+      (c) =>
+        c.handle !== 'shop' &&
+        c.handle !== 'all' &&
+        c.handle !== 'frontpage' &&
+        c.products?.nodes?.some((p) => p.id !== product.id),
+    ) ||
+    rawCollections.find((c) => c.products?.nodes?.some((p) => p.id !== product.id)) ||
+    rawCollections[0];
+
+  const relatedProducts = (matchedCollection?.products?.nodes || [])
+    .filter((p) => p.id !== product.id)
+    .slice(0, 4);
+
+  const relatedCollectionTitle = matchedCollection?.title;
+  const relatedCollectionHandle = matchedCollection?.handle;
+
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-10 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-[100vw] mx-auto">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-6 sm:pt-10 pb-28 lg:pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Breadcrumb Navigation */}
         <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
           <NavLink to="/" className="hover:text-[#9E7D3B]">
@@ -440,6 +461,42 @@ export default function Product() {
             <FamilyBundleBuilder product={product} selectedVariant={selectedVariant} />
           </div>
         )}
+
+        {/* Related Products from the Same Collection */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-20 pt-14 border-t border-[#E2DFD8]">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2">
+                KOLEKSI SELARAS
+              </span>
+              <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal tracking-wide">
+                Rekomendasi {relatedCollectionTitle || 'Koleksi Sejenis'}
+              </h2>
+              <div className="w-12 h-px bg-[#C5A059] mx-auto mt-3" />
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+              {relatedProducts.map((relProduct) => (
+                <ProductItem
+                  key={relProduct.id}
+                  product={relProduct}
+                  loading="lazy"
+                />
+              ))}
+            </div>
+
+            {relatedCollectionHandle && (
+              <div className="text-center mt-10">
+                <Link
+                  to={`/collections/${relatedCollectionHandle}`}
+                  className="inline-block px-8 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm"
+                >
+                  LIHAT SEMUA KOLEKSI {relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : ''} &rarr;
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Floating Smart Mobile Action Bar */}
@@ -540,6 +597,49 @@ const PRODUCT_FRAGMENT = `#graphql
     }
     adjacentVariants (selectedOptions: $selectedOptions) {
       ...ProductVariant
+    }
+    collections(first: 5) {
+      nodes {
+        id
+        handle
+        title
+        products(first: 8) {
+          nodes {
+            id
+            title
+            handle
+            productType
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            compareAtPriceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            featuredImage {
+              id
+              url
+              altText
+              width
+              height
+            }
+            images(first: 2) {
+              nodes {
+                id
+                url
+                altText
+                width
+                height
+              }
+            }
+          }
+        }
+      }
     }
     seo {
       description

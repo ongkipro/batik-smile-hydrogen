@@ -7,7 +7,7 @@ import { NavLink } from 'react-router';
  */
 export function Footer() {
   return (
-    <footer className="bg-[#111111] text-white pt-16 pb-20 border-t border-[#1C1C1C]">
+    <footer className="bg-[#111111] text-white pt-16 pb-[max(6rem,calc(env(safe-area-inset-bottom)+5.5rem))] lg:pb-20 border-t border-[#1C1C1C]">
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         {/* Brand Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">

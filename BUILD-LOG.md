@@ -90,6 +90,36 @@
 
 ---
 
+## Milestone 4: Standard Taxonomy Setup & Complete Company Profile Pages Deployment (2026-09-03)
+
+### 1. Standard Product Taxonomy (Google Category) Configuration
+- Identified that Google Product Taxonomy (`category`) was unconfigured (`null`) across all products.
+- Queried official Shopify Taxonomy Categories for apparel, tops, sleepwear, dresses, outfits, textiles, and accessories.
+- Executed batch GraphQL mutation updating all 23 live products to their exact official taxonomy categories (`All Categories Configured: True`):
+  - *Tunics* (`aa-1-13-11`), *Blouses* (`aa-1-13-1`), *Cardigans* (`aa-1-13-3`), *Dresses* (`aa-1-4`), *Nightgowns* (`aa-1-17-3`), *Dress Shirts* (`aa-1-13-7-2`), *Shirts* (`aa-1-13-7`), *Pants* (`aa-1-12`), *Outfit Sets* (`aa-1-11`), *Baby & Children's Dresses* (`aa-1-25-3`), *Baby & Children's Outfits* (`aa-1-25-5`), *Fabric* (`ae-2-1-2-14-2`), *Hats* (`aa-2-17`).
+
+### 2. Zero-Product Collection Fill (Zero Sarimbit Touched)
+- Detected 7 empty collections (`Blazer Batik Wanita`, `Inner Busana Batik`, `Gamis Batik Anak`, `Kebaya Batik Anak`, `Jarik Anak`, `Babydoll Batik Anak`, `Sarung Batik Anak`).
+- Populated all 7 collections using non-sarimbit RTW items (`Kebaya Encim Modern`, `Outer Terracotta Gold`, `Blus Royal Navy`, `Tunik Senyum Floral`, `Daster Solo Series`, `Setelan Surjan Anak`, `Dress Anak Bunga`, `Hem Anak Pesisir`, `Kain Tenun Troso`, `Celana Sirwal Etnik`).
+- Verified: **0 empty collections remaining**, and **0 Sarimbit products added to these collections**.
+
+### 3. Company Profile Page Extraction & Shopify Deployment
+- Extracted and structured official data from `COMPANY PROFILE.pdf` (13 pages, est. 2007 Semarang).
+- Formatted into Quiet Luxury semantic HTML with responsive grids and dignified microcopy.
+- Deployed and published 11 complete Shopify pages on `23ahbp-sq.myshopify.com`:
+  1. `/pages/tentang-kami`: Sejarah sejak 2007, Visi, Misi, dan Budaya Layanan **3S 1C 1T & 1H**.
+  2. `/pages/layanan-seragam`: Pembuatan seragam korporat/instansi tanpa MOQ, mitra RS Bhayangkara & RSUD dr. Adhyatma Semarang.
+  3. `/pages/fasilitas-store`: Showroom 3 Lantai Simongan (L1 Ready-to-Wear, L2 Galeri Kain & Sutra Lounge, L3 Kerajinan & Oleh-oleh).
+  4. `/pages/lokasi-toko`: Outlet Simongan Pamularsih 109 & Banyumanik Sukun Raya 23, jam operasional, Google Maps link.
+  5. `/pages/contact` & `/pages/hubungi-kami`: Layanan Customer Care & direct WhatsApp Concierge (`081-390-8888-09`).
+  6. `/pages/panduan-ukuran`: Size Chart Butik Kemeja Pria (S–XXL), Tunik/Blus/Gamis Wanita (S–XXL), dan opsi Bespoke Sizing.
+  7. `/pages/panduan-perawatan`: Panduan pencucian lerak, penjemuran teduh, setrika suhu sedang, dan penyimpanan alami akar wangi.
+  8. `/pages/kebijakan-pengembalian`: Garansi Kepuasan & Tukar Size 100%.
+  9. `/pages/kebijakan-pengiriman`: Kebijakan pengiriman aman dan Free Delivery.
+  10. `/pages/syarat-dan-ketentuan`: Ketentuan layanan resmi.
+
+---
+
 ## Milestone 3: Full-Width Refinement, Real Collection Sync, Featured Collections & Contrast Fix (2026-09-03)
 
 ### 1. Global Edge-to-Edge Full-Width Layout Shift
@@ -165,5 +195,92 @@
 - `npm run lint`: 0 warnings, 0 errors.
 - `npm run build`: Exit code 0.
 - All footer routes return HTTP 200 OK locally.
+
+---
+
+## Milestone 5: Full Responsive & Adaptive Device Screening, Clean Card Badges, & Mobile Web App Architecture
+**Date**: 2026-09-03 | **Execution**: Comprehensive All-Page Screening
+
+### 1. Header & Navigation Simplification
+- Focused desktop header & mega menu on exactly 4 clean pillars: `Sarimbit`, `Batik Pria`, `Batik Wanita`, and `Batik Anak`.
+- Eliminated all "kasta" and "tier" nomenclature across submenus and badges.
+- Synced mobile drawer navigation with the 4 primary focus categories on top.
+
+### 2. Product Card Badges Removal (Pure Quiet Luxury)
+- Removed all floating overlay badges (`SALE`, `Terbaru`, `Kain Tradisional`) from `ProductItem.jsx`, `ChooseYourBatikGrid.jsx`, and `BestSellersTabs.jsx`.
+- Achieved 100% clean, unobstructed 4:5 portrait media presentation.
+
+### 3. Mobile Web App Ergonomics & Device Adaptation
+- **Mobile Navigation Bar (`MobileNavigation.jsx`)**: Removed Cart button (already present in header); retained Beranda, Kategori, Cari, and WA CS in an evenly spaced, clean 4-item bottom bar.
+- **Safe Area Insets**: Added `viewport-fit=cover` in `root.jsx` and CSS `env(safe-area-inset-bottom)` / `env(safe-area-inset-top)` across `MobileNavigation.jsx`, `Footer.jsx`, `StickyMobileBar.jsx`, and `Aside.jsx`.
+- **Eliminated `max-w-[100vw]` bug**: Replaced across all pages and components with `max-w-7xl` to prevent horizontal scrollbars and layout shifts on narrow mobile screens (360px - 430px).
+- **Sticky Mobile Action Bar (`StickyMobileBar.jsx`)**: Updated to zero-radius architecture (`rounded-none`), Quiet Luxury tokens (`#111111`/`#C5A059`), and elevated above bottom bar with safe area padding.
+- **All-Page Mobile Clearance**: Upgraded outer bottom padding (`pb-24 lg:pb-16` and safe-area calculation) across `collections.$handle.jsx`, `collections.all.jsx`, `collections._index.jsx`, `products.$handle.jsx`, `search.jsx`, `cart.jsx`, and all `/pages/*` and `/policies/*` routes.
+
+### 4. Verification Evidence Across All Routes
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0.
+- Probed 14 canonical storefront routes on local dev server (`http://localhost:3005/`): 100% returned HTTP 200 OK.
+
+---
+
+## Milestone 6: Centered Card Typography, Collection-Aware Related Products, & Mobile Header De-clutter
+**Date**: 2026-09-03 | **Execution**: Polish & Product Synergy
+
+### 1. Centered Card Typography (`ProductItem.jsx`)
+- Aligned product title, product type, and price to center (`text-center items-center justify-center`) for balanced Quiet Luxury card symmetry.
+
+### 2. Collection-Aware Related Products on PDP (`products.$handle.jsx`)
+- Expanded Storefront API `PRODUCT_FRAGMENT` with `collections(first: 5)` and nested products.
+- Dynamically resolved matching collection (prioritizing specific collections e.g. `sarimbit-exclusive`, `batik-pria`, `jarik-anak` over generic `shop`).
+- Filtered out current product and displayed up to 4 related products from the exact same collection.
+- Added direct collection link: `LIHAT SEMUA KOLEKSI {TITLE} →`.
+
+### 3. Mobile Header Simplification (`Header.jsx`)
+- Hidden search trigger on mobile header (`hidden lg:block`) since Search is already available in the sticky bottom app navigation bar.
+- Surfaced Account icon on mobile header alongside Cart.
+- Mobile header now cleanly displays: Brand Logo (left) + Account & Cart (right).
+
+### 4. Verification
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0.
+- Verified on local server:
+  - `kain-tenun-troso` -> displays `Rekomendasi Jarik Anak` with matching products.
+  - `sarimbit-mustard-gold` -> displays `Rekomendasi Sarimbit Exclusive`.
+  - Mobile header search hidden, account icon visible.
+
+---
+
+## Milestone 7: Desktop Overlap Eradication (`ShoppableLookbook.jsx`), Container Max-Width Normalization, & Production Edge Deployment
+**Date**: 2026-09-03 | **Execution**: Comprehensive Responsiveness Polish & Release
+
+### 1. Shoppable Lookbook Desktop Overlap Eradication (`ShoppableLookbook.jsx`)
+- Diagnosed collision cause on 1024px-1366px laptop screens: fixed 16:9 aspect ratio conflicted with taller detail card under `items-stretch`, and specification row labels collided horizontally with values in narrow 4-column space.
+- Re-architected grid: `lg:col-span-7 xl:col-span-8` for photography with adaptive `lg:min-h-[480px] lg:aspect-auto`, and `lg:col-span-5 xl:col-span-4` for detail card.
+- Re-structured specification rows: `flex-col sm:flex-row sm:items-baseline sm:justify-between` with `shrink-0` labels and right-aligned values to guarantee zero text overlap.
+- Optimized CTAs: adjusted micro-tracking and padding (`text-[10px] sm:text-[11px] tracking-[0.16em] px-4`) so button text never wraps or clips awkwardly.
+
+### 2. Global Section Container Max-Width Normalization
+- Enforced `max-w-7xl mx-auto` across:
+  - `BestSellersTabs.jsx`
+  - `ChooseYourBatikGrid.jsx`
+  - `FeaturedCollections.jsx`
+  - `HeritageVideoBanner.jsx`
+  - `TrustGuaranteeBar.jsx`
+  - `ShoppableLookbook.jsx`
+- Eliminated all remaining "3 kasta" and "tier 1/2/3" copy across `FeaturedCollections.jsx`.
+
+### 3. Quiet Luxury Architecture for FamilyBundleBuilder (`FamilyBundleBuilder.jsx`)
+- Replaced non-conforming `rounded-2xl` and `rounded-xl` with Quiet Luxury Zero-Radius `rounded-none`.
+- Aligned palette to obsidian (`#111111`) and antique gold (`#C5A059`), and eliminated raw emoji.
+
+### 4. Verification Evidence & Deployment
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0.
+- All 14 tested canonical storefront routes return HTTP 200 OK.
+- Pushed to GitHub repository `ongkipro/batik-smile-hydrogen` (`origin/main`) triggering automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
+
+
+
 
 

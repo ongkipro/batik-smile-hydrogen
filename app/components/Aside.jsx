@@ -55,11 +55,11 @@ export function Aside({children, heading, type}) {
       
       {/* Drawer Container */}
       <aside
-        className={`absolute top-0 right-0 h-full w-full sm:w-[400px] bg-[#FAF8F5] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
+        className={`absolute top-0 right-0 h-full w-full sm:w-[420px] bg-[#FAF8F5] shadow-2xl flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-in-out ${
           expanded ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <header className="flex flex-shrink-0 items-center justify-between h-20 px-6 border-b border-[#E2DFD8] bg-[#FAF8F5] z-10">
+        <header className="flex flex-shrink-0 items-center justify-between h-16 sm:h-20 px-6 border-b border-[#E2DFD8] bg-[#FAF8F5] z-10">
           <h3 id={id} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9E7D3B] m-0">
             {heading}
           </h3>

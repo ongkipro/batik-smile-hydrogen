@@ -5,7 +5,7 @@ import { BatikDivider, BatikCorner } from './BatikOrnaments';
 export function SarimbitSpotlight() {
   return (
     <section className="py-20 px-6 sm:px-8 lg:px-12 bg-[#FDFBF7] text-[#121212]">
-      <div className="w-full max-w-[100vw] mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="text-xs uppercase tracking-[0.2em] text-[#9E4719] font-bold">

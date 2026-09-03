@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
-import { NavLink, Await } from 'react-router';
+import React from 'react';
+import { NavLink } from 'react-router';
 import { useAside } from '~/components/Aside';
 
-export function MobileNavigation({ cart }) {
+export function MobileNavigation() {
   const { open } = useAside();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-neutral-200 lg:hidden px-4 py-2 flex items-center justify-around shadow-lg">
-      {/* Home */}
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] lg:hidden px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex items-center justify-around shadow-lg">
+      {/* 1. Beranda */}
       <NavLink
         to="/"
         end
@@ -27,7 +27,7 @@ export function MobileNavigation({ cart }) {
         <span>Beranda</span>
       </NavLink>
 
-      {/* Kategori / Mobile Menu Drawer Trigger */}
+      {/* 2. Kategori Drawer Trigger */}
       <button
         type="button"
         onClick={() => open('mobile')}
@@ -43,7 +43,7 @@ export function MobileNavigation({ cart }) {
         <span>Kategori</span>
       </button>
 
-      {/* Search Trigger */}
+      {/* 3. Search / Cari Drawer Trigger */}
       <button
         type="button"
         onClick={() => open('search')}
@@ -59,38 +59,7 @@ export function MobileNavigation({ cart }) {
         <span>Cari</span>
       </button>
 
-      {/* Tas Belanja / Cart Drawer Trigger */}
-      <button
-        type="button"
-        onClick={() => open('cart')}
-        className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors relative cursor-pointer"
-      >
-        <div className="relative">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-            />
-          </svg>
-          <Suspense fallback={null}>
-            <Await resolve={cart}>
-              {(cartData) => {
-                const count = cartData?.totalQuantity || 0;
-                if (!count) return null;
-                return (
-                  <span className="absolute -top-1.5 -right-2 px-1 min-w-[16px] h-4 bg-[#111111] !text-white text-[9px] font-bold flex items-center justify-center">
-                    {count}
-                  </span>
-                );
-              }}
-            </Await>
-          </Suspense>
-        </div>
-        <span>Tas</span>
-      </button>
-
-      {/* WhatsApp CS */}
+      {/* 4. WhatsApp CS Concierge */}
       <a
         href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
         target="_blank"

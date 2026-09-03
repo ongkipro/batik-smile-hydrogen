@@ -48,7 +48,7 @@ export function HeritageVideoBanner({ videoData }) {
         <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent" />
       </div>
 
-      <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
         {/* Left Column: Editorial Storytelling */}
         <div className="lg:col-span-7 flex flex-col items-start">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium mb-3">
