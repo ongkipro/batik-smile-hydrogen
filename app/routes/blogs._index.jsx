@@ -30,7 +30,7 @@ export async function loader(args) {
  */
 async function loadCriticalData({ context, request }) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 12,
+    pageBy: 9,
   });
 
   const [{ blogs }] = await Promise.all([
@@ -100,10 +100,14 @@ export default function BlogsIndex() {
           </span>
         </div>
 
-        {/* Paginated Frameless Articles Grid (3:2 Aspect Ratio Locked) */}
+        {/* Paginated Frameless Articles Grid (3:2 Aspect Ratio Locked, 3x3 Grid = 9 Items) */}
         <PaginatedResourceSection
           connection={articlesConnection}
           resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+          loadMoreText="MUAT LEBIH BANYAK CATATAN"
+          loadPreviousText="CATATAN SEBELUMNYA"
+          badgeText="ARSIP JURNAL BUDAYA"
+          captionText="Menampilkan arsip catatan makna motif, filosofi adiluhung, serta etika berbusana batik"
         >
           {({ node: article, index }) => (
             <EditorialArticleCard

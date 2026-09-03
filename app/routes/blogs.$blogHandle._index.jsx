@@ -23,7 +23,7 @@ export async function loader(args) {
  */
 async function loadCriticalData({ context, request, params }) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 12,
+    pageBy: 9,
   });
 
   if (!params.blogHandle) {
@@ -90,10 +90,14 @@ export default function Blog() {
           </span>
         </div>
 
-        {/* Frameless Articles Grid (Locked 3:2 Aspect Ratio) */}
+        {/* Frameless Articles Grid (Locked 3:2 Aspect Ratio, 3x3 Grid = 9 Items) */}
         <PaginatedResourceSection
           connection={articles}
           resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+          loadMoreText="MUAT LEBIH BANYAK CATATAN"
+          loadPreviousText="CATATAN SEBELUMNYA"
+          badgeText="ARSIP JURNAL BUDAYA"
+          captionText="Menampilkan arsip catatan makna motif, filosofi adiluhung, serta etika berbusana batik"
         >
           {({ node: article, index }) => (
             <ArticleItem

@@ -44,3 +44,17 @@ Ketika garis sekat (`border-b border-[#E2DFD8]`) dihilangkan agar halaman terasa
   - Menggunakan estetika **Scattered Atelier Moodboard** (kartu miring organik, aksen selotip washi, stempel plate arsip `SRM-01`, `WDR-01`, hover un-tilting).
 - **Warta & Jurnal Kebudayaan**:
   - Menggunakan estetika **Frameless Minimalist Editorial** (tanpa kartu kotak, tanpa selotip washi, murni tipografi serif anggun, foto 3:2 bersih, nomor esai `01 / ARSIP BUDAYA`, dan tautan bergaris bawah halus).
+
+---
+
+## 4. Standar Kuota Pagination Matematis (Simetri Kolom x Baris & Performa Ringan)
+
+> **PENTING**: Angka per halaman (`pageBy`) wajib sinkron secara matematis dengan jumlah kolom desktop agar baris terakhir tidak pernah bolong/pincang dan beban data awal tetap super ringan.
+
+| Halaman & Grid | Susunan Grid (Kolom x Baris) | Nilai `pageBy` Baku | Rasio Media | Alasan Teknis & Estetika |
+|---|---|---|---|---|
+| **List Artikel Blog (`/blogs`, `/blogs/:handle`)** | **3 Kolom x 3 Baris** | **`pageBy: 9`** | `3:2` | Grid desktop 3 kolom. Kuota 9 artikel menjaga baris selalu penuh 3x3 simetris, ringan dimuat, dan tombol *Load More* memuat tepat 9 artikel berikutnya. |
+| **All Collections (`/collections/all`)** | **3 Kolom x 3 Baris** | **`pageBy: 9`** | `4:5` | Scattered atelier cards 3 kolom. Kuota 9 kartu membuat ritme kartu miring selalu presisi kelipatan 3. |
+| **Catalog Produk 4 Kolom (PLP)** | **4 Kolom x 3 Baris** | **`pageBy: 12`** | `4:5` | Grid produk 4 kolom. Kuota 12 produk membuat 3 baris penuh (4x3 = 12), tanpa slot kosong di baris terbawah. |
+| **Catalog Produk 3 Kolom (PLP)** | **3 Kolom x 3 Baris** | **`pageBy: 9`** | `4:5` | Grid produk 3 kolom bila menggunakan sidebar filter. Kuota 9 menjaga 3 baris penuh (3x3 = 9). |
+
