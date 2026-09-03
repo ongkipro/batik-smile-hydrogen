@@ -171,10 +171,10 @@ export default function Product() {
   // Size Guide Modal state
   const [showSizeGuide, setShowSizeGuide] = useState(false);
 
-  // Policy accordion state
-  const [openSection, setOpenSection] = useState(null);
+  // Policy & description accordion state (auto show deskripsi by default)
+  const [openSections, setOpenSections] = useState({ deskripsi: true, shipping: false });
   const toggleSection = (id) => {
-    setOpenSection((prev) => (prev === id ? null : id));
+    setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const isAvailable = selectedVariant?.availableForSale;
@@ -309,9 +309,9 @@ export default function Product() {
                 {title}
               </h1>
 
-              {/* Price & Stock Status */}
-              <div className="flex items-baseline gap-3 mb-4">
-                <span className="text-2xl sm:text-3xl font-semibold text-[#111111] tracking-wide font-sans">
+              {/* Price & Stock Status (Frameless Minimalist) */}
+              <div className="flex items-baseline gap-4 mb-3">
+                <span className="text-2xl sm:text-3xl font-medium text-[#111111] tracking-wide font-sans">
                   {selectedVariant?.price && <Money data={selectedVariant.price} />}
                 </span>
                 {selectedVariant?.compareAtPrice && (
@@ -319,40 +319,33 @@ export default function Product() {
                     <Money data={selectedVariant.compareAtPrice} />
                   </span>
                 )}
-                <span
-                  className={`text-[9px] uppercase font-bold tracking-[0.18em] px-2.5 py-0.5 ml-auto ${
-                    isAvailable
-                      ? 'text-[#2E6B3E] bg-[#EAF5EC] border border-[#2E6B3E]/20'
-                      : 'text-[#8A2525] bg-[#FBEBEB] border border-[#8A2525]/20'
-                  }`}
-                >
-                  {isAvailable ? 'TERSEDIA DI BUTIK' : 'HABIS TERJUAL'}
-                </span>
+                <div className="ml-auto flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em]">
+                  <span className={`inline-block w-1.5 h-1.5 rounded-full ${isAvailable ? 'bg-[#2E6B3E]' : 'bg-[#8A2525]'}`} />
+                  <span className={isAvailable ? 'text-[#2E6B3E]' : 'text-[#8A2525]'}>
+                    {isAvailable ? 'Tersedia di Butik' : 'Habis Terjual'}
+                  </span>
+                </div>
               </div>
 
-              {/* Value Props Chips */}
-              <div className="flex flex-wrap gap-2 text-[10px] text-[#5A5550] uppercase tracking-[0.14em]">
-                <span className="px-2.5 py-1 bg-white border border-[#E2DFD8]">
-                  Lapis Furing Katun Hero
-                </span>
-                <span className="px-2.5 py-1 bg-white border border-[#E2DFD8]">
-                  Sambung Motif Presisi
-                </span>
-                <span className="px-2.5 py-1 bg-white border border-[#E2DFD8]">
-                  Bebas Tukar Ukuran
-                </span>
+              {/* Value Props (Seamless Typography, Zero Box) */}
+              <div className="flex items-center gap-2 text-[11px] text-[#5A5550] font-light tracking-wide flex-wrap">
+                <span>Lapis Furing Katun Hero</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Sambung Motif Presisi</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Bebas Tukar Ukuran</span>
               </div>
             </div>
 
             <div className="w-full h-px bg-[#E2DFD8]" />
 
-            {/* Variant Option Selection (Ukuran / Size) */}
-            <div className="space-y-4">
+            {/* Variant Option Selection (Ukuran / Size - Frameless Minimalist) */}
+            <div>
               {productOptions.length > 0 ? (
                 productOptions.map((option) => (
                   <div key={option.name}>
                     <div className="flex items-center justify-between mb-2.5">
-                      <label className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#111111]">
+                      <label className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#111111]">
                         {option.name}: <span className="font-normal text-[#5A5550]">{option.value}</span>
                       </label>
                       <button
@@ -373,10 +366,10 @@ export default function Product() {
                             to={val.to}
                             preventScrollReset
                             replace
-                            className={`px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition-all border cursor-pointer ${
+                            className={`w-11 h-11 flex items-center justify-center text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer ${
                               isSelected
-                                ? 'bg-[#111111] !text-white border-[#111111] shadow-sm'
-                                : 'bg-white !text-[#111111] border-[#E2DFD8] hover:border-[#111111]'
+                                ? 'bg-[#111111] !text-white'
+                                : 'bg-white !text-[#111111] hover:bg-[#FAF8F5]'
                             }`}
                           >
                             {val.name}
@@ -387,24 +380,18 @@ export default function Product() {
                   </div>
                 ))
               ) : (
-                <div>
-                  <div className="flex items-center justify-between mb-2.5">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#111111]">
-                      PILIHAN UKURAN: <span className="font-normal text-[#5A5550]">REGULAR FIT BUTIK</span>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setShowSizeGuide(!showSizeGuide)}
-                      className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] transition-colors font-medium underline underline-offset-4 cursor-pointer"
-                    >
-                      PANDUAN UKURAN (SIZE GUIDE) {showSizeGuide ? '−' : '+'}
-                    </button>
+                <div className="flex items-baseline justify-between text-xs py-1">
+                  <div className="text-[11px] text-[#111111]">
+                    <span className="text-[#888888] uppercase tracking-wider text-[9px] block mb-0.5">Ukuran</span>
+                    <span className="font-normal tracking-wide text-[#111111]">All Size &bull; Regular Fit Butik</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] bg-[#111111] text-white border border-[#111111]">
-                      ALL SIZE / STANDAR BUTIK
-                    </span>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowSizeGuide(!showSizeGuide)}
+                    className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] transition-colors font-medium underline underline-offset-4 cursor-pointer"
+                  >
+                    PANDUAN UKURAN (SIZE GUIDE) {showSizeGuide ? '−' : '+'}
+                  </button>
                 </div>
               )}
             </div>
@@ -496,83 +483,86 @@ export default function Product() {
               </AddToCartButton>
             </div>
 
-            {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H) */}
-            <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#E2DFD8] text-[10px] text-[#5A5550]">
-              <div className="flex items-start gap-2">
-                <span className="text-[#9E7D3B] font-bold">&bull;</span>
-                <span>Garansi Bebas Tukar Ukuran 7 Hari</span>
+            {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H - Frameless) */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 pt-4 border-t border-[#E2DFD8] text-[10px] text-[#5A5550]">
+              <div className="flex items-center gap-2">
+                <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                <span>Bebas Tukar Ukuran 7 Hari</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-[#9E7D3B] font-bold">&bull;</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[#C5A059] text-[8px]">&bull;</span>
                 <span>100% Batik Asli Cap/Tulis</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-[#9E7D3B] font-bold">&bull;</span>
-                <span>Furing Katun Hero Adem Halus</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                <span>Lapis Furing Katun Hero Adem</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="text-[#9E7D3B] font-bold">&bull;</span>
-                <span>Pengiriman Aman Seluruh Indonesia</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                <span>Pengiriman Seluruh Indonesia</span>
               </div>
             </div>
 
-            {/* Full Dynamic Shopify Description & Specifications (Rendered directly as 1 unified entity) */}
-            <div className="pt-2 border-t border-[#E2DFD8]">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] block mb-3">
-                DESKRIPSI &amp; SPESIFIKASI KARYA
-              </span>
+            {/* Dual Clean Accordions: Deskripsi (Auto Show) & Pengiriman (Short Title) */}
+            <div className="border-t border-[#E2DFD8] divide-y divide-[#E2DFD8] text-xs pt-1">
+              {/* Accordion 1: Deskripsi & Spesifikasi (Auto Show / Open by default) */}
+              <div className="py-3.5">
+                <button
+                  type="button"
+                  onClick={() => toggleSection('deskripsi')}
+                  className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
+                >
+                  <span>DESKRIPSI &amp; SPESIFIKASI KARYA</span>
+                  <span className="text-sm font-normal">{openSections.deskripsi ? '−' : '+'}</span>
+                </button>
 
-              {/* Story Narrative */}
-              {parsedDescription.story && (
-                <p className="text-xs sm:text-sm text-[#444444] font-light leading-relaxed mb-4 italic font-serif">
-                  &ldquo;{parsedDescription.story}&rdquo;
-                </p>
-              )}
+                {openSections.deskripsi && (
+                  <div className="mt-3 text-xs leading-relaxed font-light space-y-3">
+                    {/* Story Narrative */}
+                    {parsedDescription.story && (
+                      <p className="text-xs sm:text-sm text-[#444444] font-light leading-relaxed italic font-serif">
+                        &ldquo;{parsedDescription.story}&rdquo;
+                      </p>
+                    )}
 
-              {/* Dynamic Specifications Grid from Shopify UL/LI */}
-              {parsedDescription.specs.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-                  {parsedDescription.specs.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 bg-white border border-[#E2DFD8] flex items-start gap-2.5 transition-colors hover:border-[#C5A059]"
-                    >
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
-                      <div className="min-w-0">
-                        {item.label && (
-                          <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
-                            {item.label}
-                          </span>
-                        )}
-                        <span className="text-xs text-[#5A5550] font-light leading-snug block">
-                          {item.value}
-                        </span>
+                    {/* Frameless Atelier Specifications List (Zero Cards/Frames) */}
+                    {parsedDescription.specs.length > 0 ? (
+                      <div className="divide-y divide-[#E2DFD8]/80 pt-1">
+                        {parsedDescription.specs.map((item, idx) => (
+                          <div key={idx} className="py-2 flex items-baseline justify-between gap-4">
+                            <span className="text-[10px] uppercase tracking-[0.18em] text-[#888888] font-medium shrink-0">
+                              {item.label || 'Spesifikasi'}
+                            </span>
+                            <span className="text-right text-xs text-[#111111] font-light">
+                              {item.value}
+                            </span>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                descriptionHtml && (
-                  <div
-                    className="text-xs text-[#5A5550] leading-relaxed font-light mb-4 space-y-2"
-                    dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-                  />
-                )
-              )}
-            </div>
+                    ) : (
+                      descriptionHtml && (
+                        <div
+                          className="text-xs text-[#5A5550] leading-relaxed font-light space-y-2"
+                          dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+                        />
+                      )
+                    )}
+                  </div>
+                )}
+              </div>
 
-            {/* Store Service & Delivery Accordion */}
-            <div className="border-t border-[#E2DFD8] divide-y divide-[#E2DFD8] text-xs">
+              {/* Accordion 2: Pengiriman & Garansi (Short, clean title) */}
               <div className="py-3.5">
                 <button
                   type="button"
                   onClick={() => toggleSection('shipping')}
                   className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
                 >
-                  <span>PENGIRIMAN RESMI &amp; JAMINAN TUKAR UKURAN 7 HARI</span>
-                  <span className="text-sm">{openSection === 'shipping' ? '−' : '+'}</span>
+                  <span>PENGIRIMAN &amp; GARANSI TUKAR</span>
+                  <span className="text-sm font-normal">{openSections.shipping ? '−' : '+'}</span>
                 </button>
-                {openSection === 'shipping' && (
+
+                {openSections.shipping && (
                   <div className="mt-3 text-[#5A5550] leading-relaxed font-light space-y-2">
                     <p>&bull; <strong>Pengiriman Cepat:</strong> Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.</p>
                     <p>&bull; <strong>Garansi Bebas Tukar Ukuran:</strong> Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas.</p>
