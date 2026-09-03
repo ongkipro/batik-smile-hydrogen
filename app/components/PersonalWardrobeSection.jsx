@@ -69,10 +69,10 @@ export function PersonalWardrobeSection({ collections = [] }) {
   ];
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] overflow-hidden">
+    <section className="py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] overflow-hidden">
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
             Koleksi Busana Pria, Wanita &amp; Anak
           </h2>
@@ -82,7 +82,7 @@ export function PersonalWardrobeSection({ collections = [] }) {
         </div>
 
         {/* 3 Scattered Atelier Moodboard Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-4 pb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-2 pb-2">
           {wardrobePillars.map((pillar, idx) => {
             const found = collections.find((c) => c.handle === pillar.handle);
             const imageUrl =

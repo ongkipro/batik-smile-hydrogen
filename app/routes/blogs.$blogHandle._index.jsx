@@ -52,17 +52,18 @@ export default function Blog() {
   /** @type {LoaderReturnData} */
   const { blog } = useLoaderData();
   const { articles } = blog;
+  const articlesList = articles?.nodes || [];
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb */}
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16">
+      <div className="max-w-7xl mx-auto">
+        {/* Minimalist Breadcrumbs */}
         <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
-          <NavLink to="/" className="hover:text-[#9E7D3B]">
+          <NavLink to="/" className="hover:text-[#9E7D3B] transition-colors">
             BERANDA
           </NavLink>
           <span>/</span>
-          <NavLink to="/blogs" className="hover:text-[#9E7D3B]">
+          <NavLink to="/blogs" className="hover:text-[#9E7D3B] transition-colors">
             JURNAL
           </NavLink>
           <span>/</span>
@@ -70,20 +71,29 @@ export default function Blog() {
         </nav>
 
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
-            ARSIP TULISAN RESMI
-          </span>
-          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
             {blog.title}
           </h1>
-          <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+            Arsip tulisan resmi, catatan filosofi motif, etika berbusana, serta warta kebudayaan Butik Batik Smile Nusantara.
+          </p>
         </div>
 
-        {/* Articles Grid (0px Radius) */}
+        {/* Curatorial Archive Label */}
+        <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
+            DAFTAR ARTIKEL TERKURASI
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] font-medium">
+            {articlesList.length} TULISAN
+          </span>
+        </div>
+
+        {/* Frameless Articles Grid (Locked 3:2 Aspect Ratio) */}
         <PaginatedResourceSection
           connection={articles}
-          resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          resourcesClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
         >
           {({ node: article, index }) => (
             <ArticleItem
@@ -99,6 +109,7 @@ export default function Blog() {
 }
 
 /**
+ * ArticleItem: Frameless Minimalist Card (Locked 3:2 Aspect Ratio)
  * @param {{
  *   article: ArticleItemFragment;
  *   loading?: HTMLImageElement['loading'];
@@ -112,56 +123,55 @@ function ArticleItem({ article, loading }) {
   }).format(new Date(article.publishedAt));
 
   return (
-    <article className="group relative flex flex-col bg-white border border-[#E2DFD8] hover:border-[#C5A059] transition-all duration-500 overflow-hidden shadow-sm hover:shadow-[0_12px_32px_rgba(197,160,89,0.14)]">
-      <Link to={`/blogs/${article.blog.handle}/${article.handle}`} className="flex-1 flex flex-col">
-        <div className="relative aspect-[16/10] bg-[#111111] overflow-hidden">
+    <article className="group flex flex-col">
+      <Link to={`/blogs/${article.blog.handle}/${article.handle}`} className="block no-underline">
+        {/* Frameless Media (Locked 3:2 Ratio) */}
+        <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#111111] mb-4">
           {article.image ? (
             <Image
               alt={article.image.altText || article.title}
               data={article.image}
               loading={loading}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out opacity-95 group-hover:opacity-100"
             />
           ) : (
             <img
               src="/banners/hero_editorial_banner.jpg"
               alt={article.title}
-              className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute top-3.5 left-3.5 z-10">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-black/70 backdrop-blur-md border border-[#C5A059]/40 text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-[#C5A059] font-bold">
-              <span>◆</span>
-              JURNAL BUDAYA
-            </span>
-          </div>
         </div>
 
-        <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] font-medium mb-2.5">
-              <time dateTime={article.publishedAt}>{publishedAt}</time>
-              <span className="text-[#888888]">{article.author?.name || 'Batik Smile'}</span>
-            </div>
+        {/* Metadata */}
+        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mb-2">
+          <time dateTime={article.publishedAt}>{publishedAt}</time>
+          <span className="text-[#A69F96]">•</span>
+          <span className="text-[#A69F96] font-normal">
+            {article.author?.name || 'Batik Smile'}
+          </span>
+        </div>
 
-            <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors leading-snug mb-3 line-clamp-2">
-              {article.title}
-            </h2>
+        {/* Pure Serif Editorial Headline */}
+        <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#111111] group-hover:text-[#9E7D3B] transition-colors leading-snug mb-2.5 line-clamp-2">
+          {article.title}
+        </h2>
 
-            {article.excerpt && (
-              <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed line-clamp-3 mb-4">
-                {article.excerpt}
-              </p>
-            )}
-          </div>
+        {/* Narrative Excerpt */}
+        {article.contentHtml && (
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed line-clamp-3 mb-4">
+            {article.contentHtml.replace(/<[^>]*>?/gm, '').slice(0, 140)}...
+          </p>
+        )}
 
-          <div className="pt-3 border-t border-[#F0ECE1] flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold group-hover:text-[#C5A059] transition-colors">
-            <span>BACA SELENGKAPNYA</span>
-            <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">
-              &rarr;
-            </span>
-          </div>
+        {/* Subtle Text Action Link */}
+        <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+          <span className="border-b border-[#111111]/30 group-hover:border-[#9E7D3B] pb-0.5 transition-colors">
+            BACA CATATAN
+          </span>
+          <span className="transform group-hover:translate-x-1 transition-transform duration-300">
+            &rarr;
+          </span>
         </div>
       </Link>
     </article>

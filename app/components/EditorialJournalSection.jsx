@@ -33,10 +33,10 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
   const categories = ['ARSIP BUDAYA', 'SERAGAM SARIMBIT', 'FILOSOFI WASRA'];
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">
+    <section className="py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">
       <div className="w-full max-w-7xl mx-auto">
         {/* Minimalist Editorial Header (No dividing lines, generous whitespace) */}
-        <div className="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
             Catatan &amp; Filosofi Batik
           </h2>
@@ -46,7 +46,7 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
         </div>
 
         {/* 3-Column Frameless Editorial Stories (No card frames, no borders, no box shadows) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
           {displayArticles.map((article, idx) => {
             const articleUrl = `/blogs/${article.blog?.handle || blogHandle}/${article.handle}`;
             const imageUrl = article.image?.url || '/banners/hero_editorial_banner.jpg';
@@ -56,8 +56,8 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
             return (
               <article key={article.id || idx} className="group flex flex-col">
                 <Link to={articleUrl} className="block no-underline">
-                  {/* Frameless Media (Clean 16:11 ratio with subtle hover zoom) */}
-                  <div className="relative aspect-[16/11] w-full overflow-hidden bg-[#111111] mb-6">
+                  {/* Frameless Media (Locked 3:2 ratio with subtle hover zoom) */}
+                  <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#111111] mb-4">
                     <img
                       src={imageUrl}
                       alt={article.image?.altText || article.title}
@@ -105,7 +105,7 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
         </div>
 
         {/* Minimalist Centered Archive Action */}
-        <div className="mt-16 sm:mt-20 text-center">
+        <div className="mt-8 sm:mt-10 text-center">
           <Link
             to="/blogs"
             className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.22em] font-semibold text-[#111111] hover:text-[#9E7D3B] transition-colors group pb-1 border-b border-[#111111]/30 hover:border-[#9E7D3B]"

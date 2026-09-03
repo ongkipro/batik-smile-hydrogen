@@ -44,11 +44,11 @@ export function BestSellersTabs({
   const displayProducts = (currentTabData.products || []).slice(0, 4);
 
   return (
-    <section id="best-sellers" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">
+    <section id="best-sellers" className="py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">
       <div className="w-full max-w-7xl mx-auto">
         {/* Editorial Section Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal mb-6">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] tracking-wide font-normal mb-4">
             Koleksi Busana Terlaris
           </h2>
 
@@ -96,7 +96,7 @@ export function BestSellersTabs({
         )}
 
         {/* View All Collection Link */}
-        <div className="text-center mt-12 sm:mt-16">
+        <div className="text-center mt-8 sm:mt-10">
           <Link
             to={currentTabData.viewAllLink}
             className="inline-block px-10 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.2em] transition-colors duration-300 shadow-sm"

@@ -596,6 +596,30 @@
 - Client bundle size reduced to **34.89 kB** (gzip: 8.90 kB).
 - Dev server HTTP 200 OK verified.
 
+---
+
+## Milestone 21: Dynamic Precision Spacing & Blog List UI Redesign (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Dead Space Gaps & Redesign of Blog List Pages (3:2 Ratio)
+
+### 1. Section Padding & Vertical Rhythm Calibration
+- Conducted full-page spacing screening across all homepage sections:
+  - Compressed consecutive section paddings from bloated `py-20 sm:py-28` to dynamic `py-12 sm:py-16`.
+  - Tightened header bottom margins from `mb-14 sm:mb-20` to `mb-8 sm:mb-10`, ensuring section titles remain anchored to their content.
+  - Calibrated full-bleed contrast sections (`HeritageVideoBanner` and `ShowroomO2O`) from `py-24 sm:py-32` to `py-16 sm:py-20`.
+  - Result: Eliminated ~140px+ of cumulative dead space between section boundaries.
+
+### 2. Frameless Minimalist Blog List Redesign (`blogs._index.jsx` & `blogs.$blogHandle._index.jsx`)
+- Strictly locked all article media containers to **3:2** (`aspect-[3/2]`), matching classical 35mm editorial proportions.
+- Completely removed clunky card containers (`bg-white`, border lines, and box shadows).
+- Introduced clean curatorial archive bar, micro-index stamps, Cormorant Garamond serif headlines, and subtle underlined read actions.
+- Client bundle for blog index reduced from 7.99 kB to **6.96 kB** (gzip: 2.17 kB).
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- HTTP 200 verified on `/blogs` and `/blogs/news`.
+
+
 
 
 

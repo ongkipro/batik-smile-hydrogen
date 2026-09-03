@@ -27,7 +27,7 @@ export function HeritageVideoBanner({ videoData }) {
   const videoUrl = videoData?.video_url?.value || null;
 
   return (
-    <section className="relative w-full bg-[#111111] text-white py-24 sm:py-32 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden">
+    <section className="relative w-full bg-[#111111] text-white py-16 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden">
       {/* Background Media with 0px Radius */}
       <div className="absolute inset-0 w-full h-full">
         {videoUrl && isPlaying ? (
@@ -52,15 +52,15 @@ export function HeritageVideoBanner({ videoData }) {
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
         {/* Left Column: Editorial Storytelling */}
         <div className="lg:col-span-7 flex flex-col items-start">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-3">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
             {eyebrow}
           </span>
 
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-6">
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-4">
             {heading}
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#E2DFD8] leading-relaxed font-light mb-10">
+          <p className="text-xs sm:text-sm text-[#E2DFD8] leading-relaxed font-light mb-8">
             {narrative}
           </p>
 

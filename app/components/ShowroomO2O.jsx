@@ -7,7 +7,7 @@ import { Link } from 'react-router';
  */
 export function ShowroomO2O() {
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#111111] text-white relative overflow-hidden">
+    <section className="py-16 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#111111] text-white relative overflow-hidden">
       <div className="w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-stretch">
           {/* Left Column: Authentic Brand Narrative */}
@@ -16,11 +16,10 @@ export function ShowroomO2O() {
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
                 PENGALAMAN OFFLINE-TO-ONLINE (O2O)
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white mb-6 leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight">
                 Showroom Butik 3 Lantai &amp; Layanan Bespoke
               </h2>
-              <div className="w-16 h-px bg-[#C5A059] mb-6" />
-              <p className="text-[#E2DFD8] text-xs sm:text-sm leading-relaxed mb-8 font-light">
+              <p className="text-[#E2DFD8] text-xs sm:text-sm leading-relaxed mb-6 font-light">
                 Didirikan sejak 2007 di Semarang, Batik Smile menghadirkan butik fisik 3 lantai yang
                 nyaman di Simongan serta cabang Banyumanik. Rasakan langsung kemewahan tenun sutra ATBM
                 dan konsultasikan kebutuhan seragam keluarga Anda dengan standar layanan <strong>3S 1C 1T &amp; 1H</strong> (Senyum, Salam, Sapa, Cepat, Tanggap, Hati).
