@@ -515,6 +515,28 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - All endpoints tested and verified returning HTTP 200 OK.
 
+---
+
+## Milestone 17: Mobile Menu Decluttering & Curated Search Products (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Informal Emojis, Drawer Search Pruning, and Un-Boxed Modern Search Grid
+
+### 1. Mobile Drawer Menu Decluttering (`Header.jsx`)
+- Pruned redundant in-menu search input from `HeaderMenu` to maximize clean vertical rhythm.
+- Purged all informal emojis/emoticons (`👑`, `✨`, `🌿`, `📍`, `⏰`).
+- Introduced bespoke 1.5-stroke vector SVG icons for categories (Pria, Wanita, Anak, Kain Tulis, Jurnal, Showroom, Clock).
+- Implemented high-contrast quiet luxury typography with minimal status pill stamps (`EKSKLUSIF`, `PREMIUM`, `EKONOMIS`).
+
+### 2. Modern Un-Boxed Search & Recommended Product Grid (`LuxurySearchModal.jsx`)
+- Eliminated clunky boxed framing around trending search keywords in favor of clean, bullet-separated inline text links (`•`).
+- Introduced preloaded curated product cards: when opening search in the empty state, the modal automatically displays **REKOMENDASI KOLEKSI BUTIK** with 4 real product cards (2 cols on mobile, 4 cols on desktop) complete with 4:5 imagery, titles, and IDR prices.
+- Removed search icon emoji (`🔍`).
+- Guarded initial fetcher call with `hasLoadedInitial` ref to ensure single-cycle preloading and zero lint warnings.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+
+
 
 
 
