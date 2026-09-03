@@ -531,3 +531,77 @@
 - [x] **Task 18.7: 12 Plain-Text Semantic Blog Articles Deployed to Shopify**
   - *Action*: Created 12 plain-text editorial articles in `gid://shopify/Blog/108131713081` without custom inline HTML/CSS, attached Shopify CDN featured images, and set author `Batik Smile Editorial`.
   - *Evidence*: Verified 12 articles live in `news` blog with `All 12 Articles Valid, Published, and Image Attached: True`.
+
+---
+
+## Phase 19: Dual-Section Homepage Collection Hierarchy (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: SarimbitBentoSection, PersonalWardrobeSection, _index.jsx, PAGES-SCHEMA.xml*
+
+- [x] **Task 19.1: Signature Sarimbit Asymmetric Bento Grid (`SarimbitBentoSection.jsx`)**
+  - *Action*: Created `SarimbitBentoSection.jsx` positioned directly under `HeroSlider`. Dedicated to the 3 Sarimbit tiers (`sarimbit-exclusive`, `sarimbit-premium`, `sarimbit-ekonomis`). Desktop 12-column asymmetric bento layout: dominant 7-column portrait card for Sarimbit Exclusive with gold hairline accents, and 5-column dual-stacked cards for Sarimbit Premium and Sarimbit Ekonomis. Zero-radius architecture (`rounded-none`), slow ambient hover transitions, and quiet luxury typography.
+  - *Evidence*: Verified rendering on desktop and mobile viewports.
+- [x] **Task 19.2: Personal Wardrobe & Multi-Generational Triptych (`PersonalWardrobeSection.jsx`)**
+  - *Action*: Created `PersonalWardrobeSection.jsx` positioned after `HeritageVideoBanner`. Features the 3 personal collection pillars: `batik-pria` (Jahitan Sambung Motif & Furing Hero), `batik-wanita` (Blus Modern, Tunik, Kebaya), and `batik-anak` (Setelan Adat & Hem Katun Lembut). Symmetrical 3-column grid with quiet luxury cards, 4:5 vertical proportions, and gold micro-accents.
+  - *Evidence*: Verified clean grid alignment and responsiveness.
+- [x] **Task 19.3: Homepage Route Integration & GraphQL Query Synchronization (`app/routes/_index.jsx`)**
+  - *Action*: Updated `HOMEPAGE_QUERY` in `_index.jsx` to fetch `collections(first: 20)` ensuring all 6 collections are retrieved with live Shopify images. Re-ordered homepage sections to establish the dual-section rhythm: Hero -> Sarimbit Bento -> Best Sellers Tabs -> Heritage Video -> Personal Wardrobe -> Choose Your Batik -> Lookbook -> Testimonials -> Trust -> Showroom. Updated `PAGES-SCHEMA.xml`.
+  - *Evidence*: Page loader returns complete collection set and renders both sections flawlessly.
+- [x] **Task 19.4: Production Build Verification & Automated Edge Deployment**
+  - *Action*: Ran `npm run lint` and `npm run build`.
+  - *Evidence*: `npm run build` exits with code 0, clean Vite + Hydrogen SSR bundle.
+
+---
+
+## Phase 20: Full-Cycle Editorial Blog System (Homepage, List & Dynamic Article) (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: EditorialJournalSection, blogs._index, blogs.$blogHandle._index, blogs.$blogHandle.$articleHandle, _index.jsx*
+
+- [x] **Task 20.1: Homepage Editorial Journal Component (`EditorialJournalSection.jsx`) & Loader Query**
+  - *Action*: Created `EditorialJournalSection.jsx` showcasing 3 latest editorial articles on Homepage. Connected GraphQL query in `_index.jsx` to fetch live blog articles from Shopify Storefront API. Zero-radius cards with 16:10 photography, Indonesian dates, Cormorant Garamond headlines, rich excerpts, and direct links to `/blogs/${blogHandle}/${articleHandle}` and `/blogs`.
+  - *Evidence*: Verified HTTP 200 and markup rendering on `http://localhost:3005/`.
+- [x] **Task 20.2: Premium Editorial Blog Listing & Direct Article Catalog (`blogs._index.jsx` & `blogs.$blogHandle._index.jsx`)**
+  - *Action*: Upgraded `/blogs` from empty 1-card blog list to a comprehensive editorial archive. Queried primary blog articles directly with featured hero article banner, category filter pills, 3-column quiet luxury article grid, and `PaginatedResourceSection` pagination. Aligned `blogs.$blogHandle._index.jsx` with matching Quiet Luxury styling.
+  - *Evidence*: Verified HTTP 200 rendering on `http://localhost:3005/blogs` and `http://localhost:3005/blogs/news`.
+- [x] **Task 20.3: Dynamic Article Reading Experience with Related Curations (`blogs.$blogHandle.$articleHandle.jsx`)**
+  - *Action*: Upgraded single article view with calculated reading time estimate, social share/WhatsApp link, polished typography (`prose prose-neutral`), fixed redirect handle mapping, and dynamic related articles section at bottom fetching 3 other articles from the same blog.
+  - *Evidence*: Verified HTTP 200 rendering on `http://localhost:3005/blogs/news/kisah-canting-filosofi-batik-tulis-jawa`.
+- [x] **Task 20.4: Production Build Verification & Automated Edge Deployment**
+  - *Action*: Ran `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit code 0).
+  - *Evidence*: All 4 blog routes return HTTP 200 cleanly.
+
+---
+
+## Phase 21: Homepage Streamlining & Section Pruning (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: _index.jsx, ChooseYourBatikGrid.jsx, PAGES-SCHEMA.xml*
+
+- [x] **Task 21.1: Removal of Shoppable Lookbook Hotspot Section from Homepage**
+  - *Action*: Removed `ShoppableLookbook` import, loader extraction, and JSX render block from `app/routes/_index.jsx` to streamline scroll depth and focus visitor attention on the new Editorial Journal section. Removed `lookbookSpotlights` query from `HOMEPAGE_QUERY`, reducing client payload by 13% (from 50.29 kB to 43.65 kB).
+  - *Evidence*: Verified removal from homepage HTML on `http://localhost:3005/`.
+- [x] **Task 21.2: Pruning of Dual Commercial Pathway Box from ChooseYourBatikGrid (`ChooseYourBatikGrid.jsx`)**
+  - *Action*: Removed the 2-column box ("01. BELI PRODUK & KAIN LEMBARAN / 02. TAMBAH JASA BESPOKE TAILORING") from `ChooseYourBatikGrid.jsx`. The section now transitions directly and cleanly from the editorial headline into the 8-product showcase grid.
+  - *Evidence*: Rendered without banner box, 0 visual clutters.
+- [x] **Task 21.3: Quality Verification & Production Build**
+  - *Action*: Ran `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit code 0).
+  - *Evidence*: Verified HTTP 200 on `http://localhost:3005/`.
+
+---
+
+## Phase 22: Modern Search UI/UX & Mobile Navigation Overhaul (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: LuxurySearchModal.jsx, PageLayout.jsx, Header.jsx, Aside.jsx, MobileNavigation.jsx*
+
+- [x] **Task 22.1: Modern Desktop Command-Palette & Mobile Full-Screen Search (`LuxurySearchModal.jsx`)**
+  - *Action*: Replaced the narrow 420px right slide-over search with a modern luxury search modal. On desktop: grand centered top overlay with auto-focus, ESC shortcut, trending search chips (`Sarimbit Mahakarya`, `Kemeja Furing Hero`, etc.), and multi-faceted live results (products, collections, blog articles). On mobile: full-screen native feel with sticky header and vertical scroll.
+  - *Evidence*: Replaced `SearchAside` in `PageLayout.jsx`, verified live on `http://localhost:3005/`.
+- [x] **Task 22.2: Mobile Burger Navigation Drawer Redesign (`Header.jsx` & `Aside.jsx`)**
+  - *Action*: Upgraded `HeaderMenu` from a plain list to an architectural mobile menu with: quick in-menu search bar, collapsible Sarimbit 3-tier accordion, individual wardrobe categories with subtitle descriptions, prominent Warta & Jurnal Kebudayaan card, physical showroom footprint details (Simongan & Banyumanik), and a direct WhatsApp Concierge CTA button. Updated `Aside.jsx` so the burger menu opens naturally from the left.
+  - *Evidence*: Verified interactive rendering and drawer sliding.
+- [x] **Task 22.3: Mobile Sticky Navigation & Header Integration (`MobileNavigation.jsx` & `Header.jsx`)**
+  - *Action*: Added Jurnal Kebudayaan (`/blogs`) to the mobile sticky bottom bar (Beranda, Kategori, Cari, Jurnal, WA CS). Enabled search button visibility in the mobile top header.
+  - *Evidence*: Verified all 5 bottom navigation touchpoints active.
+- [x] **Task 22.4: Production Verification & Build Integrity**
+  - *Action*: Ran `npm run lint` (0 errors, 0 warnings) and `npm run build` (Exit code 0).
+  - *Evidence*: Clean compilation of Vite + Hydrogen SSR bundle.
+
+
+
+
+

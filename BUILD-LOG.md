@@ -400,4 +400,123 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
 
+---
+
+## Milestone 13: Dual-Section Homepage Collection Hierarchy (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Signature 3-Tier Sarimbit Bento Grid (`SarimbitBentoSection.jsx`) & Symmetrical Personal Wardrobe Triptych (`PersonalWardrobeSection.jsx`)
+
+### 1. Signature Sarimbit Asymmetric Bento Grid (`SarimbitBentoSection.jsx`)
+- Positioned directly beneath `HeroSlider` to solidify Batik Smile's primary brand positioning as the #1 family sarimbit specialist.
+- 12-Column Asymmetric Bento Grid Architecture:
+  - **Dominant 7-Column Portrait Container (Left)**: *Sarimbit Exclusive* (`sarimbit-exclusive`) featuring deep obsidian container, subtle antique gold border (`border-[#C5A059]/40`), high-contrast dark gradient, and badge `◆ KASTA TERTINGGI • SUTRA ATBM & PRADA EMAS`.
+  - **Stacked 5-Column Containers (Right)**: *Sarimbit Premium* (`sarimbit-premium`, `◆ RESEPSI & JAMUAN • TENUN DOBBY`) on top, and *Sarimbit Ekonomis* (`sarimbit-ekonomis`, `◆ HARIAN & KELUARGA • KATUN PRIMISIMA`) on the bottom.
+  - Interactive tactile physics: Slow hover zoom (`scale-105 duration-700`), ambient gold shadow illumination, and zero-radius edge-to-edge action bars.
+
+### 2. Symmetrical 3-Column Personal Wardrobe Triptych (`PersonalWardrobeSection.jsx`)
+- Placed beneath `HeritageVideoBanner` to form a cohesive storytelling transition: after customers witness raw fabric canting and hero lining tailoring in the video, they are introduced to individual wardrobe pillars.
+- 3 Dedicated Curated Pillars:
+  1. *Kemeja Batik Pria* (`batik-pria`): Jahitan sambung motif & furing katun hero sejuk.
+  2. *Busana Batik Wanita* (`batik-wanita`): Blus modern, tunik sutra, outer elegan, dan kebaya kontemporer.
+  3. *Batik Anak & Tradisional* (`batik-anak`): Setelan surjan adat Jawa & hem katun ramah anak.
+- Strictly preserved 4:5 vertical proportions, zero-radius architecture, and linen bottom action bars.
+
+### 3. Route & Query Optimization (`app/routes/_index.jsx`)
+- Expanded `HOMEPAGE_QUERY` collection limit to `collections(first: 20)` to ensure all 6 core pillars always retrieve their live Shopify CDN imagery.
+- Re-ordered homepage layout: HeroSlider -> Sarimbit Bento -> Best Sellers Tabs -> Heritage Video -> Personal Wardrobe -> Choose Your Batik -> Lookbook -> Testimonials -> Trust -> Showroom.
+- Updated `PAGES-SCHEMA.xml` and maintained backward compatibility in `FeaturedCollections.jsx`.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+
+---
+
+## Milestone 14: Full-Cycle Editorial Blog System Deployment (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Homepage Journal Section, Curated Editorial Archive, and Dynamic Article View with Related Curations
+
+### 1. Homepage Editorial Journal Section (`EditorialJournalSection.jsx` & `_index.jsx`)
+- Integrated GraphQL query into `HOMEPAGE_QUERY` fetching 3 latest published articles dynamically from `blogs(first: 1)`.
+- Crafted `EditorialJournalSection.jsx` using Quiet Luxury Zero-Radius standards:
+  - 16:10 photography containers with subtle dark vignette overlays.
+  - Indonesian date formatting (`Intl.DateTimeFormat('id-ID')`), author stamp (`Batik Smile Editorial`), and Cormorant Garamond headlines.
+  - Multi-line clamp excerpts and interactive action links to `/blogs/${blogHandle}/${articleHandle}` and `/blogs`.
+  - Positioned between `CustomerLoveNotes` and `TrustGuaranteeBar` for natural cultural storytelling rhythm.
+
+### 2. Editorial Archive Catalog (`blogs._index.jsx` & `blogs.$blogHandle._index.jsx`)
+- Transformed `/blogs` from an empty 1-category card into a rich **Editorial Journal Archive**:
+  - Highlights the latest story as a grand **Featured Hero Card** (12-column split with high-definition photography).
+  - Renders all subsequent articles in a balanced 3-column quiet luxury grid with `PaginatedResourceSection` pagination.
+  - Aligned `blogs.$blogHandle._index.jsx` with matching Quiet Luxury tokens and full excerpt previews.
+
+### 3. Dynamic Article Reading Journey (`blogs.$blogHandle.$articleHandle.jsx`)
+- Upgraded single article template with:
+  - Calculated reading time estimate (`⏱️ X MENIT BACA`).
+  - Breadcrumb trail (`BERANDA / JURNAL / [JUDUL]`).
+  - Polished typography using Tailwind typography engine (`prose prose-neutral`).
+  - Fixed redirect handle mapping by including `handle` on `blog` and `articleByHandle`.
+  - **Dynamic Related Articles Section**: Fetches and renders 3 related stories from the same blog to eliminate bounce rate.
+  - Integrated WhatsApp Concierge consultation CTA banner.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- All 4 blog endpoints verified returning HTTP 200 OK:
+  - `http://localhost:3005/` (Homepage): 200 OK
+  - `http://localhost:3005/blogs` (List Archive): 200 OK
+  - `http://localhost:3005/blogs/news` (Category List): 200 OK
+  - `http://localhost:3005/blogs/news/kisah-canting-filosofi-batik-tulis-jawa` (Dynamic Article): 200 OK
+
+---
+
+## Milestone 15: Homepage Streamlining & Section Pruning (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Shoppable Lookbook and Dual Pathway Box for Optimized Conversion Rhythm
+
+### 1. Removal of Shoppable Lookbook Hotspot Section
+- Pruned `ShoppableLookbook` from `app/routes/_index.jsx` to prevent vertical fatigue and ensure the new **Editorial Journal** receives maximum visitor engagement.
+- Removed `lookbookSpotlights` query from `HOMEPAGE_QUERY`, reducing client JavaScript bundle from 50.29 kB to 43.65 kB (13% payload reduction).
+
+### 2. Pruning of Dual Commercial Pathway Box (`ChooseYourBatikGrid.jsx`)
+- Removed the redundant 2-column box ("01. BELI PRODUK & KAIN LEMBARAN / 02. TAMBAH JASA BESPOKE TAILORING").
+- Section now transitions smoothly from the editorial headline directly into the 8-product showcase grid with clean white canvas and zero visual clutter.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Storefront response verified HTTP 200 OK.
+
+---
+
+## Milestone 16: Modern Search UI/UX & Mobile Navigation Overhaul (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Luxury Search Command-Palette & Native-Feel Mobile Menu Upgrade
+
+### 1. Modern Luxury Search Modal (`LuxurySearchModal.jsx` & `PageLayout.jsx`)
+- Replaced the narrow 420px right-side drawer with a luxury command-palette overlay on desktop and a full-screen search view on mobile.
+- Features:
+  - Grand search input with gold search icon, clear button, and ESC keyboard shortcut support.
+  - Trending search chips (`Sarimbit Mahakarya`, `Kemeja Furing Hero`, `Batik Wanita Sutra`, `Kain Batik Tulis`, etc.) with instant one-tap search.
+  - Responsive multi-faceted predictive results: 4-column product grid with 4:5 photography and formatted IDR prices, collection pills, and editorial cultural journal articles.
+  - Replaced `SearchAside` in `PageLayout.jsx`.
+
+### 2. Architectural Mobile Navigation Drawer (`Header.jsx` & `Aside.jsx`)
+- Replaced the plain text list in `HeaderMenu` with a comprehensive Quiet Luxury navigation menu:
+  - Interactive accordion for **Trilogi Sarimbit Keluarga** (Mahakarya Eksklusif, Signature Premium, Essential Ekonomis).
+  - Categorized individual wardrobe links with subtitle descriptions.
+  - Prominent **Warta & Jurnal Budaya** card linking directly to `/blogs`.
+  - Physical showroom footprint card (Simongan 109 & Banyumanik 23, Buka Setiap Hari 08:00–21:00 WIB).
+  - Official WhatsApp Concierge consultation CTA button.
+  - Updated `Aside.jsx` so the burger menu slides in naturally from the left, while the cart slides in from the right.
+
+### 3. Mobile Sticky Navigation & Header Optimization (`MobileNavigation.jsx` & `Header.jsx`)
+- Added **Jurnal** (`/blogs`) to the mobile sticky bottom bar (`Beranda`, `Kategori`, `Cari`, `Jurnal`, `WA CS`).
+- Made search icon visible on both mobile and desktop headers for immediate discoverability.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- All endpoints tested and verified returning HTTP 200 OK.
+
+
+
+
+
 

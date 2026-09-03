@@ -112,35 +112,56 @@ function ArticleItem({ article, loading }) {
   }).format(new Date(article.publishedAt));
 
   return (
-    <article className="bg-white border border-[#E2DFD8] hover:border-[#111111] shadow-sm hover:shadow-md transition-all group block overflow-hidden">
-      <Link to={`/blogs/${article.blog.handle}/${article.handle}`} className="block">
+    <article className="group relative flex flex-col bg-white border border-[#E2DFD8] hover:border-[#C5A059] transition-all duration-500 overflow-hidden shadow-sm hover:shadow-[0_12px_32px_rgba(197,160,89,0.14)]">
+      <Link to={`/blogs/${article.blog.handle}/${article.handle}`} className="flex-1 flex flex-col">
         <div className="relative aspect-[16/10] bg-[#111111] overflow-hidden">
           {article.image ? (
             <Image
               alt={article.image.altText || article.title}
               data={article.image}
               loading={loading}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
             />
           ) : (
             <img
               src="/banners/hero_editorial_banner.jpg"
               alt={article.title}
-              className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
             />
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute top-3.5 left-3.5 z-10">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-black/70 backdrop-blur-md border border-[#C5A059]/40 text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-[#C5A059] font-bold">
+              <span>◆</span>
+              JURNAL BUDAYA
+            </span>
+          </div>
         </div>
 
-        <div className="p-6">
-          <time className="text-[10px] uppercase tracking-wider text-[#9E7D3B] font-medium block mb-2">
-            {publishedAt}
-          </time>
-          <h2 className="font-serif text-xl font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors leading-snug mb-3">
-            {article.title}
-          </h2>
-          <span className="text-[10px] uppercase tracking-[0.16em] text-[#111111] font-semibold inline-flex items-center gap-1 group-hover:text-[#9E7D3B] transition-colors">
-            BACA SELENGKAPNYA &rarr;
-          </span>
+        <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] font-medium mb-2.5">
+              <time dateTime={article.publishedAt}>{publishedAt}</time>
+              <span className="text-[#888888]">{article.author?.name || 'Batik Smile'}</span>
+            </div>
+
+            <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors leading-snug mb-3 line-clamp-2">
+              {article.title}
+            </h2>
+
+            {article.excerpt && (
+              <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed line-clamp-3 mb-4">
+                {article.excerpt}
+              </p>
+            )}
+          </div>
+
+          <div className="pt-3 border-t border-[#F0ECE1] flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold group-hover:text-[#C5A059] transition-colors">
+            <span>BACA SELENGKAPNYA</span>
+            <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">
+              &rarr;
+            </span>
+          </div>
         </div>
       </Link>
     </article>

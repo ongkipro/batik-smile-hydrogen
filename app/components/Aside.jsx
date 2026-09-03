@@ -55,20 +55,29 @@ export function Aside({children, heading, type}) {
       
       {/* Drawer Container */}
       <aside
-        className={`absolute top-0 right-0 h-full w-full sm:w-[420px] bg-[#FAF8F5] shadow-2xl flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-in-out ${
-          expanded ? 'translate-x-0' : 'translate-x-full'
+        className={`absolute top-0 ${
+          type === 'mobile' ? 'left-0' : 'right-0'
+        } h-full w-full sm:w-[420px] bg-[#FAF8F5] shadow-2xl flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-in-out ${
+          expanded
+            ? 'translate-x-0'
+            : type === 'mobile'
+            ? '-translate-x-full'
+            : 'translate-x-full'
         }`}
       >
-        <header className="flex flex-shrink-0 items-center justify-between h-16 sm:h-20 px-6 border-b border-[#E2DFD8] bg-[#FAF8F5] z-10">
-          <h3 id={id} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9E7D3B] m-0">
-            {heading}
-          </h3>
+        <header className="flex flex-shrink-0 items-center justify-between h-16 sm:h-20 px-6 border-b border-[#E2DFD8] bg-white z-10">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[#C5A059]" />
+            <h3 id={id} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#111111] m-0">
+              {heading}
+            </h3>
+          </div>
           <button 
-            className="text-3xl leading-none text-[#111111] hover:text-[#C5A059] transition-colors pb-1 cursor-pointer"
+            className="w-8 h-8 flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
             onClick={close} 
             aria-label="Tutup"
           >
-            &times;
+            ✕
           </button>
         </header>
         <main className="flex-1 overflow-y-auto overflow-x-hidden">

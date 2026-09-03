@@ -1,11 +1,12 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
 import { HeroSlider } from '~/components/HeroSlider';
-import { FeaturedCollections } from '~/components/FeaturedCollections';
+import { SarimbitBentoSection } from '~/components/SarimbitBentoSection';
+import { PersonalWardrobeSection } from '~/components/PersonalWardrobeSection';
+import { EditorialJournalSection } from '~/components/EditorialJournalSection';
 import { BestSellersTabs } from '~/components/BestSellersTabs';
 import { HeritageVideoBanner } from '~/components/HeritageVideoBanner';
 import { ChooseYourBatikGrid } from '~/components/ChooseYourBatikGrid';
-import { ShoppableLookbook } from '~/components/ShoppableLookbook';
 import { CustomerLoveNotes } from '~/components/CustomerLoveNotes';
 import { TrustGuaranteeBar } from '~/components/TrustGuaranteeBar';
 import { ShowroomO2O } from '~/components/ShowroomO2O';
@@ -82,20 +83,25 @@ export async function loader({ context }) {
   // Extract metaobjects
   const heroData = data?.heroBanners?.nodes?.[0] || null;
   const videoData = data?.heritageVideos?.nodes?.[0] || null;
-  const lookbookData = data?.lookbookSpotlights?.nodes?.[0] || null;
   const testimonials = data?.customerTestimonials?.nodes || [];
   const featuredCollections = data?.featuredCollections?.nodes || [];
+
+  // Extract editorial articles
+  const primaryBlog = data?.blogs?.nodes?.[0] || null;
+  const editorialArticles = primaryBlog?.articles?.nodes || [];
+  const editorialBlogHandle = primaryBlog?.handle || 'news';
 
   return {
     heroData,
     videoData,
-    lookbookData,
     testimonials,
     featuredCollections,
     womenProducts,
     menProducts,
     sarimbitProducts,
     newestProducts,
+    editorialArticles,
+    editorialBlogHandle,
   };
 }
 
@@ -104,13 +110,14 @@ export default function Homepage() {
   const {
     _heroData,
     videoData,
-    lookbookData,
     testimonials,
     featuredCollections,
     womenProducts,
     menProducts,
     sarimbitProducts,
     newestProducts,
+    editorialArticles,
+    editorialBlogHandle,
   } = useLoaderData();
 
   return (
@@ -118,8 +125,8 @@ export default function Homepage() {
       {/* 1. Master Full-Bleed 5-Slide Quiet Luxury Hero Carousel */}
       <HeroSlider />
 
-      {/* 2. Curated Featured Collections (Real Shopify Images) */}
-      <FeaturedCollections collections={featuredCollections} />
+      {/* 2. Signature Sarimbit Asymmetric Bento Grid (Exclusive, Premium, Ekonomis) */}
+      <SarimbitBentoSection collections={featuredCollections} />
 
       {/* 3. Best Sellers Tabbed Switcher (Women | Men | Sarimbit) */}
       <BestSellersTabs
@@ -128,22 +135,28 @@ export default function Homepage() {
         sarimbitProducts={sarimbitProducts}
       />
 
-      {/* 3. Heritage Craftsmanship Video Banner */}
+      {/* 4. Heritage Craftsmanship Video Banner */}
       <HeritageVideoBanner videoData={videoData} />
 
-      {/* 4. Choose Your Batik / Koleksi Terbaru: 8 Produk Pilihan Non-Sarimbit */}
+      {/* 5. Busana Personal & Lintas Generasi (Pria, Wanita, Anak) */}
+      <PersonalWardrobeSection collections={featuredCollections} />
+
+      {/* 6. Choose Your Batik / Koleksi Terbaru: 8 Produk Pilihan Non-Sarimbit */}
       <ChooseYourBatikGrid products={newestProducts} />
 
-      {/* 5. Shoppable Lookbook Spotlight with Interactive Hotspots */}
-      <ShoppableLookbook lookbook={lookbookData} />
-
-      {/* 6. Customer Love Notes Testimonial Carousel */}
+      {/* 7. Customer Love Notes Testimonial Carousel */}
       <CustomerLoveNotes testimonials={testimonials} />
 
-      {/* 7. 4 Core Trust Pillars */}
+      {/* 8. Warta & Jurnal Kebudayaan (Latest Editorial Articles) */}
+      <EditorialJournalSection
+        articles={editorialArticles}
+        blogHandle={editorialBlogHandle}
+      />
+
+      {/* 9. 4 Core Trust Pillars */}
       <TrustGuaranteeBar />
 
-      {/* 8. Showroom O2O (Simongan 109 & Banyumanik 23) */}
+      {/* 10. Showroom O2O (Simongan 109 & Banyumanik 23) */}
       <ShowroomO2O />
     </div>
   );
@@ -223,7 +236,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    featuredCollections: collections(first: 10, sortKey: UPDATED_AT) {
+    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {
       nodes {
         id
         title
@@ -285,13 +298,28 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    lookbookSpotlights: metaobjects(type: "lookbook_spotlight", first: 1) {
+    blogs(first: 1) {
       nodes {
-        id
         handle
-        fields {
-          key
-          value
+        title
+        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {
+          nodes {
+            id
+            title
+            handle
+            publishedAt
+            excerpt
+            image {
+              id
+              url
+              altText
+              width
+              height
+            }
+            author: authorV2 {
+              name
+            }
+          }
         }
       }
     }

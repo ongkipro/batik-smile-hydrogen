@@ -30,32 +30,6 @@ export function ChooseYourBatikGrid({ products = [] }) {
           </p>
         </div>
 
-        {/* Dual Commercial Pathway Banner Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 bg-[#FAF8F5] border border-[#E2DFD8] p-6">
-          <div className="flex items-start gap-4 pr-4 border-b md:border-b-0 md:border-r border-[#E2DFD8] pb-4 md:pb-0">
-            <span className="text-[#C5A059] text-xl font-serif">01.</span>
-            <div>
-              <h3 className="text-xs uppercase tracking-[0.16em] font-semibold text-[#111111] mb-1">
-                BELI PRODUK &amp; KAIN LEMBARAN
-              </h3>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed">
-                Koleksi busana siap pakai &amp; lembaran kain tulis eksklusif siap dikirim dengan kemasan aman &amp; jaminan mutu butik.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4 pl-0 md:pl-4">
-            <span className="text-[#C5A059] text-xl font-serif">02.</span>
-            <div>
-              <h3 className="text-xs uppercase tracking-[0.16em] font-semibold text-[#111111] mb-1">
-                TAMBAH JASA BESPOKE TAILORING
-              </h3>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed">
-                Kirim ukuran lingkar dada &amp; panjang baju via WhatsApp Concierge untuk dijahit presisi dengan furing katun hero adem.
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* 4-Column / 8-Product Showcase Grid (2 Rows of 4 Cards) */}
         {displayProducts.length > 0 ? (
