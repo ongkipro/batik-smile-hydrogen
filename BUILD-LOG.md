@@ -557,6 +557,26 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - All endpoints tested and verified returning HTTP 200 OK.
 
+---
+
+## Milestone 19: English Buzzwords Pruning & Asymmetric Magazine Gazette Journal UI (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Redundant Fluff Eyebrows & Asymmetric Editorial Journal Layout
+
+### 1. Pruning English Fluff & Cluttered Badges
+- Pruned `SIGNATURE FAMILY HAUTE COUTURE` and `BUSANA PERSONAL & LINTAS GENERASI` small boxes that elongated page lines.
+- Cleaned up buzzwords ("Heritage", "Elegance", "Essential Daily") into natural, authentic luxury names: *Sarimbit Eksklusif*, *Sarimbit Premium*, *Sarimbit Ekonomis*.
+
+### 2. Asymmetric Magazine Gazette Journal Layout (`EditorialJournalSection.jsx`)
+- Solved card grid fatigue by converting the 3-column boxed blog section into an Asymmetric Magazine Gazette:
+  - **7-Column Dominant Lead Article**: Large 16:10 editorial photo with dark vignette, `ULASAN UTAMA` badge, date/author metadata, large serif headline, 3-line excerpt, and `BACA ULASAN LENGKAP →` action.
+  - **5-Column Compact Horizontal Stories**: 2 companion articles arranged in compact horizontal rows with square thumbnails, `CATATAN 02` / `CATATAN 03` archival badges, clean typography, and a dashed quick-access card to the full archive.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Storefront HTTP 200 OK verified on `http://localhost:3005/`.
+
+
 
 
 

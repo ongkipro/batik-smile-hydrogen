@@ -73,17 +73,12 @@ export function PersonalWardrobeSection({ collections = [] }) {
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E2DFD8] text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold mb-3 shadow-xs">
-            <span className="w-1.5 h-1.5 bg-[#C5A059]" />
-            <span>BUSANA PERSONAL &amp; LINTAS GENERASI</span>
-          </div>
-
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-4 leading-tight">
-            Harmoni Busana Perseorangan &amp; Tradisi
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
+            Koleksi Busana Pria, Wanita &amp; Anak
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto my-3" />
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
-            Dedikasi jahitan sambung motif presisi, lapisan furing katun hero penyerap keringat, dan keanggunan siluet batik kontemporer untuk setiap generasi keluarga.
+            Jahitan sambung motif presisi, furing katun hero adem, dan kenyamanan siluet kontemporer untuk seluruh keluarga.
           </p>
         </div>
 
