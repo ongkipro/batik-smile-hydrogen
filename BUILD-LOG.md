@@ -734,6 +734,34 @@
 - `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
 - Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
 
+---
+
+## Milestone 25: Native Collection-Themed PDP for Sarimbit Exclusive (2026-09-03)
+**Date**: 2026-09-03 | **Execution**: Elimination of Detached Template Sections & Full Native Obsidian Noir PDP Theming Mirroring Sarimbit Exclusive Collection
+
+### 1. Zero Detached Template Architecture (`products.$handle.jsx`)
+- Removed the separate artificial showcase blocks that disrupted standard PDP flow.
+- Integrated native, continuous theme inheritance: the product page itself adapts dynamically into **Obsidian Noir & Gold** (`bg-[#111111] text-white`) when viewing any product from `sarimbit-exclusive`.
+- Transition between `/collections/sarimbit-exclusive` and `/products/sarimbit-royal-navy-1` is now 100% harmonious with zero visual shock.
+
+### 2. High-Contrast Prestige Detailing
+- Dynamic Breadcrumbs: `#A9A49C` with `#C5A059` hover and pure white active title.
+- 4:5 Vertical Gallery: Obsidian backdrop with antique gold active ring (`ring-[#C5A059]`).
+- Typography: Display titles in Cormorant Garamond crisp white, stock status in vivid green (`#4ADE80`), value props in `#E2DFD8]/85` with gold dots.
+- Quantity Counter: Dark atelier container (`bg-[#181818] border-[#C5A059]/40 text-white`) with gold numeral count.
+- Action Buttons: `+ TAMBAH KE TAS BELANJA` in gold outline on dark container; `BELI SEKARANG` in solid Imperial Antique Gold (`bg-[#C5A059] text-[#111111]`).
+- Accordions: Seamless dark dividers (`border-[#262626] divide-[#262626]`), gold labels, and white values.
+
+### 3. Synchronized Related Products & Sticky Mobile Bar
+- Related Products ("Koleksi Selaras") renders `ProductItem` with `variant="exclusive"`.
+- `StickyMobileBar.jsx` adapts to `bg-[#111111]/95 text-white border-[#C5A059]/40` with direct checkout CTA.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 warnings, 0 errors.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Pushed to `origin/main` for automated deployment to Shopify Oxygen Global Edge Network via GitHub Actions.
+
+
 
 
 

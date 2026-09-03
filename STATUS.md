@@ -66,12 +66,13 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
    - Hidden floating WhatsApp widget on mobile (`hidden lg:block` in `WhatsAppConcierge.jsx`) to avoid collision with the bottom mobile app navigation bar.
    - Polished `MobileNavigation.jsx` with Quiet Luxury design tokens, zero-radius badge, and direct WhatsApp concierge integration.
 
-8. **PDP Master Frameless Architecture, Quantity Geometry & Tier Showcase**:
+8. **PDP Native Collection-Themed Architecture for Sarimbit Exclusive**:
    - Zero-frame purchasing panel with borderless stock indicator (`● Tersedia di Butik`) cleanly stacked beneath price.
+   - Elimination of detached template sections: the product page itself adapts dynamically into **Obsidian Noir & Gold** (`bg-[#111111] text-white`) when viewing any product from `sarimbit-exclusive`, mirroring `/collections/sarimbit-exclusive`.
    - Mathematically aligned button geometry: Row 1 Quantity selector (`w-28 h-12`) + Tambah ke Tas Belanja (`flex-1 h-12`), Row 2 Beli Sekarang (`w-full h-12`), providing 100% matched container width.
    - Dual clean accordions: Deskripsi (Auto Show) + Pengiriman & Garansi Tukar (concise title, 3 quiet luxury service rows).
-   - Distinctive tier experience for Sarimbit Exclusive (`HAUTE HERITAGE` eyebrow, sutra ATBM & prada emas props, dark obsidian heritage pavilion with 3 pillars) and Sarimbit Premium (`SIGNATURE ATELIER` eyebrow, dobby & furing sejuk props, champagne linen pavilion with 3 standards).
-   - Comprehensive cross-device audit: 100% of 16 key routes returning HTTP 200 OK, with automated 301 redirects for blog aliases (`/blogs/jurnal` -> `/blogs`).
+   - Cohesive related products ("Koleksi Selaras") rendering obsidian luxury cards (`variant="exclusive"`) and theme-aware `StickyMobileBar.jsx`.
+   - Comprehensive cross-device audit: 100% of 16 key routes returning HTTP 200 OK.
 
 ## Verification evidence
 

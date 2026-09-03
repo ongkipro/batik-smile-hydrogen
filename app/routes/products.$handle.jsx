@@ -246,23 +246,43 @@ export default function Product() {
   // Active image index
   const activeIndex = imageList.findIndex((img) => img.url === activeImage?.url);
 
+  // Theme classes mirroring collection theme
+  const themeClasses = isExclusiveTier
+    ? 'bg-[#111111] text-white'
+    : isPremiumTier
+    ? 'bg-[#F3EDE2] text-[#111111]'
+    : 'bg-[#FAF8F5] text-[#111111]';
+
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-8 sm:py-12 px-4 sm:px-8 lg:px-12 xl:px-16">
+    <div className={`min-h-screen py-8 sm:py-12 px-4 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-500 ${themeClasses}`}>
       <div className="w-full max-w-7xl mx-auto">
         {/* Dynamic Breadcrumb Navigation */}
-        <nav className="text-[10px] text-[#5A5550] uppercase tracking-[0.2em] mb-8 sm:mb-10 flex items-center gap-2 flex-wrap">
-          <NavLink to="/" className="hover:text-[#9E7D3B] transition-colors">
+        <nav
+          className={`text-[10px] uppercase tracking-[0.2em] mb-8 sm:mb-10 flex items-center gap-2 flex-wrap ${
+            isExclusiveTier ? 'text-[#A9A49C]' : 'text-[#5A5550]'
+          }`}
+        >
+          <NavLink
+            to="/"
+            className={isExclusiveTier ? 'hover:text-[#C5A059] transition-colors' : 'hover:text-[#9E7D3B] transition-colors'}
+          >
             BERANDA
           </NavLink>
-          <span>/</span>
+          <span className={isExclusiveTier ? 'text-[#444444]' : 'text-[#CCCCCC]'}>/</span>
           <NavLink
             to={relatedCollectionHandle ? `/collections/${relatedCollectionHandle}` : '/collections/all'}
-            className="hover:text-[#9E7D3B] transition-colors"
+            className={isExclusiveTier ? 'hover:text-[#C5A059] transition-colors' : 'hover:text-[#9E7D3B] transition-colors'}
           >
             {relatedCollectionTitle || 'KOLEKSI'}
           </NavLink>
-          <span>/</span>
-          <span className="text-[#111111] font-semibold truncate max-w-[200px] sm:max-w-xs">{title}</span>
+          <span className={isExclusiveTier ? 'text-[#444444]' : 'text-[#CCCCCC]'}>/</span>
+          <span
+            className={`truncate max-w-[200px] sm:max-w-xs ${
+              isExclusiveTier ? 'text-white font-medium' : 'text-[#111111] font-semibold'
+            }`}
+          >
+            {title}
+          </span>
         </nav>
 
         {/* Main PDP Grid (Left: 4:5 Vertical Gallery, Right: Frameless Quiet Luxury Panel) */}
@@ -282,6 +302,8 @@ export default function Product() {
                       className={`relative w-16 sm:w-20 aspect-[4/5] overflow-hidden flex-shrink-0 border transition-all cursor-pointer ${
                         isActive
                           ? 'border-[#C5A059] ring-1 ring-[#C5A059]'
+                          : isExclusiveTier
+                          ? 'border-[#262626] opacity-60 hover:opacity-100 hover:border-[#C5A059]/60'
                           : 'border-[#E2DFD8] opacity-75 hover:opacity-100 hover:border-[#111111]'
                       }`}
                     >
@@ -297,7 +319,13 @@ export default function Product() {
             )}
 
             {/* Main Featured Image Container (Strict 4:5 Aspect Ratio) */}
-            <div className="flex-1 relative overflow-hidden bg-[#111111] group shadow-sm">
+            <div
+              className={`flex-1 relative overflow-hidden group shadow-sm ${
+                isExclusiveTier
+                  ? 'bg-[#181818] border border-[#C5A059]/30'
+                  : 'bg-[#111111]'
+              }`}
+            >
               <div className="relative aspect-[4/5] w-full overflow-hidden">
                 {activeImage ? (
                   <img
@@ -306,7 +334,11 @@ export default function Product() {
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 ) : (
-                  <div className="aspect-[4/5] w-full flex items-center justify-center bg-[#EFECE6] text-[#5A5550] text-xs font-serif">
+                  <div
+                    className={`aspect-[4/5] w-full flex items-center justify-center text-xs font-serif ${
+                      isExclusiveTier ? 'bg-[#181818] text-[#A9A49C]' : 'bg-[#EFECE6] text-[#5A5550]'
+                    }`}
+                  >
                     Batik Smile Nusantara
                   </div>
                 )}
@@ -314,7 +346,13 @@ export default function Product() {
 
               {/* Counter Badge */}
               {imageList.length > 1 && (
-                <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-white font-medium">
+                <div
+                  className={`absolute bottom-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-medium backdrop-blur-sm ${
+                    isExclusiveTier
+                      ? 'bg-[#111111]/85 text-[#C5A059] border border-[#C5A059]/40'
+                      : 'bg-black/70 text-white'
+                  }`}
+                >
                   {activeIndex >= 0 ? activeIndex + 1 : 1} / {imageList.length}
                 </div>
               )}
@@ -344,13 +382,21 @@ export default function Product() {
                 )}
               </div>
 
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#111111] leading-[1.14] tracking-wide mb-3">
+              <h1
+                className={`font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal leading-[1.14] tracking-wide mb-3 ${
+                  isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                }`}
+              >
                 {title}
               </h1>
 
               {/* Price Display */}
               <div className="flex items-baseline gap-3 mb-1.5">
-                <span className="text-2xl sm:text-3xl font-medium text-[#111111] tracking-wide font-sans">
+                <span
+                  className={`text-2xl sm:text-3xl font-medium tracking-wide font-sans ${
+                    isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                  }`}
+                >
                   {selectedVariant?.price && <Money data={selectedVariant.price} />}
                 </span>
                 {selectedVariant?.compareAtPrice && (
@@ -362,14 +408,26 @@ export default function Product() {
 
               {/* Stock Status Indicator (Placed directly under price) */}
               <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] mb-3">
-                <span className={`inline-block w-1.5 h-1.5 rounded-full ${isAvailable ? 'bg-[#2E6B3E]' : 'bg-[#8A2525]'}`} />
-                <span className={isAvailable ? 'text-[#2E6B3E]' : 'text-[#8A2525]'}>
+                <span
+                  className={`inline-block w-1.5 h-1.5 rounded-full ${
+                    isAvailable ? (isExclusiveTier ? 'bg-[#4ADE80]' : 'bg-[#2E6B3E]') : 'bg-[#EF4444]'
+                  }`}
+                />
+                <span
+                  className={
+                    isAvailable ? (isExclusiveTier ? 'text-[#4ADE80]' : 'text-[#2E6B3E]') : 'text-[#EF4444]'
+                  }
+                >
                   {isAvailable ? 'Tersedia di Butik' : 'Habis Terjual'}
                 </span>
               </div>
 
               {/* Value Props (Seamless Typography, Tier-Differentiated) */}
-              <div className="flex items-center gap-2 text-[11px] text-[#5A5550] font-light tracking-wide flex-wrap">
+              <div
+                className={`flex items-center gap-2 text-[11px] font-light tracking-wide flex-wrap ${
+                  isExclusiveTier ? 'text-[#E2DFD8]/85' : 'text-[#5A5550]'
+                }`}
+              >
                 {isExclusiveTier ? (
                   <>
                     <span>Sutra Alam ATBM</span>
@@ -398,7 +456,7 @@ export default function Product() {
               </div>
             </div>
 
-            <div className="w-full h-px bg-[#E2DFD8]" />
+            <div className={`w-full h-px ${isExclusiveTier ? 'bg-[#262626]' : 'bg-[#E2DFD8]'}`} />
 
             {/* Variant Option Selection (Only rendered if multiple variants exist) */}
             {hasMultipleVariants && (
@@ -406,8 +464,15 @@ export default function Product() {
                 {productOptions.map((option) => (
                   <div key={option.name}>
                     <div className="mb-2">
-                      <label className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#111111]">
-                        {option.name}: <span className="font-normal text-[#5A5550]">{option.value}</span>
+                      <label
+                        className={`text-[10px] font-medium uppercase tracking-[0.18em] ${
+                          isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                        }`}
+                      >
+                        {option.name}:{' '}
+                        <span className={isExclusiveTier ? 'font-normal text-[#A9A49C]' : 'font-normal text-[#5A5550]'}>
+                          {option.value}
+                        </span>
                       </label>
                     </div>
 
@@ -422,8 +487,12 @@ export default function Product() {
                             replace
                             className={`w-11 h-11 flex items-center justify-center text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer ${
                               isSelected
-                                ? 'bg-[#111111] !text-white'
-                                : 'bg-white !text-[#111111] hover:bg-[#FAF8F5]'
+                                ? isExclusiveTier
+                                  ? 'bg-[#C5A059] !text-[#111111] font-bold border border-[#C5A059]'
+                                  : 'bg-[#111111] !text-white'
+                                : isExclusiveTier
+                                ? 'bg-[#181818] !text-white border border-[#333333] hover:border-[#C5A059]'
+                                : 'bg-white !text-[#111111] border border-[#E2DFD8] hover:bg-[#FAF8F5]'
                             }`}
                           >
                             {val.name}
@@ -440,24 +509,38 @@ export default function Product() {
             <div className="space-y-2.5 pt-2">
               <div className="flex items-center gap-2.5">
                 {/* Quantity Selector */}
-                <div className="flex items-center border border-[#111111] bg-white h-12 w-28 shrink-0">
+                <div
+                  className={`flex items-center h-12 w-28 shrink-0 ${
+                    isExclusiveTier
+                      ? 'border border-[#C5A059]/40 bg-[#181818] text-white'
+                      : 'border border-[#111111] bg-white text-[#111111]'
+                  }`}
+                >
                   <button
                     type="button"
                     onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
                     disabled={quantity <= 1 || !isAvailable}
-                    className="w-9 h-full flex items-center justify-center text-sm font-medium text-[#111111] hover:bg-black/5 disabled:opacity-30 cursor-pointer transition-colors"
+                    className={`w-9 h-full flex items-center justify-center text-sm font-medium disabled:opacity-30 cursor-pointer transition-colors ${
+                      isExclusiveTier ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
+                    }`}
                     aria-label="Kurangi Jumlah"
                   >
                     −
                   </button>
-                  <span className="flex-1 text-center text-xs font-semibold text-[#111111] font-sans">
+                  <span
+                    className={`flex-1 text-center text-xs font-semibold font-sans ${
+                      isExclusiveTier ? 'text-[#C5A059]' : 'text-[#111111]'
+                    }`}
+                  >
                     {quantity}
                   </span>
                   <button
                     type="button"
                     onClick={() => setQuantity((prev) => prev + 1)}
                     disabled={!isAvailable}
-                    className="w-9 h-full flex items-center justify-center text-sm font-medium text-[#111111] hover:bg-black/5 disabled:opacity-30 cursor-pointer transition-colors"
+                    className={`w-9 h-full flex items-center justify-center text-sm font-medium disabled:opacity-30 cursor-pointer transition-colors ${
+                      isExclusiveTier ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
+                    }`}
                     aria-label="Tambah Jumlah"
                   >
                     +
@@ -469,7 +552,11 @@ export default function Product() {
                   disabled={!isAvailable}
                   lines={cartLines}
                   wrapperClassName="flex-1"
-                  className="w-full h-12 px-4 bg-white hover:bg-[#FAF8F5] !text-[#111111] hover:!text-[#9E7D3B] font-semibold text-[10px] uppercase tracking-[0.18em] text-center flex items-center justify-center border border-[#111111] transition-colors cursor-pointer"
+                  className={`w-full h-12 px-4 font-semibold text-[10px] uppercase tracking-[0.18em] text-center flex items-center justify-center transition-all cursor-pointer ${
+                    isExclusiveTier
+                      ? 'border border-[#C5A059] bg-[#181818] hover:bg-[#C5A059] !text-[#C5A059] hover:!text-[#111111] shadow-sm'
+                      : 'border border-[#111111] bg-white hover:bg-[#FAF8F5] !text-[#111111] hover:!text-[#9E7D3B]'
+                  }`}
                 >
                   + TAMBAH KE TAS BELANJA
                 </AddToCartButton>
@@ -481,14 +568,22 @@ export default function Product() {
                 lines={cartLines}
                 redirectTo="checkout"
                 wrapperClassName="w-full block"
-                className="w-full h-12 py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:bg-[#E2DFD8] disabled:!text-[#5A5550] disabled:cursor-not-allowed cursor-pointer shadow-md flex items-center justify-center"
+                className={`w-full h-12 py-3.5 px-6 font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:cursor-not-allowed cursor-pointer shadow-md flex items-center justify-center ${
+                  isExclusiveTier
+                    ? 'bg-[#C5A059] hover:bg-white !text-[#111111] font-bold shadow-lg disabled:bg-[#333333] disabled:!text-[#777777]'
+                    : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] disabled:bg-[#E2DFD8] disabled:!text-[#5A5550]'
+                }`}
               >
                 {isAvailable ? 'BELI SEKARANG' : 'HABIS TERJUAL'}
               </AddToCartButton>
             </div>
 
             {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H - Frameless) */}
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 pt-4 border-t border-[#E2DFD8] text-[10px] text-[#5A5550]">
+            <div
+              className={`grid grid-cols-2 gap-x-6 gap-y-2 pt-4 border-t text-[10px] ${
+                isExclusiveTier ? 'border-[#262626] text-[#E2DFD8]/75' : 'border-[#E2DFD8] text-[#5A5550]'
+              }`}
+            >
               <div className="flex items-center gap-2">
                 <span className="text-[#C5A059] text-[8px]">&bull;</span>
                 <span>Bebas Tukar Ukuran 7 Hari</span>
@@ -508,36 +603,62 @@ export default function Product() {
             </div>
 
             {/* Dual Clean Accordions: Deskripsi (Auto Show) & Pengiriman (Short Title) */}
-            <div className="border-t border-[#E2DFD8] divide-y divide-[#E2DFD8] text-xs pt-1">
+            <div
+              className={`border-t divide-y text-xs pt-1 ${
+                isExclusiveTier
+                  ? 'border-[#262626] divide-[#262626]'
+                  : 'border-[#E2DFD8] divide-[#E2DFD8]'
+              }`}
+            >
               {/* Accordion 1: Deskripsi & Spesifikasi (Auto Show / Open by default) */}
               <div className="py-3.5">
                 <button
                   type="button"
                   onClick={() => toggleSection('deskripsi')}
-                  className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
+                  className={`w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-left cursor-pointer ${
+                    isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                  }`}
                 >
                   <span>DESKRIPSI &amp; SPESIFIKASI KARYA</span>
-                  <span className="text-sm font-normal">{openSections.deskripsi ? '−' : '+'}</span>
+                  <span className={`text-sm font-normal ${isExclusiveTier ? 'text-[#C5A059]' : ''}`}>
+                    {openSections.deskripsi ? '−' : '+'}
+                  </span>
                 </button>
 
                 {openSections.deskripsi && (
                   <div className="mt-3 text-xs leading-relaxed font-light space-y-3">
                     {/* Story Narrative */}
                     {parsedDescription.story && (
-                      <p className="text-xs sm:text-sm text-[#444444] font-light leading-relaxed italic font-serif">
+                      <p
+                        className={`text-xs sm:text-sm font-light leading-relaxed italic font-serif ${
+                          isExclusiveTier ? 'text-[#E2DFD8]/90' : 'text-[#444444]'
+                        }`}
+                      >
                         &ldquo;{parsedDescription.story}&rdquo;
                       </p>
                     )}
 
                     {/* Frameless Atelier Specifications List (Zero Cards/Frames) */}
                     {parsedDescription.specs.length > 0 ? (
-                      <div className="divide-y divide-[#E2DFD8]/80 pt-1">
+                      <div
+                        className={`divide-y pt-1 ${
+                          isExclusiveTier ? 'divide-[#262626]/80' : 'divide-[#E2DFD8]/80'
+                        }`}
+                      >
                         {parsedDescription.specs.map((item, idx) => (
                           <div key={idx} className="py-2 flex items-baseline justify-between gap-4">
-                            <span className="text-[10px] uppercase tracking-[0.18em] text-[#888888] font-medium shrink-0">
+                            <span
+                              className={`text-[10px] uppercase tracking-[0.18em] font-medium shrink-0 ${
+                                isExclusiveTier ? 'text-[#C5A059]' : 'text-[#888888]'
+                              }`}
+                            >
                               {item.label || 'Spesifikasi'}
                             </span>
-                            <span className="text-right text-xs text-[#111111] font-light">
+                            <span
+                              className={`text-right text-xs font-light ${
+                                isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                              }`}
+                            >
                               {item.value}
                             </span>
                           </div>
@@ -546,7 +667,9 @@ export default function Product() {
                     ) : (
                       descriptionHtml && (
                         <div
-                          className="text-xs text-[#5A5550] leading-relaxed font-light space-y-2"
+                          className={`text-xs leading-relaxed font-light space-y-2 ${
+                            isExclusiveTier ? 'text-[#E2DFD8]/80' : 'text-[#5A5550]'
+                          }`}
                           dangerouslySetInnerHTML={{ __html: descriptionHtml }}
                         />
                       )
@@ -560,21 +683,37 @@ export default function Product() {
                 <button
                   type="button"
                   onClick={() => toggleSection('shipping')}
-                  className="w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-[#111111] text-left cursor-pointer"
+                  className={`w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-left cursor-pointer ${
+                    isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                  }`}
                 >
                   <span>PENGIRIMAN &amp; GARANSI TUKAR</span>
-                  <span className="text-sm font-normal">{openSections.shipping ? '−' : '+'}</span>
+                  <span className={`text-sm font-normal ${isExclusiveTier ? 'text-[#C5A059]' : ''}`}>
+                    {openSections.shipping ? '−' : '+'}
+                  </span>
                 </button>
 
                 {openSections.shipping && (
-                  <div className="mt-3 divide-y divide-[#E2DFD8]/80 text-xs">
+                  <div
+                    className={`mt-3 divide-y text-xs ${
+                      isExclusiveTier ? 'divide-[#262626]/80' : 'divide-[#E2DFD8]/80'
+                    }`}
+                  >
                     <div className="py-2.5 flex items-start gap-3">
                       <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
                       <div className="min-w-0">
-                        <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                        <span
+                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                            isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                          }`}
+                        >
                           Pengiriman Cepat &amp; Terlindungi
                         </span>
-                        <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                        <p
+                          className={`text-xs font-light leading-relaxed ${
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : 'text-[#5A5550]'
+                          }`}
+                        >
                           Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.
                         </p>
                       </div>
@@ -583,10 +722,18 @@ export default function Product() {
                     <div className="py-2.5 flex items-start gap-3">
                       <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
                       <div className="min-w-0">
-                        <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                        <span
+                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                            isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                          }`}
+                        >
                           Garansi Bebas Tukar Ukuran 7 Hari
                         </span>
-                        <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                        <p
+                          className={`text-xs font-light leading-relaxed ${
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : 'text-[#5A5550]'
+                          }`}
+                        >
                           Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas di badan.
                         </p>
                       </div>
@@ -595,16 +742,26 @@ export default function Product() {
                     <div className="py-2.5 flex items-start gap-3">
                       <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
                       <div className="min-w-0">
-                        <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#111111] block mb-0.5">
+                        <span
+                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                            isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                          }`}
+                        >
                           Layanan Konsultasi 3S 1C 1T &amp; 1H
                         </span>
-                        <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+                        <p
+                          className={`text-xs font-light leading-relaxed ${
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : 'text-[#5A5550]'
+                          }`}
+                        >
                           Tim penjahit dan konsultan kami siap mendampingi panduan ukuran melalui WhatsApp Concierge{' '}
                           <a
                             href="https://wa.me/6281390888809"
                             target="_blank"
                             rel="noreferrer"
-                            className="text-[#9E7D3B] font-medium underline underline-offset-2 hover:text-[#111111] transition-colors"
+                            className={`font-medium underline underline-offset-2 transition-colors ${
+                              isExclusiveTier ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
+                            }`}
                           >
                             081-390-8888-09
                           </a>.
@@ -618,155 +775,26 @@ export default function Product() {
           </div>
         </div>
 
-        {/* Tier-Differentiated Heritage Showcase Section (Sarimbit Exclusive & Premium) */}
-        {isExclusiveTier && (
-          <section className="mt-16 sm:mt-20 -mx-4 sm:-mx-8 lg:-mx-12 xl:-mx-16 bg-[#111111] text-white py-14 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-[#C5A059]/40 relative overflow-hidden">
-            <div className="w-full max-w-7xl mx-auto">
-              <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#C5A059] font-bold block mb-2">
-                  HAUTE HERITAGE &bull; MAHAKARYA SARIMBIT EXCLUSIVE
-                </span>
-                <h2 className="font-serif text-2xl sm:text-4xl text-white font-normal tracking-wide leading-snug mb-3">
-                  Keagungan Sutra Alam ATBM &amp; Canting Prada Emas Murni
-                </h2>
-                <div className="w-16 h-px mx-auto my-4 bg-[#C5A059]" />
-                <p className="text-xs sm:text-sm text-[#E2DFD8]/80 font-light leading-relaxed">
-                  Koleksi Sarimbit Exclusive diciptakan khusus untuk momen sakral resepsi, akad pernikahan, dan perayaan agung keluarga. Setiap helai kain ditenun dan dibatik dengan ketelitian maestro Butik Batik Smile Simongan Semarang.
-                </p>
-              </div>
-
-              {/* 3 Pillars Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <div className="p-6 bg-[#181818] border border-[#C5A059]/30 text-center">
-                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
-                    PILAR 01 &bull; KAIN PUSAKA
-                  </span>
-                  <h3 className="font-serif text-lg text-white font-normal mb-2">
-                    Sutra Alam ATBM 1-of-1
-                  </h3>
-                  <p className="text-xs text-[#E2DFD8]/75 font-light leading-relaxed">
-                    Ditenun manual dengan alat tenun bukan mesin, menghasilkan kilau serat alami yang bernapas, jatuh anggun di badan, dan tidak gerah sepanjang prosesi perayaan.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-[#181818] border border-[#C5A059]/30 text-center">
-                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
-                    PILAR 02 &bull; SENTUHAN MAESTRO
-                  </span>
-                  <h3 className="font-serif text-lg text-white font-normal mb-2">
-                    Canting Prada Emas Murni
-                  </h3>
-                  <p className="text-xs text-[#E2DFD8]/75 font-light leading-relaxed">
-                    Aksen prada emas murni digoreskan teliti pada motif pusaka, memancarkan aura wibawa ningrat yang memikat di bawah pencahayaan ballroom pesta.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-[#181818] border border-[#C5A059]/30 text-center">
-                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
-                    PILAR 03 &bull; LAYANAN CONCIERGE
-                  </span>
-                  <h3 className="font-serif text-lg text-white font-normal mb-2">
-                    VIP Fitting &amp; Harmoni Pasangan
-                  </h3>
-                  <p className="text-xs text-[#E2DFD8]/75 font-light leading-relaxed">
-                    Setiap motif kemeja pria dan gaun wanita dipastikan menyambung simetris sempurna, didampingi konsultan busana langsung dari Flagship Showroom Simongan Semarang.
-                  </p>
-                </div>
-              </div>
-
-              {/* VIP Concierge Link */}
-              <div className="text-center">
-                <a
-                  href={`https://wa.me/6281390888809?text=${encodeURIComponent(`Halo Butik Batik Smile Semarang, saya tertarik konsultasi koleksi Sarimbit Exclusive: ${title}`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] uppercase font-bold tracking-[0.22em] transition-all shadow-lg cursor-pointer"
-                >
-                  KONSULTASI VIP CONCIERGE &rarr;
-                </a>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {isPremiumTier && (
-          <section className="mt-16 sm:mt-20 -mx-4 sm:-mx-8 lg:-mx-12 xl:-mx-16 bg-[#F3EDE2] text-[#111111] py-14 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-[#C5A059]/35 relative overflow-hidden">
-            <div className="w-full max-w-7xl mx-auto">
-              <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-bold block mb-2">
-                  SIGNATURE ATELIER &bull; STANDAR SARIMBIT PREMIUM
-                </span>
-                <h2 className="font-serif text-2xl sm:text-4xl text-[#111111] font-normal tracking-wide leading-snug mb-3">
-                  Kemewahan Tenun Dobby Timbul &amp; Kenyamanan Pesta Tropis
-                </h2>
-                <div className="w-16 h-px mx-auto my-4 bg-[#9E7D3B]" />
-                <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
-                  Sarimbit Premium Signature dirancang khusus untuk kenyamanan optimal resepsi dan perhelatan keluarga. Dibuat dari tenun dobby berkarakter timbul yang kokoh dan dilapisi furing katun hero adem sejuk.
-                </p>
-              </div>
-
-              {/* 3 Signature Standards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <div className="p-6 bg-white/95 border border-[#C5A059]/30 text-center shadow-sm">
-                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
-                    STANDAR BUTIK 01
-                  </span>
-                  <h3 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
-                    Tekstur Tenun Dobby Timbul
-                  </h3>
-                  <p className="text-xs text-[#5A5550] font-light leading-relaxed">
-                    Karakter bahan bermotif timbul bertekstur tebal, tidak menerawang, tidak mudah kusut saat duduk lama, dan tahan cuci tanpa kehilangan kilau anggunnya.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white/95 border border-[#C5A059]/30 text-center shadow-sm">
-                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
-                    STANDAR BUTIK 02
-                  </span>
-                  <h3 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
-                    Furing Katun Hero Sejuk
-                  </h3>
-                  <p className="text-xs text-[#5A5550] font-light leading-relaxed">
-                    Lapis furing katun hero premium halus yang menyerap keringat dan adem, menjamin kenyamanan maksimal sekeluarga dari awal hingga akhir acara.
-                  </p>
-                </div>
-
-                <div className="p-6 bg-white/95 border border-[#C5A059]/30 text-center shadow-sm">
-                  <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
-                    STANDAR BUTIK 03
-                  </span>
-                  <h3 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
-                    Garansi Bebas Tukar 7 Hari
-                  </h3>
-                  <p className="text-xs text-[#5A5550] font-light leading-relaxed">
-                    Layanan purna jual resmi Batik Smile Nusantara dengan garansi bebas tukar ukuran dalam 7 hari kalender apabila ukuran salah satu anggota keluarga kurang pas.
-                  </p>
-                </div>
-              </div>
-
-              {/* Consultation Link */}
-              <div className="text-center">
-                <a
-                  href={`https://wa.me/6281390888809?text=${encodeURIComponent(`Halo Butik Batik Smile Semarang, saya ingin konsultasi ukuran & seragam Sarimbit Premium: ${title}`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#9E7D3B] text-white text-[10px] uppercase font-semibold tracking-[0.2em] transition-all shadow-md cursor-pointer"
-                >
-                  KONSULTASI SARIMBIT RESEPSI &rarr;
-                </a>
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* Related Products: "Koleksi Selaras" (Strict 4:5 Vertical Cards, Calibrated Spacing) */}
         {relatedProducts.length > 0 && (
-          <div className="mt-16 sm:mt-20 pt-12 border-t border-[#E2DFD8]">
+          <div
+            className={`mt-16 sm:mt-20 pt-12 border-t ${
+              isExclusiveTier ? 'border-[#262626]' : 'border-[#E2DFD8]'
+            }`}
+          >
             <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+              <span
+                className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-1.5 ${
+                  isExclusiveTier ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
+                }`}
+              >
                 KOLEKSI SELARAS
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal tracking-wide">
+              <h2
+                className={`font-serif text-2xl sm:text-3xl font-normal tracking-wide ${
+                  isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                }`}
+              >
                 Rekomendasi {relatedCollectionTitle || 'Koleksi Sejenis'}
               </h2>
             </div>
@@ -776,6 +804,7 @@ export default function Product() {
                 <ProductItem
                   key={relProduct.id}
                   product={relProduct}
+                  variant={isExclusiveTier ? 'exclusive' : isPremiumTier ? 'premium' : 'default'}
                   loading="lazy"
                 />
               ))}
@@ -785,7 +814,11 @@ export default function Product() {
               <div className="text-center mt-8 sm:mt-10">
                 <Link
                   to={`/collections/${relatedCollectionHandle}`}
-                  className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
+                  className={`inline-block px-8 py-3.5 text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline ${
+                    isExclusiveTier
+                      ? 'bg-[#181818] border border-[#C5A059]/50 hover:bg-[#C5A059] !text-[#C5A059] hover:!text-[#111111]'
+                      : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111]'
+                  }`}
                 >
                   LIHAT SEMUA KOLEKSI {relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : ''} &rarr;
                 </Link>
@@ -796,7 +829,12 @@ export default function Product() {
       </div>
 
       {/* Floating Smart Mobile Action Bar */}
-      <StickyMobileBar product={product} selectedVariant={selectedVariant} />
+      <StickyMobileBar
+        product={product}
+        selectedVariant={selectedVariant}
+        isExclusive={isExclusiveTier}
+        isPremium={isPremiumTier}
+      />
 
       <Analytics.ProductView
         data={{

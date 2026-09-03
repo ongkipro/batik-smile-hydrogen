@@ -712,6 +712,22 @@
   - *Action*: Audited all 16 key routes across homepage, collections, products, articles, informative pages, and cart. Resolved 404 on `/blogs/jurnal` by redirecting to `/blogs` and aliasing `/blogs/jurnal/:handle` to `/blogs/news/:handle`. Audited mobile touch targets, safe area insets, sticky mobile bar direct checkout triggers, and desktop widescreen layouts.
   - *Evidence*: Comprehensive audit script verified all 16 routes returning 200 OK. `npm run lint` 0 warnings, `npm run build` Exit code 0.
 
+---
+
+## Phase 30: Native Collection-Themed PDP for Sarimbit Exclusive (Zero Detached Template) (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, StickyMobileBar.jsx, Oxygen Deployment*
+
+- [x] **Task 30.1: Native Obsidian Noir PDP Theme Integration**
+  - *Action*: Replaced detached template sections with native, cohesive theme inheritance. The entire PDP container now takes `bg-[#111111] text-white` when viewing products from `sarimbit-exclusive`, seamlessly mirroring the visual and color identity of `/collections/sarimbit-exclusive`.
+  - *Evidence*: `GET /products/sarimbit-royal-navy-1` SSR renders `min-h-screen ... bg-[#111111] text-white`.
+- [x] **Task 30.2: Fine-Tuned Typography, Contrast & Action Harmony**
+  - *Action*: Adjusted contrast across all PDP elements: dark breadcrumbs with gold hover, dark thumbnail frames with gold active rings, Cormorant Garamond title in crisp white, stock indicator in vivid `#4ADE80` green, quantity selector in `bg-[#181818] border-[#C5A059]/40`, Tambah ke Tas Belanja in gold outline, Beli Sekarang in solid Imperial Antique Gold (`bg-[#C5A059] text-[#111111]`), and frameless specification accordions on dark obsidian with gold diamond bullets.
+  - *Evidence*: Tested locally on dev server; high-contrast readability verified across light and dark viewports.
+- [x] **Task 30.3: Harmonized Related Products & Sticky Mobile Bar**
+  - *Action*: Configured "Koleksi Selaras" (Related Products) on Sarimbit Exclusive PDP to render `ProductItem` with `variant="exclusive"` (obsidian cards with gold border) and updated `StickyMobileBar.jsx` to render matching obsidian and gold styling with instant direct checkout.
+  - *Evidence*: `npm run lint` 0 errors, `npm run build` Exit code 0, 16/16 routes 200 OK.
+
+
 
 
 
