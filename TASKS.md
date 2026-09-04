@@ -919,6 +919,28 @@
   - *Action*: Completely eliminated AI-slop clunky OS native `<select>` dropdown. Replaced with bespoke Quiet Luxury controls: (1) Desktop custom popover menu with gold bullet indicators, (2) Mobile Sort Bottom Sheet drawer with backdrop blur, 48px thumb touch targets, and antique gold checkmarks, (3) Mobile top status bar with item count and active filter reset chips, (4) Touch-friendly horizontal ribbon for price tabs with edge bleed and no scrollbar.
   - *Evidence*: `npm run lint` (0 errors, 0 warnings), `npm run build` (Exit code 0), and SSR test verified `<select>` elimination and mobile bottom sheet integration.
 
+---
+
+## Phase 42: Tri-Domain Architecture, Shopify CLI Linkage, & CSP Whitelisting (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: entry.server.jsx, root.jsx, CartSummary.jsx, .env.example, PRD.md, ARCHITECTURE.md*
+
+- [x] **Task 42.1: Authoritative Tri-Domain Topology Mapping & Verification**
+  - *Action*: Mapped and verified the tripartite domain topology across Shopify Admin and Hydrogen:
+    - `batiksmile.com` / `www.batiksmile.com`: Production headless storefront on Shopify Oxygen Edge.
+    - `checkout.batiksmile.com`: Shopify Core Online Store Hosted Checkout.
+    - `account.batiksmile.com`: Shopify New Customer Accounts passwordless portal.
+  - *Evidence*: `dig` and `curl -sI` verified all 3 domains active with valid SSL, correct CNAME routing, and proper HTTP response headers.
+- [x] **Task 42.2: Shopify CLI Authentication & Storefront Linkage**
+  - *Action*: Authenticated Shopify CLI for store `23ahbp-sq.myshopify.com` via account `ongkiardiansyah@gmail.com`. Linked local repository to Hydrogen Storefront `Batik Smile (id: 1000176204)` enabling seamless non-interactive `shopify hydrogen env list` execution.
+  - *Evidence*: `shopify hydrogen env list` outputs Production and Preview environments successfully.
+- [x] **Task 42.3: Content Security Policy (CSP) Multi-Domain Whitelisting (`app/entry.server.jsx`)**
+  - *Action*: Extended `createContentSecurityPolicy` in `entry.server.jsx` with `connectSrc` explicitly whitelisting `https://account.batiksmile.com`, `https://checkout.batiksmile.com`, and `https://batiksmile.com`, preventing any browser cross-domain blocking during checkout or customer auth.
+  - *Evidence*: `npm run build` and node CSP test verified compliant `connect-src` header generation.
+- [x] **Task 42.4: Standardized Environment Template (`.env.example`)**
+  - *Action*: Standardized `.env.example` with the full suite of production keys including `PUBLIC_STOREFRONT_ID`, `SHOP_ID`, `PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID`, and `PUBLIC_CUSTOMER_ACCOUNT_API_URL`.
+  - *Evidence*: Verified `.env.example` completeness against Shopify official headless specifications.
+
+
 
 
 

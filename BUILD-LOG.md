@@ -1138,6 +1138,34 @@
 - `npm run lint`: 0 errors, 0 warnings.
 - `npm run build`: Exit code 0.
 
+---
+
+## Milestone 41: Tri-Domain Architecture, Shopify CLI Linkage, & CSP Whitelisting (2026-09-04)
+**Date**: 2026-09-04 | **Execution**: Tri-domain verification, Shopify CLI storefront linking, CSP connectSrc expansion, and environment template standardization
+
+### 1. Authoritative Domain Mapping
+- Storefront: `https://batiksmile.com` (and `www.batiksmile.com`) on Shopify Oxygen Edge.
+- Checkout: `https://checkout.batiksmile.com` on Shopify Core Online Store.
+- Customer Accounts: `https://account.batiksmile.com` on Shopify New Customer Accounts.
+
+### 2. Shopify CLI Linkage
+- Authenticated with `23ahbp-sq.myshopify.com` as `ongkiardiansyah@gmail.com`.
+- Linked local project to storefront `Batik Smile (id: 1000176204)`.
+- Verified non-interactive commands (`shopify hydrogen env list`).
+
+### 3. Content Security Policy (CSP) Updates (`entry.server.jsx`)
+- Expanded `connectSrc` directive to explicitly whitelist:
+  - `https://account.batiksmile.com`
+  - `https://checkout.batiksmile.com`
+  - `https://batiksmile.com`
+
+### 4. Verification Evidence
+- `dig` and `curl -sI` verified all 3 domains active with proper SSL and HTTP response codes.
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- Oxygen Deployment Workflow `#33800203770` succeeded in 49s.
+
+
 
 
 

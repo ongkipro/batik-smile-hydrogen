@@ -135,11 +135,16 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Configured `PUBLIC_STORE_DOMAIN="batiksmile.com"` and `PUBLIC_CHECKOUT_DOMAIN="checkout.batiksmile.com"` in `.env` and `.env.example`.
     - Integrated with Hydrogen CSP, privacy consent, and `CartCheckoutActions` checkout URL resolution.
     - Verified GraphQL query execution on `batiksmile.com` and 302 redirection to active checkout session on `checkout.batiksmile.com`.
+25. **Tri-Domain Topology, Shopify CLI Linkage, & CSP Whitelisting**:
+    - Authenticated Shopify CLI and linked local repository permanently to storefront `Batik Smile (id: 1000176204)`.
+    - Documented and verified tripartite domain architecture (`batiksmile.com`, `checkout.batiksmile.com`, `account.batiksmile.com`).
+    - Whitelisted all three domains in CSP `connectSrc` directive in `app/entry.server.jsx`.
+    - Synchronized `PRD.md`, `ARCHITECTURE.md`, and standardized `.env.example` with Customer Account API parameters.
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
-- **Domain Verification**: Direct Storefront API GraphQL and checkout session verified on `checkout.batiksmile.com`.
-- **Deployment Status**: Configured and verified.
+- **Domain Verification**: Direct Storefront API GraphQL, live checkout session redirect, and customer account routing verified.
+- **Deployment Status**: Deployed and active on Shopify Oxygen Global Edge (Workflow `#33800203770`).
 
