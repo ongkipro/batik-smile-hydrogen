@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generatePageMeta } from '~/lib/seo';
 
 export const meta = () => {
-  return [
-    { title: 'Tentang Kami — Menjaga Warisan Luhur Batik Sejak 2007 | Batik Smile' },
-    {
-      name: 'description',
-      content:
-        'Profil resmi Batik Smile Nusantara. Berdiri sejak 2007 di Semarang dengan showroom flagship 3 lantai di Simongan dan cabang Banyumanik. Pelayanan berbudaya 3S 1C 1T & 1H.',
-    },
-  ];
+  return generatePageMeta({
+    handle: 'tentang-kami',
+    customTitle: 'Tentang Kami — Menjaga Warisan Luhur Batik Sejak 2007 | Batik Smile',
+    customDescription:
+      'Profil resmi Batik Smile Nusantara. Berdiri sejak 2007 di Semarang dengan showroom flagship 3 lantai di Simongan dan cabang Banyumanik. Pelayanan berbudaya 3S 1C 1T & 1H.',
+  });
 };
 
 export default function TentangKamiPage() {

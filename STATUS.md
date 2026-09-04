@@ -140,11 +140,18 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Documented and verified tripartite domain architecture (`batiksmile.com`, `checkout.batiksmile.com`, `account.batiksmile.com`).
     - Whitelisted all three domains in CSP `connectSrc` directive in `app/entry.server.jsx`.
     - Synchronized `PRD.md`, `ARCHITECTURE.md`, and standardized `.env.example` with Customer Account API parameters.
+26. **Catalog Slug Parity & Precise SEO Metadata Engine**:
+    - Audited 100% of live catalog handles: 31/31 Collections (HTTP 200), 23/23 Products (HTTP 200), 11/11 Pages (HTTP 200), 12/12 Blog Articles (HTTP 200).
+    - Built authoritative `app/lib/seo.js` metadata engine syncing Shopify Admin `seo.title` and `seo.description`.
+    - Fixed React Router v7 canonical tags to render standard `<link rel="canonical" href="https://batiksmile.com/...">` via `tagName: 'link'`.
+    - Injected OpenGraph and Twitter Summary Large Card tags across all routes.
+    - Standardized root `<html lang="id">` for Indonesian search engine targeting.
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
+- **Slug Parity**: 77 of 77 endpoints verified responding with HTTP 200 OK.
 - **Domain Verification**: Direct Storefront API GraphQL, live checkout session redirect, and customer account routing verified.
-- **Deployment Status**: Deployed and active on Shopify Oxygen Global Edge (Workflow `#33800203770`).
+- **Deployment Status**: Ready for deployment to Shopify Oxygen Global Edge.
 

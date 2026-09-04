@@ -1,20 +1,13 @@
 import { useLoaderData } from 'react-router';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generatePageMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
-  return [
-    {
-      title: `${data?.page.title ?? 'Halaman'} — Butik Batik Smile Nusantara`,
-    },
-    {
-      name: 'description',
-      content: data?.page.seo?.description || 'Halaman informasi resmi Butik Batik Smile Semarang.',
-    },
-  ];
+  return generatePageMeta({ page: data?.page });
 };
 
 /**

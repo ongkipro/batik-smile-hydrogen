@@ -6,20 +6,13 @@ import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { ProductItem } from '~/components/ProductItem';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { CollectionFilterBar } from '~/components/CollectionFilterBar';
+import { generateCollectionMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
-  return [
-    { title: `${data?.collection?.title ?? 'Katalog'} — Batik Smile Nusantara` },
-    {
-      name: 'description',
-      content:
-        data?.collection?.description ||
-        'Koleksi busana batik premium dan sarimbit keluarga dari Butik Batik Smile Nusantara Semarang.',
-    },
-  ];
+  return generateCollectionMeta(data?.collection);
 };
 
 /**
@@ -577,6 +570,10 @@ const COLLECTION_QUERY = `#graphql
       handle
       title
       description
+      seo {
+        title
+        description
+      }
       image {
         id
         altText

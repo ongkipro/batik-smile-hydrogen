@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generatePageMeta } from '~/lib/seo';
 
 export const meta = () => {
-  return [
-    { title: 'Fasilitas Showroom 3 Lantai Simongan — Batik Smile Semarang' },
-    {
-      name: 'description',
-      content:
-        'Jelajahi pengalaman belanja offline di Gedung 3 Lantai Batik Smile Simongan Semarang. Lantai 1 RTW, Lantai 2 Galeri Kain Tulis & VIP Lounge, Lantai 3 Oleh-oleh & Kerajinan.',
-    },
-  ];
+  return generatePageMeta({
+    handle: 'fasilitas-store',
+    customTitle: 'Fasilitas Showroom 3 Lantai Simongan — Batik Smile Semarang',
+    customDescription:
+      'Jelajahi pengalaman belanja offline di Gedung 3 Lantai Batik Smile Simongan Semarang. Lantai 1 RTW, Lantai 2 Galeri Kain Tulis & VIP Lounge, Lantai 3 Oleh-oleh & Kerajinan.',
+  });
 };
 
 export default function FasilitasStorePage() {

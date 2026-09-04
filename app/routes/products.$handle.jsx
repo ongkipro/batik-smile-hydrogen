@@ -14,6 +14,7 @@ import { ProductItem } from '~/components/ProductItem';
 import { ProductTierStorySection } from '~/components/ProductTierStorySection';
 import { BoutiqueMoney } from '~/lib/currency';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateProductMeta } from '~/lib/seo';
 
 /**
  * Parse Shopify product description HTML into narrative story and structured specifications
@@ -50,19 +51,7 @@ function parseShopifyDescription(html) {
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
-  return [
-    { title: `${data?.product?.title ?? 'Produk'} — Batik Smile Nusantara` },
-    {
-      name: 'description',
-      content:
-        data?.product?.description ||
-        'Busana batik berkualitas tinggi dari Butik Batik Smile Nusantara Semarang.',
-    },
-    {
-      rel: 'canonical',
-      href: `/products/${data?.product?.handle}`,
-    },
-  ];
+  return generateProductMeta(data?.product);
 };
 
 /**

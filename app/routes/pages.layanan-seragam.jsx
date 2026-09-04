@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generatePageMeta } from '~/lib/seo';
 
 export const meta = () => {
-  return [
-    { title: 'Layanan Seragam & Jahit Kustom — Tanpa Minimal Order | Batik Smile' },
-    {
-      name: 'description',
-      content:
-        'Spesialis pengadaan seragam batik instansi medis, korporat, dan keluarga pernikahan tanpa minimal order. Portofolio RS Bhayangkara, RSUD dr. Adhyatma, dan perbankan.',
-    },
-  ];
+  return generatePageMeta({
+    handle: 'layanan-seragam',
+    customTitle: 'Layanan Seragam & Jahit Kustom — Tanpa Minimal Order | Batik Smile',
+    customDescription:
+      'Spesialis pengadaan seragam batik instansi medis, korporat, dan keluarga pernikahan tanpa minimal order. Portofolio RS Bhayangkara, RSUD dr. Adhyatma, dan perbankan.',
+  });
 };
 
 export default function LayananSeragamPage() {

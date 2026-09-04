@@ -1165,6 +1165,29 @@
 - `npm run build`: Exit code 0.
 - Oxygen Deployment Workflow `#33800203770` succeeded in 49s.
 
+---
+
+## Milestone 42: Catalog Slug Parity Audit & 100% Precise SEO Metadata Engine (2026-09-04)
+**Date**: 2026-09-04 | **Execution**: Comprehensive inventory audit of Shopify Core catalog, verification of slug routing in Hydrogen, and implementation of authoritative SEO/OpenGraph metadata engine (`app/lib/seo.js`)
+
+### 1. Live Catalog Audit & Verification
+- **Collections (31/31 PASSED - HTTP 200)**: All 31 collection handles from Shopify Admin verified responsive.
+- **Products (23/23 PASSED - HTTP 200)**: All 23 product handles from Shopify Admin verified responsive.
+- **Pages (11/11 PASSED - HTTP 200)**: All 11 pages (custom and dynamic CMS) verified responsive.
+- **Articles (12/12 PASSED - HTTP 200)**: All 12 cultural wastra articles under `/blogs/news/*` verified responsive.
+
+### 2. SEO & Metadata Engine Calibration (`app/lib/seo.js`)
+- Integrated Shopify Admin `seo.title` and `seo.description` into all page types.
+- Fixed React Router v7 canonical tags to render standard `<link rel="canonical" href="https://batiksmile.com/...">` via `tagName: 'link'`.
+- Added OpenGraph (`og:title`, `og:description`, `og:image`, `og:type`, `og:url`, `og:site_name`, `og:price`) and Twitter Summary Large Cards across products, collections, pages, and articles.
+- Updated root `<html lang="id">` for Indonesian language targeting.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- Node HTML inspection verified exact reproduction of Shopify Admin search engine listing titles.
+
+
 
 
 

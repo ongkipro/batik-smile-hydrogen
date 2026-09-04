@@ -3,25 +3,13 @@ import { useLoaderData, Link, redirect } from 'react-router';
 import { Image, Money } from '@shopify/hydrogen';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateArticleMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
-  return [
-    { title: `${data?.article.title ?? 'Artikel'} — Butik Batik Smile Nusantara` },
-    {
-      name: 'description',
-      content:
-        data?.article.seo?.description ||
-        data?.article.excerpt ||
-        'Karya tulis dan jurnal budaya batik dari Butik Batik Smile Nusantara Semarang.',
-    },
-    {
-      rel: 'canonical',
-      href: `/blogs/${data?.blogHandle}/${data?.article.handle}`,
-    },
-  ];
+  return generateArticleMeta(data?.article, data?.blogHandle);
 };
 
 /**

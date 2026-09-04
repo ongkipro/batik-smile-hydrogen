@@ -4,19 +4,13 @@ import { PaginatedResourceSection } from '~/components/PaginatedResourceSection'
 import { ProductItem } from '~/components/ProductItem';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { CollectionFilterBar } from '~/components/CollectionFilterBar';
+import { generateCollectionMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [
-    { title: 'Katalog Lengkap Busana Batik — Butik Batik Smile Semarang' },
-    {
-      name: 'description',
-      content:
-        'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga, kemeja pria lapis furing, dan kain batik tulis asli Batik Smile.',
-    },
-  ];
+  return generateCollectionMeta(null, true);
 };
 
 /**
