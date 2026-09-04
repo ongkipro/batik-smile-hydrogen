@@ -403,6 +403,7 @@ export type HomepageDataQueryVariables = StorefrontAPI.Exact<{
 }>;
 
 export type HomepageDataQuery = {
+  shop: Pick<StorefrontAPI.Shop, 'name' | 'description'>;
   womenCollection?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Collection, 'id' | 'title'> & {
       products: {
@@ -1105,6 +1106,22 @@ export type PageQuery = {
   >;
 };
 
+export type PageSeoQueryVariables = StorefrontAPI.Exact<{
+  handle: StorefrontAPI.Scalars['String']['input'];
+  country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
+  language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
+}>;
+
+export type PageSeoQuery = {
+  page?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'title' | 'handle'> & {
+      seo?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Seo, 'title' | 'description'>
+      >;
+    }
+  >;
+};
+
 export type PolicyFragment = Pick<
   StorefrontAPI.ShopPolicy,
   'body' | 'handle' | 'id' | 'title' | 'url'
@@ -1700,7 +1717,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    womenCollection: collection(handle: "batik-wanita") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    menCollection: collection(handle: "batik-pria") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    sarimbitCollection: collection(handle: "sarimbit-ekonomis") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "jarik-kain-batik") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    heroBanners: metaobjects(type: "hero_banner", first: 1) {\n      nodes {\n        id\n        handle\n        fields {\n          key\n          value\n        }\n      }\n    }\n    heritageVideos: metaobjects(type: "heritage_video", first: 1) {\n      nodes {\n        id\n        handle\n        fields {\n          key\n          value\n        }\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      name\n      description\n    }\n    womenCollection: collection(handle: "batik-wanita") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    menCollection: collection(handle: "batik-pria") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    sarimbitCollection: collection(handle: "sarimbit-ekonomis") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "jarik-kain-batik") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    heroBanners: metaobjects(type: "hero_banner", first: 1) {\n      nodes {\n        id\n        handle\n        fields {\n          key\n          value\n        }\n      }\n    }\n    heritageVideos: metaobjects(type: "heritage_video", first: 1) {\n      nodes {\n        id\n        handle\n        fields {\n          key\n          value\n        }\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: HomepageDataQuery;
     variables: HomepageDataQueryVariables;
   };
@@ -1731,6 +1748,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  query Page(\n    $language: LanguageCode,\n    $country: CountryCode,\n    $handle: String!\n  )\n  @inContext(language: $language, country: $country) {\n    page(handle: $handle) {\n      handle\n      id\n      title\n      body\n      seo {\n        description\n        title\n      }\n    }\n  }\n': {
     return: PageQuery;
     variables: PageQueryVariables;
+  };
+  '#graphql\n  query PageSeo(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n  ) @inContext(country: $country, language: $language) {\n    page(handle: $handle) {\n      id\n      title\n      handle\n      seo {\n        title\n        description\n      }\n    }\n  }\n': {
+    return: PageSeoQuery;
+    variables: PageSeoQueryVariables;
   };
   '#graphql\n  fragment Policy on ShopPolicy {\n    body\n    handle\n    id\n    title\n    url\n  }\n  query Policy(\n    $country: CountryCode\n    $language: LanguageCode\n    $privacyPolicy: Boolean!\n    $refundPolicy: Boolean!\n    $shippingPolicy: Boolean!\n    $termsOfService: Boolean!\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      privacyPolicy @include(if: $privacyPolicy) {\n        ...Policy\n      }\n      shippingPolicy @include(if: $shippingPolicy) {\n        ...Policy\n      }\n      termsOfService @include(if: $termsOfService) {\n        ...Policy\n      }\n      refundPolicy @include(if: $refundPolicy) {\n        ...Policy\n      }\n    }\n  }\n': {
     return: PolicyQuery;

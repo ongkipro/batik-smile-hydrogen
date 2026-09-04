@@ -3,8 +3,39 @@ import { Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePageMeta } from '~/lib/seo';
 
-export const meta = () => {
+const PAGE_SEO_QUERY = `#graphql
+  query PageSeo(
+    $handle: String!
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    page(handle: $handle) {
+      id
+      title
+      handle
+      seo {
+        title
+        description
+      }
+    }
+  }
+`;
+
+export async function loader({ context }) {
+  try {
+    const data = await context.storefront.query(PAGE_SEO_QUERY, {
+      variables: { handle: 'tentang-kami' },
+      cache: context.storefront.CacheLong(),
+    });
+    return { page: data?.page || null };
+  } catch {
+    return { page: null };
+  }
+}
+
+export const meta = ({ data }) => {
   return generatePageMeta({
+    page: data?.page,
     handle: 'tentang-kami',
     customTitle: 'Tentang Kami — Menjaga Warisan Luhur Batik Sejak 2007 | Batik Smile',
     customDescription:

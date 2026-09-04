@@ -2,19 +2,13 @@ import { useLoaderData, Link } from 'react-router';
 import { getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateCollectionIndexMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [
-    { title: 'Koleksi Busana Batik & Sarimbit — Butik Batik Smile Nusantara' },
-    {
-      name: 'description',
-      content:
-        'Koleksi lengkap busana batik modern, sarimbit keluarga 3 kasta, dan kain batik tulis asli dari Butik Batik Smile Semarang.',
-    },
-  ];
+  return generateCollectionIndexMeta();
 };
 
 /**

@@ -1,15 +1,12 @@
 import { useLoaderData } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generatePolicyMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = ({ data }) => {
-  return [
-    {
-      title: `${data?.policy.title ?? 'Kebijakan'} — Butik Batik Smile Nusantara`,
-    },
-  ];
+export const meta = ({ data, params }) => {
+  return generatePolicyMeta(data?.policy, params?.handle);
 };
 
 /**

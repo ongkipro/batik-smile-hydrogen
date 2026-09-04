@@ -1,23 +1,13 @@
 import React from 'react';
 import { Link, useRouteError, isRouteErrorResponse } from 'react-router';
 import { useAside } from '~/components/Aside';
+import { generateNotFoundMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [
-    { title: '404 — Halaman Tidak Ditemukan | Butik Batik Smile Semarang' },
-    {
-      name: 'description',
-      content:
-        'Halaman atau arsip koleksi yang Anda tuju belum tersedia di Butik Batik Smile Nusantara.',
-    },
-    {
-      name: 'robots',
-      content: 'noindex, nofollow',
-    },
-  ];
+  return generateNotFoundMeta();
 };
 
 /**

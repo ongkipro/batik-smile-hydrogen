@@ -3,12 +3,13 @@ import { Image, getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateBlogMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
-  return [{ title: `${data?.blog.title ?? 'Jurnal'} — Butik Batik Smile Nusantara` }];
+  return generateBlogMeta(data?.blog);
 };
 
 /**

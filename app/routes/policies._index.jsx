@@ -1,17 +1,12 @@
 import { useLoaderData, Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generatePoliciesIndexMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [
-    { title: 'Kebijakan Pelayanan Butik — Butik Batik Smile Nusantara' },
-    {
-      name: 'description',
-      content: 'Informasi resmi kebijakan privasi, garansi penukaran ukuran, ketentuan pengiriman, dan layanan Batik Smile Semarang.',
-    },
-  ];
+  return generatePoliciesIndexMeta();
 };
 
 /**

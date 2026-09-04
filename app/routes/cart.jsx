@@ -2,18 +2,13 @@ import { useLoaderData, data, Link } from 'react-router';
 import { CartForm } from '@shopify/hydrogen';
 import { CartMain } from '~/components/CartMain';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateCartMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [
-    { title: 'Tas Belanja — Butik Batik Smile Nusantara' },
-    {
-      name: 'description',
-      content: 'Tinjau pesanan busana batik dan sarimbit keluarga Anda sebelum melanjutkan ke pembayaran resmi Shopify.',
-    },
-  ];
+  return generateCartMeta();
 };
 
 /**

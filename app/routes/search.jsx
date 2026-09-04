@@ -4,18 +4,13 @@ import { SearchForm } from '~/components/SearchForm';
 import { SearchResults } from '~/components/SearchResults';
 import { getEmptyPredictiveSearchResult } from '~/lib/search';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateSearchMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = () => {
-  return [
-    { title: 'Pencarian Produk — Butik Batik Smile Nusantara' },
-    {
-      name: 'description',
-      content: 'Cari koleksi sarimbit keluarga, batik wanita modern, kemeja pria lapis furing, dan kain batik tulis asli.',
-    },
-  ];
+export const meta = ({ data }) => {
+  return generateSearchMeta(data?.term);
 };
 
 /**

@@ -33,6 +33,39 @@ export function getSeoDescription(desc, fallback) {
 }
 
 /**
+ * Generate Homepage SEO metadata
+ * Dynamically fetches shop name & description from Shopify, falling back to brand copy.
+ * @param {any} [shop]
+ */
+export function generateHomeMeta(shop) {
+  const shopName = shop?.name || SITE_NAME;
+  const title = `${shopName} — Butik Batik Modern & Sarimbit Keluarga`;
+  const description = getSeoDescription(
+    shop?.description,
+    'Butik batik modern premium sejak 2007 di Semarang. Koleksi sarimbit keluarga 3 kasta, kain batik tulis asli Pekalongan & Solo, serta layanan jahit bespoke tanpa minimal order.'
+  );
+  const canonicalUrl = `${ROOT_DOMAIN}`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    // OpenGraph
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
  * Generate Product SEO metadata
  * @param {any} product
  */
@@ -144,6 +177,31 @@ export function generateCollectionMeta(collection, isAll = false) {
 }
 
 /**
+ * Generate Collections Index SEO metadata (/collections)
+ */
+export function generateCollectionIndexMeta() {
+  const title = `Koleksi Busana Batik & Sarimbit Keluarga — ${SITE_NAME}`;
+  const description = 'Koleksi lengkap busana batik modern, sarimbit keluarga 3 kasta, kemeja pria furing katun hero, dan kain batik tulis asli dari Butik Batik Smile Semarang.';
+  const canonicalUrl = `${ROOT_DOMAIN}/collections`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
  * Generate CMS Page SEO metadata
  * @param {{ page?: any, customTitle?: string, customDescription?: string, handle?: string }} args
  */
@@ -213,5 +271,186 @@ export function generateArticleMeta(article, blogHandle = 'news') {
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: imageUrl },
+  ];
+}
+
+/**
+ * Generate Blog Index SEO metadata (/blogs)
+ * @param {any} [primaryBlog]
+ */
+export function generateBlogsIndexMeta(primaryBlog) {
+  const rawTitle = primaryBlog?.seo?.title || primaryBlog?.title;
+  const title = getSeoTitle(rawTitle, `Warta & Jurnal Kebudayaan Wastra — ${SITE_NAME}`);
+  const description = getSeoDescription(
+    primaryBlog?.seo?.description,
+    'Kumpulan artikel, jurnal batik tulis, filosofi motif Jawa, etika berbusana, dan panduan perawatan wastra dari Butik Batik Smile Semarang.'
+  );
+  const canonicalUrl = `${ROOT_DOMAIN}/blogs`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
+ * Generate Single Blog Category SEO metadata (/blogs/:blogHandle)
+ * @param {any} blog
+ */
+export function generateBlogMeta(blog) {
+  if (!blog) {
+    return [
+      { title: `Kategori Jurnal Tidak Ditemukan — ${SITE_NAME}` },
+      { name: 'robots', content: 'noindex, nofollow' },
+    ];
+  }
+
+  const rawTitle = blog.seo?.title || blog.title;
+  const title = getSeoTitle(rawTitle, `${blog.title} — ${SITE_NAME}`);
+  const description = getSeoDescription(
+    blog.seo?.description,
+    `Catatan dan artikel seputar ${blog.title} dari Butik Batik Smile Nusantara Semarang.`
+  );
+  const canonicalUrl = `${ROOT_DOMAIN}/blogs/${blog.handle}`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
+ * Generate Policy Page SEO metadata (/policies/:handle)
+ * @param {any} policy
+ * @param {string} handle
+ */
+export function generatePolicyMeta(policy, handle) {
+  const policyTitle = policy?.title || 'Kebijakan Pelayanan Butik';
+  const title = `${policyTitle} — ${SITE_NAME}`;
+  const rawBody = policy?.body ? policy.body.slice(0, 250) : null;
+  const description = getSeoDescription(
+    rawBody,
+    'Informasi resmi ketentuan dan kebijakan layanan Butik Batik Smile Nusantara Semarang.'
+  );
+  const canonicalUrl = `${ROOT_DOMAIN}/policies/${handle}`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
+ * Generate Policies Index SEO metadata (/policies)
+ */
+export function generatePoliciesIndexMeta() {
+  const title = `Kebijakan Pelayanan & Garansi Butik — ${SITE_NAME}`;
+  const description = 'Informasi resmi kebijakan privasi, garansi penukaran ukuran, ketentuan pengiriman, dan komitmen layanan Batik Smile Semarang.';
+  const canonicalUrl = `${ROOT_DOMAIN}/policies`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
+ * Generate Search Page SEO metadata (/search)
+ * @param {string} [term]
+ */
+export function generateSearchMeta(term) {
+  const title = term
+    ? `Pencarian: "${term}" — ${SITE_NAME}`
+    : `Pencarian Katalog Busana Batik — ${SITE_NAME}`;
+  const description = 'Cari koleksi sarimbit keluarga, batik wanita modern, kemeja pria lapis furing hero, dan kain batik tulis asli Batik Smile Semarang.';
+  const canonicalUrl = `${ROOT_DOMAIN}/search`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    // Prevent indexation of dynamic internal search query permutations per Google SEO guidelines
+    { name: 'robots', content: 'noindex, follow' },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+  ];
+}
+
+/**
+ * Generate Cart Page SEO metadata (/cart)
+ */
+export function generateCartMeta() {
+  const title = `Tas Belanja — ${SITE_NAME}`;
+  const description = 'Tinjau pesanan busana batik dan sarimbit keluarga Anda sebelum melanjutkan ke pembayaran resmi Shopify.';
+  const canonicalUrl = `${ROOT_DOMAIN}/cart`;
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    // Cart pages should not be indexed by search engines
+    { name: 'robots', content: 'noindex, nofollow' },
+  ];
+}
+
+/**
+ * Generate 404 / Catch-all SEO metadata
+ */
+export function generateNotFoundMeta() {
+  return [
+    { title: `404 — Halaman Tidak Ditemukan | ${SITE_NAME}` },
+    {
+      name: 'description',
+      content: 'Halaman atau arsip koleksi yang Anda tuju belum tersedia di Butik Batik Smile Nusantara.',
+    },
+    { name: 'robots', content: 'noindex, nofollow' },
   ];
 }

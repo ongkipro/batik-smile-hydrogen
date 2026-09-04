@@ -10,28 +10,13 @@ import { ChooseYourBatikGrid } from '~/components/ChooseYourBatikGrid';
 import { TrustGuaranteeBar } from '~/components/TrustGuaranteeBar';
 import { ShowroomO2O } from '~/components/ShowroomO2O';
 
+import { generateHomeMeta } from '~/lib/seo';
+
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = () => {
-  const title = 'Batik Smile Nusantara — Butik Batik Modern & Sarimbit Keluarga';
-  const description =
-    'Butik batik modern premium sejak 2007 di Semarang. Koleksi sarimbit keluarga 3 kasta, kain batik tulis asli Pekalongan & Solo, serta layanan jahit bespoke tanpa minimal order.';
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: 'https://batiksmile.com' },
-    { property: 'og:site_name', content: 'Batik Smile Nusantara' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: 'https://batiksmile.com' },
-    { property: 'og:image', content: 'https://batiksmile.com/banners/hero-desktop.webp' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: 'https://batiksmile.com/banners/hero-desktop.webp' },
-  ];
+export const meta = ({ data }) => {
+  return generateHomeMeta(data?.shop);
 };
 
 /**
@@ -133,6 +118,7 @@ export async function loader({ context }) {
     newestProducts,
     editorialArticles,
     editorialBlogHandle,
+    shop: data?.shop,
   };
 }
 
@@ -227,6 +213,10 @@ const HOMEPAGE_QUERY = `#graphql
 
   query HomepageData($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
+    shop {
+      name
+      description
+    }
     womenCollection: collection(handle: "batik-wanita") {
       id
       title

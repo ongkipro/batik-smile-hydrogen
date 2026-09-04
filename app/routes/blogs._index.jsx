@@ -3,19 +3,13 @@ import { Link, useLoaderData } from 'react-router';
 import { Image, getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { generateBlogsIndexMeta } from '~/lib/seo';
 
 /**
  * @type {Route.MetaFunction}
  */
-export const meta = () => {
-  return [
-    { title: 'Warta & Jurnal Kebudayaan — Butik Batik Smile Semarang' },
-    {
-      name: 'description',
-      content:
-        'Kumpulan artikel, jurnal batik tulis, filosofi motif Jawa, etika berbusana, dan panduan perawatan busana batik dari Butik Batik Smile Semarang.',
-    },
-  ];
+export const meta = ({ data }) => {
+  return generateBlogsIndexMeta(data?.blog);
 };
 
 /**
