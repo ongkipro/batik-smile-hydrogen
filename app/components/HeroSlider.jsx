@@ -74,7 +74,12 @@ const SLIDES = [
 export function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const touchStartX = useRef(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isPaused) return;
@@ -123,6 +128,9 @@ export function HeroSlider() {
     >
       {/* Background Slides with Cross-Fade */}
       {SLIDES.map((slide, index) => {
+        // Defer non-primary slides until client hydration to avoid initial LCP bandwidth competition
+        if (index > 0 && !isMounted) return null;
+
         const isActive = index === current;
         return (
           <div
@@ -132,21 +140,52 @@ export function HeroSlider() {
             }`}
           >
             {/* Background Image with Subtle Slow Pan & AVIF Next-Gen Format */}
-            <picture>
-              <source srcSet={slide.image.replace('.jpg', '.avif')} type="image/avif" />
-              <img
-                src={slide.image}
-                alt={slide.title}
-                fetchPriority={index === 0 ? 'high' : 'auto'}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding={index === 0 ? 'sync' : 'async'}
-                width="1920"
-                height="1080"
-                className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
-                  isActive ? 'scale-105' : 'scale-100'
-                }`}
-              />
-            </picture>
+            {index === 0 ? (
+              <picture>
+                <source
+                  media="(max-width: 640px)"
+                  srcSet="/banners/hero_slider_1_mobile.avif"
+                  type="image/avif"
+                />
+                <source
+                  media="(max-width: 640px)"
+                  srcSet="/banners/hero_slider_1_mobile.jpg"
+                  type="image/jpeg"
+                />
+                <source
+                  srcSet={slide.image.replace('.jpg', '.avif')}
+                  type="image/avif"
+                />
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="sync"
+                  width="1920"
+                  height="1080"
+                  className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
+                    isActive ? 'scale-105' : 'scale-100'
+                  }`}
+                />
+              </picture>
+            ) : (
+              <picture>
+                <source srcSet={slide.image.replace('.jpg', '.avif')} type="image/avif" />
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  fetchPriority="auto"
+                  loading="lazy"
+                  decoding="async"
+                  width="1920"
+                  height="1080"
+                  className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
+                    isActive ? 'scale-105' : 'scale-100'
+                  }`}
+                />
+              </picture>
+            )}
 
             {/* Quiet Luxury Dark & Amber Gradients */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/35" />

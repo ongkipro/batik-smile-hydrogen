@@ -41,9 +41,19 @@ export const links = () => {
   return [
     {
       rel: 'preload',
+      href: '/banners/hero_slider_1_mobile.avif',
+      as: 'image',
+      type: 'image/avif',
+      media: '(max-width: 640px)',
+      fetchPriority: 'high',
+    },
+    {
+      rel: 'preload',
       href: '/banners/hero_slider_1.avif',
       as: 'image',
       type: 'image/avif',
+      media: '(min-width: 641px)',
+      fetchPriority: 'high',
     },
   ];
 };

@@ -74,6 +74,9 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
               data={secondaryImage}
               alt={secondaryImage.altText || rawTitle}
               aspectRatio="4/5"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
               className="w-full h-full object-cover object-center scale-105"
             />

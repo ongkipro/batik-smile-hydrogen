@@ -61,22 +61,36 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
 
             {/* Desktop Brand Logo (Left-aligned on lg screens) */}
             <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
-              <img
-                src="/brand/batik-smile-logo.png"
-                alt="Batik Smile Nusantara"
-                className="h-10 sm:h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
-              />
+              <picture>
+                <source srcSet="/brand/batik-smile-logo.webp" type="image/webp" />
+                <img
+                  src="/brand/batik-smile-logo.png"
+                  alt="Batik Smile Nusantara"
+                  width="200"
+                  height="48"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-10 sm:h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
+                />
+              </picture>
             </NavLink>
           </div>
 
           {/* Mobile Centered Brand Logo (Dead Center on Mobile Viewports - Calibrated Size) */}
           <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-auto">
             <NavLink to="/" className="flex items-center group">
-              <img
-                src="/brand/batik-smile-logo.png"
-                alt="Batik Smile Nusantara"
-                className="h-10 sm:h-11 w-auto max-w-[170px] sm:max-w-[200px] object-contain group-hover:opacity-90 transition-opacity"
-              />
+              <picture>
+                <source srcSet="/brand/batik-smile-logo.webp" type="image/webp" />
+                <img
+                  src="/brand/batik-smile-logo.png"
+                  alt="Batik Smile Nusantara"
+                  width="170"
+                  height="44"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-10 sm:h-11 w-auto max-w-[170px] sm:max-w-[200px] object-contain group-hover:opacity-90 transition-opacity"
+                />
+              </picture>
             </NavLink>
           </div>
 

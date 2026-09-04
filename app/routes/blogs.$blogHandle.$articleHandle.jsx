@@ -187,7 +187,7 @@ export default function Article() {
 
             <a
               href={`https://wa.me/?text=${encodeURIComponent(
-                `Baca catatan wastra "${title}" dari Butik Batik Smile Nusantara:\nhttps://cart.batiksmile.com/blogs/${blogHandle}/${article.handle}`,
+                `Baca catatan wastra "${title}" dari Butik Batik Smile Nusantara:\nhttps://batiksmile.com/blogs/${blogHandle}/${article.handle}`,
               )}`}
               target="_blank"
               rel="noreferrer"

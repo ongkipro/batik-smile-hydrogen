@@ -326,6 +326,9 @@ export default function Product() {
               >
                 {imageList.map((img, idx) => {
                   const isActive = (activeImage?.url || imageList[0]?.url) === img.url;
+                  const thumbUrl = img.url?.includes('?')
+                    ? `${img.url}&width=160`
+                    : `${img.url}?width=160`;
                   return (
                     <button
                       key={img.id || idx}
@@ -345,7 +348,7 @@ export default function Product() {
                       aria-label={`Pilih gambar produk ${idx + 1}`}
                     >
                       <img
-                        src={img.url}
+                        src={thumbUrl}
                         alt={img.altText || `${title} - Gambar ${idx + 1}`}
                         loading="lazy"
                         decoding="async"
@@ -373,7 +376,11 @@ export default function Product() {
               <div className="relative aspect-[4/5] w-full overflow-hidden">
                 {activeImage ? (
                   <img
-                    src={activeImage.url}
+                    src={
+                      activeImage.url?.includes('?')
+                        ? `${activeImage.url}&width=1000`
+                        : `${activeImage.url}?width=1000`
+                    }
                     alt={activeImage.altText || title}
                     fetchPriority="high"
                     loading="eager"
