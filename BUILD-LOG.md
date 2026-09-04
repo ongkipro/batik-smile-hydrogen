@@ -1187,34 +1187,71 @@
 - `npm run build`: Exit code 0.
 - Node HTML inspection verified exact reproduction of Shopify Admin search engine listing titles.
 
+---
 
+## Milestone 43: Google PageSpeed Insights Mobile & Desktop Performance Optimization (2026-09-04)
+**Date**: 2026-09-04 | **Execution**: Global Brand Logo WebP Conversion, Mobile Hero AVIF Generation, LCP Resource Preloading, Enforced Below-The-Fold Lazy-Loading, and PSI Metric Verification
 
+### 1. Global Brand Logo WebP Optimization
+- Converted raw unoptimized 3600px PNG logo (`public/brand/batik-smile-logo.png`, 373 KB) into modern responsive WebP assets (`public/logo/logo-600.webp` and `public/logo.webp`).
+- Reduced header network payload by ~90% while retaining razor-sharp 2x retina clarity on mobile viewports.
+- Integrated into `Header.jsx`, `Footer.jsx`, `LuxurySearchModal.jsx`, and mobile navigation drawer.
 
+### 2. Mobile Hero Banner AVIF Generation & Responsive Picture
+- Created next-gen AVIF mobile banner (`public/banners/hero_slider_1_mobile.avif`), tailored specifically for mobile screen dimensions and cellular network bandwidth.
+- Implemented responsive `<picture>` markup in `HeroSlider.jsx` serving lightweight AVIF on mobile (`media="(max-width: 768px)"`) and full-res desktop imagery on larger viewports.
 
+### 3. LCP Resource Preloading & PDP Priority Fetching
+- Configured `fetchPriority="high"`, `loading="eager"`, and `decoding="async"` on the initial hero slide to accelerate First Contentful Paint (FCP) and Largest Contentful Paint (LCP).
+- Added `fetchPriority="high"` on the primary PDP gallery image in `products.$handle.jsx`.
 
+### 4. Enforced Lazy-Loading Across Below-The-Fold Assets
+- Enforced `loading="lazy"` and `decoding="async"` across all catalog product cards (`ProductItem.jsx`), related products ("Koleksi Selaras"), and editorial CMS content blocks.
+- Guaranteed zero layout thrashing or render-blocking media downloads.
 
+### 5. Verification Evidence & PSI Real-World Scores
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- **Mobile Performance Jump**: Performance score surged from **51 &rarr; 81 / 100** (LCP dropped from 16.6s to 4.1s).
+- **PDP Mobile Performance**: Jumped from **55 &rarr; 75 / 100** (LCP dropped from 6.3s to 4.8s).
+- **Desktop Performance**: Scored **90 – 98 / 100** consistently across templates.
+- **SEO Score**: **100 / 100** across mobile and desktop.
+- **Cumulative Layout Shift (CLS)**: **0.00** (perfect stability).
 
+---
 
+## Milestone 44: Complete Dynamic SEO Engine, Custom Sitemap Chunk & Authoritative Robots.txt (2026-09-04)
+**Date**: 2026-09-04 | **Execution**: Route-Wide Dynamic Shopify Storefront API SEO Integration (`app/lib/seo.js`), Bogus Locale Elimination, Custom Sitemap Chunk (`/sitemap/custom/1.xml`), AI-Friendly Authoritative Robots.txt (`/robots.txt`), and Live Oxygen Production Release
 
+### 1. Centralized Dynamic SEO Metadata Engine (`app/lib/seo.js`)
+- Authored a comprehensive suite of dynamic meta generators extracting live data from Shopify Storefront API:
+  - `generateHomeMeta`: Dynamic `shop.name` and `shop.description` with quiet luxury branding.
+  - `generateCollectionIndexMeta` & `generateCollectionMeta`: Catalog curation meta, handle-aware title/description, collection image, and canonical URL.
+  - `generateProductMeta`: Product title, price formatted in IDR, stock status, primary imagery, and rich product schema.
+  - `generatePageMeta`: Integrated `PAGE_SEO_QUERY` across `pages.tentang-kami.jsx`, `pages.fasilitas-store.jsx`, `pages.lokasi-toko.jsx`, `pages.layanan-seragam.jsx`, and dynamic `pages.$handle.jsx`.
+  - `generateBlogsIndexMeta`, `generateBlogMeta`, and `generateArticleMeta`: Cultural wastra storytelling titles, summaries, and social share cards.
+  - `generatePoliciesIndexMeta` & `generatePolicyMeta`: Official boutique legal policies with canonical mapping.
+  - `generateSearchMeta`, `generateCartMeta`, and `generateNotFoundMeta`: Configured with strict `noindex, follow` or `noindex, nofollow` headers to safeguard crawl budget.
+- Formatted OpenGraph (`og:site_name`, `og:type`, `og:title`, `og:description`, `og:url`, `og:image`, `og:locale: "id_ID"`), Twitter Summary Large Cards, and canonical tags via `tagName: 'link'`.
 
+### 2. Clean Sitemaps & Dedicated Custom Chunk (`app/routes/sitemap.$type.$page[.xml].jsx` & `app/routes/[sitemap.xml].jsx`)
+- Purged hardcoded fake locales (`['EN-US', 'EN-CA', 'FR-CA']`) from Hydrogen boilerplate that caused 404 crawl errors on Google Search Console.
+- Implemented dedicated custom sitemap chunk (`params.type === 'custom'`) serving 15 storefront-native URLs (`/`, `/collections/all`, `/collections`, `/blogs`, `/pages/*`, `/policies/*`) with defined `<priority>` and `<changefreq>`.
+- Injected `<sitemap><loc>https://batiksmile.com/sitemap/custom/1.xml</loc></sitemap>` into the XML sitemap index.
 
+### 3. Authoritative Robots.txt Engine (`app/routes/[robots.txt].jsx`)
+- Removed harmful `Disallow: /policies/` that blocked search engines from crawling trust policies.
+- Blocked administrative and cart query parameters (`/checkout`, `/checkouts/`, `/cart`, `/account`, `/*?*sort_by=*`, `/*?*filter.*=*`, `/*?*+*`, `/*?*%2B*`).
+- Explicitly allowed major search engines (`Googlebot`, `Bingbot`, `Applebot`) and modern AI search/answer engine crawlers (`OAI-SearchBot`, `GPTBot`, `Claude-SearchBot`, `ClaudeBot`, `PerplexityBot`).
+- Declared canonical sitemap link: `Sitemap: https://batiksmile.com/sitemap.xml`.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### 4. Production Deployment & Live Verification
+- Deployed commit `ba645fc` to Shopify Oxygen Global Edge (`https://batiksmile.com`).
+- Live curl verification confirmed:
+  - `https://batiksmile.com/robots.txt` &rarr; HTTP 200 with new AI-crawler directives and canonical sitemap.
+  - `https://batiksmile.com/sitemap.xml` &rarr; HTTP 200 with `/sitemap/custom/1.xml` chunk.
+  - `https://batiksmile.com/sitemap/custom/1.xml` &rarr; HTTP 200 rendering 15 storefront URLs.
+  - `https://batiksmile.com/sitemap/pages/1.xml` &rarr; HTTP 200 with zero fake alternate hreflangs.
+  - Core routes (`/`, `/collections/all`, `/products/sarimbit-royal-navy-1`, `/pages/tentang-kami`, `/policies/kebijakan-pengiriman`, `/search`, `404`) verified with dynamic metadata.
 
 

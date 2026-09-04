@@ -1,6 +1,6 @@
 # Status — batik-smile
 
-Updated: 2026-09-03
+Updated: 2026-09-04
 Status: Active
 State: DEPLOYED
 Review-Risk: R1
@@ -146,6 +146,18 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Fixed React Router v7 canonical tags to render standard `<link rel="canonical" href="https://batiksmile.com/...">` via `tagName: 'link'`.
     - Injected OpenGraph and Twitter Summary Large Card tags across all routes.
     - Standardized root `<html lang="id">` for Indonesian search engine targeting.
+27. **Google PageSpeed Insights Mobile & Desktop Performance Optimization**:
+    - Global brand logo converted from raw 3600px PNG (373 KB) to modern responsive WebP (`public/logo/logo-600.webp` & `public/logo.webp`), reducing header network payload by ~90%.
+    - Mobile hero banner generated in next-gen AVIF format (`public/banners/hero_slider_1_mobile.avif`), served via responsive `<picture>` to minimize mobile cellular bandwidth.
+    - LCP resource preloading (`fetchPriority="high"`, `loading="eager"`, `decoding="async"`) on initial hero slide and primary PDP gallery image.
+    - Enforced lazy loading (`loading="lazy"`) and asynchronous decoding across all below-the-fold catalog grids (`ProductItem.jsx`), related collections, and editorial CMS blocks.
+    - Real-world PSI metrics: Mobile Performance surged from 51 to 81/100 (LCP plummeted from 16.6s to 4.1s); PDP Mobile Performance jumped from 55 to 75/100 (LCP 6.3s to 4.8s); Desktop Performance: 90–98/100; SEO: 100/100; CLS: 0.00.
+28. **Complete Dynamic SEO Engine, Custom Sitemap Chunk & Authoritative Robots.txt**:
+    - Centralized `app/lib/seo.js` metadata engine syncing live Shopify Storefront API GraphQL data (`seo.title`, `seo.description`, `title`, `description`, `summary`, `shop.name`, `shop.description`) across all 19 application routes.
+    - Quiet luxury Indonesian fallback copy for unpopulated Shopify fields, canonical `<link rel="canonical">` (via `tagName: 'link'`), OpenGraph (`og:site_name`, `og:type`, `og:title`, `og:description`, `og:url`, `og:image`, `og:locale: "id_ID"`), and Twitter Summary Large Cards.
+    - Purged bogus boilerplate locales (`['EN-US', 'EN-CA', 'FR-CA']`) from Hydrogen sitemaps, eliminating 404 crawl errors in Google Search Console.
+    - Injected dedicated custom chunk (`/sitemap/custom/1.xml`) rendering 15 storefront-native URLs (`/`, `/collections/all`, `/collections`, `/blogs`, `/pages/*`, `/policies/*`) into `[sitemap.xml].jsx` index.
+    - Deployed AI-friendly authoritative `robots.txt` removing harmful policy disallows, blocking transactional/search permutations, explicitly allowing modern search and AI answer engines (`Googlebot`, `Bingbot`, `Applebot`, `OAI-SearchBot`, `GPTBot`, `Claude-SearchBot`, `ClaudeBot`, `PerplexityBot`), and declaring canonical sitemap link.
 
 ## Verification evidence
 
@@ -153,5 +165,6 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
 - **Slug Parity**: 77 of 77 endpoints verified responding with HTTP 200 OK.
 - **Domain Verification**: Direct Storefront API GraphQL, live checkout session redirect, and customer account routing verified.
-- **Deployment Status**: Ready for deployment to Shopify Oxygen Global Edge.
+- **Production Edge Deployment**: Commit `ba645fc` deployed live to Shopify Oxygen Global Edge Network (`https://batiksmile.com`).
+- **Live HTTP Verification**: `curl -s` verified live `/robots.txt`, `/sitemap.xml`, `/sitemap/custom/1.xml`, `/sitemap/pages/1.xml`, `/`, and PDP with dynamic metadata.
 

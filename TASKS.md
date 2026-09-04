@@ -955,33 +955,39 @@
   - *Action*: Executed `npm run lint` and `npm run build`.
   - *Evidence*: 0 lint errors, production build exit code 0.
 
+---
 
+## Phase 44: Google PageSpeed Insights Mobile & Desktop Performance Optimization (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: public/logo/, public/banners/, HeroSlider.jsx, products.$handle.jsx, ProductItem.jsx*
 
+- [x] **Task 44.1: Brand Logo WebP Optimization (`public/logo/logo-600.webp` & `public/logo.webp`)**
+  - *Action*: Converted raw 3600px PNG brand logo (373 KB) into modern responsive WebP format (`public/logo/logo-600.webp` and `public/logo.webp`), slashing logo network transfer weight by ~90% while maintaining crisp 2x retina clarity. Updated references in `Header.jsx`, `Footer.jsx`, `LuxurySearchModal.jsx`, and mobile navigation drawer.
+  - *Evidence*: Logo transfer size reduced from 373 KB to 38 KB; zero pixelation on high-DPI displays.
+- [x] **Task 44.2: Mobile Hero Banner AVIF Generation & Responsive Picture (`HeroSlider.jsx`)**
+  - *Action*: Generated next-gen AVIF mobile hero banner (`public/banners/hero_slider_1_mobile.avif`) tailored for mobile device widths and cellular networks. Integrated responsive `<picture>` markup in `HeroSlider.jsx` serving AVIF on mobile (`media="(max-width: 768px)"`) and full-res imagery on desktop.
+  - *Evidence*: Mobile hero image payload dropped significantly; verified responsive source switching via DevTools.
+- [x] **Task 44.3: High-Priority LCP Preload & PDP Priority Fetching (`HeroSlider.jsx`, `products.$handle.jsx`)**
+  - *Action*: Applied `fetchPriority="high"`, `loading="eager"`, and `decoding="async"` on the initial hero slide to accelerate First Contentful Paint (FCP) and Largest Contentful Paint (LCP). Added `fetchPriority="high"` on the primary PDP gallery image.
+  - *Evidence*: LCP dropped from 16.6s to 4.1s on Mobile PageSpeed simulation.
+- [x] **Task 44.4: Enforced Lazy-Loading Across Below-The-Fold Grids (`ProductItem.jsx`)**
+  - *Action*: Enforced `loading="lazy"` and `decoding="async"` across all catalog product item cards (`ProductItem.jsx`), related products ("Koleksi Selaras"), and editorial CMS content blocks.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings), `npm run build` (exit code 0), and verified zero render-blocking media requests below the fold. Real-world PSI: Mobile jumped from **51 &rarr; 81 / 100**, PDP Mobile from **55 &rarr; 75 / 100**, Desktop **90 – 98 / 100**, SEO **100 / 100**, CLS **0.00**.
 
+---
 
+## Phase 45: Dynamic Multi-Route SEO Engine, Custom Sitemap Chunk, & Authoritative Robots.txt (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/lib/seo.js, app/routes/sitemap.*, app/routes/[robots.txt].jsx, app/routes/_index.jsx, app/routes/pages.*, app/routes/collections.*, app/routes/blogs.*, app/routes/policies.*, app/routes/search.jsx, app/routes/cart.jsx, app/routes/$.jsx*
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [x] **Task 45.1: Dynamic Shopify SEO Generators Across All Routes (`app/lib/seo.js`)**
+  - *Action*: Built complete dynamic metadata engine in `app/lib/seo.js` querying live Storefront API data (`seo.title`, `seo.description`, `title`, `description`, `summary`, `shop.name`, `shop.description`). Wired across all 19 application routes (Home, collections, products, custom & CMS pages, blogs, policies, search, cart, 404) with quiet luxury Indonesian fallback copy, OpenGraph, Twitter Large Cards, and canonical `<link rel="canonical">` (via `tagName: 'link'`).
+  - *Evidence*: Tested and verified `<head>` meta tags across all route types matching Shopify Admin listings.
+- [x] **Task 45.2: Clean Sitemaps & Dedicated Custom Chunk (`sitemap.$type.$page[.xml].jsx`, `[sitemap.xml].jsx`)**
+  - *Action*: Removed boilerplate fake locales (`['EN-US', 'EN-CA', 'FR-CA']`) that caused 404 crawl errors in Google Search Console. Created dedicated custom sitemap chunk (`params.type === 'custom'`) serving 15 storefront-native URLs (`/`, `/collections/all`, `/collections`, `/blogs`, `/pages/*`, `/policies/*`) with defined `<priority>` and `<changefreq>`. Appended `<sitemap><loc>https://batiksmile.com/sitemap/custom/1.xml</loc></sitemap>` into sitemap index.
+  - *Evidence*: Verified `/sitemap.xml`, `/sitemap/custom/1.xml`, and `/sitemap/pages/1.xml` returning valid XML with zero fake hreflangs.
+- [x] **Task 45.3: Modern Crawl & AI-Friendly Robots.txt (`[robots.txt].jsx`)**
+  - *Action*: Removed harmful `Disallow: /policies/`. Added disallows for transactional paths (`/checkout`, `/checkouts/`, `/cart`, `/account`) and filter/sort URL permutations. Explicitly allowed major search engines (`Googlebot`, `Bingbot`, `Applebot`) and modern AI search/answer engine bots (`OAI-SearchBot`, `GPTBot`, `Claude-SearchBot`, `ClaudeBot`, `PerplexityBot`). Added `Sitemap: https://batiksmile.com/sitemap.xml`.
+  - *Evidence*: Verified `/robots.txt` output matches authoritative specification.
+- [x] **Task 45.4: Oxygen Production Edge Deployment & Verification**
+  - *Action*: Pushed commit `ba645fc` to `origin/main` and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`). Conducted live HTTP curl checks across all updated endpoints.
+  - *Evidence*: All live URLs verified returning HTTP 200 with dynamic metadata and proper XML/txt headers. Zero background dev servers running.
 
