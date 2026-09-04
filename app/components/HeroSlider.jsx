@@ -73,14 +73,21 @@ const SLIDES = [
 
 export function HeroSlider() {
   const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % SLIDES.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+    if (isPaused) return;
+    // Editorial pacing: Allow 12s initial reading time before first auto-advance, then 8s per slide
+    const initialDelay = setTimeout(() => {
+      const interval = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % SLIDES.length);
+      }, 8000);
+      return () => clearInterval(interval);
+    }, 12000);
+
+    return () => clearTimeout(initialDelay);
+  }, [isPaused]);
 
   const prevSlide = () => {
     setCurrent((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
@@ -110,6 +117,8 @@ export function HeroSlider() {
       className="relative w-full h-[85vh] sm:h-[90vh] lg:h-[95vh] min-h-[580px] max-h-[920px] overflow-hidden bg-[#111111] select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
       aria-label="Carousel Hero Butik Batik Smile"
     >
       {/* Background Slides with Cross-Fade */}
@@ -122,16 +131,22 @@ export function HeroSlider() {
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
-            {/* Background Image with Subtle Slow Pan */}
-            <img
-              src={slide.image}
-              alt={slide.title}
-              fetchPriority={index === 0 ? 'high' : 'auto'}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
-                isActive ? 'scale-105' : 'scale-100'
-              }`}
-            />
+            {/* Background Image with Subtle Slow Pan & AVIF Next-Gen Format */}
+            <picture>
+              <source srcSet={slide.image.replace('.jpg', '.avif')} type="image/avif" />
+              <img
+                src={slide.image}
+                alt={slide.title}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding={index === 0 ? 'sync' : 'async'}
+                width="1920"
+                height="1080"
+                className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
+                  isActive ? 'scale-105' : 'scale-100'
+                }`}
+              />
+            </picture>
 
             {/* Quiet Luxury Dark & Amber Gradients */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/35" />

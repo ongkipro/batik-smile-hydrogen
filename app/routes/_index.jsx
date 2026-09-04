@@ -35,6 +35,20 @@ export const meta = () => {
 };
 
 /**
+ * Preload high-priority LCP hero asset for sub-second visual paint
+ */
+export const links = () => {
+  return [
+    {
+      rel: 'preload',
+      href: '/banners/hero_slider_1.avif',
+      as: 'image',
+      type: 'image/avif',
+    },
+  ];
+};
+
+/**
  * @param {Route.LoaderArgs} args
  */
 export async function loader({ context }) {

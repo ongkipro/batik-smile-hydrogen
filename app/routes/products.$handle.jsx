@@ -347,6 +347,10 @@ export default function Product() {
                       <img
                         src={img.url}
                         alt={img.altText || `${title} - Gambar ${idx + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        width="80"
+                        height="100"
                         className="w-full h-full object-cover"
                       />
                     </button>
@@ -371,6 +375,11 @@ export default function Product() {
                   <img
                     src={activeImage.url}
                     alt={activeImage.altText || title}
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="sync"
+                    width={activeImage.width || 800}
+                    height={activeImage.height || 1000}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out pointer-events-none"
                   />
                 ) : (

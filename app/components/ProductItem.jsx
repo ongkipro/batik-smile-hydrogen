@@ -60,6 +60,8 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
             alt={primaryImage.altText || rawTitle}
             aspectRatio="4/5"
             loading={loading}
+            fetchPriority={loading === 'eager' ? 'high' : 'auto'}
+            decoding={loading === 'eager' ? 'sync' : 'async'}
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
             className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
