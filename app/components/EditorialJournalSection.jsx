@@ -61,6 +61,9 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
                     <img
                       src={imageUrl}
                       alt={article.image?.altText || article.title}
+                      width="600"
+                      height="400"
+                      decoding="async"
                       loading={idx === 0 ? 'eager' : 'lazy'}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out opacity-95 group-hover:opacity-100"
                     />

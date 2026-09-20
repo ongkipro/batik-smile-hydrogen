@@ -74,7 +74,7 @@ export function SarimbitBentoSection({ collections = [] }) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
-            Trilogi Sarimbit Nusantara
+            Trilogi Koleksi Sarimbit
           </h2>
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
             Pusat busana seragam keluarga nomor satu di Semarang sejak 2007. Terbagi dalam tiga kasta material: Sutra ATBM kemewahan tertinggi, Tenun Dobby perhelatan resmi, dan Katun Primisima sejuk harian.
@@ -111,6 +111,9 @@ export function SarimbitBentoSection({ collections = [] }) {
                   <img
                     src={imageUrl}
                     alt={altText}
+                    width="800"
+                    height="1000"
+                    decoding="async"
                     loading={idx === 0 ? 'eager' : 'lazy'}
                     className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700 opacity-85 group-hover:opacity-100"
                   />

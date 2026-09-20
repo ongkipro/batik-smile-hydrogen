@@ -3,40 +3,42 @@ import { Link } from 'react-router';
 import { ProductItem } from './ProductItem';
 
 /**
- * BestSellersTabs: Engrasia / Prestige 9.3.0 Category Switcher
- * Switch between WOMEN, MEN, and SARIMBIT collections with 4:5 portrait cards
+ * BestSellersTabs: Quiet Luxury Category Switcher
+ * Switch between WANITA, PRIA, and ANAK collections with 4:5 portrait cards
  *
  * @param {{
  *   womenProducts?: any[];
  *   menProducts?: any[];
+ *   anakProducts?: any[];
  *   sarimbitProducts?: any[];
  * }} props
  */
 export function BestSellersTabs({
   womenProducts = [],
   menProducts = [],
+  anakProducts = [],
   sarimbitProducts = [],
 }) {
-  const [activeTab, setActiveTab] = useState('women');
+  const [activeTab, setActiveTab] = useState('wanita');
 
   const tabs = [
     {
-      id: 'women',
-      label: 'WOMEN',
+      id: 'wanita',
+      label: 'WANITA',
       products: womenProducts,
-      viewAllLink: '/collections/sarimbit-luxury?gender=wanita',
+      viewAllLink: '/collections/all?gender=wanita',
     },
     {
-      id: 'men',
-      label: 'MEN',
+      id: 'pria',
+      label: 'PRIA',
       products: menProducts,
-      viewAllLink: '/collections/sarimbit-premium?gender=pria',
+      viewAllLink: '/collections/all?gender=pria',
     },
     {
-      id: 'sarimbit',
-      label: 'SARIMBIT',
-      products: sarimbitProducts,
-      viewAllLink: '/collections/sarimbit-luxury',
+      id: 'anak',
+      label: 'ANAK',
+      products: anakProducts.length > 0 ? anakProducts : sarimbitProducts,
+      viewAllLink: '/collections/batik-anak',
     },
   ];
 
@@ -52,15 +54,16 @@ export function BestSellersTabs({
             Koleksi Busana Terlaris
           </h2>
 
-          {/* Tabbed Category Switcher */}
+          {/* Tabbed Category Switcher (Wanita | Pria | Anak) */}
           <div className="inline-flex items-center gap-1 pb-px">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
+                  type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-5 sm:px-8 py-2.5 text-[11px] uppercase tracking-[0.2em] font-medium transition-all relative cursor-pointer ${
+                  className={`px-6 sm:px-8 py-3 min-h-[44px] inline-flex items-center justify-center text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium transition-all relative cursor-pointer ${
                     isActive
                       ? 'text-[#111111] font-semibold'
                       : 'text-[#5A5550] hover:text-[#111111]'

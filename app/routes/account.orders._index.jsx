@@ -22,7 +22,7 @@ import { PaginatedResourceSection } from '~/components/PaginatedResourceSection'
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [{ title: 'Riwayat Pesanan — Butik Batik Smile Nusantara' }];
+  return [{ title: 'Riwayat Pesanan — Butik Batik Smile' }];
 };
 
 /**

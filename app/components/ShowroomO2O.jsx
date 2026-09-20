@@ -75,6 +75,10 @@ export function ShowroomO2O() {
               <img
                 src="/brand/showroom/showroom_interior_textiles.jpeg"
                 alt="Showroom Butik Batik Smile Simongan"
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end z-10">

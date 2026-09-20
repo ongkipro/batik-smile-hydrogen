@@ -560,6 +560,45 @@ export type HomepageDataQuery = {
       };
     }
   >;
+  batikAnakCollection?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Collection, 'id' | 'title'> & {
+      products: {
+        nodes: Array<
+          Pick<
+            StorefrontAPI.Product,
+            'id' | 'title' | 'handle' | 'productType'
+          > & {
+            priceRange: {
+              minVariantPrice: Pick<
+                StorefrontAPI.MoneyV2,
+                'amount' | 'currencyCode'
+              >;
+            };
+            compareAtPriceRange: {
+              minVariantPrice: Pick<
+                StorefrontAPI.MoneyV2,
+                'amount' | 'currencyCode'
+              >;
+            };
+            featuredImage?: StorefrontAPI.Maybe<
+              Pick<
+                StorefrontAPI.Image,
+                'id' | 'url' | 'altText' | 'width' | 'height'
+              >
+            >;
+            images: {
+              nodes: Array<
+                Pick<
+                  StorefrontAPI.Image,
+                  'id' | 'url' | 'altText' | 'width' | 'height'
+                >
+              >;
+            };
+          }
+        >;
+      };
+    }
+  >;
   featuredCollections: {
     nodes: Array<
       Pick<
@@ -1194,9 +1233,63 @@ export type ProductFragment = Pick<
   StorefrontAPI.Product,
   'id' | 'title' | 'vendor' | 'handle' | 'descriptionHtml' | 'description'
 > & {
+  featuredImage?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
+  >;
   images: {
     nodes: Array<
       Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
+    >;
+  };
+  media: {
+    nodes: Array<
+      | ({__typename: 'ExternalVideo'} & Pick<
+          StorefrontAPI.ExternalVideo,
+          'id' | 'embedUrl' | 'host' | 'originUrl' | 'mediaContentType' | 'alt'
+        > & {
+            previewImage?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText' | 'width' | 'height'>
+            >;
+          })
+      | ({__typename: 'MediaImage'} & Pick<
+          StorefrontAPI.MediaImage,
+          'id' | 'mediaContentType' | 'alt'
+        > & {
+            image?: StorefrontAPI.Maybe<
+              Pick<
+                StorefrontAPI.Image,
+                'id' | 'url' | 'altText' | 'width' | 'height'
+              >
+            >;
+            previewImage?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText' | 'width' | 'height'>
+            >;
+          })
+      | ({__typename: 'Model3d'} & Pick<
+          StorefrontAPI.Model3d,
+          'id' | 'mediaContentType' | 'alt'
+        > & {
+            sources: Array<
+              Pick<StorefrontAPI.Model3dSource, 'url' | 'mimeType' | 'format'>
+            >;
+            previewImage?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText' | 'width' | 'height'>
+            >;
+          })
+      | ({__typename: 'Video'} & Pick<
+          StorefrontAPI.Video,
+          'id' | 'mediaContentType' | 'alt'
+        > & {
+            sources: Array<
+              Pick<
+                StorefrontAPI.VideoSource,
+                'url' | 'mimeType' | 'format' | 'height' | 'width'
+              >
+            >;
+            previewImage?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText' | 'width' | 'height'>
+            >;
+          })
     >;
   };
   options: Array<
@@ -1347,12 +1440,86 @@ export type ProductQuery = {
       StorefrontAPI.Product,
       'id' | 'title' | 'vendor' | 'handle' | 'descriptionHtml' | 'description'
     > & {
+      featuredImage?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
+      >;
       images: {
         nodes: Array<
           Pick<
             StorefrontAPI.Image,
             'id' | 'url' | 'altText' | 'width' | 'height'
           >
+        >;
+      };
+      media: {
+        nodes: Array<
+          | ({__typename: 'ExternalVideo'} & Pick<
+              StorefrontAPI.ExternalVideo,
+              | 'id'
+              | 'embedUrl'
+              | 'host'
+              | 'originUrl'
+              | 'mediaContentType'
+              | 'alt'
+            > & {
+                previewImage?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+              })
+          | ({__typename: 'MediaImage'} & Pick<
+              StorefrontAPI.MediaImage,
+              'id' | 'mediaContentType' | 'alt'
+            > & {
+                image?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'id' | 'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+                previewImage?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+              })
+          | ({__typename: 'Model3d'} & Pick<
+              StorefrontAPI.Model3d,
+              'id' | 'mediaContentType' | 'alt'
+            > & {
+                sources: Array<
+                  Pick<
+                    StorefrontAPI.Model3dSource,
+                    'url' | 'mimeType' | 'format'
+                  >
+                >;
+                previewImage?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+              })
+          | ({__typename: 'Video'} & Pick<
+              StorefrontAPI.Video,
+              'id' | 'mediaContentType' | 'alt'
+            > & {
+                sources: Array<
+                  Pick<
+                    StorefrontAPI.VideoSource,
+                    'url' | 'mimeType' | 'format' | 'height' | 'width'
+                  >
+                >;
+                previewImage?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+              })
         >;
       };
       options: Array<
@@ -1703,7 +1870,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      name\n      description\n    }\n    luxuryCollection: collection(handle: "sarimbit-luxury") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    premiumCollection: collection(handle: "sarimbit-premium") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    ekonomiCollection: collection(handle: "sarimbit-ekonomi") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "kain") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      name\n      description\n    }\n    luxuryCollection: collection(handle: "sarimbit-luxury") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    premiumCollection: collection(handle: "sarimbit-premium") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    ekonomiCollection: collection(handle: "sarimbit-ekonomi") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "kain") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    batikAnakCollection: collection(handle: "batik-anak") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: HomepageDataQuery;
     variables: HomepageDataQueryVariables;
   };
@@ -1747,7 +1914,7 @@ interface GeneratedQueryTypes {
     return: PoliciesQuery;
     variables: PoliciesQueryVariables;
   };
-  '#graphql\n  query Product(\n    $country: CountryCode\n    $handle: String!\n    $language: LanguageCode\n    $selectedOptions: [SelectedOptionInput!]!\n  ) @inContext(country: $country, language: $language) {\n    product(handle: $handle) {\n      ...Product\n    }\n  }\n  #graphql\n  fragment Product on Product {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    images(first: 8) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    options {\n      name\n      optionValues {\n        name\n        firstSelectableVariant {\n          ...ProductVariant\n        }\n        swatch {\n          color\n          image {\n            previewImage {\n              url\n            }\n          }\n        }\n      }\n    }\n    selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {\n      ...ProductVariant\n    }\n    adjacentVariants (selectedOptions: $selectedOptions) {\n      ...ProductVariant\n    }\n    collections(first: 5) {\n      nodes {\n        id\n        handle\n        title\n        products(first: 8) {\n          nodes {\n            id\n            title\n            handle\n            productType\n            priceRange {\n              minVariantPrice {\n                amount\n                currencyCode\n              }\n            }\n            compareAtPriceRange {\n              minVariantPrice {\n                amount\n                currencyCode\n              }\n            }\n            featuredImage {\n              id\n              url\n              altText\n              width\n              height\n            }\n            images(first: 2) {\n              nodes {\n                id\n                url\n                altText\n                width\n                height\n              }\n            }\n          }\n        }\n      }\n    }\n    seo {\n      description\n      title\n    }\n  }\n  #graphql\n  fragment ProductVariant on ProductVariant {\n    availableForSale\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    id\n    image {\n      __typename\n      id\n      url\n      altText\n      width\n      height\n    }\n    price {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n    selectedOptions {\n      name\n      value\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n  }\n\n\n': {
+  '#graphql\n  query Product(\n    $country: CountryCode\n    $handle: String!\n    $language: LanguageCode\n    $selectedOptions: [SelectedOptionInput!]!\n  ) @inContext(country: $country, language: $language) {\n    product(handle: $handle) {\n      ...Product\n    }\n  }\n  #graphql\n  fragment Product on Product {\n    id\n    title\n    vendor\n    handle\n    descriptionHtml\n    description\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 8) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    media(first: 15) {\n      nodes {\n        __typename\n        id\n        mediaContentType\n        alt\n        previewImage {\n          url\n          altText\n          width\n          height\n        }\n        ... on MediaImage {\n          id\n          image {\n            id\n            url\n            altText\n            width\n            height\n          }\n        }\n        ... on Video {\n          id\n          sources {\n            url\n            mimeType\n            format\n            height\n            width\n          }\n        }\n        ... on ExternalVideo {\n          id\n          embedUrl\n          host\n          originUrl\n        }\n        ... on Model3d {\n          id\n          sources {\n            url\n            mimeType\n            format\n          }\n        }\n      }\n    }\n    options {\n      name\n      optionValues {\n        name\n        firstSelectableVariant {\n          ...ProductVariant\n        }\n        swatch {\n          color\n          image {\n            previewImage {\n              url\n            }\n          }\n        }\n      }\n    }\n    selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {\n      ...ProductVariant\n    }\n    adjacentVariants (selectedOptions: $selectedOptions) {\n      ...ProductVariant\n    }\n    collections(first: 5) {\n      nodes {\n        id\n        handle\n        title\n        products(first: 8) {\n          nodes {\n            id\n            title\n            handle\n            productType\n            priceRange {\n              minVariantPrice {\n                amount\n                currencyCode\n              }\n            }\n            compareAtPriceRange {\n              minVariantPrice {\n                amount\n                currencyCode\n              }\n            }\n            featuredImage {\n              id\n              url\n              altText\n              width\n              height\n            }\n            images(first: 2) {\n              nodes {\n                id\n                url\n                altText\n                width\n                height\n              }\n            }\n          }\n        }\n      }\n    }\n    seo {\n      description\n      title\n    }\n  }\n  #graphql\n  fragment ProductVariant on ProductVariant {\n    availableForSale\n    compareAtPrice {\n      amount\n      currencyCode\n    }\n    id\n    image {\n      __typename\n      id\n      url\n      altText\n      width\n      height\n    }\n    price {\n      amount\n      currencyCode\n    }\n    product {\n      title\n      handle\n    }\n    selectedOptions {\n      name\n      value\n    }\n    sku\n    title\n    unitPrice {\n      amount\n      currencyCode\n    }\n  }\n\n\n': {
     return: ProductQuery;
     variables: ProductQueryVariables;
   };

@@ -6,7 +6,7 @@ import { CUSTOMER_ORDER_QUERY } from '~/graphql/customer-account/CustomerOrderQu
  * @type {Route.MetaFunction}
  */
 export const meta = ({ data }) => {
-  return [{ title: `Pesanan ${data?.order?.name} — Butik Batik Smile Nusantara` }];
+  return [{ title: `Pesanan ${data?.order?.name} — Butik Batik Smile` }];
 };
 
 /**

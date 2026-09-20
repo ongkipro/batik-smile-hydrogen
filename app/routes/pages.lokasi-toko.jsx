@@ -37,7 +37,7 @@ export const meta = ({ data }) => {
   return generatePageMeta({
     page: data?.page,
     handle: 'lokasi-toko',
-    customTitle: 'Lokasi Showroom & Butik Resmi Semarang — Batik Smile Nusantara',
+    customTitle: 'Lokasi Showroom & Butik Resmi Semarang — Batik Smile',
     customDescription:
       'Panduan kunjungan ke butik resmi Batik Smile di Semarang. Flagship Store 3 Lantai di Simongan Raya No. 109 dan Cabang Banyumanik di Sukun Raya No. 23. Buka setiap hari 09.00 - 21.00 WIB.',
   });

@@ -47,7 +47,7 @@ export async function loader({ params, context }) {
         title: 'Garansi Bebas Tukar Size & Pengembalian',
         body: `
           <h3>1. Garansi Kepuasan Ukuran (Bebas Tukar Size)</h3>
-          <p>Kami memahami bahwa kenyamanan busana batik sangat bergantung pada presisi ukuran. Butik Batik Smile Nusantara memberikan <strong>Garansi Bebas Tukar Size 100%</strong> untuk seluruh pembelian produk Ready-To-Wear (Kemeja Pria, Blus Wanita, dan Sarimbit Keluarga).</p>
+          <p>Kami memahami bahwa kenyamanan busana batik sangat bergantung pada presisi ukuran. Butik Batik Smile memberikan <strong>Garansi Bebas Tukar Size 100%</strong> untuk seluruh pembelian produk Ready-To-Wear (Kemeja Pria, Blus Wanita, dan Sarimbit Keluarga).</p>
           <h3>2. Syarat &amp; Ketentuan Penukaran</h3>
           <ul>
             <li>Konfirmasi penukaran dapat dilakukan maksimal <strong>7 hari</strong> setelah paket diterima oleh pelanggan.</li>
@@ -62,7 +62,7 @@ export async function loader({ params, context }) {
         title: 'Kebijakan Pengiriman Seluruh Indonesia',
         body: `
           <h3>1. Wilayah &amp; Mitra Ekspedisi</h3>
-          <p>Batik Smile Nusantara melayani pengiriman ke seluruh wilayah Indonesia melalui mitra logistik terpercaya (JNE, SiCepat, J&T, dan kurir kilat khusus wilayah Semarang).</p>
+          <p>Batik Smile melayani pengiriman ke seluruh wilayah Indonesia melalui mitra logistik terpercaya (JNE, SiCepat, J&T, dan kurir kilat khusus wilayah Semarang).</p>
           <h3>2. Waktu Pemrosesan &amp; Pengiriman</h3>
           <ul>
             <li>Pesanan produk Ready-To-Wear yang terkonfirmasi sebelum pukul 15.00 WIB akan dikirim pada hari yang sama.</li>
@@ -78,7 +78,7 @@ export async function loader({ params, context }) {
         title: 'Kebijakan Privasi & Keamanan Data',
         body: `
           <h3>1. Komitmen Privasi Pelanggan</h3>
-          <p>Butik Batik Smile Nusantara menghargai kerahasiaan data pribadi pelanggan kami. Kami hanya mengumpulkan informasi penting yang diperlukan untuk memproses transaksi pesanan, pengiriman busana, dan komunikasi layanan pelanggan.</p>
+          <p>Butik Batik Smile menghargai kerahasiaan data pribadi pelanggan kami. Kami hanya mengumpulkan informasi penting yang diperlukan untuk memproses transaksi pesanan, pengiriman busana, dan komunikasi layanan pelanggan.</p>
           <h3>2. Keamanan Pembayaran</h3>
           <p>Seluruh proses pembayaran diproses secara terenkripsi melalui gerbang pembayaran resmi Shopify yang telah bersertifikasi PCI DSS Level 1. Kami tidak pernah menyimpan data kartu kredit atau kredensial rahasia perbankan pelanggan di server kami.</p>
         `,
@@ -87,7 +87,7 @@ export async function loader({ params, context }) {
         title: 'Syarat & Ketentuan Layanan Butik',
         body: `
           <h3>1. Ketentuan Umum</h3>
-          <p>Selamat datang di platform butik online Batik Smile Nusantara. Dengan mengakses dan berbelanja melalui situs ini, Anda menyetujui seluruh ketentuan layanan yang kami terapkan.</p>
+          <p>Selamat datang di platform butik online Batik Smile. Dengan mengakses dan berbelanja melalui situs ini, Anda menyetujui seluruh ketentuan layanan yang kami terapkan.</p>
           <h3>2. Keaslian Produk &amp; Akurasi Warna</h3>
           <p>Seluruh produk batik yang kami hadirkan diproduksi dengan standar kain katun primisima, tenun dobby, dan sutra asli. Perbedaan warna minor dapat terjadi karena perbedaan pencahayaan layar monitor atau perangkat seluler Anda.</p>
         `,

@@ -73,9 +73,9 @@ export function Aside({children, heading, type}) {
             </h3>
           </div>
           <button 
-            className="w-8 h-8 flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+            className="w-10 h-10 min-w-[40px] min-h-[40px] sm:w-11 sm:h-11 sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
             onClick={close} 
-            aria-label="Tutup"
+            aria-label="Tutup menu samping"
           >
             ✕
           </button>

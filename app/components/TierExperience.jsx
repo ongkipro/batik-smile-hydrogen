@@ -5,7 +5,7 @@ const TIERS = [
   {
     id: 'mahakarya',
     tierNumber: 'KASTA I',
-    name: 'Sarimbit Eksklusif (Mahakarya)',
+    name: 'Sarimbit Luxury',
     subname: 'Sutra ATBM & Prada Emas Tradisional',
     priceRange: 'Rp 1.500.000 – Rp 3.500.000+',
     badge: 'MAHAKARYA 1-OF-1',
@@ -26,7 +26,7 @@ const TIERS = [
   {
     id: 'signature',
     tierNumber: 'KASTA II',
-    name: 'Sarimbit Premium (Signature)',
+    name: 'Sarimbit Premium',
     subname: 'Tenun Dobby Timbul & Furing Hero',
     priceRange: 'Rp 500.000 – Rp 950.000',
     badge: 'STANDAR RESEPSI RESMI',
@@ -47,7 +47,7 @@ const TIERS = [
   {
     id: 'essential',
     tierNumber: 'KASTA III',
-    name: 'Sarimbit Ekonomi (Essential)',
+    name: 'Sarimbit Ekonomi',
     subname: 'Katun Primisima Halus Sejuk Harian',
     priceRange: 'Rp 350.000 – Rp 485.000',
     badge: 'KENYAMANAN HARIAN',
@@ -81,7 +81,7 @@ export function TierExperience() {
             PANDUAN KASTA MATERIAL BUTIK
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111] leading-tight mb-3">
-            Sarimbit Nusantara Tiga Kasta
+            Panduan Sarimbit Tiga Kasta
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
@@ -128,6 +128,10 @@ export function TierExperience() {
                     e.currentTarget.src = activeTier.fallbackImage;
                   }}
                   alt={activeTier.name}
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">

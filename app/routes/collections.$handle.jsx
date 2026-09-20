@@ -353,7 +353,7 @@ export default function Collection() {
                   </p>
                 ) : (
                   <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
-                    Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Nusantara Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.
+                    Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.
                   </p>
                 )}
 

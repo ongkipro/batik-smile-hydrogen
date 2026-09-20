@@ -180,7 +180,7 @@ export default function Collections() {
           </div>
 
           <p className="text-[11px] sm:text-sm text-[#5A5550] font-light leading-relaxed max-w-2xl mx-auto px-2">
-            Lembar arsip kurasi mahakarya Batik Smile Nusantara. Dari kemegahan Sarimbit Tiga Kasta berfuring hero halus, kemeja pria pola simetris, hingga helaian kain batik tulis canting tembaga asli Jawa Tengah.
+            Lembar arsip kurasi mahakarya Batik Smile. Dari kemegahan Sarimbit Tiga Kasta berfuring hero halus, kemeja pria pola simetris, hingga helaian kain batik tulis canting tembaga asli Jawa Tengah.
           </p>
 
           {/* Quick Category Anchors (Horizontal swipeable on mobile) */}

@@ -48,7 +48,7 @@ export function WhatsAppConcierge() {
 
   const officialNumber = '6281390888809';
   const defaultMessage = encodeURIComponent(
-    'Halo Butik Batik Smile Nusantara, saya ingin konsultasi busana sarimbit keluarga / jahit bespoke kustom.',
+    'Halo Butik Batik Smile, saya ingin konsultasi busana sarimbit keluarga / jahit bespoke kustom.',
   );
   const waUrl = `https://wa.me/${officialNumber}?text=${defaultMessage}`;
 

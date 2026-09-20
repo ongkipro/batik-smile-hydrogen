@@ -11,7 +11,7 @@ import {
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [{ title: 'Profil Pelanggan — Butik Batik Smile Nusantara' }];
+  return [{ title: 'Profil Pelanggan — Butik Batik Smile' }];
 };
 
 /**

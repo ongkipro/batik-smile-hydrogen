@@ -23,7 +23,7 @@ function robotsTxtData({baseUrl}) {
 
   return `
 # ==============================================================================
-# Batik Smile Nusantara — Official Robots.txt
+# Batik Smile — Official Robots.txt
 # High-Heritage Quiet Luxury Batik | Semarang, Central Java
 # ==============================================================================
 

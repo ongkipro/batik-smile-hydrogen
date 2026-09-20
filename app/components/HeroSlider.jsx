@@ -255,19 +255,23 @@ export function HeroSlider() {
       <div className="absolute bottom-8 inset-x-0 z-20">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 flex items-center justify-between">
           {/* Progress Indicator Lines */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {SLIDES.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => setCurrent(idx)}
                 aria-label={`Pindah ke slide ${idx + 1}`}
-                className={`h-0.5 transition-all duration-500 rounded-none cursor-pointer ${
-                  idx === current
-                    ? 'w-10 sm:w-14 bg-[#C5A059]'
-                    : 'w-4 sm:w-6 bg-white/30 hover:bg-white/60'
-                }`}
-              />
+                className="py-3 px-1 cursor-pointer flex items-center justify-center focus:outline-none"
+              >
+                <span
+                  className={`h-0.5 block transition-all duration-500 rounded-none ${
+                    idx === current
+                      ? 'w-10 sm:w-14 bg-[#C5A059]'
+                      : 'w-4 sm:w-6 bg-white/30 hover:bg-white/60'
+                  }`}
+                />
+              </button>
             ))}
           </div>
 

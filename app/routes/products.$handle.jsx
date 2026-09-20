@@ -155,9 +155,65 @@ export default function Product() {
     selectedOrFirstAvailableVariant: selectedVariant,
   });
 
-  const { title, descriptionHtml, images } = product;
-  const imageList = images?.nodes || (product.featuredImage ? [product.featuredImage] : []);
-  const [activeImage, setActiveImage] = useState(selectedVariant?.image || imageList[0]);
+  const { title, descriptionHtml, images, media } = product;
+
+  // Build unified media list with type identification (Images, Videos, 3D Models)
+  const mediaList = React.useMemo(() => {
+    if (media?.nodes?.length) {
+      return media.nodes.map((item) => {
+        const isVideo = item.__typename === 'Video' || item.mediaContentType === 'VIDEO';
+        const isExternalVideo =
+          item.__typename === 'ExternalVideo' || item.mediaContentType === 'EXTERNAL_VIDEO';
+        const isModel = item.__typename === 'Model3d' || item.mediaContentType === 'MODEL_3D';
+        const url =
+          item.image?.url ||
+          item.previewImage?.url ||
+          item.url ||
+          '';
+        const previewUrl = item.previewImage?.url || item.image?.url || url;
+        const altText = item.alt || item.image?.altText || item.previewImage?.altText || title;
+        return {
+          ...item,
+          isVideo,
+          isExternalVideo,
+          isModel,
+          url,
+          previewUrl,
+          altText,
+        };
+      });
+    }
+
+    const fallbackImages = images?.nodes || (product.featuredImage ? [product.featuredImage] : []);
+    return fallbackImages.map((img) => ({
+      ...img,
+      __typename: 'MediaImage',
+      isVideo: false,
+      isExternalVideo: false,
+      isModel: false,
+      url: img.url,
+      previewUrl: img.url,
+      altText: img.altText || title,
+    }));
+  }, [media?.nodes, images?.nodes, product.featuredImage, title]);
+
+  const [activeMedia, setActiveMedia] = useState(() => {
+    if (selectedVariant?.image?.url) {
+      const match = mediaList.find((m) => m.url === selectedVariant.image.url);
+      if (match) return match;
+    }
+    return mediaList[0] || null;
+  });
+
+  // Sync activeMedia when selectedVariant image changes
+  useEffect(() => {
+    if (selectedVariant?.image?.url) {
+      const match = mediaList.find((m) => m.url === selectedVariant.image.url);
+      if (match) {
+        setActiveMedia(match);
+      }
+    }
+  }, [selectedVariant?.image?.url, mediaList]);
 
 
   // Quantity order state
@@ -234,29 +290,37 @@ export default function Product() {
     productTitle.includes('signature') ||
     (productHandle.startsWith('sarimbit') && variantPrice >= 500000 && variantPrice < 1000000));
 
-  // Active image index
+  // Active media index & current media item
   const activeIndex = Math.max(
     0,
-    imageList.findIndex((img) => img.url === (activeImage?.url || imageList[0]?.url))
+    mediaList.findIndex((m) => {
+      if (activeMedia?.id && m.id) return m.id === activeMedia.id;
+      return (m.previewUrl || m.url) === (activeMedia?.previewUrl || activeMedia?.url);
+    })
   );
+  const currentMedia = mediaList[activeIndex] || activeMedia || mediaList[0];
 
   // Swipe navigation state & handlers
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
 
-  const handlePrevImage = () => {
-    if (imageList.length <= 1) return;
-    const prevIdx = (activeIndex - 1 + imageList.length) % imageList.length;
-    setActiveImage(imageList[prevIdx]);
+  const handlePrevMedia = () => {
+    if (mediaList.length <= 1) return;
+    const prevIdx = (activeIndex - 1 + mediaList.length) % mediaList.length;
+    setActiveMedia(mediaList[prevIdx]);
   };
 
-  const handleNextImage = () => {
-    if (imageList.length <= 1) return;
-    const nextIdx = (activeIndex + 1) % imageList.length;
-    setActiveImage(imageList[nextIdx]);
+  const handleNextMedia = () => {
+    if (mediaList.length <= 1) return;
+    const nextIdx = (activeIndex + 1) % mediaList.length;
+    setActiveMedia(mediaList[nextIdx]);
   };
 
   const handleTouchStart = (e) => {
+    if (e.target.tagName === 'VIDEO' || e.target.closest('video')) {
+      setTouchStartX(null);
+      return;
+    }
     setTouchEndX(null);
     setTouchStartX(e.targetTouches[0].clientX);
   };
@@ -272,10 +336,10 @@ export default function Product() {
 
     if (deltaX > minSwipeDistance) {
       // Swiped left -> next
-      handleNextImage();
+      handleNextMedia();
     } else if (deltaX < -minSwipeDistance) {
       // Swiped right -> prev
-      handlePrevImage();
+      handlePrevMedia();
     }
   };
 
@@ -308,34 +372,34 @@ export default function Product() {
           {/* Left: 4:5 Vertical Gallery System (7 Cols on Desktop) */}
           <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 lg:sticky lg:top-24">
             {/* Thumbnails Column (Precision-aligned on Mobile to match Main Thumbnail width, Vertical on Desktop) */}
-            {imageList.length > 1 && (
+            {mediaList.length > 1 && (
               <div
                 className={`${
-                  imageList.length <= 5
+                  mediaList.length <= 5
                     ? `grid ${
-                        imageList.length === 2
+                        mediaList.length === 2
                           ? 'grid-cols-2'
-                          : imageList.length === 3
+                          : mediaList.length === 3
                           ? 'grid-cols-3'
-                          : imageList.length === 4
+                          : mediaList.length === 4
                           ? 'grid-cols-4'
                           : 'grid-cols-5'
                       } gap-2 w-full`
                     : 'flex gap-2 overflow-x-auto scrollbar-none w-full'
                 } sm:flex sm:flex-col sm:w-20 sm:gap-3 sm:overflow-y-auto sm:max-h-[660px] pb-1 sm:pb-0`}
               >
-                {imageList.map((img, idx) => {
-                  const isActive = (activeImage?.url || imageList[0]?.url) === img.url;
-                  const thumbUrl = img.url?.includes('?')
-                    ? `${img.url}&width=160`
-                    : `${img.url}?width=160`;
+                {mediaList.map((item, idx) => {
+                  const isActive = activeIndex === idx;
+                  const thumbUrl = item.previewUrl?.includes('?')
+                    ? `${item.previewUrl}&width=160`
+                    : `${item.previewUrl}?width=160`;
                   return (
                     <button
-                      key={img.id || idx}
+                      key={item.id || idx}
                       type="button"
-                      onClick={() => setActiveImage(img)}
+                      onClick={() => setActiveMedia(item)}
                       className={`relative aspect-[4/5] overflow-hidden border transition-all cursor-pointer ${
-                        imageList.length > 5
+                        mediaList.length > 5
                           ? 'w-[calc((100%-32px)/5)] shrink-0 sm:w-20'
                           : 'w-full sm:w-20 sm:shrink-0'
                       } ${
@@ -345,24 +409,34 @@ export default function Product() {
                           ? 'border-[#262626] opacity-60 hover:opacity-100 hover:border-[#C5A059]/60'
                           : 'border-[#E2DFD8] opacity-75 hover:opacity-100 hover:border-[#111111]'
                       }`}
-                      aria-label={`Pilih gambar produk ${idx + 1}`}
+                      aria-label={item.isVideo ? `Putar video produk` : `Pilih media produk ${idx + 1}`}
                     >
                       <img
                         src={thumbUrl}
-                        alt={img.altText || `${title} - Gambar ${idx + 1}`}
+                        alt={item.altText || `${title} - Media ${idx + 1}`}
                         loading="lazy"
                         decoding="async"
                         width="80"
                         height="100"
                         className="w-full h-full object-cover"
                       />
+                      {(item.isVideo || item.isExternalVideo) && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[0.5px]">
+                          <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black/70 text-[#C5A059] border border-[#C5A059]/70 text-[9px] pl-0.5 shadow-sm">
+                            ▶
+                          </span>
+                          <span className="text-[7px] text-white/90 font-medium tracking-wider uppercase mt-1">
+                            VIDEO
+                          </span>
+                        </div>
+                      )}
                     </button>
                   );
                 })}
               </div>
             )}
 
-            {/* Main Featured Image Container (Strict 4:5 Aspect Ratio with Swipe & Arrows) */}
+            {/* Main Featured Media Container (Strict 4:5 Aspect Ratio with Video, Swipe & Arrows) */}
             <div
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -373,43 +447,89 @@ export default function Product() {
                   : 'bg-[#111111]'
               }`}
             >
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
-                {activeImage ? (
-                  <img
+              {currentMedia?.isVideo ? (
+                <div className="relative aspect-[4/5] w-full bg-black flex items-center justify-center overflow-hidden">
+                  <video
+                    key={currentMedia.id}
                     src={
-                      activeImage.url?.includes('?')
-                        ? `${activeImage.url}&width=1000`
-                        : `${activeImage.url}?width=1000`
+                      currentMedia.sources?.find((s) => s.mimeType === 'video/mp4' && s.height >= 720)?.url ||
+                      currentMedia.sources?.find((s) => s.mimeType === 'video/mp4')?.url ||
+                      currentMedia.sources?.[0]?.url
                     }
-                    alt={activeImage.altText || title}
-                    fetchPriority="high"
-                    loading="eager"
-                    decoding="sync"
-                    width={activeImage.width || 800}
-                    height={activeImage.height || 1000}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out pointer-events-none"
-                  />
-                ) : (
-                  <div
-                    className={`aspect-[4/5] w-full flex items-center justify-center text-xs font-serif ${
-                      isExclusiveTier ? 'bg-[#181818] text-[#A9A49C]' : 'bg-[#EFECE6] text-[#5A5550]'
-                    }`}
+                    poster={currentMedia.previewUrl}
+                    controls
+                    playsInline
+                    autoPlay
+                    muted
+                    loop
+                    preload="metadata"
+                    className="w-full h-full object-cover"
                   >
-                    Batik Smile Nusantara
+                    {currentMedia.sources?.map((source, sIdx) => (
+                      <source
+                        key={sIdx}
+                        src={source.url}
+                        type={source.mimeType}
+                      />
+                    ))}
+                    Peramban Anda tidak mendukung pemutaran video.
+                  </video>
+
+                  {/* Video Lookbook Pill Badge */}
+                  <div className="absolute top-3 left-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-10 flex items-center gap-1.5 bg-black/70 text-[#C5A059] border border-[#C5A059]/40 pointer-events-none">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
+                    VIDEO LOOKBOOK
                   </div>
-                )}
-              </div>
+                </div>
+              ) : currentMedia?.isExternalVideo ? (
+                <div className="relative aspect-[4/5] w-full bg-black flex items-center justify-center overflow-hidden">
+                  <iframe
+                    src={currentMedia.embedUrl}
+                    title={currentMedia.altText || title}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                  {currentMedia ? (
+                    <img
+                      src={
+                        currentMedia.url?.includes('?')
+                          ? `${currentMedia.url}&width=1000`
+                          : `${currentMedia.url}?width=1000`
+                      }
+                      alt={currentMedia.altText || title}
+                      fetchPriority="high"
+                      loading="eager"
+                      decoding="sync"
+                      width={currentMedia.width || 800}
+                      height={currentMedia.height || 1000}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out pointer-events-none"
+                    />
+                  ) : (
+                    <div
+                      className={`aspect-[4/5] w-full flex items-center justify-center text-xs font-serif ${
+                        isExclusiveTier ? 'bg-[#181818] text-[#A9A49C]' : 'bg-[#EFECE6] text-[#5A5550]'
+                      }`}
+                    >
+                      Batik Smile
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Prev / Next Arrows (Desktop hover & Mobile visible) */}
-              {imageList.length > 1 && (
+              {mediaList.length > 1 && (
                 <>
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handlePrevImage();
+                      handlePrevMedia();
                     }}
-                    aria-label="Gambar sebelumnya"
+                    aria-label="Media sebelumnya"
                     className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-black/45 hover:bg-black/85 text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-xs opacity-75 sm:opacity-0 sm:group-hover:opacity-100 z-10"
                   >
                     ‹
@@ -418,9 +538,9 @@ export default function Product() {
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleNextImage();
+                      handleNextMedia();
                     }}
-                    aria-label="Gambar berikutnya"
+                    aria-label="Media berikutnya"
                     className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center bg-black/45 hover:bg-black/85 text-white/90 hover:text-white transition-all cursor-pointer backdrop-blur-xs opacity-75 sm:opacity-0 sm:group-hover:opacity-100 z-10"
                   >
                     ›
@@ -429,7 +549,7 @@ export default function Product() {
               )}
 
               {/* Counter Badge */}
-              {imageList.length > 1 && (
+              {mediaList.length > 1 && (
                 <div
                   className={`absolute bottom-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-medium backdrop-blur-sm z-10 pointer-events-none ${
                     isExclusiveTier
@@ -437,7 +557,7 @@ export default function Product() {
                       : 'bg-black/70 text-white'
                   }`}
                 >
-                  {activeIndex + 1} / {imageList.length}
+                  {activeIndex + 1} / {mediaList.length}
                 </div>
               )}
             </div>
@@ -992,6 +1112,13 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    featuredImage {
+      id
+      url
+      altText
+      width
+      height
+    }
     images(first: 8) {
       nodes {
         id
@@ -999,6 +1126,54 @@ const PRODUCT_FRAGMENT = `#graphql
         altText
         width
         height
+      }
+    }
+    media(first: 15) {
+      nodes {
+        __typename
+        id
+        mediaContentType
+        alt
+        previewImage {
+          url
+          altText
+          width
+          height
+        }
+        ... on MediaImage {
+          id
+          image {
+            id
+            url
+            altText
+            width
+            height
+          }
+        }
+        ... on Video {
+          id
+          sources {
+            url
+            mimeType
+            format
+            height
+            width
+          }
+        }
+        ... on ExternalVideo {
+          id
+          embedUrl
+          host
+          originUrl
+        }
+        ... on Model3d {
+          id
+          sources {
+            url
+            mimeType
+            format
+          }
+        }
       }
     }
     options {

@@ -6,13 +6,12 @@ import { AnnouncementBar } from './AnnouncementBar';
 
 /**
  * Curated 1-Line Navigation Architecture (Dead Center, Zero Submenus)
- * Primary Focus: Sarimbit (Wanita, Pria, Anak) + Terlaris + Kain + Aksesoris
+ * Core Categories: Sarimbit Luxury, Sarimbit Premium, Sarimbit Ekonomi, Batik Anak, Kain, Aksesoris
  */
 const NAV_ITEMS = [
-  { label: 'Koleksi Busana Terlaris', to: '/collections/all?sort=best-selling' },
-  { label: 'Sarimbit', to: '/collections/sarimbit-luxury' },
-  { label: 'Women', to: '/collections/sarimbit-premium?gender=wanita' },
-  { label: 'Men', to: '/collections/sarimbit-premium?gender=pria' },
+  { label: 'Sarimbit Luxury', to: '/collections/sarimbit-luxury' },
+  { label: 'Sarimbit Premium', to: '/collections/sarimbit-premium' },
+  { label: 'Sarimbit Ekonomi', to: '/collections/sarimbit-ekonomi' },
   { label: 'Batik Anak', to: '/collections/batik-anak' },
   { label: 'Kain', to: '/collections/kain' },
   { label: 'Aksesoris', to: '/collections/aksesoris' },
@@ -60,7 +59,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             {/* Mobile Burger Menu Button */}
             <button
               type="button"
-              className="lg:hidden p-2 -ml-2 text-[#111111] hover:text-[#9E7D3B] transition-colors cursor-pointer"
+              className="lg:hidden p-2.5 -ml-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-[#111111] hover:text-[#9E7D3B] transition-colors cursor-pointer"
               onClick={() => open('mobile')}
               aria-label="Buka menu navigasi"
             >
@@ -69,18 +68,18 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
               </svg>
             </button>
 
-            {/* Desktop Brand Logo (Luxury Gold + Brown Patina, Zero Subtitle) */}
+            {/* Desktop Brand Logo (Slightly Smaller & Refined for Architectural Precision) */}
             <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
-              <span className="font-serif text-[22px] sm:text-[24px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
+              <span className="font-serif text-[18px] xl:text-[19px] uppercase tracking-[0.24em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
           </div>
 
-          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile, Luxury Gold + Brown Patina, Zero Subtitle) */}
+          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile, Proportionally Sized) */}
           <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-auto">
             <NavLink to="/" className="flex items-center group">
-              <span className="font-serif text-[20px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
+              <span className="font-serif text-[16px] sm:text-[17px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
@@ -89,7 +88,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
           {/* 3. CENTER: Desktop Navigation Menu (Dead Center Precision, Strictly 1 Line, No Submenus) */}
           <nav
             aria-label="Navigasi Utama Butik"
-            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-5 xl:gap-7 whitespace-nowrap z-10 text-[11.5px] xl:text-[12.5px] font-medium uppercase tracking-[0.16em]"
+            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-5 xl:gap-8 2xl:gap-9 whitespace-nowrap z-10 text-[12px] xl:text-[13px] font-medium uppercase tracking-[0.18em]"
           >
             {NAV_ITEMS.map((item) => (
               <NavLink
@@ -256,7 +255,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
                 key={item.to}
                 to={item.to}
                 onClick={close}
-                className="py-2.5 px-3 text-[11px] font-medium tracking-[0.14em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
+                className="py-3 px-3.5 text-xs font-medium tracking-[0.14em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
               >
                 <span>{item.label}</span>
                 <span className="text-[#A69F96]">&rarr;</span>
@@ -264,12 +263,21 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
             ))}
 
             <NavLink
+              to="/collections/all?sort=best-selling"
+              onClick={close}
+              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#C5A059] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
+            >
+              <span>Koleksi Busana Terlaris</span>
+              <span className="text-[#C5A059]">&rarr;</span>
+            </NavLink>
+
+            <NavLink
               to="/collections/all"
               onClick={close}
-              className="py-2.5 px-3 text-[11px] font-semibold tracking-[0.14em] text-[#9E7D3B] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
+              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#111111] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
             >
               <span>Semua Produk Butik</span>
-              <span className="text-[#9E7D3B]">&rarr;</span>
+              <span className="text-[#111111]">&rarr;</span>
             </NavLink>
           </div>
         </div>
@@ -324,13 +332,13 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
       </div>
 
       {/* Sticky Bottom Account Action */}
-      <div className="sticky bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+      <div className="sticky bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] p-4 pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
         <NavLink
           to="/account"
           onClick={close}
           className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#9E7D3B] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-sm"
         >
-          <svg className="w-4 h-4 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-[#C5A059]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="square"
               strokeLinejoin="miter"

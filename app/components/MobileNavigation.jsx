@@ -6,13 +6,13 @@ export function MobileNavigation() {
   const { open } = useAside();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] lg:hidden px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex items-center justify-around shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] lg:hidden px-2 sm:px-4 pt-1.5 pb-[max(0.625rem,calc(env(safe-area-inset-bottom)+0.25rem))] flex items-center justify-around shadow-lg">
       {/* 1. Beranda */}
       <NavLink
         to="/"
         end
         className={({ isActive }) =>
-          `flex flex-col items-center gap-1 text-[10px] uppercase tracking-wider font-medium transition-colors ${
+          `flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium transition-colors ${
             isActive ? 'text-[#9E7D3B] font-semibold' : 'text-[#5A5550] hover:text-[#111111]'
           }`
         }
@@ -31,7 +31,8 @@ export function MobileNavigation() {
       <button
         type="button"
         onClick={() => open('mobile')}
-        className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
+        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
+        aria-label="Buka menu kategori"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path
@@ -47,7 +48,8 @@ export function MobileNavigation() {
       <button
         type="button"
         onClick={() => open('search')}
-        className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
+        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
+        aria-label="Buka pencarian produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path
@@ -63,7 +65,7 @@ export function MobileNavigation() {
       <NavLink
         to="/blogs"
         className={({ isActive }) =>
-          `flex flex-col items-center gap-1 text-[10px] uppercase tracking-wider font-medium transition-colors ${
+          `flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium transition-colors ${
             isActive ? 'text-[#9E7D3B] font-semibold' : 'text-[#5A5550] hover:text-[#111111]'
           }`
         }
@@ -83,7 +85,8 @@ export function MobileNavigation() {
         href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
         target="_blank"
         rel="noreferrer"
-        className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-wider font-medium text-[#25D366] hover:opacity-80 transition-opacity"
+        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium text-[#25D366] hover:opacity-80 transition-opacity"
+        aria-label="Konsultasi WhatsApp Customer Service"
       >
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />

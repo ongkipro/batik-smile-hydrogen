@@ -5,7 +5,7 @@
  */
 
 export const ROOT_DOMAIN = 'https://batiksmile.com';
-export const SITE_NAME = 'Batik Smile Nusantara';
+export const SITE_NAME = 'Batik Smile';
 export const DEFAULT_OG_IMAGE = `${ROOT_DOMAIN}/banners/hero-desktop.webp`;
 
 /**
@@ -149,7 +149,7 @@ export function generateCollectionMeta(collection, isAll = false) {
   const title = getSeoTitle(rawTitle, `${collection.title} — ${SITE_NAME}`);
   const description = getSeoDescription(
     collection.seo?.description,
-    collection.description || `Koleksi ${collection.title} berkualitas tinggi dari Butik Batik Smile Nusantara Semarang.`
+    collection.description || `Koleksi ${collection.title} berkualitas tinggi dari Butik Batik Smile Semarang.`
   );
   const canonicalUrl = `${ROOT_DOMAIN}/collections/${collection.handle}`;
   const imageUrl = collection.image?.url || DEFAULT_OG_IMAGE;
@@ -212,7 +212,7 @@ export function generatePageMeta({ page, customTitle, customDescription, handle 
   const title = getSeoTitle(rawTitle, `${page?.title ?? 'Halaman'} — ${SITE_NAME}`);
   const description = getSeoDescription(
     page?.seo?.description || customDescription,
-    'Halaman informasi resmi Butik Batik Smile Nusantara Semarang.'
+    'Halaman informasi resmi Butik Batik Smile Semarang.'
   );
 
   return [
@@ -320,7 +320,7 @@ export function generateBlogMeta(blog) {
   const title = getSeoTitle(rawTitle, `${blog.title} — ${SITE_NAME}`);
   const description = getSeoDescription(
     blog.seo?.description,
-    `Catatan dan artikel seputar ${blog.title} dari Butik Batik Smile Nusantara Semarang.`
+    `Catatan dan artikel seputar ${blog.title} dari Butik Batik Smile Semarang.`
   );
   const canonicalUrl = `${ROOT_DOMAIN}/blogs/${blog.handle}`;
 
@@ -352,7 +352,7 @@ export function generatePolicyMeta(policy, handle) {
   const rawBody = policy?.body ? policy.body.slice(0, 250) : null;
   const description = getSeoDescription(
     rawBody,
-    'Informasi resmi ketentuan dan kebijakan layanan Butik Batik Smile Nusantara Semarang.'
+    'Informasi resmi ketentuan dan kebijakan layanan Butik Batik Smile Semarang.'
   );
   const canonicalUrl = `${ROOT_DOMAIN}/policies/${handle}`;
 
@@ -449,7 +449,7 @@ export function generateNotFoundMeta() {
     { title: `404 — Halaman Tidak Ditemukan | ${SITE_NAME}` },
     {
       name: 'description',
-      content: 'Halaman atau arsip koleksi yang Anda tuju belum tersedia di Butik Batik Smile Nusantara.',
+      content: 'Halaman atau arsip koleksi yang Anda tuju belum tersedia di Butik Batik Smile.',
     },
     { name: 'robots', content: 'noindex, nofollow' },
   ];

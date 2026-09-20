@@ -83,6 +83,23 @@ export async function loader({ context }) {
       ? data.premiumCollection.products.nodes
       : fallbackProducts.slice(0, 6);
 
+  const anakFromCollectionOrTags =
+    data?.batikAnakCollection?.products?.nodes?.length > 0
+      ? data.batikAnakCollection.products.nodes
+      : allNewest.filter((p) => {
+          const tags = (p.tags || []).map((t) => t.toLowerCase());
+          const title = (p.title || '').toLowerCase();
+          return (
+            tags.some((t) => t.includes('anak') || t.includes('putra') || t.includes('putri')) ||
+            title.includes('anak')
+          );
+        });
+
+  const anakProducts =
+    anakFromCollectionOrTags.length > 0
+      ? anakFromCollectionOrTags.slice(0, 6)
+      : fallbackProducts.slice(0, 6);
+
   // 8 Newest Products excluding Sarimbit collection/tags/titles
   const rawNewest = data?.newestProducts?.nodes || [];
   const nonSarimbitProducts = rawNewest.filter((product) => {
@@ -123,6 +140,7 @@ export async function loader({ context }) {
     featuredCollections,
     womenProducts,
     menProducts,
+    anakProducts,
     sarimbitProducts,
     newestProducts,
     editorialArticles,
@@ -139,6 +157,7 @@ export default function Homepage() {
     featuredCollections,
     womenProducts,
     menProducts,
+    anakProducts,
     sarimbitProducts,
     newestProducts,
     editorialArticles,
@@ -153,10 +172,11 @@ export default function Homepage() {
       {/* 2. Signature Sarimbit 3-Pillar Scattered Atelier Moodboard */}
       <SarimbitBentoSection collections={featuredCollections} />
 
-      {/* 3. Best Sellers Tabbed Switcher (Women | Men | Sarimbit) */}
+      {/* 3. Best Sellers Tabbed Switcher (Wanita | Pria | Anak) */}
       <BestSellersTabs
         womenProducts={womenProducts}
         menProducts={menProducts}
+        anakProducts={anakProducts}
         sarimbitProducts={sarimbitProducts}
       />
 
@@ -251,6 +271,15 @@ const HOMEPAGE_QUERY = `#graphql
       }
     }
     rawFabricCollection: collection(handle: "kain") {
+      id
+      title
+      products(first: 6) {
+        nodes {
+          ...ProductCardItem
+        }
+      }
+    }
+    batikAnakCollection: collection(handle: "batik-anak") {
       id
       title
       products(first: 6) {

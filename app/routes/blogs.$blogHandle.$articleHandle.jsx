@@ -151,7 +151,7 @@ export default function Article() {
               />
             </div>
             <figcaption className="text-[10px] sm:text-[11px] text-[#888888] uppercase tracking-[0.16em] mt-3 text-center font-light">
-              Dokumentasi Arsip Wastra &bull; Butik Batik Smile Nusantara Semarang
+              Dokumentasi Arsip Wastra &bull; Butik Batik Smile Semarang
             </figcaption>
           </figure>
         )}
@@ -167,7 +167,7 @@ export default function Article() {
           <div className="mt-14 pt-8 border-t border-[#E2DFD8] flex items-start justify-between gap-4">
             <div>
               <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] block mb-1">
-                Kurasi Redaksi Butik Batik Smile Nusantara
+                Kurasi Redaksi Butik Batik Smile
               </span>
               <p className="text-xs text-[#5A5550] font-light leading-relaxed max-w-md">
                 Didedikasikan untuk riset canting malam, pelestarian filosofi motif keraton, serta panduan keserasian busana sarimbit keluarga sejak 2007 di Semarang.
@@ -187,7 +187,7 @@ export default function Article() {
 
             <a
               href={`https://wa.me/?text=${encodeURIComponent(
-                `Baca catatan wastra "${title}" dari Butik Batik Smile Nusantara:\nhttps://batiksmile.com/blogs/${blogHandle}/${article.handle}`,
+                `Baca catatan wastra "${title}" dari Butik Batik Smile:\nhttps://batiksmile.com/blogs/${blogHandle}/${article.handle}`,
               )}`}
               target="_blank"
               rel="noreferrer"
@@ -310,7 +310,7 @@ export default function Article() {
           </div>
           <a
             href={`https://wa.me/6281390888809?text=${encodeURIComponent(
-              `Halo Butik Batik Smile Nusantara, saya sedang membaca jurnal "${title}" dan ingin berkonsultasi mengenai motif ini.`,
+              `Halo Butik Batik Smile, saya sedang membaca jurnal "${title}" dan ingin berkonsultasi mengenai motif ini.`,
             )}`}
             target="_blank"
             rel="noreferrer"

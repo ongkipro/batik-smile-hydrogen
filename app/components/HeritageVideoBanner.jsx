@@ -41,6 +41,9 @@ export function HeritageVideoBanner({ videoData }) {
           <img
             src={posterUrl}
             alt="Craftsmanship Canting Batik Tulis"
+            width="1920"
+            height="1080"
+            decoding="async"
             loading="lazy"
             className="w-full h-full object-cover object-center filter grayscale contrast-125 opacity-70"
           />
@@ -87,6 +90,10 @@ export function HeritageVideoBanner({ videoData }) {
             <img
               src={posterUrl}
               alt="Batik Smile Canting Preview"
+              width="800"
+              height="500"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
             />
 

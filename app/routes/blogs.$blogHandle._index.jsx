@@ -77,7 +77,7 @@ export default function Blog() {
             {blog.title}
           </h1>
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
-            Arsip tulisan resmi, catatan filosofi motif, etika berbusana, serta warta kebudayaan Butik Batik Smile Nusantara.
+            Arsip tulisan resmi, catatan filosofi motif, etika berbusana, serta warta kebudayaan Butik Batik Smile.
           </p>
         </div>
 

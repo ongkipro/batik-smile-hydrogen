@@ -58,7 +58,7 @@ export default function Page() {
         {/* Header */}
         <div className="border-b border-[#E2DFD8] pb-6 mb-10">
           <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
-            BATIK SMILE NUSANTARA
+            BATIK SMILE
           </span>
           <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-2">
             {page.title}

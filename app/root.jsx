@@ -47,16 +47,24 @@ export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
 export function links() {
   return [
     {
-      rel: 'preconnect',
+      rel: 'dns-prefetch',
       href: 'https://cdn.shopify.com',
     },
     {
       rel: 'preconnect',
-      href: 'https://shop.app',
+      href: 'https://cdn.shopify.com',
+    },
+    {
+      rel: 'dns-prefetch',
+      href: 'https://fonts.googleapis.com',
     },
     {
       rel: 'preconnect',
       href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'dns-prefetch',
+      href: 'https://fonts.gstatic.com',
     },
     {
       rel: 'preconnect',

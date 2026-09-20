@@ -39,7 +39,7 @@ export const meta = ({ data }) => {
     handle: 'tentang-kami',
     customTitle: 'Tentang Kami — Menjaga Warisan Luhur Batik Sejak 2007 | Batik Smile',
     customDescription:
-      'Profil resmi Batik Smile Nusantara. Berdiri sejak 2007 di Semarang dengan showroom flagship 3 lantai di Simongan dan cabang Banyumanik. Pelayanan berbudaya 3S 1C 1T & 1H.',
+      'Profil resmi Batik Smile. Berdiri sejak 2007 di Semarang dengan showroom flagship 3 lantai di Simongan dan cabang Banyumanik. Pelayanan berbudaya 3S 1C 1T & 1H.',
   });
 };
 
@@ -68,7 +68,7 @@ export default function TentangKamiPage() {
           </blockquote>
 
           <p>
-            Berawal dari sebuah butik di kota Semarang pada tahun 2007, <strong>Batik Smile Nusantara</strong> lahir
+            Berawal dari sebuah butik di kota Semarang pada tahun 2007, <strong>Batik Smile</strong> lahir
             dengan dedikasi luhur: menghadirkan busana batik Nusantara yang tidak hanya anggun secara estetika, tetapi
             juga memberikan kenyamanan paripurna bagi pemakainya. Kami memadukan katun primisima bermutu tinggi, dobby timbul,
             dan sutra ATBM asli dengan lapisan furing hero katun yang sejuk dan menyerap keringat.
@@ -195,7 +195,7 @@ export default function TentangKamiPage() {
             &ldquo;Matur Nuwun Sanget&rdquo;
           </h4>
           <p className="text-xs text-[#5A5550] max-w-lg mx-auto leading-relaxed font-light mb-6">
-            Terima kasih telah mempercayakan momen-momen berharga keluarga Anda bersama karya cipta Batik Smile Nusantara.
+            Terima kasih telah mempercayakan momen-momen berharga keluarga Anda bersama karya cipta Batik Smile.
           </p>
           <Link
             to="/collections/sarimbit-luxury"
