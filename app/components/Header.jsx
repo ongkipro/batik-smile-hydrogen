@@ -69,18 +69,18 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
               </svg>
             </button>
 
-            {/* Desktop Brand Logo (Gold Gradient from previous design, Zero Subtitle) */}
+            {/* Desktop Brand Logo (Luxury Gold + Brown Patina, Zero Subtitle) */}
             <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
-              <span className="font-serif text-[22px] sm:text-[24px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#9E7D3B] via-[#C5A059] to-[#7B5B24] text-transparent bg-clip-text transition-all duration-700 leading-none">
+              <span className="font-serif text-[22px] sm:text-[24px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
           </div>
 
-          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile, Gold Gradient, Zero Subtitle) */}
+          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile, Luxury Gold + Brown Patina, Zero Subtitle) */}
           <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-auto">
             <NavLink to="/" className="flex items-center group">
-              <span className="font-serif text-[20px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#9E7D3B] via-[#C5A059] to-[#7B5B24] text-transparent bg-clip-text transition-all duration-700 leading-none">
+              <span className="font-serif text-[20px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
