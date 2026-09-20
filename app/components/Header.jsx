@@ -5,23 +5,26 @@ import { useAside } from '~/components/Aside';
 import { AnnouncementBar } from './AnnouncementBar';
 
 /**
- * 6 Official Collections Navigation Items (1 Line, No Submenus)
+ * Curated 1-Line Navigation Architecture (Dead Center, Zero Submenus)
+ * Primary Focus: Sarimbit (Wanita, Pria, Anak) + Terlaris + Kain + Aksesoris
  */
 const NAV_ITEMS = [
-  { label: 'Sarimbit Luxury', to: '/collections/sarimbit-luxury' },
-  { label: 'Sarimbit Premium', to: '/collections/sarimbit-premium' },
-  { label: 'Sarimbit Ekonomi', to: '/collections/sarimbit-ekonomi' },
+  { label: 'Koleksi Busana Terlaris', to: '/collections/all?sort=best-selling' },
+  { label: 'Sarimbit', to: '/collections/sarimbit-luxury' },
+  { label: 'Women', to: '/collections/sarimbit-premium?gender=wanita' },
+  { label: 'Men', to: '/collections/sarimbit-premium?gender=pria' },
+  { label: 'Batik Anak', to: '/collections/batik-anak' },
   { label: 'Kain', to: '/collections/kain' },
   { label: 'Aksesoris', to: '/collections/aksesoris' },
-  { label: 'Batik Anak', to: '/collections/batik-anak' },
 ];
 
 /**
  * Master Header: Quiet Luxury Nusantara
  * - Dead Center Navigation Menu (Absolute Center, 1 Line, No Submenus).
+ * - Text Logo Header Color: Gradient Gold (from previous design), Strictly No Sub-text.
+ * - Zero WhatsApp CTA in Header.
  * - Zero Border Radius (0px).
- * - Layout-Shift Free Cart Badge (Zero CLS).
- * - Clean Responsive Desktop & Mobile Layout.
+ * - Layout-Shift Free Floating Cart Badge (Zero CLS).
  *
  * @param {HeaderProps} props
  */
@@ -52,7 +55,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
       >
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-18 sm:h-20 flex items-center justify-between relative">
           
-          {/* 1. LEFT: Mobile Burger Trigger & Desktop Brand Logo */}
+          {/* 1. LEFT: Mobile Burger Trigger & Desktop Brand Logo (Pure Logo, No Subtitle) */}
           <div className="flex items-center z-10">
             {/* Mobile Burger Menu Button */}
             <button
@@ -66,18 +69,18 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
               </svg>
             </button>
 
-            {/* Desktop Brand Logo */}
+            {/* Desktop Brand Logo (Gold Gradient from previous design, Zero Subtitle) */}
             <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
-              <span className="font-serif text-[22px] sm:text-[24px] uppercase tracking-[0.22em] text-[#111111] group-hover:text-[#9E7D3B] transition-colors duration-300 leading-none">
+              <span className="font-serif text-[22px] sm:text-[24px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#9E7D3B] via-[#C5A059] to-[#7B5B24] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
           </div>
 
-          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile Viewports) */}
+          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile, Gold Gradient, Zero Subtitle) */}
           <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-auto">
             <NavLink to="/" className="flex items-center group">
-              <span className="font-serif text-[20px] uppercase tracking-[0.22em] text-[#111111] group-hover:text-[#9E7D3B] transition-colors leading-none">
+              <span className="font-serif text-[20px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#9E7D3B] via-[#C5A059] to-[#7B5B24] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
@@ -86,7 +89,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
           {/* 3. CENTER: Desktop Navigation Menu (Dead Center Precision, Strictly 1 Line, No Submenus) */}
           <nav
             aria-label="Navigasi Utama Butik"
-            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-6 xl:gap-8 whitespace-nowrap z-10 text-[12px] xl:text-[13px] font-medium uppercase tracking-[0.16em]"
+            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-5 xl:gap-7 whitespace-nowrap z-10 text-[11.5px] xl:text-[12.5px] font-medium uppercase tracking-[0.16em]"
           >
             {NAV_ITEMS.map((item) => (
               <NavLink
@@ -105,8 +108,8 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             ))}
           </nav>
 
-          {/* 4. RIGHT: Actions (Search, Account, Cart) */}
-          <div className="flex items-center justify-end z-10 gap-1 sm:gap-2">
+          {/* 4. RIGHT: Actions (Search, Account, Cart — Zero WhatsApp CTA) */}
+          <div className="flex items-center justify-end z-10 gap-1 sm:gap-1.5">
             <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
           </div>
         </div>
@@ -116,7 +119,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
 }
 
 /**
- * Header Right Action Buttons (Search, Account, Cart)
+ * Header Right Action Buttons (Search, Account, Cart — Zero WhatsApp CTA)
  */
 function HeaderCtas({ _isLoggedIn, cart }) {
   const { open } = useAside();
@@ -128,7 +131,8 @@ function HeaderCtas({ _isLoggedIn, cart }) {
         type="button"
         onClick={() => open('search')}
         className="hidden lg:flex items-center justify-center p-2 sm:p-2.5 text-[#111111] hover:text-[#9E7D3B] transition-colors cursor-pointer"
-        aria-label="Cari produk"
+        aria-label="Cari produk busana"
+        title="Cari Produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -140,6 +144,7 @@ function HeaderCtas({ _isLoggedIn, cart }) {
         to="/account"
         className="hidden lg:flex items-center justify-center p-2 sm:p-2.5 text-[#111111] hover:text-[#9E7D3B] transition-colors"
         aria-label="Akun saya"
+        title="Akun Saya"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -191,6 +196,7 @@ function CartBadge({ count }) {
       }}
       className="relative p-2 sm:p-2.5 text-[#111111] hover:text-[#9E7D3B] transition-colors cursor-pointer flex items-center justify-center"
       aria-label={`Tas Belanja (${count} item)`}
+      title="Tas Belanja"
     >
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
@@ -203,8 +209,8 @@ function CartBadge({ count }) {
 
       {/* Floating Precision Numeric Badge (Fixed position, Zero layout shift) */}
       {count > 0 && (
-        <span className="absolute top-1 right-1 min-w-[16px] h-4 px-1 bg-[#111111] text-white text-[9px] font-mono font-bold flex items-center justify-center">
-          {count}
+        <span className="absolute top-1 right-1 min-w-[16px] h-4 px-1 bg-[#111111] text-white text-[9px] font-mono font-bold flex items-center justify-center border border-white leading-none">
+          {count > 99 ? '99+' : count}
         </span>
       )}
     </button>
@@ -235,7 +241,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
           </span>
         </div>
 
-        {/* 6 Kategori Utama Mobile */}
+        {/* Kategori Utama Mobile (Matching Desktop 1-Line Hierarchy) */}
         <div className="mb-6">
           <div className="flex items-center gap-2 pb-2 border-b border-[#E2DFD8] mb-2">
             <span className="w-1.5 h-1.5 bg-[#9E7D3B]" />

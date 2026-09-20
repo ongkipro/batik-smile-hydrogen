@@ -2,7 +2,7 @@ import React from 'react';
 
 /**
  * AnnouncementBar: Hairline Quiet Luxury Notification Bar
- * Official WhatsApp 081-390-8888-09
+ * Free from external WhatsApp CTA as per brand specification
  */
 export function AnnouncementBar() {
   return (
@@ -24,16 +24,6 @@ export function AnnouncementBar() {
       <span className="hidden sm:inline">
         BEBAS ONGKIR SE-NUSANTARA &bull; KONSULTASI JAHIT BESPOKE TANPA MINIMAL ORDER
       </span>
-
-      <span className="hidden sm:inline text-[#C5A059]">&bull;</span>
-      <a
-        href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[#C5A059] hover:underline font-medium transition-colors hidden sm:inline"
-      >
-        CHAT CONCIERGE &rarr;
-      </a>
     </aside>
   );
 }
