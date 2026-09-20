@@ -8,7 +8,7 @@
   body {
     background-color: #FAF8F5;
     color: #1C1C1C;
-    font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -45,7 +45,7 @@
   --color-border-hairline: #E2DFD8;
   
   --font-serif: 'Cormorant Garamond', Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Micro-tracking utility */
@@ -73,14 +73,14 @@
 }
 
 .editorial-eyebrow {
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.22em;
 }
 
 .editorial-body {
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   font-weight: 300;
   line-height: 1.75;
 }

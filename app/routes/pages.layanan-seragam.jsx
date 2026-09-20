@@ -264,7 +264,7 @@ export default function LayananSeragamPage() {
               CHAT WHATSAPP RESMI: 081-390-8888-09 &rarr;
             </a>
             <Link
-              to="/collections/sarimbit-exclusive"
+              to="/collections/sarimbit-luxury"
               className="w-full sm:w-auto px-8 py-4 bg-white border border-[#111111] !text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-[#111111] hover:!text-white transition-colors"
             >
               LIHAT CONTOH SARIMBIT

@@ -198,7 +198,7 @@ export default function TentangKamiPage() {
             Terima kasih telah mempercayakan momen-momen berharga keluarga Anda bersama karya cipta Batik Smile Nusantara.
           </p>
           <Link
-            to="/collections/sarimbit-exclusive"
+            to="/collections/sarimbit-luxury"
             className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
           >
             LIHAT KOLEKSI KAMI &rarr;

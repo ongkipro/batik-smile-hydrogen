@@ -17,7 +17,7 @@ export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
     data?.subheading?.value ||
     'Menenun Keanggunan Klasik & Keselarasan Busana Keluarga Sejak 2007';
   const ctaText = data?.cta_text?.value || 'JELAJAHI KOLEKSI';
-  const ctaLink = data?.cta_link?.value || '/collections/sarimbit-exclusive';
+  const ctaLink = data?.cta_link?.value || '/collections/sarimbit-luxury';
   const secondaryCtaText = data?.secondary_cta_text?.value || 'KONSULTASI JAHIT';
   const secondaryCtaLink = data?.secondary_cta_link?.value || '/pages/layanan-seragam';
 

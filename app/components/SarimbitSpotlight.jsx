@@ -59,7 +59,7 @@ export function SarimbitSpotlight() {
               <div className="pt-4 border-t border-neutral-800 flex items-center justify-between">
                 <span className="text-xs text-neutral-400">Mulai dari Rp 1.850.000 / Pasang</span>
                 <NavLink
-                  to="/collections/sarimbit-exclusive"
+                  to="/collections/sarimbit-luxury"
                   className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#C5A059] hover:text-amber-200 transition-colors"
                 >
                   Eksplorasi Mahakarya &rarr;
@@ -136,7 +136,7 @@ export function SarimbitSpotlight() {
                   </p>
                 </div>
                 <NavLink
-                  to="/collections/sarimbit-ekonomis"
+                  to="/collections/sarimbit-ekonomi"
                   className="text-xs font-semibold uppercase tracking-wider text-[#9E4719] hover:text-[#7A320C] transition-colors"
                 >
                   Jelajahi Essential &rarr;

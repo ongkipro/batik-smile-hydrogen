@@ -24,19 +24,19 @@ export function BestSellersTabs({
       id: 'women',
       label: 'WOMEN',
       products: womenProducts,
-      viewAllLink: '/collections/batik-wanita',
+      viewAllLink: '/collections/sarimbit-luxury?gender=wanita',
     },
     {
       id: 'men',
       label: 'MEN',
       products: menProducts,
-      viewAllLink: '/collections/batik-pria',
+      viewAllLink: '/collections/sarimbit-premium?gender=pria',
     },
     {
       id: 'sarimbit',
       label: 'SARIMBIT',
       products: sarimbitProducts,
-      viewAllLink: '/collections/sarimbit-exclusive',
+      viewAllLink: '/collections/sarimbit-luxury',
     },
   ];
 

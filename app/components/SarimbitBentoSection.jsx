@@ -15,28 +15,28 @@ import { Link } from 'react-router';
  */
 export function SarimbitBentoSection({ collections = [] }) {
   const defaultFallbackImages = {
-    'sarimbit-exclusive':
+    'sarimbit-luxury':
       'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_51f1e349-35df-4896-b08d-6290f84897d9.jpg?v=1786005734',
     'sarimbit-premium':
       'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_d8691b10-ece8-4430-a8c6-d184fa0c467a.jpg?v=1786004716',
-    'sarimbit-ekonomis':
+    'sarimbit-ekonomi':
       'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749',
   };
 
   const sarimbitPillars = [
     {
-      handle: 'sarimbit-exclusive',
-      title: 'Sarimbit Eksklusif',
+      handle: 'sarimbit-luxury',
+      title: 'Sarimbit Luxury',
       subtitle:
         'Kemewahan tenun sutra ATBM berpola presisi dengan sentuhan prada emas untuk perhelatan teragung keluarga.',
-      stamp: 'EKSKLUSIF',
+      stamp: 'LUXURY',
       plate: 'SRM-01',
       note: 'SUTRA ATBM & PRADA EMAS',
       tilt: '-rotate-2 sm:-rotate-2.5',
       offset: 'lg:translate-y-2',
       tapePos: 'left-8 -top-2.5',
       tapeAngle: '-rotate-2',
-      cta: 'JELAJAHI EKSKLUSIF',
+      cta: 'JELAJAHI LUXURY',
     },
     {
       handle: 'sarimbit-premium',
@@ -53,18 +53,18 @@ export function SarimbitBentoSection({ collections = [] }) {
       cta: 'LIHAT PREMIUM',
     },
     {
-      handle: 'sarimbit-ekonomis',
-      title: 'Sarimbit Ekonomis',
+      handle: 'sarimbit-ekonomi',
+      title: 'Sarimbit Ekonomi',
       subtitle:
         'Katun primisima premium super adem untuk kehangatan silaturahmi dan busana kasual keluarga sehari-hari.',
-      stamp: 'EKONOMIS',
+      stamp: 'EKONOMI',
       plate: 'SRM-03',
       note: 'KATUN PRIMISIMA SEJUK',
       tilt: '-rotate-1 sm:-rotate-1.5',
       offset: 'lg:translate-y-3',
       tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
       tapeAngle: '-rotate-1',
-      cta: 'LIHAT EKONOMIS',
+      cta: 'LIHAT EKONOMI',
     },
   ];
 

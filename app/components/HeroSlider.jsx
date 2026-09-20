@@ -3,42 +3,42 @@ import { Link } from 'react-router';
 
 const SLIDES = [
   {
-    id: 'sarimbit-exclusive',
+    id: 'sarimbit-luxury',
     eyebrow: 'SEMARANG • ESTABLISHED 2007',
     title: 'Mahakarya Sarimbit Nusantara',
     subtitle: 'Keagungan Sutra ATBM & Canting Prada Emas',
     description:
       'Menenun keselarasan busana pasangan dan keluarga agung dengan jahitan butik berstandar tinggi untuk momen sakral resepsi pernikahan.',
     ctaText: 'JELAJAHI SARIMBIT',
-    ctaLink: '/collections/sarimbit-exclusive',
+    ctaLink: '/collections/sarimbit-luxury',
     secondaryCtaText: 'KONSULTASI WA',
     secondaryCtaLink:
       'https://wa.me/6281390888809?text=' +
-      encodeURIComponent('Halo Batik Smile, saya ingin konsultasi koleksi Sarimbit Exclusive.'),
+      encodeURIComponent('Halo Batik Smile, saya ingin konsultasi koleksi Sarimbit Luxury.'),
     image: '/banners/hero_slider_1.jpg',
   },
   {
-    id: 'batik-wanita',
+    id: 'sarimbit-wanita',
     eyebrow: 'HAUTE COUTURE WANITA',
     title: 'Kemewahan Yang Bersahaja',
     subtitle: 'Gaun, Gamis & Kebaya Sutra Modern',
     description:
       'Siluet anggun kontemporer berpadu warisan canting soga Jawa. Dirancang khusus untuk memancarkan pesona ningrat yang abadi dan memikat.',
     ctaText: 'KOLEKSI WANITA',
-    ctaLink: '/collections/batik-wanita',
+    ctaLink: '/collections/sarimbit-luxury?gender=wanita',
     secondaryCtaText: 'LIHAT LOOKBOOK',
     secondaryCtaLink: '#lookbook',
     image: '/banners/hero_slider_2.jpg',
   },
   {
-    id: 'batik-pria',
+    id: 'sarimbit-pria',
     eyebrow: 'PRESISI POLA & FURING HERO',
     title: 'Karisma Kemeja Pria Eksekutif',
     subtitle: 'Jahitan Sambung Motif & Furing Katun Sejuk',
     description:
       'Kenyamanan sejuk sepanjang hari dengan potongan presisi simetris pada saku dan belahan kancing, mencerminkan wibawa sang pemimpin.',
     ctaText: 'KOLEKSI KEMEJA PRIA',
-    ctaLink: '/collections/batik-pria',
+    ctaLink: '/collections/sarimbit-premium?gender=pria',
     secondaryCtaText: 'LAYANAN JAHIT',
     secondaryCtaLink: '/pages/layanan-seragam',
     image: '/banners/hero_slider_3.jpg',
@@ -51,7 +51,7 @@ const SLIDES = [
     description:
       'Koleksi busana serasi untuk seluruh anggota keluarga tercinta dengan bahan katun primisima yang sejuk, nyaman, dan ramah di kulit anak.',
     ctaText: 'SARIMBIT KELUARGA',
-    ctaLink: '/collections/sarimbit-ekonomis',
+    ctaLink: '/collections/sarimbit-ekonomi',
     secondaryCtaText: 'BATIK ANAK',
     secondaryCtaLink: '/collections/batik-anak',
     image: '/banners/hero_slider_4.jpg',
@@ -64,7 +64,7 @@ const SLIDES = [
     description:
       'Setiap goresan lilin malam panas di atas kain Mori adalah doa dan ketekunan maestro batik. Tersedia lembaran kain atau dipadukan dengan jasa jahit butik.',
     ctaText: 'PILIH LEMBARAN KAIN',
-    ctaLink: '/collections/jarik-kain-batik',
+    ctaLink: '/collections/kain',
     secondaryCtaText: 'KISAH PENGRAJIN',
     secondaryCtaLink: '/pages/tentang-kami',
     image: '/banners/hero_slider_5.jpg',

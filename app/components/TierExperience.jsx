@@ -21,7 +21,7 @@ const TIERS = [
     ],
     image: '/banners/craftsmanship_canting_banner.jpg',
     fallbackImage: '/banners/hero_editorial_banner.jpg',
-    collectionUrl: '/collections/sarimbit-exclusive',
+    collectionUrl: '/collections/sarimbit-luxury',
   },
   {
     id: 'signature',
@@ -47,7 +47,7 @@ const TIERS = [
   {
     id: 'essential',
     tierNumber: 'KASTA III',
-    name: 'Sarimbit Ekonomis (Essential)',
+    name: 'Sarimbit Ekonomi (Essential)',
     subname: 'Katun Primisima Halus Sejuk Harian',
     priceRange: 'Rp 350.000 – Rp 485.000',
     badge: 'KENYAMANAN HARIAN',
@@ -63,7 +63,7 @@ const TIERS = [
     ],
     image: '/brand/models/model_teak_door.jpg',
     fallbackImage: '/banners/hero_editorial_banner.jpg',
-    collectionUrl: '/collections/sarimbit-ekonomis',
+    collectionUrl: '/collections/sarimbit-ekonomi',
   },
 ];
 

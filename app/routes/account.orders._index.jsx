@@ -115,7 +115,7 @@ function EmptyOrders({ hasFilters = false }) {
           : 'Pilih koleksi sarimbit keluarga atau busana batik favorit Anda sekarang.'}
       </p>
       <Link
-        to={hasFilters ? '/account/orders' : '/collections/sarimbit-exclusive'}
+        to={hasFilters ? '/account/orders' : '/collections/sarimbit-luxury'}
         className="inline-block px-6 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
       >
         {hasFilters ? 'HAPUS FILTER' : 'MULAI BELANJA &rarr;'}

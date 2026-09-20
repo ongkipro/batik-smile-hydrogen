@@ -404,7 +404,7 @@ export type HomepageDataQueryVariables = StorefrontAPI.Exact<{
 
 export type HomepageDataQuery = {
   shop: Pick<StorefrontAPI.Shop, 'name' | 'description'>;
-  womenCollection?: StorefrontAPI.Maybe<
+  luxuryCollection?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Collection, 'id' | 'title'> & {
       products: {
         nodes: Array<
@@ -443,7 +443,7 @@ export type HomepageDataQuery = {
       };
     }
   >;
-  menCollection?: StorefrontAPI.Maybe<
+  premiumCollection?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Collection, 'id' | 'title'> & {
       products: {
         nodes: Array<
@@ -482,7 +482,7 @@ export type HomepageDataQuery = {
       };
     }
   >;
-  sarimbitCollection?: StorefrontAPI.Maybe<
+  ekonomiCollection?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Collection, 'id' | 'title'> & {
       products: {
         nodes: Array<
@@ -642,20 +642,6 @@ export type HomepageDataQuery = {
             >
           >;
         };
-      }
-    >;
-  };
-  heroBanners: {
-    nodes: Array<
-      Pick<StorefrontAPI.Metaobject, 'id' | 'handle'> & {
-        fields: Array<Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>>;
-      }
-    >;
-  };
-  heritageVideos: {
-    nodes: Array<
-      Pick<StorefrontAPI.Metaobject, 'id' | 'handle'> & {
-        fields: Array<Pick<StorefrontAPI.MetaobjectField, 'key' | 'value'>>;
       }
     >;
   };
@@ -866,7 +852,7 @@ export type MoneyProductItemFragment = Pick<
 
 export type ProductItemFragment = Pick<
   StorefrontAPI.Product,
-  'id' | 'handle' | 'title' | 'productType'
+  'id' | 'handle' | 'title' | 'productType' | 'tags'
 > & {
   featuredImage?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Image, 'id' | 'altText' | 'url' | 'width' | 'height'>
@@ -918,7 +904,7 @@ export type CollectionQuery = {
         nodes: Array<
           Pick<
             StorefrontAPI.Product,
-            'id' | 'handle' | 'title' | 'productType'
+            'id' | 'handle' | 'title' | 'productType' | 'tags'
           > & {
             featuredImage?: StorefrontAPI.Maybe<
               Pick<
@@ -1717,7 +1703,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      name\n      description\n    }\n    womenCollection: collection(handle: "batik-wanita") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    menCollection: collection(handle: "batik-pria") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    sarimbitCollection: collection(handle: "sarimbit-ekonomis") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "jarik-kain-batik") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    heroBanners: metaobjects(type: "hero_banner", first: 1) {\n      nodes {\n        id\n        handle\n        fields {\n          key\n          value\n        }\n      }\n    }\n    heritageVideos: metaobjects(type: "heritage_video", first: 1) {\n      nodes {\n        id\n        handle\n        fields {\n          key\n          value\n        }\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      name\n      description\n    }\n    luxuryCollection: collection(handle: "sarimbit-luxury") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    premiumCollection: collection(handle: "sarimbit-premium") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    ekonomiCollection: collection(handle: "sarimbit-ekonomi") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "kain") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: HomepageDataQuery;
     variables: HomepageDataQueryVariables;
   };
@@ -1733,7 +1719,7 @@ interface GeneratedQueryTypes {
     return: BlogsPageQuery;
     variables: BlogsPageQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment MoneyProductItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment ProductItem on Product {\n    id\n    handle\n    title\n    productType\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        altText\n        url\n        width\n        height\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n      maxVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n  }\n\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n    $sortKey: ProductCollectionSortKeys\n    $reverse: Boolean\n    $filters: [ProductFilter!]\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      seo {\n        title\n        description\n      }\n      image {\n        id\n        altText\n        url\n        width\n        height\n      }\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor,\n        sortKey: $sortKey,\n        reverse: $reverse,\n        filters: $filters\n      ) {\n        nodes {\n          ...ProductItem\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment MoneyProductItem on MoneyV2 {\n    amount\n    currencyCode\n  }\n  fragment ProductItem on Product {\n    id\n    handle\n    title\n    productType\n    tags\n    featuredImage {\n      id\n      altText\n      url\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        altText\n        url\n        width\n        height\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n      maxVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        ...MoneyProductItem\n      }\n    }\n  }\n\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n    $sortKey: ProductCollectionSortKeys\n    $reverse: Boolean\n    $filters: [ProductFilter!]\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      seo {\n        title\n        description\n      }\n      image {\n        id\n        altText\n        url\n        width\n        height\n      }\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor,\n        sortKey: $sortKey,\n        reverse: $reverse,\n        filters: $filters\n      ) {\n        nodes {\n          ...ProductItem\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
     return: CollectionQuery;
     variables: CollectionQueryVariables;
   };

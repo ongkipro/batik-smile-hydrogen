@@ -991,3 +991,25 @@
   - *Action*: Pushed commit `ba645fc` to `origin/main` and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`). Conducted live HTTP curl checks across all updated endpoints.
   - *Evidence*: All live URLs verified returning HTTP 200 with dynamic metadata and proper XML/txt headers. Zero background dev servers running.
 
+---
+
+## Phase 46: Tree Taxonomy Overhaul, Store Consolidation, & Frontend Synchronisation (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: Shopify Collections, Product Tags, app/components/*, app/routes/collections.*, PAGES-SCHEMA.xml, SCHEMA.md*
+
+- [x] **Task 46.1: Full Store Snapshot & Data Protection**
+  - *Action*: Created pre-migration backup of all 31 legacy collections and 23 products into `docs/backups/shopify-legacy-backup.json` and `docs/backups/COLLECTIONS-BACKUP.md`. Preserved every product ID, variant, SKU, and original tag configuration.
+  - *Evidence*: Snapshot persisted in repository; zero data loss.
+- [x] **Task 46.2: Live Shopify Core Collection Refactoring**
+  - *Action*: Renamed core collections via GraphQL Admin mutations (`Sarimbit Exclusive` &rarr; `Sarimbit Luxury`, `Sarimbit Ekonomis` &rarr; `Sarimbit Ekonomi`, `Jarik & Kain Batik` &rarr; `Kain`, `Blangkon Tradisional` &rarr; `Aksesoris`). Purged 24 obsolete collections (`batik-wanita`, `batik-pria`, `blus-batik-wanita`, `daster-batik-solo`, etc.) consolidating catalog strictly into 6 core collections + umbrella `shop`.
+  - *Evidence*: Live query returns exactly 7 collections (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `kain`, `aksesoris`, `batik-anak`, `shop`).
+- [x] **Task 46.3: Product Tags & Cross-Category Enrichment**
+  - *Action*: Injected tree taxonomy tags (`pria`, `wanita`, `putra`, `putri`, `lengan-panjang`, `lengan-pendek`) across all 23 products. Cleaned up misplaced items in Aksesoris and Sarimbit Ekonomi.
+  - *Evidence*: Product tag inspection verified 100% compliant with subcategory filter parameters.
+- [x] **Task 46.4: Hydrogen Navigation, Components & Subcategory Filter Ribbon**
+  - *Action*: Updated navigation across `Header.jsx`, `MegaMenu.jsx`, `Footer.jsx`, `HeroSlider.jsx`, `CartMain.jsx`, `TierExperience.jsx`, `SarimbitSpotlight.jsx`, `ShoppableLookbook.jsx`, `HeritageVideoBanner.jsx`, `BestSellersTabs.jsx`, and `CollectionFilterBar.jsx`. Added instant subcategory filter ribbon (Gender & Sleeve chips) driving URL search params `gender` and `sleeve`.
+  - *Evidence*: Zero obsolete collection handle links remaining across `app/`.
+- [x] **Task 46.5: SEO 301 Redirections & Schema Contracts**
+  - *Action*: Configured permanent 301 server redirects in `app/routes/collections.$handle.jsx` for all 24 obsolete handles. Updated `PAGES-SCHEMA.xml` and `SCHEMA.md` with the authoritative 6-collection tree taxonomy.
+  - *Evidence*: `npm run codegen` generated types cleanly; `npm run lint` (0 errors, 0 warnings); `npm run build` (exit code 0).
+
+

@@ -20,7 +20,7 @@ Managed at: **Shopify Admin $\rightarrow$ Content $\rightarrow$ Metaobjects $\ri
 | `tier_badge` | Single line text | Badge text (e.g. "Butik Asli Nusantara • Sejak 2007") |
 | `featured_image` | File (Image) | Portrait 4:5 lookbook image |
 | `cta_label` | Single line text | Button text (e.g. "Jelajahi Koleksi Sarimbit") |
-| `cta_url` | Single line text | Destination route (e.g. "/collections/sarimbit-exclusive", "/collections/sarimbit-premium") |
+| `cta_url` | Single line text | Destination route (e.g. "/collections/sarimbit-luxury", "/collections/sarimbit-premium") |
 
 ### B. `heritage_video` (Craftsmanship Video Section)
 Managed at: **Shopify Admin $\rightarrow$ Content $\rightarrow$ Metaobjects $\rightarrow$ Heritage Video**
@@ -368,3 +368,24 @@ query Collection(
   }
 }
 ```
+
+---
+
+## 8. Authoritative Store Collections & Taxonomy Schema
+
+> **Tree Taxonomy (Single Source of Truth)**:
+> The live Shopify catalog is consolidated into **6 Core Collections** with subcategories handled via URL parameters / tags (`gender`, `sleeve`). Umbrella collection `shop` serves as the catalog master index.
+
+| Collection Title | Handle | ID (`gid://shopify/Collection/...`) | Sub-Categories (URL Filter / Tags) | Description / Tier |
+|---|---|---|---|---|
+| **Sarimbit Luxury** | `sarimbit-luxury` | `480517193785` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta I: Sutra Alam ATBM, canting prada emas |
+| **Sarimbit Premium** | `sarimbit-premium` | `480517423161` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta II: Tenun Dobby timbul, furing hero katun sejuk |
+| **Sarimbit Ekonomi** | `sarimbit-ekonomi` | `480517455929` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta III: 100% Katun Primisima adem harian |
+| **Kain** | `kain` | `480516636729` | Flat (No subcategories) | Kain batik tulis canting tembaga & jarik wiru |
+| **Aksesoris** | `aksesoris` | `480517128249` | Flat (No subcategories) | Blangkon tradisional, selendang adat Jawa |
+| **Batik Anak** | `batik-anak` | `480517062713` | `putra`, `putri` &times; `lengan-panjang`, `lengan-pendek` | Setelan surjan anak, kemeja anak, dress katun balita |
+| **Shop (All)** | `shop` | `480517488697` | Master catalog umbrella | All active products index |
+
+### SEO Redirection Contract
+All 24 obsolete legacy collection handles (e.g. `sarimbit-exclusive`, `sarimbit-ekonomis`, `batik-wanita`, `batik-pria`, `jarik-kain-batik`, `blangkon-tradisional`, `blus-batik-wanita`, etc.) are permanently 301-redirected in `app/routes/collections.$handle.jsx` to preserve indexing equity.
+

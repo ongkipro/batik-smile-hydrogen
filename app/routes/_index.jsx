@@ -2,7 +2,6 @@ import React from 'react';
 import { useLoaderData } from 'react-router';
 import { HeroSlider } from '~/components/HeroSlider';
 import { SarimbitBentoSection } from '~/components/SarimbitBentoSection';
-import { PersonalWardrobeSection } from '~/components/PersonalWardrobeSection';
 import { EditorialJournalSection } from '~/components/EditorialJournalSection';
 import { BestSellersTabs } from '~/components/BestSellersTabs';
 import { HeritageVideoBanner } from '~/components/HeritageVideoBanner';
@@ -58,21 +57,31 @@ export async function loader({ context }) {
   });
 
   const fallbackProducts = data?.fallbackProducts?.nodes || [];
+  const allNewest = data?.newestProducts?.nodes || [];
+
+  const womenFromTags = allNewest.filter((p) =>
+    (p.tags || []).map((t) => t.toLowerCase()).includes('wanita'),
+  );
+  const menFromTags = allNewest.filter((p) =>
+    (p.tags || []).map((t) => t.toLowerCase()).includes('pria'),
+  );
 
   const womenProducts =
-    data?.womenCollection?.products?.nodes?.length > 0
-      ? data.womenCollection.products.nodes
-      : fallbackProducts;
+    womenFromTags.length > 0
+      ? womenFromTags.slice(0, 6)
+      : fallbackProducts.slice(0, 6);
 
   const menProducts =
-    data?.menCollection?.products?.nodes?.length > 0
-      ? data.menCollection.products.nodes
-      : fallbackProducts;
+    menFromTags.length > 0
+      ? menFromTags.slice(0, 6)
+      : fallbackProducts.slice(0, 6);
 
   const sarimbitProducts =
-    data?.sarimbitCollection?.products?.nodes?.length > 0
-      ? data.sarimbitCollection.products.nodes
-      : fallbackProducts;
+    data?.luxuryCollection?.products?.nodes?.length > 0
+      ? data.luxuryCollection.products.nodes
+      : data?.premiumCollection?.products?.nodes?.length > 0
+      ? data.premiumCollection.products.nodes
+      : fallbackProducts.slice(0, 6);
 
   // 8 Newest Products excluding Sarimbit collection/tags/titles
   const rawNewest = data?.newestProducts?.nodes || [];
@@ -154,13 +163,10 @@ export default function Homepage() {
       {/* 4. Heritage Craftsmanship Video Banner */}
       <HeritageVideoBanner videoData={videoData} />
 
-      {/* 5. Busana Personal & Lintas Generasi 3-Pillar Scattered Atelier Moodboard */}
-      <PersonalWardrobeSection collections={featuredCollections} />
-
-      {/* 6. Choose Your Batik / Koleksi Terbaru: 8 Produk Pilihan Non-Sarimbit */}
+      {/* 5. Choose Your Batik / Koleksi Terbaru: 8 Produk Pilihan Non-Sarimbit */}
       <ChooseYourBatikGrid products={newestProducts} />
 
-      {/* 7. Warta & Jurnal Kebudayaan (Latest Editorial Articles) */}
+      {/* 6. Warta & Jurnal Kebudayaan (Latest Editorial Articles) */}
       <EditorialJournalSection
         articles={editorialArticles}
         blogHandle={editorialBlogHandle}
@@ -217,7 +223,7 @@ const HOMEPAGE_QUERY = `#graphql
       name
       description
     }
-    womenCollection: collection(handle: "batik-wanita") {
+    luxuryCollection: collection(handle: "sarimbit-luxury") {
       id
       title
       products(first: 6) {
@@ -226,7 +232,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    menCollection: collection(handle: "batik-pria") {
+    premiumCollection: collection(handle: "sarimbit-premium") {
       id
       title
       products(first: 6) {
@@ -235,7 +241,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    sarimbitCollection: collection(handle: "sarimbit-ekonomis") {
+    ekonomiCollection: collection(handle: "sarimbit-ekonomi") {
       id
       title
       products(first: 6) {
@@ -244,7 +250,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    rawFabricCollection: collection(handle: "jarik-kain-batik") {
+    rawFabricCollection: collection(handle: "kain") {
       id
       title
       products(first: 6) {
@@ -283,26 +289,6 @@ const HOMEPAGE_QUERY = `#graphql
     fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...ProductCardItem
-      }
-    }
-    heroBanners: metaobjects(type: "hero_banner", first: 1) {
-      nodes {
-        id
-        handle
-        fields {
-          key
-          value
-        }
-      }
-    }
-    heritageVideos: metaobjects(type: "heritage_video", first: 1) {
-      nodes {
-        id
-        handle
-        fields {
-          key
-          value
-        }
       }
     }
     blogs(first: 1) {

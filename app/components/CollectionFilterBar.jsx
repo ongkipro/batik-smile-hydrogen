@@ -22,7 +22,7 @@ const SORT_OPTIONS = [
  *   className?: string;
  * }} props
  */
-export function CollectionFilterBar({ totalCount, isDark = false, className = '' }) {
+export function CollectionFilterBar({ totalCount, isDark = false, className = '', handle = '' }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isSortOpen, setIsSortOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -31,12 +31,17 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
   const currentSort = searchParams.get('sort') || 'featured';
   const minPrice = searchParams.get('minPrice') || '';
   const maxPrice = searchParams.get('maxPrice') || '';
+  const currentGender = searchParams.get('gender') || '';
+  const currentSleeve = searchParams.get('sleeve') || '';
+
+  const isSarimbit = handle.includes('sarimbit');
+  const isAnak = handle.includes('anak');
 
   // Determine active price bracket
   const isUnder500 = !minPrice && maxPrice === '500000';
   const is500To1M = minPrice === '500000' && maxPrice === '1000000';
   const isAbove1M = minPrice === '1000000' && !maxPrice;
-  const isAllActive = !minPrice && !maxPrice;
+  const isAllActive = !minPrice && !maxPrice && !currentGender && !currentSleeve;
 
   const currentSortObj = SORT_OPTIONS.find((opt) => opt.value === currentSort) || SORT_OPTIONS[0];
 
@@ -76,12 +81,34 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
     });
   };
 
+  const setGenderFilter = (val) => {
+    updateParams((params) => {
+      if (!val || val === currentGender) {
+        params.delete('gender');
+      } else {
+        params.set('gender', val);
+      }
+    });
+  };
+
+  const setSleeveFilter = (val) => {
+    updateParams((params) => {
+      if (!val || val === currentSleeve) {
+        params.delete('sleeve');
+      } else {
+        params.set('sleeve', val);
+      }
+    });
+  };
+
   const clearAllFilters = () => {
     updateParams((params) => {
       params.delete('sort');
       params.delete('minPrice');
       params.delete('maxPrice');
       params.delete('productType');
+      params.delete('gender');
+      params.delete('sleeve');
     });
   };
 
@@ -372,8 +399,167 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
             )}
           </div>
         </div>
-
       </div>
+
+      {/* SUB-CATEGORY CHIP RIBBON (Tree: Sarimbit [Pria/Wanita, Panjang/Pendek] & Batik Anak [Putra/Putri]) */}
+      {(isSarimbit || isAnak) && (
+        <div
+          className={`mt-3.5 pt-3.5 border-t flex flex-wrap items-center gap-3 sm:gap-4 ${
+            isDark ? 'border-white/15' : 'border-[#E2DFD8]/80'
+          }`}
+        >
+          {/* Gender Filter Chips */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span
+              className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${
+                isDark ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
+              }`}
+            >
+              {isSarimbit ? 'Gender:' : 'Koleksi:'}
+            </span>
+            <div className="inline-flex items-center border border-[#E2DFD8] bg-white p-0.5 shadow-2xs">
+              <button
+                type="button"
+                onClick={() => setGenderFilter('')}
+                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                  !currentGender
+                    ? isDark
+                      ? 'bg-[#C5A059] text-[#111111] font-bold'
+                      : 'bg-[#111111] text-white font-bold'
+                    : 'text-[#5A5550] hover:text-[#111111]'
+                }`}
+              >
+                Semua
+              </button>
+              {isSarimbit ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setGenderFilter('pria')}
+                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                      currentGender === 'pria'
+                        ? isDark
+                          ? 'bg-[#C5A059] text-[#111111] font-bold'
+                          : 'bg-[#111111] text-white font-bold'
+                        : 'text-[#5A5550] hover:text-[#111111]'
+                    }`}
+                  >
+                    Pria
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setGenderFilter('wanita')}
+                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                      currentGender === 'wanita'
+                        ? isDark
+                          ? 'bg-[#C5A059] text-[#111111] font-bold'
+                          : 'bg-[#111111] text-white font-bold'
+                        : 'text-[#5A5550] hover:text-[#111111]'
+                    }`}
+                  >
+                    Wanita
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setGenderFilter('putra')}
+                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                      currentGender === 'putra'
+                        ? isDark
+                          ? 'bg-[#C5A059] text-[#111111] font-bold'
+                          : 'bg-[#111111] text-white font-bold'
+                        : 'text-[#5A5550] hover:text-[#111111]'
+                    }`}
+                  >
+                    Putra
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setGenderFilter('putri')}
+                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                      currentGender === 'putri'
+                        ? isDark
+                          ? 'bg-[#C5A059] text-[#111111] font-bold'
+                          : 'bg-[#111111] text-white font-bold'
+                        : 'text-[#5A5550] hover:text-[#111111]'
+                    }`}
+                  >
+                    Putri
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Sleeve Filter Chips */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span
+              className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${
+                isDark ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
+              }`}
+            >
+              Lengan:
+            </span>
+            <div className="inline-flex items-center border border-[#E2DFD8] bg-white p-0.5 shadow-2xs">
+              <button
+                type="button"
+                onClick={() => setSleeveFilter('')}
+                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                  !currentSleeve
+                    ? isDark
+                      ? 'bg-[#C5A059] text-[#111111] font-bold'
+                      : 'bg-[#111111] text-white font-bold'
+                    : 'text-[#5A5550] hover:text-[#111111]'
+                }`}
+              >
+                Semua
+              </button>
+              <button
+                type="button"
+                onClick={() => setSleeveFilter('lengan-panjang')}
+                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                  currentSleeve === 'lengan-panjang'
+                    ? isDark
+                      ? 'bg-[#C5A059] text-[#111111] font-bold'
+                      : 'bg-[#111111] text-white font-bold'
+                    : 'text-[#5A5550] hover:text-[#111111]'
+                }`}
+              >
+                Panjang
+              </button>
+              <button
+                type="button"
+                onClick={() => setSleeveFilter('lengan-pendek')}
+                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
+                  currentSleeve === 'lengan-pendek'
+                    ? isDark
+                      ? 'bg-[#C5A059] text-[#111111] font-bold'
+                      : 'bg-[#111111] text-white font-bold'
+                    : 'text-[#5A5550] hover:text-[#111111]'
+                }`}
+              >
+                Pendek
+              </button>
+            </div>
+          </div>
+
+          {/* Reset button if any sub-filter active */}
+          {(currentGender || currentSleeve) && (
+            <button
+              type="button"
+              onClick={() => {
+                setGenderFilter('');
+                setSleeveFilter('');
+              }}
+              className="text-[9px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-2 cursor-pointer"
+            >
+              Reset Pilihan &times;
+            </button>
+          )}
+        </div>
+      )}
 
       {/* MOBILE SORT BOTTOM SHEET DRAWER (Zero-Zoom, Pure Touch UX) */}
       {isSortOpen && (

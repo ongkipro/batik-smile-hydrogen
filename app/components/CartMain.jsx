@@ -197,10 +197,10 @@ function CartEmpty({ layout }) {
 
   const CURATED_PILLARS = [
     {
-      title: 'Sarimbit Exclusive',
+      title: 'Sarimbit Luxury',
       desc: 'Sutra Alam ATBM & Prada Emas',
       image: '/banners/hero_slider_1.jpg',
-      to: '/collections/sarimbit-exclusive',
+      to: '/collections/sarimbit-luxury',
     },
     {
       title: 'Sarimbit Premium',
@@ -209,10 +209,10 @@ function CartEmpty({ layout }) {
       to: '/collections/sarimbit-premium',
     },
     {
-      title: 'Kemeja Batik Pria',
-      desc: 'Sambung Pola & Furing Hero Katun',
+      title: 'Sarimbit Ekonomi',
+      desc: 'Katun Primisima Adem & Sejuk',
       image: '/banners/collection_kain_tulis_banner.jpg',
-      to: '/collections/batik-pria',
+      to: '/collections/sarimbit-ekonomi',
     },
   ];
 

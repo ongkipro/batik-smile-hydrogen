@@ -1,5 +1,5 @@
-import React from 'react';
-import { redirect, useLoaderData } from 'react-router';
+import React, { useMemo } from 'react';
+import { redirect, useLoaderData, useSearchParams } from 'react-router';
 import { getPaginationVariables, Analytics } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
@@ -47,12 +47,39 @@ async function loadCriticalData({ context, params, request }) {
 
   // Handle redirect untuk koleksi yang tidak ada atau berganti slug resmi
   const collectionRedirects = {
-    'sarimbit': '/collections/sarimbit-exclusive',
-    'kain-batik-tulis': '/collections/jarik-kain-batik',
-    'sarimbit-mahakarya-heritage': '/collections/sarimbit-exclusive',
+    'sarimbit': '/collections/sarimbit-luxury',
+    'sarimbit-exclusive': '/collections/sarimbit-luxury',
+    'sarimbit-ekonomis': '/collections/sarimbit-ekonomi',
+    'jarik-kain-batik': '/collections/kain',
+    'kain-batik-tulis': '/collections/kain',
+    'sarimbit-mahakarya-heritage': '/collections/sarimbit-luxury',
     'sarimbit-signature-elegance': '/collections/sarimbit-premium',
-    'sarimbit-essential-daily': '/collections/sarimbit-ekonomis',
-    'sarimbit-batik-couple': '/collections/sarimbit-exclusive',
+    'sarimbit-essential-daily': '/collections/sarimbit-ekonomi',
+    'sarimbit-batik-couple': '/collections/sarimbit-luxury',
+    'batik-wanita': '/collections/sarimbit-luxury?gender=wanita',
+    'batik-pria': '/collections/sarimbit-luxury?gender=pria',
+    'blus-batik-wanita': '/collections/sarimbit-premium?gender=wanita',
+    'outer-tunik-batik': '/collections/sarimbit-luxury?gender=wanita',
+    'tunik-batik-wanita': '/collections/sarimbit-ekonomi?gender=wanita',
+    'dress-batik-wanita': '/collections/sarimbit-premium?gender=wanita',
+    'gamis-batik-wanita': '/collections/sarimbit-premium?gender=wanita',
+    'outer-batik-wanita': '/collections/sarimbit-luxury?gender=wanita',
+    'blazer-batik-wanita': '/collections/sarimbit-luxury?gender=wanita',
+    'kebaya-batik-modern': '/collections/sarimbit-luxury?gender=wanita',
+    'daster-batik-solo': '/collections/sarimbit-ekonomi?gender=wanita',
+    'kemeja-batik-lengan-panjang': '/collections/sarimbit-premium?gender=pria&sleeve=lengan-panjang',
+    'hem-batik-lengan-pendek': '/collections/sarimbit-premium?gender=pria&sleeve=lengan-pendek',
+    'celana-batik-pria': '/collections/sarimbit-ekonomi?gender=pria',
+    'blus-batik-anak-cewek': '/collections/batik-anak?gender=putri',
+    'gamis-batik-anak': '/collections/batik-anak?gender=putri',
+    'dress-batik-anak': '/collections/batik-anak?gender=putri',
+    'kebaya-batik-anak': '/collections/batik-anak?gender=putri',
+    'jarik-anak': '/collections/batik-anak',
+    'babydoll-batik-anak': '/collections/batik-anak?gender=putri',
+    'hem-batik-anak-cowo': '/collections/batik-anak?gender=putra',
+    'surjan-batik-anak': '/collections/batik-anak?gender=putra',
+    'blangkon-tradisional': '/collections/aksesoris',
+    'sarung-batik-anak': '/collections/batik-anak',
   };
 
   if (collectionRedirects[handle]) {
@@ -143,13 +170,37 @@ async function loadCriticalData({ context, params, request }) {
 export default function Collection() {
   /** @type {LoaderReturnData} */
   const { collection } = useLoaderData();
+  const [searchParams] = useSearchParams();
   const handle = collection?.handle || '';
+
+  const genderParam = searchParams.get('gender')?.toLowerCase();
+  const sleeveParam = searchParams.get('sleeve')?.toLowerCase();
 
   // Tier-Differentiated Theme Classification
   const isExclusive =
-    handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra');
+    handle.includes('luxury') || handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra');
   const isPremium =
     handle.includes('premium') || handle.includes('signature') || handle.includes('dobby');
+
+  // Filter products by tag if gender/sleeve params are active
+  const filteredConnection = useMemo(() => {
+    if (!genderParam && !sleeveParam) return collection.products;
+    const nodes = (collection.products?.nodes || []).filter((p) => {
+      const pTags = (p.tags || []).map((t) => t.toLowerCase());
+      if (genderParam && !pTags.includes(genderParam)) return false;
+      if (sleeveParam && !pTags.includes(sleeveParam)) return false;
+      return true;
+    });
+    return {
+      ...collection.products,
+      nodes,
+      pageInfo: {
+        ...collection.products?.pageInfo,
+        hasNextPage: false,
+        hasPreviousPage: false,
+      },
+    };
+  }, [collection.products, genderParam, sleeveParam]);
 
   const themeClasses = isExclusive
     ? 'bg-[#111111] text-white'
@@ -407,11 +458,12 @@ export default function Collection() {
         {/* Minimalist Horizontal Filter & Sort Bar (Before Product List) */}
         <CollectionFilterBar
           isDark={isExclusive}
-          totalCount={collection.products?.nodes?.length}
+          handle={handle}
+          totalCount={filteredConnection?.nodes?.length}
         />
 
         {/* Tier-Differentiated Products Grid (4:5 Aspect Ratio) */}
-        {collection.products?.nodes?.length === 0 ? (
+        {filteredConnection?.nodes?.length === 0 ? (
           <div className="text-center py-16 px-4 border border-dashed border-[#E2DFD8] bg-[#FAF8F5]/60 mb-12">
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
               FILTER TIDAK MENEMUKAN HASIL
@@ -420,12 +472,12 @@ export default function Collection() {
               Tidak ada busana yang sesuai dengan kriteria filter.
             </p>
             <p className="text-xs text-[#5A5550] max-w-md mx-auto mb-6">
-              Silakan sesuaikan rentang harga, reset filter, atau hubungi konsultan kami untuk pesanan khusus.
+              Silakan sesuaikan filter pilihan Anda, reset filter, atau hubungi konsultan kami untuk pesanan khusus.
             </p>
           </div>
         ) : (
           <PaginatedResourceSection
-            connection={collection.products}
+            connection={filteredConnection}
             resourcesClassName={`grid ${gridColumns}`}
           >
             {({ node: product, index }) => (
@@ -519,6 +571,7 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     handle
     title
     productType
+    tags
     featuredImage {
       id
       altText

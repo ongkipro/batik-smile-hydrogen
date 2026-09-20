@@ -55,12 +55,12 @@
       
       <loader-contracts>
         <graphql-query name="HomepageQuery">
-          <!-- Live Shopify Collections -->
-          <collection handle="batik-wanita" first="6" as="womenProducts" />
-          <collection handle="batik-pria" first="6" as="menProducts" />
-          <collection handle="sarimbit-ekonomis" first="6" as="sarimbitProducts" />
-          <collection handle="jarik-kain-batik" first="6" as="rawFabricProducts" />
-          <collections limit="10" sortKey="UPDATED_AT" as="featuredCollections" withImage="true" />
+          <!-- Live Shopify Collections (6 Core Collections + Sub-Category Chips) -->
+          <collection handle="sarimbit-luxury" first="6" as="luxuryCollection" />
+          <collection handle="sarimbit-premium" first="6" as="premiumCollection" />
+          <collection handle="sarimbit-ekonomi" first="6" as="ekonomiCollection" />
+          <collection handle="kain" first="6" as="rawFabricCollection" />
+          <collections limit="20" sortKey="UPDATED_AT" as="featuredCollections" withImage="true" />
           <!-- Native Metaobjects with Graceful Fallbacks -->
           <metaobject type="hero_banner" as="heroData" fallback="public/banners/hero_editorial_banner.jpg" />
           <metaobject type="heritage_video" as="videoData" fallback="public/banners/craftsmanship_canting_banner.jpg" />
@@ -185,8 +185,8 @@
       </loader-contracts>
 
       <tier-branches>
-        <!-- Branch A: Exclusive Collection (Kasta I) -->
-        <tier id="sarimbit-exclusive" condition="handle == 'sarimbit-exclusive'">
+        <!-- Branch A: Luxury Collection (Kasta I) -->
+        <tier id="sarimbit-luxury" condition="handle == 'sarimbit-luxury' || handle == 'sarimbit-exclusive'">
           <component name="CollectionExclusive" file="app/components/CollectionExclusive.jsx" />
           <design-token scheme="Scheme 3 (Dark Luxe)" bg="#111111" text="#FFFFFF" accent="#C5A059" />
           <layout>2-to-3 column expansive editorial layout, wide whitespace, artisan storytelling block</layout>
@@ -201,7 +201,7 @@
           <filter>Family Sarimbit Filter Drawer &amp; Fabric Drape Selector</filter>
         </tier>
 
-        <!-- Branch C: Standard / RTW Collections (Kasta III) -->
+        <!-- Branch C: Ekonomi / Standard Collections (Kasta III) -->
         <tier id="default-rtw" condition="default">
           <design-token scheme="Scheme 2 (Pure Studio)" bg="#FFFFFF" text="#1C1C1C" />
           <layout>4-column high-speed conversion grid with direct add-to-bag cues</layout>

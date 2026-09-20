@@ -1,0 +1,2172 @@
+{
+  "backupDate": "2026-09-20T14:54:40.989Z",
+  "shop": "23ahbp-sq.myshopify.com",
+  "totalCollections": 31,
+  "totalProducts": 23,
+  "collections": [
+    {
+      "id": "gid://shopify/Collection/480516014137",
+      "title": "Batik Wanita",
+      "handle": "batik-wanita",
+      "description": "Koleksi lengkap busana batik wanita modern: blus, tunik, dress, outer & kebaya.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618722361",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241.jpg?v=1786004433",
+        "altText": "Banner Batik Wanita - Ratio 3:2",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054709817",
+            "title": "Daster Solo Series",
+            "handle": "daster-solo-series"
+          },
+          {
+            "id": "gid://shopify/Product/8421054644281",
+            "title": "Kebaya Encim Modern",
+            "handle": "kebaya-encim-modern"
+          },
+          {
+            "id": "gid://shopify/Product/8421054578745",
+            "title": "Gamis Parang Kusumo",
+            "handle": "gamis-parang-kusumo"
+          },
+          {
+            "id": "gid://shopify/Product/8421054480441",
+            "title": "Outer Terracotta Gold",
+            "handle": "outer-terracotta-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421054414905",
+            "title": "Blus Royal Navy",
+            "handle": "blus-royal-navy"
+          },
+          {
+            "id": "gid://shopify/Product/8421054382137",
+            "title": "Tunik Senyum Floral",
+            "handle": "tunik-senyum-floral"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516046905",
+      "title": "Batik Pria",
+      "handle": "batik-pria",
+      "description": "Koleksi kemeja batik pria lengan panjang, hem pendek & celana batik.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618755129",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_pria_1785995886986.jpg?v=1786004442",
+        "altText": "Banner Batik Pria - Ratio 3:2",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055201337",
+            "title": "Celana Sirwal Etnik",
+            "handle": "celana-sirwal-etnik"
+          },
+          {
+            "id": "gid://shopify/Product/8421055168569",
+            "title": "Hem Lurik Hitam",
+            "handle": "hem-lurik-hitam"
+          },
+          {
+            "id": "gid://shopify/Product/8421055135801",
+            "title": "Hem Dobby Maroon",
+            "handle": "hem-dobby-maroon"
+          },
+          {
+            "id": "gid://shopify/Product/8421054808121",
+            "title": "Kemeja Sido Asih",
+            "handle": "kemeja-sido-asih"
+          },
+          {
+            "id": "gid://shopify/Product/8421054775353",
+            "title": "Kemeja Motif Semarangan",
+            "handle": "kemeja-motif-semarangan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516112441",
+      "title": "Batik Anak",
+      "handle": "batik-anak",
+      "description": "Koleksi busana batik anak cewek & cowok tradisional serta modern.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618787897",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125.jpg?v=1786004452",
+        "altText": "Banner Batik Anak - Ratio 3:2",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          },
+          {
+            "id": "gid://shopify/Product/8421055463481",
+            "title": "Hem Anak Pesisir",
+            "handle": "hem-anak-pesisir"
+          },
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516177977",
+      "title": "Blus Batik Wanita",
+      "handle": "blus-batik-wanita",
+      "description": "Blouse batik wanita modern motif Solo & Pekalongan.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618853433",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_f0dcf87f-ab6f-4235-86b9-af07d855c3a9.jpg?v=1786005572",
+        "altText": "Banner Blus Batik Wanita - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054414905",
+            "title": "Blus Royal Navy",
+            "handle": "blus-royal-navy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516243513",
+      "title": "Outer Tunik Batik",
+      "handle": "outer-tunik-batik",
+      "description": "Outerwear model tunik batik serbaguna untuk kantor & hijab style.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618886201",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_74069e0a-7e78-46c7-8247-05ab79453ad1.jpg?v=1786005578",
+        "altText": "Banner Outer Tunik Batik - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054480441",
+            "title": "Outer Terracotta Gold",
+            "handle": "outer-terracotta-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421054382137",
+            "title": "Tunik Senyum Floral",
+            "handle": "tunik-senyum-floral"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516374585",
+      "title": "Tunik Batik Wanita",
+      "handle": "tunik-batik-wanita",
+      "description": "Tunik batik wanita bersiluet A-line anggun berbahan katun primisima.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618918969",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_b141a51f-87d7-4ec9-a82e-e8598153671c.jpg?v=1786005586",
+        "altText": "Banner Tunik Batik Wanita - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054382137",
+            "title": "Tunik Senyum Floral",
+            "handle": "tunik-senyum-floral"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516407353",
+      "title": "Dress Batik Wanita",
+      "handle": "dress-batik-wanita",
+      "description": "Gaun & dress batik pesta bernuansa etnik kontemporer.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618951737",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_b4fd8180-d9f1-4313-b7af-89662d594bfe.jpg?v=1786005593",
+        "altText": "Banner Dress Batik Wanita - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054578745",
+            "title": "Gamis Parang Kusumo",
+            "handle": "gamis-parang-kusumo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516440121",
+      "title": "Gamis Batik Wanita",
+      "handle": "gamis-batik-wanita",
+      "description": "Gamis batik muslimah syari elegan untuk momen bahagia.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614618984505",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_c2ee4a76-08e1-4d4e-8f94-980bc489e695.jpg?v=1786005601",
+        "altText": "Banner Gamis Batik Wanita - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054578745",
+            "title": "Gamis Parang Kusumo",
+            "handle": "gamis-parang-kusumo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516472889",
+      "title": "Outer Batik Wanita",
+      "handle": "outer-batik-wanita",
+      "description": "Outer cardigan & cape batik etnik pelapis gaun & busana.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619017273",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_e913ea73-730a-4068-a330-d7ae30488d84.jpg?v=1786006738",
+        "altText": "Featured Banner Outer Batik Wanita - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054480441",
+            "title": "Outer Terracotta Gold",
+            "handle": "outer-terracotta-gold"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516505657",
+      "title": "Blazer Batik Wanita",
+      "handle": "blazer-batik-wanita",
+      "description": "Blazer batik wanita formal potongan eksekutif.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619050041",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_a47631ef-d85c-4899-af15-9c325e056674.jpg?v=1786005614",
+        "altText": "Banner Blazer Batik Wanita - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054644281",
+            "title": "Kebaya Encim Modern",
+            "handle": "kebaya-encim-modern"
+          },
+          {
+            "id": "gid://shopify/Product/8421054480441",
+            "title": "Outer Terracotta Gold",
+            "handle": "outer-terracotta-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421054414905",
+            "title": "Blus Royal Navy",
+            "handle": "blus-royal-navy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516538425",
+      "title": "Inner Busana Batik",
+      "handle": "inner-busana-batik",
+      "description": "Manset & inner pelapis busana batik transparan yang adem.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619082809",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_fa53ec77-0460-40ba-b6a2-3bda688ef29f.jpg?v=1786006746",
+        "altText": "Featured Banner Inner Busana Batik - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054709817",
+            "title": "Daster Solo Series",
+            "handle": "daster-solo-series"
+          },
+          {
+            "id": "gid://shopify/Product/8421054414905",
+            "title": "Blus Royal Navy",
+            "handle": "blus-royal-navy"
+          },
+          {
+            "id": "gid://shopify/Product/8421054382137",
+            "title": "Tunik Senyum Floral",
+            "handle": "tunik-senyum-floral"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516603961",
+      "title": "Kebaya Batik Modern",
+      "handle": "kebaya-batik-modern",
+      "description": "Kebaya batik perpaduan brokat & batik tradisional untuk pesta.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619115577",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_d9e083a3-28db-40fc-b411-6c2ecb9f98c7.jpg?v=1786006755",
+        "altText": "Featured Banner Kebaya Batik Modern - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054644281",
+            "title": "Kebaya Encim Modern",
+            "handle": "kebaya-encim-modern"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516636729",
+      "title": "Jarik & Kain Batik",
+      "handle": "jarik-kain-batik",
+      "description": "Kain batik tulis & primisima halus khas Solo & Jogja.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619148345",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_74b9bcb8-fe35-457a-8161-5dc886cf9cb7.jpg?v=1786006762",
+        "altText": "Featured Banner Jarik & Kain Batik - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055529017",
+            "title": "Kain Tenun Troso",
+            "handle": "kain-tenun-troso"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516669497",
+      "title": "Daster Batik Solo",
+      "handle": "daster-batik-solo",
+      "description": "Daster batik santai & busui friendly adem di rumah.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619181113",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_wanita_cat_1786004365241_fe3f4e74-64cb-4fc0-ad25-c78b4261685d.jpg?v=1786004564",
+        "altText": "Banner Daster Batik Solo - Ratio 3:2",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054709817",
+            "title": "Daster Solo Series",
+            "handle": "daster-solo-series"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516702265",
+      "title": "Kemeja Batik Lengan Panjang",
+      "handle": "kemeja-batik-lengan-panjang",
+      "description": "Kemeja batik pria lengan panjang furing halus formal.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619213881",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_pria_1785995886986_54ad5168-3619-4b88-9abc-ad7b8721b86f.jpg?v=1786006769",
+        "altText": "Featured Banner Kemeja Batik Lengan Panjang - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421054808121",
+            "title": "Kemeja Sido Asih",
+            "handle": "kemeja-sido-asih"
+          },
+          {
+            "id": "gid://shopify/Product/8421054775353",
+            "title": "Kemeja Motif Semarangan",
+            "handle": "kemeja-motif-semarangan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516735033",
+      "title": "Hem Batik Lengan Pendek",
+      "handle": "hem-batik-lengan-pendek",
+      "description": "Hem batik pria lengan pendek santai untuk harian.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619246649",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_pria_1785995886986_d40a469a-9177-4e96-9ab1-7cc9a5f0cbbd.jpg?v=1786006776",
+        "altText": "Featured Banner Hem Batik Lengan Pendek - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055168569",
+            "title": "Hem Lurik Hitam",
+            "handle": "hem-lurik-hitam"
+          },
+          {
+            "id": "gid://shopify/Product/8421055135801",
+            "title": "Hem Dobby Maroon",
+            "handle": "hem-dobby-maroon"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516800569",
+      "title": "Celana Batik Pria",
+      "handle": "celana-batik-pria",
+      "description": "Celana batik pria chino stretch & celana santai.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619279417",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_pria_1785995886986_968ad82b-16e4-47f2-b714-d7d8e8d62a28.jpg?v=1786006784",
+        "altText": "Featured Banner Celana Batik Pria - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055201337",
+            "title": "Celana Sirwal Etnik",
+            "handle": "celana-sirwal-etnik"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516833337",
+      "title": "Blus Batik Anak Cewek",
+      "handle": "blus-batik-anak-cewek",
+      "description": "Blouse batik lucu & manis untuk anak perempuan.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619312185",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_233148db-1981-4603-a77f-73114c86c280.jpg?v=1786004600",
+        "altText": "Banner Blus Batik Anak Cewek - Ratio 3:2",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516866105",
+      "title": "Gamis Batik Anak",
+      "handle": "gamis-batik-anak",
+      "description": "Gamis batik muslimah imut untuk anak perempuan.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619344953",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_4df22c24-2952-45a9-89f7-8577da426a9b.jpg?v=1786005670",
+        "altText": "Banner Gamis Batik Anak - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          },
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516898873",
+      "title": "Dress Batik Anak",
+      "handle": "dress-batik-anak",
+      "description": "Dress & gaun batik anak cewek untuk pesta.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619377721",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_715306d9-1c74-4853-a771-53922639e9d4.jpg?v=1786006791",
+        "altText": "Featured Banner Dress Batik Anak - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516931641",
+      "title": "Kebaya Batik Anak",
+      "handle": "kebaya-batik-anak",
+      "description": "Kebaya anak cewek etnik untuk kartinian & kondangan.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619410489",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_23f3d6bf-cd53-4b77-910c-585629fbb802.jpg?v=1786006798",
+        "altText": "Featured Banner Kebaya Batik Anak - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          },
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516964409",
+      "title": "Jarik Anak",
+      "handle": "jarik-anak",
+      "description": "Jarik batik kecil untuk anak perempuan.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619443257",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_c05ece3f-dc10-41e1-bfcf-db9ff56fff51.jpg?v=1786005691",
+        "altText": "Banner Jarik Anak - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055529017",
+            "title": "Kain Tenun Troso",
+            "handle": "kain-tenun-troso"
+          },
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          },
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480516997177",
+      "title": "Babydoll Batik Anak",
+      "handle": "babydoll-batik-anak",
+      "description": "Setelan babydoll batik santai untuk anak perempuan.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619476025",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_a3873de3-b1d3-4130-8f00-c0109d34f9b8.jpg?v=1786006806",
+        "altText": "Featured Banner Babydoll Batik Anak - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055463481",
+            "title": "Hem Anak Pesisir",
+            "handle": "hem-anak-pesisir"
+          },
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517029945",
+      "title": "Hem Batik Anak Cowo",
+      "handle": "hem-batik-anak-cowo",
+      "description": "Hem kemeja batik pendek anak laki-laki.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619508793",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_9f7e3e43-d559-4175-9fb6-c47c6080a09a.jpg?v=1786006813",
+        "altText": "Featured Banner Hem Batik Anak Cowo - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055463481",
+            "title": "Hem Anak Pesisir",
+            "handle": "hem-anak-pesisir"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517062713",
+      "title": "Surjan Batik Anak",
+      "handle": "surjan-batik-anak",
+      "description": "Baju surjan batik tradisional anak cowok.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619541561",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_18e27dba-30d2-4a9e-8e60-0c4586213721.jpg?v=1786005713",
+        "altText": "Banner Surjan Batik Anak - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517128249",
+      "title": "Blangkon Tradisional",
+      "handle": "blangkon-tradisional",
+      "description": "Blangkon batik Solo & Jogja untuk anak & dewasa.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619574329",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_dc145df8-517d-41db-bf18-8d9f9d5939b9.jpg?v=1786005720",
+        "altText": "Banner Blangkon Tradisional - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055594553",
+            "title": "Set Blangkon Semarang",
+            "handle": "set-blangkon-semarang"
+          },
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517161017",
+      "title": "Sarung Batik Anak",
+      "handle": "sarung-batik-anak",
+      "description": "Sarung batik instan & praktis anak laki-laki.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619607097",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_anak_cat_1786004381125_1aabb6b7-aae3-4139-80e8-4f7e4497d5f1.jpg?v=1786006822",
+        "altText": "Featured Banner Sarung Batik Anak - Perfect 3:2 Landscape Ratio",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          },
+          {
+            "id": "gid://shopify/Product/8421055463481",
+            "title": "Hem Anak Pesisir",
+            "handle": "hem-anak-pesisir"
+          },
+          {
+            "id": "gid://shopify/Product/8421055201337",
+            "title": "Celana Sirwal Etnik",
+            "handle": "celana-sirwal-etnik"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517193785",
+      "title": "Sarimbit Exclusive",
+      "handle": "sarimbit-exclusive",
+      "description": "Koleksi eksklusif batik tulis & silk emboss sarimbit pasangan royal.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619639865",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_51f1e349-35df-4896-b08d-6290f84897d9.jpg?v=1786005734",
+        "altText": "Banner Sarimbit Mahakarya Heritage - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421056413753",
+            "title": "Sarimbit Royal Navy",
+            "handle": "sarimbit-royal-navy-1"
+          },
+          {
+            "id": "gid://shopify/Product/8421056348217",
+            "title": "Sarimbit Mustard Gold",
+            "handle": "sarimbit-mustard-gold"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517390393",
+      "title": "Sarimbit Premium",
+      "handle": "sarimbit-premium",
+      "description": "Koleksi premium sarimbit batik katun primisima furing pesta.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619672633",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_d8691b10-ece8-4430-a8c6-d184fa0c467a.jpg?v=1786004716",
+        "altText": "Banner Sarimbit Signature Elegance - Ratio 3:2",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421056512057",
+            "title": "Sarimbit Charcoal Hitam",
+            "handle": "sarimbit-charcoal-hitam"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480517455929",
+      "title": "Sarimbit Ekonomis",
+      "handle": "sarimbit-ekonomis",
+      "description": "Koleksi sarimbit batik pasangan harian yang adem & terjangkau.",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614619705401",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749",
+        "altText": "Banner Sarimbit Essential Daily - Unique 3:2 Lookbook",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421055397945",
+            "title": "Sarimbit Kondangan Gold",
+            "handle": "sarimbit-kondangan-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421055365177",
+            "title": "Sarimbit Daily Keluarga",
+            "handle": "sarimbit-daily-keluarga"
+          },
+          {
+            "id": "gid://shopify/Product/8421055332409",
+            "title": "Sarimbit Royal Navy",
+            "handle": "sarimbit-royal-navy"
+          },
+          {
+            "id": "gid://shopify/Product/8421055266873",
+            "title": "Sarimbit Sutra Pasangan",
+            "handle": "sarimbit-sutra-pasangan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Collection/480519684153",
+      "title": "Shop",
+      "handle": "shop",
+      "description": "Katalog lengkap busana batik etnik modern khas Solo & Pekalongan untuk Pria, Wanita, Anak-anak, dan Pasangan (Sarimbit).",
+      "image": {
+        "id": "gid://shopify/CollectionImage/1614620491833",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_shop_all_1786007684766.jpg?v=1786007711",
+        "altText": "Banner Shop Collection - All Batik Products",
+        "width": 1264,
+        "height": 848
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/8421056512057",
+            "title": "Sarimbit Charcoal Hitam",
+            "handle": "sarimbit-charcoal-hitam"
+          },
+          {
+            "id": "gid://shopify/Product/8421056413753",
+            "title": "Sarimbit Royal Navy",
+            "handle": "sarimbit-royal-navy-1"
+          },
+          {
+            "id": "gid://shopify/Product/8421056348217",
+            "title": "Sarimbit Mustard Gold",
+            "handle": "sarimbit-mustard-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421055594553",
+            "title": "Set Blangkon Semarang",
+            "handle": "set-blangkon-semarang"
+          },
+          {
+            "id": "gid://shopify/Product/8421055529017",
+            "title": "Kain Tenun Troso",
+            "handle": "kain-tenun-troso"
+          },
+          {
+            "id": "gid://shopify/Product/8421055496249",
+            "title": "Setelan Surjan Anak",
+            "handle": "setelan-surjan-anak"
+          },
+          {
+            "id": "gid://shopify/Product/8421055463481",
+            "title": "Hem Anak Pesisir",
+            "handle": "hem-anak-pesisir"
+          },
+          {
+            "id": "gid://shopify/Product/8421055430713",
+            "title": "Dress Anak Bunga",
+            "handle": "dress-anak-bunga"
+          },
+          {
+            "id": "gid://shopify/Product/8421055397945",
+            "title": "Sarimbit Kondangan Gold",
+            "handle": "sarimbit-kondangan-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421055365177",
+            "title": "Sarimbit Daily Keluarga",
+            "handle": "sarimbit-daily-keluarga"
+          },
+          {
+            "id": "gid://shopify/Product/8421055332409",
+            "title": "Sarimbit Royal Navy",
+            "handle": "sarimbit-royal-navy"
+          },
+          {
+            "id": "gid://shopify/Product/8421055266873",
+            "title": "Sarimbit Sutra Pasangan",
+            "handle": "sarimbit-sutra-pasangan"
+          },
+          {
+            "id": "gid://shopify/Product/8421055201337",
+            "title": "Celana Sirwal Etnik",
+            "handle": "celana-sirwal-etnik"
+          },
+          {
+            "id": "gid://shopify/Product/8421055168569",
+            "title": "Hem Lurik Hitam",
+            "handle": "hem-lurik-hitam"
+          },
+          {
+            "id": "gid://shopify/Product/8421055135801",
+            "title": "Hem Dobby Maroon",
+            "handle": "hem-dobby-maroon"
+          },
+          {
+            "id": "gid://shopify/Product/8421054808121",
+            "title": "Kemeja Sido Asih",
+            "handle": "kemeja-sido-asih"
+          },
+          {
+            "id": "gid://shopify/Product/8421054775353",
+            "title": "Kemeja Motif Semarangan",
+            "handle": "kemeja-motif-semarangan"
+          },
+          {
+            "id": "gid://shopify/Product/8421054709817",
+            "title": "Daster Solo Series",
+            "handle": "daster-solo-series"
+          },
+          {
+            "id": "gid://shopify/Product/8421054644281",
+            "title": "Kebaya Encim Modern",
+            "handle": "kebaya-encim-modern"
+          },
+          {
+            "id": "gid://shopify/Product/8421054578745",
+            "title": "Gamis Parang Kusumo",
+            "handle": "gamis-parang-kusumo"
+          },
+          {
+            "id": "gid://shopify/Product/8421054480441",
+            "title": "Outer Terracotta Gold",
+            "handle": "outer-terracotta-gold"
+          },
+          {
+            "id": "gid://shopify/Product/8421054414905",
+            "title": "Blus Royal Navy",
+            "handle": "blus-royal-navy"
+          },
+          {
+            "id": "gid://shopify/Product/8421054382137",
+            "title": "Tunik Senyum Floral",
+            "handle": "tunik-senyum-floral"
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "id": "gid://shopify/Product/8421054382137",
+      "title": "Tunik Senyum Floral",
+      "handle": "tunik-senyum-floral",
+      "description": "Busana tunik batik modern bernuansa floral pink elegan dengan siluet kontemporer yang anggun. Dilengkapi aksen ritsleting signature senyum yang praktis dan modis, menjadikannya pilihan ideal untuk acara semi-formal maupun busana harian berkelas. Bahan: Katun Primisima Sanforized halus dan jatuh Furing: Katun Hero adem, lembut & menyerap keringat Konstruksi: Potongan presisi dengan sambung motif simetris standar butik Perawatan: Cuci lembut terpisah dengan lerak atau deterjen cair lembut",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898543943737",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1.jpg?v=1788412306",
+        "altText": "Tunik Senyum Floral - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442740875321",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "245000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "320000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516014137",
+            "title": "Batik Wanita",
+            "handle": "batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516243513",
+            "title": "Outer Tunik Batik",
+            "handle": "outer-tunik-batik"
+          },
+          {
+            "id": "gid://shopify/Collection/480516374585",
+            "title": "Tunik Batik Wanita",
+            "handle": "tunik-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516538425",
+            "title": "Inner Busana Batik",
+            "handle": "inner-busana-batik"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054414905",
+      "title": "Blus Royal Navy",
+      "handle": "blus-royal-navy",
+      "description": "Blus batik wanita modern dengan paduan warna royal navy eksklusif dan sentuhan lis etnik kontemporer. Didesain untuk wanita aktif yang mengutamakan wibawa dan kenyamanan sepanjang hari. Bahan: Katun Primisima Sanforized kualitas ekspor Furing: Katun Hero lembut dan tidak gerah Konstruksi: Sambung motif simetris di saku dan belahan kancing Perawatan: Setrika suhu sedang, hindari penjemuran langsung di bawah terik matahari",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898545942585",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_3b94036d-a107-4304-9a86-34c0a82d855a.jpg?v=1788412345",
+        "altText": "Blus Royal Navy - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442740908089",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "215000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "285000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516014137",
+            "title": "Batik Wanita",
+            "handle": "batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516177977",
+            "title": "Blus Batik Wanita",
+            "handle": "blus-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516505657",
+            "title": "Blazer Batik Wanita",
+            "handle": "blazer-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516538425",
+            "title": "Inner Busana Batik",
+            "handle": "inner-busana-batik"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054480441",
+      "title": "Outer Terracotta Gold",
+      "handle": "outer-terracotta-gold",
+      "description": "Outer tunik beraksen cape modern dengan palet warna terracotta gold yang memikat. Memberikan dimensi visual anggun dan fleksibel dipadukan dengan berbagai busana dasar. Bahan: Katun Primisima Sanforized tekstur lembut Furing: Katun Hero adem khas butik Konstruksi: Siluet cape jatuh natural tanpa membatasi gerak Perawatan: Cuci tangan dengan deterjen lembut",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898547548217",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_39d79ab0-321a-4bca-956f-9457c76640a8.jpg?v=1788412380",
+        "altText": "Outer Terracotta Gold - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442740973625",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "275000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "350000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516014137",
+            "title": "Batik Wanita",
+            "handle": "batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516243513",
+            "title": "Outer Tunik Batik",
+            "handle": "outer-tunik-batik"
+          },
+          {
+            "id": "gid://shopify/Collection/480516472889",
+            "title": "Outer Batik Wanita",
+            "handle": "outer-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516505657",
+            "title": "Blazer Batik Wanita",
+            "handle": "blazer-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054578745",
+      "title": "Gamis Parang Kusumo",
+      "handle": "gamis-parang-kusumo",
+      "description": "Gamis batik berpotongan anggun dengan motif pusaka Parang Kusumo yang melambangkan keharuman budi pekerti dan keteguhan hati. Pilihan tepat untuk resepsi, pengajian, dan momen silaturahmi keluarga. Bahan: Katun Primisima Sanforized tidak menerawang Furing: Katun Hero sejuk berpori mikro Konstruksi: Ritsleting depan ramah menyusui dan wudhu-friendly Perawatan: Cuci terpisah, hindari pemutih pakaian",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898550562873",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_c22557c9-efea-42cd-b88f-52b3b4038df7.jpg?v=1788412424",
+        "altText": "Gamis Parang Kusumo - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442741203001",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "345000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "450000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516014137",
+            "title": "Batik Wanita",
+            "handle": "batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516407353",
+            "title": "Dress Batik Wanita",
+            "handle": "dress-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516440121",
+            "title": "Gamis Batik Wanita",
+            "handle": "gamis-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054644281",
+      "title": "Kebaya Encim Modern",
+      "handle": "kebaya-encim-modern",
+      "description": "Perpaduan harmoni siluet kebaya encim peranakan dan motif batik Nusantara dengan lis brokat etnik halus. Menampilkan pesona klasik yang abadi dengan sentuhan modernitas. Bahan: Katun Halus Primisima berpadu lis brokat timbul Furing: Furing katun hero nyaman dan adem di kulit Konstruksi: Kancing depan rapi dan potongan pas badan yang fleksibel Perawatan: Dianjurkan dry clean atau cuci lembut dengan lerak",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898552430649",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_4d3d5d02-81fd-40bf-a7ef-48c5f8100110.jpg?v=1788412467",
+        "altText": "Kebaya Encim Modern - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442741301305",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "295000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "380000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516014137",
+            "title": "Batik Wanita",
+            "handle": "batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516505657",
+            "title": "Blazer Batik Wanita",
+            "handle": "blazer-batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516603961",
+            "title": "Kebaya Batik Modern",
+            "handle": "kebaya-batik-modern"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054709817",
+      "title": "Daster Solo Series",
+      "handle": "daster-solo-series",
+      "description": "Daster batik rumah premium dari seri Solo dengan bahan katun halus sanforized yang sangat lembut di kulit. Memberikan kesejukan istimewa untuk bersantai di rumah tanpa mengorbankan kerapian berbusana. Bahan: 100% Katun Halus Sanforized berserat rapat Konstruksi: Jahitan obras kuat, saku samping praktis, dan kancing depan Kenyamanan: Adem maksimal untuk iklim tropis Perawatan: Cuci mesin putaran lembut atau cuci tangan biasa",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898553774137",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_7f8582ef-9019-4907-9e09-41089315117a.jpg?v=1788412502",
+        "altText": "Daster Solo Series - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442741661753",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "135000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "175000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516014137",
+            "title": "Batik Wanita",
+            "handle": "batik-wanita"
+          },
+          {
+            "id": "gid://shopify/Collection/480516538425",
+            "title": "Inner Busana Batik",
+            "handle": "inner-busana-batik"
+          },
+          {
+            "id": "gid://shopify/Collection/480516669497",
+            "title": "Daster Batik Solo",
+            "handle": "daster-batik-solo"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054775353",
+      "title": "Kemeja Motif Semarangan",
+      "handle": "kemeja-motif-semarangan",
+      "description": "Kemeja batik pria lengan panjang menghadirkan motif pesisiran khas Semarangan yang dinamis dan berwibawa. Potongan reguler fit dengan presisi sambung pola simetris di bagian saku depan dan kerah. Bahan: Katun Primisima Sanforized premium Furing: Katun Hero adem hingga ke lengan Konstruksi: Saku bobok pas motif, kancing tersembunyi berkelas Perawatan: Setrika uap suhu sedang, hindari pemutih",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898555707449",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_46cec61a-6827-4134-b2d4-c242b3107309.jpg?v=1788412542",
+        "altText": "Kemeja Motif Semarangan - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442741760057",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "285000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "375000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516046905",
+            "title": "Batik Pria",
+            "handle": "batik-pria"
+          },
+          {
+            "id": "gid://shopify/Collection/480516702265",
+            "title": "Kemeja Batik Lengan Panjang",
+            "handle": "kemeja-batik-lengan-panjang"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421054808121",
+      "title": "Kemeja Sido Asih",
+      "handle": "kemeja-sido-asih",
+      "description": "Mahakarya kemeja batik pria berbahan sutra alam dengan motif sakral Sido Asih yang melambangkan kasih sayang abadi dan kedudukan terhormat. Dikerjakan secara cermat oleh maestro pengrajin batik tulis. Bahan: Sutra Tulis Halus ATBM berkilau lembut alami Furing: Katun Hero sutra lembut berdaya serap tinggi Konstruksi: Slimfit modern berwibawa dengan kerah tegak kaku Perawatan: Wajib dry clean untuk menjaga kilau sutra",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898557247545",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_a00d3a7d-f689-4b2a-a9b9-607399c3951d.jpg?v=1788412579",
+        "altText": "Kemeja Sido Asih - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442741792825",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "550000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "720000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516046905",
+            "title": "Batik Pria",
+            "handle": "batik-pria"
+          },
+          {
+            "id": "gid://shopify/Collection/480516702265",
+            "title": "Kemeja Batik Lengan Panjang",
+            "handle": "kemeja-batik-lengan-panjang"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055135801",
+      "title": "Hem Dobby Maroon",
+      "handle": "hem-dobby-maroon",
+      "description": "Hem batik pria lengan pendek dengan bahan dasar tenun dobby bertekstur timbul elegan berwarna maroon pekat. Memberikan nuansa formal yang tetap santai dan fleksibel dipakai seharian. Bahan: Katun Tenun Dobby Timbul berkualitas tinggi Furing: Katun Hero halus dan menyerap keringat Konstruksi: Saku paspeli rapi, kerah kemeja kokoh Perawatan: Cuci lembut, jemur di tempat teduh",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898566684729",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_21ab5030-66c8-40cf-a13e-4acb609d9925.jpg?v=1788412737",
+        "altText": "Hem Dobby Maroon - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442742415417",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "195000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "260000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516046905",
+            "title": "Batik Pria",
+            "handle": "batik-pria"
+          },
+          {
+            "id": "gid://shopify/Collection/480516735033",
+            "title": "Hem Batik Lengan Pendek",
+            "handle": "hem-batik-lengan-pendek"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055168569",
+      "title": "Hem Lurik Hitam",
+      "handle": "hem-lurik-hitam",
+      "description": "Eksplorasi kontemporer yang memadukan keindahan motif batik modern dan ketegasan tenun lurik hitam bergaris halus. Menghadirkan karakter maskulin yang santai namun tetap berakar pada tradisi. Bahan: Katun Primisima berpadu Tenun Lurik Tradisional Furing: Katun Hero adem tanpa rasa gerah Konstruksi: Belahan samping leluasa dan saku fungsional Perawatan: Cuci dengan warna serupa, setrika suhu sedang",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898568159289",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_bf7fbd04-7960-4012-ab5d-448ccb95fa2b.jpg?v=1788412762",
+        "altText": "Hem Lurik Hitam - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442742448185",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "210000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "275000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516046905",
+            "title": "Batik Pria",
+            "handle": "batik-pria"
+          },
+          {
+            "id": "gid://shopify/Collection/480516735033",
+            "title": "Hem Batik Lengan Pendek",
+            "handle": "hem-batik-lengan-pendek"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055201337",
+      "title": "Celana Sirwal Etnik",
+      "handle": "celana-sirwal-etnik",
+      "description": "Celana panjang bergaya sirwal etnik berpinggang karet fleksibel dengan sentuhan motif batik klasik. Nyaman digunakan untuk bersantai, beribadah, maupun aktivitas harian bertema budaya. Bahan: Katun Primisima lembut bernapas Konstruksi: Pinggang elastis dengan tali serut dan saku dalam di kedua sisi Potongan: Longgar leluasa dan tidak membatasi mobilitas Perawatan: Cuci biasa dengan deterjen cair lembut",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898572091449",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_de5850b8-60ef-4279-8a72-ff2798f60eb1.jpg?v=1788412797",
+        "altText": "Celana Sirwal Etnik - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442742579257",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "175000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "230000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516046905",
+            "title": "Batik Pria",
+            "handle": "batik-pria"
+          },
+          {
+            "id": "gid://shopify/Collection/480516800569",
+            "title": "Celana Batik Pria",
+            "handle": "celana-batik-pria"
+          },
+          {
+            "id": "gid://shopify/Collection/480517161017",
+            "title": "Sarung Batik Anak",
+            "handle": "sarung-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055266873",
+      "title": "Sarimbit Sutra Pasangan",
+      "handle": "sarimbit-sutra-pasangan",
+      "description": "Set sarimbit busana pasangan berbahan sutra silk berkilau lembut yang dirancang kompak dan serasi untuk momentum istimewa keluarga. Hadir dengan motif royal yang anggun memikat. Bahan: Sutra Silk Halus berpadu katun prima sanforized Furing: Katun Hero adem di kedua busana Konstruksi: Kemeja pria lengan panjang presisi & tunik wanita elegan Perawatan: Cuci kering (dry clean) atau cuci manual sangat lembut",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898574352441",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_96f4cef7-8fc0-4b40-882e-551ec2a45ae1.jpg?v=1788412832",
+        "altText": "Sarimbit Sutra Pasangan - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442742841401",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "695000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "890000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517455929",
+            "title": "Sarimbit Ekonomis",
+            "handle": "sarimbit-ekonomis"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055332409",
+      "title": "Sarimbit Royal Navy",
+      "handle": "sarimbit-royal-navy",
+      "description": "Koleksi sarimbit pasangan kemeja pria dan tunik wanita dalam balutan palet royal navy yang teduh dan elegan. Menampilkan keserasian harmonis dalam setiap langkah acara formal keluarga. Bahan: Katun Primisima Sanforized tidak luntur Furing: Full furing katun hero adem menyerap keringat Konstruksi: Kerah kemeja rapi dan kancing tunik tersembunyi Perawatan: Cuci terpisah, balik pakaian saat dijemur",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898575990841",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_842fdeb9-f242-4624-af39-d2da9f28ba4d.jpg?v=1788412862",
+        "altText": "Sarimbit Royal Navy - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442742906937",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "495000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "650000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517455929",
+            "title": "Sarimbit Ekonomis",
+            "handle": "sarimbit-ekonomis"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055365177",
+      "title": "Sarimbit Daily Keluarga",
+      "handle": "sarimbit-daily-keluarga",
+      "description": "Koleksi sarimbit keluarga harian yang mengedepankan kepraktisan, kenyamanan gerak, dan keindahan motif batik klasik. Cocok untuk hari raya Lebaran dan pertemuan akrab keluarga besar. Bahan: Katun Primisima Sanforized sejuk Furing: Katun Hero bertekstur halus Karakter: Ringan, adem, dan mudah disetrika Perawatan: Cuci mesin putaran lembut dengan air dingin",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898577662009",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_627248a2-2707-494b-8f73-c3f2cdb81d71.jpg?v=1788412897",
+        "altText": "Sarimbit Daily Keluarga - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442742939705",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "425000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "550000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517455929",
+            "title": "Sarimbit Ekonomis",
+            "handle": "sarimbit-ekonomis"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055397945",
+      "title": "Sarimbit Kondangan Gold",
+      "handle": "sarimbit-kondangan-gold",
+      "description": "Koleksi sarimbit kondangan beraksen warna maroon dan prada gold yang memberikan pesona mewah seketika. Dirancang khusus untuk menghadiri jamuan resepsi malam dan pesta pernikahan bergengsi. Bahan: Katun Dobby Primisima berpadu lis prada gold halus Furing: Katun Hero sejuk hingga ujung pergelangan Konstruksi: Gamis wanita lebar berayun & kemeja pria simetris Perawatan: Hindari penyikatan keras pada aksen prada gold",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898579333177",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_a304cdaf-fa40-4155-b1e4-d1a6cf11ba33.jpg?v=1788412929",
+        "altText": "Sarimbit Kondangan Gold - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442743038009",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "580000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "750000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517455929",
+            "title": "Sarimbit Ekonomis",
+            "handle": "sarimbit-ekonomis"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055430713",
+      "title": "Dress Anak Bunga",
+      "handle": "dress-anak-bunga",
+      "description": "Dress batik anak perempuan dengan motif kupu-kupu ceria dan warna-warni bunga Nusantara yang manis. Dibuat dengan bahan katun super lembut yang menjaga kenyamanan kulit buah hati sepanjang hari. Bahan: 100% Katun Halus Primisima ramah kulit anak Furing: Katun Hero sangat lembut anti-gatal Konstruksi: Ritsleting belakang halus dengan pelindung leher Perawatan: Cuci terpisah dengan deterjen bayi/lembut",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898580381753",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_ac3a4584-3e94-4fdd-ad0d-0a699714b9d9.jpg?v=1788412963",
+        "altText": "Dress Anak Bunga - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442743070777",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "135000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "180000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516112441",
+            "title": "Batik Anak",
+            "handle": "batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516833337",
+            "title": "Blus Batik Anak Cewek",
+            "handle": "blus-batik-anak-cewek"
+          },
+          {
+            "id": "gid://shopify/Collection/480516866105",
+            "title": "Gamis Batik Anak",
+            "handle": "gamis-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516898873",
+            "title": "Dress Batik Anak",
+            "handle": "dress-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516931641",
+            "title": "Kebaya Batik Anak",
+            "handle": "kebaya-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516964409",
+            "title": "Jarik Anak",
+            "handle": "jarik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516997177",
+            "title": "Babydoll Batik Anak",
+            "handle": "babydoll-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055463481",
+      "title": "Hem Anak Pesisir",
+      "handle": "hem-anak-pesisir",
+      "description": "Hem batik anak laki-laki dengan corak motif pesisiran yang dinamis dan berani. Bahan katun adem yang lentur membuat si kecil tetap leluasa bermain di acara formal keluarga. Bahan: Katun Prima berserat adem Konstruksi: Kancing depan kokoh, jahitan ganda di titik renggang Kenyamanan: Menyerap keringat optimal di ruangan non-AC Perawatan: Cuci biasa, setrika hangat",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898582544441",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_3938e8ab-eda3-4a36-8537-c26cc470f869.jpg?v=1788412999",
+        "altText": "Hem Anak Pesisir - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442743103545",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "125000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "165000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516112441",
+            "title": "Batik Anak",
+            "handle": "batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516997177",
+            "title": "Babydoll Batik Anak",
+            "handle": "babydoll-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480517029945",
+            "title": "Hem Batik Anak Cowo",
+            "handle": "hem-batik-anak-cowo"
+          },
+          {
+            "id": "gid://shopify/Collection/480517161017",
+            "title": "Sarung Batik Anak",
+            "handle": "sarung-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055496249",
+      "title": "Setelan Surjan Anak",
+      "handle": "setelan-surjan-anak",
+      "description": "Setelan busana adat Jawa klasik berupa baju surjan lurik lengkap dengan blangkon lipat serasi. Mengajarkan kecintaan budaya Nusantara kepada generasi penerus dengan busana yang pas dan nyaman. Bahan: Tenun Lurik Halus tradisional & katun batik Kelengkapan: Baju atasan surjan kancing khas Jawa & blangkon serasi Konstruksi: Jahitan rapi standar butik pengrajin Jawa Perawatan: Cuci lembut manual, jangan diperas kencang",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898584477753",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_ba593dd2-e198-489c-adb4-60c3be2cd938.jpg?v=1788413033",
+        "altText": "Setelan Surjan Anak - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442743136313",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "185000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "240000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516112441",
+            "title": "Batik Anak",
+            "handle": "batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516866105",
+            "title": "Gamis Batik Anak",
+            "handle": "gamis-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516931641",
+            "title": "Kebaya Batik Anak",
+            "handle": "kebaya-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480516964409",
+            "title": "Jarik Anak",
+            "handle": "jarik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480517062713",
+            "title": "Surjan Batik Anak",
+            "handle": "surjan-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480517128249",
+            "title": "Blangkon Tradisional",
+            "handle": "blangkon-tradisional"
+          },
+          {
+            "id": "gid://shopify/Collection/480517161017",
+            "title": "Sarung Batik Anak",
+            "handle": "sarung-batik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055529017",
+      "title": "Kain Tenun Troso",
+      "handle": "kain-tenun-troso",
+      "description": "Lembaran kain batik tulis istimewa berpadu tenun Troso Solo sepanjang 2.5 meter dengan kerapatan benang tinggi. Siap diolah menjadi kemeja eksekutif pria, busana pesta wanita, atau disimpan sebagai koleksi kain Nusantara bernilai tinggi. Bahan: Katun Primisima Halus kombinasi Tenun Troso Sutra Dimensi: Panjang 250 cm × Lebar 115 cm Keaslian: Batik tulis pengrajin Solo bergaransi Perawatan: Simpan di tempat kering dengan akar wangi, cuci dengan lerak",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898585460793",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_55ee5ba6-caca-49a8-81db-c42179239d6b.jpg?v=1788413063",
+        "altText": "Kain Tenun Troso - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442743169081",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "375000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "490000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480516636729",
+            "title": "Jarik & Kain Batik",
+            "handle": "jarik-kain-batik"
+          },
+          {
+            "id": "gid://shopify/Collection/480516964409",
+            "title": "Jarik Anak",
+            "handle": "jarik-anak"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421055594553",
+      "title": "Set Blangkon Semarang",
+      "handle": "set-blangkon-semarang",
+      "description": "Paket aksesori etnik pelengkap busana adat Jawa yang terdiri dari blangkon klasik gaya khas Semarang dan bros kebaya ukir kuningan beraksen permata etnik. Menghadirkan sentuhan paripurna pada penampilan tradisional Anda. Kelengkapan: 1 buah Blangkon Klasik Semarang & 1 buah Bros Kebaya Etnik Bahan: Blangkon kain katun batik kokoh & Bros kuningan sepuh emas Pengerjaan: Kerajinan tangan pengrajin tradisi Semarang Perawatan: Simpan bros di kotak kedap udara, bersihkan blangkon dengan kuas kering",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898586640441",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_23a965aa-cee3-470b-8b37-4667082fdfe1.jpg?v=1788413092",
+        "altText": "Set Blangkon Semarang - Batik Smile Lookbook (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442743234617",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "145000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "195000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517128249",
+            "title": "Blangkon Tradisional",
+            "handle": "blangkon-tradisional"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421056348217",
+      "title": "Sarimbit Mustard Gold",
+      "handle": "sarimbit-mustard-gold",
+      "description": "Koleksi Sarimbit Exclusive Mahakarya Batik Smile dalam balutan warna mustard gold yang hangat dan berwibawa. Memadukan kemeja pria lengan panjang presisi dan tunik wanita modern ritsleting depan yang serasi. Bahan: Sutra Alam ATBM Halus & Katun Primisima Sanforized Furing: Full furing Katun Hero adem menyerap keringat Presisi: Sambung motif simetris di kerah dan saku kemeja Koleksi: Sarimbit Exclusive Perawatan: Dry clean atau cuci lembut dengan lerak",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898636349497",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/WhatsApp_Image_2026-09-01_at_18.47.23.jpg?v=1788413858",
+        "altText": "Sarimbit Mustard Gold - Foto Lookbook Pasangan (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442746282041",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "1450000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "1950000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517193785",
+            "title": "Sarimbit Exclusive",
+            "handle": "sarimbit-exclusive"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421056413753",
+      "title": "Sarimbit Royal Navy",
+      "handle": "sarimbit-royal-navy-1",
+      "description": "Set sarimbit pasangan mewah bernuansa royal navy dengan motif buketan etnik klasik. Memberikan aura keanggunan kompak dan berkelas saat menghadiri acara formal keluarga besar. Bahan: Katun Sutra Primisima Sanforized kualitas ekspor Furing: Katun Hero sejuk khas butik Batik Smile Detail: Ritsleting emas praktis pada tunik & kemeja pria furing penuh Koleksi: Sarimbit Exclusive Perawatan: Cuci manual terpisah, setrika suhu sedang",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898639331385",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/WhatsApp_Image_2026-09-01_at_18.47.24_1.jpg?v=1788413882",
+        "altText": "Sarimbit Royal Navy - Foto Lookbook Pasangan (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442746347577",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "1250000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "1750000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517193785",
+            "title": "Sarimbit Exclusive",
+            "handle": "sarimbit-exclusive"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Product/8421056512057",
+      "title": "Sarimbit Charcoal Hitam",
+      "handle": "sarimbit-charcoal-hitam",
+      "description": "Koleksi Sarimbit Premium Batik Smile dengan palet warna charcoal hitam legam yang tegas dan elegan. Menampilkan siluet kemeja pria formal dan tunik wanita modern yang memancarkan pesona tradisi kontemporer. Bahan: Tenun Katun Dobby Timbul Primisima Furing: Katun Hero adem berdaya serap tinggi Konstruksi: Potongan reguler fit pria & tunik anggun wanita Koleksi: Sarimbit Premium Perawatan: Cuci lembut, hindari sinar matahari langsung saat penjemuran",
+      "productType": "",
+      "tags": [],
+      "vendor": "BATIK SMILE",
+      "featuredImage": {
+        "id": "gid://shopify/ProductImage/40898640379961",
+        "url": "https://cdn.shopify.com/s/files/1/0813/3224/0441/files/WhatsApp_Image_2026-09-01_at_18.47.24.jpg?v=1788413906",
+        "altText": "Sarimbit Charcoal Hitam - Foto Lookbook Pasangan (1)"
+      },
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/46442746675257",
+            "title": "Default Title",
+            "sku": null,
+            "price": {
+              "amount": "785000.0",
+              "currencyCode": "IDR"
+            },
+            "compareAtPrice": {
+              "amount": "1050000.0",
+              "currencyCode": "IDR"
+            }
+          }
+        ]
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/480517390393",
+            "title": "Sarimbit Premium",
+            "handle": "sarimbit-premium"
+          },
+          {
+            "id": "gid://shopify/Collection/480519684153",
+            "title": "Shop",
+            "handle": "shop"
+          }
+        ]
+      }
+    }
+  ]
+}

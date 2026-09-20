@@ -69,33 +69,33 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-[#A69F96] text-[11px]">
               <li>
-                <NavLink to="/collections/sarimbit-exclusive" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <NavLink to="/collections/sarimbit-luxury" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 bg-[#C5A059] group-hover:scale-150 transition-transform" />
-                  Sarimbit Keluarga (3 Kasta)
+                  Sarimbit Luxury &amp; Premium
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/collections/jarik-kain-batik" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <NavLink to="/collections/sarimbit-ekonomi" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 bg-[#C5A059] group-hover:scale-150 transition-transform" />
-                  Kain Batik &amp; Jarik Nusantara
+                  Sarimbit Ekonomi Harian
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/collections/batik-wanita" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <NavLink to="/collections/kain" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 bg-[#C5A059] group-hover:scale-150 transition-transform" />
-                  Busana Batik Wanita (Blus &amp; Gamis)
+                  Kain Batik &amp; Jarik Solo-Jogja
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/collections/batik-pria" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <NavLink to="/collections/aksesoris" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 bg-[#C5A059] group-hover:scale-150 transition-transform" />
-                  Kemeja Batik Pria Lapis Furing
+                  Aksesoris &amp; Blangkon Tradisional
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/collections/batik-anak" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <span className="w-1 h-1 bg-[#C5A059] group-hover:scale-150 transition-transform" />
-                  Koleksi Batik Anak Nusantara
+                  Batik Anak (Putra &amp; Putri)
                 </NavLink>
               </li>
             </ul>

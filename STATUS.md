@@ -158,13 +158,21 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Purged bogus boilerplate locales (`['EN-US', 'EN-CA', 'FR-CA']`) from Hydrogen sitemaps, eliminating 404 crawl errors in Google Search Console.
     - Injected dedicated custom chunk (`/sitemap/custom/1.xml`) rendering 15 storefront-native URLs (`/`, `/collections/all`, `/collections`, `/blogs`, `/pages/*`, `/policies/*`) into `[sitemap.xml].jsx` index.
     - Deployed AI-friendly authoritative `robots.txt` removing harmful policy disallows, blocking transactional/search permutations, explicitly allowing modern search and AI answer engines (`Googlebot`, `Bingbot`, `Applebot`, `OAI-SearchBot`, `GPTBot`, `Claude-SearchBot`, `ClaudeBot`, `PerplexityBot`), and declaring canonical sitemap link.
+29. **Tree Taxonomy Overhaul & Storefront Consolidation**:
+    - Complete pre-migration snapshot generated in `docs/backups/shopify-legacy-backup.json` and `docs/backups/COLLECTIONS-BACKUP.md` protecting 31 collections and 23 products.
+    - Live Shopify catalog consolidated from 31 sprawling collections down to strictly **6 core collections** + umbrella `shop` (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `kain`, `aksesoris`, `batik-anak`, `shop`).
+    - Purged 24 obsolete collections (`batik-wanita`, `batik-pria`, `blus-batik-wanita`, `daster-batik-solo`, dll.) via Admin GraphQL mutations.
+    - Permanent 301 server redirects configured in `app/routes/collections.$handle.jsx` for all 24 deleted handles.
+    - Enriched all 23 products with subcategory taxonomy tags (`pria`, `wanita`, `putra`, `putri`, `lengan-panjang`, `lengan-pendek`).
+    - Integrated responsive subcategory chip ribbon into `CollectionFilterBar.jsx` driving URL search params `gender` and `sleeve`.
+    - Synchronized all navigation links and components (`Header.jsx`, `MegaMenu.jsx`, `Footer.jsx`, `HeroSlider.jsx`, `CartMain.jsx`, `TierExperience.jsx`, `SarimbitSpotlight.jsx`, `ShoppableLookbook.jsx`, `HeritageVideoBanner.jsx`, `BestSellersTabs.jsx`, `collections._index.jsx`).
+    - Updated documentation suite (`PAGES-SCHEMA.xml`, `SCHEMA.md`, `TASKS.md`, `STATUS.md`).
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
-- **Slug Parity**: 77 of 77 endpoints verified responding with HTTP 200 OK.
-- **Domain Verification**: Direct Storefront API GraphQL, live checkout session redirect, and customer account routing verified.
-- **Production Edge Deployment**: Commit `ba645fc` deployed live to Shopify Oxygen Global Edge Network (`https://batiksmile.com`).
-- **Live HTTP Verification**: `curl -s` verified live `/robots.txt`, `/sitemap.xml`, `/sitemap/custom/1.xml`, `/sitemap/pages/1.xml`, `/`, and PDP with dynamic metadata.
-
+- **GraphQL Codegen**: `npm run codegen` completed with exit code 0.
+- **Clean Handle Parity**: 0 obsolete collection paths remain across `app/`.
+- **Live Collections**: Exactly 7 collections live in Shopify Core (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `kain`, `aksesoris`, `batik-anak`, `shop`).
+- **Data Protection**: 100% of 23 products, variants, and pricing preserved.

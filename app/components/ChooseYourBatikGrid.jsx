@@ -22,7 +22,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
             KURASI KARYA TERANYAR
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] tracking-wide font-normal mb-3 leading-tight">
-            Koleksi Terbaru &amp; Kain Lembaran
+            Koleksi Terbaru
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] max-w-xl mx-auto font-light leading-relaxed">

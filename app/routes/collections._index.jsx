@@ -186,10 +186,11 @@ export default function Collections() {
           {/* Quick Category Anchors (Horizontal swipeable on mobile) */}
           <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2.5 mt-6 sm:mt-8 overflow-x-auto no-scrollbar pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
             {[
-              { label: 'SARIMBIT EXCLUSIVE', href: '/collections/sarimbit-exclusive' },
+              { label: 'SARIMBIT LUXURY', href: '/collections/sarimbit-luxury' },
               { label: 'SARIMBIT PREMIUM', href: '/collections/sarimbit-premium' },
-              { label: 'BATIK PRIA', href: '/collections/batik-pria' },
-              { label: 'BATIK WANITA', href: '/collections/batik-wanita' },
+              { label: 'SARIMBIT EKONOMI', href: '/collections/sarimbit-ekonomi' },
+              { label: 'KAIN', href: '/collections/kain' },
+              { label: 'AKSESORIS', href: '/collections/aksesoris' },
               { label: 'BATIK ANAK', href: '/collections/batik-anak' },
             ].map((cat, idx) => (
               <Link
@@ -230,24 +231,19 @@ export default function Collections() {
 function CollectionItem({ collection, index }) {
   const fallbackImages = {
     'sarimbit': '/banners/sarimbit_family_banner.jpg',
-    'sarimbit-exclusive': '/banners/sarimbit_family_banner.jpg',
+    'sarimbit-luxury': '/banners/sarimbit_family_banner.jpg',
     'sarimbit-premium': '/banners/sarimbit_family_banner.jpg',
-    'sarimbit-ekonomis': '/banners/sarimbit_family_banner.jpg',
-    'batik-wanita': '/brand/models/model_teak_door.jpg',
-    'batik-pria': '/banners/hero_editorial_banner.jpg',
-    'kain-batik-tulis': '/banners/collection_kain_tulis_banner.jpg',
-    'jarik-kain-batik': '/banners/collection_kain_tulis_banner.jpg',
-    'blazer-batik-wanita': '/brand/models/model_teak_door.jpg',
-    'blus-batik-wanita': '/brand/models/model_teak_door.jpg',
-    'dress-batik-wanita': '/brand/models/model_teak_door.jpg',
-    'gamis-batik-wanita': '/brand/models/model_teak_door.jpg',
-    'outer-batik-wanita': '/brand/models/model_teak_door.jpg',
-    'outer-tunik-batik': '/brand/models/model_teak_door.jpg',
-    'tunik-batik-wanita': '/brand/models/model_teak_door.jpg',
-    'kebaya-batik-modern': '/brand/models/model_teak_door.jpg',
-    'inner-busana-batik': '/brand/models/model_teak_door.jpg',
+    'sarimbit-ekonomi': '/banners/sarimbit_family_banner.jpg',
+    'kain': '/banners/collection_kain_tulis_banner.jpg',
+    'aksesoris': '/banners/hero_editorial_banner.jpg',
     'batik-anak':
       'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/img_1_ba593dd2-e198-489c-adb4-60c3be2cd938.jpg?v=1788413033',
+    'shop': '/banners/hero_editorial_banner.jpg',
+    // Fallback aliases for safety
+    'sarimbit-exclusive': '/banners/sarimbit_family_banner.jpg',
+    'sarimbit-ekonomis': '/banners/sarimbit_family_banner.jpg',
+    'jarik-kain-batik': '/banners/collection_kain_tulis_banner.jpg',
+    'blangkon-tradisional': '/banners/hero_editorial_banner.jpg',
   };
 
   const imageUrl =

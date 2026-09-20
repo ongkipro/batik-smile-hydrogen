@@ -66,7 +66,7 @@ export function HeritageVideoBanner({ videoData }) {
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              to="/collections/jarik-kain-batik"
+              to="/collections/kain"
               className="px-8 py-4 bg-[#C5A059] text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-[#9E7D3B] hover:text-white transition-colors duration-300"
             >
               LIHAT KAIN TULIS ASLI
