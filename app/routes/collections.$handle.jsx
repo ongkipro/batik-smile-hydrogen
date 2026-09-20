@@ -186,9 +186,11 @@ export default function Collection() {
   const filteredConnection = useMemo(() => {
     if (!genderParam && !sleeveParam) return collection.products;
     const nodes = (collection.products?.nodes || []).filter((p) => {
-      const pTags = (p.tags || []).map((t) => t.toLowerCase());
-      if (genderParam && !pTags.includes(genderParam)) return false;
-      if (sleeveParam && !pTags.includes(sleeveParam)) return false;
+      const pTags = (p.tags || []).map((t) => t.toLowerCase().replace(/[\s_]+/g, '-'));
+      const targetGender = genderParam ? genderParam.toLowerCase().replace(/[\s_]+/g, '-') : null;
+      const targetSleeve = sleeveParam ? sleeveParam.toLowerCase().replace(/[\s_]+/g, '-') : null;
+      if (targetGender && !pTags.includes(targetGender)) return false;
+      if (targetSleeve && !pTags.includes(targetSleeve)) return false;
       return true;
     });
     return {
