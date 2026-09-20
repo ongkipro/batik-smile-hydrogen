@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useSearchParams } from 'react-router';
+import React, { useState, useRef, useEffect, useId } from 'react';
+import { Link, useSearchParams } from 'react-router';
 
-const SORT_OPTIONS = [
+export const SORT_OPTIONS = [
   { value: 'featured', label: 'Rekomendasi Butik', shortLabel: 'Rekomendasi' },
   { value: 'latest', label: 'Koleksi Terbaru', shortLabel: 'Terbaru' },
   { value: 'price-asc', label: 'Harga: Terendah → Tertinggi', shortLabel: 'Harga Terendah' },
@@ -9,43 +9,46 @@ const SORT_OPTIONS = [
   { value: 'title-asc', label: 'Abjad: A – Z', shortLabel: 'Abjad A–Z' },
 ];
 
-/**
- * Bespoke Quiet Luxury Collection Filter & Sort Bar
- * - Zero-Box, Zero-Radius Precision (0px).
- * - Custom Anti-Slop Dropdown & Mobile Bottom Sheet (No native OS select, No iOS Safari zoom).
- * - Responsive touch-friendly horizontal ribbon for price brackets.
- * - Single-tap filter reset chips and count badges.
- *
- * @param {{
- *   totalCount?: number;
- *   isDark?: boolean;
- *   className?: string;
- * }} props
- */
-export function CollectionFilterBar({ totalCount, isDark = false, className = '', handle = '' }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [isSortOpen, setIsSortOpen] = useState(false);
-  const dropdownRef = useRef(null);
+export const OFFICIAL_COLLECTIONS = [
+  { handle: 'sarimbit-luxury', label: 'Sarimbit Luxury', tier: 'Mahakarya Sutra ATBM' },
+  { handle: 'sarimbit-premium', label: 'Sarimbit Premium', tier: 'Tenun Dobby Furing' },
+  { handle: 'sarimbit-ekonomi', label: 'Sarimbit Ekonomi', tier: 'Katun Primis Harian' },
+  { handle: 'kain', label: 'Kain Batik', tier: 'Kain Mori & Tulis' },
+  { handle: 'aksesoris', label: 'Aksesoris', tier: 'Pelengkap Tradisional' },
+  { handle: 'batik-anak', label: 'Batik Anak', tier: 'Putra & Putri' },
+];
 
-  // Read active state from URL
+/**
+ * Hook to manage filter and sort params cleanly
+ */
+export function useCollectionFilterState() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const currentSort = searchParams.get('sort') || 'featured';
   const minPrice = searchParams.get('minPrice') || '';
   const maxPrice = searchParams.get('maxPrice') || '';
   const currentGender = searchParams.get('gender') || '';
   const currentSleeve = searchParams.get('sleeve') || '';
 
-  const isSarimbit = handle.includes('sarimbit');
-  const isAnak = handle.includes('anak');
-
-  // Determine active price bracket
   const isUnder500 = !minPrice && maxPrice === '500000';
   const is500To1M = minPrice === '500000' && maxPrice === '1000000';
   const isAbove1M = minPrice === '1000000' && !maxPrice;
-  const isAllActive = !minPrice && !maxPrice && !currentGender && !currentSleeve;
+  const isCustomPrice = (minPrice || maxPrice) && !isUnder500 && !is500To1M && !isAbove1M;
 
-  const currentSortObj = SORT_OPTIONS.find((opt) => opt.value === currentSort) || SORT_OPTIONS[0];
+  const hasActiveFilters = Boolean(
+    minPrice ||
+    maxPrice ||
+    currentGender ||
+    currentSleeve ||
+    (currentSort && currentSort !== 'featured')
+  );
 
-  // Helper to update search params while clearing pagination cursor
+  const activeFilterCount =
+    (minPrice || maxPrice ? 1 : 0) +
+    (currentGender ? 1 : 0) +
+    (currentSleeve ? 1 : 0) +
+    (currentSort && currentSort !== 'featured' ? 1 : 0);
+
   const updateParams = (updater) => {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.delete('cursor');
@@ -54,34 +57,47 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
     setSearchParams(nextParams, { preventScrollReset: true });
   };
 
-  const handleSortSelect = (val) => {
+  const setSort = (val) => {
     updateParams((params) => {
-      if (val === 'featured') {
+      if (!val || val === 'featured') {
         params.delete('sort');
       } else {
         params.set('sort', val);
       }
     });
-    setIsSortOpen(false);
   };
 
-  const setFilterMode = (mode) => {
+  const setPriceBracket = (bracket) => {
     updateParams((params) => {
       params.delete('minPrice');
       params.delete('maxPrice');
-
-      if (mode === 'under500') {
+      if (bracket === 'under500') {
         params.set('maxPrice', '500000');
-      } else if (mode === '500to1m') {
+      } else if (bracket === '500to1m') {
         params.set('minPrice', '500000');
         params.set('maxPrice', '1000000');
-      } else if (mode === 'above1m') {
+      } else if (bracket === 'above1m') {
         params.set('minPrice', '1000000');
       }
     });
   };
 
-  const setGenderFilter = (val) => {
+  const setCustomPriceRange = (min, max) => {
+    updateParams((params) => {
+      if (min && !isNaN(Number(min)) && Number(min) > 0) {
+        params.set('minPrice', String(min));
+      } else {
+        params.delete('minPrice');
+      }
+      if (max && !isNaN(Number(max)) && Number(max) > 0) {
+        params.set('maxPrice', String(max));
+      } else {
+        params.delete('maxPrice');
+      }
+    });
+  };
+
+  const setGender = (val) => {
     updateParams((params) => {
       if (!val || val === currentGender) {
         params.delete('gender');
@@ -91,7 +107,7 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
     });
   };
 
-  const setSleeveFilter = (val) => {
+  const setSleeve = (val) => {
     updateParams((params) => {
       if (!val || val === currentSleeve) {
         params.delete('sleeve');
@@ -106,30 +122,711 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
       params.delete('sort');
       params.delete('minPrice');
       params.delete('maxPrice');
-      params.delete('productType');
       params.delete('gender');
       params.delete('sleeve');
     });
   };
 
-  // Close desktop popover on outside click
+  return {
+    currentSort,
+    minPrice,
+    maxPrice,
+    currentGender,
+    currentSleeve,
+    isUnder500,
+    is500To1M,
+    isAbove1M,
+    isCustomPrice,
+    hasActiveFilters,
+    activeFilterCount,
+    setSort,
+    setPriceBracket,
+    setCustomPriceRange,
+    setGender,
+    setSleeve,
+    clearAllFilters,
+  };
+}
+
+/**
+ * Desktop Marketplace Left Sidebar Filter
+ */
+export function CollectionSidebar({
+  handle = '',
+  totalCount,
+  isDark = false,
+  className = '',
+}) {
+  const filterState = useCollectionFilterState();
+  const {
+    currentSort,
+    minPrice,
+    maxPrice,
+    currentGender,
+    currentSleeve,
+    isUnder500,
+    is500To1M,
+    isAbove1M,
+    hasActiveFilters,
+    setSort,
+    setPriceBracket,
+    setCustomPriceRange,
+    setGender,
+    setSleeve,
+    clearAllFilters,
+  } = filterState;
+
+  const isSarimbit = handle.includes('sarimbit');
+  const isAnak = handle.includes('anak');
+
+  // Custom price input local state
+  const [localMin, setLocalMin] = useState(minPrice);
+  const [localMax, setLocalMax] = useState(maxPrice);
+
+  useEffect(() => {
+    setLocalMin(minPrice);
+    setLocalMax(maxPrice);
+  }, [minPrice, maxPrice]);
+
+  const handleCustomPriceSubmit = (e) => {
+    e.preventDefault();
+    setCustomPriceRange(localMin, localMax);
+  };
+
+  // Accordion state
+  const [openSections, setOpenSections] = useState({
+    collections: true,
+    gender: true,
+    sleeve: true,
+    price: true,
+    sort: false,
+  });
+
+  const toggleSection = (key) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const borderColor = isDark ? 'border-white/15' : 'border-[#E2DFD8]';
+  const textColor = isDark ? 'text-white' : 'text-[#111111]';
+  const mutedTextColor = isDark ? 'text-[#A69F96]' : 'text-[#5A5550]';
+  const activeBg = isDark ? 'bg-[#C5A059] text-[#111111]' : 'bg-[#111111] text-white';
+
+  return (
+    <aside
+      aria-label="Filter Katalog Koleksi"
+      className={`hidden lg:block w-64 xl:w-72 shrink-0 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pr-3 py-1 no-scrollbar space-y-6 ${className}`}
+    >
+      {/* 1. SIDEBAR HEADER */}
+      <div className={`pb-4 border-b ${borderColor} flex items-center justify-between`}>
+        <div className="flex items-center gap-2">
+          {/* Sliders Icon */}
+          <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path strokeLinecap="square" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16M8 4v4M16 10v4M10 16v4" />
+          </svg>
+          <h2 className={`text-xs uppercase tracking-[0.2em] font-bold ${textColor}`}>
+            FILTER
+          </h2>
+          {typeof totalCount === 'number' && (
+            <span className={`text-[11px] font-medium ${mutedTextColor}`}>
+              ({totalCount})
+            </span>
+          )}
+        </div>
+
+        {hasActiveFilters && (
+          <button
+            type="button"
+            onClick={clearAllFilters}
+            className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#C5A059] underline underline-offset-4 cursor-pointer transition-colors"
+          >
+            Hapus Semua
+          </button>
+        )}
+      </div>
+
+      {/* 2. SECTION: KOLEKSI UTAMA (TREE NAVIGATION) */}
+      <div className={`pb-5 border-b ${borderColor}`}>
+        <button
+          type="button"
+          onClick={() => toggleSection('collections')}
+          className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
+        >
+          <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+            Koleksi Busana
+          </span>
+          <span className="text-xs text-[#9E7D3B] font-mono">
+            {openSections.collections ? '−' : '+'}
+          </span>
+        </button>
+
+        {openSections.collections && (
+          <div className="mt-3 space-y-1.5">
+            {OFFICIAL_COLLECTIONS.map((col) => {
+              const isActive = col.handle === handle;
+              return (
+                <Link
+                  key={col.handle}
+                  to={`/collections/${col.handle}`}
+                  prefetch="intent"
+                  className={`block py-1.5 pl-3 border-l-2 transition-all cursor-pointer ${
+                    isActive
+                      ? isDark
+                        ? 'border-[#C5A059] bg-white/5 text-white font-semibold'
+                        : 'border-[#C5A059] bg-[#FAF8F5] text-[#111111] font-semibold'
+                      : isDark
+                      ? 'border-transparent text-[#A69F96] hover:text-white hover:border-white/20'
+                      : 'border-transparent text-[#5A5550] hover:text-[#111111] hover:border-[#E2DFD8]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between pr-2">
+                    <span className="text-xs tracking-wide">{col.label}</span>
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 bg-[#C5A059] rounded-none" />
+                    )}
+                  </div>
+                  <span className="block text-[9px] uppercase tracking-[0.18em] text-[#9E7D3B]">
+                    {col.tier}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* 3. SECTION: SUB-KATEGORI / GENDER (SARIMBIT & BATIK ANAK) */}
+      {(isSarimbit || isAnak) && (
+        <div className={`pb-5 border-b ${borderColor}`}>
+          <button
+            type="button"
+            onClick={() => toggleSection('gender')}
+            className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
+          >
+            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+              {isSarimbit ? 'Gender / Kategori' : 'Kategori Anak'}
+            </span>
+            <span className="text-xs text-[#9E7D3B] font-mono">
+              {openSections.gender ? '−' : '+'}
+            </span>
+          </button>
+
+          {openSections.gender && (
+            <div className="mt-3 space-y-2">
+              {isSarimbit ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setGender('')}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        !currentGender
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {!currentGender && (
+                        <span className="w-1.5 h-1.5 bg-current" />
+                      )}
+                    </div>
+                    <span className={`text-xs uppercase tracking-[0.14em] ${!currentGender ? textColor + ' font-medium' : mutedTextColor}`}>
+                      Semua Gender
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setGender('pria')}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        currentGender === 'pria'
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {currentGender === 'pria' && (
+                        <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'pria' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                      Busana Pria
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setGender('wanita')}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        currentGender === 'wanita'
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {currentGender === 'wanita' && (
+                        <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'wanita' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                      Busana Wanita
+                    </span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setGender('')}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        !currentGender
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {!currentGender && (
+                        <span className="w-1.5 h-1.5 bg-current" />
+                      )}
+                    </div>
+                    <span className={`text-xs uppercase tracking-[0.14em] ${!currentGender ? textColor + ' font-medium' : mutedTextColor}`}>
+                      Semua Anak
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setGender('putra')}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        currentGender === 'putra'
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {currentGender === 'putra' && (
+                        <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'putra' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                      Batik Putra (Laki-laki)
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setGender('putri')}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        currentGender === 'putri'
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {currentGender === 'putri' && (
+                        <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'putri' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                      Batik Putri (Perempuan)
+                    </span>
+                  </button>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 4. SECTION: PANJANG LENGAN */}
+      {(isSarimbit || isAnak) && (
+        <div className={`pb-5 border-b ${borderColor}`}>
+          <button
+            type="button"
+            onClick={() => toggleSection('sleeve')}
+            className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
+          >
+            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+              Panjang Lengan
+            </span>
+            <span className="text-xs text-[#9E7D3B] font-mono">
+              {openSections.sleeve ? '−' : '+'}
+            </span>
+          </button>
+
+          {openSections.sleeve && (
+            <div className="mt-3 space-y-2">
+              <button
+                type="button"
+                onClick={() => setSleeve('')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    !currentSleeve
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {!currentSleeve && <span className="w-1.5 h-1.5 bg-current" />}
+                </div>
+                <span className={`text-xs uppercase tracking-[0.14em] ${!currentSleeve ? textColor + ' font-medium' : mutedTextColor}`}>
+                  Semua Lengan
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSleeve('lengan-panjang')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    currentSleeve === 'lengan-panjang'
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {currentSleeve === 'lengan-panjang' && (
+                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+                <span className={`text-xs uppercase tracking-[0.14em] ${currentSleeve === 'lengan-panjang' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  Lengan Panjang
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSleeve('lengan-pendek')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    currentSleeve === 'lengan-pendek'
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {currentSleeve === 'lengan-pendek' && (
+                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+                <span className={`text-xs uppercase tracking-[0.14em] ${currentSleeve === 'lengan-pendek' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  Lengan Pendek
+                </span>
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 5. SECTION: RENTANG HARGA */}
+      <div className={`pb-5 border-b ${borderColor}`}>
+        <button
+          type="button"
+          onClick={() => toggleSection('price')}
+          className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
+        >
+          <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+            Rentang Harga
+          </span>
+          <span className="text-xs text-[#9E7D3B] font-mono">
+            {openSections.price ? '−' : '+'}
+          </span>
+        </button>
+
+        {openSections.price && (
+          <div className="mt-3 space-y-2.5">
+            {/* Quick Presets */}
+            <div className="space-y-2">
+              <button
+                type="button"
+                onClick={() => setPriceBracket('all')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    !minPrice && !maxPrice
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {!minPrice && !maxPrice && <span className="w-1.5 h-1.5 bg-current" />}
+                </div>
+                <span className={`text-xs ${!minPrice && !maxPrice ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  Semua Harga
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPriceBracket(isUnder500 ? 'all' : 'under500')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    isUnder500
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {isUnder500 && (
+                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+                <span className={`text-xs ${isUnder500 ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  &lt; Rp 500.000
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPriceBracket(is500To1M ? 'all' : '500to1m')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    is500To1M
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {is500To1M && (
+                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+                <span className={`text-xs ${is500To1M ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  Rp 500.000 – Rp 1.000.000
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPriceBracket(isAbove1M ? 'all' : 'above1m')}
+                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none"
+              >
+                <div
+                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                    isAbove1M
+                      ? activeBg
+                      : isDark
+                      ? 'border-white/20 bg-white/5'
+                      : 'border-[#D5D0C7] bg-white'
+                  }`}
+                >
+                  {isAbove1M && (
+                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+                <span className={`text-xs ${isAbove1M ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  &gt; Rp 1.000.000
+                </span>
+              </button>
+            </div>
+
+            {/* Custom Price Inputs */}
+            <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-dashed border-[#E2DFD8]/60 space-y-2">
+              <span className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] block">
+                Atur Rentang Sendiri:
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-[9px] uppercase tracking-wider text-[#888888] block mb-0.5">Min (Rp)</label>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    placeholder="0"
+                    value={localMin}
+                    onChange={(e) => setLocalMin(e.target.value)}
+                    className={`w-full px-2 py-1.5 text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
+                      isDark ? 'border-white/20 text-white' : 'border-[#E2DFD8] text-[#111111]'
+                    }`}
+                  />
+                </div>
+                <div>
+                  <label className="text-[9px] uppercase tracking-wider text-[#888888] block mb-0.5">Maks (Rp)</label>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    placeholder="1.000.000"
+                    value={localMax}
+                    onChange={(e) => setLocalMax(e.target.value)}
+                    className={`w-full px-2 py-1.5 text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
+                      isDark ? 'border-white/20 text-white' : 'border-[#E2DFD8] text-[#111111]'
+                    }`}
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className={`w-full py-1.5 text-[10px] uppercase font-bold tracking-[0.2em] transition-colors cursor-pointer ${
+                  isDark
+                    ? 'bg-[#C5A059] text-[#111111] hover:bg-white'
+                    : 'bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111]'
+                }`}
+              >
+                Terapkan
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
+
+      {/* 6. SECTION: URUTKAN (SORT BY) */}
+      <div className={`pb-5 border-b ${borderColor}`}>
+        <button
+          type="button"
+          onClick={() => toggleSection('sort')}
+          className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
+        >
+          <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+            Urutkan
+          </span>
+          <span className="text-xs text-[#9E7D3B] font-mono">
+            {openSections.sort ? '−' : '+'}
+          </span>
+        </button>
+
+        {openSections.sort && (
+          <div className="mt-3 space-y-2">
+            {SORT_OPTIONS.map((opt) => {
+              const isSelected = opt.value === currentSort;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setSort(opt.value)}
+                  className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none"
+                >
+                  <div
+                    className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                      isSelected
+                        ? activeBg
+                        : isDark
+                        ? 'border-white/20 bg-white/5'
+                        : 'border-[#D5D0C7] bg-white'
+                    }`}
+                  >
+                    {isSelected && <span className="w-1.5 h-1.5 bg-current" />}
+                  </div>
+                  <span className={`text-xs ${isSelected ? textColor + ' font-semibold' : mutedTextColor}`}>
+                    {opt.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </aside>
+  );
+}
+
+/**
+ * Active Filter Pills & Top Control Bar (Rendered on top of product grid)
+ */
+export function CollectionFilterHeader({
+  handle = '',
+  totalCount,
+  isDark = false,
+  className = '',
+}) {
+  const filterState = useCollectionFilterState();
+  const {
+    currentSort,
+    minPrice,
+    maxPrice,
+    currentGender,
+    currentSleeve,
+    isUnder500,
+    is500To1M,
+    isAbove1M,
+    hasActiveFilters,
+    activeFilterCount,
+    setSort,
+    setPriceBracket,
+    setGender,
+    setSleeve,
+    clearAllFilters,
+  } = filterState;
+
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+  const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+  const sortRef = useRef(null);
+
+  const currentSortObj = SORT_OPTIONS.find((opt) => opt.value === currentSort) || SORT_OPTIONS[0];
+
+  // Close desktop sort dropdown on outside click
   useEffect(() => {
     function handleClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setIsSortOpen(false);
+      if (sortRef.current && !sortRef.current.contains(e.target)) {
+        setIsSortDropdownOpen(false);
       }
     }
-    if (isSortOpen) {
+    if (isSortDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isSortOpen]);
+  }, [isSortDropdownOpen]);
 
-  // Lock body scroll on mobile bottom sheet open
+  // Lock body scroll on mobile drawer open
   useEffect(() => {
-    if (isSortOpen) {
+    if (isMobileDrawerOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -137,220 +834,67 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isSortOpen]);
+  }, [isMobileDrawerOpen]);
 
   return (
-    <div
-      ref={dropdownRef}
-      className={`w-full mb-8 sm:mb-10 border-b pb-3.5 transition-colors ${
-        isDark ? 'border-white/15' : 'border-[#E2DFD8]/80'
-      } ${className}`}
-    >
-      {/* TOP CONTROL ROW: Mobile & Desktop Responsive Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3.5 sm:gap-4">
-        
-        {/* DESKTOP VIEW: Clean Typographic Filter Tabs */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          <nav aria-label="Filter Katalog Desktop" className="flex items-center gap-6 lg:gap-8">
-            <button
-              type="button"
-              onClick={() => setFilterMode('all')}
-              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
-                isAllActive
-                  ? isDark
-                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                    : 'text-[#111111] border-[#C5A059] font-semibold'
-                  : isDark
-                  ? 'text-[#A69F96] border-transparent hover:text-white'
-                  : 'text-[#777777] border-transparent hover:text-[#111111]'
-              }`}
-            >
-              Semua {typeof totalCount === 'number' && `(${totalCount})`}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setFilterMode(isUnder500 ? 'all' : 'under500')}
-              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
-                isUnder500
-                  ? isDark
-                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                    : 'text-[#111111] border-[#C5A059] font-semibold'
-                  : isDark
-                  ? 'text-[#A69F96] border-transparent hover:text-white'
-                  : 'text-[#777777] border-transparent hover:text-[#111111]'
-              }`}
-            >
-              &lt; Rp 500rb
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setFilterMode(is500To1M ? 'all' : '500to1m')}
-              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
-                is500To1M
-                  ? isDark
-                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                    : 'text-[#111111] border-[#C5A059] font-semibold'
-                  : isDark
-                  ? 'text-[#A69F96] border-transparent hover:text-white'
-                  : 'text-[#777777] border-transparent hover:text-[#111111]'
-              }`}
-            >
-              Rp 500rb – 1jt
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setFilterMode(isAbove1M ? 'all' : 'above1m')}
-              className={`text-[11px] uppercase tracking-[0.18em] transition-all whitespace-nowrap cursor-pointer pb-2 border-b-2 bg-transparent ${
-                isAbove1M
-                  ? isDark
-                    ? 'text-[#C5A059] border-[#C5A059] font-semibold'
-                    : 'text-[#111111] border-[#C5A059] font-semibold'
-                  : isDark
-                  ? 'text-[#A69F96] border-transparent hover:text-white'
-                  : 'text-[#777777] border-transparent hover:text-[#111111]'
-              }`}
-            >
-              &gt; Rp 1jt
-            </button>
-          </nav>
+    <div className={`w-full mb-6 pb-4 border-b ${isDark ? 'border-white/15' : 'border-[#E2DFD8]'} ${className}`}>
+      {/* TOP ROW: Count + Mobile Filter Trigger + Desktop Quick Sort */}
+      <div className="flex items-center justify-between gap-4">
+        {/* Total Product Count (Desktop & Mobile) */}
+        <div className="flex items-center gap-2.5">
+          <span className={`text-xs uppercase tracking-[0.2em] font-semibold ${isDark ? 'text-white' : 'text-[#111111]'}`}>
+            {typeof totalCount === 'number' ? `${totalCount} Busana Ditemukan` : 'Koleksi Busana'}
+          </span>
         </div>
 
-        {/* MOBILE VIEW TOP ROW: Count + Active Filter Summary + Sort Button */}
-        <div className="flex md:hidden items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.18em] text-[#5A5550] font-medium">
-              {typeof totalCount === 'number' ? `${totalCount} Busana` : 'Koleksi'}
-            </span>
-            {!isAllActive && (
-              <button
-                type="button"
-                onClick={clearAllFilters}
-                className="inline-flex items-center gap-1 text-[9px] uppercase tracking-wider text-[#9E7D3B] bg-[#FAF8F5] border border-[#E2DFD8] px-2 py-0.5"
-              >
-                <span>{isUnder500 ? '<500rb' : is500To1M ? '500rb–1jt' : '>1jt'}</span>
-                <span className="text-[#111111] font-bold">&times;</span>
-              </button>
-            )}
-          </div>
-
-          {/* Mobile Sort Trigger Button */}
+        {/* CONTROLS RIGHT: Mobile Drawer Button (< lg) & Desktop Sort (> lg) */}
+        <div className="flex items-center gap-3">
+          {/* MOBILE FILTER TRIGGER BUTTON (Visible on < lg) */}
           <button
             type="button"
-            onClick={() => setIsSortOpen(true)}
-            aria-haspopup="dialog"
-            aria-expanded={isSortOpen}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 border text-[10px] uppercase tracking-[0.18em] font-medium transition-colors cursor-pointer ${
-              isDark
-                ? 'border-[#C5A059]/40 text-[#C5A059] bg-[#111111]'
-                : 'border-[#E2DFD8] text-[#111111] bg-white active:bg-[#FAF8F5]'
+            onClick={() => setIsMobileDrawerOpen(true)}
+            aria-label="Buka Filter & Urutkan"
+            className={`lg:hidden inline-flex items-center gap-2 px-3 py-1.5 border text-[11px] uppercase tracking-[0.18em] font-bold cursor-pointer transition-colors ${
+              hasActiveFilters
+                ? isDark
+                  ? 'border-[#C5A059] bg-[#C5A059] text-[#111111]'
+                  : 'border-[#111111] bg-[#111111] text-white'
+                : isDark
+                ? 'border-white/20 text-white bg-white/5'
+                : 'border-[#E2DFD8] text-[#111111] bg-white'
             }`}
           >
-            <span>Urutkan: {currentSortObj.shortLabel}</span>
-            <svg className="w-3 h-3 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M19 9l-7 7-7-7" />
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="square" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16M8 4v4M16 10v4M10 16v4" />
             </svg>
+            <span>Filter</span>
+            {activeFilterCount > 0 && (
+              <span className={`inline-flex items-center justify-center w-4 h-4 text-[9px] font-mono font-bold ${
+                hasActiveFilters
+                  ? isDark ? 'bg-[#111111] text-[#C5A059]' : 'bg-white text-[#111111]'
+                  : 'bg-[#C5A059] text-[#111111]'
+              }`}>
+                {activeFilterCount}
+              </span>
+            )}
           </button>
-        </div>
 
-        {/* MOBILE VIEW BOTTOM ROW: Clean Horizontal Touch-Scroll Tabs */}
-        <div className="md:hidden overflow-x-auto no-scrollbar -mx-4 px-4">
-          <nav aria-label="Filter Katalog Mobile" className="flex items-center gap-2 py-1">
+          {/* DESKTOP QUICK SORT DROPDOWN (Visible on lg+) */}
+          <div ref={sortRef} className="hidden lg:relative lg:block">
             <button
               type="button"
-              onClick={() => setFilterMode('all')}
-              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
-                isAllActive
-                  ? isDark
-                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
-                    : 'bg-[#111111] text-white border-[#111111] font-bold'
-                  : isDark
-                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
-                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
-              }`}
-            >
-              Semua {typeof totalCount === 'number' && `(${totalCount})`}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setFilterMode(isUnder500 ? 'all' : 'under500')}
-              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
-                isUnder500
-                  ? isDark
-                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
-                    : 'bg-[#111111] text-white border-[#111111] font-bold'
-                  : isDark
-                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
-                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
-              }`}
-            >
-              &lt; Rp 500rb
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setFilterMode(is500To1M ? 'all' : '500to1m')}
-              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
-                is500To1M
-                  ? isDark
-                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
-                    : 'bg-[#111111] text-white border-[#111111] font-bold'
-                  : isDark
-                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
-                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
-              }`}
-            >
-              Rp 500rb – 1jt
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setFilterMode(isAbove1M ? 'all' : 'above1m')}
-              className={`text-[10px] uppercase tracking-[0.16em] px-3 py-1.5 border transition-all whitespace-nowrap cursor-pointer shrink-0 ${
-                isAbove1M
-                  ? isDark
-                    ? 'bg-[#C5A059] text-[#111111] border-[#C5A059] font-bold'
-                    : 'bg-[#111111] text-white border-[#111111] font-bold'
-                  : isDark
-                  ? 'bg-[#1A1918] text-[#A69F96] border-white/10'
-                  : 'bg-white text-[#5A5550] border-[#E2DFD8]'
-              }`}
-            >
-              &gt; Rp 1jt
-            </button>
-          </nav>
-        </div>
-
-        {/* DESKTOP RIGHT CONTROLS: Reset Filter & Custom Dropdown Popover */}
-        <div className="hidden md:flex items-center gap-4 shrink-0 relative">
-          {!isAllActive && (
-            <button
-              type="button"
-              onClick={clearAllFilters}
-              className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-4 cursor-pointer transition-colors"
-            >
-              Reset Filter
-            </button>
-          )}
-
-          {/* Desktop Sort Dropdown Button */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setIsSortOpen(!isSortOpen)}
-              className={`inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium py-1 px-2.5 transition-colors cursor-pointer ${
+              onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+              className={`inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium py-1.5 px-3 border transition-colors cursor-pointer ${
                 isDark
-                  ? 'text-[#C5A059] hover:text-white'
-                  : 'text-[#5A5550] hover:text-[#111111]'
+                  ? 'border-white/20 text-white hover:border-[#C5A059]'
+                  : 'border-[#E2DFD8] text-[#111111] hover:border-[#111111] bg-white'
               }`}
             >
-              <span>Urutkan: {currentSortObj.shortLabel}</span>
+              <span className="text-[#9E7D3B]">Urutkan:</span>
+              <span>{currentSortObj.shortLabel}</span>
               <svg
                 className={`w-3 h-3 text-[#9E7D3B] transition-transform duration-200 ${
-                  isSortOpen ? 'rotate-180' : ''
+                  isSortDropdownOpen ? 'rotate-180' : ''
                 }`}
                 fill="none"
                 stroke="currentColor"
@@ -360,286 +904,535 @@ export function CollectionFilterBar({ totalCount, isDark = false, className = ''
               </svg>
             </button>
 
-            {/* Desktop Popover Menu (0px Radius, Quiet Luxury) */}
-            {isSortOpen && (
+            {isSortDropdownOpen && (
               <div
-                className={`absolute right-0 top-full mt-2 w-64 border shadow-xl z-50 p-1 rounded-none transition-all ${
+                className={`absolute right-0 top-full mt-1.5 w-60 border shadow-2xl z-50 p-1 rounded-none transition-all ${
                   isDark
                     ? 'bg-[#1C1C1C] border-[#C5A059]/40 text-white'
                     : 'bg-white border-[#E2DFD8] text-[#111111]'
                 }`}
               >
-                <div className="py-1">
-                  {SORT_OPTIONS.map((opt) => {
-                    const isSelected = opt.value === currentSort;
-                    return (
-                      <button
-                        key={opt.value}
-                        type="button"
-                        onClick={() => handleSortSelect(opt.value)}
-                        className={`w-full text-left px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] flex items-center justify-between transition-colors cursor-pointer ${
-                          isSelected
-                            ? isDark
-                              ? 'bg-white/10 text-[#C5A059] font-semibold'
-                              : 'bg-[#FAF8F5] text-[#111111] font-semibold'
-                            : isDark
-                            ? 'text-[#A69F96] hover:bg-white/5 hover:text-white'
-                            : 'text-[#5A5550] hover:bg-[#FAF8F5] hover:text-[#111111]'
-                        }`}
-                      >
-                        <span>{opt.label}</span>
-                        {isSelected && (
-                          <span className="text-[#C5A059] text-xs font-bold">&bull;</span>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+                {SORT_OPTIONS.map((opt) => {
+                  const isSelected = opt.value === currentSort;
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => {
+                        setSort(opt.value);
+                        setIsSortDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3.5 py-2 text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors cursor-pointer ${
+                        isSelected
+                          ? isDark
+                            ? 'bg-white/10 text-[#C5A059] font-semibold'
+                            : 'bg-[#FAF8F5] text-[#111111] font-semibold'
+                          : isDark
+                          ? 'text-[#A69F96] hover:bg-white/5 hover:text-white'
+                          : 'text-[#5A5550] hover:bg-[#FAF8F5] hover:text-[#111111]'
+                      }`}
+                    >
+                      <span>{opt.label}</span>
+                      {isSelected && <span className="text-[#C5A059] text-xs font-bold">&bull;</span>}
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
         </div>
       </div>
 
-      {/* SUB-CATEGORY CHIP RIBBON (Tree: Sarimbit [Pria/Wanita, Panjang/Pendek] & Batik Anak [Putra/Putri]) */}
-      {(isSarimbit || isAnak) && (
-        <div
-          className={`mt-3.5 pt-3.5 border-t flex flex-wrap items-center gap-3 sm:gap-4 ${
-            isDark ? 'border-white/15' : 'border-[#E2DFD8]/80'
-          }`}
-        >
-          {/* Gender Filter Chips */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <span
-              className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${
-                isDark ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
-              }`}
-            >
-              {isSarimbit ? 'Gender:' : 'Koleksi:'}
-            </span>
-            <div className="inline-flex items-center border border-[#E2DFD8] bg-white p-0.5 shadow-2xs">
-              <button
-                type="button"
-                onClick={() => setGenderFilter('')}
-                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                  !currentGender
-                    ? isDark
-                      ? 'bg-[#C5A059] text-[#111111] font-bold'
-                      : 'bg-[#111111] text-white font-bold'
-                    : 'text-[#5A5550] hover:text-[#111111]'
-                }`}
-              >
-                Semua
-              </button>
-              {isSarimbit ? (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setGenderFilter('pria')}
-                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                      currentGender === 'pria'
-                        ? isDark
-                          ? 'bg-[#C5A059] text-[#111111] font-bold'
-                          : 'bg-[#111111] text-white font-bold'
-                        : 'text-[#5A5550] hover:text-[#111111]'
-                    }`}
-                  >
-                    Pria
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGenderFilter('wanita')}
-                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                      currentGender === 'wanita'
-                        ? isDark
-                          ? 'bg-[#C5A059] text-[#111111] font-bold'
-                          : 'bg-[#111111] text-white font-bold'
-                        : 'text-[#5A5550] hover:text-[#111111]'
-                    }`}
-                  >
-                    Wanita
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setGenderFilter('putra')}
-                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                      currentGender === 'putra'
-                        ? isDark
-                          ? 'bg-[#C5A059] text-[#111111] font-bold'
-                          : 'bg-[#111111] text-white font-bold'
-                        : 'text-[#5A5550] hover:text-[#111111]'
-                    }`}
-                  >
-                    Putra
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGenderFilter('putri')}
-                    className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                      currentGender === 'putri'
-                        ? isDark
-                          ? 'bg-[#C5A059] text-[#111111] font-bold'
-                          : 'bg-[#111111] text-white font-bold'
-                        : 'text-[#5A5550] hover:text-[#111111]'
-                    }`}
-                  >
-                    Putri
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
+      {/* ACTIVE FILTER PILLS / CHIPS ROW */}
+      {hasActiveFilters && (
+        <div className="mt-3.5 pt-3 border-t border-dashed border-[#E2DFD8]/60 flex flex-wrap items-center gap-2">
+          <span className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mr-1">
+            Filter Aktif:
+          </span>
 
-          {/* Sleeve Filter Chips */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <span
-              className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${
-                isDark ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
-              }`}
-            >
-              Lengan:
-            </span>
-            <div className="inline-flex items-center border border-[#E2DFD8] bg-white p-0.5 shadow-2xs">
-              <button
-                type="button"
-                onClick={() => setSleeveFilter('')}
-                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                  !currentSleeve
-                    ? isDark
-                      ? 'bg-[#C5A059] text-[#111111] font-bold'
-                      : 'bg-[#111111] text-white font-bold'
-                    : 'text-[#5A5550] hover:text-[#111111]'
-                }`}
-              >
-                Semua
-              </button>
-              <button
-                type="button"
-                onClick={() => setSleeveFilter('lengan-panjang')}
-                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                  currentSleeve === 'lengan-panjang'
-                    ? isDark
-                      ? 'bg-[#C5A059] text-[#111111] font-bold'
-                      : 'bg-[#111111] text-white font-bold'
-                    : 'text-[#5A5550] hover:text-[#111111]'
-                }`}
-              >
-                Panjang
-              </button>
-              <button
-                type="button"
-                onClick={() => setSleeveFilter('lengan-pendek')}
-                className={`px-2.5 py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] font-medium transition-colors cursor-pointer ${
-                  currentSleeve === 'lengan-pendek'
-                    ? isDark
-                      ? 'bg-[#C5A059] text-[#111111] font-bold'
-                      : 'bg-[#111111] text-white font-bold'
-                    : 'text-[#5A5550] hover:text-[#111111]'
-                }`}
-              >
-                Pendek
-              </button>
-            </div>
-          </div>
-
-          {/* Reset button if any sub-filter active */}
-          {(currentGender || currentSleeve) && (
+          {/* Gender Pill */}
+          {currentGender && (
             <button
               type="button"
-              onClick={() => {
-                setGenderFilter('');
-                setSleeveFilter('');
-              }}
-              className="text-[9px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-2 cursor-pointer"
+              onClick={() => setGender('')}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+                isDark
+                  ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
+                  : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
+              }`}
             >
-              Reset Pilihan &times;
+              <span>Kategori: {currentGender.toUpperCase()}</span>
+              <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
             </button>
           )}
+
+          {/* Sleeve Pill */}
+          {currentSleeve && (
+            <button
+              type="button"
+              onClick={() => setSleeve('')}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+                isDark
+                  ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
+                  : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
+              }`}
+            >
+              <span>Lengan: {currentSleeve === 'lengan-panjang' ? 'Panjang' : 'Pendek'}</span>
+              <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
+            </button>
+          )}
+
+          {/* Price Bracket Pill */}
+          {(minPrice || maxPrice) && (
+            <button
+              type="button"
+              onClick={() => setPriceBracket('all')}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+                isDark
+                  ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
+                  : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
+              }`}
+            >
+              <span>
+                Harga:{' '}
+                {isUnder500
+                  ? '< Rp 500rb'
+                  : is500To1M
+                  ? 'Rp 500rb – 1jt'
+                  : isAbove1M
+                  ? '> Rp 1jt'
+                  : `${minPrice || '0'} – ${maxPrice || '...'}`}
+              </span>
+              <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
+            </button>
+          )}
+
+          {/* Sort Pill (if not default) */}
+          {currentSort && currentSort !== 'featured' && (
+            <button
+              type="button"
+              onClick={() => setSort('featured')}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+                isDark
+                  ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
+                  : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
+              }`}
+            >
+              <span>Urut: {currentSortObj.shortLabel}</span>
+              <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
+            </button>
+          )}
+
+          {/* Clear All Link */}
+          <button
+            type="button"
+            onClick={clearAllFilters}
+            className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-2 ml-1 cursor-pointer transition-colors"
+          >
+            Hapus Semua
+          </button>
         </div>
       )}
 
-      {/* MOBILE SORT BOTTOM SHEET DRAWER (Zero-Zoom, Pure Touch UX) */}
-      {isSortOpen && (
-        <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
-          {/* Dark Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
-            onClick={() => setIsSortOpen(false)}
-            aria-hidden="true"
-          />
+      {/* MOBILE SLIDE-IN DRAWER (< lg) */}
+      {isMobileDrawerOpen && (
+        <CollectionMobileDrawer
+          handle={handle}
+          totalCount={totalCount}
+          isDark={isDark}
+          onClose={() => setIsMobileDrawerOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
 
-          {/* Bottom Sheet Modal */}
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Urutkan Koleksi"
-            className={`relative z-10 w-full max-h-[80vh] overflow-y-auto border-t p-5 shadow-2xl rounded-none transition-transform ${
-              isDark
-                ? 'bg-[#181716] border-[#C5A059]/40 text-white'
-                : 'bg-white border-[#E2DFD8] text-[#111111]'
-            }`}
+/**
+ * Mobile Slide-in Drawer Component (Zero-radius, Flat Quiet Luxury)
+ */
+export function CollectionMobileDrawer({
+  handle = '',
+  totalCount,
+  isDark = false,
+  onClose,
+}) {
+  const id = useId();
+  const filterState = useCollectionFilterState();
+  const {
+    currentSort,
+    minPrice,
+    maxPrice,
+    currentGender,
+    currentSleeve,
+    isUnder500,
+    is500To1M,
+    isAbove1M,
+    hasActiveFilters,
+    setSort,
+    setPriceBracket,
+    setCustomPriceRange,
+    setGender,
+    setSleeve,
+    clearAllFilters,
+  } = filterState;
+
+  const isSarimbit = handle.includes('sarimbit');
+  const isAnak = handle.includes('anak');
+
+  const [localMin, setLocalMin] = useState(minPrice);
+  const [localMax, setLocalMax] = useState(maxPrice);
+
+  const handleCustomPriceSubmit = (e) => {
+    e.preventDefault();
+    setCustomPriceRange(localMin, localMax);
+  };
+
+  const borderColor = isDark ? 'border-white/15' : 'border-[#E2DFD8]';
+  const textColor = isDark ? 'text-white' : 'text-[#111111]';
+  const mutedTextColor = isDark ? 'text-[#A69F96]' : 'text-[#5A5550]';
+  const activeBg = isDark ? 'bg-[#C5A059] text-[#111111]' : 'bg-[#111111] text-white';
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={`${id}-title`}
+      className="fixed inset-0 z-50 flex"
+    >
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Drawer Container (Slide from left) */}
+      <aside
+        className={`relative z-10 w-[85vw] max-w-sm h-full shadow-2xl flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-in-out ${
+          isDark ? 'bg-[#161616] text-white' : 'bg-[#FAF8F5] text-[#111111]'
+        }`}
+      >
+        {/* Drawer Header */}
+        <header className={`flex items-center justify-between h-16 px-5 border-b ${borderColor} ${isDark ? 'bg-[#1C1C1C]' : 'bg-white'}`}>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[#C5A059]" />
+            <h3 id={`${id}-title`} className={`text-xs font-bold uppercase tracking-[0.2em] ${textColor} m-0`}>
+              FILTER &amp; URUTKAN
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center text-base font-light text-[#888888] hover:text-current cursor-pointer"
+            aria-label="Tutup Filter"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between pb-4 mb-3 border-b border-[#E2DFD8]/60">
-              <span className="text-xs uppercase tracking-[0.22em] font-bold text-[#9E7D3B]">
-                URUTKAN KOLEKSI
+            ✕
+          </button>
+        </header>
+
+        {/* Drawer Scrollable Content */}
+        <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6 text-left">
+          {/* KOLEKSI UTAMA */}
+          <div className={`pb-5 border-b ${borderColor}`}>
+            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+              Koleksi Busana
+            </span>
+            <div className="space-y-1.5">
+              {OFFICIAL_COLLECTIONS.map((col) => {
+                const isActive = col.handle === handle;
+                return (
+                  <Link
+                    key={col.handle}
+                    to={`/collections/${col.handle}`}
+                    onClick={onClose}
+                    className={`block py-2 pl-3 border-l-2 transition-all ${
+                      isActive
+                        ? isDark
+                          ? 'border-[#C5A059] bg-white/5 text-white font-semibold'
+                          : 'border-[#C5A059] bg-white text-[#111111] font-semibold'
+                        : isDark
+                        ? 'border-transparent text-[#A69F96]'
+                        : 'border-transparent text-[#5A5550]'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between pr-2">
+                      <span className="text-xs">{col.label}</span>
+                      {isActive && <span className="w-1.5 h-1.5 bg-[#C5A059]" />}
+                    </div>
+                    <span className="block text-[9px] uppercase tracking-[0.16em] text-[#9E7D3B]">
+                      {col.tier}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* GENDER / KATEGORI */}
+          {(isSarimbit || isAnak) && (
+            <div className={`pb-5 border-b ${borderColor}`}>
+              <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+                {isSarimbit ? 'Gender / Kategori' : 'Kategori Anak'}
               </span>
+              <div className="space-y-2.5">
+                {isSarimbit ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setGender('')}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentGender ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {!currentGender && <span className="w-1.5 h-1.5 bg-current" />}
+                      </div>
+                      <span className={`text-xs uppercase tracking-wider ${!currentGender ? textColor + ' font-bold' : mutedTextColor}`}>Semua Gender</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGender('pria')}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'pria' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {currentGender === 'pria' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                      </div>
+                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'pria' ? textColor + ' font-bold' : mutedTextColor}`}>Busana Pria</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGender('wanita')}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'wanita' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {currentGender === 'wanita' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                      </div>
+                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'wanita' ? textColor + ' font-bold' : mutedTextColor}`}>Busana Wanita</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setGender('')}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentGender ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {!currentGender && <span className="w-1.5 h-1.5 bg-current" />}
+                      </div>
+                      <span className={`text-xs uppercase tracking-wider ${!currentGender ? textColor + ' font-bold' : mutedTextColor}`}>Semua Anak</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGender('putra')}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'putra' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {currentGender === 'putra' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                      </div>
+                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'putra' ? textColor + ' font-bold' : mutedTextColor}`}>Batik Putra (Laki-laki)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGender('putri')}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'putri' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {currentGender === 'putri' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                      </div>
+                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'putri' ? textColor + ' font-bold' : mutedTextColor}`}>Batik Putri (Perempuan)</span>
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* PANJANG LENGAN */}
+          {(isSarimbit || isAnak) && (
+            <div className={`pb-5 border-b ${borderColor}`}>
+              <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+                Panjang Lengan
+              </span>
+              <div className="space-y-2.5">
+                <button
+                  type="button"
+                  onClick={() => setSleeve('')}
+                  className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                >
+                  <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentSleeve ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                    {!currentSleeve && <span className="w-1.5 h-1.5 bg-current" />}
+                  </div>
+                  <span className={`text-xs uppercase tracking-wider ${!currentSleeve ? textColor + ' font-bold' : mutedTextColor}`}>Semua Lengan</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSleeve('lengan-panjang')}
+                  className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                >
+                  <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentSleeve === 'lengan-panjang' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                    {currentSleeve === 'lengan-panjang' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                  </div>
+                  <span className={`text-xs uppercase tracking-wider ${currentSleeve === 'lengan-panjang' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Panjang</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSleeve('lengan-pendek')}
+                  className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                >
+                  <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentSleeve === 'lengan-pendek' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                    {currentSleeve === 'lengan-pendek' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                  </div>
+                  <span className={`text-xs uppercase tracking-wider ${currentSleeve === 'lengan-pendek' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Pendek</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* RENTANG HARGA */}
+          <div className={`pb-5 border-b ${borderColor}`}>
+            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+              Rentang Harga
+            </span>
+            <div className="space-y-2.5">
               <button
                 type="button"
-                onClick={() => setIsSortOpen(false)}
-                className="w-8 h-8 flex items-center justify-center text-[#888888] hover:text-[#111111] cursor-pointer text-lg leading-none"
-                aria-label="Tutup"
+                onClick={() => setPriceBracket('all')}
+                className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
               >
-                &times;
+                <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!minPrice && !maxPrice ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                  {!minPrice && !maxPrice && <span className="w-1.5 h-1.5 bg-current" />}
+                </div>
+                <span className={`text-xs ${!minPrice && !maxPrice ? textColor + ' font-bold' : mutedTextColor}`}>Semua Harga</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setPriceBracket(isUnder500 ? 'all' : 'under500')}
+                className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+              >
+                <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isUnder500 ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                  {isUnder500 && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                </div>
+                <span className={`text-xs ${isUnder500 ? textColor + ' font-bold' : mutedTextColor}`}>&lt; Rp 500.000</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setPriceBracket(is500To1M ? 'all' : '500to1m')}
+                className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+              >
+                <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${is500To1M ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                  {is500To1M && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                </div>
+                <span className={`text-xs ${is500To1M ? textColor + ' font-bold' : mutedTextColor}`}>Rp 500.000 – Rp 1.000.000</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setPriceBracket(isAbove1M ? 'all' : 'above1m')}
+                className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+              >
+                <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isAbove1M ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                  {isAbove1M && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                </div>
+                <span className={`text-xs ${isAbove1M ? textColor + ' font-bold' : mutedTextColor}`}>&gt; Rp 1.000.000</span>
               </button>
             </div>
 
-            {/* Options List (15px/16px font size to guarantee ZERO mobile zoom!) */}
-            <div className="space-y-1">
+            {/* Custom inputs */}
+            <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-dashed border-[#E2DFD8]/60 space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  placeholder="Min (Rp)"
+                  value={localMin}
+                  onChange={(e) => setLocalMin(e.target.value)}
+                  className={`w-full px-2.5 py-1.5 text-xs border bg-white focus:outline-none ${isDark ? 'border-white/20 text-white bg-[#222]' : 'border-[#E2DFD8] text-[#111111]'}`}
+                />
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  placeholder="Maks (Rp)"
+                  value={localMax}
+                  onChange={(e) => setLocalMax(e.target.value)}
+                  className={`w-full px-2.5 py-1.5 text-xs border bg-white focus:outline-none ${isDark ? 'border-white/20 text-white bg-[#222]' : 'border-[#E2DFD8] text-[#111111]'}`}
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 bg-[#111111] text-white text-[10px] uppercase font-bold tracking-[0.2em] cursor-pointer"
+              >
+                Pasang Harga
+              </button>
+            </form>
+          </div>
+
+          {/* URUTKAN */}
+          <div className="pb-5">
+            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+              Urutkan Koleksi
+            </span>
+            <div className="space-y-2.5">
               {SORT_OPTIONS.map((opt) => {
                 const isSelected = opt.value === currentSort;
                 return (
                   <button
                     key={opt.value}
                     type="button"
-                    onClick={() => handleSortSelect(opt.value)}
-                    className={`w-full text-left px-4 py-3.5 text-[15px] sm:text-base tracking-wide flex items-center justify-between border-b border-[#E2DFD8]/30 transition-colors cursor-pointer ${
-                      isSelected
-                        ? isDark
-                          ? 'text-[#C5A059] font-semibold bg-white/5'
-                          : 'text-[#111111] font-semibold bg-[#FAF8F5]'
-                        : isDark
-                        ? 'text-[#CCCCCC] hover:text-white'
-                        : 'text-[#5A5550] hover:text-[#111111]'
-                    }`}
+                    onClick={() => setSort(opt.value)}
+                    className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
                   >
-                    <span>{opt.label}</span>
-                    {isSelected && (
-                      <svg className="w-4 h-4 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
+                    <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isSelected ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                      {isSelected && <span className="w-1.5 h-1.5 bg-current" />}
+                    </div>
+                    <span className={`text-xs ${isSelected ? textColor + ' font-bold' : mutedTextColor}`}>
+                      {opt.label}
+                    </span>
                   </button>
                 );
               })}
             </div>
-
-            {/* Bottom Safe Action */}
-            <div className="mt-5 pt-3">
-              <button
-                type="button"
-                onClick={() => setIsSortOpen(false)}
-                className="w-full py-3 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs font-bold uppercase tracking-[0.2em] transition-colors text-center"
-              >
-                TUTUP
-              </button>
-            </div>
           </div>
         </div>
-      )}
+
+        {/* Drawer Sticky Footer Actions */}
+        <footer className={`p-4 border-t ${borderColor} ${isDark ? 'bg-[#1C1C1C]' : 'bg-white'} flex items-center gap-3`}>
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={clearAllFilters}
+              className={`py-3 px-4 text-xs font-semibold uppercase tracking-[0.16em] border transition-colors cursor-pointer ${
+                isDark ? 'border-white/30 text-white hover:bg-white/10' : 'border-[#E2DFD8] text-[#111111] hover:bg-[#FAF8F5]'
+              }`}
+            >
+              Reset
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 py-3 bg-[#C5A059] hover:bg-[#111111] hover:text-white text-[#111111] text-xs font-bold uppercase tracking-[0.2em] transition-colors text-center shadow-md cursor-pointer"
+          >
+            {typeof totalCount === 'number' ? `Terapkan (${totalCount} Busana)` : 'Terapkan Filter'}
+          </button>
+        </footer>
+      </aside>
     </div>
+  );
+}
+
+/**
+ * Backward-compatible full horizontal wrapper if used directly
+ */
+export function CollectionFilterBar({
+  handle = '',
+  totalCount,
+  isDark = false,
+  className = '',
+}) {
+  return (
+    <CollectionFilterHeader
+      handle={handle}
+      totalCount={totalCount}
+      isDark={isDark}
+      className={className}
+    />
   );
 }

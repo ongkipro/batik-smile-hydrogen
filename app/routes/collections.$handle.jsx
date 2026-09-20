@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react';
-import { redirect, useLoaderData, useSearchParams } from 'react-router';
+import { redirect, useLoaderData, useSearchParams, Link } from 'react-router';
 import { getPaginationVariables, Analytics } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { ProductItem } from '~/components/ProductItem';
 import { Breadcrumb } from '~/components/Breadcrumb';
-import { CollectionFilterBar } from '~/components/CollectionFilterBar';
+import {
+  CollectionSidebar,
+  CollectionFilterHeader,
+} from '~/components/CollectionFilterBar';
 import { generateCollectionMeta } from '~/lib/seo';
 
 /**
@@ -211,8 +214,8 @@ export default function Collection() {
     : 'bg-[#FFFFFF] text-[#111111]';
 
   const gridColumns = isExclusive
-    ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10'
-    : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8';
+    ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8'
+    : 'grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 xl:gap-8';
 
 
   const officialWaUrl =
@@ -457,41 +460,70 @@ export default function Collection() {
           </div>
         )}
 
-        {/* Minimalist Horizontal Filter & Sort Bar (Before Product List) */}
-        <CollectionFilterBar
-          isDark={isExclusive}
-          handle={handle}
-          totalCount={filteredConnection?.nodes?.length}
-        />
+        {/* MARKETPLACE 2-COLUMN CATALOG LAYOUT: Desktop Left Sidebar + Catalog Grid */}
+        <div className="lg:flex lg:gap-8 xl:gap-10 items-start">
+          {/* DESKTOP LEFT SIDEBAR FILTER */}
+          <CollectionSidebar
+            handle={handle}
+            isDark={isExclusive}
+            totalCount={filteredConnection?.nodes?.length}
+          />
 
-        {/* Tier-Differentiated Products Grid (4:5 Aspect Ratio) */}
-        {filteredConnection?.nodes?.length === 0 ? (
-          <div className="text-center py-16 px-4 border border-dashed border-[#E2DFD8] bg-[#FAF8F5]/60 mb-12">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
-              FILTER TIDAK MENEMUKAN HASIL
-            </span>
-            <p className="font-serif text-xl text-[#111111] mb-2">
-              Tidak ada busana yang sesuai dengan kriteria filter.
-            </p>
-            <p className="text-xs text-[#5A5550] max-w-md mx-auto mb-6">
-              Silakan sesuaikan filter pilihan Anda, reset filter, atau hubungi konsultan kami untuk pesanan khusus.
-            </p>
-          </div>
-        ) : (
-          <PaginatedResourceSection
-            connection={filteredConnection}
-            resourcesClassName={`grid ${gridColumns}`}
-          >
-            {({ node: product, index }) => (
-              <ProductItem
-                key={product.id}
-                product={product}
-                variant={isExclusive ? 'exclusive' : isPremium ? 'premium' : 'default'}
-                loading={index < 4 ? 'eager' : 'lazy'}
-              />
+          {/* MAIN CATALOG CONTENT AREA */}
+          <div className="flex-1 min-w-0">
+            {/* Header Controls (Product count, mobile filter trigger, active filter pills, desktop quick sort) */}
+            <CollectionFilterHeader
+              handle={handle}
+              isDark={isExclusive}
+              totalCount={filteredConnection?.nodes?.length}
+            />
+
+            {/* Products Grid or Empty State */}
+            {filteredConnection?.nodes?.length === 0 ? (
+              <div
+                className={`text-center py-16 px-4 border border-dashed mb-12 ${
+                  isExclusive
+                    ? 'border-[#C5A059]/30 bg-[#161616]'
+                    : 'border-[#E2DFD8] bg-[#FAF8F5]/60'
+                }`}
+              >
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-2">
+                  FILTER TIDAK MENEMUKAN HASIL
+                </span>
+                <p className={`font-serif text-xl mb-2 ${isExclusive ? 'text-white' : 'text-[#111111]'}`}>
+                  Tidak ada busana yang sesuai dengan kriteria filter.
+                </p>
+                <p className={`text-xs max-w-md mx-auto mb-6 ${isExclusive ? 'text-[#A69F96]' : 'text-[#5A5550]'}`}>
+                  Silakan sesuaikan filter pilihan Anda, hapus filter, atau hubungi konsultan kami untuk pesanan khusus.
+                </p>
+                <Link
+                  to={`/collections/${handle}`}
+                  className={`inline-block px-6 py-2.5 text-[10px] uppercase font-bold tracking-[0.2em] transition-colors ${
+                    isExclusive
+                      ? 'bg-[#C5A059] text-[#111111] hover:bg-white'
+                      : 'bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111]'
+                  }`}
+                >
+                  Reset Filter Koleksi
+                </Link>
+              </div>
+            ) : (
+              <PaginatedResourceSection
+                connection={filteredConnection}
+                resourcesClassName={`grid ${gridColumns}`}
+              >
+                {({ node: product, index }) => (
+                  <ProductItem
+                    key={product.id}
+                    product={product}
+                    variant={isExclusive ? 'exclusive' : isPremium ? 'premium' : 'default'}
+                    loading={index < 4 ? 'eager' : 'lazy'}
+                  />
+                )}
+              </PaginatedResourceSection>
             )}
-          </PaginatedResourceSection>
-        )}
+          </div>
+        </div>
 
         {/* Bottom Callouts: Tailored per Tier */}
         {isExclusive ? (
