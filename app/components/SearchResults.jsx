@@ -131,8 +131,8 @@ function SearchResultsProducts({ term, products }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xs uppercase font-semibold tracking-[0.2em] text-[#9E7D3B]">
-          PRODUK &amp; KARYA BATIK ({products.nodes.length})
+        <h3 className="text-sm sm:text-base uppercase font-semibold tracking-[0.2em] text-[#9E7D3B]">
+          PRODUK &amp; KARYA BATIK
         </h3>
       </div>
 
@@ -185,29 +185,29 @@ function SearchResultsProducts({ term, products }) {
 
                         {/* Minimalist Hover Quick View Action */}
                         <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-black/65 via-black/25 to-transparent">
-                          <div className="w-full py-2 px-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-center bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] transition-colors shadow-sm">
+                          <div className="w-full py-3 px-3 text-xs font-bold uppercase tracking-[0.2em] text-center bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] transition-colors shadow-sm">
                             LIHAT DETAIL
                           </div>
                         </div>
                       </Link>
 
                       {/* Editorial Metadata */}
-                      <div className="pt-3 pb-1 flex flex-col flex-grow justify-between text-center items-center">
+                      <div className="pt-3.5 pb-1 flex flex-col flex-grow justify-between text-center items-center">
                         <div>
-                          <span className="text-[9px] uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1">
+                          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1.5">
                             BATIK SMILE
                           </span>
                           <Link
                             prefetch="intent"
                             to={productUrl}
-                            className="block font-serif text-sm font-normal text-[#111111] line-clamp-2 leading-snug group-hover:text-[#9E7D3B] transition-colors"
+                            className="block font-serif text-base sm:text-lg font-normal text-[#111111] line-clamp-2 leading-snug group-hover:text-[#9E7D3B] transition-colors"
                           >
                             {product.title}
                           </Link>
                         </div>
 
-                        <div className="mt-2 text-center">
-                          <span className="text-xs font-semibold text-[#111111] tracking-wide">
+                        <div className="mt-2.5 text-center">
+                          <span className="text-sm sm:text-base font-semibold text-[#111111] tracking-wide">
                             {price && <Money data={price} withoutTrailingZeros as="span" />}
                           </span>
                         </div>

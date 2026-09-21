@@ -153,7 +153,7 @@ export function useCollectionFilterState() {
  */
 export function CollectionSidebar({
   handle = '',
-  totalCount,
+  _totalCount,
   isDark = false,
   className = '',
 }) {
@@ -220,24 +220,19 @@ export function CollectionSidebar({
       <div className={`pb-4 border-b ${borderColor} flex items-center justify-between`}>
         <div className="flex items-center gap-2">
           {/* Sliders Icon */}
-          <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path strokeLinecap="square" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16M8 4v4M16 10v4M10 16v4" />
           </svg>
-          <h2 className={`text-xs uppercase tracking-[0.2em] font-bold ${textColor}`}>
+          <h2 className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
             FILTER
           </h2>
-          {typeof totalCount === 'number' && (
-            <span className={`text-[11px] font-medium ${mutedTextColor}`}>
-              ({totalCount})
-            </span>
-          )}
         </div>
 
         {hasActiveFilters && (
           <button
             type="button"
             onClick={clearAllFilters}
-            className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#C5A059] underline underline-offset-4 cursor-pointer transition-colors"
+            className="text-xs uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#C5A059] underline underline-offset-4 cursor-pointer transition-colors"
           >
             Hapus Semua
           </button>
@@ -251,10 +246,10 @@ export function CollectionSidebar({
           onClick={() => toggleSection('collections')}
           className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
         >
-          <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+          <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
             Koleksi Busana
           </span>
-          <span className="text-xs text-[#9E7D3B] font-mono">
+          <span className="text-sm text-[#9E7D3B] font-mono">
             {openSections.collections ? '−' : '+'}
           </span>
         </button>
@@ -268,7 +263,7 @@ export function CollectionSidebar({
                   key={col.handle}
                   to={`/collections/${col.handle}`}
                   prefetch="intent"
-                  className={`block py-1.5 pl-3 border-l-2 transition-all cursor-pointer ${
+                  className={`block py-2 pl-3 border-l-2 transition-all cursor-pointer ${
                     isActive
                       ? isDark
                         ? 'border-[#C5A059] bg-white/5 text-white font-semibold'
@@ -279,12 +274,12 @@ export function CollectionSidebar({
                   }`}
                 >
                   <div className="flex items-center justify-between pr-2">
-                    <span className="text-xs tracking-wide">{col.label}</span>
+                    <span className="text-xs sm:text-sm tracking-wide">{col.label}</span>
                     {isActive && (
                       <span className="w-1.5 h-1.5 bg-[#C5A059] rounded-none" />
                     )}
                   </div>
-                  <span className="block text-[9px] uppercase tracking-[0.18em] text-[#9E7D3B]">
+                  <span className="block text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#9E7D3B]">
                     {col.tier}
                   </span>
                 </Link>
@@ -302,10 +297,10 @@ export function CollectionSidebar({
             onClick={() => toggleSection('gender')}
             className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
           >
-            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+            <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
               {isSarimbit ? 'Gender / Kategori' : 'Kategori Anak'}
             </span>
-            <span className="text-xs text-[#9E7D3B] font-mono">
+            <span className="text-sm text-[#9E7D3B] font-mono">
               {openSections.gender ? '−' : '+'}
             </span>
           </button>
@@ -332,7 +327,7 @@ export function CollectionSidebar({
                         <span className="w-1.5 h-1.5 bg-current" />
                       )}
                     </div>
-                    <span className={`text-xs uppercase tracking-[0.14em] ${!currentGender ? textColor + ' font-medium' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${!currentGender ? textColor + ' font-medium' : mutedTextColor}`}>
                       Semua Gender
                     </span>
                   </button>
@@ -357,7 +352,7 @@ export function CollectionSidebar({
                         </svg>
                       )}
                     </div>
-                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'pria' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentGender === 'pria' ? textColor + ' font-semibold' : mutedTextColor}`}>
                       Busana Pria
                     </span>
                   </button>
@@ -382,7 +377,7 @@ export function CollectionSidebar({
                         </svg>
                       )}
                     </div>
-                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'wanita' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentGender === 'wanita' ? textColor + ' font-semibold' : mutedTextColor}`}>
                       Busana Wanita
                     </span>
                   </button>
@@ -407,7 +402,7 @@ export function CollectionSidebar({
                         <span className="w-1.5 h-1.5 bg-current" />
                       )}
                     </div>
-                    <span className={`text-xs uppercase tracking-[0.14em] ${!currentGender ? textColor + ' font-medium' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${!currentGender ? textColor + ' font-medium' : mutedTextColor}`}>
                       Semua Anak
                     </span>
                   </button>
@@ -432,7 +427,7 @@ export function CollectionSidebar({
                         </svg>
                       )}
                     </div>
-                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'putra' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentGender === 'putra' ? textColor + ' font-semibold' : mutedTextColor}`}>
                       Batik Putra (Laki-laki)
                     </span>
                   </button>
@@ -457,7 +452,7 @@ export function CollectionSidebar({
                         </svg>
                       )}
                     </div>
-                    <span className={`text-xs uppercase tracking-[0.14em] ${currentGender === 'putri' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentGender === 'putri' ? textColor + ' font-semibold' : mutedTextColor}`}>
                       Batik Putri (Perempuan)
                     </span>
                   </button>
@@ -476,10 +471,10 @@ export function CollectionSidebar({
             onClick={() => toggleSection('sleeve')}
             className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
           >
-            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+            <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
               Panjang Lengan
             </span>
-            <span className="text-xs text-[#9E7D3B] font-mono">
+            <span className="text-sm text-[#9E7D3B] font-mono">
               {openSections.sleeve ? '−' : '+'}
             </span>
           </button>
@@ -502,7 +497,7 @@ export function CollectionSidebar({
                 >
                   {!currentSleeve && <span className="w-1.5 h-1.5 bg-current" />}
                 </div>
-                <span className={`text-xs uppercase tracking-[0.14em] ${!currentSleeve ? textColor + ' font-medium' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${!currentSleeve ? textColor + ' font-medium' : mutedTextColor}`}>
                   Semua Lengan
                 </span>
               </button>
@@ -527,7 +522,7 @@ export function CollectionSidebar({
                     </svg>
                   )}
                 </div>
-                <span className={`text-xs uppercase tracking-[0.14em] ${currentSleeve === 'lengan-panjang' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentSleeve === 'lengan-panjang' ? textColor + ' font-semibold' : mutedTextColor}`}>
                   Lengan Panjang
                 </span>
               </button>
@@ -552,7 +547,7 @@ export function CollectionSidebar({
                     </svg>
                   )}
                 </div>
-                <span className={`text-xs uppercase tracking-[0.14em] ${currentSleeve === 'lengan-pendek' ? textColor + ' font-semibold' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentSleeve === 'lengan-pendek' ? textColor + ' font-semibold' : mutedTextColor}`}>
                   Lengan Pendek
                 </span>
               </button>
@@ -568,10 +563,10 @@ export function CollectionSidebar({
           onClick={() => toggleSection('price')}
           className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
         >
-          <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+          <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
             Rentang Harga
           </span>
-          <span className="text-xs text-[#9E7D3B] font-mono">
+          <span className="text-sm text-[#9E7D3B] font-mono">
             {openSections.price ? '−' : '+'}
           </span>
         </button>
@@ -596,7 +591,7 @@ export function CollectionSidebar({
                 >
                   {!minPrice && !maxPrice && <span className="w-1.5 h-1.5 bg-current" />}
                 </div>
-                <span className={`text-xs ${!minPrice && !maxPrice ? textColor + ' font-semibold' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm ${!minPrice && !maxPrice ? textColor + ' font-semibold' : mutedTextColor}`}>
                   Semua Harga
                 </span>
               </button>
@@ -621,7 +616,7 @@ export function CollectionSidebar({
                     </svg>
                   )}
                 </div>
-                <span className={`text-xs ${isUnder500 ? textColor + ' font-semibold' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm ${isUnder500 ? textColor + ' font-semibold' : mutedTextColor}`}>
                   &lt; Rp 500.000
                 </span>
               </button>
@@ -646,7 +641,7 @@ export function CollectionSidebar({
                     </svg>
                   )}
                 </div>
-                <span className={`text-xs ${is500To1M ? textColor + ' font-semibold' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm ${is500To1M ? textColor + ' font-semibold' : mutedTextColor}`}>
                   Rp 500.000 – Rp 1.000.000
                 </span>
               </button>
@@ -671,7 +666,7 @@ export function CollectionSidebar({
                     </svg>
                   )}
                 </div>
-                <span className={`text-xs ${isAbove1M ? textColor + ' font-semibold' : mutedTextColor}`}>
+                <span className={`text-xs sm:text-sm ${isAbove1M ? textColor + ' font-semibold' : mutedTextColor}`}>
                   &gt; Rp 1.000.000
                 </span>
               </button>
@@ -679,32 +674,32 @@ export function CollectionSidebar({
 
             {/* Custom Price Inputs */}
             <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-[#E2DFD8]/60 space-y-2">
-              <span className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] block">
+              <span className="text-xs uppercase tracking-[0.16em] text-[#9E7D3B] font-semibold block">
                 Atur Rentang Sendiri:
               </span>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[9px] uppercase tracking-wider text-[#888888] block mb-0.5">Min (Rp)</label>
+                  <label className="text-[10px] uppercase tracking-wider text-[#888888] block mb-0.5">Min (Rp)</label>
                   <input
                     type="number"
                     inputMode="numeric"
                     placeholder="0"
                     value={localMin}
                     onChange={(e) => setLocalMin(e.target.value)}
-                    className={`w-full px-2 py-2 text-base sm:text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
+                    className={`w-full px-2.5 py-2 text-base sm:text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
                       isDark ? 'border-white/20 text-white' : 'border-[#E2DFD8] text-[#111111]'
                     }`}
                   />
                 </div>
                 <div>
-                  <label className="text-[9px] uppercase tracking-wider text-[#888888] block mb-0.5">Maks (Rp)</label>
+                  <label className="text-[10px] uppercase tracking-wider text-[#888888] block mb-0.5">Maks (Rp)</label>
                   <input
                     type="number"
                     inputMode="numeric"
                     placeholder="1.000.000"
                     value={localMax}
                     onChange={(e) => setLocalMax(e.target.value)}
-                    className={`w-full px-2 py-2 text-base sm:text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
+                    className={`w-full px-2.5 py-2 text-base sm:text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
                       isDark ? 'border-white/20 text-white' : 'border-[#E2DFD8] text-[#111111]'
                     }`}
                   />
@@ -712,7 +707,7 @@ export function CollectionSidebar({
               </div>
               <button
                 type="submit"
-                className={`w-full py-1.5 text-[10px] uppercase font-bold tracking-[0.2em] transition-colors cursor-pointer ${
+                className={`w-full py-2 text-xs uppercase font-bold tracking-[0.2em] transition-colors cursor-pointer ${
                   isDark
                     ? 'bg-[#C5A059] text-[#111111] hover:bg-white'
                     : 'bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111]'
@@ -732,10 +727,10 @@ export function CollectionSidebar({
           onClick={() => toggleSection('sort')}
           className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
         >
-          <span className={`text-[11px] uppercase tracking-[0.2em] font-bold ${textColor}`}>
+          <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
             Urutkan
           </span>
-          <span className="text-xs text-[#9E7D3B] font-mono">
+          <span className="text-sm text-[#9E7D3B] font-mono">
             {openSections.sort ? '−' : '+'}
           </span>
         </button>
@@ -762,7 +757,7 @@ export function CollectionSidebar({
                   >
                     {isSelected && <span className="w-1.5 h-1.5 bg-current" />}
                   </div>
-                  <span className={`text-xs ${isSelected ? textColor + ' font-semibold' : mutedTextColor}`}>
+                  <span className={`text-xs sm:text-sm ${isSelected ? textColor + ' font-semibold' : mutedTextColor}`}>
                     {opt.label}
                   </span>
                 </button>
@@ -780,7 +775,7 @@ export function CollectionSidebar({
  */
 export function CollectionFilterHeader({
   handle = '',
-  totalCount,
+  _totalCount,
   isDark = false,
   className = '',
 }) {
@@ -840,10 +835,10 @@ export function CollectionFilterHeader({
     <div className={`w-full mb-6 pb-4 border-b ${isDark ? 'border-white/15' : 'border-[#E2DFD8]'} ${className}`}>
       {/* TOP ROW: Count + Mobile Filter Trigger + Desktop Quick Sort */}
       <div className="flex items-center justify-between gap-4">
-        {/* Total Product Count (Desktop & Mobile) */}
+        {/* Curated Collection Header (No count, clean Quiet Luxury) */}
         <div className="flex items-center gap-2.5">
-          <span className={`text-xs uppercase tracking-[0.2em] font-semibold ${isDark ? 'text-white' : 'text-[#111111]'}`}>
-            {typeof totalCount === 'number' ? `${totalCount} Busana Ditemukan` : 'Koleksi Busana'}
+          <span className={`text-sm sm:text-base uppercase tracking-[0.2em] font-semibold ${isDark ? 'text-white' : 'text-[#111111]'}`}>
+            Koleksi Busana
           </span>
         </div>
 
@@ -854,7 +849,7 @@ export function CollectionFilterHeader({
             type="button"
             onClick={() => setIsMobileDrawerOpen(true)}
             aria-label="Buka Filter & Urutkan"
-            className={`lg:hidden inline-flex items-center gap-2 px-3 py-1.5 border text-[11px] uppercase tracking-[0.18em] font-bold cursor-pointer transition-colors ${
+            className={`lg:hidden inline-flex items-center gap-2 px-3.5 py-2 border text-xs sm:text-sm uppercase tracking-[0.18em] font-bold cursor-pointer transition-colors ${
               hasActiveFilters
                 ? isDark
                   ? 'border-[#C5A059] bg-[#C5A059] text-[#111111]'
@@ -884,7 +879,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-              className={`inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-medium py-1.5 px-3 border transition-colors cursor-pointer ${
+              className={`inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] font-medium py-2 px-4 border transition-colors cursor-pointer ${
                 isDark
                   ? 'border-white/20 text-white hover:border-[#C5A059]'
                   : 'border-[#E2DFD8] text-[#111111] hover:border-[#111111] bg-white'
@@ -893,7 +888,7 @@ export function CollectionFilterHeader({
               <span className="text-[#9E7D3B]">Urutkan:</span>
               <span>{currentSortObj.shortLabel}</span>
               <svg
-                className={`w-3 h-3 text-[#9E7D3B] transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 text-[#9E7D3B] transition-transform duration-200 ${
                   isSortDropdownOpen ? 'rotate-180' : ''
                 }`}
                 fill="none"
@@ -922,7 +917,7 @@ export function CollectionFilterHeader({
                         setSort(opt.value);
                         setIsSortDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3.5 py-2 text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors cursor-pointer ${
+                      className={`w-full text-left px-4 py-2.5 text-xs sm:text-sm uppercase tracking-[0.14em] flex items-center justify-between transition-colors cursor-pointer ${
                         isSelected
                           ? isDark
                             ? 'bg-white/10 text-[#C5A059] font-semibold'
@@ -946,7 +941,7 @@ export function CollectionFilterHeader({
       {/* ACTIVE FILTER PILLS / CHIPS ROW */}
       {hasActiveFilters && (
         <div className="mt-3.5 pt-3 border-t border-[#E2DFD8]/60 flex flex-wrap items-center gap-2">
-          <span className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mr-1">
+          <span className="text-xs uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mr-1">
             Filter Aktif:
           </span>
 
@@ -955,7 +950,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setGender('')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -971,7 +966,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setSleeve('')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -987,7 +982,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setPriceBracket('all')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -1012,7 +1007,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setSort('featured')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -1027,7 +1022,7 @@ export function CollectionFilterHeader({
           <button
             type="button"
             onClick={clearAllFilters}
-            className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-2 ml-1 cursor-pointer transition-colors"
+            className="text-xs uppercase tracking-[0.18em] text-[#9E7D3B] hover:text-[#111111] underline underline-offset-2 ml-1 cursor-pointer transition-colors"
           >
             Hapus Semua
           </button>
@@ -1038,7 +1033,7 @@ export function CollectionFilterHeader({
       {isMobileDrawerOpen && (
         <CollectionMobileDrawer
           handle={handle}
-          totalCount={totalCount}
+          _totalCount={_totalCount}
           isDark={isDark}
           onClose={() => setIsMobileDrawerOpen(false)}
         />
@@ -1052,7 +1047,7 @@ export function CollectionFilterHeader({
  */
 export function CollectionMobileDrawer({
   handle = '',
-  totalCount,
+  _totalCount,
   isDark = false,
   onClose,
 }) {
@@ -1116,7 +1111,7 @@ export function CollectionMobileDrawer({
         <header className={`flex items-center justify-between h-16 px-5 border-b ${borderColor} ${isDark ? 'bg-[#1C1C1C]' : 'bg-white'}`}>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#C5A059]" />
-            <h3 id={`${id}-title`} className={`text-xs font-bold uppercase tracking-[0.2em] ${textColor} m-0`}>
+            <h3 id={`${id}-title`} className={`text-sm sm:text-base font-bold uppercase tracking-[0.2em] ${textColor} m-0`}>
               FILTER &amp; URUTKAN
             </h3>
           </div>
@@ -1134,7 +1129,7 @@ export function CollectionMobileDrawer({
         <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6 text-left">
           {/* KOLEKSI UTAMA */}
           <div className={`pb-5 border-b ${borderColor}`}>
-            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+            <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
               Koleksi Busana
             </span>
             <div className="space-y-1.5">
@@ -1156,10 +1151,10 @@ export function CollectionMobileDrawer({
                     }`}
                   >
                     <div className="flex items-center justify-between pr-2">
-                      <span className="text-xs">{col.label}</span>
+                      <span className="text-xs sm:text-sm">{col.label}</span>
                       {isActive && <span className="w-1.5 h-1.5 bg-[#C5A059]" />}
                     </div>
-                    <span className="block text-[9px] uppercase tracking-[0.16em] text-[#9E7D3B]">
+                    <span className="block text-[10px] sm:text-[11px] uppercase tracking-[0.16em] text-[#9E7D3B]">
                       {col.tier}
                     </span>
                   </Link>
@@ -1171,7 +1166,7 @@ export function CollectionMobileDrawer({
           {/* GENDER / KATEGORI */}
           {(isSarimbit || isAnak) && (
             <div className={`pb-5 border-b ${borderColor}`}>
-              <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+              <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
                 {isSarimbit ? 'Gender / Kategori' : 'Kategori Anak'}
               </span>
               <div className="space-y-2.5">
@@ -1185,7 +1180,7 @@ export function CollectionMobileDrawer({
                       <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentGender ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                         {!currentGender && <span className="w-1.5 h-1.5 bg-current" />}
                       </div>
-                      <span className={`text-xs uppercase tracking-wider ${!currentGender ? textColor + ' font-bold' : mutedTextColor}`}>Semua Gender</span>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${!currentGender ? textColor + ' font-bold' : mutedTextColor}`}>Semua Gender</span>
                     </button>
                     <button
                       type="button"
@@ -1195,7 +1190,7 @@ export function CollectionMobileDrawer({
                       <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'pria' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                         {currentGender === 'pria' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                       </div>
-                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'pria' ? textColor + ' font-bold' : mutedTextColor}`}>Busana Pria</span>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentGender === 'pria' ? textColor + ' font-bold' : mutedTextColor}`}>Busana Pria</span>
                     </button>
                     <button
                       type="button"
@@ -1205,7 +1200,7 @@ export function CollectionMobileDrawer({
                       <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'wanita' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                         {currentGender === 'wanita' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                       </div>
-                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'wanita' ? textColor + ' font-bold' : mutedTextColor}`}>Busana Wanita</span>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentGender === 'wanita' ? textColor + ' font-bold' : mutedTextColor}`}>Busana Wanita</span>
                     </button>
                   </>
                 ) : (
@@ -1218,7 +1213,7 @@ export function CollectionMobileDrawer({
                       <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentGender ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                         {!currentGender && <span className="w-1.5 h-1.5 bg-current" />}
                       </div>
-                      <span className={`text-xs uppercase tracking-wider ${!currentGender ? textColor + ' font-bold' : mutedTextColor}`}>Semua Anak</span>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${!currentGender ? textColor + ' font-bold' : mutedTextColor}`}>Semua Anak</span>
                     </button>
                     <button
                       type="button"
@@ -1228,7 +1223,7 @@ export function CollectionMobileDrawer({
                       <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'putra' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                         {currentGender === 'putra' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                       </div>
-                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'putra' ? textColor + ' font-bold' : mutedTextColor}`}>Batik Putra (Laki-laki)</span>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentGender === 'putra' ? textColor + ' font-bold' : mutedTextColor}`}>Batik Putra (Laki-laki)</span>
                     </button>
                     <button
                       type="button"
@@ -1238,7 +1233,7 @@ export function CollectionMobileDrawer({
                       <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentGender === 'putri' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                         {currentGender === 'putri' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                       </div>
-                      <span className={`text-xs uppercase tracking-wider ${currentGender === 'putri' ? textColor + ' font-bold' : mutedTextColor}`}>Batik Putri (Perempuan)</span>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentGender === 'putri' ? textColor + ' font-bold' : mutedTextColor}`}>Batik Putri (Perempuan)</span>
                     </button>
                   </>
                 )}
@@ -1249,7 +1244,7 @@ export function CollectionMobileDrawer({
           {/* PANJANG LENGAN */}
           {(isSarimbit || isAnak) && (
             <div className={`pb-5 border-b ${borderColor}`}>
-              <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+              <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
                 Panjang Lengan
               </span>
               <div className="space-y-2.5">
@@ -1261,7 +1256,7 @@ export function CollectionMobileDrawer({
                   <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentSleeve ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                     {!currentSleeve && <span className="w-1.5 h-1.5 bg-current" />}
                   </div>
-                  <span className={`text-xs uppercase tracking-wider ${!currentSleeve ? textColor + ' font-bold' : mutedTextColor}`}>Semua Lengan</span>
+                  <span className={`text-xs sm:text-sm uppercase tracking-wider ${!currentSleeve ? textColor + ' font-bold' : mutedTextColor}`}>Semua Lengan</span>
                 </button>
                 <button
                   type="button"
@@ -1271,7 +1266,7 @@ export function CollectionMobileDrawer({
                   <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentSleeve === 'lengan-panjang' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                     {currentSleeve === 'lengan-panjang' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                   </div>
-                  <span className={`text-xs uppercase tracking-wider ${currentSleeve === 'lengan-panjang' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Panjang</span>
+                  <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentSleeve === 'lengan-panjang' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Panjang</span>
                 </button>
                 <button
                   type="button"
@@ -1281,7 +1276,7 @@ export function CollectionMobileDrawer({
                   <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentSleeve === 'lengan-pendek' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                     {currentSleeve === 'lengan-pendek' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                   </div>
-                  <span className={`text-xs uppercase tracking-wider ${currentSleeve === 'lengan-pendek' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Pendek</span>
+                  <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentSleeve === 'lengan-pendek' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Pendek</span>
                 </button>
               </div>
             </div>
@@ -1289,7 +1284,7 @@ export function CollectionMobileDrawer({
 
           {/* RENTANG HARGA */}
           <div className={`pb-5 border-b ${borderColor}`}>
-            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+            <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
               Rentang Harga
             </span>
             <div className="space-y-2.5">
@@ -1301,7 +1296,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!minPrice && !maxPrice ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {!minPrice && !maxPrice && <span className="w-1.5 h-1.5 bg-current" />}
                 </div>
-                <span className={`text-xs ${!minPrice && !maxPrice ? textColor + ' font-bold' : mutedTextColor}`}>Semua Harga</span>
+                <span className={`text-xs sm:text-sm ${!minPrice && !maxPrice ? textColor + ' font-bold' : mutedTextColor}`}>Semua Harga</span>
               </button>
               <button
                 type="button"
@@ -1311,7 +1306,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isUnder500 ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {isUnder500 && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className={`text-xs ${isUnder500 ? textColor + ' font-bold' : mutedTextColor}`}>&lt; Rp 500.000</span>
+                <span className={`text-xs sm:text-sm ${isUnder500 ? textColor + ' font-bold' : mutedTextColor}`}>&lt; Rp 500.000</span>
               </button>
               <button
                 type="button"
@@ -1321,7 +1316,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${is500To1M ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {is500To1M && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className={`text-xs ${is500To1M ? textColor + ' font-bold' : mutedTextColor}`}>Rp 500.000 – Rp 1.000.000</span>
+                <span className={`text-xs sm:text-sm ${is500To1M ? textColor + ' font-bold' : mutedTextColor}`}>Rp 500.000 – Rp 1.000.000</span>
               </button>
               <button
                 type="button"
@@ -1331,7 +1326,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isAbove1M ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {isAbove1M && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className={`text-xs ${isAbove1M ? textColor + ' font-bold' : mutedTextColor}`}>&gt; Rp 1.000.000</span>
+                <span className={`text-xs sm:text-sm ${isAbove1M ? textColor + ' font-bold' : mutedTextColor}`}>&gt; Rp 1.000.000</span>
               </button>
             </div>
 
@@ -1357,7 +1352,7 @@ export function CollectionMobileDrawer({
               </div>
               <button
                 type="submit"
-                className="w-full py-2 bg-[#111111] text-white text-[10px] uppercase font-bold tracking-[0.2em] cursor-pointer"
+                className="w-full py-2.5 bg-[#111111] text-white text-xs uppercase font-bold tracking-[0.2em] cursor-pointer"
               >
                 Pasang Harga
               </button>
@@ -1366,7 +1361,7 @@ export function CollectionMobileDrawer({
 
           {/* URUTKAN */}
           <div className="pb-5">
-            <span className={`text-[11px] uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
+            <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
               Urutkan Koleksi
             </span>
             <div className="space-y-2.5">
@@ -1382,7 +1377,7 @@ export function CollectionMobileDrawer({
                     <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isSelected ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                       {isSelected && <span className="w-1.5 h-1.5 bg-current" />}
                     </div>
-                    <span className={`text-xs ${isSelected ? textColor + ' font-bold' : mutedTextColor}`}>
+                    <span className={`text-xs sm:text-sm ${isSelected ? textColor + ' font-bold' : mutedTextColor}`}>
                       {opt.label}
                     </span>
                   </button>
@@ -1398,7 +1393,7 @@ export function CollectionMobileDrawer({
             <button
               type="button"
               onClick={clearAllFilters}
-              className={`py-3 px-4 text-xs font-semibold uppercase tracking-[0.16em] border transition-colors cursor-pointer ${
+              className={`py-3.5 px-5 text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] border transition-colors cursor-pointer ${
                 isDark ? 'border-white/30 text-white hover:bg-white/10' : 'border-[#E2DFD8] text-[#111111] hover:bg-[#FAF8F5]'
               }`}
             >
@@ -1408,9 +1403,9 @@ export function CollectionMobileDrawer({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 py-3 bg-[#C5A059] hover:bg-[#111111] hover:text-white text-[#111111] text-xs font-bold uppercase tracking-[0.2em] transition-colors text-center shadow-md cursor-pointer"
+            className="flex-1 py-3.5 bg-[#C5A059] hover:bg-[#111111] hover:text-white text-[#111111] text-xs sm:text-sm font-bold uppercase tracking-[0.2em] transition-colors text-center shadow-md cursor-pointer"
           >
-            {typeof totalCount === 'number' ? `Terapkan (${totalCount} Busana)` : 'Terapkan Filter'}
+            Terapkan Filter
           </button>
         </footer>
       </aside>
@@ -1423,14 +1418,14 @@ export function CollectionMobileDrawer({
  */
 export function CollectionFilterBar({
   handle = '',
-  totalCount,
+  _totalCount,
   isDark = false,
   className = '',
 }) {
   return (
     <CollectionFilterHeader
       handle={handle}
-      totalCount={totalCount}
+      _totalCount={_totalCount}
       isDark={isDark}
       className={className}
     />

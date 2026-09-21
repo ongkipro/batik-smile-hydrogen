@@ -464,8 +464,8 @@ export default function Product() {
 
         {/* Main PDP Grid (Left: 4:5 Vertical Gallery, Right: Frameless Quiet Luxury Panel) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* Left: 4:5 Vertical Gallery System (7 Cols on Desktop) */}
-          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 lg:sticky lg:top-24">
+          {/* Left: 4:5 Vertical Gallery System (7 Cols on Desktop - Non-sticky, Natural Editorial Flow) */}
+          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
             {/* Thumbnails Column (Precision-aligned on Mobile to match Main Thumbnail width, Vertical on Desktop) */}
             {mediaList.length > 1 && (
               <div
@@ -805,9 +805,9 @@ export default function Product() {
               <div>
                 {productOptions.map((option) => (
                   <div key={option.name}>
-                    <div className="mb-2">
+                    <div className="mb-2.5">
                       <label
-                        className={`text-[10px] font-medium uppercase tracking-[0.18em] ${
+                        className={`text-xs font-medium uppercase tracking-[0.18em] ${
                           isDarkPDP ? 'text-white' : 'text-[#111111]'
                         }`}
                       >
@@ -818,7 +818,7 @@ export default function Product() {
                       </label>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2.5">
                       {option.optionValues.map((val) => {
                         const isSelected = val.name === option.value;
                         return (
@@ -827,7 +827,7 @@ export default function Product() {
                             to={val.to}
                             preventScrollReset
                             replace
-                            className={`w-11 h-11 flex items-center justify-center text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer ${
+                            className={`w-12 h-12 flex items-center justify-center text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors cursor-pointer ${
                               isSelected
                                 ? isExclusiveTier
                                   ? 'bg-[#C5A059] !text-[#111111] font-bold border border-[#C5A059]'
@@ -852,11 +852,11 @@ export default function Product() {
             )}
 
             {/* Purchase Actions: Row 1 (Quantity + Tambah ke Tas), Row 2 (Beli Sekarang) */}
-            <div className="space-y-2.5 pt-2">
-              <div className="flex items-center gap-2.5">
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center gap-3">
                 {/* Quantity Selector */}
                 <div
-                  className={`flex items-center h-12 w-28 shrink-0 ${
+                  className={`flex items-center h-13 w-32 shrink-0 ${
                     isExclusiveTier
                       ? 'border border-[#C5A059]/40 bg-[#181818] text-white'
                       : isPremiumTier
@@ -868,7 +868,7 @@ export default function Product() {
                     type="button"
                     onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
                     disabled={quantity <= 1 || !isAvailable}
-                    className={`w-9 h-full flex items-center justify-center text-sm font-medium disabled:opacity-30 cursor-pointer transition-colors ${
+                    className={`w-10 h-full flex items-center justify-center text-base font-medium disabled:opacity-30 cursor-pointer transition-colors ${
                       isDarkPDP ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
                     }`}
                     aria-label="Kurangi Jumlah"
@@ -876,7 +876,7 @@ export default function Product() {
                     −
                   </button>
                   <span
-                    className={`flex-1 text-center text-xs font-semibold font-sans ${
+                    className={`flex-1 text-center text-sm font-semibold font-sans ${
                       isDarkPDP ? 'text-[#C5A059]' : 'text-[#111111]'
                     }`}
                   >
@@ -886,7 +886,7 @@ export default function Product() {
                     type="button"
                     onClick={() => setQuantity((prev) => prev + 1)}
                     disabled={!isAvailable}
-                    className={`w-9 h-full flex items-center justify-center text-sm font-medium disabled:opacity-30 cursor-pointer transition-colors ${
+                    className={`w-10 h-full flex items-center justify-center text-base font-medium disabled:opacity-30 cursor-pointer transition-colors ${
                       isDarkPDP ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
                     }`}
                     aria-label="Tambah Jumlah"
@@ -900,7 +900,7 @@ export default function Product() {
                   disabled={!isAvailable}
                   lines={cartLines}
                   wrapperClassName="flex-1"
-                  className={`w-full h-12 px-4 font-semibold text-[10px] uppercase tracking-[0.18em] text-center flex items-center justify-center transition-all cursor-pointer ${
+                  className={`w-full h-13 px-4 font-bold text-xs uppercase tracking-[0.2em] text-center flex items-center justify-center transition-all cursor-pointer ${
                     isExclusiveTier
                       ? 'border border-[#C5A059] bg-[#181818] hover:bg-[#C5A059] !text-[#C5A059] hover:!text-[#111111] shadow-sm'
                       : isPremiumTier
@@ -918,11 +918,11 @@ export default function Product() {
                 lines={cartLines}
                 redirectTo="checkout"
                 wrapperClassName="w-full block"
-                className={`w-full h-12 py-3.5 px-6 font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:cursor-not-allowed cursor-pointer shadow-md flex items-center justify-center ${
+                className={`w-full h-13 py-3.5 px-6 font-bold text-xs uppercase tracking-[0.22em] transition-all disabled:cursor-not-allowed cursor-pointer shadow-md flex items-center justify-center ${
                   isExclusiveTier
-                    ? 'bg-[#C5A059] hover:bg-white !text-[#111111] font-bold shadow-lg disabled:bg-[#333333] disabled:!text-[#777777]'
+                    ? 'bg-[#C5A059] hover:bg-white !text-[#111111] shadow-lg disabled:bg-[#333333] disabled:!text-[#777777]'
                     : isPremiumTier
-                    ? 'bg-[#7C3F1D] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-bold border border-[#C5A059]/40 shadow-lg disabled:bg-[#38261C] disabled:!text-[#88786D]'
+                    ? 'bg-[#7C3F1D] hover:bg-[#C5A059] !text-white hover:!text-[#111111] border border-[#C5A059]/40 shadow-lg disabled:bg-[#38261C] disabled:!text-[#88786D]'
                     : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] disabled:bg-[#E2DFD8] disabled:!text-[#5A5550]'
                 }`}
               >
@@ -932,7 +932,7 @@ export default function Product() {
 
             {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H - Frameless) */}
             <div
-              className={`grid grid-cols-2 gap-x-6 gap-y-2 pt-4 border-t text-[10px] ${
+              className={`grid grid-cols-2 gap-x-6 gap-y-2.5 pt-4.5 border-t text-[11px] sm:text-xs ${
                 isExclusiveTier
                   ? 'border-[#262626] text-[#E2DFD8]/75'
                   : isPremiumTier

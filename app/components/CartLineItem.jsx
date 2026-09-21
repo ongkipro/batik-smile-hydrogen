@@ -59,7 +59,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
         {/* Product Details & Stepper Row */}
         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
           <div>
-            <span className="text-[8px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-0.5">
+            <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-0.5">
               BATIK SMILE
             </span>
             <Link
@@ -68,14 +68,14 @@ export function CartLineItem({ layout, line, childrenMap }) {
               onClick={() => {
                 if (layout === 'aside') close();
               }}
-              className="font-serif text-sm sm:text-base font-normal text-[#111111] hover:text-[#C5A059] transition-colors leading-snug line-clamp-2 block mb-1"
+              className="font-serif text-base sm:text-lg font-normal text-[#111111] hover:text-[#C5A059] transition-colors leading-snug line-clamp-2 block mb-1"
             >
               {product.title}
             </Link>
 
             {/* Variant specifications (Size, Color/Pattern) - Hidden if Default Title or empty */}
             {realOptions.length > 0 && (
-              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[10px] text-[#5A5550] uppercase tracking-wider mb-1">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[11px] text-[#5A5550] uppercase tracking-wider mb-1">
                 {realOptions.map((option) => (
                   <span key={option.name}>
                     {option.name}: <strong className="text-[#111111]">{option.value}</strong>
@@ -85,7 +85,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
             )}
 
             {/* Unit Price */}
-            <div className="text-[11px] sm:text-xs text-[#777777]">
+            <div className="text-xs sm:text-sm text-[#777777]">
               {unitPrice ? formatRupiah(unitPrice) : '-'}
             </div>
           </div>
@@ -98,7 +98,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
             </div>
 
             <div className="text-right">
-              <span className="font-serif text-sm sm:text-base font-semibold text-[#111111]">
+              <span className="font-serif text-base sm:text-lg font-semibold text-[#111111]">
                 {line?.cost?.totalAmount ? formatRupiah(line.cost.totalAmount) : '-'}
               </span>
             </div>
@@ -115,8 +115,8 @@ export function CartLineItem({ layout, line, childrenMap }) {
           <ul aria-labelledby={childrenLabelId} className="space-y-1.5">
             {lineItemChildren.map((childLine) => (
               <CartLineItem
-                childrenMap={childrenMap}
                 key={childLine.id}
+                childrenMap={childrenMap}
                 line={childLine}
                 layout={layout}
               />
@@ -149,13 +149,13 @@ function CartLineQuantity({ line }) {
           disabled={quantity <= 1 || !!isOptimistic}
           name="decrease-quantity"
           value={prevQuantity}
-          className="w-7 h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+          className="w-8 h-8 flex items-center justify-center text-sm text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
         >
           &#8722;
         </button>
       </CartLineUpdateButton>
 
-      <span className="w-7 text-center text-xs font-semibold text-[#111111]">
+      <span className="w-8 text-center text-xs sm:text-sm font-semibold text-[#111111]">
         {quantity}
       </span>
 
@@ -165,7 +165,7 @@ function CartLineQuantity({ line }) {
           name="increase-quantity"
           value={nextQuantity}
           disabled={!!isOptimistic}
-          className="w-7 h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+          className="w-8 h-8 flex items-center justify-center text-sm text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
         >
           &#43;
         </button>

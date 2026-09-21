@@ -1227,6 +1227,44 @@
   - *Action*: Engineered modular, unboxed 404 view over Mori Linen canvas (`#FAF8F5`) with oversized watermark numeral (`404`), rotating diamond monogram emblem, whispered headline "Jejak Wastra Belum Tersedia", links to Home, Collections, search trigger, and WhatsApp Concierge. Replaced custom 404 in `$.jsx` and exported `ErrorBoundary` with `NotFoundView` across all key routes (`root.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `blogs._index.jsx`, `pages.$handle.jsx`, `policies.$handle.jsx`, `policies._index.jsx`, `search.jsx`, `cart.jsx`).
   - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
 
+---
+
+## Phase 61: Product Count Elimination & Quiet Luxury Typography Scale Elevation (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/components/ProductItem.jsx, app/components/CollectionFilterBar.jsx, app/components/LuxurySearchModal.jsx, app/components/SearchResults.jsx, app/routes/collections.$handle.jsx, app/routes/collections.all.jsx, app/routes/search.jsx*
+
+- [x] **Task 61.1: Complete Removal of Product & Entity Counters Across Storefront**
+  - *Action*: Eliminated count text and badges from all catalog collection headers (`${totalCount} Busana Ditemukan` -> `Koleksi Busana`), sidebar headers (`({totalCount})`), mobile filter drawers (`Terapkan (${totalCount} Busana)` -> `Terapkan Filter`), search headers (`PRODUK & KARYA BATIK ({products.nodes.length})` -> `PRODUK & KARYA BATIK`, `MENAMPILKAN {result.total} HASIL` -> `HASIL PENCARIAN`), and predictive search modal tabs & section headers.
+  - *Evidence*: Zero numerical clutter across collection PLPs, filter drawers, search pages, and predictive search modals.
+- [x] **Task 61.2: Typography Scale Elevation on Product Cards (`ProductItem.jsx`)**
+  - *Action*: Scaled up typography across all product card instances: product titles increased from `text-sm sm:text-base` / `text-[11px] sm:text-xs` to `font-serif text-base sm:text-lg` (Exclusive) and `text-xs sm:text-sm uppercase tracking-[0.12em]` (Premium & Essential); prices scaled from `text-[11px] sm:text-xs` to `text-sm sm:text-base font-semibold` / `font-serif text-base sm:text-lg`; compare-at strikethrough price scaled to `text-xs sm:text-sm`; eyebrow category tag scaled to `text-[10px] sm:text-xs`; whispered tier craftsmanship badge scaled to `text-[10px] sm:text-[11px]`; and hover action button scaled to `py-3 px-3 text-xs`.
+  - *Evidence*: Significantly enhanced legibility and visual prominence while strictly preserving 4:5 vertical portrait geometry and zero-radius architecture.
+- [x] **Task 61.3: Collection Filter Bar & Sort Controls Readability Enhancement**
+  - *Action*: In `CollectionFilterBar.jsx`, scaled sidebar section titles to `text-xs sm:text-sm uppercase font-bold`, filter checkboxes and labels to `text-xs sm:text-sm`, mobile filter trigger button to `text-xs sm:text-sm`, desktop sort dropdown and popover menu items to `text-xs sm:text-sm`, active filter chips to `text-[11px] sm:text-xs`, and mobile drawer action buttons to `py-3.5 text-xs sm:text-sm`.
+  - *Evidence*: Clean touch targets and high-readability controls across mobile and desktop.
+- [x] **Task 61.4: Search Result & Collection Editorial Header Typography Scaling**
+  - *Action*: In `collections.$handle.jsx` and `collections.all.jsx`, scaled hero subtitles to `text-xs sm:text-sm`, narrative text to `text-sm sm:text-base`, VIP CTA buttons to `px-8 py-3.5 text-xs`, and service highlights to `text-xs`. In `search.jsx` and `SearchResults.jsx`, scaled search product titles to `text-base sm:text-lg` and prices to `text-sm sm:text-base`.
+  - *Evidence*: Verified across collection and search views; passed `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+---
+
+## Phase 62: Bespoke Cart Icon, Drawer UI/UX Precision, Mobile Logo Scale & PDP Natural Flow (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/components/Header.jsx, app/components/Aside.jsx, app/components/PageLayout.jsx, app/components/CartMain.jsx, app/components/CartLineItem.jsx, app/routes/products.$handle.jsx*
+
+- [x] **Task 62.1: Bespoke Quiet Luxury Atelier Shopping Tote Bag Icon**
+  - *Action*: Replaced generic default Shopify shopping bag SVG with custom architectural Atelier Tote Bag icon (tapered body, sleek arched dual handles, zero-slop vector paths). Upgraded floating cart quantity badge with Obsidian Deep background (`#111111`), Imperial Antique Gold typography (`#C5A059`), and hairline border (`#C5A059`/60) with zero layout shift. Synchronized `CartEmpty` state icon in `CartMain.jsx`.
+  - *Evidence*: Verified in `Header.jsx` and `CartMain.jsx`.
+- [x] **Task 62.2: Cart Drawer UI/UX Precision Alignment with Search Modal & Burger Menu**
+  - *Action*: Upgraded `Aside.jsx` with velvety dark blur backdrop (`bg-black/75 backdrop-blur-md`), expanded spacious width (`sm:w-[460px] lg:w-[480px]`), and architectural header bar featuring gold square emblem (`#C5A059`), desktop `[ESC] TUTUP` badge, and 44px close button. Synchronized titles across `PageLayout.jsx` (`BUTIK BATIK SMILE • TAS BELANJA` & `BUTIK BATIK SMILE • MENU NAVIGASI`). Added whispered free shipping perk ribbon in `CartMain.jsx` and elevated line item typography/steppers in `CartLineItem.jsx`.
+  - *Evidence*: Cart Drawer visual precision and interaction behavior identical to `LuxurySearchModal.jsx`.
+- [x] **Task 62.3: Mobile Header Logo & Height Scale Enhancement**
+  - *Action*: Scaled mobile center brand logo from `text-[16px] sm:text-[17px]` to `font-serif text-[20px] sm:text-[22px] font-normal uppercase tracking-[0.24em]` with brown-to-gold patina gradient. Scaled desktop logo to `text-[20px] xl:text-[22px]`. Adjusted header bar height to `h-20 sm:h-21 lg:h-20` ensuring dignified proportion and generous breathing room in sticky and static states.
+  - *Evidence*: Verified across mobile and desktop viewport sizes.
+- [x] **Task 62.4: Non-Sticky Natural Flow for PDP Image Gallery (`products.$handle.jsx`)**
+  - *Action*: Removed `lg:sticky lg:top-24` from product image gallery container in `app/routes/products.$handle.jsx`. The 4:5 vertical gallery and product details now scroll together naturally in an editorial magazine flow, eliminating sticky unpinning jitter and thumbnail viewport cutoff. Elevated right-column option labels (`text-xs font-medium`), size option chips (`w-12 h-12 text-xs sm:text-sm`), quantity selector (`h-13 w-32`), Add to Cart CTA (`h-13 text-xs uppercase font-bold tracking-[0.2em]`), and Buy Now CTA (`h-13 text-xs uppercase font-bold tracking-[0.22em]`).
+  - *Evidence*: Verified on PDP; passed ESLint (0 errors, 0 warnings) and production build (`npm run build`, exit code 0).
+
+
+
 
 
 

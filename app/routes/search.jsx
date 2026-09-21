@@ -126,8 +126,8 @@ export default function SearchPage() {
         ) : (
           <div>
             <div className="flex items-center justify-between border-b border-[#E2DFD8] pb-3 mb-8">
-              <span className="text-xs uppercase tracking-[0.16em] text-[#5A5550]">
-                MENAMPILKAN {result.total} HASIL UNTUK &ldquo;<strong className="text-[#111111]">{term}</strong>&rdquo;
+              <span className="text-sm sm:text-base uppercase tracking-[0.16em] text-[#5A5550]">
+                HASIL PENCARIAN UNTUK &ldquo;<strong className="text-[#111111]">{term}</strong>&rdquo;
               </span>
             </div>
 

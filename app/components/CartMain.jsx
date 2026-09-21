@@ -157,9 +157,22 @@ export function CartMain({ layout, cart: originalCart }) {
 
   // 2. COMPACT ASIDE / DRAWER LAYOUT
   return (
-    <div className="cart-details flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto px-4 py-3">
-        <ul aria-label="Daftar produk" className="divide-y divide-[#E2DFD8]">
+    <div className="cart-details flex flex-col h-full bg-[#FAF8F5]">
+      {/* Whispered Free Shipping Ribbon */}
+      <div className="px-5 sm:px-8 py-3 bg-white border-b border-[#E2DFD8] flex items-center justify-between text-xs text-[#7C3F1D] shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
+          <span className="font-semibold tracking-[0.14em] uppercase text-[10px] sm:text-[11px]">
+            GRATIS ONGKIR &amp; ASURANSI PENGIRIMAN
+          </span>
+        </div>
+        <span className="text-[9px] text-[#9E7D3B] tracking-wider uppercase font-medium hidden sm:inline">
+          Semarang Est. 2007
+        </span>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-5 sm:px-8 py-2">
+        <ul aria-label="Daftar produk dalam tas belanja" className="divide-y divide-[#E2DFD8]">
           {(cart?.lines?.nodes ?? []).map((line) => {
             if ('parentRelationship' in line && line.parentRelationship?.parent) {
               return null;
@@ -177,7 +190,7 @@ export function CartMain({ layout, cart: originalCart }) {
       </div>
 
       {cartHasItems && (
-        <div className="p-5 bg-[#FAF8F5] border-t border-[#E2DFD8] shrink-0">
+        <div className="p-5 sm:p-7 bg-white border-t border-[#E2DFD8] shadow-[0_-8px_25px_rgba(0,0,0,0.04)] shrink-0">
           <CartSummary cart={cart} layout={layout} />
         </div>
       )}
@@ -219,9 +232,24 @@ function CartEmpty({ layout }) {
   return (
     <div className="text-center py-12 sm:py-16 px-4">
       {/* Monogram Diamond Bag Icon */}
-      <div className="w-12 h-12 mx-auto mb-4 border border-[#C5A059] flex items-center justify-center text-[#C5A059]">
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="square" strokeWidth="1.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+      <div className="w-13 h-13 mx-auto mb-4 border border-[#C5A059] flex items-center justify-center text-[#C5A059]">
+        <svg
+          className="w-6 h-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.3"
+        >
+          <path
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            d="M4.5 8H19.5L18.75 21H5.25L4.5 8Z"
+          />
+          <path
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+            d="M8.5 8V5.5C8.5 3.567 10.067 2 12 2C13.933 2 15.5 3.567 15.5 5.5V8"
+          />
         </svg>
       </div>
 

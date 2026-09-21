@@ -83,7 +83,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         {badge && (
           <div className="absolute top-2.5 left-2.5 z-10">
             <span
-              className={`text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-semibold px-2 py-0.5 shadow-xs ${
+              className={`text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold px-2.5 py-1 shadow-xs ${
                 isExclusive
                   ? 'bg-[#111111]/90 text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-xs'
                   : isPremium
@@ -99,7 +99,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         {/* Minimalist Quick View Bar (Slides up on desktop hover) */}
         <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-black/65 via-black/25 to-transparent pointer-events-none sm:pointer-events-auto">
           <div
-            className={`w-full py-2.5 px-3 text-[10px] font-bold uppercase tracking-[0.2em] text-center transition-colors shadow-sm ${
+            className={`w-full py-3 px-3 text-xs font-bold uppercase tracking-[0.2em] text-center transition-colors shadow-sm ${
               isExclusive
                 ? 'bg-[#C5A059] text-[#111111] hover:bg-white hover:text-[#111111]'
                 : isPremium
@@ -113,12 +113,12 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
       </Link>
 
       {/* 2. Editorial Typography & Price Metadata */}
-      <div className="pt-3 sm:pt-4 pb-1 flex flex-col flex-grow justify-between text-center items-center">
+      <div className="pt-3.5 sm:pt-4 pb-1 flex flex-col flex-grow justify-between text-center items-center">
         <div className="w-full">
           {/* Eyebrow Product Type */}
           {product.productType && (
             <span
-              className={`block text-[9px] sm:text-[10px] uppercase tracking-[0.22em] font-medium mb-1 ${
+              className={`block text-[10px] sm:text-xs uppercase tracking-[0.22em] font-medium mb-1.5 ${
                 isExclusive
                   ? 'text-[#C5A059]'
                   : isPremium
@@ -136,10 +136,10 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
             prefetch="intent"
             className={`block transition-colors line-clamp-2 leading-snug ${
               isExclusive
-                ? 'font-serif text-sm sm:text-base font-normal tracking-wide text-[#FAF8F5] group-hover:text-[#C5A059]'
+                ? 'font-serif text-base sm:text-lg font-normal tracking-wide text-[#FAF8F5] group-hover:text-[#C5A059]'
                 : isPremium
-                ? 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#FAF8F5] group-hover:text-[#C5A059]'
-                : 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#1C1C1C] group-hover:text-[#9E7D3B]'
+                ? 'text-xs sm:text-sm uppercase font-medium tracking-[0.12em] text-[#FAF8F5] group-hover:text-[#C5A059]'
+                : 'text-xs sm:text-sm uppercase font-medium tracking-[0.12em] text-[#1C1C1C] group-hover:text-[#9E7D3B]'
             }`}
           >
             {displayTitle}
@@ -147,16 +147,16 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         </div>
 
         {/* Pricing Area */}
-        <div className="mt-2 flex flex-col items-center justify-center gap-1">
+        <div className="mt-2.5 flex flex-col items-center justify-center gap-1">
           <div className="flex items-baseline justify-center gap-2">
             {price && (
               <span
                 className={`tracking-wide ${
                   isExclusive
-                    ? 'font-serif text-sm sm:text-base font-semibold text-[#C5A059]'
+                    ? 'font-serif text-base sm:text-lg font-semibold text-[#C5A059]'
                     : isPremium
-                    ? 'text-xs sm:text-sm font-semibold text-[#C5A059]'
-                    : 'text-[11px] sm:text-xs font-semibold text-[#111111]'
+                    ? 'text-sm sm:text-base font-semibold text-[#C5A059]'
+                    : 'text-sm sm:text-base font-semibold text-[#111111]'
                 }`}
               >
                 {formatRupiah(price)}
@@ -164,7 +164,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
             )}
             {isOnSale && compareAtPrice && (
               <span
-                className={`text-[10px] line-through ${
+                className={`text-xs sm:text-sm line-through ${
                   isExclusive ? 'text-white/40' : isPremium ? 'text-[#D5C8B8]/60' : 'text-[#8C827A]'
                 }`}
               >
@@ -175,12 +175,12 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
 
           {/* Whispered Tier Craftsmanship Signature */}
           {isExclusive && (
-            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-light mt-0.5 opacity-90">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#C5A059] font-light mt-0.5 opacity-90">
               Sutra ATBM &bull; Prada Emas
             </span>
           )}
           {isPremium && (
-            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-[#D5B066] font-medium mt-0.5 opacity-90">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#D5B066] font-medium mt-0.5 opacity-90">
               Tenun Dobby &bull; Furing Hero
             </span>
           )}

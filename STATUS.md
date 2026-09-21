@@ -197,11 +197,24 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Created CSP nonce-safe `<JsonLd>` component (`app/components/JsonLd.jsx`) using `@shopify/hydrogen` `useNonce()` to inject inline structured data scripts cleanly.
     - Designed modular Quiet Luxury 404 / Error view (`app/components/NotFoundView.jsx`) with unboxed Mori Linen canvas (`#FAF8F5`), oversized watermark numeral, rotating diamond monogram, and resilient context fallbacks.
     - Bound `NotFoundView` to `$.jsx` and exported consistent `ErrorBoundary` instances across all primary routes (`root.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `blogs._index.jsx`, `pages.$handle.jsx`, `policies.$handle.jsx`, `policies._index.jsx`, `search.jsx`, `cart.jsx`).
+36. **Product Count Elimination & Typography Scale Elevation Across Storefront**:
+    - Completely eliminated cluttering product and entity counters across collection filter bars (`${totalCount} Busana Ditemukan` replaced by clean `Koleksi Busana`), sidebars (`({totalCount})`), mobile filter drawers (`Terapkan Filter`), search pages, and predictive search modals (`LuxurySearchModal.jsx`).
+    - Scaled up product card typography (`ProductItem.jsx`) across all tiers: product titles elevated to `font-serif text-base sm:text-lg` (Exclusive) and `text-xs sm:text-sm uppercase tracking-[0.12em]` (Premium & Default); product prices elevated to `text-sm sm:text-base font-semibold` / `font-serif text-base sm:text-lg`; compare-at prices to `text-xs sm:text-sm`; eyebrow category to `text-[10px] sm:text-xs`; whispered craftsmanship signature to `text-[10px] sm:text-[11px]`.
+    - Elevated typography scale for collection filter sidebar section titles, sort options, mobile filter buttons, search card typography, and collection hero editorial descriptions.
+37. **Bespoke Atelier Cart Icon, Drawer UI/UX Symmetry, Mobile Logo Scale & PDP Natural Flow**:
+    - Replaced default Shopify shopping bag icon with custom architectural Atelier Tote Bag icon and upgraded floating cart badge (Obsidian Deep background, Imperial Antique Gold text, hairline border, zero layout shift).
+    - Upgraded slide-out drawer architecture (`Aside.jsx`) with velvety dark blur backdrop (`bg-black/75 backdrop-blur-md`), spacious width (`sm:w-[460px] lg:w-[480px]`), architectural header bar with gold diamond emblem, desktop `[ESC] TUTUP` badge, and 44px close button. Synchronized titles in `PageLayout.jsx` (`BUTIK BATIK SMILE • TAS BELANJA` & `BUTIK BATIK SMILE • MENU NAVIGASI`).
+    - Elevated `CartMain.jsx` with whispered free shipping perk ribbon and `CartLineItem.jsx` with enhanced typography and 32px touch-friendly steppers.
+    - Scaled mobile brand logo from `16px` to `20px-22px font-serif uppercase tracking-[0.24em]` with gold-soga gradient and increased header bar height (`h-20 sm:h-21 lg:h-20`) for majestic breathing room in sticky and static states.
+    - Removed `lg:sticky lg:top-24` from PDP image gallery (`products.$handle.jsx`) creating a cohesive, magazine-style editorial flow. Elevated option chips (`w-12 h-12`), quantity selector (`h-13 w-32`), and action buttons (`h-13 text-xs uppercase font-bold tracking-[0.2em]`).
 
 ## Verification evidence
 
 - **Production Build**: `npm run build` completed with exit code 0 (SSR + Oxygen client build).
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
+- **Cart & Drawer Verification**: Custom atelier tote SVG verified in `Header.jsx` and `CartMain.jsx`; drawer backdrop, width, and header actions verified in `Aside.jsx` and `PageLayout.jsx`.
+- **PDP Editorial Flow**: Verified gallery non-sticky natural scrolling behavior on desktop and elevated button hierarchy in `products.$handle.jsx`.
+- **Typography Scale & Zero-Count Integrity**: Verified clean UI across `ProductItem.jsx`, `CollectionFilterBar.jsx`, `LuxurySearchModal.jsx`, `SearchResults.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, and `search.jsx`.
 - **GraphQL Codegen**: `npm run codegen` completed with exit code 0.
 - **OpenGraph Assets**: Generated 1200x630 assets in `public/og-image.jpg` (169KB) and `public/og-image.webp` (113KB).
 - **SEO & JSON-LD**: Schemas injected across all routes with CSP nonces; social meta headers fully populated with 1200x630 image dimensions.

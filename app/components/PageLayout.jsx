@@ -51,8 +51,8 @@ export function PageLayout({
  */
 function CartAside({cart}) {
   return (
-    <Aside type="cart" heading="TAS BELANJA">
-      <Suspense fallback={<p className="p-4 text-xs text-neutral-500">Memuat keranjang belanja ...</p>}>
+    <Aside type="cart" heading="BUTIK BATIK SMILE • TAS BELANJA">
+      <Suspense fallback={<p className="p-5 text-xs text-[#888888] font-light">Memuat tas belanja butik...</p>}>
         <Await resolve={cart}>
           {(cart) => {
             return <CartMain cart={cart} layout="aside" />;
@@ -73,7 +73,7 @@ function MobileMenuAside({header, publicStoreDomain}) {
   return (
     header.menu &&
     header.shop.primaryDomain?.url && (
-      <Aside type="mobile" heading="MENU">
+      <Aside type="mobile" heading="BUTIK BATIK SMILE • MENU NAVIGASI">
         <HeaderMenu
           menu={header.menu}
           viewport="mobile"

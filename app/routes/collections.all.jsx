@@ -134,14 +134,14 @@ export default function CollectionAll() {
 
         {/* Editorial Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
             KATALOG BUTIK LENGKAP
           </span>
           <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
             Katalog Busana Batik Nusantara
           </h1>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
-          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-[#5A5550] font-light leading-relaxed">
             Setiap karya batik dijahit dengan ketelitian tinggi dan dilapisi furing hero katun yang sejuk.
           </p>
         </div>

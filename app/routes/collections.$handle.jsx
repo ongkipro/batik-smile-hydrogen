@@ -305,7 +305,7 @@ export default function Collection() {
               className="flex justify-center mb-6"
             />
 
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
+            <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
               {isExclusive
                 ? 'HAUTE HERITAGE • MAHAKARYA SUTRA ATBM'
                 : 'SIGNATURE ATELIER • RESEPSI & FORMAL'}
@@ -316,13 +316,13 @@ export default function Collection() {
             </h1>
 
             {isExclusive && (
-              <p className="font-serif italic text-sm sm:text-lg text-[#C5A059] mb-4 max-w-2xl leading-relaxed">
+              <p className="font-serif italic text-base sm:text-xl text-[#C5A059] mb-4 max-w-2xl leading-relaxed">
                 Keagungan Sutra ATBM &amp; Prada Emas Murni untuk Momen Sakral Keluarga
               </p>
             )}
 
             {isPremium && (
-              <p className="font-serif italic text-sm sm:text-lg text-[#E2DFD8] mb-4 max-w-2xl leading-relaxed">
+              <p className="font-serif italic text-base sm:text-xl text-[#E2DFD8] mb-4 max-w-2xl leading-relaxed">
                 Harmoni Tenun Dobby Timbul &amp; Kenyamanan Furing Pesta Sejuk
               </p>
             )}
@@ -330,7 +330,7 @@ export default function Collection() {
             <div className="w-16 h-px mb-5 bg-[#C5A059]" />
 
             {collection.description && (
-              <p className="text-xs sm:text-sm font-light leading-relaxed max-w-2xl text-[#E2DFD8]/90 mb-6">
+              <p className="text-sm sm:text-base font-light leading-relaxed max-w-2xl text-[#E2DFD8]/90 mb-6">
                 {collection.description}
               </p>
             )}
@@ -341,7 +341,7 @@ export default function Collection() {
                 href={officialWaUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="px-7 py-3 text-[10px] uppercase font-bold tracking-[0.2em] shadow-lg transition-colors bg-[#C5A059] hover:bg-white text-[#111111]"
+                className="px-8 py-3.5 text-xs uppercase font-bold tracking-[0.2em] shadow-lg transition-colors bg-[#C5A059] hover:bg-white text-[#111111]"
               >
                 {isExclusive ? 'RESERVASI VIP CONCIERGE →' : 'KONSULTASI BUSANA RESEPSI →'}
               </a>
@@ -363,7 +363,7 @@ export default function Collection() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
               {/* Left Column: Collection Title & Shopify Description */}
               <div className="lg:col-span-7 flex flex-col justify-center">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] block mb-2 sm:mb-3">
+                <span className="text-xs sm:text-sm uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] block mb-2 sm:mb-3">
                   KATALOG BUSANA BATIK NUSANTARA
                 </span>
 
@@ -374,17 +374,17 @@ export default function Collection() {
                 <div className="w-12 h-px bg-[#C5A059] mb-4 sm:mb-5" />
 
                 {collection.description ? (
-                  <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
+                  <p className="text-sm sm:text-base text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
                     {collection.description}
                   </p>
                 ) : (
-                  <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
+                  <p className="text-sm sm:text-base text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
                     Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.
                   </p>
                 )}
 
                 {/* Service Highlights */}
-                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#7C3F1D] font-medium pt-4 border-t border-[#E2DFD8]">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#7C3F1D] font-medium pt-4 border-t border-[#E2DFD8]">
                   <span>Jahit Bespoke Tanpa MOQ</span>
                   <span className="text-[#C5A059]">&bull;</span>
                   <span>Konsultasi Ukuran via WA</span>

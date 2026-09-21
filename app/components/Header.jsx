@@ -52,7 +52,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
         }`}
       >
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-18 sm:h-20 flex items-center justify-between relative">
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 sm:h-21 lg:h-20 flex items-center justify-between relative">
           
           {/* 1. LEFT: Mobile Burger Trigger & Desktop Brand Logo (Pure Logo, No Subtitle) */}
           <div className="flex items-center z-10">
@@ -68,18 +68,18 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
               </svg>
             </button>
 
-            {/* Desktop Brand Logo (Slightly Smaller & Refined for Architectural Precision) */}
+            {/* Desktop Brand Logo (Majestic Quiet Luxury Gold + Soga Patina) */}
             <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
-              <span className="font-serif text-[18px] xl:text-[19px] uppercase tracking-[0.24em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
+              <span className="font-serif text-[20px] xl:text-[22px] font-normal uppercase tracking-[0.24em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
           </div>
 
-          {/* 2. MOBILE CENTER LOGO (Dead Center on Mobile, Proportionally Sized) */}
+          {/* 2. MOBILE CENTER LOGO (Prominent, Elegant & Centered on Mobile) */}
           <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-auto">
-            <NavLink to="/" className="flex items-center group">
-              <span className="font-serif text-[16px] sm:text-[17px] uppercase tracking-[0.22em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
+            <NavLink to="/" className="flex items-center group py-1">
+              <span className="font-serif text-[20px] sm:text-[22px] font-normal uppercase tracking-[0.24em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
@@ -197,18 +197,29 @@ function CartBadge({ count }) {
       aria-label={`Tas Belanja (${count} item)`}
       title="Tas Belanja"
     >
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      {/* Bespoke Quiet Luxury Atelier Shopping Tote Bag Icon */}
+      <svg
+        className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.35"
+      >
         <path
           strokeLinecap="square"
           strokeLinejoin="miter"
-          strokeWidth="1.5"
-          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+          d="M4.5 8H19.5L18.75 21H5.25L4.5 8Z"
+        />
+        <path
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+          d="M8.5 8V5.5C8.5 3.567 10.067 2 12 2C13.933 2 15.5 3.567 15.5 5.5V8"
         />
       </svg>
 
       {/* Floating Precision Numeric Badge (Fixed position, Zero layout shift) */}
       {count > 0 && (
-        <span className="absolute top-1 right-1 min-w-[16px] h-4 px-1 bg-[#111111] text-white text-[9px] font-mono font-bold flex items-center justify-center border border-white leading-none">
+        <span className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 bg-[#111111] text-[#C5A059] text-[9.5px] font-mono font-bold flex items-center justify-center border border-[#C5A059]/60 leading-none shadow-sm">
           {count > 99 ? '99+' : count}
         </span>
       )}
