@@ -7,6 +7,7 @@ import {CartMain} from '~/components/CartMain';
 import {MobileNavigation} from '~/components/MobileNavigation';
 import {LuxurySearchModal} from '~/components/LuxurySearchModal';
 import {WhatsAppConcierge} from '~/components/WhatsAppConcierge';
+import {VipDiscountModal} from '~/components/VipDiscountModal';
 
 /**
  * @param {PageLayoutProps}
@@ -40,6 +41,7 @@ export function PageLayout({
       />
       <MobileNavigation />
       <WhatsAppConcierge />
+      <VipDiscountModal />
     </Aside.Provider>
   );
 }

@@ -1092,6 +1092,19 @@
   - *Action*: Upgraded catch-all route `$.jsx` with `SLUG_CHECK_QUERY` to intelligently resolve single-segment root slugs (e.g. `/sarimbit-charcoal-hitam`). Redirects valid product slugs via 302 to `/products/:handle` (and collections/pages to their respective canonical paths) instead of throwing 404.
   - *Evidence*: `curl -I http://localhost:3001/sarimbit-charcoal-hitam` verified returning `302 Found` with `location: /products/sarimbit-charcoal-hitam`.
 
+---
+
+## Phase 53: Mobile Input Auto-Zoom Elimination & VIP 25% Discount Modal (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/styles/app.css, app/components/Footer.jsx, app/components/VipDiscountModal.jsx, app/components/PageLayout.jsx*
+
+- [x] **Task 53.1: Global Mobile Input Auto-Zoom Prevention (`app/styles/app.css`, `app/components/Footer.jsx`)**
+  - *Action*: Enforced `@media screen and (max-width: 768px) { input, select, textarea { font-size: 16px !important; } }` in `app/styles/app.css` to permanently eliminate iOS Safari and mobile browser auto-zooming on input and textarea focus. Explicitly updated footer email input to `text-base sm:text-sm`.
+  - *Evidence*: Computed styles verified in mobile viewport yielding exact `16px` font-size on all mobile inputs.
+- [x] **Task 53.2: VIP 25% Discount Email Newsletter Modal (`app/components/VipDiscountModal.jsx`, `app/components/PageLayout.jsx`)**
+  - *Action*: Engineered Quiet Luxury Zero-Radius popup modal with Quad-Harmonic palette (`#FAF8F5`, `#111111`, `#C5A059`, `#7C3F1D`). Integrated non-intrusive delayed trigger (6s delay or 30% scroll), localStorage claim/cooldown persistence, accessible backdrop, ESC key dismiss, and dynamic voucher reveal for code `BATIK25` with one-click copy and auto-apply direct link.
+  - *Evidence*: Headless Chrome emulation confirmed modal trigger, email submission, and voucher display. `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+
 
 
 

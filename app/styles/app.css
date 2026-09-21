@@ -23,6 +23,15 @@
     font-family: inherit;
     color: inherit;
   }
+
+  /* Prevent iOS Safari automatic zoom on inputs and textareas */
+  @media screen and (max-width: 768px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
 }
 
 @theme {

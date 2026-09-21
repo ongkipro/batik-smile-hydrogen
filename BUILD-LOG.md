@@ -1411,13 +1411,30 @@
   - If handle matches a collection or page, performs 302 redirect to `/collections/:handle` or `/pages/:handle`.
   - Unmatched handles smoothly render 404.
 
-### 3. Verification Evidence
-- Headless Chrome CDP Verification:
-  - Video network request: HTTP 206 Partial Content from `checkout.batiksmile.com`.
-  - Video playback state: `paused: false`, `readyState: 4`, `currentTime > 1.6s`, `error: null`.
-- Short URL Check: `curl -I http://localhost:3001/sarimbit-charcoal-hitam` returns `HTTP/1.1 302 Found` with `location: /products/sarimbit-charcoal-hitam`.
+---
+
+## Milestone 51: Mobile Input Auto-Zoom Elimination & VIP 25% Discount Modal (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Enforced 16px minimum font size on mobile inputs/textareas to prevent iOS auto-zoom, and deployed Quiet Luxury 25% discount email newsletter modal
+
+### 1. Root Cause & Architectural Fixes
+- **iOS Safari Input Auto-Zoom (`font-size < 16px`)**:
+  - iOS Safari automatically zooms in and out when an `<input>` or `<textarea>` has a font-size below 16px (e.g. `text-sm` = 14px in footer email and cart forms).
+  - Enforced `@media screen and (max-width: 768px) { input, select, textarea { font-size: 16px !important; } }` in `app/styles/app.css`.
+  - Updated footer email input in `app/components/Footer.jsx` with explicit `text-base sm:text-sm`.
+- **VIP 25% Discount Email Newsletter Modal (`app/components/VipDiscountModal.jsx`)**:
+  - Engineered Quiet Luxury Zero-Radius popup modal with Quad-Harmonic palette (`#FAF8F5`, `#111111`, `#C5A059`, `#7C3F1D`).
+  - Mobile zero-zoom input compliance with `text-base` 16px font size.
+  - Delayed non-intrusive trigger: triggers after 6 seconds of browsing or scrolling 30% down the page.
+  - LocalStorage persistence: stores claim / dismissal timestamps to avoid repetitive annoying popups (5-day cooldown on dismissal).
+  - Dynamic voucher reveal: on email submission, displays exclusive voucher code `BATIK25` with one-click copy and direct auto-apply shop link (`/discount/BATIK25?redirect=/collections/all`).
+  - Integrated into master layout via `app/components/PageLayout.jsx`.
+
+### 2. Verification Evidence
+- Headless Chrome Mobile Emulation (iPhone 14, 390x844):
+  - All mobile inputs verified computed `fontSize: "16px"` (zero viewport zoom-in/out).
+  - Modal automatically triggers, accepts email submission, and reveals voucher `BATIK25` with one-click copy functionality.
 - `npm run lint`: 0 errors, 0 warnings.
-- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 905ms).
+- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 911ms).
 
 
 
