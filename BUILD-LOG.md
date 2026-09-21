@@ -1389,9 +1389,35 @@
   - Harmonized Aside header background with Mori Linen canvas (`bg-[#FAF8F5]` on mobile drawer) to create an unbroken, seamless editorial canvas.
   - Simplified drawer header title to whispered, minimalist `MENU` with wide tracking (`tracking-[0.22em]`).
 
-### 2. Verification Evidence
+---
+
+## Milestone 50: Video Playback CSP Authorization & Short URL Slug Resolution (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Solved browser CSP video blocking on Shopify CDN and added smart slug redirect from root `/sarimbit-charcoal-hitam` to `/products/sarimbit-charcoal-hitam`
+
+### 1. Root Cause Analysis
+- **CSP Video Block (`errorCode: 4, MEDIA_ELEMENT_ERROR: Media load rejected by URL safety check`)**:
+  - Shopify video assets for `sarimbit-charcoal-hitam` are hosted on `https://checkout.batiksmile.com/cdn/shop/videos/...`.
+  - In `app/entry.server.jsx`, `createContentSecurityPolicy` had no `mediaSrc` directive defined, causing browsers to fall back to `default-src` which only permitted `https://cdn.shopify.com` and `'self'`.
+  - Browser engines blocked video media requests on CSP violation (`[Network Failed] false csp`).
+- **Short URL 404 (`/sarimbit-charcoal-hitam`)**:
+  - Direct root URL requests to `/:handle` hit catch-all `app/routes/$.jsx` and immediately threw 404 because Hydrogen standard product routes reside at `/products/:handle`.
+
+### 2. Architectural Fixes
+- **CSP `mediaSrc` Expansion (`app/entry.server.jsx`)**:
+  - Added explicit `mediaSrc` policy including `'self'`, `https://cdn.shopify.com`, `https://checkout.batiksmile.com`, `https://batiksmile.com`, `https://*.shopify.com`, `https://*.myshopify.com`, `data:`, and `blob:`.
+- **Intelligent Slug Routing (`app/routes/$.jsx`)**:
+  - Added `SLUG_CHECK_QUERY` in `$.jsx` loader to inspect single-segment paths (`/:handle`).
+  - If handle matches a product, performs immediate 302 redirect to `/products/:handle`.
+  - If handle matches a collection or page, performs 302 redirect to `/collections/:handle` or `/pages/:handle`.
+  - Unmatched handles smoothly render 404.
+
+### 3. Verification Evidence
+- Headless Chrome CDP Verification:
+  - Video network request: HTTP 206 Partial Content from `checkout.batiksmile.com`.
+  - Video playback state: `paused: false`, `readyState: 4`, `currentTime > 1.6s`, `error: null`.
+- Short URL Check: `curl -I http://localhost:3001/sarimbit-charcoal-hitam` returns `HTTP/1.1 302 Found` with `location: /products/sarimbit-charcoal-hitam`.
 - `npm run lint`: 0 errors, 0 warnings.
-- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 874ms).
+- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 905ms).
 
 
 

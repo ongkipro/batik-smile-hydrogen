@@ -27,6 +27,18 @@ export default async function handleRequest(
       'https://checkout.batiksmile.com',
       'https://batiksmile.com',
     ],
+    mediaSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
+      'https://checkout.batiksmile.com',
+      'https://batiksmile.com',
+      'https://*.shopify.com',
+      'https://*.myshopify.com',
+      context.env?.PUBLIC_CHECKOUT_DOMAIN ? `https://${context.env.PUBLIC_CHECKOUT_DOMAIN}` : null,
+      context.env?.PUBLIC_STORE_DOMAIN ? `https://${context.env.PUBLIC_STORE_DOMAIN}` : null,
+      'data:',
+      'blob:',
+    ].filter(Boolean),
   });
 
   const body = await renderToReadableStream(

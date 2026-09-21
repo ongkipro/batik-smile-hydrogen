@@ -377,6 +377,16 @@ export type FooterQuery = {
   >;
 };
 
+export type SlugResolutionQueryVariables = StorefrontAPI.Exact<{
+  handle: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type SlugResolutionQuery = {
+  product?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Product, 'id'>>;
+  collection?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Collection, 'id'>>;
+  page?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Page, 'id'>>;
+};
+
 export type ProductCardItemFragment = Pick<
   StorefrontAPI.Product,
   'id' | 'title' | 'handle' | 'productType'
@@ -1869,6 +1879,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  query Footer(\n    $country: CountryCode\n    $footerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    menu(handle: $footerMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: FooterQuery;
     variables: FooterQueryVariables;
+  };
+  '#graphql\n  query SlugResolution($handle: String!) {\n    product(handle: $handle) {\n      id\n    }\n    collection(handle: $handle) {\n      id\n    }\n    page(handle: $handle) {\n      id\n    }\n  }\n': {
+    return: SlugResolutionQuery;
+    variables: SlugResolutionQueryVariables;
   };
   '#graphql\n  fragment ProductCardItem on Product {\n    id\n    title\n    handle\n    productType\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    featuredImage {\n      id\n      url\n      altText\n      width\n      height\n    }\n    images(first: 2) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n  }\n\n  query HomepageData($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      name\n      description\n    }\n    luxuryCollection: collection(handle: "sarimbit-luxury") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    premiumCollection: collection(handle: "sarimbit-premium") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    ekonomiCollection: collection(handle: "sarimbit-ekonomi") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    rawFabricCollection: collection(handle: "kain") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    batikAnakCollection: collection(handle: "batik-anak") {\n      id\n      title\n      products(first: 6) {\n        nodes {\n          ...ProductCardItem\n        }\n      }\n    }\n    featuredCollections: collections(first: 20, sortKey: UPDATED_AT) {\n      nodes {\n        id\n        title\n        handle\n        description\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n      }\n    }\n    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n        tags\n        collections(first: 5) {\n          nodes {\n            handle\n            title\n          }\n        }\n      }\n    }\n    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCardItem\n      }\n    }\n    blogs(first: 1) {\n      nodes {\n        handle\n        title\n        articles(first: 3, sortKey: PUBLISHED_AT, reverse: true) {\n          nodes {\n            id\n            title\n            handle\n            publishedAt\n            excerpt\n            image {\n              id\n              url\n              altText\n              width\n              height\n            }\n            author: authorV2 {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: HomepageDataQuery;

@@ -1080,6 +1080,19 @@
   - *Action*: Unified drawer header background to Mori Linen (`bg-[#FAF8F5]` on mobile drawer) to create an unbroken, seamless editorial canvas. Simplified drawer header title to whispered, minimalist `MENU` with wide tracking (`tracking-[0.22em]`).
   - *Evidence*: `npm run build` exits with code 0 (Vite SSR + Oxygen bundle created in 874ms).
 
+---
+
+## Phase 52: Video Playback CSP Authorization & Short URL Slug Resolution (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/entry.server.jsx, app/routes/$.jsx*
+
+- [x] **Task 52.1: CSP Video Source Authorization (`app/entry.server.jsx`)**
+  - *Action*: Resolved browser Content Security Policy media blocking (`MEDIA_ELEMENT_ERROR: Media load rejected by URL safety check`) by adding explicit `mediaSrc` directives for `'self'`, `https://cdn.shopify.com`, `https://checkout.batiksmile.com`, `https://batiksmile.com`, `https://*.shopify.com`, `https://*.myshopify.com`, `data:`, and `blob:`.
+  - *Evidence*: Verified via Headless Chrome CDP yielding HTTP 206 Partial Content, `readyState: 4`, `paused: false`, `currentTime > 1.6s`, and `error: null`.
+- [x] **Task 52.2: Short URL Single-Segment Slug Resolution (`app/routes/$.jsx`)**
+  - *Action*: Upgraded catch-all route `$.jsx` with `SLUG_CHECK_QUERY` to intelligently resolve single-segment root slugs (e.g. `/sarimbit-charcoal-hitam`). Redirects valid product slugs via 302 to `/products/:handle` (and collections/pages to their respective canonical paths) instead of throwing 404.
+  - *Evidence*: `curl -I http://localhost:3001/sarimbit-charcoal-hitam` verified returning `302 Found` with `location: /products/sarimbit-charcoal-hitam`.
+
+
 
 
 
