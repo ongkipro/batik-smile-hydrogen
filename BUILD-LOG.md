@@ -1328,6 +1328,47 @@
 - `npm run build`: Exit code 0 (Vite SSR + Rolldown + React Router typegen).
 - Confirmed zero occurrences of unauthorized `rounded-` classes across `app/`.
 
+---
+
+## Milestone 47: Tier-Differentiated Breadcrumb Architecture for Luxury and Premium Collections (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Visual Hierarchy & Kasta Separation in Breadcrumb Navigation (Luxury vs Premium vs Ekonomi)
+
+### 1. Architectural Kasta Tier Specification in Breadcrumbs (`app/components/Breadcrumb.jsx`)
+- Introduced explicit `tier` property (`'luxury' | 'premium' | 'ekonomi' | null`) to adapt styling to collection and product heritage kastas:
+  - **Sarimbit Luxury (`tier="luxury"`)**:
+    - Micro-badge: Obsidian black chip with rotated diamond gold icon (`✦ KASTA I • LUXURY`) with border `border-[#C5A059]/60` and shadow.
+    - Container: `bg-black/75 backdrop-blur-md border border-[#C5A059]/40`.
+    - Separator: Imperial Antique Gold slash (`text-[#C5A059]`).
+    - Home & Trail links: Luminous gold accents (`text-[#E6CA85]`, `text-[#C5A059]/85`).
+    - Active Leaf: Luminous light gold typography (`text-[#FFF4D6]`) with pure gold underline (`border-[#C5A059]`).
+  - **Sarimbit Premium (`tier="premium"`)**:
+    - Micro-badge: Deep espresso / dobby soga chip with square icon (`◈ KASTA II • PREMIUM`) with border `border-[#9E7D3B]/50`.
+    - Container: `bg-[#1E1914]/85 backdrop-blur-md border border-[#9E7D3B]/45`.
+    - Separator: Warm Ochre slash (`text-[#9E7D3B]/80`).
+    - Home & Trail links: Warm sand/ivory accents (`text-[#D8B26E]`, `text-[#C8B89E]`).
+    - Active Leaf: Mori Linen typography (`text-[#FAF8F5]`) with ochre underline (`border-[#9E7D3B]/70`).
+  - **Sarimbit Ekonomi (`tier="ekonomi"`)**:
+    - Micro-badge: Clean Mori Linen chip (`∎ KASTA III • EKONOMI`).
+    - Container: `bg-white/85 backdrop-blur-md border border-[#E2DFD8]`.
+    - Separator: Subtle soga earth slash (`text-[#7C3F1D]/50`).
+    - Active Leaf: Obsidian text (`text-[#111111]`).
+
+### 2. Integration Across Collection & Product Routes
+- **Collections Route (`app/routes/collections.$handle.jsx`)**:
+  - Dynamically calculates `collectionTier` based on collection handle:
+    - `sarimbit-luxury` &rarr; `luxury`
+    - `sarimbit-premium` &rarr; `premium`
+    - `sarimbit-ekonomi` &rarr; `ekonomi`
+  - Injects `tier={collectionTier}` into both Haute Hero overlay and standard 2-column catalog hero.
+- **Product Detail Route (`app/routes/products.$handle.jsx`)**:
+  - Dynamically calculates `productTier` based on product type, collection membership, and pricing tier.
+  - Injects `tier={productTier}` to preserve cohesive customer journey from collection to PDP.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 1.31s).
+
+
 
 
 

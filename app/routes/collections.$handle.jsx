@@ -184,6 +184,16 @@ export default function Collection() {
     handle.includes('luxury') || handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra');
   const isPremium =
     handle.includes('premium') || handle.includes('signature') || handle.includes('dobby');
+  const isEkonomi =
+    handle.includes('ekonomi') || handle.includes('essential');
+
+  const collectionTier = isExclusive
+    ? 'luxury'
+    : isPremium
+    ? 'premium'
+    : isEkonomi
+    ? 'ekonomi'
+    : null;
 
   // Filter products by tag if gender/sleeve params are active
   const filteredConnection = useMemo(() => {
@@ -273,11 +283,12 @@ export default function Collection() {
 
           {/* Hero Content Overlay */}
           <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center">
-            {/* Breadcrumb Navigation (Fluid single-line) */}
+            {/* Breadcrumb Navigation (Fluid single-line, tier-differentiated) */}
             <Breadcrumb
               isDark={true}
+              tier={collectionTier}
               items={[{ label: 'KOLEKSI', to: '/collections' }, { label: collection.title.toUpperCase() }]}
-              className="justify-center mb-6"
+              className="flex justify-center mb-6"
             />
 
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
@@ -329,6 +340,7 @@ export default function Collection() {
           <div className="w-full max-w-7xl mx-auto">
             {/* Breadcrumb Navigation (Strictly Single-Line on Mobile) */}
             <Breadcrumb
+              tier={collectionTier}
               items={[{ label: 'KOLEKSI', to: '/collections' }, { label: collection.title.toUpperCase() }]}
               className="mb-6 sm:mb-8"
             />

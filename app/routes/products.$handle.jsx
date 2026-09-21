@@ -326,6 +326,14 @@ export default function Product() {
     productTitle.includes('signature') ||
     (productHandle.startsWith('sarimbit') && variantPrice >= 500000 && variantPrice < 1000000));
 
+  const productTier = isExclusiveTier
+    ? 'luxury'
+    : isPremiumTier
+    ? 'premium'
+    : (productHandle.includes('ekonomi') || collectionHandles.some((h) => h.includes('ekonomi')))
+    ? 'ekonomi'
+    : null;
+
   // Active media index & current media item
   const activeIndex = Math.max(
     0,
@@ -429,6 +437,7 @@ export default function Product() {
         {/* Dynamic Breadcrumb Navigation (Single-line fluid responsive across all device sizes) */}
         <Breadcrumb
           isDark={isExclusiveTier}
+          tier={productTier}
           items={[
             {
               label: relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : 'KOLEKSI',

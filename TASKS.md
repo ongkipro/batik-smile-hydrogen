@@ -1044,6 +1044,23 @@
     - **Mobile Bottom Navigation (`MobileNavigation.jsx`)**: Updated SVG stroke attributes to architectural `square` and `miter`.
   - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
 
+---
+
+## Phase 49: Tier-Differentiated Breadcrumb Architecture for Luxury vs Premium (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/components/Breadcrumb.jsx, app/routes/collections.$handle.jsx, app/routes/products.$handle.jsx*
+
+- [x] **Task 49.1: Kasta-Tier Visual Specification in Breadcrumb Navigation (`app/components/Breadcrumb.jsx`)**
+  - *Action*: Implemented `tier` prop support (`'luxury' | 'premium' | 'ekonomi' | null`) providing distinctive visual language per collection kasta:
+    - **Luxury**: Obsidian dark halo (`bg-black/75`), rotated diamond gold badge (`✦ KASTA I • LUXURY`), pure imperial gold slash separator (`#C5A059`), luminous gold text accents (`#E6CA85`), and gold-underlined active leaf (`#FFF4D6`).
+    - **Premium**: Deep espresso/dobby halo (`bg-[#1E1914]/85`), square ochre badge (`◈ KASTA II • PREMIUM`), warm ochre slash separator (`#9E7D3B`), warm linen accents, and ochre-underlined Mori Linen active leaf (`#FAF8F5`).
+    - **Ekonomi**: Mori Linen chip (`∎ KASTA III • EKONOMI`), neutral border, and subtle soga earth slash.
+    - **Default**: Clean single-line breadcrumb for general informational routes.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings).
+- [x] **Task 49.2: Collection & Product Route Integration (`collections.$handle.jsx`, `products.$handle.jsx`)**
+  - *Action*: Injected `collectionTier` calculation into `collections.$handle.jsx` and passed `tier={collectionTier}` to both cinematic Haute Hero and standard catalog hero. Integrated `productTier` into `products.$handle.jsx` to preserve continuity between collection pages and PDP.
+  - *Evidence*: Verified build with `npm run build` (exit code 0).
+
+
 
 
 
