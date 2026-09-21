@@ -1170,6 +1170,24 @@
   - *Action*: Expanded article hero banner from narrow `max-w-4xl` to full container width (`w-full aspect-[16/9] sm:aspect-[21/9]`) matching the layout hierarchy of editorial catalog grids.
   - *Evidence*: `npm run lint` (0 errors, 0 warnings), `npm run build` (exit code 0).
 
+---
+
+## Phase 58: Legal Policies & Official Pages Storefront Harmonization (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/routes/policies._index.jsx, app/routes/policies.$handle.jsx, app/routes/pages.$handle.jsx*
+
+- [x] **Task 58.1: Full 4-Policy Architecture in `policies._index.jsx`**
+  - *Action*: Fixed policy array population in `policies._index.jsx` to guarantee all 4 core legal policies (Shipping, Privacy, Refund/Exchange, Terms of Service) are always rendered with rich summaries and badges, reading dynamically from Shopify `shop` policies and native Shopify `pages` (`kebijakan-pengiriman`, `kebijakan-pengembalian`, `syarat-dan-ketentuan`).
+  - *Evidence*: Render verified on `/policies` with 4 complete cards + 3 service guides.
+- [x] **Task 58.2: Dynamic Dual-Source Policy Loader in `policies.$handle.jsx`**
+  - *Action*: Upgraded `policies.$handle.jsx` to seamlessly fetch from `shop[policyKey]` or native Shopify `page[pageHandle]`, supporting both English and Indonesian handles (`shipping-policy`, `kebijakan-pengiriman`, `privacy-policy`, `kebijakan-privasi`, `refund-policy`, `kebijakan-pengembalian`, `terms-of-service`, `syarat-dan-ketentuan`).
+  - *Evidence*: All 4 policy routes return HTTP 200 with authentic Shopify content.
+- [x] **Task 58.3: Privacy Policy Fallback in `pages.$handle.jsx`**
+  - *Action*: Equipped `pages.$handle.jsx` to gracefully serve `shop.privacyPolicy` when `/pages/kebijakan-privasi` or `/pages/privacy-policy` is accessed, eliminating 404 errors.
+  - *Evidence*: `/pages/kebijakan-privasi` returns HTTP 200 OK.
+- [x] **Task 58.4: Customer Care & Atelier Guides Integration**
+  - *Action*: Added curated secondary section on `/policies` connecting customers to Size Guide (`/pages/panduan-ukuran`), Care Guide (`/pages/panduan-perawatan`), and Bespoke Tailoring (`/pages/layanan-seragam`), complete with direct WhatsApp Concierge CTA.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
 
 
 

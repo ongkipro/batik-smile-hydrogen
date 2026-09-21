@@ -1156,6 +1156,11 @@ export type PageQuery = {
       >;
     }
   >;
+  shop: {
+    privacyPolicy?: StorefrontAPI.Maybe<
+      Pick<StorefrontAPI.ShopPolicy, 'id' | 'title' | 'handle' | 'body'>
+    >;
+  };
 };
 
 export type PageSeoQueryVariables = StorefrontAPI.Exact<{
@@ -1174,35 +1179,30 @@ export type PageSeoQuery = {
   >;
 };
 
-export type PolicyFragment = Pick<
-  StorefrontAPI.ShopPolicy,
-  'body' | 'handle' | 'id' | 'title' | 'url'
->;
-
-export type PolicyQueryVariables = StorefrontAPI.Exact<{
+export type PolicyAndPageQueryVariables = StorefrontAPI.Exact<{
+  pageHandle: StorefrontAPI.Scalars['String']['input'];
   country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
   language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
-  privacyPolicy: StorefrontAPI.Scalars['Boolean']['input'];
-  refundPolicy: StorefrontAPI.Scalars['Boolean']['input'];
-  shippingPolicy: StorefrontAPI.Scalars['Boolean']['input'];
-  termsOfService: StorefrontAPI.Scalars['Boolean']['input'];
 }>;
 
-export type PolicyQuery = {
+export type PolicyAndPageQuery = {
   shop: {
     privacyPolicy?: StorefrontAPI.Maybe<
-      Pick<StorefrontAPI.ShopPolicy, 'body' | 'handle' | 'id' | 'title' | 'url'>
+      Pick<StorefrontAPI.ShopPolicy, 'id' | 'title' | 'handle' | 'body'>
     >;
     shippingPolicy?: StorefrontAPI.Maybe<
-      Pick<StorefrontAPI.ShopPolicy, 'body' | 'handle' | 'id' | 'title' | 'url'>
+      Pick<StorefrontAPI.ShopPolicy, 'id' | 'title' | 'handle' | 'body'>
     >;
     termsOfService?: StorefrontAPI.Maybe<
-      Pick<StorefrontAPI.ShopPolicy, 'body' | 'handle' | 'id' | 'title' | 'url'>
+      Pick<StorefrontAPI.ShopPolicy, 'id' | 'title' | 'handle' | 'body'>
     >;
     refundPolicy?: StorefrontAPI.Maybe<
-      Pick<StorefrontAPI.ShopPolicy, 'body' | 'handle' | 'id' | 'title' | 'url'>
+      Pick<StorefrontAPI.ShopPolicy, 'id' | 'title' | 'handle' | 'body'>
     >;
   };
+  page?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'title' | 'handle' | 'body'>
+  >;
 };
 
 export type PolicyItemFragment = Pick<
@@ -1233,6 +1233,15 @@ export type PoliciesQuery = {
       Pick<StorefrontAPI.ShopPolicyWithDefault, 'id' | 'title' | 'handle'>
     >;
   };
+  shippingPage?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'title' | 'handle'>
+  >;
+  refundPage?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'title' | 'handle'>
+  >;
+  termsPage?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Page, 'id' | 'title' | 'handle'>
+  >;
 };
 
 export type ProductVariantFragment = Pick<
@@ -1929,7 +1938,7 @@ interface GeneratedQueryTypes {
     return: CatalogQuery;
     variables: CatalogQueryVariables;
   };
-  '#graphql\n  query Page(\n    $language: LanguageCode,\n    $country: CountryCode,\n    $handle: String!\n  )\n  @inContext(language: $language, country: $country) {\n    page(handle: $handle) {\n      handle\n      id\n      title\n      body\n      seo {\n        description\n        title\n      }\n    }\n  }\n': {
+  '#graphql\n  query Page(\n    $language: LanguageCode,\n    $country: CountryCode,\n    $handle: String!\n  )\n  @inContext(language: $language, country: $country) {\n    page(handle: $handle) {\n      handle\n      id\n      title\n      body\n      seo {\n        description\n        title\n      }\n    }\n    shop {\n      privacyPolicy {\n        id\n        title\n        handle\n        body\n      }\n    }\n  }\n': {
     return: PageQuery;
     variables: PageQueryVariables;
   };
@@ -1937,11 +1946,11 @@ interface GeneratedQueryTypes {
     return: PageSeoQuery;
     variables: PageSeoQueryVariables;
   };
-  '#graphql\n  fragment Policy on ShopPolicy {\n    body\n    handle\n    id\n    title\n    url\n  }\n  query Policy(\n    $country: CountryCode\n    $language: LanguageCode\n    $privacyPolicy: Boolean!\n    $refundPolicy: Boolean!\n    $shippingPolicy: Boolean!\n    $termsOfService: Boolean!\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      privacyPolicy @include(if: $privacyPolicy) {\n        ...Policy\n      }\n      shippingPolicy @include(if: $shippingPolicy) {\n        ...Policy\n      }\n      termsOfService @include(if: $termsOfService) {\n        ...Policy\n      }\n      refundPolicy @include(if: $refundPolicy) {\n        ...Policy\n      }\n    }\n  }\n': {
-    return: PolicyQuery;
-    variables: PolicyQueryVariables;
+  '#graphql\n  query PolicyAndPage(\n    $pageHandle: String!\n    $country: CountryCode\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      privacyPolicy {\n        id\n        title\n        handle\n        body\n      }\n      shippingPolicy {\n        id\n        title\n        handle\n        body\n      }\n      termsOfService {\n        id\n        title\n        handle\n        body\n      }\n      refundPolicy {\n        id\n        title\n        handle\n        body\n      }\n    }\n    page(handle: $pageHandle) {\n      id\n      title\n      handle\n      body\n    }\n  }\n': {
+    return: PolicyAndPageQuery;
+    variables: PolicyAndPageQueryVariables;
   };
-  '#graphql\n  fragment PolicyItem on ShopPolicy {\n    id\n    title\n    handle\n  }\n  query Policies ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      privacyPolicy {\n        ...PolicyItem\n      }\n      shippingPolicy {\n        ...PolicyItem\n      }\n      termsOfService {\n        ...PolicyItem\n      }\n      refundPolicy {\n        ...PolicyItem\n      }\n      subscriptionPolicy {\n        id\n        title\n        handle\n      }\n    }\n  }\n': {
+  '#graphql\n  fragment PolicyItem on ShopPolicy {\n    id\n    title\n    handle\n  }\n  query Policies ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    shop {\n      privacyPolicy {\n        ...PolicyItem\n      }\n      shippingPolicy {\n        ...PolicyItem\n      }\n      termsOfService {\n        ...PolicyItem\n      }\n      refundPolicy {\n        ...PolicyItem\n      }\n      subscriptionPolicy {\n        id\n        title\n        handle\n      }\n    }\n    shippingPage: page(handle: "kebijakan-pengiriman") {\n      id\n      title\n      handle\n    }\n    refundPage: page(handle: "kebijakan-pengembalian") {\n      id\n      title\n      handle\n    }\n    termsPage: page(handle: "syarat-dan-ketentuan") {\n      id\n      title\n      handle\n    }\n  }\n': {
     return: PoliciesQuery;
     variables: PoliciesQueryVariables;
   };
