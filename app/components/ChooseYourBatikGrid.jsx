@@ -32,7 +32,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
 
         {/* 4-Column / 8-Product Showcase Grid (2 Rows of 4 Cards) */}
         {displayProducts.length > 0 ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 lg:gap-y-12">
             {displayProducts.map((product, idx) => (
               <ProductItem
                 key={product.id || idx}

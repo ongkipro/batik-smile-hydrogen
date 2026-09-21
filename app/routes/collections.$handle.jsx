@@ -214,8 +214,8 @@ export default function Collection() {
     : 'bg-[#FFFFFF] text-[#111111]';
 
   const gridColumns = isExclusive
-    ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8'
-    : 'grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 xl:gap-8';
+    ? 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-10 sm:gap-x-8 sm:gap-y-12'
+    : 'grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 xl:gap-x-8 xl:gap-y-12';
 
 
   const officialWaUrl =

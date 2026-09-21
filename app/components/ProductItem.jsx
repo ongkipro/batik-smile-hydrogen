@@ -1,19 +1,27 @@
+import React from 'react';
 import { Link } from 'react-router';
 import { Image } from '@shopify/hydrogen';
 import { useVariantUrl } from '~/lib/variants';
 import { formatRupiah } from '~/lib/currency';
 
 /**
- * Quiet Luxury Nusantara Product Card
- * Strict 4:5 Aspect Ratio, 0px Radius, Micro-tracking & Prestige Styling
+ * Master Quiet Luxury Product Card
+ * - Frameless & Borderless Architecture (No heavy box borders, no clunky padding, zero drop-shadow).
+ * - Strict 4:5 Vertical Aspect Ratio preserving pure textile & silhouette proportions.
+ * - Zero-Radius (0px) precision geometry aligned with Quiet Luxury Nusantara standards.
+ * - Tailored themes for each collection tier:
+ *   - 'exclusive': Obsidian Canvas, Sutra ATBM & Prada Emas gold typography.
+ *   - 'premium': Warm Ivory Canvas, Tenun Dobby & Furing Hero crisp typography.
+ *   - 'default': Clean Mori Linen Canvas, Soga Matang accents & modern editorial layout.
  *
  * @param {{
  *   product: any;
  *   loading?: 'eager' | 'lazy';
  *   badge?: string;
+ *   variant?: 'default' | 'exclusive' | 'premium';
  * }} props
  */
-export function ProductItem({ product, loading = 'lazy', _badge, variant = 'default' }) {
+export function ProductItem({ product, loading = 'lazy', badge, variant = 'default' }) {
   const variantUrl = useVariantUrl(product?.handle);
 
   if (!product) return null;
@@ -25,7 +33,6 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
     compareAtPrice &&
     parseFloat(compareAtPrice.amount) > parseFloat(price?.amount || 0);
 
-  // Title formatting: clean 3-word title or uppercase syntax
   const rawTitle = product.title || '';
   const displayTitle = rawTitle.toUpperCase();
 
@@ -33,27 +40,16 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
   const isPremium = variant === 'premium';
 
   return (
-    <div
-      className={`group relative flex flex-col justify-between h-full transition-all duration-300 ${
-        isExclusive
-          ? 'bg-[#181818] border border-[#C5A059]/35 hover:border-[#C5A059] p-3 sm:p-4 shadow-xl'
-          : isPremium
-          ? 'bg-white border border-[#C5A059]/40 hover:border-[#9E7D3B] p-3 sm:p-4 shadow-[0_4px_20px_rgba(197,160,89,0.10)] hover:shadow-[0_8px_25px_rgba(197,160,89,0.22)]'
-          : 'bg-[#FAF8F5]'
-      }`}
-    >
-      {/* 4:5 Vertical Portrait Image Container */}
+    <div className="group relative flex flex-col justify-between h-full bg-transparent">
+      {/* 1. Frameless 4:5 Portrait Media Container */}
       <Link
         to={variantUrl}
         prefetch="intent"
-        className={`relative block w-full aspect-[4/5] overflow-hidden transition-colors ${
-          isExclusive
-            ? 'bg-[#111111] border border-[#C5A059]/30 group-hover:border-[#C5A059]'
-            : isPremium
-            ? 'bg-[#F8F5EF] border border-[#E2DFD8] group-hover:border-[#C5A059]/60'
-            : 'bg-[#EFECE6] border border-[#E2DFD8]/80 group-hover:border-[#C5A059]/50'
+        className={`relative block w-full aspect-[4/5] overflow-hidden ${
+          isExclusive ? 'bg-[#181818]' : isPremium ? 'bg-[#F4EFEA]' : 'bg-[#EFECE6]'
         }`}
       >
+        {/* Primary Image with Organic Subtle Scale */}
         {primaryImage && (
           <Image
             data={primaryImage}
@@ -62,12 +58,12 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
             loading={loading}
             fetchPriority={loading === 'eager' ? 'high' : 'auto'}
             decoding={loading === 'eager' ? 'sync' : 'async'}
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+            sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
             className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
         )}
 
-        {/* Secondary image crossfade on hover if available */}
+        {/* Secondary Image Crossfade on Hover */}
         {secondaryImage && (
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
             <Image
@@ -77,21 +73,36 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
               loading="lazy"
               decoding="async"
               fetchPriority="low"
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+              sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
               className="w-full h-full object-cover object-center scale-105"
             />
           </div>
         )}
 
-        {/* Quick View / Add to Bag Overlay (Slide from bottom) */}
-        <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+        {/* Status Badge: Sale / Custom Badge */}
+        {(isOnSale || badge) && (
+          <div className="absolute top-2.5 left-2.5 z-10">
+            <span
+              className={`text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-semibold px-2 py-0.5 shadow-xs ${
+                isExclusive
+                  ? 'bg-[#111111]/90 text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-xs'
+                  : 'bg-[#111111] text-white'
+              }`}
+            >
+              {badge || 'PENAWARAN'}
+            </span>
+          </div>
+        )}
+
+        {/* Minimalist Quick View Bar (Slides up on desktop hover) */}
+        <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-black/65 via-black/25 to-transparent pointer-events-none sm:pointer-events-auto">
           <div
-            className={`w-full py-2.5 px-4 text-[10px] font-bold uppercase tracking-[0.2em] text-center shadow-md transition-colors ${
+            className={`w-full py-2.5 px-3 text-[10px] font-bold uppercase tracking-[0.2em] text-center transition-colors shadow-sm ${
               isExclusive
-                ? 'bg-[#C5A059] text-[#111111] hover:bg-white'
+                ? 'bg-[#C5A059] text-[#111111] hover:bg-white hover:text-[#111111]'
                 : isPremium
-                ? 'bg-[#111111] text-[#FAF8F5] hover:bg-[#9E7D3B] hover:text-white'
-                : 'bg-white text-[#111111] hover:bg-[#C5A059] hover:text-white'
+                ? 'bg-[#111111] text-white hover:bg-[#9E7D3B]'
+                : 'bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111]'
             }`}
           >
             LIHAT DETAIL
@@ -99,39 +110,42 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
         </div>
       </Link>
 
-      {/* Typography & Price Metadata (Centered for Precision) */}
-      <div className="pt-4 pb-1 flex flex-col flex-grow justify-between text-center items-center">
+      {/* 2. Editorial Typography & Price Metadata */}
+      <div className="pt-3 sm:pt-4 pb-1 flex flex-col flex-grow justify-between text-center items-center">
         <div className="w-full">
-          <Link
-            to={variantUrl}
-            prefetch="intent"
-            className={`block transition-colors line-clamp-1 text-center ${
-              isExclusive
-                ? 'font-serif text-sm sm:text-base font-normal tracking-wide text-white hover:text-[#C5A059]'
-                : isPremium
-                ? 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#111111] hover:text-[#9E7D3B]'
-                : 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#1C1C1C] hover:text-[#9E7D3B]'
-            }`}
-          >
-            {displayTitle}
-          </Link>
-
+          {/* Eyebrow Product Type */}
           {product.productType && (
             <span
-              className={`block text-[9px] uppercase tracking-[0.22em] mt-1 text-center ${
+              className={`block text-[9px] sm:text-[10px] uppercase tracking-[0.22em] font-medium mb-1 ${
                 isExclusive
-                  ? 'text-[#C5A059] font-medium'
+                  ? 'text-[#C5A059]'
                   : isPremium
-                  ? 'text-[#9E7D3B] font-medium'
+                  ? 'text-[#9E7D3B]'
                   : 'text-[#7C3F1D]'
               }`}
             >
               {product.productType}
             </span>
           )}
+
+          {/* Product Title */}
+          <Link
+            to={variantUrl}
+            prefetch="intent"
+            className={`block transition-colors line-clamp-2 leading-snug ${
+              isExclusive
+                ? 'font-serif text-sm sm:text-base font-normal tracking-wide text-[#FAF8F5] group-hover:text-[#C5A059]'
+                : isPremium
+                ? 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#111111] group-hover:text-[#9E7D3B]'
+                : 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#1C1C1C] group-hover:text-[#9E7D3B]'
+            }`}
+          >
+            {displayTitle}
+          </Link>
         </div>
 
-        <div className="mt-2.5 flex flex-col items-center justify-center gap-1.5 text-center">
+        {/* Pricing Area */}
+        <div className="mt-2 flex flex-col items-center justify-center gap-1">
           <div className="flex items-baseline justify-center gap-2">
             {price && (
               <span
@@ -147,21 +161,25 @@ export function ProductItem({ product, loading = 'lazy', _badge, variant = 'defa
               </span>
             )}
             {isOnSale && compareAtPrice && (
-              <span className="text-[10px] line-through text-[#5A5550]">
+              <span
+                className={`text-[10px] line-through ${
+                  isExclusive ? 'text-white/40' : 'text-[#8C827A]'
+                }`}
+              >
                 {formatRupiah(compareAtPrice)}
               </span>
             )}
           </div>
 
-          {/* Differentiated Craftsmanship Spec Pill */}
+          {/* Whispered Tier Craftsmanship Signature */}
           {isExclusive && (
-            <span className="border border-[#C5A059]/30 bg-[#111111] text-[#E2DFD8] text-[8px] sm:text-[9px] uppercase tracking-[0.16em] px-2.5 py-0.5 mt-1 font-light">
-              SUTRA ATBM • PRADA EMAS
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-light mt-0.5 opacity-90">
+              Sutra ATBM &bull; Prada Emas
             </span>
           )}
           {isPremium && (
-            <span className="bg-[#F3EDE2] border border-[#C5A059]/40 text-[#7C3F1D] text-[8px] sm:text-[9px] uppercase tracking-[0.16em] px-2.5 py-0.5 mt-1 font-medium">
-              TENUN DOBBY • FURING HERO
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-[#7C3F1D] font-medium mt-0.5 opacity-90">
+              Tenun Dobby &bull; Furing Hero
             </span>
           )}
         </div>

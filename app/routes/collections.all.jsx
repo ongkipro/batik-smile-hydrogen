@@ -150,7 +150,7 @@ export default function CollectionAll() {
         ) : (
           <PaginatedResourceSection
             connection={products}
-            resourcesClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
+            resourcesClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 lg:gap-y-12"
           >
             {({ node: product, index }) => (
               <ProductItem

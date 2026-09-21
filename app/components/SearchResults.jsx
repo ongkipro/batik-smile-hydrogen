@@ -59,11 +59,11 @@ function SearchResultsArticles({ term, articles }) {
 
           return (
             <div
-              className="p-5 bg-white border border-[#E2DFD8] hover:border-[#111111] transition-all"
+              className="p-4 bg-[#FAF8F5] hover:bg-white transition-all group"
               key={article.id}
             >
-              <Link prefetch="intent" to={articleUrl} className="block group">
-                <span className="text-[9px] uppercase tracking-wider text-[#A69F96] block mb-1">
+              <Link prefetch="intent" to={articleUrl} className="block">
+                <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] block mb-1 font-semibold">
                   CATATAN BUDAYA
                 </span>
                 <h4 className="font-serif text-lg font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors leading-snug">
@@ -103,12 +103,13 @@ function SearchResultsPages({ term, pages }) {
 
           return (
             <div
-              className="p-4 bg-white border border-[#E2DFD8] hover:border-[#111111] transition-all"
+              className="p-4 bg-[#FAF8F5] hover:bg-white transition-all group"
               key={page.id}
             >
-              <Link prefetch="intent" to={pageUrl} className="block group">
-                <span className="font-serif text-base font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors">
-                  {page.title} &rarr;
+              <Link prefetch="intent" to={pageUrl} className="block">
+                <span className="font-serif text-base font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors flex items-center justify-between">
+                  <span>{page.title}</span>
+                  <span className="text-[#C5A059] group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </span>
               </Link>
             </div>
@@ -145,7 +146,7 @@ function SearchResultsProducts({ term, products }) {
                 </PreviousLink>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10">
                 {nodes.map((product) => {
                   const productUrl = urlWithTrackingParams({
                     baseUrl: `/products/${product.handle}`,
@@ -162,46 +163,55 @@ function SearchResultsProducts({ term, products }) {
 
                   return (
                     <div
-                      className="group bg-white border border-[#E2DFD8] hover:border-[#111111] transition-all overflow-hidden flex flex-col"
+                      className="group relative flex flex-col justify-between h-full bg-transparent"
                       key={product.id}
                     >
-                      <Link prefetch="intent" to={productUrl} className="block">
-                        <div className="relative aspect-[4/5] bg-[#111111] overflow-hidden">
-                          {image ? (
-                            <Image
-                              data={image}
-                              alt={product.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                          ) : (
-                            <img
-                              src="/banners/hero_editorial_banner.jpg"
-                              alt={product.title}
-                              className="w-full h-full object-cover opacity-80"
-                            />
-                          )}
-                        </div>
+                      {/* Frameless 4:5 Portrait Media */}
+                      <Link prefetch="intent" to={productUrl} className="relative block w-full aspect-[4/5] overflow-hidden bg-[#EFECE6]">
+                        {image ? (
+                          <Image
+                            data={image}
+                            alt={product.title}
+                            aspectRatio="4/5"
+                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                          />
+                        ) : (
+                          <img
+                            src="/banners/hero_editorial_banner.jpg"
+                            alt={product.title}
+                            className="w-full h-full object-cover opacity-80"
+                          />
+                        )}
 
-                        <div className="p-4 flex-1 flex flex-col justify-between">
-                          <div>
-                            <span className="text-[9px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold block mb-1">
-                              BATIK SMILE
-                            </span>
-                            <h4 className="font-serif text-sm font-normal text-[#111111] line-clamp-2 leading-snug group-hover:text-[#C5A059] transition-colors">
-                              {product.title}
-                            </h4>
-                          </div>
-
-                          <div className="mt-3 pt-3 border-t border-[#E2DFD8] flex items-center justify-between">
-                            <span className="text-xs font-semibold text-[#111111]">
-                              {price && <Money data={price} withoutTrailingZeros as="span" />}
-                            </span>
-                            <span className="text-[10px] text-[#A69F96] group-hover:text-[#111111] transition-colors">
-                              LIHAT &rarr;
-                            </span>
+                        {/* Minimalist Hover Quick View Action */}
+                        <div className="absolute inset-x-0 bottom-0 p-2 sm:p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-black/65 via-black/25 to-transparent">
+                          <div className="w-full py-2 px-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-center bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] transition-colors shadow-sm">
+                            LIHAT DETAIL
                           </div>
                         </div>
                       </Link>
+
+                      {/* Editorial Metadata */}
+                      <div className="pt-3 pb-1 flex flex-col flex-grow justify-between text-center items-center">
+                        <div>
+                          <span className="text-[9px] uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1">
+                            BATIK SMILE
+                          </span>
+                          <Link
+                            prefetch="intent"
+                            to={productUrl}
+                            className="block font-serif text-sm font-normal text-[#111111] line-clamp-2 leading-snug group-hover:text-[#9E7D3B] transition-colors"
+                          >
+                            {product.title}
+                          </Link>
+                        </div>
+
+                        <div className="mt-2 text-center">
+                          <span className="text-xs font-semibold text-[#111111] tracking-wide">
+                            {price && <Money data={price} withoutTrailingZeros as="span" />}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   );
                 })}
