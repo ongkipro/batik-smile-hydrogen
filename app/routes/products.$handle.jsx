@@ -1,5 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLoaderData, NavLink, Link, redirect } from 'react-router';
+
+/**
+ * Ensures embedded video iframe URLs (YouTube/Vimeo) contain autoplay & mute parameters
+ * @param {string} url
+ */
+function getAutoplayEmbedUrl(url) {
+  if (!url) return '';
+  const sep = url.includes('?') ? '&' : '?';
+  if (url.includes('autoplay')) return url;
+  return `${url}${sep}autoplay=1&mute=1&playsinline=1`;
+}
 import {
   getSelectedProductOptions,
   Analytics,
@@ -158,9 +169,13 @@ export default function Product() {
   const { title, descriptionHtml, images, media } = product;
 
   // Build unified media list with type identification (Images, Videos, 3D Models)
+  // Ensures that if a product video exists, it is prioritized as the 2nd mini thumbnail (index 1)
+  // directly following the primary featured photograph at index 0.
   const mediaList = React.useMemo(() => {
+    let rawItems = [];
+
     if (media?.nodes?.length) {
-      return media.nodes.map((item) => {
+      rawItems = media.nodes.map((item) => {
         const isVideo = item.__typename === 'Video' || item.mediaContentType === 'VIDEO';
         const isExternalVideo =
           item.__typename === 'ExternalVideo' || item.mediaContentType === 'EXTERNAL_VIDEO';
@@ -182,19 +197,40 @@ export default function Product() {
           altText,
         };
       });
+    } else {
+      const fallbackImages = images?.nodes || (product.featuredImage ? [product.featuredImage] : []);
+      rawItems = fallbackImages.map((img) => ({
+        ...img,
+        __typename: 'MediaImage',
+        isVideo: false,
+        isExternalVideo: false,
+        isModel: false,
+        url: img.url,
+        previewUrl: img.url,
+        altText: img.altText || title,
+      }));
     }
 
-    const fallbackImages = images?.nodes || (product.featuredImage ? [product.featuredImage] : []);
-    return fallbackImages.map((img) => ({
-      ...img,
-      __typename: 'MediaImage',
-      isVideo: false,
-      isExternalVideo: false,
-      isModel: false,
-      url: img.url,
-      previewUrl: img.url,
-      altText: img.altText || title,
-    }));
+    if (!rawItems.length) return [];
+
+    // Separate video assets from still photography/models
+    const videoItems = rawItems.filter((item) => item.isVideo || item.isExternalVideo);
+    const nonVideoItems = rawItems.filter((item) => !item.isVideo && !item.isExternalVideo);
+
+    // If both photography and video exist:
+    // [0] = Primary featured image cover
+    // [1] = 1st Video Lookbook (2nd mini thumbnail)
+    // [2..n] = Remaining photography, followed by additional video/3D assets
+    if (videoItems.length > 0 && nonVideoItems.length > 0) {
+      return [
+        nonVideoItems[0],
+        videoItems[0],
+        ...nonVideoItems.slice(1),
+        ...videoItems.slice(1),
+      ];
+    }
+
+    return rawItems;
   }, [media?.nodes, images?.nodes, product.featuredImage, title]);
 
   const [activeMedia, setActiveMedia] = useState(() => {
@@ -300,6 +336,43 @@ export default function Product() {
   );
   const currentMedia = mediaList[activeIndex] || activeMedia || mediaList[0];
 
+  // Video playback & audio mute state (Desktop & Mobile Autoplay Compliance)
+  const videoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  // Unified media select handler ensuring instant auto play
+  const handleSelectMedia = (item) => {
+    setActiveMedia(item);
+    if ((item.isVideo || item.isExternalVideo) && videoRef.current) {
+      videoRef.current.currentTime = 0;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+  };
+
+  // Autoplay trigger across desktop and mobile whenever active video changes
+  useEffect(() => {
+    if (currentMedia?.isVideo && videoRef.current) {
+      const videoEl = videoRef.current;
+      videoEl.defaultMuted = true;
+      videoEl.muted = isMuted;
+
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((_err) => {
+          // If browser policy blocked unmuted playback, enforce muted state and retry immediately
+          if (!videoEl.muted) {
+            videoEl.muted = true;
+            setIsMuted(true);
+            videoEl.play().catch(() => {});
+          }
+        });
+      }
+    }
+  }, [currentMedia?.id, currentMedia?.url, currentMedia?.isVideo, isMuted]);
+
   // Swipe navigation state & handlers
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
@@ -307,13 +380,13 @@ export default function Product() {
   const handlePrevMedia = () => {
     if (mediaList.length <= 1) return;
     const prevIdx = (activeIndex - 1 + mediaList.length) % mediaList.length;
-    setActiveMedia(mediaList[prevIdx]);
+    handleSelectMedia(mediaList[prevIdx]);
   };
 
   const handleNextMedia = () => {
     if (mediaList.length <= 1) return;
     const nextIdx = (activeIndex + 1) % mediaList.length;
-    setActiveMedia(mediaList[nextIdx]);
+    handleSelectMedia(mediaList[nextIdx]);
   };
 
   const handleTouchStart = (e) => {
@@ -397,7 +470,7 @@ export default function Product() {
                     <button
                       key={item.id || idx}
                       type="button"
-                      onClick={() => setActiveMedia(item)}
+                      onClick={() => handleSelectMedia(item)}
                       className={`relative aspect-[4/5] overflow-hidden border transition-all cursor-pointer ${
                         mediaList.length > 5
                           ? 'w-[calc((100%-32px)/5)] shrink-0 sm:w-20'
@@ -409,7 +482,7 @@ export default function Product() {
                           ? 'border-[#262626] opacity-60 hover:opacity-100 hover:border-[#C5A059]/60'
                           : 'border-[#E2DFD8] opacity-75 hover:opacity-100 hover:border-[#111111]'
                       }`}
-                      aria-label={item.isVideo ? `Putar video produk` : `Pilih media produk ${idx + 1}`}
+                      aria-label={item.isVideo || item.isExternalVideo ? `Putar video lookbook produk` : `Pilih media produk ${idx + 1}`}
                     >
                       <img
                         src={thumbUrl}
@@ -421,11 +494,11 @@ export default function Product() {
                         className="w-full h-full object-cover"
                       />
                       {(item.isVideo || item.isExternalVideo) && (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[0.5px]">
-                          <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black/70 text-[#C5A059] border border-[#C5A059]/70 text-[9px] pl-0.5 shadow-sm">
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/45 backdrop-blur-[0.5px]">
+                          <span className="w-6 h-6 flex items-center justify-center bg-black/80 text-[#C5A059] border border-[#C5A059]/70 text-[9px] pl-0.5 shadow-sm">
                             ▶
                           </span>
-                          <span className="text-[7px] text-white/90 font-medium tracking-wider uppercase mt-1">
+                          <span className="text-[7.5px] text-white/95 font-medium tracking-[0.16em] uppercase mt-1">
                             VIDEO
                           </span>
                         </div>
@@ -450,19 +523,22 @@ export default function Product() {
               {currentMedia?.isVideo ? (
                 <div className="relative aspect-[4/5] w-full bg-black flex items-center justify-center overflow-hidden">
                   <video
-                    key={currentMedia.id}
+                    ref={videoRef}
+                    key={currentMedia.id || currentMedia.url}
                     src={
+                      currentMedia.sources?.find((s) => s.mimeType === 'video/mp4' && s.height <= 720 && s.height >= 480)?.url ||
                       currentMedia.sources?.find((s) => s.mimeType === 'video/mp4' && s.height >= 720)?.url ||
                       currentMedia.sources?.find((s) => s.mimeType === 'video/mp4')?.url ||
                       currentMedia.sources?.[0]?.url
                     }
                     poster={currentMedia.previewUrl}
                     controls
+                    controlsList="nodownload"
                     playsInline
                     autoPlay
-                    muted
+                    muted={isMuted}
                     loop
-                    preload="metadata"
+                    preload="auto"
                     className="w-full h-full object-cover"
                   >
                     {currentMedia.sources?.map((source, sIdx) => (
@@ -476,15 +552,47 @@ export default function Product() {
                   </video>
 
                   {/* Video Lookbook Pill Badge */}
-                  <div className="absolute top-3 left-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-10 flex items-center gap-1.5 bg-black/70 text-[#C5A059] border border-[#C5A059]/40 pointer-events-none">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
+                  <div className="absolute top-3 left-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-10 flex items-center gap-1.5 bg-black/75 text-[#C5A059] border border-[#C5A059]/40 pointer-events-none">
+                    <span className="inline-block w-1.5 h-1.5 bg-[#C5A059] animate-pulse" />
                     VIDEO LOOKBOOK
                   </div>
+
+                  {/* Floating Audio Mute/Unmute Toggle Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (videoRef.current) {
+                        const nextMuted = !isMuted;
+                        videoRef.current.muted = nextMuted;
+                        setIsMuted(nextMuted);
+                      }
+                    }}
+                    aria-label={isMuted ? 'Nyalakan audio video lookbook' : 'Senyapkan audio video lookbook'}
+                    className="absolute top-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-20 flex items-center gap-1.5 bg-black/75 hover:bg-black/90 text-white border border-[#C5A059]/40 transition-all cursor-pointer shadow-sm"
+                  >
+                    {isMuted ? (
+                      <>
+                        <svg className="w-3.5 h-3.5 text-[#C5A059]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                          <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                        </svg>
+                        <span>SUARA MATI</span>
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-3.5 h-3.5 text-[#C5A059]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                        </svg>
+                        <span>SUARA AKTIF</span>
+                      </>
+                    )}
+                  </button>
                 </div>
               ) : currentMedia?.isExternalVideo ? (
                 <div className="relative aspect-[4/5] w-full bg-black flex items-center justify-center overflow-hidden">
                   <iframe
-                    src={currentMedia.embedUrl}
+                    src={getAutoplayEmbedUrl(currentMedia.embedUrl)}
                     title={currentMedia.altText || title}
                     className="w-full h-full border-0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

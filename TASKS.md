@@ -1012,4 +1012,17 @@
   - *Action*: Configured permanent 301 server redirects in `app/routes/collections.$handle.jsx` for all 24 obsolete handles. Updated `PAGES-SCHEMA.xml` and `SCHEMA.md` with the authoritative 6-collection tree taxonomy.
   - *Evidence*: `npm run codegen` generated types cleanly; `npm run lint` (0 errors, 0 warnings); `npm run build` (exit code 0).
 
+---
+
+## Phase 47: PDP Video Prioritization as 2nd Mini-Thumbnail & Cross-Device Autoplay (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: products.$handle.jsx, BUILD-LOG.md, Oxygen Edge*
+
+- [x] **Task 47.1: 2nd Mini-Thumbnail Video Prioritization (`app/routes/products.$handle.jsx`)**
+  - *Action*: Engineered media curation logic in `mediaList` memo. When a product possesses video assets (e.g. `sarimbit-charcoal-hitam`), the primary featured photo is anchored at index 0 (1st thumbnail / cover image), and the first video lookbook is explicitly prioritized at index 1 (**2nd mini-thumbnail**). Subsequent photography and secondary assets follow naturally. If no video exists, standard catalog photo order is preserved without alteration.
+  - *Evidence*: Verified array order on live Shopify Storefront data for `sarimbit-charcoal-hitam` yielding `[MediaImage 1, Video, MediaImage 2]`.
+- [x] **Task 47.2: Desktop & Mobile Autoplay Engine with Audio Control**
+  - *Action*: Implemented `videoRef = useRef(null)` and dynamic `useEffect` to trigger programmatic `.play()` immediately upon thumbnail selection or swipe navigation. Standardized HTML5 `<video>` properties (`autoPlay`, `playsInline`, `muted={isMuted}`, `controls`, `controlsList="nodownload"`) to conform strictly with iOS Safari and Android Chrome autoplay security policies. Integrated helper `getAutoplayEmbedUrl` for iframe external videos (`autoplay=1&mute=1&playsinline=1`). Added Quiet Luxury floating audio toggle button (`SUARA MATI` / `SUARA AKTIF`) styled in obsidian noir and antique gold with zero-radius geometry (`rounded-none`).
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+
 

@@ -1254,4 +1254,35 @@
   - `https://batiksmile.com/sitemap/pages/1.xml` &rarr; HTTP 200 with zero fake alternate hreflangs.
   - Core routes (`/`, `/collections/all`, `/products/sarimbit-royal-navy-1`, `/pages/tentang-kami`, `/policies/kebijakan-pengiriman`, `/search`, `404`) verified with dynamic metadata.
 
+---
+
+## Milestone 45: Product Video Prioritization as 2nd Mini-Thumbnail & Desktop/Mobile Autoplay (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Media Ordering Prioritizing Video as 2nd Mini-Thumbnail (Index 1) on PDP, Desktop & Mobile Autoplay with Programmatic Audio Control, and Quiet Luxury Zero-Radius Video UI
+
+### 1. 2nd Mini-Thumbnail Video Prioritization (`app/routes/products.$handle.jsx`)
+- Refactored `mediaList` calculation in `React.useMemo`:
+  - Automatically isolates product videos (`Video`, `ExternalVideo`) and photography (`MediaImage`).
+  - When a product contains video media (e.g. `sarimbit-charcoal-hitam`), the primary featured photo is kept at index 0 (1st thumbnail / cover image), and the first video lookbook is explicitly prioritized at index 1 (**2nd mini-thumbnail**).
+  - Subsequent photography and remaining media follow sequentially.
+  - If a product does not contain video, standard image ordering is retained 100%.
+
+### 2. Guaranteed Autoplay Across Desktop & Mobile Viewports
+- Standardized autoplay compliance:
+  - Added `videoRef = useRef(null)` with `useEffect` triggering programmatic `.play()` upon media switch.
+  - Defaulted to `muted={isMuted}` (with `isMuted` initialized to `true`) and `playsInline` to satisfy strict iOS Safari and Android Chrome autoplay security policies.
+  - Implemented automatic fallback retry if unmuted autoplay is rejected by browser policy.
+  - Enhanced `ExternalVideo` embeds with automatic query injection (`autoplay=1&mute=1&playsinline=1`).
+  - Bound direct thumbnail tap/click handler `handleSelectMedia` to instantly trigger video playback from start.
+
+### 3. Quiet Luxury Nusantara Audio Control & Zero-Radius Badging
+- Added an unobtrusive, elegant floating audio toggle button at the top-right of the video viewport (`SUARA MATI` / `SUARA AKTIF`) styled in obsidian noir (`bg-black/75 backdrop-blur-sm`), antique gold hairline border (`border-[#C5A059]/40`), and sharp zero-radius geometry (`rounded-none`).
+- Updated the mini-thumbnail video play indicator badge to sharp zero-radius architecture (`rounded-none`).
+
+### 4. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite + Hydrogen SSR).
+- Live Shopify Storefront API media query check on `sarimbit-charcoal-hitam` confirmed `gid://shopify/Video/41513996976185` with 1080p, 720p, and 480p MP4 sources.
+- Node unit test verified exact array ordering `[MediaImage 1, Video, MediaImage 2]`.
+
+
 
