@@ -1056,6 +1056,16 @@
   - *Action*: Injected `collectionTier` calculation into `collections.$handle.jsx` and passed `tier={collectionTier}` to both cinematic Haute Hero and standard catalog hero. Integrated `productTier` into `products.$handle.jsx` to preserve continuity between collection pages and PDP.
   - *Evidence*: Verified build with `npm run build` (exit code 0).
 
+---
+
+## Phase 50: Mobile Burger Menu Streamlining & Search Trigger Removal (COMPLETED ✅)
+*Semantic Risk: R0 | Primary Boundary: app/components/Header.jsx*
+
+- [x] **Task 50.1: Remove In-Drawer Search Bar from Mobile Menu (`app/components/Header.jsx`)**
+  - *Action*: Removed the redundant quick search bar container from `HeaderMenu` drawer. Mobile search remains cleanly accessible via the persistent mobile bottom bar (`MobileNavigation.jsx`). Streamlined drawer structure directly into Brand Heritage Stamp &rarr; Kategori Utama &rarr; VIP WhatsApp Concierge &rarr; Layanan Showroom &rarr; Sticky Akun Saya.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+
 
 
 

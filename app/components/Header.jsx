@@ -220,13 +220,13 @@ function CartBadge({ count }) {
  * Mobile Navigation Drawer Link Helper (Master Quiet Luxury Experience)
  */
 export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomainUrl }) {
-  const { close, open } = useAside();
+  const { close } = useAside();
 
   return (
     <nav className="flex flex-col min-h-full bg-[#FAF8F5]" role="navigation" aria-label="Menu Mobile Butik">
       <div className="flex-1 p-5 sm:p-6 pb-6 overflow-y-auto">
         {/* Brand Heritage Stamp */}
-        <div className="pb-4 border-b border-[#E2DFD8] mb-5 flex items-center justify-between">
+        <div className="pb-4 border-b border-[#E2DFD8] mb-6 flex items-center justify-between">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block">
               BUTIK BATIK SMILE
@@ -238,30 +238,6 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
           <span className="text-[9px] uppercase tracking-widest text-[#111111] bg-white border border-[#E2DFD8] px-2.5 py-0.5 font-semibold">
             3 LANTAI
           </span>
-        </div>
-
-        {/* In-Drawer Quick Search Trigger Bar */}
-        <div className="mb-6">
-          <button
-            type="button"
-            onClick={() => {
-              close();
-              setTimeout(() => open('search'), 120);
-            }}
-            className="w-full py-2.5 px-3.5 bg-white border border-[#E2DFD8] hover:border-[#C5A059] flex items-center justify-between text-xs transition-colors cursor-pointer group shadow-xs"
-          >
-            <span className="flex items-center gap-2.5">
-              <svg className="w-4 h-4 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <span className="text-[10.5px] uppercase tracking-[0.14em] text-[#777777] group-hover:text-[#111111]">
-                Cari Busana &amp; Koleksi...
-              </span>
-            </span>
-            <span className="text-[9px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold">
-              CARI
-            </span>
-          </button>
         </div>
 
         {/* Kategori Utama Mobile (Matching Desktop 1-Line Hierarchy with Material Descriptors) */}

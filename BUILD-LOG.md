@@ -1357,6 +1357,22 @@
 - `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 918ms).
 - Verified zero layout shift, seamless touch scroll on mobile viewports.
 
+---
+
+## Milestone 48: Mobile Burger Menu Streamlining & Search Trigger Removal (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Removal of In-Drawer Quick Search Bar from Mobile Burger Drawer
+
+### 1. Architectural Changes (`app/components/Header.jsx`)
+- Removed redundant in-drawer search button container from `HeaderMenu`:
+  - Eliminates visual clutter in the mobile navigation drawer.
+  - Retains primary mobile search access point via the persistent bottom navigation bar (`MobileNavigation.jsx`).
+  - Strengthens immediate hierarchy: Brand Heritage Stamp &rarr; Kategori Utama (3-tier Sarimbit, Batik Anak, Kain, Aksesoris) &rarr; VIP WhatsApp Concierge &rarr; Layanan & Showroom &rarr; Sticky Akun Saya.
+
+### 2. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 862ms).
+
+
 
 
 
