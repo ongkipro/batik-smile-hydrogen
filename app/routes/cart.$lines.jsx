@@ -1,4 +1,5 @@
 import {redirect} from 'react-router';
+import {resolveCheckoutUrl} from '~/lib/checkout';
 
 /**
  * Automatically creates a new cart based on the URL and redirects straight to checkout.
@@ -59,7 +60,11 @@ export async function loader({request, context, params}) {
 
   // redirect to checkout
   if (cartResult.checkoutUrl) {
-    return redirect(cartResult.checkoutUrl, {headers});
+    const checkoutUrl = resolveCheckoutUrl(
+      cartResult.checkoutUrl,
+      context.env?.PUBLIC_CHECKOUT_DOMAIN,
+    );
+    return redirect(checkoutUrl, {headers});
   } else {
     throw new Error('No checkout URL found');
   }

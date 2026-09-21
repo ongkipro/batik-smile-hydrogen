@@ -26,6 +26,9 @@ import { ProductTierStorySection } from '~/components/ProductTierStorySection';
 import { BoutiqueMoney } from '~/lib/currency';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generateProductMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateProductSchema, generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * Parse Shopify product description HTML into narrative story and structured specifications
@@ -433,22 +436,30 @@ export default function Product() {
     ? 'bg-[#201610] text-[#FAF8F5]'
     : 'bg-[#FAF8F5] text-[#111111]';
 
+  const breadcrumbItems = [
+    {
+      label: relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : 'KOLEKSI',
+      to: relatedCollectionHandle ? `/collections/${relatedCollectionHandle}` : '/collections/all',
+    },
+    {
+      label: title,
+    },
+  ];
+
   return (
     <div className={`min-h-screen pt-8 sm:pt-12 pb-24 sm:pb-16 px-4 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-500 ${themeClasses}`}>
+      <JsonLd
+        schema={[
+          generateProductSchema(product),
+          generateBreadcrumbSchema(breadcrumbItems),
+        ]}
+      />
       <div className="w-full max-w-7xl mx-auto">
         {/* Dynamic Breadcrumb Navigation (Single-line fluid responsive across all device sizes) */}
         <Breadcrumb
           isDark={isDarkPDP}
           tier={productTier}
-          items={[
-            {
-              label: relatedCollectionTitle ? relatedCollectionTitle.toUpperCase() : 'KOLEKSI',
-              to: relatedCollectionHandle ? `/collections/${relatedCollectionHandle}` : '/collections/all',
-            },
-            {
-              label: title,
-            },
-          ]}
+          items={breadcrumbItems}
         />
 
         {/* Main PDP Grid (Left: 4:5 Vertical Gallery, Right: Frameless Quiet Luxury Panel) */}
@@ -1409,3 +1420,13 @@ const PRODUCT_QUERY = `#graphql
 
 /** @typedef {import('./+types/products.$handle').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Busana Belum Tersedia"
+      message="Koleksi busana batik yang Anda tuju mungkin telah berganti kurasi atau tautan telah diperbarui. Silakan kembali menjelajahi katalog utama butik kami."
+    />
+  );
+}

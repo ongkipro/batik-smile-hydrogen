@@ -2,6 +2,9 @@ import { useLoaderData } from 'react-router';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePageMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -90,6 +93,7 @@ export default function Page() {
 
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-20 px-4 sm:px-6 lg:px-8">
+      <JsonLd schema={generateBreadcrumbSchema(breadcrumbItems)} />
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb Navigation */}
         <Breadcrumb items={breadcrumbItems} />
@@ -170,3 +174,13 @@ const PAGE_QUERY = `#graphql
 
 /** @typedef {import('./+types/pages.$handle').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Halaman Belum Tersedia"
+      message="Halaman informasi resmi yang Anda tuju sedang diperbarui atau telah berpindah. Silakan kembali ke beranda atau hubungi concierge butik kami."
+    />
+  );
+}

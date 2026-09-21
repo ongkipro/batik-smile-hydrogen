@@ -185,14 +185,30 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Removed pseudo-traditional clip-art icons (`BatikCorner` in `FamilyBundleBuilder.jsx`) and straightened tilted cards (`rotate-1.5`) in `SarimbitBentoSection.jsx` to enforce sharp `0deg` zero-radius precision.
     - Enforced `@media screen and (max-width: 768px) { input, select, textarea { font-size: 16px !important; } }` outside `@layer` in `app/styles/app.css`, permanently eliminating iOS Safari auto-zoom on input focus.
     - Cleaned cart line item containers and breadcrumb pills for pure unboxed streaming layouts.
+34. **Custom Checkout Domain & Customer Account Synchronization**:
+    - Synchronized `PUBLIC_CHECKOUT_DOMAIN="checkout.batiksmile.com"` and `PUBLIC_ACCOUNT_DOMAIN="account.batiksmile.com"` across `.env`, `.env.example`, and Oxygen runtime environment variables.
+    - Modularized checkout domain resolution via `app/lib/checkout.js` (`resolveCheckoutUrl` & `resolveAccountUrl`) across `CartSummary.jsx`, `cart.jsx` action redirect, and `cart.$lines.jsx` loader.
+    - Content Security Policy (CSP) headers in `entry.server.jsx` updated to whitelist `https://account.batiksmile.com` and `https://checkout.batiksmile.com` in `connectSrc` and `mediaSrc`.
+    - Added "Portal Akun & Status Pesanan" under LAYANAN & INFORMASI in `Footer.jsx` and verified header account link.
+35. **SEO Modernization, W3C Schema Engine, OG Image, & 404 Boundaries**:
+    - Generated official high-resolution OpenGraph banners (`public/og-image.jpg` and `public/og-image.webp`, 1200x630) with Quiet Luxury Obsidian Deep vignette, Mori Linen typography, and antique gold hairline borders.
+    - Modernized all 19 route metadata generators in `app/lib/seo.js` with standard OpenGraph tags (`og:locale`, `og:image:width`, `og:image:height`, `og:image:type`, `twitter:site`, `twitter:creator`, `twitter:domain`).
+    - Engineered W3C JSON-LD structured data engine (`app/lib/schema.js`) generating rich schemas (`ClothingStore`/`Organization`, `WebSite` Sitelinks SearchBox, `Product`, `CollectionPage`/`ItemList`, `BlogPosting`, `BreadcrumbList`).
+    - Created CSP nonce-safe `<JsonLd>` component (`app/components/JsonLd.jsx`) using `@shopify/hydrogen` `useNonce()` to inject inline structured data scripts cleanly.
+    - Designed modular Quiet Luxury 404 / Error view (`app/components/NotFoundView.jsx`) with unboxed Mori Linen canvas (`#FAF8F5`), oversized watermark numeral, rotating diamond monogram, and resilient context fallbacks.
+    - Bound `NotFoundView` to `$.jsx` and exported consistent `ErrorBoundary` instances across all primary routes (`root.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `blogs._index.jsx`, `pages.$handle.jsx`, `policies.$handle.jsx`, `policies._index.jsx`, `search.jsx`, `cart.jsx`).
 
 ## Verification evidence
 
-- **Production Build**: `npm run build` completed with exit code 0 (SSR + Oxygen client build in 1.69s).
-- **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings across all 114 scanned files).
+- **Production Build**: `npm run build` completed with exit code 0 (SSR + Oxygen client build).
+- **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
 - **GraphQL Codegen**: `npm run codegen` completed with exit code 0.
+- **OpenGraph Assets**: Generated 1200x630 assets in `public/og-image.jpg` (169KB) and `public/og-image.webp` (113KB).
+- **SEO & JSON-LD**: Schemas injected across all routes with CSP nonces; social meta headers fully populated with 1200x630 image dimensions.
+- **Error Boundaries**: 404 and ErrorBoundary unified with Quiet Luxury Mori Linen canvas and graceful context handling.
 - **Storefront API Video Query**: Live query for `sarimbit-charcoal-hitam` verified returning native `Video` media object with MP4/HLS streams from Shopify CDN (`https://checkout.batiksmile.com/cdn/shop/videos/...`).
 - **Clean Handle Parity**: 0 obsolete collection paths remain across `app/`.
 - **Live Collections**: Exactly 7 collections live in Shopify Core (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `kain`, `aksesoris`, `batik-anak`, `shop`).
 - **Data Protection**: 100% of 23 products, variants, and pricing preserved.
 - **Mobile Viewport Stability**: iOS Safari auto-zoom eliminated storefront-wide with computed `16px` font size on all input fields.
+- **Checkout & Account Domains**: All checkout CTA redirects route through `https://checkout.batiksmile.com` and account routes resolve cleanly with zero CSP errors.

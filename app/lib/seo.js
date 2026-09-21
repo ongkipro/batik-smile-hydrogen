@@ -6,7 +6,12 @@
 
 export const ROOT_DOMAIN = 'https://batiksmile.com';
 export const SITE_NAME = 'Batik Smile';
-export const DEFAULT_OG_IMAGE = `${ROOT_DOMAIN}/banners/hero-desktop.webp`;
+export const DEFAULT_OG_IMAGE = `${ROOT_DOMAIN}/og-image.jpg`;
+export const DEFAULT_OG_IMAGE_WIDTH = '1200';
+export const DEFAULT_OG_IMAGE_HEIGHT = '630';
+export const DEFAULT_OG_IMAGE_TYPE = 'image/jpeg';
+export const DEFAULT_LOCALE = 'id_ID';
+export const TWITTER_HANDLE = '@batiksmile.official';
 
 /**
  * Format clean title string
@@ -53,12 +58,20 @@ export function generateHomeMeta(shop) {
     // OpenGraph
     { property: 'og:site_name', content: SITE_NAME },
     { property: 'og:type', content: 'website' },
+    { property: 'og:locale', content: DEFAULT_LOCALE },
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:url', content: canonicalUrl },
     { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { property: 'og:image:secure_url', content: DEFAULT_OG_IMAGE },
+    { property: 'og:image:width', content: DEFAULT_OG_IMAGE_WIDTH },
+    { property: 'og:image:height', content: DEFAULT_OG_IMAGE_HEIGHT },
+    { property: 'og:image:type', content: DEFAULT_OG_IMAGE_TYPE },
+    { property: 'og:image:alt', content: `${SITE_NAME} — Butik Batik Modern & Sarimbit Keluarga` },
     // Twitter Card
     { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:site', content: TWITTER_HANDLE },
+    { name: 'twitter:creator', content: TWITTER_HANDLE },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
@@ -92,12 +105,14 @@ export function generateProductMeta(product) {
     // OpenGraph
     { property: 'og:site_name', content: SITE_NAME },
     { property: 'og:type', content: 'product' },
+    { property: 'og:locale', content: DEFAULT_LOCALE },
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:url', content: canonicalUrl },
     { property: 'og:image', content: imageUrl },
-    ...(product.featuredImage?.width ? [{ property: 'og:image:width', content: String(product.featuredImage.width) }] : []),
-    ...(product.featuredImage?.height ? [{ property: 'og:image:height', content: String(product.featuredImage.height) }] : []),
+    { property: 'og:image:secure_url', content: imageUrl },
+    { property: 'og:image:width', content: String(product.featuredImage?.width || DEFAULT_OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(product.featuredImage?.height || DEFAULT_OG_IMAGE_HEIGHT) },
     { property: 'og:image:alt', content: product.featuredImage?.altText || product.title },
     ...(price ? [
       { property: 'product:price:amount', content: price },
@@ -105,9 +120,64 @@ export function generateProductMeta(product) {
     ] : []),
     // Twitter Card
     { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:site', content: TWITTER_HANDLE },
+    { name: 'twitter:creator', content: TWITTER_HANDLE },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: imageUrl },
+  ];
+}
+
+/**
+ * Format standard OpenGraph and Twitter social card tags
+ */
+function buildSocialMeta({
+  title,
+  description,
+  canonicalUrl,
+  ogType = 'website',
+  image = DEFAULT_OG_IMAGE,
+  imageWidth = DEFAULT_OG_IMAGE_WIDTH,
+  imageHeight = DEFAULT_OG_IMAGE_HEIGHT,
+  imageAlt = SITE_NAME,
+  publishedTime,
+  author,
+  price,
+  currency = 'IDR',
+  noindex = false,
+  nofollow = false,
+}) {
+  return [
+    { title },
+    { name: 'description', content: description },
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    ...(noindex ? [{ name: 'robots', content: nofollow ? 'noindex, nofollow' : 'noindex, follow' }] : []),
+    // OpenGraph
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:type', content: ogType },
+    { property: 'og:locale', content: DEFAULT_LOCALE },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: image },
+    { property: 'og:image:secure_url', content: image },
+    { property: 'og:image:width', content: String(imageWidth || DEFAULT_OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(imageHeight || DEFAULT_OG_IMAGE_HEIGHT) },
+    { property: 'og:image:type', content: DEFAULT_OG_IMAGE_TYPE },
+    { property: 'og:image:alt', content: imageAlt || title },
+    ...(price ? [
+      { property: 'product:price:amount', content: String(price) },
+      { property: 'product:price:currency', content: currency },
+    ] : []),
+    ...(publishedTime ? [{ property: 'article:published_time', content: publishedTime }] : []),
+    ...(author ? [{ property: 'article:author', content: author }] : []),
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:site', content: TWITTER_HANDLE },
+    { name: 'twitter:creator', content: TWITTER_HANDLE },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
   ];
 }
 
@@ -128,21 +198,12 @@ export function generateCollectionMeta(collection, isAll = false) {
     const title = `Katalog Lengkap Busana Batik — ${SITE_NAME}`;
     const description = 'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga 3 kasta, kemeja pria lapis furing, dan kain batik tulis asli Batik Smile Semarang.';
     const canonicalUrl = `${ROOT_DOMAIN}/collections/all`;
-    return [
-      { title },
-      { name: 'description', content: description },
-      { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-      { property: 'og:site_name', content: SITE_NAME },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: title },
-      { property: 'og:description', content: description },
-      { property: 'og:url', content: canonicalUrl },
-      { property: 'og:image', content: DEFAULT_OG_IMAGE },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: title },
-      { name: 'twitter:description', content: description },
-      { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-    ];
+    return buildSocialMeta({
+      title,
+      description,
+      canonicalUrl,
+      imageAlt: 'Katalog Lengkap Busana Batik Smile',
+    });
   }
 
   const rawTitle = collection.seo?.title || collection.title;
@@ -154,26 +215,15 @@ export function generateCollectionMeta(collection, isAll = false) {
   const canonicalUrl = `${ROOT_DOMAIN}/collections/${collection.handle}`;
   const imageUrl = collection.image?.url || DEFAULT_OG_IMAGE;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    // OpenGraph
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: imageUrl },
-    ...(collection.image?.width ? [{ property: 'og:image:width', content: String(collection.image.width) }] : []),
-    ...(collection.image?.height ? [{ property: 'og:image:height', content: String(collection.image.height) }] : []),
-    { property: 'og:image:alt', content: collection.image?.altText || collection.title },
-    // Twitter Card
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: imageUrl },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    image: imageUrl,
+    imageWidth: collection.image?.width,
+    imageHeight: collection.image?.height,
+    imageAlt: collection.image?.altText || collection.title,
+  });
 }
 
 /**
@@ -184,21 +234,12 @@ export function generateCollectionIndexMeta() {
   const description = 'Koleksi lengkap busana batik modern, sarimbit keluarga 3 kasta, kemeja pria furing katun hero, dan kain batik tulis asli dari Butik Batik Smile Semarang.';
   const canonicalUrl = `${ROOT_DOMAIN}/collections`;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    imageAlt: 'Koleksi Busana Batik & Sarimbit Keluarga',
+  });
 }
 
 /**
@@ -215,23 +256,12 @@ export function generatePageMeta({ page, customTitle, customDescription, handle 
     'Halaman informasi resmi Butik Batik Smile Semarang.'
   );
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    // OpenGraph
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-    // Twitter Card
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    imageAlt: `${title} | Batik Smile`,
+  });
 }
 
 /**
@@ -253,25 +283,16 @@ export function generateArticleMeta(article, blogHandle = 'news') {
   const canonicalUrl = `${ROOT_DOMAIN}/blogs/${blogHandle}/${article.handle}`;
   const imageUrl = article.image?.url || DEFAULT_OG_IMAGE;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    // OpenGraph
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'article' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: imageUrl },
-    ...(article.publishedAt ? [{ property: 'article:published_time', content: article.publishedAt }] : []),
-    ...(article.author?.name ? [{ property: 'article:author', content: article.author.name }] : []),
-    // Twitter Card
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: imageUrl },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    ogType: 'article',
+    image: imageUrl,
+    publishedTime: article.publishedAt,
+    author: article.author?.name,
+    imageAlt: article.image?.altText || article.title,
+  });
 }
 
 /**
@@ -287,21 +308,12 @@ export function generateBlogsIndexMeta(primaryBlog) {
   );
   const canonicalUrl = `${ROOT_DOMAIN}/blogs`;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    imageAlt: 'Warta & Jurnal Kebudayaan Wastra Batik Smile',
+  });
 }
 
 /**
@@ -324,21 +336,12 @@ export function generateBlogMeta(blog) {
   );
   const canonicalUrl = `${ROOT_DOMAIN}/blogs/${blog.handle}`;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    imageAlt: `${blog.title} — Batik Smile`,
+  });
 }
 
 /**
@@ -356,21 +359,12 @@ export function generatePolicyMeta(policy, handle) {
   );
   const canonicalUrl = `${ROOT_DOMAIN}/policies/${handle}`;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    imageAlt: `${policyTitle} — Batik Smile`,
+  });
 }
 
 /**
@@ -381,21 +375,12 @@ export function generatePoliciesIndexMeta() {
   const description = 'Informasi resmi kebijakan privasi, garansi penukaran ukuran, ketentuan pengiriman, dan komitmen layanan Batik Smile Semarang.';
   const canonicalUrl = `${ROOT_DOMAIN}/policies`;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    imageAlt: 'Kebijakan Pelayanan & Garansi Butik Batik Smile',
+  });
 }
 
 /**
@@ -409,19 +394,13 @@ export function generateSearchMeta(term) {
   const description = 'Cari koleksi sarimbit keluarga, batik wanita modern, kemeja pria lapis furing hero, dan kain batik tulis asli Batik Smile Semarang.';
   const canonicalUrl = `${ROOT_DOMAIN}/search`;
 
-  return [
-    { title },
-    { name: 'description', content: description },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    // Prevent indexation of dynamic internal search query permutations per Google SEO guidelines
-    { name: 'robots', content: 'noindex, follow' },
-    { property: 'og:site_name', content: SITE_NAME },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: title },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
-  ];
+  return buildSocialMeta({
+    title,
+    description,
+    canonicalUrl,
+    noindex: true,
+    imageAlt: 'Pencarian Katalog Busana Batik Smile',
+  });
 }
 
 /**
@@ -436,7 +415,6 @@ export function generateCartMeta() {
     { title },
     { name: 'description', content: description },
     { tagName: 'link', rel: 'canonical', href: canonicalUrl },
-    // Cart pages should not be indexed by search engines
     { name: 'robots', content: 'noindex, nofollow' },
   ];
 }

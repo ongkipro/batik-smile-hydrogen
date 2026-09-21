@@ -10,6 +10,9 @@ import {
   CollectionFilterHeader,
 } from '~/components/CollectionFilterBar';
 import { generateCollectionMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateCollectionSchema, generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -252,8 +255,19 @@ export default function Collection() {
     collection.products?.nodes?.[0]?.featuredImage?.url ||
     '/banners/hero_editorial_banner.jpg';
 
+  const breadcrumbItems = [
+    { label: 'KOLEKSI', to: '/collections' },
+    { label: collection?.title || 'Katalog' },
+  ];
+
   return (
     <div className={`min-h-screen pb-24 lg:pb-16 transition-colors duration-500 ${themeClasses}`}>
+      <JsonLd
+        schema={[
+          generateCollectionSchema(collection, collection?.products?.nodes),
+          generateBreadcrumbSchema(breadcrumbItems),
+        ]}
+      />
       {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR EXCLUSIVE & PREMIUM */}
       {isExclusive || isPremium ? (
         <section
@@ -709,3 +723,13 @@ const COLLECTION_QUERY = `#graphql
 
 /** @typedef {import('./+types/collections.$handle').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Koleksi Belum Tersedia"
+      message="Koleksi busana batik yang Anda cari mungkin telah digabungkan atau tautan telah diperbarui. Silakan jelajahi katalog utama butik kami."
+    />
+  );
+}

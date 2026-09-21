@@ -1,6 +1,7 @@
 import React, { useId } from 'react';
 import { CartForm } from '@shopify/hydrogen';
 import { formatRupiah } from '~/lib/currency';
+import { resolveCheckoutUrl } from '~/lib/checkout';
 
 /**
  * Architectural Quiet Luxury Cart Summary Component
@@ -83,16 +84,7 @@ export function CartSummary({ cart, layout: _layout }) {
  * @param {{checkoutUrl?: string}}
  */
 function CartCheckoutActions({ checkoutUrl }) {
-  let resolvedCheckoutUrl = checkoutUrl;
-  try {
-    const url = new URL(checkoutUrl);
-    if (url.hostname.includes('myshopify.com')) {
-      url.hostname = 'checkout.batiksmile.com';
-      resolvedCheckoutUrl = url.toString();
-    }
-  } catch {
-    // Keep original if parsing fails
-  }
+  const resolvedCheckoutUrl = resolveCheckoutUrl(checkoutUrl);
 
   return (
     <div className="mt-6 pt-5 border-t border-[#E2DFD8]">

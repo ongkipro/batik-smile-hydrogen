@@ -5,6 +5,7 @@ import { SearchResults } from '~/components/SearchResults';
 import { getEmptyPredictiveSearchResult } from '~/lib/search';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generateSearchMeta } from '~/lib/seo';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -412,3 +413,13 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
 
 /** @typedef {import('./+types/search').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Pencarian Belum Menemukan Hasil"
+      message="Sistem pencarian sedang disinkronkan atau kata kunci yang dicari belum tersedia. Silakan gunakan kata kunci lain atau jelajahi koleksi utama butik."
+    />
+  );
+}

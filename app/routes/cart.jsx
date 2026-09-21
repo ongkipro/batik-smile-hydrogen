@@ -3,6 +3,8 @@ import { CartForm } from '@shopify/hydrogen';
 import { CartMain } from '~/components/CartMain';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generateCartMeta } from '~/lib/seo';
+import { resolveCheckoutUrl } from '~/lib/checkout';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -78,7 +80,10 @@ export async function action({ request, context }) {
     status = 303;
     const targetUrl =
       redirectTo === 'checkout'
-        ? cartResult?.checkoutUrl || '/cart'
+        ? resolveCheckoutUrl(
+            cartResult?.checkoutUrl,
+            context.env?.PUBLIC_CHECKOUT_DOMAIN,
+          )
         : redirectTo;
     actionResponseHeaders.set('Location', targetUrl);
   }
@@ -167,3 +172,13 @@ export default function Cart() {
 /** @typedef {import('@shopify/hydrogen').CartQueryDataReturn} CartQueryDataReturn */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
 /** @typedef {ReturnType<typeof useActionData<typeof action>>} ActionReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Tas Belanja Tidak Ditemukan"
+      message="Sesi tas belanja Anda telah berakhir atau belum dapat dimuat. Silakan kembali menjelajahi wastra pilihan butik."
+    />
+  );
+}

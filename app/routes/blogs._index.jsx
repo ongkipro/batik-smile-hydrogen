@@ -4,6 +4,9 @@ import { Image, getPaginationVariables } from '@shopify/hydrogen';
 import { PaginatedResourceSection } from '~/components/PaginatedResourceSection';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generateBlogsIndexMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -54,11 +57,14 @@ export default function BlogsIndex() {
   const articles = articlesConnection?.nodes || [];
   const featuredArticle = articles.length > 0 ? articles[0] : null;
 
+  const breadcrumbItems = [{ label: 'JURNAL & WARTA' }];
+
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16">
+      <JsonLd schema={generateBreadcrumbSchema(breadcrumbItems)} />
       <div className="max-w-7xl mx-auto">
         {/* Minimalist Breadcrumbs */}
-        <Breadcrumb items={[{ label: 'JURNAL & WARTA' }]} />
+        <Breadcrumb items={breadcrumbItems} />
 
         {/* Editorial Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -310,3 +316,13 @@ const BLOGS_PAGE_QUERY = `#graphql
 
 /** @typedef {import('./+types/blogs._index').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Warta Belum Tersedia"
+      message="Arsip warta dan jurnal kebudayaan wastra sedang diperbarui. Silakan kembali ke beranda atau telusuri koleksi busana kami."
+    />
+  );
+}

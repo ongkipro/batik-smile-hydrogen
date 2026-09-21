@@ -1188,6 +1188,46 @@
   - *Action*: Added curated secondary section on `/policies` connecting customers to Size Guide (`/pages/panduan-ukuran`), Care Guide (`/pages/panduan-perawatan`), and Bespoke Tailoring (`/pages/layanan-seragam`), complete with direct WhatsApp Concierge CTA.
   - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
 
+---
+
+## Phase 59: Custom Checkout Domain & Customer Account Synchronization (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/lib/checkout.js, app/components/CartSummary.jsx, app/routes/cart.jsx, app/routes/cart.$lines.jsx, app/root.jsx, app/entry.server.jsx, .env.example*
+
+- [x] **Task 59.1: Dedicated Checkout & Account Domain Environment Configuration**
+  - *Action*: Configured `PUBLIC_CHECKOUT_DOMAIN="checkout.batiksmile.com"` and `PUBLIC_ACCOUNT_DOMAIN="account.batiksmile.com"` in `.env.example` and live `.env`. Updated `PUBLIC_CUSTOMER_ACCOUNT_API_URL="https://account.batiksmile.com"`.
+  - *Evidence*: Documented in `.env.example` and verified in Oxygen runtime environment bindings.
+- [x] **Task 59.2: Modular Checkout Resolution Utility (`app/lib/checkout.js`)**
+  - *Action*: Created `resolveCheckoutUrl(checkoutUrl, customDomain)` to rewrite internal `myshopify.com` or root domains to `checkout.batiksmile.com` while preserving checkout token, line items, and query parameters. Created `resolveAccountUrl(path, customAccountDomain)` for external portal links.
+  - *Evidence*: Unit test / verification passed, clean imports across cart handlers.
+- [x] **Task 59.3: Storefront Cart & Direct Redirects Normalization**
+  - *Action*: Integrated `resolveCheckoutUrl` into `CartSummary.jsx` checkout CTA, `cart.jsx` action redirect handler (`redirectTo === 'checkout'`), and `cart.$lines.jsx` instant link loader.
+  - *Evidence*: All checkout entry points consistently route to `https://checkout.batiksmile.com`.
+- [x] **Task 59.4: Content Security Policy & Root Loader Synchronization**
+  - *Action*: In `app/root.jsx`, exposed `publicCheckoutDomain` and `publicAccountDomain` with quiet fallbacks, and configured `consent.checkoutDomain`. In `app/entry.server.jsx`, whitelisted `https://account.batiksmile.com` and `https://checkout.batiksmile.com` in CSP `connectSrc` and `mediaSrc`.
+  - *Evidence*: Zero CSP violation warnings. `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+- [x] **Task 59.5: Navigation & Footer Client Portal Link**
+  - *Action*: Added "Portal Akun & Status Pesanan" link pointing to `/account` under LAYANAN & INFORMASI in `app/components/Footer.jsx`.
+  - *Evidence*: Verified in site footer and header account trigger.
+
+---
+
+## Phase 60: SEO Modernization, W3C Schema Engine, OG Image, & 404 Boundaries (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/lib/seo.js, app/lib/schema.js, app/components/JsonLd.jsx, app/components/NotFoundView.jsx, public/og-image.*, app/routes/**
+
+- [x] **Task 60.1: Standard 1200x630 OpenGraph Assets Generation (`public/og-image.jpg`, `public/og-image.webp`)**
+  - *Action*: Generated official high-resolution OpenGraph banners (1200x630, ~169KB JPG, ~113KB WebP) embodying Quiet Luxury Nusantara aesthetic: Obsidian Deep vignette, Mori Linen typography, antique gold (`#C5A059`) hairline borders, diamond corner emblems, and official showroom establishment credentials (Semarang, Est. 2007).
+  - *Evidence*: Verified file creation in `public/og-image.jpg` and `public/og-image.webp`.
+- [x] **Task 60.2: Comprehensive OpenGraph & Social Metadata Modernization (`app/lib/seo.js`)**
+  - *Action*: Modernized all 19 route metadata generators in `app/lib/seo.js`. Set `DEFAULT_OG_IMAGE = 'https://batiksmile.com/og-image.jpg'`, `DEFAULT_OG_IMAGE_WIDTH = '1200'`, `DEFAULT_OG_IMAGE_HEIGHT = '630'`, `DEFAULT_OG_IMAGE_TYPE = 'image/jpeg'`, and `DEFAULT_LOCALE = 'id_ID'`. Standardized `buildSocialMeta` ensuring 100% of routes export `og:locale`, `og:image:secure_url`, explicit dimensions, `og:image:type`, and Twitter card tags.
+  - *Evidence*: Verified via unit checks and route meta functions.
+- [x] **Task 60.3: W3C JSON-LD Structured Data Engine (`app/lib/schema.js`, `app/components/JsonLd.jsx`)**
+  - *Action*: Built comprehensive Schema.org generator covering `ClothingStore`/`Organization` (with Simongan 109 Flagship & Banyumanik branch, geo-coordinates, opening hours, WhatsApp Concierge, and Instagram), `WebSite` (with Sitelinks SearchBox `potentialAction`), `Product` (`Product`, `AggregateOffer`, brand, condition, stock availability, SKU), `CollectionPage`/`ItemList`, `BlogPosting`, and `BreadcrumbList`. Created CSP nonce-aware `<JsonLd>` component using `useNonce()` from `@shopify/hydrogen`.
+  - *Evidence*: Injected into `root.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `blogs._index.jsx`, `pages.$handle.jsx`, `policies.$handle.jsx`, and `policies._index.jsx`.
+- [x] **Task 60.4: Architectural Quiet Luxury 404 / Error System (`app/components/NotFoundView.jsx`, `app/routes/**`)**
+  - *Action*: Engineered modular, unboxed 404 view over Mori Linen canvas (`#FAF8F5`) with oversized watermark numeral (`404`), rotating diamond monogram emblem, whispered headline "Jejak Wastra Belum Tersedia", links to Home, Collections, search trigger, and WhatsApp Concierge. Replaced custom 404 in `$.jsx` and exported `ErrorBoundary` with `NotFoundView` across all key routes (`root.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, `blogs.$blogHandle.$articleHandle.jsx`, `blogs._index.jsx`, `pages.$handle.jsx`, `policies.$handle.jsx`, `policies._index.jsx`, `search.jsx`, `cart.jsx`).
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+
 
 
 

@@ -1,6 +1,9 @@
 import { useLoaderData } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePolicyMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -205,16 +208,17 @@ export default function Policy() {
   /** @type {LoaderReturnData} */
   const { policy } = useLoaderData();
 
+  const breadcrumbItems = [
+    { label: 'KEBIJAKAN & JAMINAN', to: '/policies' },
+    { label: policy.title.toUpperCase() },
+  ];
+
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-20 px-4 sm:px-6 lg:px-8">
+      <JsonLd schema={generateBreadcrumbSchema(breadcrumbItems)} />
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb Navigation */}
-        <Breadcrumb
-          items={[
-            { label: 'KEBIJAKAN & JAMINAN', to: '/policies' },
-            { label: policy.title.toUpperCase() },
-          ]}
-        />
+        <Breadcrumb items={breadcrumbItems} />
 
         {/* Header */}
         <div className="border-b border-[#E2DFD8] pb-8 mb-12">
@@ -305,3 +309,13 @@ const POLICY_AND_PAGE_QUERY = `#graphql
 
 /** @typedef {import('./+types/policies.$handle').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Dokumen Kebijakan Belum Tersedia"
+      message="Dokumen kebijakan atau garansi butik yang Anda cari sedang diperbarui. Silakan kembali ke beranda atau hubungi concierge butik kami."
+    />
+  );
+}

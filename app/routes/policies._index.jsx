@@ -1,6 +1,9 @@
 import { useLoaderData, Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePoliciesIndexMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -86,11 +89,14 @@ export default function Policies() {
   /** @type {LoaderReturnData} */
   const { policies, serviceGuides } = useLoaderData();
 
+  const breadcrumbItems = [{ label: 'KEBIJAKAN & JAMINAN BUTIK' }];
+
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-20 px-4 sm:px-6 lg:px-8">
+      <JsonLd schema={generateBreadcrumbSchema(breadcrumbItems)} />
       <div className="max-w-5xl mx-auto">
         {/* Breadcrumb Navigation */}
-        <Breadcrumb items={[{ label: 'KEBIJAKAN & JAMINAN BUTIK' }]} />
+        <Breadcrumb items={breadcrumbItems} />
 
         {/* Editorial Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -293,3 +299,13 @@ const POLICIES_QUERY = `#graphql
 
 /** @typedef {import('./+types/policies._index').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Halaman Kebijakan Belum Tersedia"
+      message="Halaman dokumen kebijakan dan garansi butik sedang diperbarui. Silakan kembali ke beranda atau hubungi concierge butik kami."
+    />
+  );
+}

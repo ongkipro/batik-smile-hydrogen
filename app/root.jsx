@@ -14,6 +14,9 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import {PageLayout} from './components/PageLayout';
+import {NotFoundView} from '~/components/NotFoundView';
+import {JsonLd} from '~/components/JsonLd';
+import {generateOrganizationSchema, generateWebSiteSchema} from '~/lib/schema';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -95,13 +98,14 @@ export async function loader(args) {
     ...deferredData,
     ...criticalData,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
-    publicCheckoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
+    publicCheckoutDomain: env.PUBLIC_CHECKOUT_DOMAIN || 'checkout.batiksmile.com',
+    publicAccountDomain: env.PUBLIC_ACCOUNT_DOMAIN || 'account.batiksmile.com',
     shop: getShopAnalytics({
       storefront,
       publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
     }),
     consent: {
-      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
+      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN || 'checkout.batiksmile.com',
       storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
       withPrivacyBanner: false,
       // localize the privacy banner
@@ -194,12 +198,16 @@ export default function App() {
     return <Outlet />;
   }
 
+  const organizationSchema = generateOrganizationSchema();
+  const webSiteSchema = generateWebSiteSchema();
+
   return (
     <Analytics.Provider
       cart={data.cart}
       shop={data.shop}
       consent={data.consent}
     >
+      <JsonLd schema={[organizationSchema, webSiteSchema]} />
       <PageLayout {...data}>
         <Outlet />
       </PageLayout>
@@ -220,44 +228,16 @@ export function ErrorBoundary() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#111111] flex flex-col items-center justify-center p-6 text-center">
-      <div className="max-w-xl mx-auto border border-[#E2DFD8] bg-white p-10 sm:p-14 shadow-sm">
-        <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-bold block mb-4">
-          BUTIK BATIK SMILE &bull; STATUS {errorStatus}
-        </span>
-        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-4">
-          {errorStatus === 404 ? 'Jejak Warisan Belum Tersedia' : 'Pembaruan Layanan Butik'}
-        </h1>
-        <div className="w-12 h-px bg-[#C5A059] mx-auto mb-6" />
-        <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed mb-8">
-          {errorStatus === 404
-            ? 'Mohon maaf, halaman atau arsip koleksi yang Anda tuju tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda atau hubungi konsultan butik kami.'
-            : 'Sistem butik sedang melakukan sinkronisasi data arsip. Silakan muat ulang atau hubungi concierge kami.'}
-        </p>
-
-        {errorMessage && process.env.NODE_ENV === 'development' && (
-          <div className="text-left bg-[#FAF8F5] p-3 border border-[#E2DFD8] mt-4 mb-6 text-[11px] overflow-auto max-w-full text-[#7C3F1D]">
-            <p className="font-mono">{errorMessage}</p>
-          </div>
-        )}
-
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
-          <a
-            href="/"
-            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-bold tracking-[0.18em] transition-colors"
-          >
-            KEMBALI KE BERANDA &rarr;
-          </a>
-          <a
-            href="https://wa.me/6281390888809"
-            target="_blank"
-            rel="noreferrer"
-            className="px-6 py-3.5 border border-[#111111] hover:bg-[#111111] text-[#111111] hover:text-white text-[10px] uppercase font-bold tracking-[0.18em] transition-colors"
-          >
-            KONSULTASI VIA WHATSAPP
-          </a>
-        </div>
-      </div>
+    <div className="min-h-screen bg-[#FAF8F5]">
+      <NotFoundView
+        statusCode={errorStatus}
+        title={errorStatus === 404 ? 'Jejak Wastra Belum Tersedia' : 'Pembaruan Layanan Butik'}
+        message={
+          process.env.NODE_ENV === 'development' && errorStatus !== 404
+            ? errorMessage
+            : undefined
+        }
+      />
     </div>
   );
 }

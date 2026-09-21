@@ -5,6 +5,9 @@ import { ProductItem } from '~/components/ProductItem';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { CollectionFilterBar } from '~/components/CollectionFilterBar';
 import { generateCollectionMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateCollectionSchema, generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -104,16 +107,30 @@ export default function CollectionAll() {
   /** @type {LoaderReturnData} */
   const { products } = useLoaderData();
 
+  const breadcrumbItems = [
+    { label: 'KOLEKSI', to: '/collections' },
+    { label: 'SEMUA PRODUK' },
+  ];
+
   return (
     <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+      <JsonLd
+        schema={[
+          generateCollectionSchema(
+            {
+              handle: 'all',
+              title: 'Katalog Lengkap Busana Batik',
+              description:
+                'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga 3 kasta, kemeja pria lapis furing, dan kain batik tulis asli Batik Smile Semarang.',
+            },
+            products?.nodes,
+          ),
+          generateBreadcrumbSchema(breadcrumbItems),
+        ]}
+      />
       <div className="w-full max-w-7xl mx-auto">
         {/* Breadcrumb Navigation */}
-        <Breadcrumb
-          items={[
-            { label: 'KOLEKSI', to: '/collections' },
-            { label: 'SEMUA PRODUK' },
-          ]}
-        />
+        <Breadcrumb items={breadcrumbItems} />
 
         {/* Editorial Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
@@ -246,3 +263,13 @@ const CATALOG_QUERY = `#graphql
 /** @typedef {import('./+types/collections.all').Route} Route */
 /** @typedef {import('storefrontapi.generated').CollectionItemFragment} CollectionItemFragment */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Katalog Belum Tersedia"
+      message="Katalog busana yang Anda tuju sedang diperbarui. Silakan kembali ke beranda atau hubungi concierge butik kami."
+    />
+  );
+}

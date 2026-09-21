@@ -253,6 +253,12 @@ export function Footer() {
                   Garansi Butik &amp; Syarat Ketentuan
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/account" className="hover:text-white transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
+                  Portal Akun &amp; Status Pesanan
+                </NavLink>
+              </li>
             </ul>
           </div>
 

@@ -5,6 +5,9 @@ import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { ProductItem } from '~/components/ProductItem';
 import { generateArticleMeta } from '~/lib/seo';
+import { JsonLd } from '~/components/JsonLd';
+import { generateArticleSchema, generateBreadcrumbSchema } from '~/lib/schema';
+import { NotFoundView } from '~/components/NotFoundView';
 
 /**
  * @type {Route.MetaFunction}
@@ -101,8 +104,19 @@ export default function Article() {
   const wordCount = textOnly.trim().split(/\s+/).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 180));
 
+  const breadcrumbItems = [
+    { label: 'JURNAL', to: '/blogs' },
+    { label: title.toUpperCase() },
+  ];
+
   return (
     <article className="bg-[#FAF8F5] min-h-screen text-[#111111] py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 relative">
+      <JsonLd
+        schema={[
+          generateArticleSchema(article, blogHandle),
+          generateBreadcrumbSchema(breadcrumbItems),
+        ]}
+      />
       {/* Hairline Antique Gold Reading Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 z-50 h-[2.5px] bg-transparent pointer-events-none">
         <div
@@ -114,10 +128,7 @@ export default function Article() {
       <div className="max-w-5xl mx-auto">
         {/* Minimalist Centered Breadcrumbs */}
         <Breadcrumb
-          items={[
-            { label: 'JURNAL', to: '/blogs' },
-            { label: title.toUpperCase() },
-          ]}
+          items={breadcrumbItems}
           className="justify-center mb-10 sm:mb-12"
         />
 
@@ -438,3 +449,13 @@ const ARTICLE_QUERY = `#graphql
 
 /** @typedef {import('./+types/blogs.$blogHandle.$articleHandle').Route} Route */
 /** @typedef {ReturnType<typeof useLoaderData<typeof loader>>} LoaderReturnData */
+
+export function ErrorBoundary() {
+  return (
+    <NotFoundView
+      statusCode={404}
+      title="Catatan Jurnal Belum Tersedia"
+      message="Artikel atau warta kebudayaan yang Anda tuju mungkin sedang disunting atau telah dipindahkan. Silakan jelajahi warta lainnya."
+    />
+  );
+}

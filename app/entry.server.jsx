@@ -19,14 +19,17 @@ export default async function handleRequest(
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     shop: {
-      checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
-      storeDomain: context.env.PUBLIC_STORE_DOMAIN,
+      checkoutDomain: context.env?.PUBLIC_CHECKOUT_DOMAIN || 'checkout.batiksmile.com',
+      storeDomain: context.env?.PUBLIC_STORE_DOMAIN,
     },
     connectSrc: [
       'https://account.batiksmile.com',
       'https://checkout.batiksmile.com',
       'https://batiksmile.com',
-    ],
+      context.env?.PUBLIC_ACCOUNT_DOMAIN ? `https://${context.env.PUBLIC_ACCOUNT_DOMAIN}` : null,
+      context.env?.PUBLIC_CHECKOUT_DOMAIN ? `https://${context.env.PUBLIC_CHECKOUT_DOMAIN}` : null,
+      context.env?.PUBLIC_STORE_DOMAIN ? `https://${context.env.PUBLIC_STORE_DOMAIN}` : null,
+    ].filter(Boolean),
     mediaSrc: [
       "'self'",
       'https://cdn.shopify.com',
