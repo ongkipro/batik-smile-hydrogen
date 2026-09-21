@@ -44,7 +44,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
             onClick={() => {
               if (layout === 'aside') close();
             }}
-            className="w-18 h-22 sm:w-22 sm:h-28 aspect-[4/5] shrink-0 bg-[#111111] overflow-hidden border border-[#E2DFD8] group block"
+            className="w-20 sm:w-24 aspect-[4/5] shrink-0 bg-[#111111] overflow-hidden border border-[#E2DFD8] group block"
           >
             <Image
               alt={title}
@@ -149,13 +149,13 @@ function CartLineQuantity({ line }) {
           disabled={quantity <= 1 || !!isOptimistic}
           name="decrease-quantity"
           value={prevQuantity}
-          className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
         >
           &#8722;
         </button>
       </CartLineUpdateButton>
 
-      <span className="w-6 sm:w-7 text-center text-xs font-semibold text-[#111111]">
+      <span className="w-7 text-center text-xs font-semibold text-[#111111]">
         {quantity}
       </span>
 
@@ -165,7 +165,7 @@ function CartLineQuantity({ line }) {
           name="increase-quantity"
           value={nextQuantity}
           disabled={!!isOptimistic}
-          className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-xs text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
         >
           &#43;
         </button>
@@ -193,7 +193,7 @@ function CartLineRemoveButton({ lineIds, disabled }) {
       <button
         disabled={disabled}
         type="submit"
-        className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#888888] hover:text-red-700 transition-colors cursor-pointer underline underline-offset-2"
+        className="text-[10px] uppercase tracking-wider text-[#888888] hover:text-[#7C3F1D] transition-colors cursor-pointer underline underline-offset-2 p-1"
       >
         Hapus
       </button>

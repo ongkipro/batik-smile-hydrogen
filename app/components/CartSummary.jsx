@@ -161,7 +161,7 @@ function CartDiscounts({
                 <button
                   type="submit"
                   aria-label="Hapus kode promo"
-                  className="text-[10px] uppercase tracking-wider text-[#A69F96] hover:text-red-700 transition-colors cursor-pointer"
+                  className="text-[10px] uppercase tracking-wider text-[#A69F96] hover:text-[#7C3F1D] transition-colors cursor-pointer py-1 px-1.5"
                 >
                   Hapus &times;
                 </button>

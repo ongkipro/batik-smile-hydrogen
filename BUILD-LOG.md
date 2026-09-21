@@ -1284,5 +1284,50 @@
 - Live Shopify Storefront API media query check on `sarimbit-charcoal-hitam` confirmed `gid://shopify/Video/41513996976185` with 1080p, 720p, and 480p MP4 sources.
 - Node unit test verified exact array ordering `[MediaImage 1, Video, MediaImage 2]`.
 
+---
+
+## Milestone 46: Codebase AI Slop Purge, Breadcrumb Architecture Elevation, & Mobile View Calibration (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Comprehensive AI Slop Purge across All Components, High-Fashion Single-Line Fluid Breadcrumbs, Precision Mobile Touch Targets & Architectural Geometry, and 100dvh Dynamic Viewport Support
+
+### 1. Codebase-Wide AI Slop & Inconsistency Elimination
+- Scanned entire repository (`app/`) for non-conformant styling, generic SaaS patterns, and rounded shapes:
+  - Enforced 100% Zero-Radius compliance: Replaced stock `rounded-full` indicator dot in `app/routes/products.$handle.jsx` line 726 with `rounded-none`.
+  - Refactored legacy `app/components/SarimbitSpotlight.jsx` to completely strip `rounded-2xl`, `rounded-full`, SaaS blue `#1B2A4A`, amber border, and heavy drop shadows. All cards now strictly use Quad-Harmonic palette (`#111111`, `#181818`, `#FAF8F5`, `#C5A059`) with `rounded-none`.
+  - Audited brand naming copy: Verified zero instances of "Batik Smile Nusantara" in frontend components; standardized exclusively on **"Batik Smile"**.
+
+### 2. Breadcrumb Architecture Elevation (`app/components/Breadcrumb.jsx`)
+- Overhauled breadcrumb navigation to high-fashion atelier standards:
+  - Replaced generic SVG chevrons with high-fashion whispered slash `/` separators (`text-[#B0AAA0]/70` on light surfaces, `text-[#C5A059]/40` on dark obsidian).
+  - Upgraded to semantic `<ol>` and `<li>` structure with `aria-label="Navigasi Breadcrumb"` and `aria-current="page"`.
+  - Single-line fluid touch scroll (`overflow-x-auto scrollbar-none py-1 -my-1`), guaranteeing zero awkward multi-line wraps on mobile viewports down to 320px width.
+  - Root Home includes architectural zero-radius icon and `BERANDA` label on larger viewports.
+  - Leaf active item max-width expanded (`max-w-[200px] sm:max-w-[360px] md:max-w-none`).
+
+### 3. Mobile View UX Calibration (Burger Menu, Search Modal, Cart & Mobile Bar)
+- **Burger Menu Mobile Drawer (`app/components/Header.jsx`)**:
+  - Added material descriptors to navigation links (`Sutra ATBM & Prada Emas`, `Tenun Dobby & Furing Hero`, etc.).
+  - Added In-Drawer Quick Search trigger bar (`CARI`) under the brand stamp.
+  - Added dedicated VIP WhatsApp Concierge direct contact strip (`081-390-8888-09`).
+  - Standardized touch target sizes to minimum 44px (`min-h-[44px]`) on all drawer navigation items.
+- **Drawer Container (`app/components/Aside.jsx`)**:
+  - Enforced dynamic mobile viewport height `h-[100dvh] max-h-[100dvh]` to eliminate iOS Safari floating URL bar jump and content cutoff.
+  - Calibrated close button to minimum 44px touch target (`w-11 h-11 min-w-[44px] min-h-[44px]`).
+- **Luxury Search Modal (`app/components/LuxurySearchModal.jsx`)**:
+  - Upgraded mobile container to `h-[100dvh] max-h-[100dvh]`.
+  - Calibrated close button to 44px touch area (`w-11 h-11 min-w-[44px] min-h-[44px]`).
+  - Added dynamic mobile safe area padding `pb-[max(0.75rem,env(safe-area-inset-bottom))]` to the footer status bar.
+- **Cart Drawer & Page (`app/components/CartLineItem.jsx` & `app/components/CartSummary.jsx`)**:
+  - Calibrated thumbnail proportions to `w-20 sm:w-24 aspect-[4/5]`.
+  - Enlarged stepper touch targets to `w-7 h-7` with smooth hover states.
+  - Replaced generic red delete and voucher remove buttons with Quiet Luxury Soga Matang (`hover:text-[#7C3F1D]`).
+- **Mobile Bottom Navigation (`app/components/MobileNavigation.jsx`)**:
+  - Converted SVG stroke attributes from `round` to sharp architectural `square` and `miter`.
+
+### 4. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite SSR + Rolldown + React Router typegen).
+- Confirmed zero occurrences of unauthorized `rounded-` classes across `app/`.
+
+
 
 

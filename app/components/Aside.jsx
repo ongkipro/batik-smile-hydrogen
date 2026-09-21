@@ -57,7 +57,7 @@ export function Aside({children, heading, type}) {
       <aside
         className={`absolute top-0 ${
           type === 'mobile' ? 'left-0' : 'right-0'
-        } h-full w-full sm:w-[420px] bg-[#FAF8F5] shadow-2xl flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-in-out ${
+        } h-[100dvh] max-h-[100dvh] w-full sm:w-[420px] bg-[#FAF8F5] shadow-[0_20px_50px_rgba(0,0,0,0.18)] flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-in-out ${
           expanded
             ? 'translate-x-0'
             : type === 'mobile'
@@ -73,7 +73,7 @@ export function Aside({children, heading, type}) {
             </h3>
           </div>
           <button 
-            className="w-10 h-10 min-w-[40px] min-h-[40px] sm:w-11 sm:h-11 sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+            className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
             onClick={close} 
             aria-label="Tutup menu samping"
           >

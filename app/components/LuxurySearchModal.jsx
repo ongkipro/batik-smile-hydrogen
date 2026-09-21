@@ -165,7 +165,7 @@ export function LuxurySearchModal() {
       />
 
       {/* 2. Main Luxury Modal Container: Mobile Full-Screen / Desktop Centered Architectural Dialog */}
-      <div className="relative z-10 w-full lg:max-w-4xl xl:max-w-5xl lg:my-6 bg-[#FAF8F5] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] flex flex-col h-full lg:h-[88vh] overflow-hidden">
+      <div className="relative z-10 w-full lg:max-w-4xl xl:max-w-5xl lg:my-6 bg-[#FAF8F5] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] flex flex-col h-[100dvh] lg:h-[88vh] max-h-[100dvh] overflow-hidden">
         
         {/* Top Header Bar */}
         <div className="flex items-center justify-between px-4 sm:px-8 py-3.5 border-b border-[#E2DFD8] bg-white shrink-0">
@@ -183,7 +183,7 @@ export function LuxurySearchModal() {
             <button
               type="button"
               onClick={close}
-              className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center text-base font-light text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+              className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-base font-light text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
               aria-label="Tutup pencarian"
             >
               &#10005;
@@ -645,7 +645,7 @@ export function LuxurySearchModal() {
         </div>
 
         {/* Quiet Luxury Footer Status Bar */}
-        <div className="px-4 sm:px-8 py-3 bg-white border-t border-[#E2DFD8] flex items-center justify-between text-[10px] text-[#777777] shrink-0">
+        <div className="px-4 sm:px-8 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-white border-t border-[#E2DFD8] flex items-center justify-between text-[10px] text-[#777777] shrink-0">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#C5A059]" />
             <span>Butik Resmi Semarang &bull; Est. 2007 &bull; Pelayanan 3S 1C 1T &amp; 1H</span>

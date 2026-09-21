@@ -9,12 +9,12 @@ import { AnnouncementBar } from './AnnouncementBar';
  * Core Categories: Sarimbit Luxury, Sarimbit Premium, Sarimbit Ekonomi, Batik Anak, Kain, Aksesoris
  */
 const NAV_ITEMS = [
-  { label: 'Sarimbit Luxury', to: '/collections/sarimbit-luxury' },
-  { label: 'Sarimbit Premium', to: '/collections/sarimbit-premium' },
-  { label: 'Sarimbit Ekonomi', to: '/collections/sarimbit-ekonomi' },
-  { label: 'Batik Anak', to: '/collections/batik-anak' },
-  { label: 'Kain', to: '/collections/kain' },
-  { label: 'Aksesoris', to: '/collections/aksesoris' },
+  { label: 'Sarimbit Luxury', desc: 'Sutra ATBM & Prada Emas', to: '/collections/sarimbit-luxury' },
+  { label: 'Sarimbit Premium', desc: 'Tenun Dobby & Furing Hero', to: '/collections/sarimbit-premium' },
+  { label: 'Sarimbit Ekonomi', desc: 'Katun Primisima Sejuk', to: '/collections/sarimbit-ekonomi' },
+  { label: 'Batik Anak', desc: 'Putra & Putri', to: '/collections/batik-anak' },
+  { label: 'Kain', desc: 'Kain Tulis Canting 1-of-1', to: '/collections/kain' },
+  { label: 'Aksesoris', desc: 'Blangkon & Aksesori', to: '/collections/aksesoris' },
 ];
 
 /**
@@ -220,27 +220,51 @@ function CartBadge({ count }) {
  * Mobile Navigation Drawer Link Helper (Master Quiet Luxury Experience)
  */
 export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomainUrl }) {
-  const { close } = useAside();
+  const { close, open } = useAside();
 
   return (
     <nav className="flex flex-col min-h-full bg-[#FAF8F5]" role="navigation" aria-label="Menu Mobile Butik">
       <div className="flex-1 p-5 sm:p-6 pb-6 overflow-y-auto">
         {/* Brand Heritage Stamp */}
-        <div className="pb-4 border-b border-[#E2DFD8] mb-6 flex items-center justify-between">
+        <div className="pb-4 border-b border-[#E2DFD8] mb-5 flex items-center justify-between">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block">
               BUTIK BATIK SMILE
             </span>
-            <span className="text-[9px] uppercase tracking-[0.16em] text-[#5A5550] block mt-0.5">
+            <span className="text-[9px] uppercase tracking-[0.16em] text-[#5A5550] block mt-0.5 font-light">
               Semarang • Est. 2007
             </span>
           </div>
-          <span className="text-[9px] uppercase tracking-widest text-[#111111] bg-white border border-[#E2DFD8] px-2 py-0.5 font-semibold">
+          <span className="text-[9px] uppercase tracking-widest text-[#111111] bg-white border border-[#E2DFD8] px-2.5 py-0.5 font-semibold">
             3 LANTAI
           </span>
         </div>
 
-        {/* Kategori Utama Mobile (Matching Desktop 1-Line Hierarchy) */}
+        {/* In-Drawer Quick Search Trigger Bar */}
+        <div className="mb-6">
+          <button
+            type="button"
+            onClick={() => {
+              close();
+              setTimeout(() => open('search'), 120);
+            }}
+            className="w-full py-2.5 px-3.5 bg-white border border-[#E2DFD8] hover:border-[#C5A059] flex items-center justify-between text-xs transition-colors cursor-pointer group shadow-xs"
+          >
+            <span className="flex items-center gap-2.5">
+              <svg className="w-4 h-4 text-[#9E7D3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <span className="text-[10.5px] uppercase tracking-[0.14em] text-[#777777] group-hover:text-[#111111]">
+                Cari Busana &amp; Koleksi...
+              </span>
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold">
+              CARI
+            </span>
+          </button>
+        </div>
+
+        {/* Kategori Utama Mobile (Matching Desktop 1-Line Hierarchy with Material Descriptors) */}
         <div className="mb-6">
           <div className="flex items-center gap-2 pb-2 border-b border-[#E2DFD8] mb-2">
             <span className="w-1.5 h-1.5 bg-[#9E7D3B]" />
@@ -255,31 +279,63 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
                 key={item.to}
                 to={item.to}
                 onClick={close}
-                className="py-3 px-3.5 text-xs font-medium tracking-[0.14em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
+                className="py-2.5 px-3.5 hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 group min-h-[44px]"
               >
-                <span>{item.label}</span>
-                <span className="text-[#A69F96]">&rarr;</span>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold tracking-[0.14em] text-[#111111] group-hover:text-[#9E7D3B] transition-colors uppercase">
+                    {item.label}
+                  </span>
+                  {item.desc && (
+                    <span className="text-[9px] text-[#888888] tracking-wider mt-0.5 font-light">
+                      {item.desc}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[#A69F96] group-hover:text-[#9E7D3B] transition-colors text-sm">&rarr;</span>
               </NavLink>
             ))}
 
             <NavLink
               to="/collections/all?sort=best-selling"
               onClick={close}
-              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#C5A059] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
+              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#C5A059] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase min-h-[44px]"
             >
               <span>Koleksi Busana Terlaris</span>
-              <span className="text-[#C5A059]">&rarr;</span>
+              <span className="text-[#C5A059] text-sm">&rarr;</span>
             </NavLink>
 
             <NavLink
               to="/collections/all"
               onClick={close}
-              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#111111] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase"
+              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#111111] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase min-h-[44px]"
             >
               <span>Semua Produk Butik</span>
-              <span className="text-[#111111]">&rarr;</span>
+              <span className="text-[#111111] text-sm">&rarr;</span>
             </NavLink>
           </div>
+        </div>
+
+        {/* VIP WhatsApp Concierge Consultation Strip */}
+        <div className="mb-6">
+          <a
+            href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20busana"
+            target="_blank"
+            rel="noreferrer"
+            className="w-full py-3 px-3.5 bg-white border border-[#E2DFD8] hover:border-[#25D366] text-[#111111] flex items-center justify-between text-xs transition-colors group min-h-[44px] shadow-xs"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="w-2 h-2 bg-[#25D366] shrink-0" />
+              <div className="text-left">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] block text-[#111111]">
+                  VIP WHATSAPP CONCIERGE
+                </span>
+                <span className="text-[9px] text-[#5A5550] tracking-wider block font-light mt-0.5">
+                  081-390-8888-09 • Konsultasi Busana &amp; Ukuran
+                </span>
+              </div>
+            </div>
+            <span className="text-[#25D366] font-bold text-sm">&rarr;</span>
+          </a>
         </div>
 
         {/* Layanan & Showroom */}
@@ -295,37 +351,37 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
             <NavLink
               to="/pages/layanan-seragam"
               onClick={close}
-              className="py-2 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between"
+              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
             >
               <span>Layanan Seragam &amp; Bespoke Tailoring</span>
-              <span className="text-[#A69F96]">&rarr;</span>
+              <span className="text-[#A69F96] text-xs">&rarr;</span>
             </NavLink>
 
             <NavLink
               to="/pages/fasilitas-store"
               onClick={close}
-              className="py-2 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between"
+              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
             >
               <span>Fasilitas Showroom 3 Lantai (Simongan)</span>
-              <span className="text-[#A69F96]">&rarr;</span>
+              <span className="text-[#A69F96] text-xs">&rarr;</span>
             </NavLink>
 
             <NavLink
               to="/pages/lokasi-toko"
               onClick={close}
-              className="py-2 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between"
+              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
             >
               <span>Lokasi Toko &amp; Jam Buka</span>
-              <span className="text-[#A69F96]">&rarr;</span>
+              <span className="text-[#A69F96] text-xs">&rarr;</span>
             </NavLink>
 
             <NavLink
               to="/blogs"
               onClick={close}
-              className="py-2 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between"
+              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
             >
               <span>Warta &amp; Jurnal Budaya</span>
-              <span className="text-[#A69F96]">&rarr;</span>
+              <span className="text-[#A69F96] text-xs">&rarr;</span>
             </NavLink>
           </div>
         </div>
@@ -336,7 +392,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
         <NavLink
           to="/account"
           onClick={close}
-          className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#9E7D3B] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-sm"
+          className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#9E7D3B] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-sm min-h-[44px]"
         >
           <svg className="w-4 h-4 text-[#C5A059]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path

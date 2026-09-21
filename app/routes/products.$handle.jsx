@@ -723,7 +723,7 @@ export default function Product() {
               {/* Stock Status Indicator (Placed directly under price) */}
               <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] mb-3">
                 <span
-                  className={`inline-block w-1.5 h-1.5 rounded-full ${
+                  className={`inline-block w-1.5 h-1.5 rounded-none ${
                     isAvailable ? (isExclusiveTier ? 'bg-[#4ADE80]' : 'bg-[#2E6B3E]') : 'bg-[#EF4444]'
                   }`}
                 />
