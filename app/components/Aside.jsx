@@ -65,15 +65,15 @@ export function Aside({children, heading, type}) {
             : 'translate-x-full'
         }`}
       >
-        <header className="flex flex-shrink-0 items-center justify-between h-16 sm:h-20 px-6 border-b border-[#E2DFD8] bg-white z-10">
+        <header className={`flex flex-shrink-0 items-center justify-between h-16 sm:h-20 px-6 sm:px-8 border-b border-[#E2DFD8] z-10 ${type === 'mobile' ? 'bg-[#FAF8F5]' : 'bg-white'}`}>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#C5A059]" />
-            <h3 id={id} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#111111] m-0">
+            <h3 id={id} className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#111111] m-0">
               {heading}
             </h3>
           </div>
           <button 
-            className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+            className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-sm font-light text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
             onClick={close} 
             aria-label="Tutup menu samping"
           >

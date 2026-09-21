@@ -1065,6 +1065,22 @@
   - *Action*: Removed the redundant quick search bar container from `HeaderMenu` drawer. Mobile search remains cleanly accessible via the persistent mobile bottom bar (`MobileNavigation.jsx`). Streamlined drawer structure directly into Brand Heritage Stamp &rarr; Kategori Utama &rarr; VIP WhatsApp Concierge &rarr; Layanan Showroom &rarr; Sticky Akun Saya.
   - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
 
+---
+
+## Phase 51: Mobile Burger Drawer Elevation: Clean Minimalist Modern Luxury Editorial Stream (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/components/Header.jsx, app/components/Aside.jsx, app/components/PageLayout.jsx*
+
+- [x] **Task 51.1: Complete Purge of AI Slop from Mobile Menu Drawer (`app/components/Header.jsx`)**
+  - *Action*: Completely eliminated repetitive box borders (`border-b border-[#E2DFD8]/40`, `hover:bg-white`), generic right arrows (`&rarr;`), verbose catalog descriptions (`item.desc`), tacky `3 LANTAI` box badge, rigid section dividers, loud green WhatsApp CTA banner, and sticky bottom black button brick.
+  - *Evidence*: `app/components/Header.jsx` verified clean of box borders, arrows, and green banners.
+- [x] **Task 51.2: Pristine Editorial Typography & Whispered Brand Architecture**
+  - *Action*: Implemented confident editorial typography (`font-serif text-2xl sm:text-[26px] font-normal tracking-wide text-[#111111] hover:text-[#9E7D3B]`) for primary collections (`Sarimbit Luxury`, `Sarimbit Premium`, `Sarimbit Ekonomi`, `Batik Anak`, `Kain`, `Aksesoris`, `Koleksi Terlaris`, `Semua Koleksi`). Added whispered brand heritage stamp (`BUTIK BATIK SMILE`, `Semarang • Est. 2007`), delicate hairline gold divider (`w-10 h-px bg-[#C5A059]/40`), whispered secondary editorial navigation, and understated VIP Concierge (`081-390-8888-09`) and Account links.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings).
+- [x] **Task 51.3: Drawer Container Background & Header Unification (`Aside.jsx`, `PageLayout.jsx`)**
+  - *Action*: Unified drawer header background to Mori Linen (`bg-[#FAF8F5]` on mobile drawer) to create an unbroken, seamless editorial canvas. Simplified drawer header title to whispered, minimalist `MENU` with wide tracking (`tracking-[0.22em]`).
+  - *Evidence*: `npm run build` exits with code 0 (Vite SSR + Oxygen bundle created in 874ms).
+
+
 
 
 

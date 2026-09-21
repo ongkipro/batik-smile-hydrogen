@@ -218,168 +218,110 @@ function CartBadge({ count }) {
 
 /**
  * Mobile Navigation Drawer Link Helper (Master Quiet Luxury Experience)
+ * Pure frameless editorial stream: confident typography, zero AI-slop boxes, zero arrows.
  */
 export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomainUrl }) {
   const { close } = useAside();
 
   return (
-    <nav className="flex flex-col min-h-full bg-[#FAF8F5]" role="navigation" aria-label="Menu Mobile Butik">
-      <div className="flex-1 p-5 sm:p-6 pb-6 overflow-y-auto">
-        {/* Brand Heritage Stamp */}
-        <div className="pb-4 border-b border-[#E2DFD8] mb-6 flex items-center justify-between">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block">
+    <nav className="flex flex-col min-h-full bg-[#FAF8F5] select-none" role="navigation" aria-label="Menu Mobile Butik">
+      <div className="flex-1 px-6 sm:px-8 py-7 sm:py-8 flex flex-col justify-between">
+        <div>
+          {/* Whispered Brand Heritage Stamp */}
+          <div className="mb-8">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#9E7D3B] block">
               BUTIK BATIK SMILE
             </span>
-            <span className="text-[9px] uppercase tracking-[0.16em] text-[#5A5550] block mt-0.5 font-light">
-              Semarang • Est. 2007
-            </span>
-          </div>
-          <span className="text-[9px] uppercase tracking-widest text-[#111111] bg-white border border-[#E2DFD8] px-2.5 py-0.5 font-semibold">
-            3 LANTAI
-          </span>
-        </div>
-
-        {/* Kategori Utama Mobile (Matching Desktop 1-Line Hierarchy with Material Descriptors) */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 pb-2 border-b border-[#E2DFD8] mb-2">
-            <span className="w-1.5 h-1.5 bg-[#9E7D3B]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#111111]">
-              KATEGORI UTAMA
+            <span className="text-[9px] uppercase tracking-[0.18em] text-[#777777] block mt-1 font-light">
+              Semarang &bull; Est. 2007
             </span>
           </div>
 
-          <div className="space-y-1">
+          {/* Primary Collections (Confident, Editorial, Frameless) */}
+          <div className="flex flex-col space-y-4 sm:space-y-5 mb-8">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 onClick={close}
-                className="py-2.5 px-3.5 hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 group min-h-[44px]"
+                className="font-serif text-2xl sm:text-[26px] font-normal text-[#111111] hover:text-[#9E7D3B] transition-colors duration-200 tracking-wide block py-0.5"
               >
-                <div className="flex flex-col">
-                  <span className="text-xs font-semibold tracking-[0.14em] text-[#111111] group-hover:text-[#9E7D3B] transition-colors uppercase">
-                    {item.label}
-                  </span>
-                  {item.desc && (
-                    <span className="text-[9px] text-[#888888] tracking-wider mt-0.5 font-light">
-                      {item.desc}
-                    </span>
-                  )}
-                </div>
-                <span className="text-[#A69F96] group-hover:text-[#9E7D3B] transition-colors text-sm">&rarr;</span>
+                {item.label}
               </NavLink>
             ))}
 
             <NavLink
               to="/collections/all?sort=best-selling"
               onClick={close}
-              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#C5A059] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase min-h-[44px]"
+              className="font-serif text-2xl sm:text-[26px] font-normal text-[#9E7D3B] hover:text-[#111111] transition-colors duration-200 tracking-wide block italic py-0.5"
             >
-              <span>Koleksi Busana Terlaris</span>
-              <span className="text-[#C5A059] text-sm">&rarr;</span>
+              Koleksi Terlaris
             </NavLink>
 
             <NavLink
               to="/collections/all"
               onClick={close}
-              className="py-3 px-3.5 text-xs font-semibold tracking-[0.14em] text-[#111111] hover:bg-white transition-colors flex items-center justify-between border-b border-[#E2DFD8]/40 uppercase min-h-[44px]"
+              className="font-serif text-2xl sm:text-[26px] font-normal text-[#777777] hover:text-[#111111] transition-colors duration-200 tracking-wide block py-0.5"
             >
-              <span>Semua Produk Butik</span>
-              <span className="text-[#111111] text-sm">&rarr;</span>
+              Semua Koleksi
+            </NavLink>
+          </div>
+
+          {/* Hairline Accent Divider */}
+          <div className="w-10 h-px bg-[#C5A059]/40 mb-8" />
+
+          {/* Secondary Editorial Links (Whispered Sans, Generous Tracking) */}
+          <div className="flex flex-col space-y-3 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium text-[#5A5550]">
+            <NavLink
+              to="/pages/layanan-seragam"
+              onClick={close}
+              className="hover:text-[#111111] transition-colors block py-0.5"
+            >
+              Layanan Seragam &amp; Bespoke
+            </NavLink>
+            <NavLink
+              to="/pages/fasilitas-store"
+              onClick={close}
+              className="hover:text-[#111111] transition-colors block py-0.5"
+            >
+              Showroom 3 Lantai (Simongan)
+            </NavLink>
+            <NavLink
+              to="/pages/lokasi-toko"
+              onClick={close}
+              className="hover:text-[#111111] transition-colors block py-0.5"
+            >
+              Lokasi Butik &amp; Jam Buka
+            </NavLink>
+            <NavLink
+              to="/blogs"
+              onClick={close}
+              className="hover:text-[#111111] transition-colors block py-0.5"
+            >
+              Warta &amp; Jurnal Budaya
             </NavLink>
           </div>
         </div>
 
-        {/* VIP WhatsApp Concierge Consultation Strip */}
-        <div className="mb-6">
+        {/* Elegant Whispered VIP Concierge & Account Footer */}
+        <div className="pt-8 mt-10 border-t border-[#E2DFD8] flex flex-col gap-3.5 pb-4">
           <a
             href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20busana"
             target="_blank"
             rel="noreferrer"
-            className="w-full py-3 px-3.5 bg-white border border-[#E2DFD8] hover:border-[#25D366] text-[#111111] flex items-center justify-between text-xs transition-colors group min-h-[44px] shadow-xs"
+            className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.18em] text-[#7C3F1D] hover:text-[#111111] font-semibold transition-colors py-0.5"
           >
-            <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 bg-[#25D366] shrink-0" />
-              <div className="text-left">
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] block text-[#111111]">
-                  VIP WHATSAPP CONCIERGE
-                </span>
-                <span className="text-[9px] text-[#5A5550] tracking-wider block font-light mt-0.5">
-                  081-390-8888-09 • Konsultasi Busana &amp; Ukuran
-                </span>
-              </div>
-            </div>
-            <span className="text-[#25D366] font-bold text-sm">&rarr;</span>
+            <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
+            <span>VIP Concierge: 081-390-8888-09</span>
           </a>
+          <NavLink
+            to="/account"
+            onClick={close}
+            className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.18em] text-[#5A5550] hover:text-[#111111] font-medium transition-colors py-0.5"
+          >
+            <span>Akun Pelanggan &amp; Status Pesanan</span>
+          </NavLink>
         </div>
-
-        {/* Layanan & Showroom */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 pb-2 border-b border-[#E2DFD8] mb-2">
-            <span className="w-1.5 h-1.5 bg-[#9E7D3B]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#111111]">
-              LAYANAN &amp; SHOWROOM
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            <NavLink
-              to="/pages/layanan-seragam"
-              onClick={close}
-              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
-            >
-              <span>Layanan Seragam &amp; Bespoke Tailoring</span>
-              <span className="text-[#A69F96] text-xs">&rarr;</span>
-            </NavLink>
-
-            <NavLink
-              to="/pages/fasilitas-store"
-              onClick={close}
-              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
-            >
-              <span>Fasilitas Showroom 3 Lantai (Simongan)</span>
-              <span className="text-[#A69F96] text-xs">&rarr;</span>
-            </NavLink>
-
-            <NavLink
-              to="/pages/lokasi-toko"
-              onClick={close}
-              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
-            >
-              <span>Lokasi Toko &amp; Jam Buka</span>
-              <span className="text-[#A69F96] text-xs">&rarr;</span>
-            </NavLink>
-
-            <NavLink
-              to="/blogs"
-              onClick={close}
-              className="py-2.5 px-3 text-[11px] font-medium tracking-[0.12em] text-[#111111] hover:bg-white hover:text-[#9E7D3B] transition-colors flex items-center justify-between min-h-[40px]"
-            >
-              <span>Warta &amp; Jurnal Budaya</span>
-              <span className="text-[#A69F96] text-xs">&rarr;</span>
-            </NavLink>
-          </div>
-        </div>
-      </div>
-
-      {/* Sticky Bottom Account Action */}
-      <div className="sticky bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] p-4 pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
-        <NavLink
-          to="/account"
-          onClick={close}
-          className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#9E7D3B] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-sm min-h-[44px]"
-        >
-          <svg className="w-4 h-4 text-[#C5A059]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="square"
-              strokeLinejoin="miter"
-              strokeWidth="1.5"
-              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-            />
-          </svg>
-          <span>AKUN SAYA &amp; STATUS PESANAN</span>
-        </NavLink>
       </div>
     </nav>
   );

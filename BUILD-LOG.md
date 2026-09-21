@@ -1372,6 +1372,28 @@
 - `npm run lint`: 0 errors, 0 warnings.
 - `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 862ms).
 
+---
+
+## Milestone 49: Mobile Drawer Elevation: Clean Minimalist Modern Luxury Editorial Stream (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Complete elimination of AI-slop boxes, right arrows, and cluttered sub-badges in mobile burger drawer in favor of high-fashion editorial typography
+
+### 1. Architectural Changes
+- **HeaderMenu Overhaul (`app/components/Header.jsx`)**:
+  - Removed all boxed line items (`border-b border-[#E2DFD8]/40`, `hover:bg-white`) and generic right arrows (`&rarr;`).
+  - Removed verbose category descriptors (`item.desc`) that caused catalog/CRM-like visual fatigue.
+  - Replaced with pristine, confident editorial typography (`font-serif text-2xl sm:text-[26px] font-normal tracking-wide text-[#111111] hover:text-[#9E7D3B]`).
+  - Replaced boxy `3 LANTAI` badge and rigid `KATEGORI UTAMA` header with an understated brand heritage stamp (`BUTIK BATIK SMILE`, `Semarang • Est. 2007`).
+  - Removed loud green WhatsApp card banner and sticky black button brick; replaced with whispered, elegant VIP Concierge and Account links (`text-[11px] uppercase tracking-[0.18em]`).
+  - Added delicate hairline gold accent divider (`w-10 h-px bg-[#C5A059]/40`).
+- **Aside Header Alignment (`app/components/Aside.jsx` & `app/components/PageLayout.jsx`)**:
+  - Harmonized Aside header background with Mori Linen canvas (`bg-[#FAF8F5]` on mobile drawer) to create an unbroken, seamless editorial canvas.
+  - Simplified drawer header title to whispered, minimalist `MENU` with wide tracking (`tracking-[0.22em]`).
+
+### 2. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 874ms).
+
+
 
 
 
