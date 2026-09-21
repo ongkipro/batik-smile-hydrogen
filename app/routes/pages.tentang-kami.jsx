@@ -25,7 +25,7 @@ export async function loader({ context }) {
   try {
     const data = await context.storefront.query(PAGE_SEO_QUERY, {
       variables: { handle: 'tentang-kami' },
-      cache: context.storefront.CacheLong(),
+      cache: context.storefront.CacheShort(),
     });
     return { page: data?.page || null };
   } catch {
@@ -45,163 +45,178 @@ export const meta = ({ data }) => {
 
 export default function TentangKamiPage() {
   return (
-    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-10 pb-24 lg:pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FAF8F5] min-h-screen text-[#111111] pt-8 sm:pt-10 pb-24 lg:pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb Navigation */}
         <Breadcrumb items={[{ label: 'TENTANG KAMI' }]} />
 
-        {/* Header */}
-        <div className="text-center mb-12 sm:mb-14">
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+        {/* 1. Header Hero */}
+        <div className="text-center mb-14 sm:mb-16">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2.5">
             SEMARANG &bull; ESTABLISHED 2007
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight max-w-2xl mx-auto">
             Perjalanan Menenun Senyum &amp; Martabat
           </h1>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4" />
         </div>
 
-        {/* Narrative Card (0px Radius) */}
-        <div className="bg-white p-8 sm:p-14 border border-[#E2DFD8] shadow-sm space-y-6 text-xs sm:text-sm text-[#5A5550] leading-relaxed font-light mb-12">
-          <blockquote className="font-serif text-lg sm:text-2xl text-[#111111] italic font-normal leading-snug border-l-2 border-[#C5A059] pl-6 py-1">
+        {/* 2. Narrative Section (Pure Frameless Editorial Flow) */}
+        <div className="mb-16 sm:mb-20">
+          <blockquote className="font-serif text-xl sm:text-2xl lg:text-[26px] text-[#111111] italic font-normal leading-relaxed text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             &ldquo;Batik bukan sekadar torehan canting malam di atas bentangan mori, melainkan doa kesabaran, wibawa martabat, dan kehangatan ikatan kasih sebuah keluarga.&rdquo;
           </blockquote>
 
-          <p>
-            Berawal dari sebuah butik di kota Semarang pada tahun 2007, <strong>Batik Smile</strong> lahir
-            dengan dedikasi luhur: menghadirkan busana batik Nusantara yang tidak hanya anggun secara estetika, tetapi
-            juga memberikan kenyamanan paripurna bagi pemakainya. Kami memadukan katun primisima bermutu tinggi, dobby timbul,
-            dan sutra ATBM asli dengan lapisan furing hero katun yang sejuk dan menyerap keringat.
-          </p>
+          <div className="space-y-5 text-xs sm:text-sm text-[#5A5550] leading-relaxed font-light max-w-3xl mx-auto">
+            <p>
+              Berawal dari sebuah butik di kota Semarang pada tahun 2007, <strong className="font-medium text-[#111111]">Batik Smile</strong> lahir
+              dengan dedikasi luhur: menghadirkan busana batik Nusantara yang tidak hanya anggun secara estetika, tetapi
+              juga memberikan kenyamanan paripurna bagi pemakainya. Kami memadukan katun primisima bermutu tinggi, dobby timbul,
+              dan sutra ATBM asli dengan lapisan furing hero katun yang sejuk dan menyerap keringat.
+            </p>
 
-          <p>
-            Kini, dengan kehadiran <strong>Flagship Showroom 3 Lantai di Jl. Simongan Raya No. 109, Semarang</strong> serta
-            <strong> Cabang Banyumanik di Jl. Sukun Raya No. 23</strong>, Batik Smile melayani ribuan keluarga,
-            tokoh instansi, dan korporat dari seluruh penjuru Nusantara yang mendambakan keserasian busana sarimbit tanpa kompromi.
-          </p>
+            <p>
+              Kini, dengan kehadiran <strong className="font-medium text-[#111111]">Flagship Showroom 3 Lantai di Jl. Simongan Raya No. 109, Semarang</strong> serta
+              <strong className="font-medium text-[#111111]"> Cabang Banyumanik di Jl. Sukun Raya No. 23</strong>, Batik Smile melayani ribuan keluarga,
+              tokoh instansi, dan korporat dari seluruh penjuru Nusantara yang mendambakan keserasian busana sarimbit tanpa kompromi.
+            </p>
 
-          <p>
-            Setiap helai kain dikerjakan oleh para pengrajin pembatik tulis dan cap tradisional di sentra batik Pekalongan,
-            Solo, dan Cirebon yang kami bina secara berkelanjutan guna memastikan regenerasi warisan budaya tetap lestari.
-          </p>
+            <p>
+              Setiap helai kain dikerjakan oleh para pengrajin pembatik tulis dan cap tradisional di sentra batik Pekalongan,
+              Solo, dan Cirebon yang kami bina secara berkelanjutan guna memastikan regenerasi warisan budaya tetap lestari.
+            </p>
+          </div>
         </div>
 
-        {/* Budaya Layanan 3S 1C 1T & 1H */}
-        <div className="mb-14 bg-[#111111] text-white p-8 sm:p-12 border border-[#1C1C1C]">
-          <span className="text-[10px] uppercase tracking-[0.24em] text-[#C5A059] font-semibold block mb-2">
-            STANDAR PELAYANAN BUTIK
+        {/* 3. Budaya Layanan 3S 1C 1T & 1H (Frameless Architectural Grid) */}
+        <div className="pt-12 sm:pt-14 border-t border-[#E2DFD8] mb-16 sm:mb-20">
+          <div className="max-w-xl mb-8 sm:mb-10">
+            <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+              STANDAR PELAYANAN BUTIK
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal tracking-wide mb-2">
+              Budaya 3S 1C 1T &amp; 1H
+            </h2>
+            <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+              Di Batik Smile, senyum bukan sekadar nama, melainkan janji tulus dalam setiap interaksi kami dengan Anda:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* Pillar 1: SENYUM SALAM SAPA */}
+            <div className="pt-4 border-t border-[#E2DFD8] group hover:border-[#C5A059] transition-colors">
+              <span className="font-serif text-xs text-[#9E7D3B] font-light block mb-1.5 tracking-widest">
+                01
+              </span>
+              <h3 className="text-xs font-semibold text-[#111111] uppercase tracking-[0.14em] mb-1.5">
+                SENYUM &bull; SALAM &bull; SAPA
+              </h3>
+              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
+                Sambutan hangat penuh kekeluargaan sejak langkah pertama Anda memasuki butik.
+              </p>
+            </div>
+
+            {/* Pillar 2: CEPAT (1C) */}
+            <div className="pt-4 border-t border-[#E2DFD8] group hover:border-[#C5A059] transition-colors">
+              <span className="font-serif text-xs text-[#9E7D3B] font-light block mb-1.5 tracking-widest">
+                02
+              </span>
+              <h3 className="text-xs font-semibold text-[#111111] uppercase tracking-[0.14em] mb-1.5">
+                CEPAT (1C)
+              </h3>
+              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
+                Responsif dalam melayani kebutuhan motif, panduan ukuran presisi, &amp; katalog pilihan.
+              </p>
+            </div>
+
+            {/* Pillar 3: TANGGAP (1T) */}
+            <div className="pt-4 border-t border-[#E2DFD8] group hover:border-[#C5A059] transition-colors">
+              <span className="font-serif text-xs text-[#9E7D3B] font-light block mb-1.5 tracking-widest">
+                03
+              </span>
+              <h3 className="text-xs font-semibold text-[#111111] uppercase tracking-[0.14em] mb-1.5">
+                TANGGAP (1T)
+              </h3>
+              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
+                Solutif terhadap fitting personal, kustom ukuran keluarga, &amp; tenggat jadwal acara.
+              </p>
+            </div>
+
+            {/* Pillar 4: HATI (1H) */}
+            <div className="pt-4 border-t border-[#E2DFD8] group hover:border-[#C5A059] transition-colors">
+              <span className="font-serif text-xs text-[#9E7D3B] font-light block mb-1.5 tracking-widest">
+                04
+              </span>
+              <h3 className="text-xs font-semibold text-[#111111] uppercase tracking-[0.14em] mb-1.5">
+                HATI (1H)
+              </h3>
+              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
+                Ketulusan hati dalam setiap sambung motif rapi dan layanan purna jual bebas tukar ukuran.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. Tiga Pilar Nilai Luhur (Frameless Editorial) */}
+        <div className="pt-12 sm:pt-14 border-t border-[#E2DFD8] mb-16 sm:mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
+            {/* Value 1 */}
+            <div className="space-y-1.5">
+              <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
+                NILAI I
+              </span>
+              <h3 className="font-serif text-lg text-[#111111] font-normal tracking-wide">
+                Keaslian Motif Pusaka
+              </h3>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
+                Menjaga pakem filosofi corak batik klasik Jawa Tengah dan ketelitian goresan canting malam para pembatik binaan.
+              </p>
+            </div>
+
+            {/* Value 2 */}
+            <div className="space-y-1.5">
+              <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
+                NILAI II
+              </span>
+              <h3 className="font-serif text-lg text-[#111111] font-normal tracking-wide">
+                Kenyamanan Sejati
+              </h3>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
+                Pemilihan mori primisima adem, tenun dobby timbul, dan jahitan lapis furing katun hero standar butik keluarga.
+              </p>
+            </div>
+
+            {/* Value 3 */}
+            <div className="space-y-1.5">
+              <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
+                NILAI III
+              </span>
+              <h3 className="font-serif text-lg text-[#111111] font-normal tracking-wide">
+                Bebas Minimal Order
+              </h3>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
+                Layanan jahit seragam keluarga maupun instansi tanpa batasan kuota minimum pemesanan (1 potong pun dilayani).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 5. Matur Nuwun Closing (Frameless Minimalist Signature) */}
+        <div className="pt-12 sm:pt-14 border-t border-[#E2DFD8] text-center max-w-xl mx-auto">
+          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2">
+            UNGKAPAN HORMAT
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-6">
-            Budaya 3S 1C 1T &amp; 1H
-          </h2>
-          <p className="text-xs text-[#E2DFD8] leading-relaxed font-light mb-8 max-w-2xl">
-            Di Batik Smile, senyum bukan sekadar nama, melainkan janji tulus dalam setiap interaksi kami dengan Anda:
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
-                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                  <line x1="9" y1="9" x2="9.01" y2="9" />
-                  <line x1="15" y1="9" x2="15.01" y2="9" />
-                </svg>
-              </div>
-              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">SENYUM &bull; SALAM &bull; SAPA</span>
-              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Sambutan hangat penuh kekeluargaan sejak langkah pertama Anda.</p>
-            </div>
-
-            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
-                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-              </div>
-              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">CEPAT (1C)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Responsif dalam melayani kebutuhan motif, ukuran, &amp; katalog.</p>
-            </div>
-
-            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
-                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
-              </div>
-              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">TANGGAP (1T)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Solutif terhadap fitting personal, kustom ukuran, &amp; jadwal acara.</p>
-            </div>
-
-            <div className="border border-[#C5A059]/40 bg-white/5 p-5">
-              <div className="w-8 h-8 flex items-center justify-center border border-[#C5A059] mb-3">
-                <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                </svg>
-              </div>
-              <span className="text-[11px] font-bold text-[#C5A059] tracking-wider block">HATI (1H)</span>
-              <p className="text-[11px] text-[#A69F96] mt-1.5 font-light leading-relaxed">Ketulusan hati dalam setiap jahitan rapi dan layanan purna jual.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* 3 Nilai Inti */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center mb-14">
-          <div className="bg-white p-8 border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-            <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center border border-[#C5A059]/50 group-hover:bg-[#C5A059] transition-colors">
-              <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-              </svg>
-            </div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#111111] mb-2">KEASLIAN MOTIF</h3>
-            <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
-              Menjaga pakem filosofi corak batik klasik Jawa Tengah dan ketelitian goresan canting malam.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-            <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center border border-[#C5A059]/50 group-hover:bg-[#C5A059] transition-colors">
-              <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z" />
-                <path d="M7 12a5 5 0 0 1 10 0" />
-              </svg>
-            </div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9E7D3B] mb-2">KENYAMANAN SEJATI</h3>
-            <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
-              Pemilihan kain mori primisima adem dan jahitan lapis furing katun hero standar butik haute.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-            <div className="w-10 h-10 mx-auto mb-4 flex items-center justify-center border border-[#C5A059]/50 group-hover:bg-[#C5A059] transition-colors">
-              <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="6" cy="6" r="3" />
-                <circle cx="6" cy="18" r="3" />
-                <line x1="20" y1="4" x2="8.12" y2="15.88" />
-                <line x1="14.47" y1="14.48" x2="20" y2="20" />
-                <line x1="8.12" y1="8.12" x2="12" y2="12" />
-              </svg>
-            </div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#7C3F1D] mb-2">BEBAS MINIMAL ORDER</h3>
-            <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
-              Layanan jahit seragam keluarga maupun instansi tanpa batasan kuota minimum pemesanan.
-            </p>
-          </div>
-        </div>
-
-        {/* Matur Nuwun Box */}
-        <div className="text-center bg-[#F4EFEA] p-8 border border-[#E2DFD8]">
-          <h4 className="font-serif text-xl text-[#111111] italic font-normal mb-2">
+          <h4 className="font-serif text-2xl sm:text-3xl text-[#111111] italic font-normal mb-2.5">
             &ldquo;Matur Nuwun Sanget&rdquo;
           </h4>
-          <p className="text-xs text-[#5A5550] max-w-lg mx-auto leading-relaxed font-light mb-6">
-            Terima kasih telah mempercayakan momen-momen berharga keluarga Anda bersama karya cipta Batik Smile.
+          <p className="text-xs text-[#5A5550] leading-relaxed font-light mb-6">
+            Terima kasih telah mempercayakan momen-momen berharga dan kehangatan keluarga Anda bersama busana karya cipta Batik Smile.
           </p>
           <Link
-            to="/collections/sarimbit-luxury"
-            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+            to="/collections/all"
+            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
           >
-            LIHAT KOLEKSI KAMI &rarr;
+            JELAJAHI KOLEKSI KAMI &rarr;
           </Link>
         </div>
       </div>

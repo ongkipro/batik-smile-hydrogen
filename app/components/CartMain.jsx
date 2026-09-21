@@ -256,12 +256,12 @@ function CartEmpty({ layout }) {
           <p className="text-xs text-[#5A5550] font-light text-center mb-6">
             Mulai penjelajahan busana dari pilar kasta terpopuler:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {CURATED_PILLARS.map((item) => (
               <Link
                 key={item.title}
                 to={item.to}
-                className="group block bg-white border border-[#E2DFD8] hover:border-[#C5A059] transition-all p-3"
+                className="group block no-underline transition-all"
               >
                 <div className="aspect-[4/5] bg-[#111111] overflow-hidden mb-3">
                   <img
@@ -270,10 +270,10 @@ function CartEmpty({ layout }) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
-                <h4 className="font-serif text-sm text-[#111111] group-hover:text-[#C5A059] transition-colors mb-0.5">
+                <h4 className="font-serif text-base text-[#111111] group-hover:text-[#C5A059] transition-colors mb-0.5">
                   {item.title}
                 </h4>
-                <p className="text-[10px] text-[#777777] font-light">
+                <p className="text-[11px] text-[#777777] font-light">
                   {item.desc}
                 </p>
               </Link>

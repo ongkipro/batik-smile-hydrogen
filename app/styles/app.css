@@ -23,15 +23,6 @@
     font-family: inherit;
     color: inherit;
   }
-
-  /* Prevent iOS Safari automatic zoom on inputs and textareas */
-  @media screen and (max-width: 768px) {
-    input,
-    select,
-    textarea {
-      font-size: 16px !important;
-    }
-  }
 }
 
 @theme {
@@ -105,3 +96,31 @@
 ::-webkit-scrollbar-thumb {
   background: #C5A059;
 }
+
+/* ==========================================================================
+   Mobile Anti-Auto-Zoom Engine (iOS Safari & Mobile Browsers)
+   Strictly enforces minimum 16px font-size on all text-entry inputs and
+   textareas across all viewports <= 768px.
+   Placed outside @layer to guarantee unconditional precedence over utility classes.
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Reinforce on focus state */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):focus,
+  select:focus,
+  textarea:focus {
+    font-size: 16px !important;
+  }
+}
+

@@ -334,6 +334,8 @@ export default function Product() {
     ? 'ekonomi'
     : null;
 
+  const isDarkPDP = isExclusiveTier || isPremiumTier;
+
   // Active media index & current media item
   const activeIndex = Math.max(
     0,
@@ -428,15 +430,15 @@ export default function Product() {
   const themeClasses = isExclusiveTier
     ? 'bg-[#111111] text-white'
     : isPremiumTier
-    ? 'bg-[#F3EDE2] text-[#111111]'
+    ? 'bg-[#201610] text-[#FAF8F5]'
     : 'bg-[#FAF8F5] text-[#111111]';
 
   return (
-    <div className={`min-h-screen py-8 sm:py-12 px-4 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-500 ${themeClasses}`}>
+    <div className={`min-h-screen pt-8 sm:pt-12 pb-24 sm:pb-16 px-4 sm:px-8 lg:px-12 xl:px-16 transition-colors duration-500 ${themeClasses}`}>
       <div className="w-full max-w-7xl mx-auto">
         {/* Dynamic Breadcrumb Navigation (Single-line fluid responsive across all device sizes) */}
         <Breadcrumb
-          isDark={isExclusiveTier}
+          isDark={isDarkPDP}
           tier={productTier}
           items={[
             {
@@ -486,10 +488,12 @@ export default function Product() {
                           : 'w-full sm:w-20 sm:shrink-0'
                       } ${
                         isActive
-                          ? 'border-[#C5A059] ring-1 ring-[#C5A059]'
+                          ? 'border-[#C5A059] opacity-100'
                           : isExclusiveTier
-                          ? 'border-[#262626] opacity-60 hover:opacity-100 hover:border-[#C5A059]/60'
-                          : 'border-[#E2DFD8] opacity-75 hover:opacity-100 hover:border-[#111111]'
+                          ? 'border-transparent opacity-60 hover:opacity-100 hover:border-[#C5A059]/60'
+                          : isPremiumTier
+                          ? 'border-transparent opacity-60 hover:opacity-100 hover:border-[#7C3F1D]'
+                          : 'border-transparent opacity-75 hover:opacity-100 hover:border-[#E2DFD8]'
                       }`}
                       aria-label={item.isVideo || item.isExternalVideo ? `Putar video lookbook produk` : `Pilih media produk ${idx + 1}`}
                     >
@@ -526,6 +530,8 @@ export default function Product() {
               className={`flex-1 relative overflow-hidden group shadow-sm select-none ${
                 isExclusiveTier
                   ? 'bg-[#181818] border border-[#C5A059]/30'
+                  : isPremiumTier
+                  ? 'bg-[#281C14] border border-[#7C3F1D]/50'
                   : 'bg-[#111111]'
               }`}
             >
@@ -671,6 +677,8 @@ export default function Product() {
                   className={`absolute bottom-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-medium backdrop-blur-sm z-10 pointer-events-none ${
                     isExclusiveTier
                       ? 'bg-[#111111]/85 text-[#C5A059] border border-[#C5A059]/40'
+                      : isPremiumTier
+                      ? 'bg-[#201610]/85 text-[#C5A059] border border-[#7C3F1D]/60'
                       : 'bg-black/70 text-white'
                   }`}
                 >
@@ -692,8 +700,8 @@ export default function Product() {
                     HAUTE HERITAGE &bull; SARIMBIT EXCLUSIVE
                   </span>
                 ) : isPremiumTier ? (
-                  <span className="text-[#9E7D3B] flex items-center gap-1.5">
-                    <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#9E7D3B]" />
+                  <span className="text-[#C5A059] flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#7C3F1D]" />
                     SIGNATURE ATELIER &bull; SARIMBIT PREMIUM
                   </span>
                 ) : (
@@ -705,7 +713,7 @@ export default function Product() {
 
               <h1
                 className={`font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal leading-[1.14] tracking-wide mb-3 ${
-                  isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                  isDarkPDP ? 'text-white' : 'text-[#111111]'
                 }`}
               >
                 {title}
@@ -715,7 +723,7 @@ export default function Product() {
               <div className="flex items-baseline gap-3 mb-1.5">
                 <span
                   className={`text-2xl sm:text-3xl font-medium tracking-wide font-sans ${
-                    isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                    isDarkPDP ? 'text-white' : 'text-[#111111]'
                   }`}
                 >
                   {selectedVariant?.price && (
@@ -723,7 +731,7 @@ export default function Product() {
                   )}
                 </span>
                 {selectedVariant?.compareAtPrice && (
-                  <span className="text-sm line-through text-[#888888]">
+                  <span className={`text-sm line-through ${isDarkPDP ? 'text-[#A9A49C]' : 'text-[#888888]'}`}>
                     <BoutiqueMoney data={selectedVariant.compareAtPrice} />
                   </span>
                 )}
@@ -733,12 +741,12 @@ export default function Product() {
               <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] mb-3">
                 <span
                   className={`inline-block w-1.5 h-1.5 rounded-none ${
-                    isAvailable ? (isExclusiveTier ? 'bg-[#4ADE80]' : 'bg-[#2E6B3E]') : 'bg-[#EF4444]'
+                    isAvailable ? (isDarkPDP ? 'bg-[#4ADE80]' : 'bg-[#2E6B3E]') : 'bg-[#EF4444]'
                   }`}
                 />
                 <span
                   className={
-                    isAvailable ? (isExclusiveTier ? 'text-[#4ADE80]' : 'text-[#2E6B3E]') : 'text-[#EF4444]'
+                    isAvailable ? (isDarkPDP ? 'text-[#4ADE80]' : 'text-[#2E6B3E]') : 'text-[#EF4444]'
                   }
                 >
                   {isAvailable ? 'Tersedia di Butik' : 'Habis Terjual'}
@@ -748,7 +756,7 @@ export default function Product() {
               {/* Value Props (Seamless Typography, Tier-Differentiated) */}
               <div
                 className={`flex items-center gap-2 text-[11px] font-light tracking-wide flex-wrap ${
-                  isExclusiveTier ? 'text-[#E2DFD8]/85' : 'text-[#5A5550]'
+                  isExclusiveTier ? 'text-[#E2DFD8]/85' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                 }`}
               >
                 {isExclusiveTier ? (
@@ -779,7 +787,7 @@ export default function Product() {
               </div>
             </div>
 
-            <div className={`w-full h-px ${isExclusiveTier ? 'bg-[#262626]' : 'bg-[#E2DFD8]'}`} />
+            <div className={`w-full h-px ${isExclusiveTier ? 'bg-[#262626]' : isPremiumTier ? 'bg-[#7C3F1D]/40' : 'bg-[#E2DFD8]'}`} />
 
             {/* Variant Option Selection (Only rendered if multiple variants exist) */}
             {hasMultipleVariants && (
@@ -789,11 +797,11 @@ export default function Product() {
                     <div className="mb-2">
                       <label
                         className={`text-[10px] font-medium uppercase tracking-[0.18em] ${
-                          isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                          isDarkPDP ? 'text-white' : 'text-[#111111]'
                         }`}
                       >
                         {option.name}:{' '}
-                        <span className={isExclusiveTier ? 'font-normal text-[#A9A49C]' : 'font-normal text-[#5A5550]'}>
+                        <span className={isExclusiveTier ? 'font-normal text-[#A9A49C]' : isPremiumTier ? 'font-normal text-[#D5C8B8]' : 'font-normal text-[#5A5550]'}>
                           {option.value}
                         </span>
                       </label>
@@ -812,9 +820,13 @@ export default function Product() {
                               isSelected
                                 ? isExclusiveTier
                                   ? 'bg-[#C5A059] !text-[#111111] font-bold border border-[#C5A059]'
+                                  : isPremiumTier
+                                  ? 'bg-[#7C3F1D] !text-white font-bold border border-[#C5A059]'
                                   : 'bg-[#111111] !text-white'
                                 : isExclusiveTier
                                 ? 'bg-[#181818] !text-white border border-[#333333] hover:border-[#C5A059]'
+                                : isPremiumTier
+                                ? 'bg-[#281C15] !text-[#FAF8F5] border border-[#7C3F1D]/60 hover:border-[#C5A059]'
                                 : 'bg-white !text-[#111111] border border-[#E2DFD8] hover:bg-[#FAF8F5]'
                             }`}
                           >
@@ -836,6 +848,8 @@ export default function Product() {
                   className={`flex items-center h-12 w-28 shrink-0 ${
                     isExclusiveTier
                       ? 'border border-[#C5A059]/40 bg-[#181818] text-white'
+                      : isPremiumTier
+                      ? 'border border-[#7C3F1D]/60 bg-[#281C15] text-white'
                       : 'border border-[#111111] bg-white text-[#111111]'
                   }`}
                 >
@@ -844,7 +858,7 @@ export default function Product() {
                     onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
                     disabled={quantity <= 1 || !isAvailable}
                     className={`w-9 h-full flex items-center justify-center text-sm font-medium disabled:opacity-30 cursor-pointer transition-colors ${
-                      isExclusiveTier ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
+                      isDarkPDP ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
                     }`}
                     aria-label="Kurangi Jumlah"
                   >
@@ -852,7 +866,7 @@ export default function Product() {
                   </button>
                   <span
                     className={`flex-1 text-center text-xs font-semibold font-sans ${
-                      isExclusiveTier ? 'text-[#C5A059]' : 'text-[#111111]'
+                      isDarkPDP ? 'text-[#C5A059]' : 'text-[#111111]'
                     }`}
                   >
                     {quantity}
@@ -862,7 +876,7 @@ export default function Product() {
                     onClick={() => setQuantity((prev) => prev + 1)}
                     disabled={!isAvailable}
                     className={`w-9 h-full flex items-center justify-center text-sm font-medium disabled:opacity-30 cursor-pointer transition-colors ${
-                      isExclusiveTier ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
+                      isDarkPDP ? 'text-white hover:bg-white/10' : 'text-[#111111] hover:bg-black/5'
                     }`}
                     aria-label="Tambah Jumlah"
                   >
@@ -878,6 +892,8 @@ export default function Product() {
                   className={`w-full h-12 px-4 font-semibold text-[10px] uppercase tracking-[0.18em] text-center flex items-center justify-center transition-all cursor-pointer ${
                     isExclusiveTier
                       ? 'border border-[#C5A059] bg-[#181818] hover:bg-[#C5A059] !text-[#C5A059] hover:!text-[#111111] shadow-sm'
+                      : isPremiumTier
+                      ? 'border border-[#7C3F1D] bg-[#281C15] hover:bg-[#7C3F1D] !text-[#FAF8F5] hover:!text-white shadow-sm'
                       : 'border border-[#111111] bg-white hover:bg-[#FAF8F5] !text-[#111111] hover:!text-[#9E7D3B]'
                   }`}
                 >
@@ -894,6 +910,8 @@ export default function Product() {
                 className={`w-full h-12 py-3.5 px-6 font-semibold text-[11px] uppercase tracking-[0.2em] transition-all disabled:cursor-not-allowed cursor-pointer shadow-md flex items-center justify-center ${
                   isExclusiveTier
                     ? 'bg-[#C5A059] hover:bg-white !text-[#111111] font-bold shadow-lg disabled:bg-[#333333] disabled:!text-[#777777]'
+                    : isPremiumTier
+                    ? 'bg-[#7C3F1D] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-bold border border-[#C5A059]/40 shadow-lg disabled:bg-[#38261C] disabled:!text-[#88786D]'
                     : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] disabled:bg-[#E2DFD8] disabled:!text-[#5A5550]'
                 }`}
               >
@@ -904,7 +922,11 @@ export default function Product() {
             {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H - Frameless) */}
             <div
               className={`grid grid-cols-2 gap-x-6 gap-y-2 pt-4 border-t text-[10px] ${
-                isExclusiveTier ? 'border-[#262626] text-[#E2DFD8]/75' : 'border-[#E2DFD8] text-[#5A5550]'
+                isExclusiveTier
+                  ? 'border-[#262626] text-[#E2DFD8]/75'
+                  : isPremiumTier
+                  ? 'border-[#7C3F1D]/40 text-[#D5C8B8]'
+                  : 'border-[#E2DFD8] text-[#5A5550]'
               }`}
             >
               <div className="flex items-center gap-2">
@@ -930,6 +952,8 @@ export default function Product() {
               className={`border-t divide-y text-xs pt-1 ${
                 isExclusiveTier
                   ? 'border-[#262626] divide-[#262626]'
+                  : isPremiumTier
+                  ? 'border-[#7C3F1D]/40 divide-[#7C3F1D]/40'
                   : 'border-[#E2DFD8] divide-[#E2DFD8]'
               }`}
             >
@@ -939,11 +963,11 @@ export default function Product() {
                   type="button"
                   onClick={() => toggleSection('deskripsi')}
                   className={`w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-left cursor-pointer ${
-                    isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                    isDarkPDP ? 'text-white' : 'text-[#111111]'
                   }`}
                 >
                   <span>DESKRIPSI &amp; SPESIFIKASI KARYA</span>
-                  <span className={`text-sm font-normal ${isExclusiveTier ? 'text-[#C5A059]' : ''}`}>
+                  <span className={`text-sm font-normal ${isDarkPDP ? 'text-[#C5A059]' : ''}`}>
                     {openSections.deskripsi ? '−' : '+'}
                   </span>
                 </button>
@@ -954,7 +978,7 @@ export default function Product() {
                     {parsedDescription.story && (
                       <p
                         className={`text-xs sm:text-sm font-light leading-relaxed italic font-serif ${
-                          isExclusiveTier ? 'text-[#E2DFD8]/90' : 'text-[#444444]'
+                          isExclusiveTier ? 'text-[#E2DFD8]/90' : isPremiumTier ? 'text-[#E8DFC8]' : 'text-[#444444]'
                         }`}
                       >
                         &ldquo;{parsedDescription.story}&rdquo;
@@ -965,21 +989,21 @@ export default function Product() {
                     {parsedDescription.specs.length > 0 ? (
                       <div
                         className={`divide-y pt-1 ${
-                          isExclusiveTier ? 'divide-[#262626]/80' : 'divide-[#E2DFD8]/80'
+                          isExclusiveTier ? 'divide-[#262626]/80' : isPremiumTier ? 'divide-[#7C3F1D]/30' : 'divide-[#E2DFD8]/80'
                         }`}
                       >
                         {parsedDescription.specs.map((item, idx) => (
                           <div key={idx} className="py-2 flex items-baseline justify-between gap-4">
                             <span
                               className={`text-[10px] uppercase tracking-[0.18em] font-medium shrink-0 ${
-                                isExclusiveTier ? 'text-[#C5A059]' : 'text-[#888888]'
+                                isDarkPDP ? 'text-[#C5A059]' : 'text-[#888888]'
                               }`}
                             >
                               {item.label || 'Spesifikasi'}
                             </span>
                             <span
                               className={`text-right text-xs font-light ${
-                                isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                                isDarkPDP ? 'text-white' : 'text-[#111111]'
                               }`}
                             >
                               {item.value}
@@ -991,7 +1015,7 @@ export default function Product() {
                       descriptionHtml && (
                         <div
                           className={`text-xs leading-relaxed font-light space-y-2 ${
-                            isExclusiveTier ? 'text-[#E2DFD8]/80' : 'text-[#5A5550]'
+                            isExclusiveTier ? 'text-[#E2DFD8]/80' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                           dangerouslySetInnerHTML={{ __html: descriptionHtml }}
                         />
@@ -1007,11 +1031,11 @@ export default function Product() {
                   type="button"
                   onClick={() => toggleSection('shipping')}
                   className={`w-full flex items-center justify-between font-semibold uppercase tracking-[0.16em] text-left cursor-pointer ${
-                    isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                    isDarkPDP ? 'text-white' : 'text-[#111111]'
                   }`}
                 >
                   <span>PENGIRIMAN &amp; GARANSI TUKAR</span>
-                  <span className={`text-sm font-normal ${isExclusiveTier ? 'text-[#C5A059]' : ''}`}>
+                  <span className={`text-sm font-normal ${isDarkPDP ? 'text-[#C5A059]' : ''}`}>
                     {openSections.shipping ? '−' : '+'}
                   </span>
                 </button>
@@ -1019,7 +1043,7 @@ export default function Product() {
                 {openSections.shipping && (
                   <div
                     className={`mt-3 divide-y text-xs ${
-                      isExclusiveTier ? 'divide-[#262626]/80' : 'divide-[#E2DFD8]/80'
+                      isExclusiveTier ? 'divide-[#262626]/80' : isPremiumTier ? 'divide-[#7C3F1D]/30' : 'divide-[#E2DFD8]/80'
                     }`}
                   >
                     <div className="py-2.5 flex items-start gap-3">
@@ -1027,14 +1051,14 @@ export default function Product() {
                       <div className="min-w-0">
                         <span
                           className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
-                            isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                            isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
                           Pengiriman Cepat &amp; Terlindungi
                         </span>
                         <p
                           className={`text-xs font-light leading-relaxed ${
-                            isExclusiveTier ? 'text-[#E2DFD8]/75' : 'text-[#5A5550]'
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                         >
                           Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.
@@ -1047,14 +1071,14 @@ export default function Product() {
                       <div className="min-w-0">
                         <span
                           className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
-                            isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                            isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
                           Garansi Bebas Tukar Ukuran 7 Hari
                         </span>
                         <p
                           className={`text-xs font-light leading-relaxed ${
-                            isExclusiveTier ? 'text-[#E2DFD8]/75' : 'text-[#5A5550]'
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                         >
                           Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas di badan.
@@ -1067,14 +1091,14 @@ export default function Product() {
                       <div className="min-w-0">
                         <span
                           className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
-                            isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                            isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
                           Layanan Konsultasi 3S 1C 1T &amp; 1H
                         </span>
                         <p
                           className={`text-xs font-light leading-relaxed ${
-                            isExclusiveTier ? 'text-[#E2DFD8]/75' : 'text-[#5A5550]'
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                         >
                           Tim penjahit dan konsultan kami siap mendampingi panduan ukuran melalui WhatsApp Concierge{' '}
@@ -1083,7 +1107,7 @@ export default function Product() {
                             target="_blank"
                             rel="noreferrer"
                             className={`font-medium underline underline-offset-2 transition-colors ${
-                              isExclusiveTier ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
+                              isDarkPDP ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
                             }`}
                           >
                             081-390-8888-09
@@ -1108,20 +1132,20 @@ export default function Product() {
         {relatedProducts.length > 0 && (
           <div
             className={`mt-16 sm:mt-20 pt-12 border-t ${
-              isExclusiveTier ? 'border-[#262626]' : 'border-[#E2DFD8]'
+              isExclusiveTier ? 'border-[#262626]' : isPremiumTier ? 'border-[#7C3F1D]/40' : 'border-[#E2DFD8]'
             }`}
           >
             <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
               <span
                 className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-1.5 ${
-                  isExclusiveTier ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
+                  isDarkPDP ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
                 }`}
               >
                 KOLEKSI SELARAS
               </span>
               <h2
                 className={`font-serif text-2xl sm:text-3xl font-normal tracking-wide ${
-                  isExclusiveTier ? 'text-white' : 'text-[#111111]'
+                  isDarkPDP ? 'text-white' : 'text-[#111111]'
                 }`}
               >
                 Rekomendasi {relatedCollectionTitle || 'Koleksi Sejenis'}
@@ -1146,6 +1170,8 @@ export default function Product() {
                   className={`inline-block px-8 py-3.5 text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline ${
                     isExclusiveTier
                       ? 'bg-[#181818] border border-[#C5A059]/50 hover:bg-[#C5A059] !text-[#C5A059] hover:!text-[#111111]'
+                      : isPremiumTier
+                      ? 'bg-[#281C15] border border-[#7C3F1D] hover:bg-[#7C3F1D] !text-[#FAF8F5] hover:!text-white'
                       : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111]'
                   }`}
                 >

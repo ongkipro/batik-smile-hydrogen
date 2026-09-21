@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useFetcher } from 'react-router';
+import { CartForm } from '@shopify/hydrogen';
 
 const STORAGE_KEY_DISMISSED = 'batik_smile_vip_discount_dismissed_at';
 const STORAGE_KEY_CLAIMED = 'batik_smile_vip_discount_claimed';
@@ -11,9 +12,11 @@ const DISMISS_COOLDOWN_MS = 5 * 24 * 60 * 60 * 1000; // 5 days cooldown
  * - Quiet Luxury Nusantara Zero-Radius aesthetics.
  * - Mobile zero-zoom input compliance (minimum 16px font size on mobile).
  * - Automatic 25% discount voucher reveal with one-click copy and auto-apply link.
+ * - Live Shopify connection: syncs subscriber email to Shopify Cart Buyer Identity.
  * - Non-intrusive delayed trigger with localStorage persistence.
  */
 export function VipDiscountModal() {
+  const fetcher = useFetcher();
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -87,6 +90,25 @@ export function VipDiscountModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !email.includes('@')) return;
+
+    // Dispatch subscriber email directly to Shopify Cart Buyer Identity
+    try {
+      fetcher.submit(
+        {
+          [CartForm.INPUT_NAME]: JSON.stringify({
+            action: CartForm.ACTIONS.BuyerIdentityUpdate,
+            inputs: {
+              buyerIdentity: {
+                email: email.trim(),
+              },
+            },
+          }),
+        },
+        { method: 'POST', action: '/cart' }
+      );
+    } catch {
+      // Fallback gracefully
+    }
 
     setIsSubmitted(true);
     try {
@@ -205,8 +227,8 @@ export function VipDiscountModal() {
               Terima kasih telah bergabung. Salin kode voucher eksklusif Anda di bawah ini dan gunakan saat checkout:
             </p>
 
-            {/* Voucher Box */}
-            <div className="bg-white border-2 border-dashed border-[#C5A059] py-4 px-6 flex items-center justify-between gap-4 my-4">
+            {/* Voucher Box (Quiet Luxury Hairline Card) */}
+            <div className="bg-white border border-[#C5A059]/60 py-4 px-6 flex items-center justify-between gap-4 my-4 shadow-xs">
               <div className="text-left">
                 <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block">
                   KODE VOUCHER

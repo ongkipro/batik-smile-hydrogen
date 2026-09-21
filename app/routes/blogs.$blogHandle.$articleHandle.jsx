@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLoaderData, Link, redirect } from 'react-router';
-import { Image, Money } from '@shopify/hydrogen';
+import { Image } from '@shopify/hydrogen';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
+import { ProductItem } from '~/components/ProductItem';
 import { generateArticleMeta } from '~/lib/seo';
 
 /**
@@ -62,7 +63,7 @@ async function loadCriticalData({ context, request, params }) {
   const relatedArticles = rawRelated
     .filter((a) => a.handle !== articleHandle)
     .slice(0, 3);
-  const curatedProducts = products?.nodes || [];
+  const curatedProducts = (products?.nodes || []).slice(0, 4);
 
   return { article, relatedArticles, curatedProducts, blogHandle };
 }
@@ -139,13 +140,13 @@ export default function Article() {
           </div>
         </header>
 
-        {/* Hero Featured Media (Strictly Locked to 3:2 Ratio in max-w-4xl) */}
+        {/* Hero Featured Media (Widescreen Proportional Hero) */}
         {image && (
-          <figure className="max-w-4xl mx-auto mb-14 sm:mb-16">
-            <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#111111] shadow-sm">
+          <figure className="w-full mb-12 sm:mb-16">
+            <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden bg-[#111111]">
               <Image
                 data={image}
-                sizes="(min-width: 1024px) 896px, 100vw"
+                sizes="(min-width: 1280px) 1024px, 100vw"
                 loading="eager"
                 className="w-full h-full object-cover object-center"
               />
@@ -159,7 +160,7 @@ export default function Article() {
         {/* Frameless Article Reading Canvas (Intimate max-w-2xl ~ 680px for Maximum Comfort) */}
         <div className="max-w-2xl mx-auto mb-16 sm:mb-20">
           <div
-            className="prose prose-neutral max-w-none text-[15px] sm:text-[17px] text-[#2C2A28] font-light leading-[1.85] [&>p:first-of-type::first-letter]:text-5xl sm:[&>p:first-of-type::first-letter]:text-6xl [&>p:first-of-type::first-letter]:font-serif [&>p:first-of-type::first-letter]:mr-3.5 [&>p:first-of-type::first-letter]:float-left [&>p:first-of-type::first-letter]:text-[#9E7D3B] [&>p:first-of-type::first-letter]:leading-none [&>h2]:font-serif [&>h2]:text-2xl sm:[&>h2]:text-3xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:tracking-wide [&>h3]:font-serif [&>h3]:text-xl sm:[&>h3]:text-2xl [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-10 [&>h3]:mb-3 [&>p]:mb-6 [&>p]:leading-[1.85] [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>blockquote]:border-l-2 [&>blockquote]:border-[#C5A059] [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-[#111111] [&>blockquote]:font-serif [&>blockquote]:text-xl sm:[&>blockquote]:text-2xl [&>blockquote]:my-10 [&>blockquote]:py-1"
+            className="prose prose-neutral max-w-none text-[15px] sm:text-[17px] text-[#2C2A28] font-light leading-[1.85] [&>p:first-of-type::first-letter]:text-5xl sm:[&>p:first-of-type::first-letter]:text-6xl [&>p:first-of-type::first-letter]:font-serif [&>p:first-of-type::first-letter]:mr-3.5 [&>p:first-of-type::first-letter]:float-left [&>p:first-of-type::first-letter]:text-[#9E7D3B] [&>p:first-of-type::first-letter]:leading-none [&>h2]:font-serif [&>h2]:text-2xl sm:[&>h2]:text-3xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:tracking-wide [&>h3]:font-serif [&>h3]:text-xl sm:[&>h3]:text-2xl [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-10 [&>h3]:mb-3 [&>p]:mb-6 [&>p]:leading-[1.85] [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>blockquote]:border-l [&>blockquote]:border-[#C5A059] [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-[#111111] [&>blockquote]:font-serif [&>blockquote]:text-xl sm:[&>blockquote]:text-2xl [&>blockquote]:my-10 [&>blockquote]:py-1"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
 
@@ -198,68 +199,75 @@ export default function Article() {
           </div>
         </div>
 
-        {/* Shop The Story: Curated Pieces Linked to This Article */}
+        {/* Shop The Story: Curated Pieces Linked to This Article (Strict 4:5, 4 Products, 2x2 Mobile) */}
         {curatedProducts.length > 0 && (
-          <section className="max-w-4xl mx-auto mb-16 sm:mb-20">
+          <section className="w-full mb-16 sm:mb-20">
             <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
               <div>
-                <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-0.5">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
                   SHOP THE STORY
                 </span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#111111]">
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
                   Karya Wastra Terkait Catatan Ini
                 </h3>
               </div>
               <Link
                 to="/collections/all"
-                className="text-[10px] uppercase tracking-[0.18em] text-[#5A5550] hover:text-[#111111] transition-colors no-underline font-medium"
+                className="text-[10px] uppercase tracking-[0.18em] text-[#111111] hover:text-[#C5A059] transition-colors no-underline font-semibold"
               >
                 SEMUA KOLEKSI &rarr;
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {curatedProducts.map((prod) => (
-                <ProductStoryCard key={prod.id} product={prod} />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 lg:gap-y-12">
+              {curatedProducts.slice(0, 4).map((prod) => (
+                <ProductItem key={prod.id} product={prod} loading="lazy" />
               ))}
             </div>
           </section>
         )}
 
-        {/* Related Articles Section (Frameless Minimalist with Locked 3:2 Ratio) */}
+        {/* Related Articles Section (Matching Homepage 3-Column Frameless Editorial) */}
         {relatedArticles.length > 0 && (
-          <section className="max-w-4xl mx-auto mb-16 sm:mb-20">
+          <section className="w-full mb-16 sm:mb-20">
             <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
-                REKOMENDASI JURNAL LAINNYA
-              </span>
+              <div>
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+                  REKOMENDASI JURNAL
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
+                  Catatan Wastra Terkait
+                </h3>
+              </div>
               <Link
                 to="/blogs"
-                className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] hover:text-[#111111] transition-colors no-underline font-medium"
+                className="text-[10px] uppercase tracking-[0.18em] text-[#111111] hover:text-[#C5A059] transition-colors no-underline font-semibold"
               >
                 LIHAT SEMUA &rarr;
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-              {relatedArticles.map((rel) => {
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+              {relatedArticles.slice(0, 3).map((rel, idx) => {
                 const relUrl = `/blogs/${blogHandle}/${rel.handle}`;
                 const relDate = new Intl.DateTimeFormat('id-ID', {
                   day: 'numeric',
-                  month: 'short',
+                  month: 'long',
                   year: 'numeric',
                 }).format(new Date(rel.publishedAt));
+                const categories = ['ARSIP BUDAYA', 'SERAGAM SARIMBIT', 'FILOSOFI WASTRA'];
+                const category = categories[idx % categories.length];
 
                 return (
                   <article key={rel.id} className="group flex flex-col">
                     <Link to={relUrl} className="block no-underline">
-                      {/* Media 3:2 Ratio Locked */}
-                      <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#111111] mb-3">
+                      {/* Frameless Media (Locked 3:2 ratio with subtle hover zoom) */}
+                      <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#111111] mb-4">
                         {rel.image ? (
                           <Image
                             data={rel.image}
-                            alt={rel.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95 group-hover:opacity-100"
+                            alt={rel.image.altText || rel.title}
+                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out opacity-95 group-hover:opacity-100"
                           />
                         ) : (
                           <img
@@ -270,22 +278,37 @@ export default function Article() {
                         )}
                       </div>
 
-                      {/* Metadata */}
-                      <time className="text-[9px] uppercase tracking-[0.16em] text-[#9E7D3B] font-semibold block mb-1.5">
-                        {relDate}
-                      </time>
+                      {/* Micro Index & Metadata (Matching Homepage) */}
+                      <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold mb-2.5">
+                        <span>0{idx + 1}</span>
+                        <span>/</span>
+                        <span>{category}</span>
+                        <span className="text-[#A69F96]">•</span>
+                        <time dateTime={rel.publishedAt} className="text-[#A69F96] font-normal lowercase tracking-normal">
+                          {relDate}
+                        </time>
+                      </div>
 
-                      {/* Headline */}
-                      <h4 className="font-serif text-lg font-normal text-[#111111] group-hover:text-[#9E7D3B] transition-colors line-clamp-2 leading-snug mb-2">
+                      {/* Pure Serif Editorial Headline */}
+                      <h4 className="font-serif text-xl sm:text-2xl font-normal text-[#111111] group-hover:text-[#9E7D3B] transition-colors leading-snug mb-3 line-clamp-2">
                         {rel.title}
                       </h4>
 
-                      {/* Text Action */}
-                      <div className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+                      {/* Gentle Narrative Excerpt */}
+                      {rel.excerpt && (
+                        <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed line-clamp-3 mb-4">
+                          {rel.excerpt}
+                        </p>
+                      )}
+
+                      {/* Subtle Text Action Link */}
+                      <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
                         <span className="border-b border-[#111111]/30 group-hover:border-[#9E7D3B] pb-0.5 transition-colors">
                           BACA CATATAN
                         </span>
-                        <span>&rarr;</span>
+                        <span className="transform group-hover:translate-x-1 transition-transform duration-300">
+                          &rarr;
+                        </span>
                       </div>
                     </Link>
                   </article>
@@ -296,7 +319,7 @@ export default function Article() {
         )}
 
         {/* Bespoke Concierge Consultation Banner */}
-        <div className="max-w-4xl mx-auto p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
+        <div className="w-full p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
               LAYANAN KONSULTASI WASTRA
@@ -321,60 +344,6 @@ export default function Article() {
         </div>
       </div>
     </article>
-  );
-}
-
-/**
- * ProductStoryCard: Curated Product linked from the story (Strict 4:5 Portrait Media)
- */
-function ProductStoryCard({ product }) {
-  const targetUrl = `/products/${product.handle}`;
-  const price = product.priceRange?.minVariantPrice;
-
-  return (
-    <div className="group flex flex-col">
-      <Link to={targetUrl} className="block no-underline">
-        {/* Strict 4:5 Media */}
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#111111] mb-3 border border-[#E2DFD8] group-hover:border-[#C5A059] transition-colors">
-          {product.featuredImage ? (
-            <Image
-              data={product.featuredImage}
-              alt={product.featuredImage.altText || product.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          ) : (
-            <img
-              src="/banners/hero_editorial_banner.jpg"
-              alt={product.title}
-              className="w-full h-full object-cover"
-            />
-          )}
-          <div className="absolute top-2.5 left-2.5">
-            <span className="px-2 py-0.5 bg-black/75 backdrop-blur-sm text-[8px] uppercase tracking-[0.16em] text-[#C5A059] font-semibold border border-[#C5A059]/30">
-              KARYA TERPILIH
-            </span>
-          </div>
-        </div>
-
-        {/* Title */}
-        <h4 className="font-serif text-base font-normal text-[#111111] group-hover:text-[#9E7D3B] transition-colors line-clamp-1 mb-1">
-          {product.title}
-        </h4>
-
-        {/* Price */}
-        {price && (
-          <div className="text-xs font-semibold text-[#111111] mb-2 tracking-wide">
-            <Money data={price} />
-          </div>
-        )}
-
-        {/* Action Link */}
-        <div className="inline-flex items-center gap-1 text-[9px] uppercase tracking-[0.18em] font-semibold text-[#9E7D3B] group-hover:text-[#111111] transition-colors">
-          <span>LIHAT KARYA</span>
-          <span>&rarr;</span>
-        </div>
-      </Link>
-    </div>
   );
 }
 
@@ -427,12 +396,20 @@ const ARTICLE_QUERY = `#graphql
         }
       }
     }
-    products(first: 3, sortKey: BEST_SELLING) {
+    products(first: 4, sortKey: BEST_SELLING) {
       nodes {
         id
         title
         handle
+        productType
+        tags
         priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        compareAtPriceRange {
           minVariantPrice {
             amount
             currencyCode
@@ -444,6 +421,15 @@ const ARTICLE_QUERY = `#graphql
           altText
           width
           height
+        }
+        images(first: 2) {
+          nodes {
+            id
+            url
+            altText
+            width
+            height
+          }
         }
       }
     }

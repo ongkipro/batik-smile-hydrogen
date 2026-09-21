@@ -48,9 +48,9 @@ export const links = () => {
 export async function loader({ context }) {
   const { storefront } = context;
 
-  // Single batch GraphQL query with Oxygen CacheLong for sub-100ms TTFB
+  // Single batch GraphQL query with Oxygen CacheShort for auto-sync with Shopify updates
   const data = await storefront.query(HOMEPAGE_QUERY, {
-    cache: storefront.CacheLong(),
+    cache: storefront.CacheShort(),
   }).catch((err) => {
     console.error('Error fetching homepage data:', err);
     return null;
@@ -100,29 +100,17 @@ export async function loader({ context }) {
       ? anakFromCollectionOrTags.slice(0, 6)
       : fallbackProducts.slice(0, 6);
 
-  // 8 Newest Products excluding Sarimbit collection/tags/titles
-  const rawNewest = data?.newestProducts?.nodes || [];
-  const nonSarimbitProducts = rawNewest.filter((product) => {
-    const title = (product.title || '').toLowerCase();
-    const handle = (product.handle || '').toLowerCase();
-    const tags = (product.tags || []).map((t) => t.toLowerCase());
-    const collections = (product.collections?.nodes || []).map((c) =>
-      c.handle.toLowerCase(),
-    );
-
-    const isSarimbit =
-      title.includes('sarimbit') ||
-      handle.includes('sarimbit') ||
-      tags.some((t) => t.includes('sarimbit')) ||
-      collections.some((c) => c.includes('sarimbit'));
-
-    return !isSarimbit;
-  });
-
-  const newestProducts =
-    nonSarimbitProducts.length > 0
-      ? nonSarimbitProducts.slice(0, 8)
-      : fallbackProducts.slice(0, 8);
+  // 8 Recent Newest Products feed (sorted by CREATED_AT reverse from Shopify)
+  let newestProducts = allNewest.slice(0, 8);
+  if (newestProducts.length < 8 && fallbackProducts.length > 0) {
+    const existingIds = new Set(newestProducts.map((p) => p.id));
+    for (const item of fallbackProducts) {
+      if (!existingIds.has(item.id)) {
+        newestProducts.push(item);
+        if (newestProducts.length >= 8) break;
+      }
+    }
+  }
 
   // Extract metaobjects
   const heroData = data?.heroBanners?.nodes?.[0] || null;

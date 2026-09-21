@@ -54,7 +54,7 @@ export function TrustGuaranteeBar() {
         {pillars.map((pillar) => (
           <div
             key={pillar.id}
-            className="flex items-center gap-4 py-2 px-3 border-l-2 border-[#C5A059] sm:border-l-0 sm:border-t-2 sm:pt-4"
+            className="flex items-center gap-4 py-2 px-3 border-l border-[#C5A059]/70 sm:border-l-0 sm:border-t sm:border-[#C5A059]/50 sm:pt-4"
           >
             <div className="text-[#C5A059] flex-shrink-0">{pillar.icon}</div>
             <div>

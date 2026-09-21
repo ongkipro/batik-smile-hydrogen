@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AddToCartButton } from './AddToCartButton';
-import { BatikCorner } from './BatikOrnaments';
 
 const DEFAULT_FAMILY_MEMBERS = [
   {
@@ -73,10 +72,7 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
   }));
 
   return (
-    <div className="bg-[#FAF8F5] p-6 sm:p-8 rounded-none border border-[#E2DFD8] shadow-sm relative my-8">
-      <BatikCorner position="top-left" variant="gold" size={32} className="top-3 left-3 opacity-60" />
-      <BatikCorner position="bottom-right" variant="gold" size={32} className="bottom-3 right-3 opacity-60" />
-
+    <div className="bg-[#FAF8F5] p-6 sm:p-8 rounded-none border border-[#E2DFD8] relative my-8">
       {/* Header */}
       <div className="mb-6">
         <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">

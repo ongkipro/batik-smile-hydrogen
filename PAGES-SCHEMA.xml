@@ -51,7 +51,7 @@
     <!-- ================================================================== -->
     <route path="/" file="app/routes/_index.jsx" type="editorial-homepage">
       <title>Batik Smile Nusantara — Butik Batik Modern &amp; Spesialis Sarimbit Keluarga</title>
-      <cache-strategy mode="CacheLong" max-age="3600" stale-while-revalidate="86400" />
+      <cache-strategy mode="CacheShort" max-age="1" stale-while-revalidate="9" />
       
       <loader-contracts>
         <graphql-query name="HomepageQuery">
@@ -196,7 +196,7 @@
         <!-- Branch B: Premium Collection (Kasta II) -->
         <tier id="sarimbit-premium" condition="handle == 'sarimbit-premium'">
           <component name="CollectionPremium" file="app/components/CollectionPremium.jsx" />
-          <design-token scheme="Scheme 1 (Mori Linen)" bg="#FAF8F5" text="#1C1C1C" />
+          <design-token scheme="Scheme 4 (Signature Soga Earth)" bg="#201610" text="#FAF8F5" accent="#7C3F1D" border="rgba(197, 160, 89, 0.40)" />
           <layout>3-to-4 column balanced boutique grid, Signature Dobby badges, couple angle hover preview</layout>
           <filter>Family Sarimbit Filter Drawer &amp; Fabric Drape Selector</filter>
         </tier>
@@ -214,7 +214,7 @@
     <!-- 3. PRODUCT DETAIL PDP ROUTE (/products/:handle)                    -->
     <!-- ================================================================== -->
     <route path="/products/:handle" file="app/routes/products.$handle.jsx" type="product-pdp">
-      <description>Tier-differentiated PDP supporting single variants, family bundle builder, and tailoring addons</description>
+      <description>Tier-differentiated PDP supporting single variants, 4:5 video lookbooks, family bundle builder, and tailoring addons</description>
       
       <loader-contracts>
         <graphql-query name="ProductDetailsQuery">
@@ -222,7 +222,8 @@
           <field name="product.descriptionHtml" />
           <field name="product.priceRange" />
           <field name="product.variants(first: 50)" />
-          <field name="product.images(first: 20)" />
+          <field name="product.featuredImage" />
+          <field name="product.media(first: 15)" types="Video, MediaImage, ExternalVideo, Model3d" />
           <!-- Metafields -->
           <metafield namespace="custom" key="tier_kasta" as="tierKasta" />
           <metafield namespace="custom" key="product_type_label" as="typeLabel" />

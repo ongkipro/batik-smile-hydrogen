@@ -79,8 +79,8 @@ export default function Policies() {
           </p>
         </div>
 
-        {/* Policies Grid (0px Radius) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Policies - Frameless Quiet Luxury */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
           {policies.map((policy) => {
             const isRefund = policy.handle.includes('refund');
             const isShipping = policy.handle.includes('shipping');
@@ -90,28 +90,28 @@ export default function Policies() {
               <Link
                 key={policy.id}
                 to={`/policies/${policy.handle}`}
-                className="p-8 bg-white border border-[#E2DFD8] hover:border-[#111111] shadow-sm hover:shadow-md transition-all group block"
+                className="border-t border-[#E2DFD8] pt-6 group block no-underline"
               >
-                <div className="w-10 h-10 mb-4 flex items-center justify-center border border-[#C5A059]/40 group-hover:bg-[#C5A059] transition-colors">
+                <div className="w-8 h-8 mb-3 flex items-center justify-center text-[#C5A059]">
                   {isRefund ? (
-                    <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <svg className="w-5 h-5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <polyline points="23 4 23 10 17 10" />
                       <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
                     </svg>
                   ) : isShipping ? (
-                    <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <svg className="w-5 h-5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <rect x="1" y="3" width="15" height="13" />
                       <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
                       <circle cx="5.5" cy="18.5" r="2.5" />
                       <circle cx="18.5" cy="18.5" r="2.5" />
                     </svg>
                   ) : isPrivacy ? (
-                    <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <svg className="w-5 h-5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <rect x="3" y="11" width="18" height="11" rx="0" ry="0" />
                       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                   ) : (
-                    <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <svg className="w-5 h-5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                       <polyline points="14 2 14 8 20 8" />
                       <line x1="16" y1="13" x2="8" y2="13" />
@@ -120,13 +120,13 @@ export default function Policies() {
                     </svg>
                   )}
                 </div>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
+                <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
                   DOKUMEN RESMI
                 </span>
-                <h2 className="font-serif text-xl font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors mb-3">
+                <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors mb-2">
                   {policy.title}
                 </h2>
-                <span className="text-[10px] uppercase tracking-[0.16em] text-[#111111] font-semibold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold inline-flex items-center gap-1 group-hover:text-[#C5A059] transition-colors">
                   BACA SELENGKAPNYA &rarr;
                 </span>
               </Link>

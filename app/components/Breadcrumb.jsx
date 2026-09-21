@@ -91,43 +91,6 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
       className={`w-full overflow-hidden mb-5 sm:mb-8 select-none ${className}`}
     >
       <ol className="flex items-center flex-nowrap overflow-x-auto scrollbar-none py-1 -my-1 text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium leading-none">
-        {/* Tier Whispered Editorial Mark (Clean, Unboxed, High-Fashion) */}
-        {isLuxury && (
-          <li className="flex items-center shrink-0">
-            <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-bold tracking-[0.24em] text-[#C5A059]">
-              <span className="w-1.5 h-1.5 bg-[#C5A059] inline-block shrink-0 rotate-45" />
-              LUXURY
-            </span>
-            <span className={`mx-2 sm:mx-3 text-[11px] select-none ${separatorClass}`} aria-hidden="true">
-              /
-            </span>
-          </li>
-        )}
-
-        {isPremium && (
-          <li className="flex items-center shrink-0">
-            <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-semibold tracking-[0.24em] text-[#D8B26E]">
-              <span className="w-1.5 h-1.5 bg-[#9E7D3B] inline-block shrink-0" />
-              PREMIUM
-            </span>
-            <span className={`mx-2 sm:mx-3 text-[11px] select-none ${separatorClass}`} aria-hidden="true">
-              /
-            </span>
-          </li>
-        )}
-
-        {isEkonomi && (
-          <li className="flex items-center shrink-0">
-            <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[9.5px] font-medium tracking-[0.22em] text-[#7C3F1D]">
-              <span className="w-1.5 h-1.5 bg-[#7C3F1D] inline-block shrink-0" />
-              EKONOMI
-            </span>
-            <span className={`mx-2 sm:mx-3 text-[11px] select-none ${separatorClass}`} aria-hidden="true">
-              /
-            </span>
-          </li>
-        )}
-
         {/* 1. Root: Beranda with Zero-Radius Architectural Icon */}
         <li className="flex items-center shrink-0">
           <NavLink

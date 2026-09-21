@@ -130,3 +130,79 @@
 - **Consequences**:
   - *Positive*: 100% HTTP 200/301 route integrity across the entire catalog; zero broken links.
   - *Negative*: Any future collection renames in Shopify Admin must be reflected in the redirect map.
+
+---
+
+## ADR-010: Storefront Auto-Sync via Default Edge Sub-Minute CacheShort & Stale-While-Revalidate Caching
+
+- **Status**: Accepted (2026-09-20)
+- **Context**: Content, inventory, pricing, and tag updates made in Shopify Admin previously suffered from edge caching delays (up to 1 hour or 1 day under `CacheLong()`), requiring manual Cloudflare/Oxygen edge cache purges or redeployments to reflect changes.
+- **Decision**:
+  1. Intercept `storefront.query` within `app/lib/context.js` to automatically default all unconfigured queries to `storefront.CacheShort()` (`maxAge: 1s, staleWhileRevalidate: 9s`).
+  2. In `app/entry.server.jsx`, inject edge caching headers (`Cache-Control: public, max-age=1, stale-while-revalidate=9`) into all successful SSR responses.
+  3. Harmonize layout, navigation menu, and static page loaders in `app/root.jsx` and `app/routes/pages.*.jsx` from `CacheLong()` to `CacheShort()`.
+- **Consequences**:
+  - *Positive*: Storefront data updates in Shopify Admin reflect across the global Oxygen edge within seconds while retaining instant edge streaming performance for users.
+  - *Negative*: Slightly increases Storefront API query traffic, well within Shopify API rate limits.
+
+---
+
+## ADR-011: Dual-Engine Product Media Architecture (Video Lookbook & Shopify Storefront API Media Normalization)
+
+- **Status**: Accepted (2026-09-20)
+- **Context**: Product pages originally only queried static images (`images(first: 10)` in `PRODUCT_FRAGMENT`). Products with rich video lookbooks (e.g., `sarimbit-charcoal-hitam`) could not render their high-fashion video presentations.
+- **Decision**:
+  1. Upgrade `PRODUCT_FRAGMENT` in `app/routes/products.$handle.jsx` to query `featuredImage` and `media(first: 15)` using Storefront API GraphQL unions (`Video`, `MediaImage`, `ExternalVideo`, `Model3d`).
+  2. Implement a robust `mediaList` normalizer converting diverse media types into a unified structure `{ id, mediaContentType, url, previewImage, altText, width, height, sources }`.
+  3. Build an editorial 4:5 vertical video player with native controls, `playsInline`, `autoPlay`, `muted`, `loop`, a whispered `VIDEO LOOKBOOK` pill badge, and seekbar touch protection to prevent swipe interference on touchscreens.
+  4. Design Quiet Luxury video thumbnails with centered semi-transparent obsidian badges (`#111111`/70) and Imperial Antique Gold play icons (`#C5A059`).
+- **Consequences**:
+  - *Positive*: Provides an immersive Haute Artistry editorial lookbook experience with seamless fallback for image-only products, preserving strict 4:5 vertical proportions.
+  - *Negative*: Video assets require higher bandwidth, mitigated by default muted autoplay and CDN streaming sources.
+
+---
+
+## ADR-012: Tri-Tier Color Space Realization (Signature Soga Earth Elevation)
+
+- **Status**: Accepted (2026-09-20)
+- **Context**: The 3-tier Sarimbit catalog (`sarimbit-exclusive`, `sarimbit-premium`, `sarimbit-ekonomis`) lacked clear visual differentiation for the middle tier (Signature Premium), which previously resembled the dark obsidian palette of the top tier (Mahakarya Exclusive).
+- **Decision**:
+  1. Anchor the three collection tiers with distinct, authentic Nusantara luxury color palettes:
+     - **Mahakarya Exclusive**: Obsidian Deep (`#111111`) + Charcoal Ink (`#1C1C1C`) + Imperial Antique Gold (`#C5A059`).
+     - **Signature Premium**: Deep Soga Espresso (`#201610`, `#281C15`) + Soga Matang accents (`#7C3F1D`, `#9E7D3B`) + warm Mori cream text (`#FAF8F5`, `#D5C8B8`) + delicate gold hairlines (`#C5A059`/40).
+     - **Essential / RTW (Ekonomis)**: Mori Linen (`#FAF8F5`) + Charcoal Ink (`#1C1C1C`) + crisp light hairlines (`#E2DFD8`).
+  2. Systematically apply the Signature Soga Earth palette across all key touchpoints: `collections.$handle.jsx`, `products.$handle.jsx`, `StickyMobileBar.jsx`, `ProductItem.jsx`, and `ProductTierStorySection.jsx`.
+- **Consequences**:
+  - *Positive*: Immediate visual hierarchy and storytelling that celebrates natural Javanese soga dye heritage while elevating average order value (AOV).
+  - *Negative*: Requires careful token consistency across components to maintain contrast compliance.
+
+---
+
+## ADR-013: Mobile Viewport Stability & Anti-Auto-Zoom Engine
+
+- **Status**: Accepted (2026-09-20)
+- **Context**: On iOS Mobile Safari, focusing any input field with a font size smaller than `16px` triggers automatic viewport zooming, disorienting users and breaking the editorial aesthetic.
+- **Decision**:
+  1. Define a global CSS override in `app/styles/app.css` placed outside `@layer` to ensure unconditional specificity:
+     `@media screen and (max-width: 768px) { input, select, textarea { font-size: 16px !important; } }`.
+  2. Configure mobile filter inputs in `CollectionFilterBar.jsx` with responsive typography (`text-base sm:text-xs`).
+- **Consequences**:
+  - *Positive*: Permanently prevents disruptive auto-zooming on all mobile devices across search, filters, modals, and forms.
+  - *Negative*: Form inputs must be designed with sufficient vertical padding to accommodate 16px font sizes cleanly on small displays.
+
+---
+
+## ADR-014: Zero-Dashed Anti-Slop Architectural Purge & Solid Hairline Elevation
+
+- **Status**: Accepted (2026-09-20)
+- **Context**: Dashed borders (`border-dashed`), tilted cards (`rotate-1.5`), floating clip-art ornaments (`BatikCorner`), and heavy box wrappers in cart items violated the Quiet Luxury Nusantara Design System, creating a casual, cluttered aesthetic ("design slop").
+- **Decision**:
+  1. Eliminate all dashed borders across `BestSellersTabs.jsx`, `ChooseYourBatikGrid.jsx`, `CollectionFilterBar.jsx`, `collections.all.jsx`, and `VipDiscountModal.jsx`, replacing them with crisp solid hairlines (`border-[#E2DFD8]`, `border-[#C5A059]/40`, `border-[#7C3F1D]/50`).
+  2. Remove all floating pseudo-traditional clip-art ornaments (`BatikCorner` in `FamilyBundleBuilder.jsx`).
+  3. Straighten tilted playful cards in `SarimbitBentoSection.jsx` to sharp `0deg` zero-radius geometry.
+  4. Remove boxed tier tag badges from `Breadcrumb.jsx` to preserve editorial minimalism.
+  5. Remove unnecessary card border wrappers from `CartLineItem.jsx` and `CartMain.jsx` for clean, unboxed streaming line items.
+- **Consequences**:
+  - *Positive*: Restores uncompromised high-fashion editorial prestige, strictly upholding DESIGN.md zero-radius and architectural minimalism standards.
+  - *Negative*: Developers and designers must not introduce casual playful CSS decorations into the production codebase.
+

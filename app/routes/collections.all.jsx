@@ -136,7 +136,7 @@ export default function CollectionAll() {
 
         {/* 4:5 Products Grid */}
         {products?.nodes?.length === 0 ? (
-          <div className="text-center py-16 px-4 border border-dashed border-[#E2DFD8] bg-white mb-12">
+          <div className="text-center py-16 px-4 border border-[#E2DFD8] bg-white mb-12">
             <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
               FILTER TIDAK MENEMUKAN HASIL
             </span>

@@ -25,7 +25,7 @@ export async function loader({ context }) {
   try {
     const data = await context.storefront.query(PAGE_SEO_QUERY, {
       variables: { handle: 'fasilitas-store' },
-      cache: context.storefront.CacheLong(),
+      cache: context.storefront.CacheShort(),
     });
     return { page: data?.page || null };
   } catch {
@@ -104,7 +104,7 @@ export default function FasilitasStorePage() {
         </div>
 
         {/* Building Exterior Showcase Banner */}
-        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] bg-[#111111] border border-[#E2DFD8] overflow-hidden mb-20">
+        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] bg-[#111111] overflow-hidden mb-16 sm:mb-20">
           <img
             src="/brand/showroom/showroom_facade_building.jpeg"
             alt="Gedung Butik Batik Smile Simongan Semarang"
@@ -124,11 +124,11 @@ export default function FasilitasStorePage() {
         </div>
 
         {/* 3 Floors Detailed Breakdown */}
-        <div className="space-y-20 mb-20">
+        <div className="space-y-16 sm:space-y-20 mb-16 sm:mb-20">
           {floors.map((floor, idx) => (
             <div
               key={idx}
-              className={`grid grid-cols-1 lg:grid-cols-12 gap-10 items-center ${
+              className={`grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center ${
                 idx % 2 === 1 ? 'lg:flex-row-reverse' : ''
               }`}
             >
@@ -154,7 +154,7 @@ export default function FasilitasStorePage() {
               </div>
 
               <div className={`lg:col-span-6 ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <div className="aspect-[4/3] bg-[#EFECE6] border border-[#E2DFD8] overflow-hidden group">
+                <div className="aspect-[4/3] bg-[#EFECE6] overflow-hidden group">
                   <img
                     src={floor.image}
                     alt={floor.title}
@@ -166,85 +166,89 @@ export default function FasilitasStorePage() {
           ))}
         </div>
 
-        {/* Showroom Amenities Grid */}
-        <div className="bg-white p-8 sm:p-12 border border-[#E2DFD8] mb-16">
-          <div className="text-center mb-8">
-            <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+        {/* Showroom Amenities Grid - Frameless Quiet Luxury */}
+        <div className="pt-12 sm:pt-16 border-t border-[#E2DFD8] mb-16 sm:mb-20">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
               KENYAMANAN KELUARGA
             </span>
-            <h3 className="font-serif text-2xl text-[#111111] font-normal">
+            <h3 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal">
               Fasilitas Pendukung Butik
             </h3>
+            <div className="w-10 h-px bg-[#C5A059] mx-auto mt-3" />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center text-xs">
-            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
-                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
+            <div className="pt-4 border-t border-[#E2DFD8] flex flex-col items-center">
+              <div className="w-8 h-8 mb-3 flex items-center justify-center text-[#C5A059]">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17l-2 3h18l-2-3M7 7l2-4h6l2 4" />
                 </svg>
               </div>
-              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Area Parkir Luas</strong>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed">Aman untuk mobil pribadi maupun bus pariwisata.</p>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[10px] sm:text-[11px]">Area Parkir Luas</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">Aman untuk kendaraan pribadi &amp; bus.</p>
             </div>
 
-            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
-                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="pt-4 border-t border-[#E2DFD8] flex flex-col items-center">
+              <div className="w-8 h-8 mb-3 flex items-center justify-center text-[#C5A059]">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                 </svg>
               </div>
-              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Full AC 3 Lantai</strong>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed">Suhu sejuk untuk kenyamanan fitting keluarga.</p>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[10px] sm:text-[11px]">Full AC 3 Lantai</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">Suhu sejuk untuk kenyamanan fitting.</p>
             </div>
 
-            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
-                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="pt-4 border-t border-[#E2DFD8] flex flex-col items-center">
+              <div className="w-8 h-8 mb-3 flex items-center justify-center text-[#C5A059]">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M12 3a9 9 0 0 0 9 9 9 9 0 1 1-9-9z" />
                   <polygon points="17 4 18 7 21 7 18.5 9 19.5 12 17 10 14.5 12 15.5 9 13 7 16 7" />
                 </svg>
               </div>
-              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Mushola Bersih</strong>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed">Sarana ibadah lengkap dan wudhu nyaman.</p>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[10px] sm:text-[11px]">Mushola Bersih</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">Sarana ibadah &amp; wudhu nyaman.</p>
             </div>
 
-            <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8] hover:border-[#C5A059] transition-colors group">
-              <div className="w-10 h-10 mx-auto mb-3 flex items-center justify-center border border-[#C5A059]/40 bg-white group-hover:bg-[#C5A059] transition-colors">
-                <svg className="w-5 h-5 text-[#C5A059] group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="pt-4 border-t border-[#E2DFD8] flex flex-col items-center">
+              <div className="w-8 h-8 mb-3 flex items-center justify-center text-[#C5A059]">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect x="1" y="4" width="22" height="16" rx="0" ry="0" />
                   <line x1="1" y1="10" x2="23" y2="10" />
                 </svg>
               </div>
-              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[11px]">Pembayaran Lengkap</strong>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed">Menerima QRIS, Debit, Kartu Kredit, &amp; Transfer.</p>
+              <strong className="block text-[#111111] mb-1 tracking-wider uppercase text-[10px] sm:text-[11px]">Pembayaran Non-Tunai</strong>
+              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">QRIS, Debit, Kartu Kredit, &amp; Transfer.</p>
             </div>
           </div>
         </div>
 
-        {/* Bottom CTA Box */}
-        <div className="bg-[#111111] text-white p-8 sm:p-12 text-center border border-[#1C1C1C]">
-          <h3 className="font-serif text-2xl sm:text-3xl font-normal mb-3">
-            Rencanakan Kunjungan Anda Hari Ini
+        {/* Bottom CTA - Clean Editorial Frameless */}
+        <div className="pt-12 sm:pt-16 border-t border-[#E2DFD8] text-center max-w-2xl mx-auto">
+          <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
+            KUNJUNGAN SHOWROOM
+          </span>
+          <h3 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-3">
+            Rencanakan Kunjungan Anda
           </h3>
-          <p className="text-xs text-[#E2DFD8] max-w-xl mx-auto mb-8 font-light leading-relaxed">
-            Tim konsultan kami siap menyambut kedatangan Anda dan keluarga dengan senyum ramah dan pelayanan terbaik.
+          <p className="text-xs sm:text-sm text-[#5A5550] mb-8 font-light leading-relaxed">
+            Tim konsultan Batik Smile siap menyambut kedatangan Anda dan keluarga dengan senyum ramah dan pelayanan terbaik.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/pages/lokasi-toko"
-              className="w-full sm:w-auto px-8 py-4 bg-[#C5A059] hover:bg-white text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors"
+              className="w-full sm:w-auto px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
             >
-              PETUNJUK ARAH &amp; GOOGLE MAPS &rarr;
+              PETUNJUK ARAH &rarr;
             </Link>
             <a
               href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20jadwal%20fitting%20keluarga"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/40 text-white text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-white/10 hover:border-white transition-colors"
+              className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-[#111111] hover:border-[#C5A059] !text-[#111111] hover:!text-[#C5A059] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors no-underline"
             >
-              RESERVASI FITTING VIA WHATSAPP
+              RESERVASI FITTING &rarr;
             </a>
           </div>
         </div>

@@ -1436,6 +1436,94 @@
 - `npm run lint`: 0 errors, 0 warnings.
 - `npm run build`: Exit code 0 (Vite SSR + Oxygen bundle created in 911ms).
 
+---
+
+## Milestone 52: Storefront Auto-Sync via Default Edge Sub-Minute CacheShort & Stale-While-Revalidate (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Global Storefront API auto-sync architecture ensuring Shopify Admin changes reflect on edge within seconds without manual cache purges
+
+### 1. Problem & Architectural Need
+- Shopify Admin updates to products, descriptions, prices, variant options, tags, menus, and collection ordering previously experienced long edge caching delays (up to 1 day or 1 hour when using `CacheLong()`).
+- Merchants and developers had to perform manual edge cache invalidation or rebuild the Oxygen application to see administrative changes live.
+
+### 2. Architectural Solution
+- **Storefront Query Interceptor (`app/lib/context.js`)**:
+  - Wrapped `storefront.query` in Hydrogen context creation to automatically provide `cache: storefront.CacheShort()` (`maxAge: 1s, staleWhileRevalidate: 9s`) whenever `cache` is omitted in individual route queries.
+  - Ensures every query across all storefront routes automatically inherits edge-friendly, sub-minute freshness.
+- **Edge Cache-Control Header Injection (`app/entry.server.jsx`)**:
+  - Configured edge HTTP response headers: `Cache-Control: public, max-age=1, stale-while-revalidate=9` for all successful SSR responses.
+  - Enables the Shopify Oxygen CDN edge nodes to serve cached markup instantly while asynchronously revalidating in the background.
+- **Root & Page Loader Harmonization (`app/root.jsx`, `app/routes/pages.*.jsx`)**:
+  - Replaced legacy `storefront.CacheLong()` calls with `storefront.CacheShort()` in root header/footer queries and editorial CMS pages.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (SSR + Oxygen client build in 1.69s).
+- Query responses verify sub-second updates upon Shopify Admin mutation.
+
+---
+
+## Milestone 53: High-End Video Lookbook & Shopify Storefront API Media Integration (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Native Video Lookbook Player with Storefront API GraphQL Union Normalization and Strict 4:5 Vertical Framing
+
+### 1. Problem & Diagnostic
+- On product pages with rich editorial video assets (e.g. `sarimbit-charcoal-hitam`), the video lookbook was completely missing from the storefront.
+- Diagnostic inspection revealed that `PRODUCT_FRAGMENT` in `app/routes/products.$handle.jsx` only queried `images(first: 10)`, discarding all native Shopify `Video` media objects returned by the Storefront API.
+
+### 2. Architectural Solution
+- **GraphQL Union Query Upgrade (`app/routes/products.$handle.jsx`)**:
+  - Added `featuredImage` and `media(first: 15)` to `PRODUCT_FRAGMENT`.
+  - Queried GraphQL union types: `Video` (with MP4 and HLS sources, mime types, resolutions, and `previewImage`), `MediaImage`, `ExternalVideo`, and `Model3d`.
+- **Unified Media Normalization (`mediaList`)**:
+  - Implemented normalized media parser mapping all incoming items to `{ id, mediaContentType, url, previewImage, altText, width, height, sources }` with automatic fallback to `featuredImage` and legacy image structures.
+- **Quiet Luxury Video Lookbook Player Component**:
+  - Vertical 4:5 aspect ratio (`aspect-[4/5]`) container perfectly harmonized with catalog imagery.
+  - Implemented native HTML5 video element with `playsInline`, `autoPlay`, `muted`, `loop`, and `controls`.
+  - Added whispered gold-bordered pill badge: `VIDEO LOOKBOOK` (`text-[9px] tracking-[0.22em] text-[#C5A059] bg-[#111111]/80`).
+  - Added touch scrub protection on the video player controls to prevent swipe navigation from interrupting manual seekbar scrubbing on mobile devices.
+- **Quiet Luxury Gallery Thumbnails**:
+  - Thumbnails for video media display preview images overlaid with a centered semi-transparent dark badge (`#111111`/70) and Imperial Antique Gold play icon (`#C5A059` `▶ VIDEO`).
+
+### 3. Verification Evidence
+- `sarimbit-charcoal-hitam` queried on Storefront API: successfully returns 1 native `Video` object (`gid://shopify/Video/42144888357033`) and 6 `MediaImage` objects.
+- Video element renders with active MP4 stream from Shopify CDN (`https://checkout.batiksmile.com/cdn/shop/videos/...`).
+- CSP policy permits smooth video streaming without console warnings or blocking.
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+
+---
+
+## Milestone 54: Tri-Tier Color Space Realization & Zero-Dashed Anti-Slop Elevation (2026-09-21)
+**Date**: 2026-09-21 | **Execution**: Deepened Signature Premium tier with authentic Soga Earth palette, purged all dashed borders, straightened tilted cards, and cleansed clip-art ornaments
+
+### 1. Tri-Tier Color Space Realization (Signature Soga Earth)
+- Re-architected collection styling so each tier has a distinct, unmistakable visual identity:
+  - **Mahakarya Exclusive**: Obsidian Deep (`#111111`) + Imperial Antique Gold (`#C5A059`).
+  - **Signature Premium**: Deep Soga Espresso (`#201610`, `#281C15`) + Soga Matang accents (`#7C3F1D`, `#9E7D3B`) + warm Mori cream text (`#FAF8F5`, `#D5C8B8`) + hairline gold dividers (`#C5A059`/40).
+  - **Essential / RTW (Ekonomis)**: Mori Linen (`#FAF8F5`) + Charcoal Ink (`#1C1C1C`) + crisp light hairlines (`#E2DFD8`).
+- Propagated Signature Soga Earth across:
+  - `collections.$handle.jsx`: Hero badges, background tinting, tier pills, and collection filters.
+  - `products.$handle.jsx`: Badges, accordions, and price display.
+  - `StickyMobileBar.jsx`: Mobile sticky action bar with tier-aware styling.
+  - `ProductItem.jsx`: Catalog card stamps and badges.
+  - `ProductTierStorySection.jsx`: Tier comparison section styling.
+
+### 2. Zero-Dashed Anti-Slop Purge & Solid Hairline Elevation
+- **Elimination of Dashed Borders**:
+  - Replaced all instances of `border-dashed` with crisp solid hairlines (`border-[#E2DFD8]`, `border-[#C5A059]/40`, `border-[#7C3F1D]/50`) across `BestSellersTabs.jsx`, `ChooseYourBatikGrid.jsx`, `CollectionFilterBar.jsx`, `collections.all.jsx`, and `VipDiscountModal.jsx`.
+- **Elimination of Ornamental Clip-Art**:
+  - Removed floating pseudo-traditional clip-art icon `BatikCorner` from `FamilyBundleBuilder.jsx`.
+- **Straightened Tilted Cards**:
+  - Removed playful card rotations (`rotate-1.5`, `rotate-2`) from `SarimbitBentoSection.jsx` to enforce uncompromising zero-radius architectural discipline.
+- **Unboxed Minimalist Elements**:
+  - Removed boxed tier badge from `Breadcrumb.jsx` to preserve pure, unboxed breadcrumb navigation.
+  - Removed redundant card borders from `CartLineItem.jsx` and `CartMain.jsx` for clean, unboxed cart line item streaming.
+
+### 3. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (SSR + Oxygen client build in 1.69s).
+- All tier surfaces rendered and verified on desktop and mobile viewports.
+
+
 
 
 

@@ -52,6 +52,17 @@ export async function createHydrogenRouterContext(
     additionalContext,
   );
 
+  // Auto-Sync Architecture: Ensure all storefront queries default to CacheShort()
+  // (maxAge: 1s, staleWhileRevalidate: 9s) so updates to products, collections,
+  // blogs, and navigation in Shopify Admin reflect within seconds on the Hydrogen storefront.
+  const originalQuery = hydrogenContext.storefront.query;
+  hydrogenContext.storefront.query = (query, options = {}) => {
+    return originalQuery.call(hydrogenContext.storefront, query, {
+      ...options,
+      cache: options?.cache ?? hydrogenContext.storefront.CacheShort(),
+    });
+  };
+
   return hydrogenContext;
 }
 

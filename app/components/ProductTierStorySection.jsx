@@ -21,7 +21,9 @@ export function ProductTierStorySection({ tier, productTitle }) {
     <section
       aria-label="Keistimewaan Karya Butik"
       className={`mt-16 sm:mt-24 pt-12 sm:pt-16 border-t ${
-        isExclusive ? 'border-[#262626] text-white' : 'border-[#E2DFD8] text-[#111111]'
+        isExclusive
+          ? 'border-[#262626] text-white'
+          : 'border-[#7C3F1D]/40 text-[#FAF8F5]'
       }`}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
@@ -29,7 +31,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
         <div className="lg:col-span-5 relative group overflow-hidden">
           <div
             className={`aspect-[4/5] w-full relative overflow-hidden ${
-              isExclusive ? 'bg-[#181818]' : 'bg-[#EFECE6]'
+              isExclusive ? 'bg-[#181818]' : 'bg-[#281C14]'
             }`}
           >
             <img
@@ -65,9 +67,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
         <div className="lg:col-span-7 flex flex-col justify-center">
           {/* Eyebrow */}
           <span
-            className={`text-[9px] sm:text-[10px] uppercase tracking-[0.24em] font-bold block mb-2 ${
-              isExclusive ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
-            }`}
+            className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] font-bold block mb-2 text-[#C5A059]"
           >
             {isExclusive
               ? 'DIFERENSIASI KASTA TERTINGGI • SARIMBIT EXCLUSIVE'
@@ -76,9 +76,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
 
           {/* Heading */}
           <h3
-            className={`font-serif text-2xl sm:text-3xl lg:text-[34px] font-normal leading-snug tracking-wide mb-3 ${
-              isExclusive ? 'text-white' : 'text-[#111111]'
-            }`}
+            className="font-serif text-2xl sm:text-3xl lg:text-[34px] font-normal leading-snug tracking-wide mb-3 text-white"
           >
             {isExclusive
               ? 'Keagungan Sutra ATBM & Sentuhan Prada Emas Maestro'
@@ -87,14 +85,14 @@ export function ProductTierStorySection({ tier, productTitle }) {
 
           <div
             className={`w-12 h-px my-3.5 ${
-              isExclusive ? 'bg-[#C5A059]' : 'bg-[#9E7D3B]'
+              isExclusive ? 'bg-[#C5A059]' : 'bg-[#7C3F1D]'
             }`}
           />
 
           {/* Lead Paragraph */}
           <p
             className={`text-xs sm:text-sm font-light leading-relaxed mb-6 ${
-              isExclusive ? 'text-[#E2DFD8]/85' : 'text-[#5A5550]'
+              isExclusive ? 'text-[#E2DFD8]/85' : 'text-[#D5C8B8]'
             }`}
           >
             {isExclusive
@@ -105,7 +103,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
           {/* 3 Pillars of Distinction */}
           <div
             className={`space-y-4 pt-4 border-t ${
-              isExclusive ? 'border-[#262626]' : 'border-[#E2DFD8]'
+              isExclusive ? 'border-[#262626]' : 'border-[#7C3F1D]/40'
             }`}
           >
             {isExclusive ? (
@@ -149,36 +147,36 @@ export function ProductTierStorySection({ tier, productTitle }) {
             ) : (
               <>
                 <div className="flex items-start gap-3">
-                  <span className="text-[#9E7D3B] text-[10px] mt-0.5 shrink-0">◆</span>
+                  <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
-                    <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111]">
+                    <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
                       Tekstur Tenun Dobby Timbul Berkarakter
                     </h4>
-                    <p className="text-[11px] font-light text-[#5A5550] leading-relaxed mt-0.5">
+                    <p className="text-[11px] font-light text-[#D5C8B8]/85 leading-relaxed mt-0.5">
                       Anyaman bertekstur timbul yang mewah, tidak menerawang, tidak mudah kusut saat duduk di acara pesta, dan tahan cuci berulang tanpa luntur.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#9E7D3B] text-[10px] mt-0.5 shrink-0">◆</span>
+                  <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
-                    <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111]">
+                    <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
                       Lapis Furing Katun Hero Sejuk Tropis
                     </h4>
-                    <p className="text-[11px] font-light text-[#5A5550] leading-relaxed mt-0.5">
+                    <p className="text-[11px] font-light text-[#D5C8B8]/85 leading-relaxed mt-0.5">
                       Dilapisi furing katun hero halus yang menyerap keringat dan tidak panas, menjamin seluruh anggota keluarga nyaman seharian penuh.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#9E7D3B] text-[10px] mt-0.5 shrink-0">◆</span>
+                  <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
-                    <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111]">
+                    <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
                       Garansi Bebas Tukar Ukuran 7 Hari
                     </h4>
-                    <p className="text-[11px] font-light text-[#5A5550] leading-relaxed mt-0.5">
+                    <p className="text-[11px] font-light text-[#D5C8B8]/85 leading-relaxed mt-0.5">
                       Jaminan purna jual resmi Butik Batik Smile Semarang dengan layanan bebas tukar ukuran dalam 7 hari jika ukuran salah satu anggota kurang pas.
                     </p>
                   </div>

@@ -42,7 +42,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 border border-dashed border-[#E2DFD8] bg-[#FAF8F5]">
+          <div className="text-center py-16 border border-[#E2DFD8] bg-white">
             <p className="text-xs tracking-wider uppercase text-[#5A5550]">
               Memuat koleksi produk terbaru...
             </p>

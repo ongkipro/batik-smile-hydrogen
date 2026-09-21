@@ -66,10 +66,10 @@ export default function Page() {
           <div className="w-12 h-px bg-[#C5A059] mt-4" />
         </div>
 
-        {/* Content Box */}
-        <div className="bg-white p-8 sm:p-12 border border-[#E2DFD8] shadow-sm mb-12">
+        {/* Content - Frameless Quiet Luxury */}
+        <div className="mb-12">
           <main
-            className="prose prose-neutral max-w-none text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed [&>h2]:font-serif [&>h2]:text-xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-8 [&>h2]:mb-3 [&>h3]:font-serif [&>h3]:text-lg [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-6 [&>h3]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:space-y-1 [&>p]:mb-4"
+            className="prose prose-neutral max-w-none text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed [&>h2]:font-serif [&>h2]:text-xl sm:[&>h2]:text-2xl [&>h2]:font-normal [&>h2]:text-[#111111] [&>h2]:mt-8 [&>h2]:mb-3 [&>h3]:font-serif [&>h3]:text-lg [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-6 [&>h3]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:space-y-1 [&>p]:mb-4"
             dangerouslySetInnerHTML={{ __html: page.body }}
           />
         </div>

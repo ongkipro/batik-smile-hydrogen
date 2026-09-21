@@ -78,11 +78,13 @@ To align with modern luxury storefront architecture, components toggle between f
    - Border: `rgba(197, 160, 89, 0.25)` (Hairline Gold 25%)
    - Primary Action: `#C5A059` background with `#111111` text (hover: `#DFC283`)
 
-4. **Scheme 4: Soga Earth (Artisan Fabric & Tailoring Storytelling)**:
-   - Canvas: `#F4EFEA` (Sand Parchment)
-   - Text: `#3A2315` (Roasted Coffee)
-   - Accents: `#7C3F1D` (Soga Bata)
-   - Border: `#D8CEBE`
+4. **Scheme 4: Signature Soga Earth (Signature Premium Sarimbit & Artisan Fabric Storytelling)**:
+   - Canvas: `#201610` (Deep Soga Espresso) & `#281C15`
+   - Surface / Cards: `#201610` with subtle `#C5A059`/40 hairline borders
+   - Text: `#FAF8F5` (Mori Linen) & `#D5C8B8` (Warm Soga Sand)
+   - Accents & Dividers: `#7C3F1D` (Soga Matang) & `#9E7D3B` (Deep Ochre Gold)
+   - Border: `rgba(197, 160, 89, 0.40)` (Antique Gold Hairline 40%) or `#7C3F1D`/50
+   - Primary Action: `#C5A059` background with `#111111` text (hover: `#DFC283`), or `#7C3F1D` (hover: `#4A2E1B`)
 
 ---
 
@@ -198,31 +200,31 @@ To honor the value proposition and price tiering of Batik Smile Nusantara, store
 
 ### A. Visual Token Differentiation
 
-| Token Parameter | Exclusive Tier (`sarimbit-exclusive`) | Premium Tier (`sarimbit-premium`) | Standard Tier (`sarimbit-ekonomis` & RTW) |
+| Token Parameter | Exclusive Tier (`sarimbit-luxury` / `sarimbit-exclusive`) | Premium Tier (`sarimbit-premium`) | Standard Tier (`sarimbit-ekonomi` / `sarimbit-ekonomis` & RTW) |
 |---|---|---|---|
-| **Accent Color** | Antique Champagne Gold (`#A68A56`) & Deep Bronze (`#5A4526`) | Obsidian (`#1C1C1C`) & Soga Terracotta (`#8B3A14`) | Warm Slate (`#4A4A4A`) & Soga Accent |
-| **Canvas / Background** | Warm Obsidian Dark Canvas or Ivory Pearl (`#FDFCF9`) with Gold hairline accents | Mori Linen Light Canvas (`#FAF8F5`) with crisp hairline borders | Clean Neutral Sand (`#F5F3EF`) |
-| **Typography Styling** | Cormorant Garamond Serif Headlines with wider tracking (`0.22em`), italicized motif names | Instrument Sans clean luxury uppercase (`0.18em`) with serif accents | Instrument Sans standard tracking (`0.14em`) |
-| **Tier Badge** | Gold-bordered badge: `MAHAKARYA EXCLUSIVE • SUTRA ATBM` | Crisp black badge: `SIGNATURE PREMIER • TENUN DOBBY` | Subtle hairline badge: `ESSENTIAL DAILY` |
-| **Border Treatment** | 0px sharp corners with subtle 1px `#A68A56` / `#D4AF37` hairline | 0px sharp corners with 1px `#E5E0D8` border | 0px sharp corners with subtle hairline |
+| **Accent Color** | Imperial Antique Gold (`#C5A059`) & Deep Ochre (`#9E7D3B`) | Soga Matang (`#7C3F1D`) & Deep Ochre Gold (`#9E7D3B`) | Charcoal Ink (`#1C1C1C`) & Muted Slate (`#5A5550`) |
+| **Canvas / Background** | Obsidian Deep (`#111111`) or Charcoal Ink (`#1C1C1C`) with Gold hairlines | Deep Soga Espresso (`#201610`, `#281C15`) with Soga Matang & Gold hairlines | Mori Linen Light Canvas (`#FAF8F5`) with crisp `#E2DFD8` hairlines |
+| **Typography Styling** | Cormorant Garamond Serif Headlines with wider tracking (`0.22em`), italicized motif names | Instrument Sans clean luxury uppercase (`0.18em`) with serif accents, text in `#FAF8F5` / `#D5C8B8` | Instrument Sans standard tracking (`0.14em`), text in `#1C1C1C` |
+| **Tier Badge** | Gold-bordered badge: `MAHAKARYA EXCLUSIVE • SUTRA ATBM` (`#C5A059` on `#111111`) | Soga Gold badge: `SIGNATURE PREMIER • TENUN DOBBY` (`#FAF8F5` on `#201610`) | Minimal hairline badge: `ESSENTIAL DAILY` |
+| **Border Treatment** | 0px sharp corners with subtle 1px `rgba(197, 160, 89, 0.40)` gold hairline | 0px sharp corners with 1px `rgba(197, 160, 89, 0.30)` or `#7C3F1D`/50 hairline | 0px sharp corners with subtle 1px `#E2DFD8` hairline |
 
 ### B. Collection Listing Page (PLP) Differentiation
 
-1. **Exclusive Collection PLP (`/collections/sarimbit-exclusive`)**:
-   - **Editorial Hero Banner**: Immersive, full-width cinematic hero with dark luxury styling and gold typography: *"Koleksi Mahakarya Pasangan Sutra Alam & Batik Tulis Eksklusif"*.
+1. **Exclusive Collection PLP (`/collections/sarimbit-luxury` & `/collections/sarimbit-exclusive`)**:
+   - **Editorial Hero Banner**: Immersive, full-width cinematic hero with dark obsidian luxury styling and gold typography: *"Koleksi Mahakarya Pasangan Sutra Alam & Batik Tulis Eksklusif"*.
    - **Expansive Grid Layout**: 2-column (desktop) / 1-column (mobile) portrait format allowing each lookbook photograph maximum visual breathing space.
    - **Artisan Narrative Cards**: Interspersed between products, highlighting maestro canting stories, philosophy of motif, and heritage authenticity.
    - **VIP Concierge Anchor**: Floating or sticky banner at top/bottom offering private showroom fitting reservations and bespoke tailoring consultations.
    - **Product Card Syntax**: `[MAHAKARYA] SARIMBIT SUTRA PASANGAN` with subtle gold price tag.
 
 2. **Premium Collection PLP (`/collections/sarimbit-premium`)**:
-   - **Curated Linen Header**: Mori Linen header with bold obsidian typography and filter toggles (Kemeja, Tunik, Pasangan Lengkap).
+   - **Deep Soga Earth Header**: Deep Soga Espresso canvas (`#201610`) with Soga Matang accents and warm cream typography (`#FAF8F5`, `#D5C8B8`).
    - **Balanced 3-to-4 Column Grid**: Professional high-end boutique display with hover state showcasing complementary couple angles.
    - **Fabric Guarantee Micro-Badges**: Badges indicating `TENUN DOBBY TIMBUL` and `FULL FURING HERO`.
    - **Product Card Syntax**: `[SIGNATURE] SARIMBIT CHARCOAL HITAM`.
 
-3. **Standard / Ekonomis PLP (`/collections/sarimbit-ekonomis`)**:
-   - High-performance, fast-scrolling 4-column grid optimized for quick discovery and seamless 1-click cart addition.
+3. **Standard / Ekonomi PLP (`/collections/sarimbit-ekonomi` & `/collections/sarimbit-ekonomis`)**:
+   - High-performance, fast-scrolling 4-column grid on Mori Linen (`#FAF8F5`) optimized for quick discovery and seamless 1-click cart addition.
 
 ### C. Product Detail Page (PDP) Differentiation
 
@@ -253,6 +255,17 @@ To prevent generic AI templates, SaaS aesthetics, and low-trust dropshipping clu
 3. **NO AI Slop Gradients**: No generic purple/blue/violet tech gradients (`bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500`). We only use natural unbleached Mori Linen (`#FAF8F5`), Obsidian (`#111111`), Antique Champagne Gold (`#A68A56`), and Soga Java (`#7C3F1D`).
 4. **NO Cheap Urgency Tactics**: No ticking countdown timers, no fake live viewer counters, no "Someone in Jakarta just bought this!" popups, and no aggressive spin-to-win wheels. Luxury trusts the buyer; it does not pressure them.
 5. **NO Generic Stock Photography**: All imagery comes from authentic Batik Smile Semarang showroom and catalog shoots. Every image respects the vertical **4:5 aspect ratio (1080×1350 px)**.
+6. **NO Dashed Borders (`border-dashed`)**: All borders, dividers, and card frames must be solid crisp hairlines (`border-[#E2DFD8]`, `border-[#C5A059]/40`, `border-[#7C3F1D]/50`). Dashed borders resemble coupons or draft wireframes, destroying luxury prestige.
+7. **NO Tilted or Rotated Cards**: Cards sit perfectly square at `0deg` zero-radius geometry. Reject playful scrapbooking angles (`rotate-1.5`, `rotate-2`).
+8. **NO Floating Clip-Art Ornaments**: Floating pseudo-traditional batik stamp vectors (e.g. `BatikCorner`) are strictly banned. Heritage is communicated through authentic physical textiles, photography, and disciplined typography.
+9. **NO Boxed Breadcrumb Badges**: Breadcrumbs flow as an unboxed, fluid horizontal stream separated by whispered slashes (`/`), guaranteeing single-line responsiveness.
+10. **NO Boxed Line Item Wrappers in Cart**: Cart line items stream unboxed directly on the Mori Linen canvas separated only by delicate hairlines.
+11. **Vertical 4:5 Video Lookbook Protocol**:
+    - Product video lookbooks must strictly preserve the 4:5 vertical proportion (`aspect-[4/5]`).
+    - Video players feature whispered gold-bordered pill badges (`VIDEO LOOKBOOK`), native controls, `playsInline`, `autoPlay`, `muted`, `loop`.
+    - Gallery thumbnails for video media feature centered semi-transparent dark badges (`#111111`/70) with Imperial Antique Gold play icons (`#C5A059` `▶ VIDEO`).
+    - Mobile seekbar touch scrubbing must be isolated from swipe navigation to prevent accidental card switching.
+
 
 ### B. Shopify Commerce Tone & Interaction Conventions
 1. **Dignified Luxury Microcopy (No "Buy Now / Shop Now" Slop)**:

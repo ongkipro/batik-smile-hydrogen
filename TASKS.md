@@ -1104,6 +1104,73 @@
   - *Action*: Engineered Quiet Luxury Zero-Radius popup modal with Quad-Harmonic palette (`#FAF8F5`, `#111111`, `#C5A059`, `#7C3F1D`). Integrated non-intrusive delayed trigger (6s delay or 30% scroll), localStorage claim/cooldown persistence, accessible backdrop, ESC key dismiss, and dynamic voucher reveal for code `BATIK25` with one-click copy and auto-apply direct link.
   - *Evidence*: Headless Chrome emulation confirmed modal trigger, email submission, and voucher display. `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
 
+---
+
+## Phase 54: Storefront Auto-Sync Architecture & Edge Caching Harmonization (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/lib/context.js, app/entry.server.jsx, app/root.jsx, app/routes/pages.*.jsx*
+
+- [x] **Task 54.1: Storefront API Auto-Sync Query Interceptor (`app/lib/context.js`)**
+  - *Action*: Implemented query wrapper on `storefront.query` in Hydrogen context creation to automatically default unconfigured cache strategies to `storefront.CacheShort()` (`maxAge: 1s, staleWhileRevalidate: 9s`). Ensures changes made in Shopify Admin reflect on the storefront within seconds.
+  - *Evidence*: Local and edge queries verify sub-minute data freshness.
+- [x] **Task 54.2: Edge Response Cache-Control Header Injection (`app/entry.server.jsx`)**
+  - *Action*: Configured SSR response headers with `Cache-Control: public, max-age=1, stale-while-revalidate=9` for all successful responses to leverage Cloudflare / Oxygen edge caching without serving stale content.
+  - *Evidence*: Verified HTTP response headers on live endpoints.
+- [x] **Task 54.3: Root & Content Route Cache Harmonization (`app/root.jsx`, `app/routes/pages.*.jsx`)**
+  - *Action*: Migrated root layouts, navigation menus, and static CMS pages from `CacheLong()` to `CacheShort()`.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+---
+
+## Phase 55: Product Media Architecture & 4:5 Video Lookbook System (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/routes/products.$handle.jsx, Storefront API GraphQL, Video Component*
+
+- [x] **Task 55.1: Storefront API GraphQL Union Ingestion (`app/routes/products.$handle.jsx`)**
+  - *Action*: Upgraded `PRODUCT_FRAGMENT` to query `featuredImage` and `media(first: 15)` using Storefront API GraphQL union types (`Video`, `MediaImage`, `ExternalVideo`, `Model3d`), fetching MP4 and HLS sources, mime types, resolutions, and preview images.
+  - *Evidence*: Live query for `sarimbit-charcoal-hitam` returns native `Video` media object with MP4 streaming sources.
+- [x] **Task 55.2: Normalized Media List Normalizer (`mediaList`)**
+  - *Action*: Implemented robust normalizer extracting unified `{ id, mediaContentType, url, previewImage, altText, width, height, sources }` objects with seamless fallback for image-only products.
+  - *Evidence*: Verified unified data structure across diverse product media catalogs.
+- [x] **Task 55.3: Editorial 4:5 Video Lookbook Player Component**
+  - *Action*: Created vertical 4:5 aspect ratio (`aspect-[4/5]`) video container with native controls, `playsInline`, `autoPlay`, `muted`, `loop`, whispered `VIDEO LOOKBOOK` gold badge, and touch scrub protection against swipe navigation interruptions.
+  - *Evidence*: Playback verified in desktop and mobile viewports with zero layout shifts.
+- [x] **Task 55.4: Quiet Luxury Gallery Video Thumbnails**
+  - *Action*: Designed video thumbnail indicators featuring semi-transparent dark badges (`#111111`/70) with centered Imperial Antique Gold play icons (`#C5A059` `▶ VIDEO`).
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0).
+
+---
+
+## Phase 56: Tri-Tier Color Space (Signature Soga Earth) & Zero-Dashed Anti-Slop Elevation (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/components/*, app/routes/collections.$handle.jsx, app/routes/products.$handle.jsx, app/styles/app.css*
+
+- [x] **Task 56.1: Signature Soga Earth Palette Realization**
+  - *Action*: Deepened Signature Premium tier styling across collection PLP, product PDP, and shared components using authentic Soga Earth / Deep Espresso (`#201610`, `#281C15`), Soga Matang accents (`#7C3F1D`), warm cream text (`#FAF8F5`, `#D5C8B8`), and delicate gold hairlines (`#C5A059`/40). Differentiated the 3 tiers (Mahakarya Obsidian, Signature Soga Earth, Essential Mori Linen).
+  - *Evidence*: Visual hierarchy verified across `collections.$handle.jsx`, `products.$handle.jsx`, `StickyMobileBar.jsx`, and `ProductTierStorySection.jsx`.
+- [x] **Task 56.2: Zero-Dashed Anti-Slop Purge**
+  - *Action*: Completely replaced all `border-dashed` styling with solid crisp hairlines (`border-[#E2DFD8]`, `border-[#C5A059]/40`, `border-[#7C3F1D]/50`) across `BestSellersTabs.jsx`, `ChooseYourBatikGrid.jsx`, `CollectionFilterBar.jsx`, `collections.all.jsx`, and `VipDiscountModal.jsx`.
+  - *Evidence*: `rg "border-dashed" app/` returned zero matches.
+- [x] **Task 56.3: Architectural Minimalism & Geometry Purification**
+  - *Action*: Removed pseudo-traditional clip-art icon `BatikCorner` from `FamilyBundleBuilder.jsx`. Straightened tilted cards in `SarimbitBentoSection.jsx` to sharp `0deg` zero-radius precision. Removed boxed tier pill from `Breadcrumb.jsx`. Removed redundant card border containers from `CartLineItem.jsx` and `CartMain.jsx`.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings) and `npm run build` (exit code 0, 1.69s).
+
+---
+
+## Phase 57: Editorial Article Detail UI/UX & Grid Harmonization (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/routes/blogs.$blogHandle.$articleHandle.jsx, ProductItem*
+
+- [x] **Task 57.1: Curated Product Card Synchronization (`ProductItem`)**
+  - *Action*: Replaced custom `ProductStoryCard` with canonical `ProductItem` component inside `blogs.$blogHandle.$articleHandle.jsx`, standardizing Quiet Luxury frameless card architecture, 4:5 portrait ratio, strikethrough compare-at price, and hover slide-up quick view.
+  - *Evidence*: Render verified in article detail route with live catalog products.
+- [x] **Task 57.2: Mobile 2x2 Grid Precision**
+  - *Action*: Configured `grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 lg:gap-y-12` displaying exactly 4 curated products in a balanced 2x2 grid on mobile viewports and a single 4-column row on desktop.
+  - *Evidence*: `ARTICLE_QUERY` queries `products(first: 4)` with required image, variant price, compareAtPrice, and metadata fields.
+- [x] **Task 57.3: Related Articles Homepage Grid Alignment**
+  - *Action*: Replaced previous related articles layout with the 3-column frameless editorial grid (`grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10`) matching `EditorialJournalSection.jsx`: 3:2 aspect ratio, micro index (`01 / ARSIP BUDAYA`), date, serif headline, narrative excerpt (`line-clamp-3`), and `BACA CATATAN →` action link.
+  - *Evidence*: Verified 3-column layout and typography harmony.
+- [x] **Task 57.4: Hero Banner Proportional Container Width**
+  - *Action*: Expanded article hero banner from narrow `max-w-4xl` to full container width (`w-full aspect-[16/9] sm:aspect-[21/9]`) matching the layout hierarchy of editorial catalog grids.
+  - *Evidence*: `npm run lint` (0 errors, 0 warnings), `npm run build` (exit code 0).
+
+
 
 
 

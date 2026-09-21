@@ -25,21 +25,21 @@ export function StickyMobileBar({ product, selectedVariant, isExclusive = false,
 
   return (
     <div
-      className={`lg:hidden fixed bottom-[max(3.8rem,calc(env(safe-area-inset-bottom)+3.5rem))] left-0 right-0 z-30 p-3 backdrop-blur-md shadow-xl transition-all animate-in slide-in-from-bottom duration-300 ${
+      className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 pb-[max(0.75rem,calc(env(safe-area-inset-bottom)+0.5rem))] backdrop-blur-md shadow-2xl transition-all animate-in slide-in-from-bottom duration-300 ${
         isExclusive
           ? 'bg-[#111111]/95 border-t border-[#C5A059]/40 text-white'
           : isPremium
-          ? 'bg-[#F3EDE2]/95 border-t border-[#C5A059]/40 text-[#111111]'
+          ? 'bg-[#201610]/95 border-t border-[#7C3F1D]/60 text-white'
           : 'bg-[#FAF8F5]/95 border-t border-[#E2DFD8] text-[#111111]'
       }`}
     >
       <div className="max-w-md mx-auto flex items-center justify-between gap-3">
         {/* Left: Title & Price */}
         <div className="flex-1 min-w-0">
-          <p className={`text-xs font-semibold truncate ${isExclusive ? 'text-white' : 'text-[#111111]'}`}>
+          <p className={`text-xs font-semibold truncate ${isExclusive || isPremium ? 'text-white' : 'text-[#111111]'}`}>
             {product.title}
           </p>
-          <div className={`text-xs font-bold ${isExclusive ? 'text-[#C5A059]' : 'text-[#9E7D3B]'}`}>
+          <div className={`text-xs font-bold ${isExclusive || isPremium ? 'text-[#C5A059]' : 'text-[#9E7D3B]'}`}>
             {selectedVariant?.price && formatRupiah(selectedVariant.price)}
           </div>
         </div>
@@ -62,6 +62,8 @@ export function StickyMobileBar({ product, selectedVariant, isExclusive = false,
           className={`px-5 py-2.5 rounded-none font-semibold text-xs uppercase tracking-[0.16em] transition-colors shadow-sm disabled:cursor-not-allowed whitespace-nowrap cursor-pointer ${
             isExclusive
               ? 'bg-[#C5A059] hover:bg-white !text-[#111111] font-bold disabled:bg-[#333333] disabled:!text-[#888888]'
+              : isPremium
+              ? 'bg-[#7C3F1D] hover:bg-[#C5A059] !text-white hover:!text-[#111111] font-bold border border-[#C5A059]/40 disabled:bg-[#38261C] disabled:!text-[#88786D]'
               : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] disabled:bg-[#E2DFD8] disabled:!text-[#5A5550]'
           }`}
         >

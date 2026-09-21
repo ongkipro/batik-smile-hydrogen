@@ -66,6 +66,13 @@ export default async function handleRequest(
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
 
+  if (!responseHeaders.has('Cache-Control')) {
+    responseHeaders.set(
+      'Cache-Control',
+      'public, max-age=1, stale-while-revalidate=9',
+    );
+  }
+
   if (responseStatusCode === 404) {
     responseHeaders.set('X-Robots-Tag', 'noindex, nofollow');
   }

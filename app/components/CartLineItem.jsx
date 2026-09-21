@@ -44,7 +44,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
             onClick={() => {
               if (layout === 'aside') close();
             }}
-            className="w-20 sm:w-24 aspect-[4/5] shrink-0 bg-[#111111] overflow-hidden border border-[#E2DFD8] group block"
+            className="w-20 sm:w-24 aspect-[4/5] shrink-0 bg-[#111111] overflow-hidden group block"
           >
             <Image
               alt={title}

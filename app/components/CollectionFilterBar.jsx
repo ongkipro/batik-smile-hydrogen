@@ -678,7 +678,7 @@ export function CollectionSidebar({
             </div>
 
             {/* Custom Price Inputs */}
-            <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-dashed border-[#E2DFD8]/60 space-y-2">
+            <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-[#E2DFD8]/60 space-y-2">
               <span className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] block">
                 Atur Rentang Sendiri:
               </span>
@@ -691,7 +691,7 @@ export function CollectionSidebar({
                     placeholder="0"
                     value={localMin}
                     onChange={(e) => setLocalMin(e.target.value)}
-                    className={`w-full px-2 py-1.5 text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
+                    className={`w-full px-2 py-2 text-base sm:text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
                       isDark ? 'border-white/20 text-white' : 'border-[#E2DFD8] text-[#111111]'
                     }`}
                   />
@@ -704,7 +704,7 @@ export function CollectionSidebar({
                     placeholder="1.000.000"
                     value={localMax}
                     onChange={(e) => setLocalMax(e.target.value)}
-                    className={`w-full px-2 py-1.5 text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
+                    className={`w-full px-2 py-2 text-base sm:text-xs border bg-transparent focus:outline-none focus:border-[#C5A059] ${
                       isDark ? 'border-white/20 text-white' : 'border-[#E2DFD8] text-[#111111]'
                     }`}
                   />
@@ -945,7 +945,7 @@ export function CollectionFilterHeader({
 
       {/* ACTIVE FILTER PILLS / CHIPS ROW */}
       {hasActiveFilters && (
-        <div className="mt-3.5 pt-3 border-t border-dashed border-[#E2DFD8]/60 flex flex-wrap items-center gap-2">
+        <div className="mt-3.5 pt-3 border-t border-[#E2DFD8]/60 flex flex-wrap items-center gap-2">
           <span className="text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mr-1">
             Filter Aktif:
           </span>
@@ -1336,7 +1336,7 @@ export function CollectionMobileDrawer({
             </div>
 
             {/* Custom inputs */}
-            <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-dashed border-[#E2DFD8]/60 space-y-2">
+            <form onSubmit={handleCustomPriceSubmit} className="mt-3 pt-3 border-t border-[#E2DFD8]/60 space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="number"
@@ -1344,7 +1344,7 @@ export function CollectionMobileDrawer({
                   placeholder="Min (Rp)"
                   value={localMin}
                   onChange={(e) => setLocalMin(e.target.value)}
-                  className={`w-full px-2.5 py-1.5 text-xs border bg-white focus:outline-none ${isDark ? 'border-white/20 text-white bg-[#222]' : 'border-[#E2DFD8] text-[#111111]'}`}
+                  className={`w-full px-3 py-2.5 min-h-[44px] text-base sm:text-xs border bg-white focus:outline-none ${isDark ? 'border-white/20 text-white bg-[#222]' : 'border-[#E2DFD8] text-[#111111]'}`}
                 />
                 <input
                   type="number"
@@ -1352,7 +1352,7 @@ export function CollectionMobileDrawer({
                   placeholder="Maks (Rp)"
                   value={localMax}
                   onChange={(e) => setLocalMax(e.target.value)}
-                  className={`w-full px-2.5 py-1.5 text-xs border bg-white focus:outline-none ${isDark ? 'border-white/20 text-white bg-[#222]' : 'border-[#E2DFD8] text-[#111111]'}`}
+                  className={`w-full px-3 py-2.5 min-h-[44px] text-base sm:text-xs border bg-white focus:outline-none ${isDark ? 'border-white/20 text-white bg-[#222]' : 'border-[#E2DFD8] text-[#111111]'}`}
                 />
               </div>
               <button

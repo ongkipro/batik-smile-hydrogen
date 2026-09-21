@@ -220,7 +220,7 @@ export default function Collection() {
   const themeClasses = isExclusive
     ? 'bg-[#111111] text-white'
     : isPremium
-    ? 'bg-[#F3EDE2] text-[#111111]'
+    ? 'bg-[#201610] text-[#FAF8F5]'
     : 'bg-[#FFFFFF] text-[#111111]';
 
   const gridColumns = isExclusive
@@ -379,9 +379,9 @@ export default function Collection() {
                 </div>
               </div>
 
-              {/* Right Column: Collection Featured Image (3:2 Aspect Ratio, Zero Radius) */}
+              {/* Right Column: Collection Featured Image (3:2 Aspect Ratio, Frameless) */}
               <div className="lg:col-span-5">
-                <div className="relative w-full aspect-[3/2] bg-[#111111] overflow-hidden border border-[#E2DFD8] shadow-sm group">
+                <div className="relative w-full aspect-[3/2] bg-[#111111] overflow-hidden group">
                   <img
                     src={collectionFeaturedImage}
                     alt={collection.image?.altText || collection.title}
@@ -435,37 +435,37 @@ export default function Collection() {
 
         {/* PREMIUM TEMPLATE: 3 Signature Quality Guarantees */}
         {isPremium && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 p-6 sm:p-8 bg-white/90 backdrop-blur-sm border border-[#C5A059]/40 shadow-[0_4px_20px_rgba(197,160,89,0.08)]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 p-6 sm:p-8 bg-[#281C15]/90 backdrop-blur-sm border border-[#7C3F1D]/50 shadow-sm">
             <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 STANDAR BUTIK 01
               </span>
-              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+              <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
                 Tenun Dobby Timbul
               </h4>
-              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+              <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
                 Karakter bahan bermotif timbul bertekstur mewah, kokoh, dan tahan cuci tanpa kehilangan kilau anggunnya.
               </p>
             </div>
-            <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#C5A059]/25">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+            <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#7C3F1D]/40">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 STANDAR BUTIK 02
               </span>
-              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+              <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
                 Furing Katun Hero Sejuk
               </h4>
-              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+              <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
                 Lapis furing katun hero premium yang menyerap keringat dan adem, menjamin kenyamanan maksimal sepanjang acara.
               </p>
             </div>
             <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 STANDAR BUTIK 03
               </span>
-              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
+              <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
                 Presisi Sambung Pola
               </h4>
-              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
+              <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
                 Potongan motif simetris selaras pada saku depan, kerah, dan belahan kancing untuk wibawa busana yang rapi.
               </p>
             </div>
@@ -477,7 +477,7 @@ export default function Collection() {
           {/* DESKTOP LEFT SIDEBAR FILTER */}
           <CollectionSidebar
             handle={handle}
-            isDark={isExclusive}
+            isDark={isExclusive || isPremium}
             totalCount={filteredConnection?.nodes?.length}
           />
 
@@ -486,26 +486,28 @@ export default function Collection() {
             {/* Header Controls (Product count, mobile filter trigger, active filter pills, desktop quick sort) */}
             <CollectionFilterHeader
               handle={handle}
-              isDark={isExclusive}
+              isDark={isExclusive || isPremium}
               totalCount={filteredConnection?.nodes?.length}
             />
 
             {/* Products Grid or Empty State */}
             {filteredConnection?.nodes?.length === 0 ? (
               <div
-                className={`text-center py-16 px-4 border border-dashed mb-12 ${
+                className={`text-center py-16 px-4 border mb-12 ${
                   isExclusive
                     ? 'border-[#C5A059]/30 bg-[#161616]'
-                    : 'border-[#E2DFD8] bg-[#FAF8F5]/60'
+                    : isPremium
+                    ? 'border-[#7C3F1D]/40 bg-[#281C15]'
+                    : 'border-[#E2DFD8] bg-white'
                 }`}
               >
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-2">
                   FILTER TIDAK MENEMUKAN HASIL
                 </span>
-                <p className={`font-serif text-xl mb-2 ${isExclusive ? 'text-white' : 'text-[#111111]'}`}>
+                <p className={`font-serif text-xl mb-2 ${isExclusive || isPremium ? 'text-white' : 'text-[#111111]'}`}>
                   Tidak ada busana yang sesuai dengan kriteria filter.
                 </p>
-                <p className={`text-xs max-w-md mx-auto mb-6 ${isExclusive ? 'text-[#A69F96]' : 'text-[#5A5550]'}`}>
+                <p className={`text-xs max-w-md mx-auto mb-6 ${isExclusive || isPremium ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
                   Silakan sesuaikan filter pilihan Anda, hapus filter, atau hubungi konsultan kami untuk pesanan khusus.
                 </p>
                 <Link
@@ -513,6 +515,8 @@ export default function Collection() {
                   className={`inline-block px-6 py-2.5 text-[10px] uppercase font-bold tracking-[0.2em] transition-colors ${
                     isExclusive
                       ? 'bg-[#C5A059] text-[#111111] hover:bg-white'
+                      : isPremium
+                      ? 'bg-[#7C3F1D] text-white hover:bg-[#C5A059] hover:text-[#111111]'
                       : 'bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111]'
                   }`}
                 >
@@ -559,21 +563,21 @@ export default function Collection() {
             </a>
           </div>
         ) : isPremium ? (
-          <div className="mt-20 text-center pt-14 border-t border-[#C5A059]/40">
-            <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2">
+          <div className="mt-20 text-center pt-14 border-t border-[#7C3F1D]/50">
+            <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-2">
               LAYANAN JAHIT SERAGAM KELUARGA
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-3">
+            <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-3">
               Pemesanan Seragam Resepsi &amp; Acara Keluarga
             </h3>
-            <p className="text-xs mb-6 font-light tracking-wide text-[#5A5550] max-w-xl mx-auto leading-relaxed">
+            <p className="text-xs mb-6 font-light tracking-wide text-[#D5C8B8] max-w-xl mx-auto leading-relaxed">
               Tersedia penyesuaian ukuran dari balita hingga 4XL tanpa minimal pemesanan. Konsultasikan kebutuhan seragam keluarga besar Anda bersama konsultan butik kami.
             </p>
             <a
               href={officialWaUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
+              className="inline-block px-8 py-3.5 bg-[#7C3F1D] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
             >
               KONSULTASI SERAGAM RESEPSI &rarr;
             </a>

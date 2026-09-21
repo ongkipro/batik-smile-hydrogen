@@ -46,7 +46,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         to={variantUrl}
         prefetch="intent"
         className={`relative block w-full aspect-[4/5] overflow-hidden ${
-          isExclusive ? 'bg-[#181818]' : isPremium ? 'bg-[#F4EFEA]' : 'bg-[#EFECE6]'
+          isExclusive ? 'bg-[#181818]' : isPremium ? 'bg-[#281C14]' : 'bg-[#EFECE6]'
         }`}
       >
         {/* Primary Image with Organic Subtle Scale */}
@@ -79,17 +79,19 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
           </div>
         )}
 
-        {/* Status Badge: Sale / Custom Badge */}
-        {(isOnSale || badge) && (
+        {/* Status Badge: Custom Badge only if explicitly provided (No automatic 'PENAWARAN' badge) */}
+        {badge && (
           <div className="absolute top-2.5 left-2.5 z-10">
             <span
               className={`text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-semibold px-2 py-0.5 shadow-xs ${
                 isExclusive
                   ? 'bg-[#111111]/90 text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-xs'
+                  : isPremium
+                  ? 'bg-[#7C3F1D] text-[#FAF8F5] border border-[#C5A059]/40'
                   : 'bg-[#111111] text-white'
               }`}
             >
-              {badge || 'PENAWARAN'}
+              {badge}
             </span>
           </div>
         )}
@@ -101,7 +103,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
               isExclusive
                 ? 'bg-[#C5A059] text-[#111111] hover:bg-white hover:text-[#111111]'
                 : isPremium
-                ? 'bg-[#111111] text-white hover:bg-[#9E7D3B]'
+                ? 'bg-[#7C3F1D] text-white hover:bg-[#C5A059] hover:text-[#111111]'
                 : 'bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111]'
             }`}
           >
@@ -120,7 +122,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
                 isExclusive
                   ? 'text-[#C5A059]'
                   : isPremium
-                  ? 'text-[#9E7D3B]'
+                  ? 'text-[#C5A059]'
                   : 'text-[#7C3F1D]'
               }`}
             >
@@ -136,7 +138,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
               isExclusive
                 ? 'font-serif text-sm sm:text-base font-normal tracking-wide text-[#FAF8F5] group-hover:text-[#C5A059]'
                 : isPremium
-                ? 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#111111] group-hover:text-[#9E7D3B]'
+                ? 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#FAF8F5] group-hover:text-[#C5A059]'
                 : 'text-[11px] sm:text-xs uppercase font-medium tracking-[0.14em] text-[#1C1C1C] group-hover:text-[#9E7D3B]'
             }`}
           >
@@ -153,7 +155,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
                   isExclusive
                     ? 'font-serif text-sm sm:text-base font-semibold text-[#C5A059]'
                     : isPremium
-                    ? 'text-xs sm:text-sm font-semibold text-[#111111]'
+                    ? 'text-xs sm:text-sm font-semibold text-[#C5A059]'
                     : 'text-[11px] sm:text-xs font-semibold text-[#111111]'
                 }`}
               >
@@ -163,7 +165,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
             {isOnSale && compareAtPrice && (
               <span
                 className={`text-[10px] line-through ${
-                  isExclusive ? 'text-white/40' : 'text-[#8C827A]'
+                  isExclusive ? 'text-white/40' : isPremium ? 'text-[#D5C8B8]/60' : 'text-[#8C827A]'
                 }`}
               >
                 {formatRupiah(compareAtPrice)}
@@ -178,7 +180,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
             </span>
           )}
           {isPremium && (
-            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-[#7C3F1D] font-medium mt-0.5 opacity-90">
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-[#D5B066] font-medium mt-0.5 opacity-90">
               Tenun Dobby &bull; Furing Hero
             </span>
           )}

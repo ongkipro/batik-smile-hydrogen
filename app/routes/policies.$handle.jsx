@@ -129,21 +129,21 @@ export default function Policy() {
           <div className="w-12 h-px bg-[#C5A059] mt-4" />
         </div>
 
-        {/* Content Box */}
-        <div className="bg-white p-8 sm:p-12 border border-[#E2DFD8] shadow-sm mb-12">
+        {/* Content - Frameless Quiet Luxury */}
+        <div className="mb-12">
           <div
-            className="prose prose-neutral max-w-none text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed [&>h3]:font-serif [&>h3]:text-lg [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-6 [&>h3]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:space-y-1 [&>p]:mb-4"
+            className="prose prose-neutral max-w-none text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed [&>h3]:font-serif [&>h3]:text-lg sm:[&>h3]:text-xl [&>h3]:font-normal [&>h3]:text-[#111111] [&>h3]:mt-6 [&>h3]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:space-y-1 [&>p]:mb-4"
             dangerouslySetInnerHTML={{ __html: policy.body }}
           />
         </div>
 
-        {/* Contact Banner */}
-        <div className="p-6 bg-[#111111] text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Contact Banner - Clean Editorial Frameless */}
+        <div className="pt-8 border-t border-[#E2DFD8] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h3 className="font-serif text-base font-normal text-white mb-0.5">
+            <h3 className="font-serif text-lg font-normal text-[#111111] mb-1">
               Butuh Bantuan atau Pertanyaan?
             </h3>
-            <p className="text-[11px] text-[#E2DFD8]">
+            <p className="text-xs text-[#5A5550] font-light">
               Staf Concierge kami siap melayani Anda dengan budaya 3S 1C 1T &amp; 1H.
             </p>
           </div>
@@ -151,9 +151,9 @@ export default function Policy() {
             href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20bertanya%20mengenai%20kebijakan%20layanan"
             target="_blank"
             rel="noreferrer"
-            className="px-6 py-2.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors whitespace-nowrap"
+            className="w-full sm:w-auto px-6 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm text-center no-underline whitespace-nowrap"
           >
-            HUBUNGI KONSULTAN &rarr;
+            HUBUNGI CONCIERGE &rarr;
           </a>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useFetcher } from 'react-router';
+import { CartForm } from '@shopify/hydrogen';
 
 /**
  * Master Footer: Quiet Luxury Nusantara
@@ -9,12 +10,31 @@ import { NavLink } from 'react-router';
  * - Zero Border Radius (0px), Quad-Harmonic Palette, Pristine Craftsmanship
  */
 export function Footer() {
+  const fetcher = useFetcher();
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    if (email) {
+    if (email && email.includes('@')) {
+      // Connect and sync email with Shopify Cart Buyer Identity
+      try {
+        fetcher.submit(
+          {
+            [CartForm.INPUT_NAME]: JSON.stringify({
+              action: CartForm.ACTIONS.BuyerIdentityUpdate,
+              inputs: {
+                buyerIdentity: {
+                  email: email.trim(),
+                },
+              },
+            }),
+          },
+          { method: 'POST', action: '/cart' }
+        );
+      } catch {
+        // Graceful fallback
+      }
       setIsSubscribed(true);
       setEmail('');
     }
@@ -92,7 +112,7 @@ export function Footer() {
               BUTIK &amp; SHOWROOM RESMI
             </h4>
             <div className="space-y-5 text-[#C5BFB8] leading-relaxed text-[13px] sm:text-sm">
-              <div className="border-l-2 border-[#C5A059] pl-3.5 space-y-1">
+              <div className="border-l border-[#C5A059] pl-3.5 space-y-1">
                 <div className="flex items-center justify-between">
                   <strong className="text-white font-medium text-sm">Flagship Store (3 Lantai):</strong>
                   <span className="text-[10px] uppercase tracking-wider bg-white/10 text-[#C5A059] px-2 py-0.5 font-bold font-mono border border-[#C5A059]/40">UTAMA</span>
@@ -110,7 +130,7 @@ export function Footer() {
                 </span>
               </div>
 
-              <div className="border-l-2 border-[#C5A059]/40 pl-3.5 space-y-1">
+              <div className="border-l border-[#C5A059]/50 pl-3.5 space-y-1">
                 <strong className="text-white font-medium text-sm block">Cabang Semarang Atas:</strong>
                 <span className="block text-[#D1CCC5]">Jl. Sukun Raya No. 23, Banyumanik, Semarang</span>
                 <span className="text-[#C5A059] inline-flex items-center gap-1.5 pt-1 text-xs font-medium">
@@ -267,9 +287,9 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="mt-5 p-3.5 bg-white/5 border border-white/10 text-xs text-[#C5BFB8]">
-              <span className="text-[#C5A059] block font-semibold mb-1 uppercase tracking-wider text-[11px]">STANDAR LAYANAN:</span>
-              <span className="leading-relaxed">3S 1C 1T &amp; 1H (Senyum, Salam, Sapa, Cepat, Tanggap, Hati)</span>
+            <div className="mt-5 pt-3 border-t border-white/10 text-xs text-[#C5BFB8]">
+              <span className="text-[#C5A059] block font-semibold mb-1 uppercase tracking-[0.18em] text-[10px]">STANDAR LAYANAN:</span>
+              <span className="leading-relaxed font-light">3S 1C 1T &amp; 1H (Senyum, Salam, Sapa, Cepat, Tanggap, Hati)</span>
             </div>
           </div>
         </div>

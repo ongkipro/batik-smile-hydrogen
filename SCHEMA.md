@@ -115,13 +115,49 @@ fragment ProductDetails on Product {
     width
     height
   }
-  images(first: 8) {
+  media(first: 15) {
     nodes {
-      id
-      url
-      altText
-      width
-      height
+      mediaContentType
+      previewImage {
+        url
+        altText
+        width
+        height
+      }
+      ... on MediaImage {
+        id
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
+      }
+      ... on Video {
+        id
+        sources {
+          url
+          mimeType
+          format
+          height
+          width
+        }
+      }
+      ... on ExternalVideo {
+        id
+        embedUrl
+        host
+        originUrl
+      }
+      ... on Model3d {
+        id
+        sources {
+          url
+          mimeType
+          format
+        }
+      }
     }
   }
   options {
@@ -160,6 +196,34 @@ fragment ProductDetails on Product {
   tailoringMetafield: metafield(namespace: "custom", key: "tailoring_eligible") {
     value
   }
+```
+
+### 3.1 Normalized Product Media Architecture (`mediaList`)
+
+Hydrogen normalizes diverse Storefront API media nodes into an invariant media structure consumed by galleries, 4:5 video lookbooks, and mini-thumbnails:
+
+```typescript
+interface NormalizedMediaItem {
+  id: string;
+  mediaContentType: 'IMAGE' | 'VIDEO' | 'EXTERNAL_VIDEO' | 'MODEL_3D';
+  url: string;               // Direct image URL or primary streaming MP4 URL
+  previewImage?: {
+    url: string;
+    altText?: string;
+    width?: number;
+    height?: number;
+  };
+  altText?: string;
+  width?: number;
+  height?: number;
+  sources?: Array<{          // Present on 'VIDEO' and 'MODEL_3D'
+    url: string;
+    mimeType: string;
+    format: string;
+    height?: number;
+    width?: number;
+  }>;
+  embedUrl?: string;         // Present on 'EXTERNAL_VIDEO'
 }
 ```
 

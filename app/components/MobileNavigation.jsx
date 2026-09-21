@@ -1,9 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { useAside } from '~/components/Aside';
 
 export function MobileNavigation() {
   const { open } = useAside();
+  const location = useLocation();
+
+  // Hide mobile bottom navigation on Product Detail Pages to focus entirely on Sticky Add To Cart
+  if (location.pathname.startsWith('/products/')) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E2DFD8] lg:hidden px-2 sm:px-4 pt-1.5 pb-[max(0.625rem,calc(env(safe-area-inset-bottom)+0.25rem))] flex items-center justify-around shadow-lg">

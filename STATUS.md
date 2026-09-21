@@ -1,6 +1,6 @@
 # Status — batik-smile
 
-Updated: 2026-09-04
+Updated: 2026-09-21
 Status: Active
 State: DEPLOYED
 Review-Risk: R1
@@ -19,7 +19,8 @@ Current State: **DEPLOYED**
 
 ## Current state
 
-Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 7) has been completed and verified against all repository and user constraints:
+Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 56) has been completed and verified against all repository and user constraints:
+
 
 1. **Quiet Luxury Nusantara Design System**:
    - Zero-radius architecture (`border-radius: 0px` globally across cards, buttons, badges, modals).
@@ -167,12 +168,31 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Integrated responsive subcategory chip ribbon into `CollectionFilterBar.jsx` driving URL search params `gender` and `sleeve`.
     - Synchronized all navigation links and components (`Header.jsx`, `MegaMenu.jsx`, `Footer.jsx`, `HeroSlider.jsx`, `CartMain.jsx`, `TierExperience.jsx`, `SarimbitSpotlight.jsx`, `ShoppableLookbook.jsx`, `HeritageVideoBanner.jsx`, `BestSellersTabs.jsx`, `collections._index.jsx`).
     - Updated documentation suite (`PAGES-SCHEMA.xml`, `SCHEMA.md`, `TASKS.md`, `STATUS.md`).
+30. **Storefront Auto-Sync & Edge Stale-While-Revalidate Architecture**:
+    - Automatic edge-fresh caching defaulting to `CacheShort()` (`maxAge: 1s, staleWhileRevalidate: 9s`) via `storefront.query` wrapper in `app/lib/context.js`.
+    - Injected edge caching headers (`Cache-Control: public, max-age=1, stale-while-revalidate=9`) across all successful SSR responses in `app/entry.server.jsx`.
+    - Real-time catalog updates: administrative changes in Shopify Admin (product edits, prices, inventory, tags, menus) propagate to Oxygen edge nodes within seconds without requiring manual cache purges or code deployments.
+31. **Dual-Engine Product Media Architecture & 4:5 Video Lookbook System**:
+    - Upgraded `PRODUCT_FRAGMENT` in `app/routes/products.$handle.jsx` to query `featuredImage` and `media(first: 15)` using Storefront API GraphQL union types (`Video`, `MediaImage`, `ExternalVideo`, `Model3d`).
+    - Unified normalization pipeline `mediaList` mapping diverse media types into `{ id, mediaContentType, url, previewImage, altText, width, height, sources }` with seamless fallback for image-only products.
+    - Implemented high-end 4:5 vertical video lookbook player with native playback controls, `playsInline`, `autoPlay`, `muted`, `loop`, whispered `VIDEO LOOKBOOK` pill badge, and touch scrub protection against swipe navigation interruptions.
+    - Expanded CSP `mediaSrc` in `app/entry.server.jsx` whitelisting `checkout.batiksmile.com` and Shopify CDN video streaming origins.
+32. **Tri-Tier Color Space Realization (Signature Soga Earth)**:
+    - Deepened Signature Premium tier styling across collection PLP, product PDP, and shared components using authentic Soga Earth / Deep Espresso (`#201610`, `#281C15`), Soga Matang accents (`#7C3F1D`), warm cream text (`#FAF8F5`, `#D5C8B8`), and delicate gold hairlines (`#C5A059`/40).
+    - Established unmistakable visual hierarchy across the 3 Sarimbit tiers: Mahakarya Obsidian (`#111111`/`#C5A059`), Signature Soga Earth (`#201610`/`#7C3F1D`), and Essential Mori Linen (`#FAF8F5`/`#1C1C1C`).
+33. **Zero-Dashed Anti-Slop Architectural Purge & Mobile Viewport Stability**:
+    - Completely replaced all `border-dashed` styling with solid crisp hairlines (`border-[#E2DFD8]`, `border-[#C5A059]/40`, `border-[#7C3F1D]/50`) across `BestSellersTabs.jsx`, `ChooseYourBatikGrid.jsx`, `CollectionFilterBar.jsx`, `collections.all.jsx`, and `VipDiscountModal.jsx`.
+    - Removed pseudo-traditional clip-art icons (`BatikCorner` in `FamilyBundleBuilder.jsx`) and straightened tilted cards (`rotate-1.5`) in `SarimbitBentoSection.jsx` to enforce sharp `0deg` zero-radius precision.
+    - Enforced `@media screen and (max-width: 768px) { input, select, textarea { font-size: 16px !important; } }` outside `@layer` in `app/styles/app.css`, permanently eliminating iOS Safari auto-zoom on input focus.
+    - Cleaned cart line item containers and breadcrumb pills for pure unboxed streaming layouts.
 
 ## Verification evidence
 
-- **Production Build**: `npm run build` completed with exit code 0.
-- **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
+- **Production Build**: `npm run build` completed with exit code 0 (SSR + Oxygen client build in 1.69s).
+- **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings across all 114 scanned files).
 - **GraphQL Codegen**: `npm run codegen` completed with exit code 0.
+- **Storefront API Video Query**: Live query for `sarimbit-charcoal-hitam` verified returning native `Video` media object with MP4/HLS streams from Shopify CDN (`https://checkout.batiksmile.com/cdn/shop/videos/...`).
 - **Clean Handle Parity**: 0 obsolete collection paths remain across `app/`.
 - **Live Collections**: Exactly 7 collections live in Shopify Core (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `kain`, `aksesoris`, `batik-anak`, `shop`).
 - **Data Protection**: 100% of 23 products, variants, and pricing preserved.
+- **Mobile Viewport Stability**: iOS Safari auto-zoom eliminated storefront-wide with computed `16px` font size on all input fields.
