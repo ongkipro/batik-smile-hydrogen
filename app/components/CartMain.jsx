@@ -54,7 +54,7 @@ export function CartMain({ layout, cart: originalCart }) {
           <div className="flex items-center gap-2 text-[#7C3F1D]">
             <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
             <span className="font-semibold tracking-[0.12em] uppercase text-[10px] sm:text-[11px]">
-              GRATIS ONGKIR &amp; ASURANSI PENGIRIMAN SE-INDONESIA
+              PENGIRIMAN AMAN &amp; BERASURANSI SE-INDONESIA
             </span>
           </div>
           <span className="hidden sm:inline text-[10px] text-[#888888] tracking-wider uppercase font-light">
@@ -163,7 +163,7 @@ export function CartMain({ layout, cart: originalCart }) {
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
           <span className="font-semibold tracking-[0.14em] uppercase text-[10px] sm:text-[11px]">
-            GRATIS ONGKIR &amp; ASURANSI PENGIRIMAN
+            PENGIRIMAN AMAN &amp; BERASURANSI SE-INDONESIA
           </span>
         </div>
         <span className="text-[9px] text-[#9E7D3B] tracking-wider uppercase font-medium hidden sm:inline">
