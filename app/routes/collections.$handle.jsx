@@ -277,6 +277,8 @@ export default function Collection() {
       ? '/banners/hero_slider_1.jpg'
       : isPremium
       ? '/banners/sarimbit_family_banner.jpg'
+      : isEkonomi
+      ? 'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749'
       : handle.includes('kain')
       ? '/banners/collection_kain_tulis_banner.jpg'
       : handle.includes('series') || handle.includes('sarimbit')
@@ -289,6 +291,8 @@ export default function Collection() {
     bannerImageUrl ||
     collection.products?.nodes?.[0]?.featuredImage?.url ||
     '/banners/hero_editorial_banner.jpg';
+
+  const heroBgImage = collectionFeaturedImage || bannerImageUrl;
 
   const breadcrumbItems = [
     { label: 'KOLEKSI', to: '/collections' },
@@ -303,20 +307,22 @@ export default function Collection() {
           generateBreadcrumbSchema(breadcrumbItems),
         ]}
       />
-      {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR EXCLUSIVE & PREMIUM */}
-      {isExclusive || isPremium ? (
+      {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR EXCLUSIVE, PREMIUM & EKONOMI */}
+      {isExclusive || isPremium || isEkonomi ? (
         <section
           className={`relative w-full overflow-hidden flex items-center justify-center text-center ${
             isExclusive
               ? 'h-[62vh] min-h-[500px] max-h-[660px] bg-[#111111] border-b border-[#C5A059]/40'
-              : 'h-[58vh] min-h-[460px] max-h-[600px] bg-[#1C1813] border-b border-[#C5A059]/40'
+              : isPremium
+              ? 'h-[58vh] min-h-[460px] max-h-[600px] bg-[#1C1813] border-b border-[#C5A059]/40'
+              : 'h-[58vh] min-h-[460px] max-h-[600px] bg-[#141210] border-b border-[#C5A059]/30'
           }`}
         >
           {/* Background Image with Cinematic Scrim */}
-          {bannerImageUrl && (
+          {heroBgImage && (
             <>
               <img
-                src={bannerImageUrl}
+                src={heroBgImage}
                 alt={collection.image?.altText || collection.title}
                 className="absolute inset-0 w-full h-full object-cover object-center scale-105"
               />
@@ -324,7 +330,9 @@ export default function Collection() {
                 className={`absolute inset-0 ${
                   isExclusive
                     ? 'bg-gradient-to-t from-[#111111] via-[#111111]/75 to-[#111111]/45'
-                    : 'bg-gradient-to-t from-[#1A1612] via-[#2A2016]/75 to-[#C5A059]/25'
+                    : isPremium
+                    ? 'bg-gradient-to-t from-[#1A1612] via-[#2A2016]/75 to-[#C5A059]/25'
+                    : 'bg-gradient-to-t from-[#111111] via-[#111111]/75 to-black/35'
                 }`}
               />
             </>
@@ -340,9 +348,21 @@ export default function Collection() {
               className="flex justify-center mb-6"
             />
 
+            {isExclusive && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
+                ARSIP BUTIK &bull; SUTRA ATBM &amp; PRADA EMAS
+              </span>
+            )}
+
             {isPremium && (
               <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
                 SIGNATURE ATELIER &bull; RESEPSI &amp; FORMAL
+              </span>
+            )}
+
+            {isEkonomi && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
+                ESSENTIAL DAILY &bull; KATUN PRIMISIMA SEJUK
               </span>
             )}
 
@@ -362,7 +382,23 @@ export default function Collection() {
               </p>
             )}
 
-            <div className="w-16 h-px bg-[#C5A059]" />
+            {isEkonomi && (
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
+                Koleksi batik dengan pilihan motif menarik dan desain yang praktis untuk berbagai kebutuhan. Mengutamakan fungsi, kenyamanan, dan harga yang terjangkau, koleksi ini menjadi pilihan tepat untuk pemakaian sehari-hari maupun seragaman tanpa meninggalkan karakter khas Batik Smile.
+              </p>
+            )}
+
+            {isEkonomi && (
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
+                <span>Harga Terjangkau</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Nyaman Dipakai</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Awet untuk Aktivitas</span>
+              </div>
+            )}
+
+            <div className="w-16 h-px bg-[#C5A059] mt-4" />
           </div>
         </section>
       ) : (
@@ -441,7 +477,7 @@ export default function Collection() {
       )}
 
       {/* BODY CONTENT (Pillars & Grid) */}
-      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isExclusive || isPremium ? 'mt-12 sm:mt-16' : 'mt-8 sm:mt-12'}`}>
+      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isExclusive || isPremium || isEkonomi ? 'mt-12 sm:mt-16' : 'mt-8 sm:mt-12'}`}>
 
         {/* EXCLUSIVE TEMPLATE: 3 Pillars of Haute Artistry */}
         {isExclusive && (

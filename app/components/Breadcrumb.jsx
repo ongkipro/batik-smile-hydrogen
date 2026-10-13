@@ -38,7 +38,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
     : isPremium
     ? 'text-[#D8B26E] hover:text-[#FAF8F5]'
     : isEkonomi
-    ? 'text-[#5A5550] hover:text-[#111111]'
+    ? (isDark ? 'text-[#D5C8B8] hover:text-white' : 'text-[#5A5550] hover:text-[#111111]')
     : isDark
     ? 'text-[#A6A098] hover:text-[#C5A059]'
     : 'text-[#6E6862] hover:text-[#111111]';
@@ -49,7 +49,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
     : isPremium
     ? 'text-[#9E7D3B]'
     : isEkonomi
-    ? 'text-[#7C3F1D]'
+    ? (isDark ? 'text-[#D5B066]' : 'text-[#7C3F1D]')
     : 'currentColor';
 
   // Non-leaf link color (e.g. KOLEKSI)
@@ -58,7 +58,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
     : isPremium
     ? 'text-[#B8A995] hover:text-[#FAF8F5]'
     : isEkonomi
-    ? 'text-[#5A5550] hover:text-[#111111]'
+    ? (isDark ? 'text-[#D5C8B8]/80 hover:text-white' : 'text-[#5A5550] hover:text-[#111111]')
     : isDark
     ? 'text-[#A6A098] hover:text-[#C5A059]'
     : 'text-[#6E6862] hover:text-[#111111]';
@@ -69,7 +69,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
     : isPremium
     ? 'text-[#9E7D3B]/50 font-light'
     : isEkonomi
-    ? 'text-[#7C3F1D]/40 font-light'
+    ? (isDark ? 'text-white/30 font-light' : 'text-[#7C3F1D]/40 font-light')
     : isDark
     ? 'text-[#C5A059]/40 font-light'
     : 'text-[#B0AAA0]/70 font-light';
@@ -80,7 +80,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
     : isPremium
     ? 'font-sans font-medium tracking-[0.2em] sm:tracking-[0.22em] text-[#FAF8F5]'
     : isEkonomi
-    ? 'font-sans font-medium tracking-[0.18em] sm:tracking-[0.2em] text-[#111111]'
+    ? (isDark ? 'font-sans font-medium tracking-[0.18em] sm:tracking-[0.2em] text-[#FAF8F5]' : 'font-sans font-medium tracking-[0.18em] sm:tracking-[0.2em] text-[#111111]')
     : isDark
     ? 'font-sans font-medium tracking-[0.18em] sm:tracking-[0.2em] text-white'
     : 'font-sans font-medium tracking-[0.18em] sm:tracking-[0.2em] text-[#111111]';
