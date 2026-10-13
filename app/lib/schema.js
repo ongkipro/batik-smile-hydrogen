@@ -25,7 +25,7 @@ export function generateOrganizationSchema() {
     },
     image: `${ROOT_DOMAIN}/og-image.jpg`,
     description:
-      'Butik busana batik modern dan spesialis sarimbit keluarga 3 kasta (Luxury Series, Premium Series, Ekonomi Series), kain batik tulis asli Pekalongan & Solo, serta layanan jahit bespoke tanpa minimal order di Semarang sejak 2007.',
+      'Butik busana batik modern dan spesialis sarimbit keluarga 3 kasta (Luxury Series, Premium Series, Ekonomi Series), kain batik tulis asli Pekalongan & Solo di Semarang sejak 2007.',
     foundingDate: '2007',
     priceRange: 'Rp 150.000 - Rp 5.000.000',
     telephone: '+62-813-9088-8809',

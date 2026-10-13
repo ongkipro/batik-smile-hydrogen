@@ -48,7 +48,7 @@ export function WhatsAppConcierge() {
 
   const officialNumber = '6281390888809';
   const defaultMessage = encodeURIComponent(
-    'Halo Butik Batik Smile, saya ingin konsultasi busana sarimbit keluarga / jahit bespoke kustom.',
+    'Halo Butik Batik Smile, saya ingin konsultasi koleksi busana batik & sarimbit keluarga.',
   );
   const waUrl = `https://wa.me/${officialNumber}?text=${defaultMessage}`;
 
@@ -70,7 +70,7 @@ export function WhatsAppConcierge() {
                 CONCIERGE BUTIK
               </span>
               <h3 className="font-serif text-base text-[#111111] font-semibold">
-                Konsultan Batik &amp; Jahit
+                Konsultan Batik &amp; Busana
               </h3>
             </div>
             <button
@@ -83,7 +83,7 @@ export function WhatsAppConcierge() {
           </div>
 
           <p className="text-xs text-[#5A5550] leading-relaxed mb-4 font-light">
-            Senyum, Salam, Sapa! Butuh panduan ukuran sarimbit keluarga, kustom furing hero, atau jahit seragam instansi? Kami siap melayani Anda.
+            Senyum, Salam, Sapa! Butuh panduan ukuran sarimbit keluarga, detail motif wastra, atau rekomendasi busana? Tim kami siap melayani Anda.
           </p>
 
           <a

@@ -338,10 +338,10 @@ const SHOPIFY_MENU = {
         badge: 'Klasik',
       },
       {
-        name: 'Kain Bahan Seragam & Jahit Kustom',
-        href: '/pages/layanan-seragam',
-        icon: 'scissors',
-        badge: 'Bespoke',
+        name: 'Koleksi Kain Batik Pilihan',
+        href: '/collections/kain',
+        icon: 'sparkle',
+        badge: 'Pilihan',
       },
     ],
     featuredProducts: [

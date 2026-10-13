@@ -47,7 +47,7 @@ export function generateHomeMeta(shop) {
   const title = `${shopName} — Butik Batik Modern & Sarimbit Keluarga`;
   const description = getSeoDescription(
     shop?.description,
-    'Butik batik modern premium sejak 2007 di Semarang. Koleksi sarimbit keluarga 3 kasta, kain batik tulis asli Pekalongan & Solo, serta layanan jahit bespoke tanpa minimal order.'
+    'Butik batik modern premium sejak 2007 di Semarang. Koleksi sarimbit keluarga 3 kasta, kain batik tulis asli Pekalongan & Solo dengan jaminan mutu terpercaya.'
   );
   const canonicalUrl = `${ROOT_DOMAIN}`;
 

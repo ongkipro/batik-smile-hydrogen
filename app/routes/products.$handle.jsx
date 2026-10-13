@@ -899,11 +899,7 @@ export default function Product() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[#C5A059] text-[8px]">&bull;</span>
-                <span>100% Batik Asli Cap/Tulis</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[#C5A059] text-[8px]">&bull;</span>
-                <span>Lapis Furing Katun Hero Adem</span>
+                <span>100% Batik Indonesia</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[#C5A059] text-[8px]">&bull;</span>

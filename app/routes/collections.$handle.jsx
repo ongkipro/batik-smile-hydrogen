@@ -524,9 +524,9 @@ export default function Collection() {
                     </>
                   ) : (
                     <>
-                      <span>Jahit Bespoke Tanpa MOQ</span>
+                      <span>100% Batik Indonesia</span>
                       <span className="text-[#C5A059]">&bull;</span>
-                      <span>Garansi Butik Resmi</span>
+                      <span>Kualitas Terjamin</span>
                     </>
                   )}
                 </div>

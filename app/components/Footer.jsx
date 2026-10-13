@@ -101,11 +101,11 @@ export function Footer() {
           <div className="w-16 h-px bg-[#C5A059] mx-auto mt-4" />
         </div>
 
-        {/* 3. 4-COLUMN COMPREHENSIVE DIRECTORY */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-16 text-sm font-light">
+        {/* 3. 4-COLUMN COMPREHENSIVE DIRECTORY (PRECISION 12-COLUMN ARCHITECTURE) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 mb-16 text-sm font-light">
           
-          {/* COL 1: BUTIK & SHOWROOM RESMI */}
-          <div>
+          {/* COL 1: BUTIK & SHOWROOM RESMI (33.3% Desktop Space for Rich Content) */}
+          <div className="lg:col-span-4">
             <h4 className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-5 flex items-center gap-2 pb-2 border-b border-white/10">
               <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="square" d="M3 21h18M3 7v14M21 7v14M6 21V11M10 21V11M14 21V11M18 21V11M12 3L2 7h20L12 3z" />
@@ -210,8 +210,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* COL 2: NAVIGASI MENU */}
-          <div>
+          {/* COL 2: NAVIGASI MENU (16.6% Desktop Space) */}
+          <div className="lg:col-span-2">
             <h4 className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-5 flex items-center gap-2 pb-2 border-b border-white/10">
               <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="3" y="3" width="7" height="7" />
@@ -241,15 +241,15 @@ export function Footer() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/pages/tentang-kami" className="hover:text-white transition-colors flex items-center gap-2 group">
+                <NavLink to="/collections/ekonomi-series" className="hover:text-white transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
-                  About
+                  Ekonomi Series
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/pages/fasilitas-store" className="hover:text-white transition-colors flex items-center gap-2 group">
+                <NavLink to="/pages/tentang-kami" className="hover:text-white transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
-                  Showroom
+                  About
                 </NavLink>
               </li>
               <li>
@@ -261,8 +261,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* COL 3: LAYANAN BUTIK & EDUKASI */}
-          <div>
+          {/* COL 3: LAYANAN BUTIK & EDUKASI (25% Desktop Space) */}
+          <div className="lg:col-span-3">
             <h4 className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-5 flex items-center gap-2 pb-2 border-b border-white/10">
               <svg className="w-4 h-4 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" />
@@ -272,18 +272,6 @@ export function Footer() {
               LAYANAN &amp; INFORMASI
             </h4>
             <ul className="space-y-3 text-[#C5BFB8] text-[13px] sm:text-sm">
-              <li>
-                <NavLink to="/pages/layanan-seragam" className="hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
-                  Jahit Seragam Bespoke (Tanpa MOQ)
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/pages/fasilitas-store" className="hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
-                  Fasilitas Gedung Simongan 3 Lantai
-                </NavLink>
-              </li>
               <li>
                 <NavLink to="/pages/tentang-kami" className="hover:text-white transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
@@ -311,8 +299,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* COL 4: KONTAK RESMI BUTIK */}
-          <div>
+          {/* COL 4: KONTAK RESMI BUTIK (25% Desktop Space) */}
+          <div className="lg:col-span-3">
             <div className="flex items-center gap-2.5 mb-1.5">
               <svg className="w-4 h-4 text-[#C5A059] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />

@@ -75,10 +75,10 @@ export async function loader({ context }) {
       description: 'Langkah tepat merawat batik tulis canting & tenun dobby menggunakan sabun lerak alami agar serat dan warna tetap abadi.',
     },
     {
-      to: '/pages/layanan-seragam',
-      title: 'Jahit Seragam & Bespoke Tanpa MOQ',
-      category: 'LAYANAN ATELIER',
-      description: 'Solusi pembuatan seragam batik instansi pemerintah, BUMN, keluarga, dan jahit kustom ukuran personal tanpa batas minimum order.',
+      to: '/pages/lokasi-toko',
+      title: 'Lokasi Butik & Showroom Resmi',
+      category: 'SHOWROOM RESMI',
+      description: 'Kunjungi showroom Batik Smile di Pamularsih dan Banyumanik untuk pengalaman fitting busana langsung dan konsultasi koleksi.',
     },
   ];
 
@@ -194,7 +194,7 @@ export default function Policies() {
               STANDAR LAYANAN BUTIK
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
-              Panduan Pelanggan &amp; Layanan Atelier
+              Panduan Pelanggan &amp; Layanan Butik
             </h2>
           </div>
 
@@ -235,7 +235,7 @@ export default function Policies() {
               Butuh Informasi Tambahan Mengenai Kebijakan Kami?
             </h3>
             <p className="text-xs sm:text-sm text-[#C5BFB8] font-light max-w-xl leading-relaxed">
-              Tim Concierge Butik Batik Smile siap menjawab pertanyaan seputar status pengiriman paket, proses bebas tukar size, maupun konsultasi fitting seragam.
+              Tim Concierge Butik Batik Smile siap menjawab pertanyaan seputar status pengiriman paket, proses bebas tukar size, maupun panduan belanja koleksi.
             </p>
           </div>
           <a

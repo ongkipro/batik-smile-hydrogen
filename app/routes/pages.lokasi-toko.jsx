@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePageMeta } from '~/lib/seo';
 
@@ -121,16 +120,10 @@ export default function LokasiTokoPage() {
                 href="https://maps.google.com/?q=Batik+Smile+Simongan+Semarang"
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] text-center transition-colors shadow-sm no-underline"
+                className="w-full py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] text-center transition-colors shadow-sm no-underline block"
               >
-                PETUNJUK ARAH &rarr;
+                PETUNJUK ARAH GOOGLE MAPS &rarr;
               </a>
-              <Link
-                to="/pages/fasilitas-store"
-                className="flex-1 py-3 px-4 bg-transparent !text-[#111111] hover:!text-[#C5A059] text-[10px] uppercase font-semibold tracking-[0.2em] text-center block border border-[#111111] hover:border-[#C5A059] transition-colors no-underline"
-              >
-                FASILITAS GEDUNG &rarr;
-              </Link>
             </div>
           </div>
 

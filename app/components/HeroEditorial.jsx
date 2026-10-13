@@ -18,8 +18,8 @@ export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
     'Menenun Keanggunan Klasik & Keselarasan Busana Keluarga Sejak 2007';
   const ctaText = data?.cta_text?.value || 'JELAJAHI KOLEKSI';
   const ctaLink = data?.cta_link?.value || '/collections/luxury-series';
-  const secondaryCtaText = data?.secondary_cta_text?.value || 'KONSULTASI JAHIT';
-  const secondaryCtaLink = data?.secondary_cta_link?.value || '/pages/layanan-seragam';
+  const secondaryCtaText = data?.secondary_cta_text?.value || 'KUNJUNGI SHOWROOM';
+  const secondaryCtaLink = data?.secondary_cta_link?.value || '/pages/lokasi-toko';
 
   // Image source: Metaobject image URL or local fallback banner
   const imageUrl =

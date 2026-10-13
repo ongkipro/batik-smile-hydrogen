@@ -1,36 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router';
+import { Link, redirect } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePageMeta } from '~/lib/seo';
 
-const PAGE_SEO_QUERY = `#graphql
-  query PageSeo(
-    $handle: String!
-    $country: CountryCode
-    $language: LanguageCode
-  ) @inContext(country: $country, language: $language) {
-    page(handle: $handle) {
-      id
-      title
-      handle
-      seo {
-        title
-        description
-      }
-    }
-  }
-`;
-
-export async function loader({ context }) {
-  try {
-    const data = await context.storefront.query(PAGE_SEO_QUERY, {
-      variables: { handle: 'fasilitas-store' },
-      cache: context.storefront.CacheShort(),
-    });
-    return { page: data?.page || null };
-  } catch {
-    return { page: null };
-  }
+export async function loader() {
+  throw redirect('/pages/lokasi-toko', 301);
 }
 
 export const meta = ({ data }) => {

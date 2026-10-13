@@ -55,16 +55,10 @@ export function ShowroomO2O() {
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
-                to="/pages/fasilitas-store"
+                to="/pages/lokasi-toko"
                 className="px-8 py-4 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white font-semibold text-[11px] uppercase tracking-[0.18em] transition-colors"
               >
-                JELAJAHI FASILITAS STORE 3 LANTAI &rarr;
-              </Link>
-              <Link
-                to="/pages/lokasi-toko"
-                className="px-8 py-4 bg-transparent text-white font-semibold text-[11px] uppercase tracking-[0.18em] border border-white/30 hover:border-white hover:bg-white/10 transition-colors"
-              >
-                PETUNJUK LOKASI OUTLET
+                PANDUAN LENGKAP LOKASI BUTIK &rarr;
               </Link>
             </div>
           </div>

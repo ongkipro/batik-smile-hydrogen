@@ -26,7 +26,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] max-w-xl mx-auto font-light leading-relaxed">
-            Eksplorasi pilihan kain batik tulis, tenun tradisional Troso, kemeja pria, dan busana etnik terbaru. Beli busana siap pakai atau manfaatkan layanan jahit bespoke butik tanpa batasan minimal order.
+            Eksplorasi pilihan kain batik tulis, tenun tradisional Troso, kemeja pria, dan busana etnik terbaru siap pakai dengan standar mutu butik resmi.
           </p>
         </div>
 

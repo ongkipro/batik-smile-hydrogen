@@ -284,18 +284,11 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
           {/* Secondary Editorial Links (Whispered Sans, Generous Tracking) */}
           <div className="flex flex-col space-y-3 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium text-[#5A5550]">
             <NavLink
-              to="/pages/layanan-seragam"
+              to="/pages/tentang-kami"
               onClick={close}
               className="hover:text-[#111111] transition-colors block py-0.5"
             >
-              Layanan Seragam &amp; Bespoke
-            </NavLink>
-            <NavLink
-              to="/pages/fasilitas-store"
-              onClick={close}
-              className="hover:text-[#111111] transition-colors block py-0.5"
-            >
-              Showroom 3 Lantai (Simongan)
+              Tentang Kami &amp; Filosofi
             </NavLink>
             <NavLink
               to="/pages/lokasi-toko"

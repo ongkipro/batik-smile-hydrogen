@@ -32,15 +32,15 @@ const SLIDES = [
   },
   {
     id: 'sarimbit-pria',
-    eyebrow: 'PRESISI POLA & FURING HERO',
+    eyebrow: 'PRESISI POLA & JAHITAN BUTIK',
     title: 'Karisma Kemeja Pria Eksekutif',
-    subtitle: 'Jahitan Sambung Motif & Furing Katun Sejuk',
+    subtitle: 'Jahitan Sambung Motif & Katun Sejuk',
     description:
       'Kenyamanan sejuk sepanjang hari dengan potongan presisi simetris pada saku dan belahan kancing, mencerminkan wibawa sang pemimpin.',
     ctaText: 'KOLEKSI KEMEJA PRIA',
     ctaLink: '/collections/premium-series?gender=pria',
-    secondaryCtaText: 'LAYANAN JAHIT',
-    secondaryCtaLink: '/pages/layanan-seragam',
+    secondaryCtaText: 'KUNJUNGI SHOWROOM',
+    secondaryCtaLink: '/pages/lokasi-toko',
     image: '/banners/hero_slider_3.jpg',
   },
   {
