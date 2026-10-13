@@ -158,20 +158,7 @@ export function CartMain({ layout, cart: originalCart }) {
   // 2. COMPACT ASIDE / DRAWER LAYOUT
   return (
     <div className="cart-details flex flex-col h-full bg-[#FAF8F5]">
-      {/* Whispered Free Shipping Ribbon */}
-      <div className="px-5 sm:px-8 py-3 bg-white border-b border-[#E2DFD8] flex items-center justify-between text-xs text-[#7C3F1D] shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
-          <span className="font-semibold tracking-[0.14em] uppercase text-[10px] sm:text-[11px]">
-            PENGIRIMAN AMAN &amp; BERASURANSI SE-INDONESIA
-          </span>
-        </div>
-        <span className="text-[9px] text-[#9E7D3B] tracking-wider uppercase font-medium hidden sm:inline">
-          Semarang Sejak 2007
-        </span>
-      </div>
-
-      <div className="flex-1 overflow-y-auto px-5 sm:px-8 py-2">
+      <div className="flex-1 overflow-y-auto px-5 sm:px-7 py-3">
         <ul aria-label="Daftar produk dalam tas belanja" className="divide-y divide-[#E2DFD8]">
           {(cart?.lines?.nodes ?? []).map((line) => {
             if ('parentRelationship' in line && line.parentRelationship?.parent) {
@@ -190,7 +177,7 @@ export function CartMain({ layout, cart: originalCart }) {
       </div>
 
       {cartHasItems && (
-        <div className="p-5 sm:p-7 bg-white border-t border-[#E2DFD8] shadow-[0_-8px_25px_rgba(0,0,0,0.04)] shrink-0">
+        <div className="px-5 sm:px-7 py-4 sm:py-5 bg-white border-t border-[#E2DFD8] shadow-[0_-8px_25px_rgba(0,0,0,0.04)] shrink-0">
           <CartSummary cart={cart} layout={layout} />
         </div>
       )}
