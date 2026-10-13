@@ -282,17 +282,7 @@ function CollectionItem({ collection, index }) {
         />
 
         {/* Full-bleed Editorial Gradient Overlay (Quiet Luxury Scrim) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 p-4 sm:p-6 flex flex-col justify-between text-white">
-          {/* Top Bar: Archival Plate & Stamp */}
-          <div className="flex items-center justify-between">
-            <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#C5A059] bg-black/75 px-2 py-0.5 border border-[#C5A059]/30 backdrop-blur-xs">
-              {style.plate}
-            </span>
-            <span className="text-[8px] sm:text-[9px] font-bold tracking-[0.16em] uppercase text-white bg-[#C5A059] px-2 py-0.5 shadow-xs">
-              {style.stamp}
-            </span>
-          </div>
-
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 p-4 sm:p-6 flex flex-col justify-end text-white">
           {/* Bottom Bar: Collection Editorial Info */}
           <div>
             <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
