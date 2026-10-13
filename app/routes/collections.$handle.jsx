@@ -61,6 +61,8 @@ async function loadCriticalData({ context, params, request }) {
     'sarimbit-ekonomis': '/collections/ekonomi-series',
     'jarik-kain-batik': '/collections/kain',
     'kain-batik-tulis': '/collections/kain',
+    'koleksi-kain': '/collections/kain',
+    'kain-batik': '/collections/kain',
     'sarimbit-mahakarya-heritage': '/collections/luxury-series',
     'sarimbit-signature-elegance': '/collections/premium-series',
     'sarimbit-essential-daily': '/collections/ekonomi-series',
@@ -354,7 +356,7 @@ export default function Collection() {
             <Breadcrumb
               isDark={true}
               tier={collectionTier}
-              items={[{ label: 'KOLEKSI', to: '/collections' }, { label: collection.title.toUpperCase() }]}
+              items={[{ label: 'KOLEKSI', to: '/collections' }, { label: (isKain ? 'Kain Batik' : collection.title).toUpperCase() }]}
               className="flex justify-center mb-6"
             />
 
@@ -401,7 +403,7 @@ export default function Collection() {
             )}
 
             <h1 className={`font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide leading-tight mb-3 ${isExclusive ? 'text-[#C5A059] italic' : 'text-white'}`}>
-              {collection.title}
+              {isKain ? 'Kain Batik' : collection.title}
             </h1>
 
             {isExclusive && (
@@ -424,7 +426,7 @@ export default function Collection() {
 
             {isKain && (
               <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
-                {collection.description || 'Koleksi lembaran wastra batik tulis canting dan batik cap primisima pilihan. Menghadirkan kekayaan motif pusaka nusantara sarat filosofi adiluhung untuk busana adat, bahan kemeja eksklusif, maupun mahar pernikahan.'}
+                Temukan beragam pilihan kain batik dengan motif dan warna yang memikat, mulai dari sentuhan klasik hingga desain modern. Cocok untuk kreasi busana personal, seragam, maupun kebutuhan sarimbit, dengan pilihan kain yang dapat disesuaikan dengan gaya dan kebutuhan Anda.
               </p>
             )}
 

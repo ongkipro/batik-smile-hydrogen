@@ -291,12 +291,14 @@ function CollectionItem({ collection, index }) {
             </span>
 
             <h2 className="font-serif text-xl sm:text-2xl lg:text-2xl font-normal leading-tight text-white group-hover:text-[#C5A059] transition-colors mb-1.5 line-clamp-1">
-              {collection.title}
+              {collection.handle === 'kain' ? 'Kain Batik' : collection.title}
             </h2>
 
-            {collection.description && (
+            {(collection.handle === 'kain' || collection.description) && (
               <p className="text-[11px] text-[#E2DFD8]/80 font-light line-clamp-1 mb-2 hidden sm:block">
-                {collection.description}
+                {collection.handle === 'kain'
+                  ? 'Temukan beragam pilihan kain batik dengan motif dan warna yang memikat, mulai dari sentuhan klasik hingga desain modern. Cocok untuk kreasi busana personal, seragam, maupun kebutuhan sarimbit, dengan pilihan kain yang dapat disesuaikan dengan gaya dan kebutuhan Anda.'
+                  : collection.description}
               </p>
             )}
 
