@@ -113,13 +113,43 @@ export function Footer() {
               BUTIK &amp; SHOWROOM RESMI
             </h4>
             <div className="space-y-5 text-[#C5BFB8] leading-relaxed text-[13px] sm:text-sm">
-              <div className="border-l border-[#C5A059] pl-3.5 space-y-1">
-                <strong className="text-white font-medium text-sm block">Batik Smile Sampokong</strong>
-                <span className="block text-[#D1CCC5]">Jl. Simongan Raya No. 109, Pamularsih, Semarang</span>
-                <span className="text-xs text-[#9E978E] block">
+              <div className="border-l border-[#C5A059] pl-3.5 space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <strong className="text-white font-medium text-sm">Batik Smile Sampokong</strong>
+                  <a
+                    href="https://maps.google.com/?q=Batik+Smile+Simongan+Semarang"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] text-[#C5A059] hover:text-white font-medium uppercase tracking-wider transition-colors"
+                    title="Buka rute Google Maps Batik Smile Sampokong"
+                  >
+                    <span>Peta</span>
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+
+                <a
+                  href="https://maps.google.com/?q=Batik+Smile+Simongan+Semarang"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-1.5 text-[#D1CCC5] hover:text-[#C5A059] transition-colors group text-[12.5px] leading-snug"
+                  title="Lihat di Google Maps"
+                >
+                  <svg className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c-4.418 0-8-5.582-8-11a8 8 0 1116 0c0 5.418-3.582 11-8 11z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>Jl. Simongan Raya No. 109, Pamularsih, Semarang</span>
+                </a>
+
+                <span className="text-xs text-[#9E978E] block pl-5.5">
                   Lt. 1: RTW &amp; Fitting • Lt. 2: VIP Sutra &amp; Lounge • Lt. 3: Suvenir
                 </span>
-                <span className="text-[#C5A059] inline-flex items-center gap-1.5 pt-1 text-xs font-medium">
+                <span className="text-[#C5A059] inline-flex items-center gap-1.5 pt-0.5 text-xs font-medium pl-5.5">
                   <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <circle cx="12" cy="12" r="10" />
                     <polyline points="12 6 12 12 16 14" />
@@ -128,10 +158,40 @@ export function Footer() {
                 </span>
               </div>
 
-              <div className="border-l border-[#C5A059] pl-3.5 space-y-1">
-                <strong className="text-white font-medium text-sm block">Batik Smile Sukun</strong>
-                <span className="block text-[#D1CCC5]">Jl. Sukun Raya No. 23, Banyumanik, Semarang</span>
-                <span className="text-[#C5A059] inline-flex items-center gap-1.5 pt-1 text-xs font-medium">
+              <div className="border-l border-[#C5A059] pl-3.5 space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <strong className="text-white font-medium text-sm">Batik Smile Sukun</strong>
+                  <a
+                    href="https://maps.google.com/?q=Batik+Smile+Banyumanik+Semarang"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] text-[#C5A059] hover:text-white font-medium uppercase tracking-wider transition-colors"
+                    title="Buka rute Google Maps Batik Smile Sukun"
+                  >
+                    <span>Peta</span>
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+
+                <a
+                  href="https://maps.google.com/?q=Batik+Smile+Banyumanik+Semarang"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-1.5 text-[#D1CCC5] hover:text-[#C5A059] transition-colors group text-[12.5px] leading-snug"
+                  title="Lihat di Google Maps"
+                >
+                  <svg className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c-4.418 0-8-5.582-8-11a8 8 0 1116 0c0 5.418-3.582 11-8 11z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>Jl. Sukun Raya No. 23, Banyumanik, Semarang</span>
+                </a>
+
+                <span className="text-[#C5A059] inline-flex items-center gap-1.5 pt-0.5 text-xs font-medium pl-5.5">
                   <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <circle cx="12" cy="12" r="10" />
                     <polyline points="12 6 12 12 16 14" />
@@ -144,7 +204,7 @@ export function Footer() {
                 to="/pages/lokasi-toko"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-[#C5A059] hover:text-white font-semibold pt-1 transition-colors group"
               >
-                <span>Petunjuk Arah Google Maps</span>
+                <span>Panduan Lengkap Lokasi Toko</span>
                 <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </NavLink>
             </div>

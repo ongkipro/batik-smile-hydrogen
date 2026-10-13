@@ -192,6 +192,10 @@ export default function Collection() {
     handle.includes('premium') || handle.includes('signature') || handle.includes('dobby');
   const isEkonomi =
     handle.includes('ekonomi') || handle.includes('essential');
+  const isKain = handle.includes('kain');
+  const isAnak = handle.includes('anak');
+  const isAksesoris = handle.includes('aksesoris') || handle.includes('aksesori') || handle.includes('blangkon');
+  const isCinematicHero = isExclusive || isPremium || isEkonomi || isKain || isAnak || isAksesoris;
 
   const collectionTier = isExclusive
     ? 'luxury'
@@ -279,8 +283,12 @@ export default function Collection() {
       ? '/banners/sarimbit_family_banner.jpg'
       : isEkonomi
       ? 'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749'
-      : handle.includes('kain')
+      : isKain
       ? '/banners/collection_kain_tulis_banner.jpg'
+      : isAnak
+      ? '/banners/sarimbit_family_banner.jpg'
+      : isAksesoris
+      ? '/banners/hero_editorial_banner.jpg'
       : handle.includes('series') || handle.includes('sarimbit')
       ? '/banners/sarimbit_family_banner.jpg'
       : null);
@@ -307,8 +315,8 @@ export default function Collection() {
           generateBreadcrumbSchema(breadcrumbItems),
         ]}
       />
-      {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR EXCLUSIVE, PREMIUM & EKONOMI */}
-      {isExclusive || isPremium || isEkonomi ? (
+      {/* 1. HAUTE CINEMATIC HERO BANNER (BACKGROUND IMAGE) FOR ALL CORE COLLECTIONS */}
+      {isCinematicHero ? (
         <section
           className={`relative w-full overflow-hidden flex items-center justify-center text-center ${
             isExclusive
@@ -366,6 +374,24 @@ export default function Collection() {
               </span>
             )}
 
+            {isKain && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
+                ARSIP WASTRA &bull; KAIN TULIS CANTING &amp; CAP PRIMISIMA
+              </span>
+            )}
+
+            {isAnak && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
+                BATIK ANAK &bull; KENYAMANAN PUTRA &amp; PUTRI
+              </span>
+            )}
+
+            {isAksesoris && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
+                AKSESORIS &bull; SENTUHAN ELEGAN NUSANTARA
+              </span>
+            )}
+
             <h1 className={`font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide leading-tight mb-3 ${isExclusive ? 'text-[#C5A059] italic' : 'text-white'}`}>
               {collection.title}
             </h1>
@@ -388,6 +414,24 @@ export default function Collection() {
               </p>
             )}
 
+            {isKain && (
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
+                {collection.description || 'Koleksi lembaran wastra batik tulis canting dan batik cap primisima pilihan. Menghadirkan kekayaan motif pusaka nusantara sarat filosofi adiluhung untuk busana adat, bahan kemeja eksklusif, maupun mahar pernikahan.'}
+              </p>
+            )}
+
+            {isAnak && (
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
+                {collection.description || 'Busana batik ramah anak dengan material katun primisima lembut, adem, dan menyerap keringat. Dirancang khusus untuk kenyamanan gerak aktif buah hati saat menghadiri resepsi keluarga, acara sekolah, maupun hari raya.'}
+              </p>
+            )}
+
+            {isAksesoris && (
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
+                {collection.description || 'Pelengkap busana adat dan formal nusantara, mulai dari blangkon lipat khas Jawa, selendang, hingga aksesori pelengkap busana pria dan wanita untuk menyempurnakan penampilan berwibawa.'}
+              </p>
+            )}
+
             {isEkonomi && (
               <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
                 <span>Harga Terjangkau</span>
@@ -395,6 +439,36 @@ export default function Collection() {
                 <span>Nyaman Dipakai</span>
                 <span className="text-[#C5A059]">&bull;</span>
                 <span>Awet untuk Aktivitas</span>
+              </div>
+            )}
+
+            {isKain && (
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
+                <span>Kain Tulis &amp; Cap</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Katun Primisima Halus</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Motif Tradisi Adiluhung</span>
+              </div>
+            )}
+
+            {isAnak && (
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
+                <span>Katun Lembut &amp; Adem</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Gerak Leluasa</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Serasi Busana Keluarga</span>
+              </div>
+            )}
+
+            {isAksesoris && (
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
+                <span>Sentuhan Klasik</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Kualitas Presisi</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Penyempurna Penampilan</span>
               </div>
             )}
 
@@ -477,7 +551,7 @@ export default function Collection() {
       )}
 
       {/* BODY CONTENT (Pillars & Grid) */}
-      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isExclusive || isPremium || isEkonomi ? 'mt-12 sm:mt-16' : 'mt-8 sm:mt-12'}`}>
+      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isCinematicHero ? 'mt-12 sm:mt-16' : 'mt-8 sm:mt-12'}`}>
 
         {/* EXCLUSIVE TEMPLATE: 3 Pillars of Haute Artistry */}
         {isExclusive && (
