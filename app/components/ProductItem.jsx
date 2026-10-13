@@ -112,24 +112,9 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         </div>
       </Link>
 
-      {/* 2. Editorial Typography & Price Metadata */}
-      <div className="pt-3.5 sm:pt-4 pb-1 flex flex-col flex-grow justify-between text-center items-center">
+      {/* 2. Editorial Typography & Price Metadata: Title & Price Only */}
+      <div className="pt-3 sm:pt-3.5 pb-1 flex flex-col flex-grow justify-between text-center items-center">
         <div className="w-full">
-          {/* Eyebrow Product Type */}
-          {product.productType && (
-            <span
-              className={`block text-[10px] sm:text-xs uppercase tracking-[0.22em] font-medium mb-1.5 ${
-                isExclusive
-                  ? 'text-[#C5A059]'
-                  : isPremium
-                  ? 'text-[#C5A059]'
-                  : 'text-[#7C3F1D]'
-              }`}
-            >
-              {product.productType}
-            </span>
-          )}
-
           {/* Product Title */}
           <Link
             to={variantUrl}
@@ -147,34 +132,27 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         </div>
 
         {/* Pricing Area */}
-        <div className="mt-2.5 flex flex-col items-center justify-center gap-1">
-          <div className="flex items-baseline justify-center gap-2">
-            {price && (
-              <span
-                className={`tracking-wide ${
-                  isExclusive
-                    ? 'font-serif text-base sm:text-lg font-semibold text-[#C5A059]'
-                    : isPremium
-                    ? 'text-sm sm:text-base font-semibold text-[#C5A059]'
-                    : 'text-sm sm:text-base font-semibold text-[#111111]'
-                }`}
-              >
-                {formatRupiah(price)}
-              </span>
-            )}
-            {isOnSale && compareAtPrice && (
-              <span
-                className={`text-xs sm:text-sm line-through ${
-                  isExclusive ? 'text-white/40' : isPremium ? 'text-[#D5C8B8]/60' : 'text-[#8C827A]'
-                }`}
-              >
-                {formatRupiah(compareAtPrice)}
-              </span>
-            )}
-          </div>
-          {isPremium && (
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#D5B066] font-medium mt-0.5 opacity-90">
-              Tenun Dobby &bull; Furing Hero
+        <div className="mt-2 flex items-baseline justify-center gap-2">
+          {price && (
+            <span
+              className={`tracking-wide ${
+                isExclusive
+                  ? 'font-serif text-base sm:text-lg font-semibold text-[#C5A059]'
+                  : isPremium
+                  ? 'text-sm sm:text-base font-semibold text-[#C5A059]'
+                  : 'text-sm sm:text-base font-semibold text-[#111111]'
+              }`}
+            >
+              {formatRupiah(price)}
+            </span>
+          )}
+          {isOnSale && compareAtPrice && (
+            <span
+              className={`text-xs sm:text-sm line-through ${
+                isExclusive ? 'text-white/40' : isPremium ? 'text-[#D5C8B8]/60' : 'text-[#8C827A]'
+              }`}
+            >
+              {formatRupiah(compareAtPrice)}
             </span>
           )}
         </div>
