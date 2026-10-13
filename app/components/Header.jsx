@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { Await, NavLink, useAsyncValue } from 'react-router';
 import { useAnalytics, useOptimisticCart } from '@shopify/hydrogen';
 import { useAside } from '~/components/Aside';
+import { AnnouncementBar } from './AnnouncementBar';
 
 /**
  * Curated 1-Line Navigation Architecture (Dead Center, Zero Submenus)
@@ -41,13 +42,16 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-[#E2DFD8] shadow-[0_2px_15px_rgba(0,0,0,0.04)]'
-          : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
-      }`}
-    >
+    <div className="sticky top-0 z-40 w-full transition-all">
+      <AnnouncementBar />
+
+      <header
+        className={`w-full transition-all duration-300 relative z-50 ${
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-md border-b border-[#E2DFD8] shadow-[0_2px_15px_rgba(0,0,0,0.04)]'
+            : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
+        }`}
+      >
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 sm:h-21 lg:h-20 flex items-center justify-between relative">
           
           {/* 1. LEFT: Mobile Burger Trigger & Desktop Brand Logo (Pure Logo, No Subtitle) */}
@@ -109,6 +113,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
           </div>
         </div>
       </header>
+    </div>
   );
 }
 

@@ -56,9 +56,6 @@ export default function LayananSeragamPage() {
 
         {/* 1. Header Hero */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2.5">
-            SERAGAM &bull; BESPOKE &bull; TANPA MOQ
-          </span>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight">
             Seragam &amp; Bespoke Tailoring
           </h1>
