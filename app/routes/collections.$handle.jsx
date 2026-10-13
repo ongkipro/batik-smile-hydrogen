@@ -409,14 +409,10 @@ export default function Collection() {
                       <span>100% Katun Adem</span>
                       <span className="text-[#C5A059]">&bull;</span>
                       <span>Bebas Tukar Ukuran</span>
-                      <span className="text-[#C5A059]">&bull;</span>
-                      <span>Konsultasi Ukuran via WA</span>
                     </>
                   ) : (
                     <>
                       <span>Jahit Bespoke Tanpa MOQ</span>
-                      <span className="text-[#C5A059]">&bull;</span>
-                      <span>Konsultasi Ukuran via WA</span>
                       <span className="text-[#C5A059]">&bull;</span>
                       <span>Garansi Butik Resmi</span>
                     </>

@@ -12,7 +12,7 @@ const DEFAULT_LOVE_NOTES = [
   {
     id: 2,
     quote:
-      'Kain sutra tulis mahakarya pesanan saya datang dengan kotak kayu ukir yang sangat megah. Motifnya eksklusif tidak ada kembarannya. Konsultasi ukuran lewat WhatsApp sangat tanggap dan profesional. Matur nuwun sanget Batik Smile.',
+      'Kain sutra tulis mahakarya pesanan saya datang dengan kotak kayu ukir yang sangat megah. Motifnya eksklusif tidak ada kembarannya. Pelayanan lewat WhatsApp sangat tanggap dan profesional. Matur nuwun sanget Batik Smile.',
     author: 'IBU RADEN AJENG SAVITRI',
     location: 'JAKARTA SELATAN • KOLEKTOR BATIK',
     rating: 5,

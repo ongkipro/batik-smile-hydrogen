@@ -1066,7 +1066,7 @@ export default function Product() {
                               isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                             }`}
                           >
-                            Tersedia layanan jahit busana sarimbit keluarga dan seragam instansi tanpa minimal order. Konsultasi ukuran dapat dipandu langsung oleh tim penjahit melalui WhatsApp Concierge{' '}
+                            Tersedia layanan jahit busana sarimbit keluarga dan seragam instansi tanpa minimal order. Hubungi WhatsApp Concierge{' '}
                             <a
                               href="https://wa.me/6281390888809"
                               target="_blank"
