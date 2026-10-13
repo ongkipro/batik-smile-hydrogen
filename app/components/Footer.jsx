@@ -370,20 +370,40 @@ export function Footer() {
           </div>
         </div>
 
-        {/* 4. BOTTOM BAR: SINGLE CLEAN LINE */}
-        <div className="pt-8 border-t border-white/10 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 gap-y-2 text-[11px] sm:text-xs text-[#A69F96] tracking-[0.14em] uppercase">
-            <span>&copy; {new Date().getFullYear()} BATIK SMILE</span>
-            <span className="text-white/20">&bull;</span>
+        {/* 4. BOTTOM BAR: PROFESSIONAL TRUST GUARANTEES & LEGAL COMPLIANCE */}
+        <div className="pt-8 border-t border-white/10 space-y-4">
+          {/* Trust Guarantees */}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2 text-[11px] sm:text-xs text-[#E2DFD8] uppercase tracking-[0.16em] font-medium">
             <span>100% BATIK ASLI</span>
-            <span className="text-white/20">&bull;</span>
+            <span className="text-[#C5A059]">&bull;</span>
             <span>BEBAS TUKAR UKURAN</span>
-            <span className="text-white/20">&bull;</span>
+            <span className="text-[#C5A059]">&bull;</span>
             <span>PENGIRIMAN SELURUH INDONESIA</span>
-            <span className="text-white/20">&bull;</span>
-            <NavLink to="/sitemap.xml" reloadDocument className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
-              PETA SITUS
-            </NavLink>
+          </div>
+
+          {/* Professional Copyright & Legal Compliance Bar */}
+          <div className="pt-3 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#A69F96] tracking-[0.12em] uppercase">
+            <div className="text-center md:text-left">
+              &copy; {new Date().getFullYear()} BATIK SMILE. SELURUH HAK CIPTA DILINDUNGI.
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-center">
+              <NavLink to="/policies/privacy-policy" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+                KEBIJAKAN PRIVASI
+              </NavLink>
+              <span className="text-white/20">|</span>
+              <NavLink to="/policies/terms-of-service" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+                SYARAT &amp; KETENTUAN
+              </NavLink>
+              <span className="text-white/20">|</span>
+              <NavLink to="/policies/refund-policy" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+                GARANSI &amp; PENGEMBALIAN
+              </NavLink>
+              <span className="text-white/20">|</span>
+              <NavLink to="/sitemap.xml" reloadDocument className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+                PETA SITUS
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>
