@@ -172,13 +172,6 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
               </span>
             )}
           </div>
-
-          {/* Whispered Tier Craftsmanship Signature */}
-          {isExclusive && (
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#C5A059] font-light mt-0.5 opacity-90">
-              Sutra ATBM &bull; Prada Emas
-            </span>
-          )}
           {isPremium && (
             <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#D5B066] font-medium mt-0.5 opacity-90">
               Tenun Dobby &bull; Furing Hero

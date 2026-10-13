@@ -313,9 +313,8 @@ const SHOPIFY_MENU = {
     editorial: {
       image: '/brand/models/model_teak_door.jpg',
       eyebrow: 'KASTA III • PRIMISIMA KATUN',
-      headline: 'Kenyamanan Silaturahmi Keluarga',
       description:
-        'Katun sanforized 100% adem dan ramah di kulit. Pilihan paling tepat untuk seragam arisan, silaturahmi Idulfitri, dan santai bersama.',
+        'Koleksi batik dengan pilihan motif menarik dan desain yang praktis untuk berbagai kebutuhan. Mengutamakan fungsi, kenyamanan, dan harga yang terjangkau, koleksi ini menjadi pilihan tepat untuk pemakaian sehari-hari maupun seragaman tanpa meninggalkan karakter khas Batik Smile.',
       ctaText: 'LIHAT EKONOMI SERIES',
       ctaHref: '/collections/ekonomi-series',
       isExternal: false,

@@ -416,17 +416,31 @@ export default function Collection() {
                   </p>
                 ) : (
                   <p className="text-sm sm:text-base text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
-                    Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.
+                    {isEkonomi
+                      ? 'Koleksi batik dengan pilihan motif menarik dan desain yang praktis untuk berbagai kebutuhan. Mengutamakan fungsi, kenyamanan, dan harga yang terjangkau, koleksi ini menjadi pilihan tepat untuk pemakaian sehari-hari maupun seragaman tanpa meninggalkan karakter khas Batik Smile.'
+                      : 'Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.'}
                   </p>
                 )}
 
                 {/* Service Highlights */}
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#7C3F1D] font-medium pt-4 border-t border-[#E2DFD8]">
-                  <span>Jahit Bespoke Tanpa MOQ</span>
-                  <span className="text-[#C5A059]">&bull;</span>
-                  <span>Konsultasi Ukuran via WA</span>
-                  <span className="text-[#C5A059]">&bull;</span>
-                  <span>Garansi Butik Resmi</span>
+                  {isEkonomi ? (
+                    <>
+                      <span>100% Katun Adem</span>
+                      <span className="text-[#C5A059]">&bull;</span>
+                      <span>Bebas Tukar Ukuran</span>
+                      <span className="text-[#C5A059]">&bull;</span>
+                      <span>Konsultasi Ukuran via WA</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Jahit Bespoke Tanpa MOQ</span>
+                      <span className="text-[#C5A059]">&bull;</span>
+                      <span>Konsultasi Ukuran via WA</span>
+                      <span className="text-[#C5A059]">&bull;</span>
+                      <span>Garansi Butik Resmi</span>
+                    </>
+                  )}
                 </div>
               </div>
 
