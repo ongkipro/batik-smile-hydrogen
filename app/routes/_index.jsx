@@ -231,7 +231,7 @@ const HOMEPAGE_QUERY = `#graphql
       name
       description
     }
-    luxuryCollection: collection(handle: "sarimbit-luxury") {
+    luxuryCollection: collection(handle: "luxury-series") {
       id
       title
       products(first: 6) {
@@ -240,7 +240,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    premiumCollection: collection(handle: "sarimbit-premium") {
+    premiumCollection: collection(handle: "premium-series") {
       id
       title
       products(first: 6) {
@@ -249,7 +249,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    ekonomiCollection: collection(handle: "sarimbit-ekonomi") {
+    ekonomiCollection: collection(handle: "ekonomi-series") {
       id
       title
       products(first: 6) {

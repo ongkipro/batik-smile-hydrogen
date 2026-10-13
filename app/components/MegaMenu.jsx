@@ -78,35 +78,59 @@ function CategoryIcon({ type, className = 'w-3.5 h-3.5 text-[#C5A059] flex-shrin
  * - Col 3: Featured Collection Spotlight (Modular, Metaobject-Ready)
  */
 const SHOPIFY_MENU = {
-  'Sarimbit Luxury': {
-    title: 'Sarimbit Kasta Tertinggi (Luxury)',
-    handle: 'sarimbit-luxury',
+  'Luxury Series': {
+    title: 'Luxury Series (Kasta Tertinggi)',
+    handle: 'luxury-series',
     badge: 'Sutra Alam ATBM',
-    allHref: '/collections/sarimbit-luxury',
+    tailoringNotice: 'Layanan Jahitan Sarimbit & Seragam (Tanpa Minimal Order)',
     subcategories: [
       {
-        name: 'Pria Lengan Panjang (Furing Sutra)',
-        href: '/collections/sarimbit-luxury?gender=pria&sleeve=lengan-panjang',
+        name: 'Pria • Baju Kerja',
+        href: '/collections/luxury-series?gender=pria&category=baju-kerja',
         icon: 'shirt',
-        badge: 'Resepsi',
+        badge: 'Kantor',
       },
       {
-        name: 'Pria Lengan Pendek Sutra Halus',
-        href: '/collections/sarimbit-luxury?gender=pria&sleeve=lengan-pendek',
-        icon: 'sparkle',
-        badge: 'VIP',
-      },
-      {
-        name: 'Wanita Gaun & Blus Lengan Panjang',
-        href: '/collections/sarimbit-luxury?gender=wanita&sleeve=lengan-panjang',
-        icon: 'dress',
-        badge: 'Akad/Pesta',
-      },
-      {
-        name: 'Wanita Gaun Lengan Pendek Anggun',
-        href: '/collections/sarimbit-luxury?gender=wanita&sleeve=lengan-pendek',
+        name: 'Pria • Acara Resmi',
+        href: '/collections/luxury-series?gender=pria&category=acara-resmi',
         icon: 'crown',
-        badge: 'Mahakarya',
+        badge: 'Formal',
+      },
+      {
+        name: 'Pria • Casual',
+        href: '/collections/luxury-series?gender=pria&category=casual',
+        icon: 'sparkle',
+        badge: 'Santai',
+      },
+      {
+        name: 'Pria • Sarimbit',
+        href: '/collections/luxury-series?gender=pria&category=sarimbit',
+        icon: 'family',
+        badge: 'Keluarga',
+      },
+      {
+        name: 'Wanita • Baju Kerja',
+        href: '/collections/luxury-series?gender=wanita&category=baju-kerja',
+        icon: 'dress',
+        badge: 'Kantor',
+      },
+      {
+        name: 'Wanita • Acara Resmi',
+        href: '/collections/luxury-series?gender=wanita&category=acara-resmi',
+        icon: 'crown',
+        badge: 'Pesta',
+      },
+      {
+        name: 'Wanita • Casual',
+        href: '/collections/luxury-series?gender=wanita&category=casual',
+        icon: 'leaf',
+        badge: 'Santai',
+      },
+      {
+        name: 'Wanita • Sarimbit',
+        href: '/collections/luxury-series?gender=wanita&category=sarimbit',
+        icon: 'family',
+        badge: 'Keluarga',
       },
     ],
     featuredProducts: [
@@ -138,40 +162,64 @@ const SHOPIFY_MENU = {
       headline: 'Kemegahan Abadi Pelaminan',
       description:
         'Sentuhan canting prada emas dan tenun sutra ATBM halus. Pilihan busana kehormatan resepsi pernikahan dan jamuan kenegaraan.',
-      ctaText: 'EKSPLORASI SARIMBIT LUXURY',
-      ctaHref: '/collections/sarimbit-luxury',
+      ctaText: 'EKSPLORASI LUXURY SERIES',
+      ctaHref: '/collections/luxury-series',
       isExternal: false,
     },
   },
-  'Sarimbit Premium': {
-    title: 'Sarimbit Tenun Dobby (Premium)',
-    handle: 'sarimbit-premium',
+  'Premium Series': {
+    title: 'Premium Series (Tenun Dobby)',
+    handle: 'premium-series',
     badge: 'Tenun Dobby Timbul',
-    allHref: '/collections/sarimbit-premium',
+    tailoringNotice: 'Layanan Jahitan Sarimbit & Seragam (Tanpa Minimal Order)',
     subcategories: [
       {
-        name: 'Pria Dobby Lengan Panjang (Furing Hero)',
-        href: '/collections/sarimbit-premium?gender=pria&sleeve=lengan-panjang',
+        name: 'Pria • Baju Kerja',
+        href: '/collections/premium-series?gender=pria&category=baju-kerja',
         icon: 'shirt',
+        badge: 'Kantor',
+      },
+      {
+        name: 'Pria • Acara Resmi',
+        href: '/collections/premium-series?gender=pria&category=acara-resmi',
+        icon: 'crown',
         badge: 'Formal',
       },
       {
-        name: 'Pria Dobby Lengan Pendek Sejuk',
-        href: '/collections/sarimbit-premium?gender=pria&sleeve=lengan-pendek',
+        name: 'Pria • Casual',
+        href: '/collections/premium-series?gender=pria&category=casual',
         icon: 'sparkle',
-        badge: 'Casual Formal',
+        badge: 'Santai',
       },
       {
-        name: 'Wanita Blus & Gamis Lengan Panjang',
-        href: '/collections/sarimbit-premium?gender=wanita&sleeve=lengan-panjang',
+        name: 'Pria • Sarimbit',
+        href: '/collections/premium-series?gender=pria&category=sarimbit',
+        icon: 'family',
+        badge: 'Keluarga',
+      },
+      {
+        name: 'Wanita • Baju Kerja',
+        href: '/collections/premium-series?gender=wanita&category=baju-kerja',
         icon: 'dress',
-        badge: 'Wisuda/Lamaran',
+        badge: 'Kantor',
       },
       {
-        name: 'Wanita Outer & Dress Lengan Pendek',
-        href: '/collections/sarimbit-premium?gender=wanita&sleeve=lengan-pendek',
-        icon: 'gem',
-        badge: 'Modern',
+        name: 'Wanita • Acara Resmi',
+        href: '/collections/premium-series?gender=wanita&category=acara-resmi',
+        icon: 'crown',
+        badge: 'Pesta',
+      },
+      {
+        name: 'Wanita • Casual',
+        href: '/collections/premium-series?gender=wanita&category=casual',
+        icon: 'leaf',
+        badge: 'Santai',
+      },
+      {
+        name: 'Wanita • Sarimbit',
+        href: '/collections/premium-series?gender=wanita&category=sarimbit',
+        icon: 'family',
+        badge: 'Keluarga',
       },
     ],
     featuredProducts: [
@@ -203,38 +251,38 @@ const SHOPIFY_MENU = {
       headline: 'Harmoni Tekstur & Kenyamanan Pesta',
       description:
         'Kombinasi serat tenun dobby bertekstur timbul mewah dengan furing hero katun sejuk. Tahan kusut untuk perhelatan seharian.',
-      ctaText: 'JELAJAHI SARIMBIT PREMIUM',
-      ctaHref: '/collections/sarimbit-premium',
+      ctaText: 'JELAJAHI PREMIUM SERIES',
+      ctaHref: '/collections/premium-series',
       isExternal: false,
     },
   },
-  'Sarimbit Ekonomi': {
-    title: 'Sarimbit Katun Primisima (Ekonomi)',
-    handle: 'sarimbit-ekonomi',
+  'Ekonomi Series': {
+    title: 'Ekonomi Series (Katun Primisima)',
+    handle: 'ekonomi-series',
     badge: '100% Katun Adem',
-    allHref: '/collections/sarimbit-ekonomi',
+    allHref: '/collections/ekonomi-series',
     subcategories: [
       {
         name: 'Pria Katun Lengan Panjang',
-        href: '/collections/sarimbit-ekonomi?gender=pria&sleeve=lengan-panjang',
+        href: '/collections/ekonomi-series?gender=pria&sleeve=lengan-panjang',
         icon: 'shirt',
         badge: 'Adem',
       },
       {
         name: 'Pria Katun Lengan Pendek',
-        href: '/collections/sarimbit-ekonomi?gender=pria&sleeve=lengan-pendek',
+        href: '/collections/ekonomi-series?gender=pria&sleeve=lengan-pendek',
         icon: 'sparkle',
         badge: 'Harian',
       },
       {
         name: 'Wanita Gamis & Blus Lengan Panjang',
-        href: '/collections/sarimbit-ekonomi?gender=wanita&sleeve=lengan-panjang',
+        href: '/collections/ekonomi-series?gender=wanita&sleeve=lengan-panjang',
         icon: 'dress',
         badge: 'Silaturahmi',
       },
       {
         name: 'Wanita Terusan Lengan Pendek Santai',
-        href: '/collections/sarimbit-ekonomi?gender=wanita&sleeve=lengan-pendek',
+        href: '/collections/ekonomi-series?gender=wanita&sleeve=lengan-pendek',
         icon: 'leaf',
         badge: 'Santai',
       },
@@ -243,7 +291,7 @@ const SHOPIFY_MENU = {
       {
         title: 'Sarimbit Soga Lawasan',
         price: 'Rp 385.000',
-        href: '/collections/sarimbit-ekonomi',
+        href: '/collections/ekonomi-series',
         image: '/banners/sarimbit_family_banner.jpg',
         tag: 'Ekonomi',
       },
@@ -268,8 +316,8 @@ const SHOPIFY_MENU = {
       headline: 'Kenyamanan Silaturahmi Keluarga',
       description:
         'Katun sanforized 100% adem dan ramah di kulit. Pilihan paling tepat untuk seragam arisan, silaturahmi Idulfitri, dan santai bersama.',
-      ctaText: 'LIHAT SARIMBIT EKONOMI',
-      ctaHref: '/collections/sarimbit-ekonomi',
+      ctaText: 'LIHAT EKONOMI SERIES',
+      ctaHref: '/collections/ekonomi-series',
       isExternal: false,
     },
   },
@@ -516,22 +564,22 @@ export function MegaMenu({ onMenuStateChange }) {
                         </span>
                       </div>
 
-                      <ul className="space-y-1.5">
+                      <ul className={item.subcategories.length > 4 ? 'grid grid-cols-1 sm:grid-cols-2 gap-1.5' : 'space-y-1.5'}>
                         {item.subcategories.map((sub, idx) => (
                           <li key={idx}>
                             <NavLink
                               to={sub.href}
                               onClick={() => setActiveTab(null)}
-                              className="group flex items-center justify-between py-2 px-2.5 border border-transparent hover:border-[#E2DFD8] hover:bg-[#FAF8F5] transition-all normal-case text-xs text-[#111111] hover:text-[#9E7D3B] no-underline"
+                              className="group flex items-center justify-between py-1.5 px-2 border border-transparent hover:border-[#E2DFD8] hover:bg-[#FAF8F5] transition-all normal-case text-xs text-[#111111] hover:text-[#9E7D3B] no-underline"
                             >
-                              <div className="flex items-center gap-2.5 min-w-0">
+                              <div className="flex items-center gap-2 min-w-0">
                                 <CategoryIcon type={sub.icon} className="w-3.5 h-3.5 text-[#C5A059] flex-shrink-0" />
-                                <span className="font-medium truncate group-hover:translate-x-0.5 transition-transform text-[11px] sm:text-xs">
+                                <span className="font-medium truncate group-hover:translate-x-0.5 transition-transform text-[11px]">
                                   {sub.name}
                                 </span>
                               </div>
                               {sub.badge && (
-                                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 bg-[#FAF8F5] text-[#9E7D3B] border border-[#E2DFD8] font-semibold uppercase tracking-wider flex-shrink-0 ml-2">
+                                <span className="text-[8px] px-1.5 py-0.5 bg-[#FAF8F5] text-[#9E7D3B] border border-[#E2DFD8] font-semibold uppercase tracking-wider flex-shrink-0 ml-1.5">
                                   {sub.badge}
                                 </span>
                               )}
@@ -539,6 +587,16 @@ export function MegaMenu({ onMenuStateChange }) {
                           </li>
                         ))}
                       </ul>
+
+                      {/* Tailoring Service Highlight (Luxury & Premium) */}
+                      {item.tailoringNotice && (
+                        <div className="mt-3 p-2.5 bg-[#FAF8F5] border border-[#C5A059]/40 flex items-center gap-2 text-[10px]">
+                          <CategoryIcon type="scissors" className="w-3.5 h-3.5 text-[#C5A059] flex-shrink-0" />
+                          <span className="font-medium text-[#7D6433]">
+                            {item.tailoringNotice}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Clean Architectural Gateway to All Collections */}

@@ -6,12 +6,12 @@ import { AnnouncementBar } from './AnnouncementBar';
 
 /**
  * Curated 1-Line Navigation Architecture (Dead Center, Zero Submenus)
- * Core Categories: Sarimbit Luxury, Sarimbit Premium, Sarimbit Ekonomi, Batik Anak, Kain, Aksesoris
+ * Core Categories: Luxury Series, Premium Series, Ekonomi Series, Batik Anak, Kain, Aksesoris
  */
 const NAV_ITEMS = [
-  { label: 'Sarimbit Luxury', desc: 'Sutra ATBM & Prada Emas', to: '/collections/sarimbit-luxury' },
-  { label: 'Sarimbit Premium', desc: 'Tenun Dobby & Furing Hero', to: '/collections/sarimbit-premium' },
-  { label: 'Sarimbit Ekonomi', desc: 'Katun Primisima Sejuk', to: '/collections/sarimbit-ekonomi' },
+  { label: 'Luxury Series', desc: 'Sutra ATBM & Prada Emas', to: '/collections/luxury-series' },
+  { label: 'Premium Series', desc: 'Tenun Dobby & Furing Hero', to: '/collections/premium-series' },
+  { label: 'Ekonomi Series', desc: 'Katun Primisima Sejuk', to: '/collections/ekonomi-series' },
   { label: 'Batik Anak', desc: 'Putra & Putri', to: '/collections/batik-anak' },
   { label: 'Kain', desc: 'Kain Tulis Canting 1-of-1', to: '/collections/kain' },
   { label: 'Aksesoris', desc: 'Blangkon & Aksesori', to: '/collections/aksesoris' },
@@ -244,7 +244,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
               BUTIK BATIK SMILE
             </span>
             <span className="text-[9px] uppercase tracking-[0.18em] text-[#777777] block mt-1 font-light">
-              Semarang &bull; Est. 2007
+              Semarang &bull; Sejak 2007
             </span>
           </div>
 

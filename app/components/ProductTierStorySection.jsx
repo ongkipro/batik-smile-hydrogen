@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * ProductTierStorySection
  * 2-Column Bespoke Editorial Differentiation Section (Frameless)
- * Exclusively rendered for Sarimbit Exclusive & Sarimbit Premium
+ * Exclusively rendered for Luxury Series & Premium Series
  *
  * @param {{
  *   tier: 'exclusive' | 'premium' | 'standard';
@@ -43,7 +43,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
               alt={
                 isExclusive
                   ? 'Proses Pembatikan Canting Prada Emas Sutra ATBM'
-                  : 'Harmoni Keluarga Busana Sarimbit Premium Dobby'
+                  : 'Harmoni Keluarga Busana Premium Series Dobby'
               }
               loading="lazy"
               className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -70,8 +70,8 @@ export function ProductTierStorySection({ tier, productTitle }) {
             className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] font-bold block mb-2 text-[#C5A059]"
           >
             {isExclusive
-              ? 'DIFERENSIASI KASTA TERTINGGI • SARIMBIT EXCLUSIVE'
-              : 'STANDAR RESEPSI RESMI • SARIMBIT PREMIUM'}
+              ? 'DIFERENSIASI KASTA TERTINGGI • LUXURY SERIES'
+              : 'STANDAR RESEPSI RESMI • PREMIUM SERIES'}
           </span>
 
           {/* Heading */}
@@ -80,7 +80,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
           >
             {isExclusive
               ? 'Keagungan Sutra ATBM & Sentuhan Prada Emas Maestro'
-              : 'Ketahanan Tenun Dobby Timbul & Furing Hero Sejuk'}
+              : 'Pilihan Bahan Berkualitas & Opsi Lapisan Trikot'}
           </h3>
 
           <div
@@ -97,7 +97,7 @@ export function ProductTierStorySection({ tier, productTitle }) {
           >
             {isExclusive
               ? `Karya "${productTitle}" diciptakan khusus untuk momen sakral resepsi, akad pernikahan, dan perayaan agung keluarga. Ditenun secara manual menggunakan Alat Tenun Bukan Mesin (ATBM) dari serat sutra mulberry murni yang memancarkan kilau ningrat alami, berbobot anggun, dan bernapas sejuk di badan.`
-              : `Koleksi "${productTitle}" dirancang khusus memenuhi tuntutan kenyamanan acara perhelatan formal dan resepsi keluarga besar seharian penuh. Menggunakan bahan tenun dobby berkarakter motif timbul yang kokoh, tidak menerawang, dan tetap rapi tanpa lecek saat duduk lama.`}
+              : 'Koleksi batik dengan pilihan bahan berkualitas yang menghadirkan kenyamanan dan tampilan elegan. Tersedia dengan opsi lapisan trikot untuk memberikan struktur yang lebih rapi dan kokoh, sesuai kebutuhan dan preferensi Anda.'}
           </p>
 
           {/* 3 Pillars of Distinction */}
@@ -112,10 +112,10 @@ export function ProductTierStorySection({ tier, productTitle }) {
                   <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
                     <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
-                      Batik Tulis Prada Emas Murni
+                      Material &amp; Furing Trikot Premium
                     </h4>
                     <p className="text-[11px] font-light text-[#E2DFD8]/75 leading-relaxed mt-0.5">
-                      Aksen prada emas digoreskan teliti menggunakan canting oleh maestro Butik Simongan, memancarkan wibawa ningrat di pencahayaan ballroom resepsi.
+                      Memadukan keindahan batik pilihan dengan furing trikot berkualitas tinggi yang sejuk, nyaman, dan berkelas.
                     </p>
                   </div>
                 </div>
@@ -124,10 +124,10 @@ export function ProductTierStorySection({ tier, productTitle }) {
                   <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
                     <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
-                      Presisi Sambung Pola 100% Simetris
+                      Jahitan Presisi Penjahit Teredukasi
                     </h4>
                     <p className="text-[11px] font-light text-[#E2DFD8]/75 leading-relaxed mt-0.5">
-                      Setiap belahan kemeja pria dan gaun wanita dipotong simetris menyambung pada saku, kerah, dan dada tanpa ada motif pusaka yang terputus.
+                      Dikerjakan dengan ketelitian tinggi oleh penjahit terampil dengan kerapian potongan dan sambung motif simetris.
                     </p>
                   </div>
                 </div>
@@ -136,10 +136,10 @@ export function ProductTierStorySection({ tier, productTitle }) {
                   <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
                     <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
-                      Layanan VIP Bespoke Tailoring &amp; Fitting
+                      Layanan Jahitan Sarimbit &amp; Seragam Bespoke
                     </h4>
                     <p className="text-[11px] font-light text-[#E2DFD8]/75 leading-relaxed mt-0.5">
-                      Kustomisasi lingkar dada, panjang baju, dan siluet pasangan dapat dikonsultasikan langsung bersama penjahit butik tanpa minimal order.
+                      Tersedia layanan jahitan kustom untuk busana sarimbit keluarga dan seragam instansi dengan penyesuaian ukuran presisi tanpa minimal order.
                     </p>
                   </div>
                 </div>
@@ -150,10 +150,10 @@ export function ProductTierStorySection({ tier, productTitle }) {
                   <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
                     <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
-                      Tekstur Tenun Dobby Timbul Berkarakter
+                      Pilihan Lapisan: Dengan Trikot
                     </h4>
                     <p className="text-[11px] font-light text-[#D5C8B8]/85 leading-relaxed mt-0.5">
-                      Anyaman bertekstur timbul yang mewah, tidak menerawang, tidak mudah kusut saat duduk di acara pesta, dan tahan cuci berulang tanpa luntur.
+                      Memberikan struktur yang lebih kokoh dan tampilan yang lebih rapi.
                     </p>
                   </div>
                 </div>
@@ -162,10 +162,10 @@ export function ProductTierStorySection({ tier, productTitle }) {
                   <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
                     <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
-                      Lapis Furing Katun Hero Sejuk Tropis
+                      Pilihan Lapisan: Tanpa Trikot
                     </h4>
                     <p className="text-[11px] font-light text-[#D5C8B8]/85 leading-relaxed mt-0.5">
-                      Dilapisi furing katun hero halus yang menyerap keringat dan tidak panas, menjamin seluruh anggota keluarga nyaman seharian penuh.
+                      Memberikan karakter bahan yang lebih ringan dan jatuh alami.
                     </p>
                   </div>
                 </div>
@@ -174,10 +174,10 @@ export function ProductTierStorySection({ tier, productTitle }) {
                   <span className="text-[#C5A059] text-[10px] mt-0.5 shrink-0">◆</span>
                   <div>
                     <h4 className="text-xs uppercase font-semibold tracking-[0.14em] text-white">
-                      Garansi Bebas Tukar Ukuran 7 Hari
+                      Layanan Jahitan Sarimbit &amp; Seragam
                     </h4>
                     <p className="text-[11px] font-light text-[#D5C8B8]/85 leading-relaxed mt-0.5">
-                      Jaminan purna jual resmi Butik Batik Smile Semarang dengan layanan bebas tukar ukuran dalam 7 hari jika ukuran salah satu anggota kurang pas.
+                      Tersedia layanan jahitan butik untuk busana sarimbit keluarga dan seragam instansi/kantor tanpa batasan minimal order.
                     </p>
                   </div>
                 </div>

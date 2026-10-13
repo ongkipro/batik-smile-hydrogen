@@ -167,7 +167,7 @@ export function CartMain({ layout, cart: originalCart }) {
           </span>
         </div>
         <span className="text-[9px] text-[#9E7D3B] tracking-wider uppercase font-medium hidden sm:inline">
-          Semarang Est. 2007
+          Semarang Sejak 2007
         </span>
       </div>
 
@@ -210,22 +210,22 @@ function CartEmpty({ layout }) {
 
   const CURATED_PILLARS = [
     {
-      title: 'Sarimbit Luxury',
+      title: 'Luxury Series',
       desc: 'Sutra Alam ATBM & Prada Emas',
       image: '/banners/hero_slider_1.jpg',
-      to: '/collections/sarimbit-luxury',
+      to: '/collections/luxury-series',
     },
     {
-      title: 'Sarimbit Premium',
+      title: 'Premium Series',
       desc: 'Tenun Dobby Resepsi Keluarga',
       image: '/banners/sarimbit_family_banner.jpg',
-      to: '/collections/sarimbit-premium',
+      to: '/collections/premium-series',
     },
     {
-      title: 'Sarimbit Ekonomi',
+      title: 'Ekonomi Series',
       desc: 'Katun Primisima Adem & Sejuk',
       image: '/banners/collection_kain_tulis_banner.jpg',
-      to: '/collections/sarimbit-ekonomi',
+      to: '/collections/ekonomi-series',
     },
   ];
 

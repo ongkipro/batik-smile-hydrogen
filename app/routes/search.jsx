@@ -117,7 +117,7 @@ export default function SearchPage() {
                 : 'Ketik nama motif, model kemeja, atau ukuran untuk melihat katalog yang tersedia.'}
             </p>
             <NavLink
-              to="/collections/sarimbit-luxury"
+              to="/collections/luxury-series"
               className="inline-block px-8 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
             >
               LIHAT KOLEKSI POPULER &rarr;

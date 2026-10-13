@@ -10,9 +10,9 @@ export const SORT_OPTIONS = [
 ];
 
 export const OFFICIAL_COLLECTIONS = [
-  { handle: 'sarimbit-luxury', label: 'Sarimbit Luxury', tier: 'Mahakarya Sutra ATBM' },
-  { handle: 'sarimbit-premium', label: 'Sarimbit Premium', tier: 'Tenun Dobby Furing' },
-  { handle: 'sarimbit-ekonomi', label: 'Sarimbit Ekonomi', tier: 'Katun Primis Harian' },
+  { handle: 'luxury-series', label: 'Luxury Series', tier: 'Mahakarya Sutra ATBM' },
+  { handle: 'premium-series', label: 'Premium Series', tier: 'Tenun Dobby Furing' },
+  { handle: 'ekonomi-series', label: 'Ekonomi Series', tier: 'Katun Primis Harian' },
   { handle: 'kain', label: 'Kain Batik', tier: 'Kain Mori & Tulis' },
   { handle: 'aksesoris', label: 'Aksesoris', tier: 'Pelengkap Tradisional' },
   { handle: 'batik-anak', label: 'Batik Anak', tier: 'Putra & Putri' },
@@ -28,6 +28,7 @@ export function useCollectionFilterState() {
   const minPrice = searchParams.get('minPrice') || '';
   const maxPrice = searchParams.get('maxPrice') || '';
   const currentGender = searchParams.get('gender') || '';
+  const currentCategory = searchParams.get('category') || searchParams.get('sleeve') || '';
   const currentSleeve = searchParams.get('sleeve') || '';
 
   const isUnder500 = !minPrice && maxPrice === '500000';
@@ -39,14 +40,14 @@ export function useCollectionFilterState() {
     minPrice ||
     maxPrice ||
     currentGender ||
-    currentSleeve ||
+    currentCategory ||
     (currentSort && currentSort !== 'featured')
   );
 
   const activeFilterCount =
     (minPrice || maxPrice ? 1 : 0) +
     (currentGender ? 1 : 0) +
-    (currentSleeve ? 1 : 0) +
+    (currentCategory ? 1 : 0) +
     (currentSort && currentSort !== 'featured' ? 1 : 0);
 
   const updateParams = (updater) => {
@@ -107,14 +108,19 @@ export function useCollectionFilterState() {
     });
   };
 
-  const setSleeve = (val) => {
+  const setCategory = (val) => {
     updateParams((params) => {
-      if (!val || val === currentSleeve) {
-        params.delete('sleeve');
+      params.delete('sleeve');
+      if (!val || val === currentCategory) {
+        params.delete('category');
       } else {
-        params.set('sleeve', val);
+        params.set('category', val);
       }
     });
+  };
+
+  const setSleeve = (val) => {
+    setCategory(val);
   };
 
   const clearAllFilters = () => {
@@ -124,6 +130,7 @@ export function useCollectionFilterState() {
       params.delete('maxPrice');
       params.delete('gender');
       params.delete('sleeve');
+      params.delete('category');
     });
   };
 
@@ -132,6 +139,7 @@ export function useCollectionFilterState() {
     minPrice,
     maxPrice,
     currentGender,
+    currentCategory,
     currentSleeve,
     isUnder500,
     is500To1M,
@@ -143,6 +151,7 @@ export function useCollectionFilterState() {
     setPriceBracket,
     setCustomPriceRange,
     setGender,
+    setCategory,
     setSleeve,
     clearAllFilters,
   };
@@ -163,7 +172,7 @@ export function CollectionSidebar({
     minPrice,
     maxPrice,
     currentGender,
-    currentSleeve,
+    currentCategory,
     isUnder500,
     is500To1M,
     isAbove1M,
@@ -172,12 +181,17 @@ export function CollectionSidebar({
     setPriceBracket,
     setCustomPriceRange,
     setGender,
-    setSleeve,
+    setCategory,
     clearAllFilters,
   } = filterState;
 
   const isSarimbit = handle.includes('sarimbit');
   const isAnak = handle.includes('anak');
+  const isLuxury = handle.includes('luxury');
+  const isPremium = handle.includes('premium');
+  const isEkonomi = handle.includes('ekonomi');
+  const isFashion = isSarimbit || isLuxury || isPremium || isEkonomi;
+  const isLuxuryOrPremium = isLuxury || isPremium;
 
   // Custom price input local state
   const [localMin, setLocalMin] = useState(minPrice);
@@ -197,7 +211,7 @@ export function CollectionSidebar({
   const [openSections, setOpenSections] = useState({
     collections: true,
     gender: true,
-    sleeve: true,
+    category: true,
     price: true,
     sort: false,
   });
@@ -289,8 +303,8 @@ export function CollectionSidebar({
         )}
       </div>
 
-      {/* 3. SECTION: SUB-KATEGORI / GENDER (SARIMBIT & BATIK ANAK) */}
-      {(isSarimbit || isAnak) && (
+      {/* 3. SECTION: SUB-KATEGORI / GENDER */}
+      {(isFashion || isAnak) && (
         <div className={`pb-5 border-b ${borderColor}`}>
           <button
             type="button"
@@ -298,7 +312,7 @@ export function CollectionSidebar({
             className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
           >
             <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
-              {isSarimbit ? 'Gender / Kategori' : 'Kategori Anak'}
+              {isAnak ? 'Kategori Anak' : 'Gender'}
             </span>
             <span className="text-sm text-[#9E7D3B] font-mono">
               {openSections.gender ? '−' : '+'}
@@ -307,7 +321,7 @@ export function CollectionSidebar({
 
           {openSections.gender && (
             <div className="mt-3 space-y-2">
-              {isSarimbit ? (
+              {isFashion ? (
                 <>
                   <button
                     type="button"
@@ -463,96 +477,81 @@ export function CollectionSidebar({
         </div>
       )}
 
-      {/* 4. SECTION: PANJANG LENGAN */}
-      {(isSarimbit || isAnak) && (
+      {/* 4. SECTION: KATEGORI BUSANA (Baju Kerja, Acara Resmi, Casual, Sarimbit) */}
+      {isFashion && (
         <div className={`pb-5 border-b ${borderColor}`}>
           <button
             type="button"
-            onClick={() => toggleSection('sleeve')}
+            onClick={() => toggleSection('category')}
             className="w-full flex items-center justify-between py-1 text-left cursor-pointer group"
           >
             <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold ${textColor}`}>
-              Panjang Lengan
+              Kategori Busana
             </span>
             <span className="text-sm text-[#9E7D3B] font-mono">
-              {openSections.sleeve ? '−' : '+'}
+              {openSections.category ? '−' : '+'}
             </span>
           </button>
 
-          {openSections.sleeve && (
+          {openSections.category && (
             <div className="mt-3 space-y-2">
-              <button
-                type="button"
-                onClick={() => setSleeve('')}
-                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
-              >
-                <div
-                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
-                    !currentSleeve
-                      ? activeBg
-                      : isDark
-                      ? 'border-white/20 bg-white/5'
-                      : 'border-[#D5D0C7] bg-white'
-                  }`}
-                >
-                  {!currentSleeve && <span className="w-1.5 h-1.5 bg-current" />}
-                </div>
-                <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${!currentSleeve ? textColor + ' font-medium' : mutedTextColor}`}>
-                  Semua Lengan
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSleeve('lengan-panjang')}
-                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
-              >
-                <div
-                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
-                    currentSleeve === 'lengan-panjang'
-                      ? activeBg
-                      : isDark
-                      ? 'border-white/20 bg-white/5'
-                      : 'border-[#D5D0C7] bg-white'
-                  }`}
-                >
-                  {currentSleeve === 'lengan-panjang' && (
-                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
-                    </svg>
-                  )}
-                </div>
-                <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentSleeve === 'lengan-panjang' ? textColor + ' font-semibold' : mutedTextColor}`}>
-                  Lengan Panjang
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSleeve('lengan-pendek')}
-                className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
-              >
-                <div
-                  className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
-                    currentSleeve === 'lengan-pendek'
-                      ? activeBg
-                      : isDark
-                      ? 'border-white/20 bg-white/5'
-                      : 'border-[#D5D0C7] bg-white'
-                  }`}
-                >
-                  {currentSleeve === 'lengan-pendek' && (
-                    <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
-                    </svg>
-                  )}
-                </div>
-                <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${currentSleeve === 'lengan-pendek' ? textColor + ' font-semibold' : mutedTextColor}`}>
-                  Lengan Pendek
-                </span>
-              </button>
+              {[
+                { val: '', label: 'Semua Kategori' },
+                { val: 'baju-kerja', label: 'Baju Kerja' },
+                { val: 'acara-resmi', label: 'Acara Resmi' },
+                { val: 'casual', label: 'Casual' },
+                { val: 'sarimbit', label: 'Sarimbit' },
+              ].map(({ val, label }) => {
+                const isSelected = !val ? !currentCategory : currentCategory === val;
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => setCategory(val)}
+                    className="w-full flex items-center gap-2.5 text-left cursor-pointer select-none group"
+                  >
+                    <div
+                      className={`w-4 h-4 border flex items-center justify-center transition-colors shrink-0 ${
+                        isSelected
+                          ? activeBg
+                          : isDark
+                          ? 'border-white/20 bg-white/5'
+                          : 'border-[#D5D0C7] bg-white'
+                      }`}
+                    >
+                      {isSelected && (
+                        <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-xs sm:text-sm uppercase tracking-[0.14em] ${isSelected ? textColor + ' font-semibold' : mutedTextColor}`}>
+                      {label}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           )}
+        </div>
+      )}
+
+      {/* TAILORING SERVICE NOTICE (Luxury & Premium Only) */}
+      {isLuxuryOrPremium && (
+        <div className={`p-3.5 border ${isDark ? 'border-[#C5A059]/40 bg-[#C5A059]/10' : 'border-[#C5A059]/40 bg-[#FAF8F5]'}`}>
+          <div className="flex items-center gap-2 mb-1.5">
+            <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="6" cy="6" r="3" />
+              <circle cx="6" cy="18" r="3" />
+              <path strokeLinecap="square" strokeLinejoin="miter" d="M20 4L8.7 15.3M8.7 8.7L20 20" />
+            </svg>
+            <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#C5A059]">
+              LAYANAN JAHITAN BUTIK
+            </span>
+          </div>
+          <p className={`text-[11px] leading-relaxed ${isDark ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
+            Tersedia layanan jahitan untuk sarimbit keluarga dan seragam kantor tanpa batasan minimal order.
+          </p>
         </div>
       )}
 
@@ -785,7 +784,7 @@ export function CollectionFilterHeader({
     minPrice,
     maxPrice,
     currentGender,
-    currentSleeve,
+    currentCategory,
     isUnder500,
     is500To1M,
     isAbove1M,
@@ -794,7 +793,7 @@ export function CollectionFilterHeader({
     setSort,
     setPriceBracket,
     setGender,
-    setSleeve,
+    setCategory,
     clearAllFilters,
   } = filterState;
 
@@ -956,23 +955,38 @@ export function CollectionFilterHeader({
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
               }`}
             >
-              <span>Kategori: {currentGender.toUpperCase()}</span>
+              <span>Gender: {currentGender.toUpperCase()}</span>
               <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
             </button>
           )}
 
-          {/* Sleeve Pill */}
-          {currentSleeve && (
+          {/* Category Pill */}
+          {currentCategory && (
             <button
               type="button"
-              onClick={() => setSleeve('')}
+              onClick={() => setCategory('')}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
               }`}
             >
-              <span>Lengan: {currentSleeve === 'lengan-panjang' ? 'Panjang' : 'Pendek'}</span>
+              <span>
+                Kategori:{' '}
+                {currentCategory === 'baju-kerja'
+                  ? 'Baju Kerja'
+                  : currentCategory === 'acara-resmi'
+                  ? 'Acara Resmi'
+                  : currentCategory === 'casual'
+                  ? 'Casual'
+                  : currentCategory === 'sarimbit'
+                  ? 'Sarimbit'
+                  : currentCategory === 'lengan-panjang'
+                  ? 'Lengan Panjang'
+                  : currentCategory === 'lengan-pendek'
+                  ? 'Lengan Pendek'
+                  : currentCategory}
+              </span>
               <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
             </button>
           )}
@@ -1058,7 +1072,7 @@ export function CollectionMobileDrawer({
     minPrice,
     maxPrice,
     currentGender,
-    currentSleeve,
+    currentCategory,
     isUnder500,
     is500To1M,
     isAbove1M,
@@ -1067,12 +1081,17 @@ export function CollectionMobileDrawer({
     setPriceBracket,
     setCustomPriceRange,
     setGender,
-    setSleeve,
+    setCategory,
     clearAllFilters,
   } = filterState;
 
   const isSarimbit = handle.includes('sarimbit');
   const isAnak = handle.includes('anak');
+  const isLuxury = handle.includes('luxury');
+  const isPremium = handle.includes('premium');
+  const isEkonomi = handle.includes('ekonomi');
+  const isFashion = isSarimbit || isLuxury || isPremium || isEkonomi;
+  const isLuxuryOrPremium = isLuxury || isPremium;
 
   const [localMin, setLocalMin] = useState(minPrice);
   const [localMax, setLocalMax] = useState(maxPrice);
@@ -1164,13 +1183,13 @@ export function CollectionMobileDrawer({
           </div>
 
           {/* GENDER / KATEGORI */}
-          {(isSarimbit || isAnak) && (
+          {(isFashion || isAnak) && (
             <div className={`pb-5 border-b ${borderColor}`}>
               <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
-                {isSarimbit ? 'Gender / Kategori' : 'Kategori Anak'}
+                {isAnak ? 'Kategori Anak' : 'Gender'}
               </span>
               <div className="space-y-2.5">
-                {isSarimbit ? (
+                {isFashion ? (
                   <>
                     <button
                       type="button"
@@ -1241,44 +1260,57 @@ export function CollectionMobileDrawer({
             </div>
           )}
 
-          {/* PANJANG LENGAN */}
-          {(isSarimbit || isAnak) && (
+          {/* KATEGORI BUSANA */}
+          {isFashion && (
             <div className={`pb-5 border-b ${borderColor}`}>
               <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
-                Panjang Lengan
+                Kategori Busana
               </span>
               <div className="space-y-2.5">
-                <button
-                  type="button"
-                  onClick={() => setSleeve('')}
-                  className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
-                >
-                  <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${!currentSleeve ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
-                    {!currentSleeve && <span className="w-1.5 h-1.5 bg-current" />}
-                  </div>
-                  <span className={`text-xs sm:text-sm uppercase tracking-wider ${!currentSleeve ? textColor + ' font-bold' : mutedTextColor}`}>Semua Lengan</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSleeve('lengan-panjang')}
-                  className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
-                >
-                  <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentSleeve === 'lengan-panjang' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
-                    {currentSleeve === 'lengan-panjang' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
-                  </div>
-                  <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentSleeve === 'lengan-panjang' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Panjang</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSleeve('lengan-pendek')}
-                  className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
-                >
-                  <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${currentSleeve === 'lengan-pendek' ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
-                    {currentSleeve === 'lengan-pendek' && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
-                  </div>
-                  <span className={`text-xs sm:text-sm uppercase tracking-wider ${currentSleeve === 'lengan-pendek' ? textColor + ' font-bold' : mutedTextColor}`}>Lengan Pendek</span>
-                </button>
+                {[
+                  { val: '', label: 'Semua Kategori' },
+                  { val: 'baju-kerja', label: 'Baju Kerja' },
+                  { val: 'acara-resmi', label: 'Acara Resmi' },
+                  { val: 'casual', label: 'Casual' },
+                  { val: 'sarimbit', label: 'Sarimbit' },
+                ].map(({ val, label }) => {
+                  const isSelected = !val ? !currentCategory : currentCategory === val;
+                  return (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => setCategory(val)}
+                      className="w-full flex items-center gap-3 text-left py-1 cursor-pointer"
+                    >
+                      <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isSelected ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
+                        {isSelected && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
+                      </div>
+                      <span className={`text-xs sm:text-sm uppercase tracking-wider ${isSelected ? textColor + ' font-bold' : mutedTextColor}`}>
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
+            </div>
+          )}
+
+          {/* TAILORING SERVICE NOTICE (Luxury & Premium Only) */}
+          {isLuxuryOrPremium && (
+            <div className={`p-3.5 border mb-5 ${isDark ? 'border-[#C5A059]/40 bg-[#C5A059]/10' : 'border-[#C5A059]/40 bg-white'}`}>
+              <div className="flex items-center gap-2 mb-1.5">
+                <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="6" cy="6" r="3" />
+                  <circle cx="6" cy="18" r="3" />
+                  <path strokeLinecap="square" strokeLinejoin="miter" d="M20 4L8.7 15.3M8.7 8.7L20 20" />
+                </svg>
+                <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#C5A059]">
+                  LAYANAN JAHITAN BUTIK
+                </span>
+              </div>
+              <p className={`text-[11px] leading-relaxed ${isDark ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
+                Tersedia layanan jahitan untuk sarimbit keluarga dan seragam kantor tanpa batasan minimal order.
+              </p>
             </div>
           )}
 

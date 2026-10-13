@@ -7,9 +7,9 @@ import { formatRupiah } from '~/lib/currency';
 export const SEARCH_ENDPOINT = '/search';
 
 const TRENDING_KEYWORDS = [
-  'Sarimbit Luxury',
-  'Sarimbit Premium',
-  'Sarimbit Ekonomi',
+  'Luxury Series',
+  'Premium Series',
+  'Ekonomi Series',
   'Kemeja Pria Furing Hero',
   'Batik Wanita Modern',
   'Kain Batik Tulis',
@@ -214,7 +214,7 @@ export function LuxurySearchModal() {
               name="q"
               value={searchTerm}
               onChange={handleInputChange}
-              placeholder="Cari sarimbit luxury, tenun dobby, kemeja pria, kain tulis..."
+              placeholder="Cari luxury series, premium series, tenun dobby, kemeja pria..."
               className="w-full text-base sm:text-xl font-serif text-[#111111] placeholder-[#A69F96] bg-transparent outline-none tracking-wide"
               autoComplete="off"
             />
@@ -648,7 +648,7 @@ export function LuxurySearchModal() {
         <div className="px-4 sm:px-8 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-white border-t border-[#E2DFD8] flex items-center justify-between text-[10px] text-[#777777] shrink-0">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#C5A059]" />
-            <span>Butik Resmi Semarang &bull; Est. 2007 &bull; Pelayanan 3S 1C 1T &amp; 1H</span>
+            <span>Butik Resmi Semarang &bull; Sejak 2007</span>
           </div>
           <span className="hidden sm:inline text-[#9E7D3B] font-medium">
             Pilih busana untuk melihat detail bahan &amp; furing

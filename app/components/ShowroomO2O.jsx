@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 /**
  * ShowroomO2O: Authentic Physical Showrooms
- * Flagship Simongan (3 Floors) & Banyumanik Branch with 3S 1C 1T & 1H service
+ * Flagship Simongan (3 Floors) & Banyumanik Branch
  */
 export function ShowroomO2O() {
   return (
@@ -22,7 +22,7 @@ export function ShowroomO2O() {
               <p className="text-[#E2DFD8] text-xs sm:text-sm leading-relaxed mb-6 font-light">
                 Didirikan sejak 2007 di Semarang, Batik Smile menghadirkan butik fisik 3 lantai yang
                 nyaman di Simongan serta cabang Banyumanik. Rasakan langsung kemewahan tenun sutra ATBM
-                dan konsultasikan kebutuhan seragam keluarga Anda dengan standar layanan <strong>3S 1C 1T &amp; 1H</strong> (Senyum, Salam, Sapa, Cepat, Tanggap, Hati).
+                dan konsultasikan kebutuhan busana dan seragam keluarga Anda langsung di showroom kami.
               </p>
 
               {/* 3 Floors Breakdown Cards (0px radius) */}

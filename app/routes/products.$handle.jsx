@@ -312,10 +312,12 @@ export default function Product() {
   const variantPrice = parseFloat(selectedVariant?.price?.amount || '0');
 
   const isExclusiveTier =
-    collectionHandles.some((h) => h.includes('exclusive') || h.includes('mahakarya') || h.includes('sutra')) ||
+    collectionHandles.some((h) => h.includes('luxury') || h.includes('exclusive') || h.includes('mahakarya') || h.includes('sutra')) ||
+    productHandle.includes('luxury') ||
     productHandle.includes('exclusive') ||
     productHandle === 'sarimbit-royal-navy-1' ||
     productHandle === 'sarimbit-mustard-gold' ||
+    productTitle.includes('luxury') ||
     productTitle.includes('exclusive') ||
     productTitle.includes('mahakarya') ||
     (productHandle.startsWith('sarimbit') && variantPrice >= 1000000);
@@ -708,16 +710,16 @@ export default function Product() {
                 {isExclusiveTier ? (
                   <span className="text-[#C5A059] flex items-center gap-1.5">
                     <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#C5A059]" />
-                    HAUTE HERITAGE &bull; SARIMBIT EXCLUSIVE
+                    HAUTE HERITAGE &bull; LUXURY SERIES
                   </span>
                 ) : isPremiumTier ? (
                   <span className="text-[#C5A059] flex items-center gap-1.5">
                     <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#7C3F1D]" />
-                    SIGNATURE ATELIER &bull; SARIMBIT PREMIUM
+                    SIGNATURE ATELIER &bull; PREMIUM SERIES
                   </span>
                 ) : (
                   <span className="text-[#888888]">
-                    KARYA BUTIK SEMARANG &bull; EST. 2007
+                    KARYA BUTIK SEMARANG &bull; SEJAK 2007
                   </span>
                 )}
               </div>
@@ -745,55 +747,6 @@ export default function Product() {
                   <span className={`text-sm line-through ${isDarkPDP ? 'text-[#A9A49C]' : 'text-[#888888]'}`}>
                     <BoutiqueMoney data={selectedVariant.compareAtPrice} />
                   </span>
-                )}
-              </div>
-
-              {/* Stock Status Indicator (Placed directly under price) */}
-              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] mb-3">
-                <span
-                  className={`inline-block w-1.5 h-1.5 rounded-none ${
-                    isAvailable ? (isDarkPDP ? 'bg-[#4ADE80]' : 'bg-[#2E6B3E]') : 'bg-[#EF4444]'
-                  }`}
-                />
-                <span
-                  className={
-                    isAvailable ? (isDarkPDP ? 'text-[#4ADE80]' : 'text-[#2E6B3E]') : 'text-[#EF4444]'
-                  }
-                >
-                  {isAvailable ? 'Tersedia di Butik' : 'Habis Terjual'}
-                </span>
-              </div>
-
-              {/* Value Props (Seamless Typography, Tier-Differentiated) */}
-              <div
-                className={`flex items-center gap-2 text-[11px] font-light tracking-wide flex-wrap ${
-                  isExclusiveTier ? 'text-[#E2DFD8]/85' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
-                }`}
-              >
-                {isExclusiveTier ? (
-                  <>
-                    <span>Sutra Alam ATBM</span>
-                    <span className="text-[#C5A059]">&bull;</span>
-                    <span>Canting Prada Emas</span>
-                    <span className="text-[#C5A059]">&bull;</span>
-                    <span>Sambung Motif Presisi</span>
-                  </>
-                ) : isPremiumTier ? (
-                  <>
-                    <span>Tenun Dobby Timbul</span>
-                    <span className="text-[#C5A059]">&bull;</span>
-                    <span>Furing Katun Hero Adem</span>
-                    <span className="text-[#C5A059]">&bull;</span>
-                    <span>Sambung Motif Presisi</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Lapis Furing Katun Hero</span>
-                    <span className="text-[#C5A059]">&bull;</span>
-                    <span>Sambung Motif Presisi</span>
-                    <span className="text-[#C5A059]">&bull;</span>
-                    <span>Bebas Tukar Ukuran</span>
-                  </>
                 )}
               </div>
             </div>
@@ -930,7 +883,7 @@ export default function Product() {
               </AddToCartButton>
             </div>
 
-            {/* Trust Guarantee Grid (Standard 3S 1C 1T & 1H - Frameless) */}
+            {/* Trust Guarantee Grid (Frameless) */}
             <div
               className={`grid grid-cols-2 gap-x-6 gap-y-2.5 pt-4.5 border-t text-[11px] sm:text-xs ${
                 isExclusiveTier
@@ -1097,35 +1050,37 @@ export default function Product() {
                       </div>
                     </div>
 
-                    <div className="py-2.5 flex items-start gap-3">
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
-                      <div className="min-w-0">
-                        <span
-                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
-                            isDarkPDP ? 'text-white' : 'text-[#111111]'
-                          }`}
-                        >
-                          Layanan Konsultasi 3S 1C 1T &amp; 1H
-                        </span>
-                        <p
-                          className={`text-xs font-light leading-relaxed ${
-                            isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
-                          }`}
-                        >
-                          Tim penjahit dan konsultan kami siap mendampingi panduan ukuran melalui WhatsApp Concierge{' '}
-                          <a
-                            href="https://wa.me/6281390888809"
-                            target="_blank"
-                            rel="noreferrer"
-                            className={`font-medium underline underline-offset-2 transition-colors ${
-                              isDarkPDP ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
+                    {(isExclusiveTier || isPremiumTier) && (
+                      <div className="py-2.5 flex items-start gap-3">
+                        <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                        <div className="min-w-0">
+                          <span
+                            className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                              isDarkPDP ? 'text-white' : 'text-[#111111]'
                             }`}
                           >
-                            081-390-8888-09
-                          </a>.
-                        </p>
+                            Layanan Jahitan Sarimbit &amp; Seragam
+                          </span>
+                          <p
+                            className={`text-xs font-light leading-relaxed ${
+                              isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
+                            }`}
+                          >
+                            Tersedia layanan jahit busana sarimbit keluarga dan seragam instansi tanpa minimal order. Konsultasi ukuran dapat dipandu langsung oleh tim penjahit melalui WhatsApp Concierge{' '}
+                            <a
+                              href="https://wa.me/6281390888809"
+                              target="_blank"
+                              rel="noreferrer"
+                              className={`font-medium underline underline-offset-2 transition-colors ${
+                                isDarkPDP ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
+                              }`}
+                            >
+                              081-390-8888-09
+                            </a>.
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 )}
               </div>

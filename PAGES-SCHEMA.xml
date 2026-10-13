@@ -56,9 +56,9 @@
       <loader-contracts>
         <graphql-query name="HomepageQuery">
           <!-- Live Shopify Collections (6 Core Collections + Sub-Category Chips) -->
-          <collection handle="sarimbit-luxury" first="6" as="luxuryCollection" />
-          <collection handle="sarimbit-premium" first="6" as="premiumCollection" />
-          <collection handle="sarimbit-ekonomi" first="6" as="ekonomiCollection" />
+          <collection handle="luxury-series" first="6" as="luxuryCollection" />
+          <collection handle="premium-series" first="6" as="premiumCollection" />
+          <collection handle="ekonomi-series" first="6" as="ekonomiCollection" />
           <collection handle="kain" first="6" as="rawFabricCollection" />
           <collections limit="20" sortKey="UPDATED_AT" as="featuredCollections" withImage="true" />
           <!-- Native Metaobjects with Graceful Fallbacks -->
@@ -186,7 +186,7 @@
 
       <tier-branches>
         <!-- Branch A: Luxury Collection (Kasta I) -->
-        <tier id="sarimbit-luxury" condition="handle == 'sarimbit-luxury' || handle == 'sarimbit-exclusive'">
+        <tier id="luxury-series" condition="handle == 'luxury-series' || handle == 'sarimbit-luxury' || handle == 'sarimbit-exclusive'">
           <component name="CollectionExclusive" file="app/components/CollectionExclusive.jsx" />
           <design-token scheme="Scheme 3 (Dark Luxe)" bg="#111111" text="#FFFFFF" accent="#C5A059" />
           <layout>2-to-3 column expansive editorial layout, wide whitespace, artisan storytelling block</layout>
@@ -194,7 +194,7 @@
         </tier>
 
         <!-- Branch B: Premium Collection (Kasta II) -->
-        <tier id="sarimbit-premium" condition="handle == 'sarimbit-premium'">
+        <tier id="premium-series" condition="handle == 'premium-series' || handle == 'sarimbit-premium'">
           <component name="CollectionPremium" file="app/components/CollectionPremium.jsx" />
           <design-token scheme="Scheme 4 (Signature Soga Earth)" bg="#201610" text="#FAF8F5" accent="#7C3F1D" border="rgba(197, 160, 89, 0.40)" />
           <layout>3-to-4 column balanced boutique grid, Signature Dobby badges, couple angle hover preview</layout>

@@ -108,7 +108,7 @@ export default function Policies() {
           </h1>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
-            Komitmen Batik Smile dalam menjamin kepuasan berbelanja, perlindungan data pribadi, dan kepastian pengiriman berlandaskan budaya 3S 1C 1T &amp; 1H.
+            Komitmen Batik Smile dalam menjamin kepuasan berbelanja, perlindungan data pribadi, dan kepastian pengiriman dengan integritas butik terpercaya.
           </p>
         </div>
 

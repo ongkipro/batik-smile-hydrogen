@@ -1263,6 +1263,97 @@
   - *Action*: Removed `lg:sticky lg:top-24` from product image gallery container in `app/routes/products.$handle.jsx`. The 4:5 vertical gallery and product details now scroll together naturally in an editorial magazine flow, eliminating sticky unpinning jitter and thumbnail viewport cutoff. Elevated right-column option labels (`text-xs font-medium`), size option chips (`w-12 h-12 text-xs sm:text-sm`), quantity selector (`h-13 w-32`), Add to Cart CTA (`h-13 text-xs uppercase font-bold tracking-[0.2em]`), and Buy Now CTA (`h-13 text-xs uppercase font-bold tracking-[0.22em]`).
   - *Evidence*: Verified on PDP; passed ESLint (0 errors, 0 warnings) and production build (`npm run build`, exit code 0).
 
+---
+
+## Phase 63: Bespoke Series Naming Architecture & Shopify Admin Synchronization (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: Shopify Admin GraphQL, app/components/*, app/routes/*, SCHEMA.md, PAGES-SCHEMA.xml*
+
+- [x] **Task 63.1: Live Shopify Admin GraphQL Mutations**
+  - *Action*: Mutated core collections via Shopify Admin GraphQL:
+    - Collection `gid://shopify/Collection/480517193785`: Title `Luxury Series`, handle `luxury-series`, updated description.
+    - Collection `gid://shopify/Collection/480517390393`: Title `Premium Series`, handle `premium-series`, updated description.
+    - Collection `gid://shopify/Collection/480517455929`: Title `Ekonomi Series`, handle `ekonomi-series`, updated description.
+    - Flagship couple products (`Sarimbit Charcoal Hitam`, `Sarimbit Mustard Gold`, `Sarimbit Royal Navy`): updated descriptions to match new Series nomenclature.
+  - *Evidence*: Verified live in Shopify Admin via GraphQL query.
+- [x] **Task 63.2: 301 Permanent Redirect Table Synchronization**
+  - *Action*: Updated redirect table in `app/routes/collections.$handle.jsx` to map `sarimbit-luxury` &rarr; `/collections/luxury-series`, `sarimbit-premium` &rarr; `/collections/premium-series`, and `sarimbit-ekonomi` &rarr; `/collections/ekonomi-series`.
+  - *Evidence*: Curl tests verified HTTP 301 Moved Permanently with correct Location headers.
+- [x] **Task 63.3: Storefront Codebase Alignment Across Navigation & Components**
+  - *Action*: Updated all references across `Header.jsx`, `MegaMenu.jsx`, `Footer.jsx`, `CartMain.jsx`, `CollectionFilterBar.jsx`, `TierExperience.jsx`, `SarimbitSpotlight.jsx`, `SarimbitBentoSection.jsx`, `HeroSlider.jsx`, `HeroEditorial.jsx`, `ShoppableLookbook.jsx`, `LuxurySearchModal.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections._index.jsx`, `search.jsx`, and `account.orders._index.jsx`.
+  - *Evidence*: `git grep -i -E "sarimbit[ -](luxury|premium|ekonomi)" -- app/` confirmed 0 unmigrated active UI strings or broken links.
+- [x] **Task 63.4: Architectural Documentation & Typegen Verification**
+  - *Action*: Synchronized `SCHEMA.md`, `PAGES-SCHEMA.xml`, and `app/lib/schema.js`. Executed `npm run codegen`, `npm run lint`, and `npm run build`.
+  - *Evidence*: Codegen exit code 0; ESLint 0 errors, 0 warnings; Production build exit code 0. Both dev servers active (`revenleather.com` on port 3000, `batik-smile-hydrogen` on port 3001).
+
+---
+
+## Phase 64: Heritage Typography, Footer Navigation Simplification & Slop Purge (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: Shopify Admin GraphQL, app/components/Footer.jsx, app/routes/collections.$handle.jsx, app/routes/products.$handle.jsx, app/routes/pages.tentang-kami.jsx*
+
+- [x] **Task 64.1: Shopify Admin Mutations for Tentang Kami & Luxury Series Description**
+  - *Action*: Mutated `tentang-kami` page (`gid://shopify/Page/133633998905`) via GraphQL to delete the `Budaya Layanan: 3S 1C 1T & 1H` block. Mutated `Luxury Series` collection (`gid://shopify/Collection/480517193785`) to clear obsolete `descriptionHtml`.
+  - *Evidence*: Verified in Shopify Admin GraphQL query.
+- [x] **Task 64.2: Slop Purge Across Storefront (3S 1C 1T & 1H)**
+  - *Action*: Completely purged 3S 1C 1T & 1H mentions across `pages.tentang-kami.jsx` (entire section removed), `Footer.jsx` (brand stamp and column 4), `LuxurySearchModal.jsx`, `ShowroomO2O.jsx`, `TrustGuaranteeBar.jsx`, `collections.$handle.jsx`, `pages.$handle.jsx`, `policies._index.jsx`, and `products.$handle.jsx`.
+  - *Evidence*: `git grep -i "3S 1C" app/` returns 0 matches.
+- [x] **Task 64.3: Brand Heritage Standardization to SEJAK 2007**
+  - *Action*: Replaced `ESTABLISHED 2007` and `Est. 2007` with `SEJAK 2007` / `Sejak 2007` across `Header.jsx`, `HeroSlider.jsx`, `HeroEditorial.jsx`, `Footer.jsx`, `CartMain.jsx`, `LuxurySearchModal.jsx`, `pages.tentang-kami.jsx`, and `products.$handle.jsx`.
+  - *Evidence*: `git grep -i "establish" app/` returns 0 matches.
+- [x] **Task 64.4: Footer Navigation Simplification**
+  - *Action*: In `Footer.jsx`, converted Column 2 from "KATALOG KOLEKSI" into clean "NAVIGASI" menu (Home, Catalog, Luxury Series, Premium Series, About, Showroom, Contact). Removed "Layanan konsultasi motif sarimbit..." paragraph from Column 4.
+  - *Evidence*: Live curl check verified rendered footer menu items.
+- [x] **Task 64.5: Luxury Series Collection Hero Refinement**
+  - *Action*: In `collections.$handle.jsx`, applied `italic` to `Luxury Series` h1 title, removed `HAUTE HERITAGE • MAHAKARYA SUTRA ATBM` eyebrow, changed subtitle to standard font-serif (removed italic), and removed VIP concierge button div from the hero.
+  - *Evidence*: HTML inspection verified italic title, standard subtitle, and zero hero button.
+- [x] **Task 64.6: Product Page PDP Streamlining**
+  - *Action*: In `products.$handle.jsx`, removed stock status indicator ("Tersedia di Butik") and under-price value props ("Sutra Alam ATBM • Canting Prada Emas • Sambung Motif Presisi").
+---
+
+## Phase 65: Luxury Series Color Inversion, Simplified Pillars & Brand Story Development (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/routes/collections.$handle.jsx, app/components/ProductTierStorySection.jsx, app/routes/pages.tentang-kami.jsx, Shopify Admin GraphQL*
+
+- [x] **Task 65.1: Luxury Series Title & Subtitle Color Inversion & Screenshot 0 Copy**
+  - *Action*: In `collections.$handle.jsx`, inverted header styling for `Luxury Series`: Title is Gold italic (`text-[#C5A059] italic`), Subtitle is White (`text-white/95`, standard non-italic font) with refined text matching Screenshot 0:
+    *"Koleksi Luxury Batik Smile yang merepresentasikan kemewahan, keanggunan, dan kualitas dalam setiap detail. Menghadirkan perpaduan motif batik pilihan, desain berkarakter, serta sentuhan istimewa untuk melengkapi momen berharga dengan gaya yang elegan dan berkelas."*
+  - *Evidence*: SSR check via node fetch verified `hasGoldTitle: true` and `hasSub: true`.
+- [x] **Task 65.2: Streamlining Collection & Product Story Pillars**
+  - *Action*: In `collections.$handle.jsx` and `ProductTierStorySection.jsx`, simplified the 3 pillars based on Screenshot 1 into punchy, clear value propositions without fluff:
+    - Pilar 01: `Material & Furing Premium` (Batik tulis, kombinasi, hingga printing eksklusif dengan furing trikot sejuk untuk kenyamanan terbaik).
+    - Pilar 02: `Jahitan Penjahit Teredukasi` (Dikerjakan teliti oleh penjahit terampil dan berpengalaman guna memastikan hasil busana rapi, presisi, dan berkelas).
+    - Pilar 03: `Desain Elegan & Berkarakter` (Siluet berkelas yang dirancang proporsional untuk menyempurnakan penampilan Anda di setiap momen istimewa).
+  - *Evidence*: Verified across collection and product pages; `npm run lint` 0 errors.
+- [x] **Task 65.3: Brand Story Narrative Development ("Cerita di Balik Batik Smile")**
+  - *Action*: In `pages.tentang-kami.jsx`, developed and expanded the narrative from Screenshot 2:
+    - Rooted in Semarang since 2007 with the vision of bringing the beauty of batik into everyday life across generations.
+    - Living cultural heritage bridging traditional philosophical motifs with contemporary tailoring, comfortable silhouettes, and elegant palettes.
+    - Catering from personal everyday wear and family sarimbit to corporate uniforms and bespoke Luxury Series with fair, transparent value.
+    - Growth driven by consistent boutique craftsmanship, design innovation, and sincere hospitality.
+  - *Evidence*: SSR node fetch verified `hasCeritaTitle: true`, `hasStoryP1: true`, `hasStoryP2: true`, and `hasStoryP3: true`.
+- [x] **Task 65.4: Shopify Admin Page Body Synchronization**
+  - *Action*: Mutated Shopify Admin Page `gid://shopify/Page/133633998905` (`tentang-kami`) via GraphQL `pageUpdate` with the newly developed story and responsive styling.
+  - *Evidence*: Mutation response confirmed `userErrors: []` and updated page content.
+- [x] **Task 65.5: Build & Multi-Server Verification**
+  - *Action*: Ran `npm run lint` and `npm run build`. Verified both dev servers: `http://localhost:3000/` (`revenleather.com`) HTTP 200 OK and `http://localhost:3001/` (`batik-smile-hydrogen`) HTTP 200 OK.
+  - *Evidence*: Exit code 0 on all tests and builds.
+- [x] **Task 65.6: Footer Kontak Resmi Butik & Social Media Redesign**
+  - *Action*: Redesigned Column 4 of `Footer.jsx` to match user reference image with bespoke SVGs:
+    - Phone handset header with gold underline.
+    - WA Concierge channel with WhatsApp icon, number `081-390-8888-09`, and right chevron.
+    - Instagram channel with camera icon, handle `@batiksmile_official`, and right chevron.
+    - Email channel with envelope icon, email `butik@batiksmile.com`, and right chevron.
+    - Horizontal divider line and dedicated `JAM OPERASIONAL` block with clock icon (`Setiap Hari: 09.00 – 21.00 WIB`).
+    - Added `GABUNG →` arrow to newsletter submit button, plus social media icons (Instagram, TikTok, Facebook, YouTube) and `Peta Situs` in the bottom bar.
+  - *Evidence*: `npm run lint` 0 errors, `npm run build` exit code 0, SSR inspection confirmed all channels, icons, and hours rendered properly.
+- [x] **Task 66: Luxury & Premium Subcategories, Lapisan Trikot & Bespoke Tailoring (2026-10-13)**
+  - *Action*: Modernized subcategories and tier-differentiation across storefront and Shopify Admin:
+    - Replaced sleeve-based links with curated occasions for Pria and Wanita: `Baju Kerja`, `Acara Resmi`, `Casual`, `Sarimbit` in `MegaMenu.jsx` (rendered in a balanced 2-column grid) and `CollectionFilterBar.jsx` (`Kategori Busana` filter in sidebar and mobile drawer).
+    - Differentiated Bespoke Tailoring Service: highlighted `Layanan Jahitan Sarimbit & Seragam (Tanpa Minimal Order)` for Luxury and Premium in MegaMenu, Collection FilterBar, Collection route pillars, `ProductTierStorySection.jsx`, and PDP accordion in `products.$handle.jsx`; strictly suppressed/omitted on Ekonomi Series.
+    - Updated Premium Series copy and 2-option Lapisan Trikot (*Dengan Trikot* vs *Tanpa Trikot*) across storefront and synced to Shopify Admin Collection metadata via GraphQL mutation.
+  - *Evidence*: `npm run lint` 0 errors, 0 warnings; `npm run build` exit code 0; localhost:3000 (`revenleather.com`) and localhost:3001 (`batiksmile`) verified HTTP 200 OK.
+
+
+
+
 
 
 

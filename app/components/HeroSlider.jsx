@@ -3,18 +3,18 @@ import { Link } from 'react-router';
 
 const SLIDES = [
   {
-    id: 'sarimbit-luxury',
-    eyebrow: 'SEMARANG • ESTABLISHED 2007',
+    id: 'luxury-series',
+    eyebrow: 'SEMARANG • SEJAK 2007',
     title: 'Mahakarya Sarimbit Nusantara',
     subtitle: 'Keagungan Sutra ATBM & Canting Prada Emas',
     description:
       'Menenun keselarasan busana pasangan dan keluarga agung dengan jahitan butik berstandar tinggi untuk momen sakral resepsi pernikahan.',
-    ctaText: 'JELAJAHI SARIMBIT',
-    ctaLink: '/collections/sarimbit-luxury',
+    ctaText: 'JELAJAHI LUXURY',
+    ctaLink: '/collections/luxury-series',
     secondaryCtaText: 'KONSULTASI WA',
     secondaryCtaLink:
       'https://wa.me/6281390888809?text=' +
-      encodeURIComponent('Halo Batik Smile, saya ingin konsultasi koleksi Sarimbit Luxury.'),
+      encodeURIComponent('Halo Batik Smile, saya ingin konsultasi koleksi Luxury Series.'),
     image: '/banners/hero_slider_1.jpg',
   },
   {
@@ -25,7 +25,7 @@ const SLIDES = [
     description:
       'Siluet anggun kontemporer berpadu warisan canting soga Jawa. Dirancang khusus untuk memancarkan pesona ningrat yang abadi dan memikat.',
     ctaText: 'KOLEKSI WANITA',
-    ctaLink: '/collections/sarimbit-luxury?gender=wanita',
+    ctaLink: '/collections/luxury-series?gender=wanita',
     secondaryCtaText: 'LIHAT LOOKBOOK',
     secondaryCtaLink: '#lookbook',
     image: '/banners/hero_slider_2.jpg',
@@ -38,7 +38,7 @@ const SLIDES = [
     description:
       'Kenyamanan sejuk sepanjang hari dengan potongan presisi simetris pada saku dan belahan kancing, mencerminkan wibawa sang pemimpin.',
     ctaText: 'KOLEKSI KEMEJA PRIA',
-    ctaLink: '/collections/sarimbit-premium?gender=pria',
+    ctaLink: '/collections/premium-series?gender=pria',
     secondaryCtaText: 'LAYANAN JAHIT',
     secondaryCtaLink: '/pages/layanan-seragam',
     image: '/banners/hero_slider_3.jpg',
@@ -50,8 +50,8 @@ const SLIDES = [
     subtitle: 'Koleksi Sarimbit Ayah, Ibu & Anak',
     description:
       'Koleksi busana serasi untuk seluruh anggota keluarga tercinta dengan bahan katun primisima yang sejuk, nyaman, dan ramah di kulit anak.',
-    ctaText: 'SARIMBIT KELUARGA',
-    ctaLink: '/collections/sarimbit-ekonomi',
+    ctaText: 'BUSANA KELUARGA',
+    ctaLink: '/collections/ekonomi-series',
     secondaryCtaText: 'BATIK ANAK',
     secondaryCtaLink: '/collections/batik-anak',
     image: '/banners/hero_slider_4.jpg',

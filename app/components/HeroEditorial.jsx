@@ -17,7 +17,7 @@ export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
     data?.subheading?.value ||
     'Menenun Keanggunan Klasik & Keselarasan Busana Keluarga Sejak 2007';
   const ctaText = data?.cta_text?.value || 'JELAJAHI KOLEKSI';
-  const ctaLink = data?.cta_link?.value || '/collections/sarimbit-luxury';
+  const ctaLink = data?.cta_link?.value || '/collections/luxury-series';
   const secondaryCtaText = data?.secondary_cta_text?.value || 'KONSULTASI JAHIT';
   const secondaryCtaLink = data?.secondary_cta_link?.value || '/pages/layanan-seragam';
 
@@ -54,7 +54,7 @@ export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
       <div className="relative z-10 h-full w-full px-4 sm:px-8 lg:px-12 xl:px-16 flex flex-col justify-end pb-16 sm:pb-20 text-center items-center">
         {/* Whispered Eyebrow */}
         <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium mb-3 sm:mb-4 drop-shadow-sm">
-          SEMARANG • ESTABLISHED 2007
+          SEMARANG • SEJAK 2007
         </span>
 
         {/* Cormorant Garamond Main Headline */}

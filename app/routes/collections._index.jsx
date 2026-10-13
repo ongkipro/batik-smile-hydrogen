@@ -186,9 +186,9 @@ export default function Collections() {
           {/* Quick Category Anchors (Horizontal swipeable on mobile) */}
           <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2.5 mt-6 sm:mt-8 overflow-x-auto no-scrollbar pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0">
             {[
-              { label: 'SARIMBIT LUXURY', href: '/collections/sarimbit-luxury' },
-              { label: 'SARIMBIT PREMIUM', href: '/collections/sarimbit-premium' },
-              { label: 'SARIMBIT EKONOMI', href: '/collections/sarimbit-ekonomi' },
+              { label: 'LUXURY SERIES', href: '/collections/luxury-series' },
+              { label: 'PREMIUM SERIES', href: '/collections/premium-series' },
+              { label: 'EKONOMI SERIES', href: '/collections/ekonomi-series' },
               { label: 'KAIN', href: '/collections/kain' },
               { label: 'AKSESORIS', href: '/collections/aksesoris' },
               { label: 'BATIK ANAK', href: '/collections/batik-anak' },
@@ -230,6 +230,9 @@ export default function Collections() {
  */
 function CollectionItem({ collection, index }) {
   const fallbackImages = {
+    'luxury-series': '/banners/sarimbit_family_banner.jpg',
+    'premium-series': '/banners/sarimbit_family_banner.jpg',
+    'ekonomi-series': '/banners/sarimbit_family_banner.jpg',
     'sarimbit': '/banners/sarimbit_family_banner.jpg',
     'sarimbit-luxury': '/banners/sarimbit_family_banner.jpg',
     'sarimbit-premium': '/banners/sarimbit_family_banner.jpg',

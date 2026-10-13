@@ -38,9 +38,9 @@ async function loadCriticalData({ context, params, request }) {
   const { storefront } = context;
 
   // Quiet Luxury grid calibration:
-  // 3 columns x 3 rows = 9 items for Exclusive/Mahakarya, 4 columns x 3 rows = 12 items for general
+  // 3 columns x 3 rows = 9 items for Exclusive/Luxury/Mahakarya, 4 columns x 3 rows = 12 items for general
   const isExclusiveCollection =
-    handle && (handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra'));
+    handle && (handle.includes('luxury') || handle.includes('exclusive') || handle.includes('mahakarya') || handle.includes('sutra'));
   const pageSize = isExclusiveCollection ? 9 : 12;
 
   const paginationVariables = getPaginationVariables(request, {
@@ -53,29 +53,32 @@ async function loadCriticalData({ context, params, request }) {
 
   // Handle redirect untuk koleksi yang tidak ada atau berganti slug resmi
   const collectionRedirects = {
-    'sarimbit': '/collections/sarimbit-luxury',
-    'sarimbit-exclusive': '/collections/sarimbit-luxury',
-    'sarimbit-ekonomis': '/collections/sarimbit-ekonomi',
+    'sarimbit': '/collections/luxury-series',
+    'sarimbit-exclusive': '/collections/luxury-series',
+    'sarimbit-luxury': '/collections/luxury-series',
+    'sarimbit-premium': '/collections/premium-series',
+    'sarimbit-ekonomi': '/collections/ekonomi-series',
+    'sarimbit-ekonomis': '/collections/ekonomi-series',
     'jarik-kain-batik': '/collections/kain',
     'kain-batik-tulis': '/collections/kain',
-    'sarimbit-mahakarya-heritage': '/collections/sarimbit-luxury',
-    'sarimbit-signature-elegance': '/collections/sarimbit-premium',
-    'sarimbit-essential-daily': '/collections/sarimbit-ekonomi',
-    'sarimbit-batik-couple': '/collections/sarimbit-luxury',
-    'batik-wanita': '/collections/sarimbit-luxury?gender=wanita',
-    'batik-pria': '/collections/sarimbit-luxury?gender=pria',
-    'blus-batik-wanita': '/collections/sarimbit-premium?gender=wanita',
-    'outer-tunik-batik': '/collections/sarimbit-luxury?gender=wanita',
-    'tunik-batik-wanita': '/collections/sarimbit-ekonomi?gender=wanita',
-    'dress-batik-wanita': '/collections/sarimbit-premium?gender=wanita',
-    'gamis-batik-wanita': '/collections/sarimbit-premium?gender=wanita',
-    'outer-batik-wanita': '/collections/sarimbit-luxury?gender=wanita',
-    'blazer-batik-wanita': '/collections/sarimbit-luxury?gender=wanita',
-    'kebaya-batik-modern': '/collections/sarimbit-luxury?gender=wanita',
-    'daster-batik-solo': '/collections/sarimbit-ekonomi?gender=wanita',
-    'kemeja-batik-lengan-panjang': '/collections/sarimbit-premium?gender=pria&sleeve=lengan-panjang',
-    'hem-batik-lengan-pendek': '/collections/sarimbit-premium?gender=pria&sleeve=lengan-pendek',
-    'celana-batik-pria': '/collections/sarimbit-ekonomi?gender=pria',
+    'sarimbit-mahakarya-heritage': '/collections/luxury-series',
+    'sarimbit-signature-elegance': '/collections/premium-series',
+    'sarimbit-essential-daily': '/collections/ekonomi-series',
+    'sarimbit-batik-couple': '/collections/luxury-series',
+    'batik-wanita': '/collections/luxury-series?gender=wanita',
+    'batik-pria': '/collections/luxury-series?gender=pria',
+    'blus-batik-wanita': '/collections/premium-series?gender=wanita',
+    'outer-tunik-batik': '/collections/luxury-series?gender=wanita',
+    'tunik-batik-wanita': '/collections/ekonomi-series?gender=wanita',
+    'dress-batik-wanita': '/collections/premium-series?gender=wanita',
+    'gamis-batik-wanita': '/collections/premium-series?gender=wanita',
+    'outer-batik-wanita': '/collections/luxury-series?gender=wanita',
+    'blazer-batik-wanita': '/collections/luxury-series?gender=wanita',
+    'kebaya-batik-modern': '/collections/luxury-series?gender=wanita',
+    'daster-batik-solo': '/collections/ekonomi-series?gender=wanita',
+    'kemeja-batik-lengan-panjang': '/collections/premium-series?gender=pria&sleeve=lengan-panjang',
+    'hem-batik-lengan-pendek': '/collections/premium-series?gender=pria&sleeve=lengan-pendek',
+    'celana-batik-pria': '/collections/ekonomi-series?gender=pria',
     'blus-batik-anak-cewek': '/collections/batik-anak?gender=putri',
     'gamis-batik-anak': '/collections/batik-anak?gender=putri',
     'dress-batik-anak': '/collections/batik-anak?gender=putri',
@@ -180,7 +183,7 @@ export default function Collection() {
   const handle = collection?.handle || '';
 
   const genderParam = searchParams.get('gender')?.toLowerCase();
-  const sleeveParam = searchParams.get('sleeve')?.toLowerCase();
+  const categoryParam = (searchParams.get('category') || searchParams.get('occasion') || searchParams.get('sleeve'))?.toLowerCase();
 
   // Tier-Differentiated Theme Classification
   const isExclusive =
@@ -198,17 +201,49 @@ export default function Collection() {
     ? 'ekonomi'
     : null;
 
-  // Filter products by tag if gender/sleeve params are active
+  // Filter products by tag and title if gender/category params are active
   const filteredConnection = useMemo(() => {
-    if (!genderParam && !sleeveParam) return collection.products;
+    if (!genderParam && !categoryParam) return collection.products;
     const nodes = (collection.products?.nodes || []).filter((p) => {
       const pTags = (p.tags || []).map((t) => t.toLowerCase().replace(/[\s_]+/g, '-'));
-      const targetGender = genderParam ? genderParam.toLowerCase().replace(/[\s_]+/g, '-') : null;
-      const targetSleeve = sleeveParam ? sleeveParam.toLowerCase().replace(/[\s_]+/g, '-') : null;
-      if (targetGender && !pTags.includes(targetGender)) return false;
-      if (targetSleeve && !pTags.includes(targetSleeve)) return false;
+      const pTitle = (p.title || '').toLowerCase();
+
+      // Gender check
+      if (genderParam) {
+        const targetGender = genderParam.toLowerCase().replace(/[\s_]+/g, '-');
+        const matchesGenderTag = pTags.includes(targetGender);
+        const matchesGenderTitle = targetGender === 'pria' || targetGender === 'putra'
+          ? (pTitle.includes('pria') || pTitle.includes('kemeja') || pTitle.includes('hem') || pTitle.includes('putra') || pTitle.includes('bapak'))
+          : (pTitle.includes('wanita') || pTitle.includes('blus') || pTitle.includes('gamis') || pTitle.includes('dress') || pTitle.includes('tunik') || pTitle.includes('putri') || pTitle.includes('ibu'));
+        if (!matchesGenderTag && !matchesGenderTitle) return false;
+      }
+
+      // Category check: Baju Kerja, Acara Resmi, Casual, Sarimbit
+      if (categoryParam) {
+        if (categoryParam === 'baju-kerja' || categoryParam === 'kerja' || categoryParam === 'kantor') {
+          const match = pTags.some(t => t.includes('kerja') || t.includes('kantor') || t.includes('formal') || t.includes('kemeja') || t.includes('blus')) ||
+            pTitle.includes('kerja') || pTitle.includes('kantor') || pTitle.includes('kemeja') || pTitle.includes('blus');
+          if (!match && pTags.length > 0) return false;
+        } else if (categoryParam === 'acara-resmi' || categoryParam === 'resmi' || categoryParam === 'formal') {
+          const match = pTags.some(t => t.includes('resmi') || t.includes('formal') || t.includes('resepsi') || t.includes('pesta') || t.includes('sarimbit') || t.includes('sutra') || t.includes('dobby') || t.includes('gamis')) ||
+            pTitle.includes('resmi') || pTitle.includes('formal') || pTitle.includes('resepsi') || pTitle.includes('pesta') || pTitle.includes('sarimbit');
+          if (!match && pTags.length > 0) return false;
+        } else if (categoryParam === 'casual' || categoryParam === 'santai') {
+          const match = pTags.some(t => t.includes('casual') || t.includes('santai') || t.includes('hem') || t.includes('outer') || t.includes('katun')) ||
+            pTitle.includes('casual') || pTitle.includes('santai') || pTitle.includes('hem') || pTitle.includes('outer');
+          if (!match && pTags.length > 0) return false;
+        } else if (categoryParam === 'sarimbit' || categoryParam === 'couple') {
+          const match = pTags.some(t => t.includes('sarimbit') || t.includes('couple') || t.includes('pasangan')) ||
+            pTitle.includes('sarimbit') || pTitle.includes('couple') || pTitle.includes('pasangan');
+          if (!match && pTags.length > 0) return false;
+        } else if (categoryParam === 'lengan-panjang' || categoryParam === 'lengan-pendek') {
+          if (!pTags.includes(categoryParam)) return false;
+        }
+      }
+
       return true;
     });
+
     return {
       ...collection.products,
       nodes,
@@ -218,7 +253,7 @@ export default function Collection() {
         hasPreviousPage: false,
       },
     };
-  }, [collection.products, genderParam, sleeveParam]);
+  }, [collection.products, genderParam, categoryParam]);
 
   const themeClasses = isExclusive
     ? 'bg-[#111111] text-white'
@@ -244,7 +279,7 @@ export default function Collection() {
       ? '/banners/sarimbit_family_banner.jpg'
       : handle.includes('kain')
       ? '/banners/collection_kain_tulis_banner.jpg'
-      : handle.includes('sarimbit')
+      : handle.includes('series') || handle.includes('sarimbit')
       ? '/banners/sarimbit_family_banner.jpg'
       : null);
 
@@ -305,47 +340,49 @@ export default function Collection() {
               className="flex justify-center mb-6"
             />
 
-            <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
-              {isExclusive
-                ? 'HAUTE HERITAGE • MAHAKARYA SUTRA ATBM'
-                : 'SIGNATURE ATELIER • RESEPSI & FORMAL'}
-            </span>
+            {isPremium && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
+                SIGNATURE ATELIER &bull; RESEPSI &amp; FORMAL
+              </span>
+            )}
 
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-white leading-tight mb-3">
+            <h1 className={`font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide leading-tight mb-3 ${isExclusive ? 'text-[#C5A059] italic' : 'text-white'}`}>
               {collection.title}
             </h1>
 
             {isExclusive && (
-              <p className="font-serif italic text-base sm:text-xl text-[#C5A059] mb-4 max-w-2xl leading-relaxed">
-                Keagungan Sutra ATBM &amp; Prada Emas Murni untuk Momen Sakral Keluarga
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-white/95 mb-4 max-w-3xl leading-relaxed font-normal">
+                Koleksi Luxury Batik Smile yang merepresentasikan kemewahan, keanggunan, dan kualitas dalam setiap detail. Menghadirkan perpaduan motif batik pilihan, desain berkarakter, serta sentuhan istimewa untuk melengkapi momen berharga dengan gaya yang elegan dan berkelas.
               </p>
             )}
 
             {isPremium && (
-              <p className="font-serif italic text-base sm:text-xl text-[#E2DFD8] mb-4 max-w-2xl leading-relaxed">
-                Harmoni Tenun Dobby Timbul &amp; Kenyamanan Furing Pesta Sejuk
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
+                Koleksi batik dengan pilihan bahan berkualitas yang menghadirkan kenyamanan dan tampilan elegan. Tersedia dengan opsi lapisan trikot untuk memberikan struktur yang lebih rapi dan kokoh, sesuai kebutuhan dan preferensi Anda.
               </p>
             )}
 
             <div className="w-16 h-px mb-5 bg-[#C5A059]" />
 
-            {collection.description && (
+            {collection.description && !isExclusive && (
               <p className="text-sm sm:text-base font-light leading-relaxed max-w-2xl text-[#E2DFD8]/90 mb-6">
                 {collection.description}
               </p>
             )}
 
             {/* Quick Action in Hero */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
-                href={officialWaUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="px-8 py-3.5 text-xs uppercase font-bold tracking-[0.2em] shadow-lg transition-colors bg-[#C5A059] hover:bg-white text-[#111111]"
-              >
-                {isExclusive ? 'RESERVASI VIP CONCIERGE →' : 'KONSULTASI BUSANA RESEPSI →'}
-              </a>
-            </div>
+            {!isExclusive && isPremium && (
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <a
+                  href={officialWaUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-8 py-3.5 text-xs uppercase font-bold tracking-[0.2em] shadow-lg transition-colors bg-[#C5A059] hover:bg-white text-[#111111]"
+                >
+                  KONSULTASI BUSANA RESEPSI &rarr;
+                </a>
+              </div>
+            )}
           </div>
         </section>
       ) : (
@@ -419,68 +456,68 @@ export default function Collection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 p-6 sm:p-8 bg-[#161616] border border-[#C5A059]/35">
             <div className="text-center p-4">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                PILAR 01 • KAIN PUSAKA
+                PILAR 01
               </span>
-              <h4 className="font-serif text-lg text-white font-normal mb-2">Sutra Alam ATBM 1-of-1</h4>
+              <h4 className="font-serif text-lg text-white font-normal mb-2">Material &amp; Furing Premium</h4>
               <p className="text-xs text-[#E2DFD8]/80 font-light leading-relaxed">
-                Ditenun manual dengan alat tenun bukan mesin, menghasilkan kilau serat alami bernapas yang bertekstur anggun.
+                Batik tulis, kombinasi, hingga printing eksklusif dengan furing trikot sejuk untuk kenyamanan terbaik.
               </p>
             </div>
             <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#C5A059]/20">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                PILAR 02 • SENTUHAN MAESTRO
+                PILAR 02
               </span>
-              <h4 className="font-serif text-lg text-white font-normal mb-2">Canting Prada Emas</h4>
+              <h4 className="font-serif text-lg text-white font-normal mb-2">Jahitan Penjahit Teredukasi</h4>
               <p className="text-xs text-[#E2DFD8]/80 font-light leading-relaxed">
-                Aksen prada emas murni digoreskan teliti pada motif sakral, memancarkan wibawa ningrat di bawah lampu resepsi malam.
+                Dikerjakan teliti oleh penjahit terampil dan berpengalaman guna memastikan hasil busana rapi, presisi, dan berkelas.
               </p>
             </div>
             <div className="text-center p-4">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                PILAR 03 • LAYANAN SULTAN
+                PILAR 03
               </span>
-              <h4 className="font-serif text-lg text-white font-normal mb-2">VIP Fitting &amp; Bespoke</h4>
+              <h4 className="font-serif text-lg text-white font-normal mb-2">Jahitan Sarimbit &amp; Seragam</h4>
               <p className="text-xs text-[#E2DFD8]/80 font-light leading-relaxed">
-                Ruang ukur privat di VIP Lounge Lantai 2 Simongan Semarang atau konsultasi privat via video concierge tanpa antre.
+                Tersedia layanan jahitan eksklusif untuk busana sarimbit keluarga dan seragam instansi tanpa minimal order.
               </p>
             </div>
           </div>
         )}
 
-        {/* PREMIUM TEMPLATE: 3 Signature Quality Guarantees */}
+        {/* PREMIUM TEMPLATE: Pilihan Lapisan & Layanan Jahitan */}
         {isPremium && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 p-6 sm:p-8 bg-[#281C15]/90 backdrop-blur-sm border border-[#7C3F1D]/50 shadow-sm">
             <div className="text-center p-4">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                STANDAR BUTIK 01
+                PILIHAN LAPISAN 01
               </span>
               <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
-                Tenun Dobby Timbul
+                Dengan Trikot
               </h4>
               <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
-                Karakter bahan bermotif timbul bertekstur mewah, kokoh, dan tahan cuci tanpa kehilangan kilau anggunnya.
+                Memberikan struktur yang lebih kokoh dan tampilan yang lebih rapi.
               </p>
             </div>
             <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#7C3F1D]/40">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                STANDAR BUTIK 02
+                PILIHAN LAPISAN 02
               </span>
               <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
-                Furing Katun Hero Sejuk
+                Tanpa Trikot
               </h4>
               <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
-                Lapis furing katun hero premium yang menyerap keringat dan adem, menjamin kenyamanan maksimal sepanjang acara.
+                Memberikan karakter bahan yang lebih ringan dan jatuh alami.
               </p>
             </div>
             <div className="text-center p-4">
               <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                STANDAR BUTIK 03
+                LAYANAN BUTIK 03
               </span>
               <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
-                Presisi Sambung Pola
+                Jahitan Sarimbit &amp; Seragam
               </h4>
               <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
-                Potongan motif simetris selaras pada saku depan, kerah, dan belahan kancing untuk wibawa busana yang rapi.
+                Tersedia layanan jahitan butik untuk busana sarimbit dan seragam instansi/keluarga tanpa batasan minimal order.
               </p>
             </div>
           </div>
@@ -565,7 +602,7 @@ export default function Collection() {
               Fitting Privat di VIP Lounge Simongan Semarang
             </h3>
             <p className="text-xs mb-6 font-light tracking-wide text-[#A69F96] max-w-xl mx-auto leading-relaxed">
-              Nikmati layanan concierge privat berstandar 3S 1C 1T &amp; 1H di Lantai 2 Flagship Butik Batik Smile Simongan dengan ruang ukur privat dan pendamping busana pribadi.
+              Nikmati layanan concierge privat di Lantai 2 Flagship Butik Batik Smile Simongan dengan ruang ukur privat dan pendamping busana pribadi.
             </p>
             <a
               href={officialWaUrl}

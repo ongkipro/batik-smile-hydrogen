@@ -15,6 +15,12 @@ import { Link } from 'react-router';
  */
 export function SarimbitBentoSection({ collections = [] }) {
   const defaultFallbackImages = {
+    'luxury-series':
+      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_51f1e349-35df-4896-b08d-6290f84897d9.jpg?v=1786005734',
+    'premium-series':
+      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_d8691b10-ece8-4430-a8c6-d184fa0c467a.jpg?v=1786004716',
+    'ekonomi-series':
+      'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749',
     'sarimbit-luxury':
       'https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_51f1e349-35df-4896-b08d-6290f84897d9.jpg?v=1786005734',
     'sarimbit-premium':
@@ -25,8 +31,8 @@ export function SarimbitBentoSection({ collections = [] }) {
 
   const sarimbitPillars = [
     {
-      handle: 'sarimbit-luxury',
-      title: 'Sarimbit Luxury',
+      handle: 'luxury-series',
+      title: 'Luxury Series',
       subtitle:
         'Kemewahan tenun sutra ATBM berpola presisi dengan sentuhan prada emas untuk perhelatan teragung keluarga.',
       stamp: 'LUXURY',
@@ -35,8 +41,8 @@ export function SarimbitBentoSection({ collections = [] }) {
       cta: 'JELAJAHI LUXURY',
     },
     {
-      handle: 'sarimbit-premium',
-      title: 'Sarimbit Premium',
+      handle: 'premium-series',
+      title: 'Premium Series',
       subtitle:
         'Tekstur tenun dobby berpadu furing katun hero sejuk untuk kenyamanan resepsi pernikahan dan jamuan resmi.',
       stamp: 'PREMIUM',
@@ -45,8 +51,8 @@ export function SarimbitBentoSection({ collections = [] }) {
       cta: 'LIHAT PREMIUM',
     },
     {
-      handle: 'sarimbit-ekonomi',
-      title: 'Sarimbit Ekonomi',
+      handle: 'ekonomi-series',
+      title: 'Ekonomi Series',
       subtitle:
         'Katun primisima premium super adem untuk kehangatan silaturahmi dan busana kasual keluarga sehari-hari.',
       stamp: 'EKONOMI',
@@ -65,7 +71,7 @@ export function SarimbitBentoSection({ collections = [] }) {
             PILIHAN KASTA BUSANA KELUARGA
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
-            Trilogi Koleksi Sarimbit
+            Trilogi Koleksi Busana
           </h2>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mb-4" />
           <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed">
@@ -83,8 +89,8 @@ export function SarimbitBentoSection({ collections = [] }) {
               '/banners/hero_editorial_banner.jpg';
             const altText = found?.image?.altText || pillar.title;
 
-            const isPillarPremium = pillar.handle === 'sarimbit-premium';
-            const isPillarLuxury = pillar.handle === 'sarimbit-luxury';
+            const isPillarPremium = pillar.handle === 'premium-series' || pillar.handle === 'sarimbit-premium';
+            const isPillarLuxury = pillar.handle === 'luxury-series' || pillar.handle === 'sarimbit-luxury';
 
             return (
               <div

@@ -5,7 +5,7 @@ const TIERS = [
   {
     id: 'mahakarya',
     tierNumber: 'KASTA I',
-    name: 'Sarimbit Luxury',
+    name: 'Luxury Series',
     subname: 'Sutra ATBM & Prada Emas Tradisional',
     priceRange: 'Rp 1.500.000 – Rp 3.500.000+',
     badge: 'MAHAKARYA 1-OF-1',
@@ -21,12 +21,12 @@ const TIERS = [
     ],
     image: '/banners/craftsmanship_canting_banner.jpg',
     fallbackImage: '/banners/hero_editorial_banner.jpg',
-    collectionUrl: '/collections/sarimbit-luxury',
+    collectionUrl: '/collections/luxury-series',
   },
   {
     id: 'signature',
     tierNumber: 'KASTA II',
-    name: 'Sarimbit Premium',
+    name: 'Premium Series',
     subname: 'Tenun Dobby Timbul & Furing Hero',
     priceRange: 'Rp 500.000 – Rp 950.000',
     badge: 'STANDAR RESEPSI RESMI',
@@ -42,12 +42,12 @@ const TIERS = [
     ],
     image: '/banners/sarimbit_family_banner.jpg',
     fallbackImage: '/banners/hero_editorial_banner.jpg',
-    collectionUrl: '/collections/sarimbit-premium',
+    collectionUrl: '/collections/premium-series',
   },
   {
     id: 'essential',
     tierNumber: 'KASTA III',
-    name: 'Sarimbit Ekonomi',
+    name: 'Ekonomi Series',
     subname: 'Katun Primisima Halus Sejuk Harian',
     priceRange: 'Rp 350.000 – Rp 485.000',
     badge: 'KENYAMANAN HARIAN',
@@ -63,7 +63,7 @@ const TIERS = [
     ],
     image: '/brand/models/model_teak_door.jpg',
     fallbackImage: '/banners/hero_editorial_banner.jpg',
-    collectionUrl: '/collections/sarimbit-ekonomi',
+    collectionUrl: '/collections/ekonomi-series',
   },
 ];
 

@@ -127,7 +127,7 @@ export default function Page() {
               Butuh Bantuan Mengenai Halaman Ini?
             </h3>
             <p className="text-xs sm:text-sm text-[#C5BFB8] font-light leading-relaxed max-w-xl">
-              Tim Concierge Butik Batik Smile siap melayani Anda dengan budaya 3S 1C 1T &amp; 1H via WhatsApp resmi.
+              Tim Concierge Butik Batik Smile siap melayani Anda via WhatsApp resmi.
             </p>
           </div>
           <a

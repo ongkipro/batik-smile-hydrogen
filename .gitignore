@@ -7,5 +7,6 @@ node_modules
 /.mf
 .env
 .shopify
+.shopify.bak
 .react-router
 scratch/

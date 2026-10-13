@@ -31,7 +31,7 @@ export function SarimbitSpotlight() {
             <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-black">
               <img
                 src="https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_51f1e349-35df-4896-b08d-6290f84897d9.jpg?v=1786005734"
-                alt="Sarimbit Luxury"
+                alt="Luxury Series"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-85"
                 loading="lazy"
               />
@@ -48,7 +48,7 @@ export function SarimbitSpotlight() {
                   KASTA TERTINGGI
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-normal text-white mb-2">
-                  Sarimbit Luxury
+                  Luxury Series
                 </h3>
                 <p className="text-xs text-[#A6A098] font-light leading-relaxed mb-6">
                   Ditenun dari sutra ATBM berkualitas ningrat dengan sentuhan canting prada emas
@@ -59,7 +59,7 @@ export function SarimbitSpotlight() {
               <div className="pt-4 border-t border-[#C5A059]/20 flex items-center justify-between">
                 <span className="text-[11px] text-[#888888]">Mulai Rp 1.500.000 / Pasang</span>
                 <NavLink
-                  to="/collections/sarimbit-luxury"
+                  to="/collections/luxury-series"
                   className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5A059] hover:text-white transition-colors"
                 >
                   Jelajahi Luxury &rarr;
@@ -75,7 +75,7 @@ export function SarimbitSpotlight() {
               <div className="sm:w-1/2 relative aspect-[4/5] sm:aspect-auto overflow-hidden bg-black">
                 <img
                   src="https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_d8691b10-ece8-4430-a8c6-d184fa0c467a.jpg?v=1786004716"
-                  alt="Sarimbit Premium"
+                  alt="Premium Series"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
                   loading="lazy"
                 />
@@ -92,7 +92,7 @@ export function SarimbitSpotlight() {
                     STANDAR RESEPSI
                   </span>
                   <h4 className="font-serif text-xl sm:text-2xl font-normal text-white mb-2">
-                    Sarimbit Premium
+                    Premium Series
                   </h4>
                   <p className="text-[11px] text-[#A6A098] font-light leading-relaxed mb-4">
                     Kombinasi tenun dobby bertekstur timbul dengan furing hero lembut. Pas untuk acara
@@ -100,7 +100,7 @@ export function SarimbitSpotlight() {
                   </p>
                 </div>
                 <NavLink
-                  to="/collections/sarimbit-premium"
+                  to="/collections/premium-series"
                   className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5A059] hover:text-white transition-colors"
                 >
                   Lihat Premium &rarr;
@@ -113,7 +113,7 @@ export function SarimbitSpotlight() {
               <div className="sm:w-1/2 relative aspect-[4/5] sm:aspect-auto overflow-hidden bg-[#FAF8F5]">
                 <img
                   src="https://cdn.shopify.com/s/files/1/0813/3224/0441/collections/banner_batik_couple_1785995932731_7d17a644-177e-4489-bcf6-490c3c74d39f.jpg?v=1786005749"
-                  alt="Sarimbit Ekonomi"
+                  alt="Ekonomi Series"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
@@ -130,7 +130,7 @@ export function SarimbitSpotlight() {
                     KENYAMANAN HARIAN
                   </span>
                   <h4 className="font-serif text-xl sm:text-2xl font-normal text-[#111111] mb-2">
-                    Sarimbit Ekonomi
+                    Ekonomi Series
                   </h4>
                   <p className="text-[11px] text-[#5A5550] font-light leading-relaxed mb-4">
                     Katun primisima 100% adem dan sejuk di kulit. Motif kontemporer yang pas untuk
@@ -138,7 +138,7 @@ export function SarimbitSpotlight() {
                   </p>
                 </div>
                 <NavLink
-                  to="/collections/sarimbit-ekonomi"
+                  to="/collections/ekonomi-series"
                   className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#111111] hover:text-[#9E7D3B] transition-colors"
                 >
                   Jelajahi Ekonomi &rarr;

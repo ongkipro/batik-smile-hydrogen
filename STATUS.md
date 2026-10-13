@@ -19,7 +19,16 @@ Current State: **VERIFIED**
 
 ## Current state
 
-Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 58) has been completed, committed, and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`):
+Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 60) has been completed, committed, and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`):
+
+0. **Refined Luxury & Premium Series, Subcategories & Bespoke Tailoring (2026-10-13)**:
+   - **Subcategory Modernization**: Replaced sleeve-based categories in `MegaMenu.jsx` and `CollectionFilterBar.jsx` with curated fashion occasions for both Pria and Wanita (`Baju Kerja`, `Acara Resmi`, `Casual`, `Sarimbit`) across Luxury and Premium collections.
+   - **Tiered Tailoring Service**: Promoted bespoke tailoring for sarimbit and uniforms without minimum order on Luxury Series and Premium Series (`MegaMenu.jsx`, `CollectionFilterBar.jsx`, `collections.$handle.jsx`, `ProductTierStorySection.jsx`, and `products.$handle.jsx` accordion), while strictly omitting it on Ekonomi Series.
+   - **Premium Series Copy & Lapisan Trikot**: Integrated verified copy and 2-option lining differentiation (*Dengan Trikot*: struktur kokoh dan rapi; *Tanpa Trikot*: bahan ringan dan jatuh alami) in both storefront code and Shopify Admin collection metadata via GraphQL mutation.
+   - **Luxury Series Hero Inversion**: Title `Luxury Series` set to Gold italic (`text-[#C5A059] italic`), and subtitle inverted to White (`text-white/95`, standard non-italic font) with refined copy matching Screenshot 0.
+   - **Simplified Pillars**: Streamlined 3 pillars in `collections.$handle.jsx` (and `ProductTierStorySection.jsx`) into concise, punchy value propositions.
+   - **Story Development**: Expanded "Cerita di Balik Batik Smile" in `pages.tentang-kami.jsx` (and synced to Shopify Admin Page `tentang-kami`).
+   - **Footer Kontak Resmi Butik Redesign**: Re-engineered Column 4 of `Footer.jsx` based on user reference: phone icon header, gold underline, WA Concierge, Instagram, Email, horizontal divider, and dedicated JAM OPERASIONAL block.
 
 
 1. **Quiet Luxury Nusantara Design System**:
@@ -207,21 +216,28 @@ Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile
     - Elevated `CartMain.jsx` with whispered free shipping perk ribbon and `CartLineItem.jsx` with enhanced typography and 32px touch-friendly steppers.
     - Scaled mobile brand logo from `16px` to `20px-22px font-serif uppercase tracking-[0.24em]` with gold-soga gradient and increased header bar height (`h-20 sm:h-21 lg:h-20`) for majestic breathing room in sticky and static states.
     - Removed `lg:sticky lg:top-24` from PDP image gallery (`products.$handle.jsx`) creating a cohesive, magazine-style editorial flow. Elevated option chips (`w-12 h-12`), quantity selector (`h-13 w-32`), and action buttons (`h-13 text-xs uppercase font-bold tracking-[0.2em]`).
+38. **Bespoke Series Naming Architecture & Shopify Admin Synchronization**:
+    - Upgraded naming convention from "Sarimbit Luxury / Premium / Ekonomi" to authoritative series nomenclature: **Luxury Series**, **Premium Series**, and **Ekonomi Series**.
+    - Executed live Shopify Admin GraphQL mutations updating collection titles (`Luxury Series`, `Premium Series`, `Ekonomi Series`), handles (`luxury-series`, `premium-series`, `ekonomi-series`), and descriptions.
+    - Updated live Shopify product descriptions for flagship couple sets (*Sarimbit Charcoal Hitam*, *Sarimbit Mustard Gold*, *Sarimbit Royal Navy*).
+    - Synchronized 301 Permanent Redirection table in `collections.$handle.jsx` mapping legacy handles (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `sarimbit-exclusive`, `sarimbit-ekonomis`) cleanly to the new `-series` canonical URLs.
+    - Synchronized entire storefront codebase: `Header.jsx`, `MegaMenu.jsx`, `Footer.jsx`, `CartMain.jsx`, `CollectionFilterBar.jsx`, `TierExperience.jsx`, `SarimbitSpotlight.jsx`, `SarimbitBentoSection.jsx`, `HeroSlider.jsx`, `HeroEditorial.jsx`, `ShoppableLookbook.jsx`, `LuxurySearchModal.jsx`, `products.$handle.jsx`, `collections.$handle.jsx`, `collections._index.jsx`, `search.jsx`, `account.orders._index.jsx`, `schema.js`, `SCHEMA.md`, and `PAGES-SCHEMA.xml`.
+    - Verified all endpoints return HTTP 200 and legacy URLs return HTTP 301. Dev servers running concurrently on port 3001 (Batik Smile) and port 3000 (Reven Leather) without conflict.
+39. **Heritage Typography, Footer Navigation Simplification & Slop Purge Across Admin & Storefront**:
+    - **Shopify Admin Mutations**: Purged "Budaya Layanan: 3S 1C 1T & 1H" block from `tentang-kami` page (`gid://shopify/Page/133633998905`) and cleared obsolete description from `Luxury Series` collection (`gid://shopify/Collection/480517193785`).
+    - **Slop Purge (3S 1C 1T & 1H)**: Removed all occurrences across `pages.tentang-kami.jsx`, `Footer.jsx`, `LuxurySearchModal.jsx`, `ShowroomO2O.jsx`, `TrustGuaranteeBar.jsx`, `collections.$handle.jsx`, `pages.$handle.jsx`, `policies._index.jsx`, and `products.$handle.jsx`.
+    - **Heritage Date Standardization**: Replaced all instances of `ESTABLISHED 2007` / `Est. 2007` with `SEJAK 2007` / `Sejak 2007` across `Header.jsx`, `HeroSlider.jsx`, `HeroEditorial.jsx`, `Footer.jsx`, `CartMain.jsx`, `LuxurySearchModal.jsx`, `pages.tentang-kami.jsx`, and `products.$handle.jsx`.
+    - **Footer Navigation Menu**: Replaced "KATALOG KOLEKSI" in Column 2 with concise "NAVIGASI" menu (Home, Catalog, Luxury Series, Premium Series, About, Showroom, Contact) and removed "Layanan konsultasi motif sarimbit..." paragraph from Column 4.
+    - **Luxury Series Collection Hero Styling**: Applied `italic` to `Luxury Series` title, removed `HAUTE HERITAGE • MAHAKARYA SUTRA ATBM` eyebrow, changed `Keagungan Sutra ATBM & Prada Emas Murni...` subtitle from italic to standard font-serif, and removed the VIP Concierge button div from the hero.
+    - **PDP Cleaning**: Removed stock status indicator ("Tersedia di Butik") and value props bullet row ("Sutra Alam ATBM • Canting Prada Emas • Sambung Motif Presisi") directly under price.
+    - **Build & Server Verification**: ESLint 0 errors, 0 warnings; Production build exit code 0. Concurrently running dev servers verified on port 3000 (Reven Leather) and port 3001 (Batik Smile).
 
 ## Verification evidence
 
-- **Production Build**: `npm run build` completed with exit code 0 (SSR + Oxygen client build).
+- **Shopify Admin Live Status**: Collections `luxury-series`, `premium-series`, `ekonomi-series` verified live; `tentang-kami` page updated without 3S block; `Luxury Series` collection description cleared.
+- **Live HTTP Status**: `/collections/luxury-series`, `/collections/premium-series`, `/collections/ekonomi-series`, and `/pages/tentang-kami` return HTTP 200 OK.
+- **Render Verification**: Footer renders NAVIGASI menu and SEJAK 2007; Luxury Series hero renders italic title, standard subtitle, and zero VIP hero button; PDP renders zero stock badge and zero under-price value props.
+- **Port Isolation**: `revenleather.com` on port 3000 verified active (HTTP 200); `batik-smile-hydrogen` on port 3001 verified active (HTTP 200).
+- **Production Build**: `npm run build` completed with exit code 0.
 - **Static Analysis**: `npm run lint` completed with exit code 0 (0 errors, 0 warnings).
-- **Cart & Drawer Verification**: Custom atelier tote SVG verified in `Header.jsx` and `CartMain.jsx`; drawer backdrop, width, and header actions verified in `Aside.jsx` and `PageLayout.jsx`.
-- **PDP Editorial Flow**: Verified gallery non-sticky natural scrolling behavior on desktop and elevated button hierarchy in `products.$handle.jsx`.
-- **Typography Scale & Zero-Count Integrity**: Verified clean UI across `ProductItem.jsx`, `CollectionFilterBar.jsx`, `LuxurySearchModal.jsx`, `SearchResults.jsx`, `collections.$handle.jsx`, `collections.all.jsx`, and `search.jsx`.
-- **GraphQL Codegen**: `npm run codegen` completed with exit code 0.
-- **OpenGraph Assets**: Generated 1200x630 assets in `public/og-image.jpg` (169KB) and `public/og-image.webp` (113KB).
-- **SEO & JSON-LD**: Schemas injected across all routes with CSP nonces; social meta headers fully populated with 1200x630 image dimensions.
-- **Error Boundaries**: 404 and ErrorBoundary unified with Quiet Luxury Mori Linen canvas and graceful context handling.
-- **Storefront API Video Query**: Live query for `sarimbit-charcoal-hitam` verified returning native `Video` media object with MP4/HLS streams from Shopify CDN (`https://checkout.batiksmile.com/cdn/shop/videos/...`).
-- **Clean Handle Parity**: 0 obsolete collection paths remain across `app/`.
-- **Live Collections**: Exactly 7 collections live in Shopify Core (`sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `kain`, `aksesoris`, `batik-anak`, `shop`).
 - **Data Protection**: 100% of 23 products, variants, and pricing preserved.
-- **Mobile Viewport Stability**: iOS Safari auto-zoom eliminated storefront-wide with computed `16px` font size on all input fields.
-- **Checkout & Account Domains**: All checkout CTA redirects route through `https://checkout.batiksmile.com` and account routes resolve cleanly with zero CSP errors.

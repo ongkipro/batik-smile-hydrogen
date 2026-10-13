@@ -9,7 +9,7 @@ const DEFAULT_HOTSPOTS = [
     price: 'Rp 450.000',
     topPercent: 32,
     leftPercent: 36,
-    url: '/collections/sarimbit-luxury?gender=pria',
+    url: '/collections/luxury-series?gender=pria',
   },
   {
     id: 'wanita',
@@ -18,7 +18,7 @@ const DEFAULT_HOTSPOTS = [
     price: 'Rp 650.000',
     topPercent: 42,
     leftPercent: 64,
-    url: '/collections/sarimbit-luxury?gender=wanita',
+    url: '/collections/luxury-series?gender=wanita',
   },
   {
     id: 'anak',
@@ -147,17 +147,17 @@ export function ShoppableLookbook({ lookbook }) {
 
             <div className="space-y-2.5 pt-2">
               <Link
-                to={activePin?.url || '/collections/sarimbit-luxury'}
+                to={activePin?.url || '/collections/luxury-series'}
                 className="w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.16em] text-center block transition-colors duration-300 shadow-sm"
               >
                 LIHAT DETAIL PRODUK &rarr;
               </Link>
 
               <Link
-                to="/collections/sarimbit-luxury"
+                to="/collections/luxury-series"
                 className="w-full py-3 px-4 bg-[#FAF8F5] hover:bg-[#111111] !text-[#111111] hover:!text-white text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.16em] text-center block border border-[#E2DFD8] hover:border-[#111111] transition-colors duration-300"
               >
-                LIHAT SELURUH SARIMBIT &rarr;
+                LIHAT SELURUH KOLEKSI &rarr;
               </Link>
             </div>
           </div>
