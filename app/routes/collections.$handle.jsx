@@ -515,44 +515,7 @@ export default function Collection() {
           </div>
         )}
 
-        {/* EKONOMI TEMPLATE: 3 Poin Keunggulan Ekonomi Series */}
-        {isEkonomi && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 p-6 sm:p-8 bg-white border border-[#E2DFD8] shadow-xs">
-            <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
-                KEUNGGULAN 01
-              </span>
-              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
-                Harga Terjangkau
-              </h4>
-              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
-                Pilihan ramah anggaran untuk kebutuhan harian, seragam arisan, maupun pemesanan dalam jumlah banyak tanpa mengorbankan kualitas.
-              </p>
-            </div>
-            <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#E2DFD8]">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
-                KEUNGGULAN 02
-              </span>
-              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
-                Nyaman
-              </h4>
-              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
-                Material katun pilihan yang lembut, sejuk, dan menyerap keringat dengan baik untuk kenyamanan optimal sepanjang hari.
-              </p>
-            </div>
-            <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
-                KEUNGGULAN 03
-              </span>
-              <h4 className="font-sans text-sm uppercase font-semibold text-[#111111] mb-2 tracking-wide">
-                Awet untuk Aktivitas
-              </h4>
-              <p className="text-xs text-[#5A5550] font-light leading-relaxed">
-                Konstruksi serat kain kuat dan warna tahan cuci, dirancang siap menemani berbagai rutinitas dan aktivitas aktif keluarga.
-              </p>
-            </div>
-          </div>
-        )}
+
 
         {/* MARKETPLACE 2-COLUMN CATALOG LAYOUT: Desktop Left Sidebar + Catalog Grid */}
         <div className="lg:flex lg:gap-8 xl:gap-10 items-start">
