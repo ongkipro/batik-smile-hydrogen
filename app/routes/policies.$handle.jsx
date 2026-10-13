@@ -130,7 +130,7 @@ const DEFAULT_POLICIES = {
       <p>Selamat datang di platform butik resmi Batik Smile. Dengan mengakses dan melakukan pembelian di platform ini, Anda menyetujui seluruh ketentuan layanan yang diatur secara transparan demi kenyamanan bersama.</p>
 
       <h2>2. Standar Keaslian Wastra Nusantara</h2>
-      <p>Batik Smile menjamin bahwa seluruh produk diproduksi dengan material pilihan berkualitas: katun primisima bendera, tenun dobby bertekstur, furing katun hero adem, dan sutra ATBM asli. Motif batik tulis dikerjakan secara manual oleh perajin canting mitra kami di Jawa Tengah.</p>
+      <p>Batik Smile menjamin bahwa seluruh produk diproduksi dengan material pilihan berkualitas: katun primisima bendera, tenun dobby bertekstur, lapisan trikot rapi, dan sutra ATBM asli. Motif batik tulis dikerjakan secara manual oleh perajin canting mitra kami di Jawa Tengah.</p>
 
       <h2>3. Akurasi Warna &amp; Pencahayaan</h2>
       <p>Kami berusaha menampilkan visual warna produk sedekat mungkin dengan aslinya. Perbedaan saturasi minor dapat terjadi karena karakteristik layar gawai Anda atau sifat alami pewarnaan batik tradisional.</p>
@@ -166,6 +166,7 @@ export async function loader({ params, context }) {
         country: context.storefront.i18n?.country,
         language: context.storefront.i18n?.language,
       },
+      cache: context.storefront.CacheShort(),
     });
 
     shopPolicy = data.shop?.[config.policyKey];

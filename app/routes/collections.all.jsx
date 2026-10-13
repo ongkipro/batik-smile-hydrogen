@@ -77,6 +77,18 @@ async function loadCriticalData({ context, request }) {
     queryParts.push('available_for_sale:true');
   }
 
+  const genderParam = searchParams.get('gender')?.trim().toLowerCase();
+  if (genderParam === 'wanita' || genderParam === 'pria' || genderParam === 'putra' || genderParam === 'putri') {
+    queryParts.push(`tag:${genderParam}`);
+  }
+
+  const sleeveParam = searchParams.get('sleeve')?.trim().toLowerCase();
+  if (sleeveParam === 'lengan-panjang') {
+    queryParts.push('tag:"Lengan Panjang"');
+  } else if (sleeveParam === 'lengan-pendek') {
+    queryParts.push('tag:"Lengan Pendek"');
+  }
+
   const minPrice = searchParams.get('minPrice');
   const maxPrice = searchParams.get('maxPrice');
   if (minPrice && maxPrice) {
@@ -97,6 +109,7 @@ async function loadCriticalData({ context, request }) {
         reverse,
         query,
       },
+      cache: storefront.CacheShort(),
     }),
   ]);
 
@@ -121,7 +134,7 @@ export default function CollectionAll() {
               handle: 'all',
               title: 'Katalog Lengkap Busana Batik',
               description:
-                'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga 3 kasta, kemeja pria lapis furing, dan kain batik tulis asli Batik Smile Semarang.',
+                'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga 3 kasta, busana pria dan wanita, serta kain batik tulis asli Batik Smile Semarang.',
             },
             products?.nodes,
           ),
@@ -142,7 +155,7 @@ export default function CollectionAll() {
           </h1>
           <div className="w-12 h-px bg-[#C5A059] mx-auto mt-4 mb-4" />
           <p className="text-sm sm:text-base text-[#5A5550] font-light leading-relaxed">
-            Setiap karya batik dijahit dengan ketelitian tinggi dan dilapisi furing hero katun yang sejuk.
+            Setiap karya batik dirancang dengan ketelitian pola simetris dan material pilihan berkualitas standar butik.
           </p>
         </div>
 
@@ -193,6 +206,8 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
     handle
     title
     productType
+    availableForSale
+    tags
     featuredImage {
       id
       altText

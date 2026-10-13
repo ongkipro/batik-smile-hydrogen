@@ -10,7 +10,7 @@ const TRENDING_KEYWORDS = [
   'Luxury Series',
   'Premium Series',
   'Ekonomi Series',
-  'Kemeja Pria Furing Hero',
+  'Kemeja Batik Pria',
   'Batik Wanita Modern',
   'Kain Batik Tulis',
   'Batik Anak',
@@ -651,7 +651,7 @@ export function LuxurySearchModal() {
             <span>Butik Resmi Semarang &bull; Sejak 2007</span>
           </div>
           <span className="hidden sm:inline text-[#9E7D3B] font-medium">
-            Pilih busana untuk melihat detail bahan &amp; furing
+            Pilih busana untuk melihat detail bahan &amp; ukuran
           </span>
         </div>
 

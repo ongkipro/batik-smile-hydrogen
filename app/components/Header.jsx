@@ -10,7 +10,7 @@ import { AnnouncementBar } from './AnnouncementBar';
  */
 const NAV_ITEMS = [
   { label: 'Luxury Series', desc: 'Sutra ATBM & Prada Emas', to: '/collections/luxury-series' },
-  { label: 'Premium Series', desc: 'Tenun Dobby & Furing Hero', to: '/collections/premium-series' },
+  { label: 'Premium Series', desc: 'Tenun Dobby & Lapis Trikot', to: '/collections/premium-series' },
   { label: 'Ekonomi Series', desc: 'Katun Primisima Sejuk', to: '/collections/ekonomi-series' },
   { label: 'Batik Anak', desc: 'Putra & Putri', to: '/collections/batik-anak' },
   { label: 'Kain', desc: 'Kain Tulis Canting 1-of-1', to: '/collections/kain' },

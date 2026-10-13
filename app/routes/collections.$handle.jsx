@@ -160,6 +160,7 @@ async function loadCriticalData({ context, params, request }) {
         reverse,
         filters: filters.length > 0 ? filters : undefined,
       },
+      cache: storefront.CacheShort(),
     }),
   ]);
 
@@ -195,7 +196,8 @@ export default function Collection() {
   const isKain = handle.includes('kain');
   const isAnak = handle.includes('anak');
   const isAksesoris = handle.includes('aksesoris') || handle.includes('aksesori') || handle.includes('blangkon');
-  const isCinematicHero = isExclusive || isPremium || isEkonomi || isKain || isAnak || isAksesoris;
+  const isGeneralCollection = !isExclusive && !isPremium && !isEkonomi && !isKain && !isAnak && !isAksesoris;
+  const isCinematicHero = true;
 
   const collectionTier = isExclusive
     ? 'luxury'
@@ -392,6 +394,12 @@ export default function Collection() {
               </span>
             )}
 
+            {isGeneralCollection && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
+                KATALOG BUSANA &bull; BATIK SMILE SEMARANG
+              </span>
+            )}
+
             <h1 className={`font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide leading-tight mb-3 ${isExclusive ? 'text-[#C5A059] italic' : 'text-white'}`}>
               {collection.title}
             </h1>
@@ -429,6 +437,12 @@ export default function Collection() {
             {isAksesoris && (
               <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
                 {collection.description || 'Pelengkap busana adat dan formal nusantara, mulai dari blangkon lipat khas Jawa, selendang, hingga aksesori pelengkap busana pria dan wanita untuk menyempurnakan penampilan berwibawa.'}
+              </p>
+            )}
+
+            {isGeneralCollection && (
+              <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
+                {collection.description || 'Eksplorasi koleksi busana batik dan wastra pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan material pilihan berkualitas.'}
               </p>
             )}
 
@@ -472,6 +486,16 @@ export default function Collection() {
               </div>
             )}
 
+            {isGeneralCollection && (
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
+                <span>100% Batik Indonesia</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Bebas Tukar Ukuran</span>
+                <span className="text-[#C5A059]">&bull;</span>
+                <span>Pengiriman Seluruh Indonesia</span>
+              </div>
+            )}
+
             <div className="w-16 h-px bg-[#C5A059] mt-4" />
           </div>
         </section>
@@ -508,7 +532,7 @@ export default function Collection() {
                   <p className="text-sm sm:text-base text-[#5A5550] font-light leading-relaxed mb-6 max-w-xl">
                     {isEkonomi
                       ? 'Koleksi batik dengan pilihan motif menarik dan desain yang praktis untuk berbagai kebutuhan. Mengutamakan fungsi, kenyamanan, dan harga yang terjangkau, koleksi ini menjadi pilihan tepat untuk pemakaian sehari-hari maupun seragaman tanpa meninggalkan karakter khas Batik Smile.'
-                      : 'Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan kenyamanan furing katun adem.'}
+                      : 'Eksplorasi koleksi busana batik dan kain pilihan terbaik Butik Batik Smile Semarang. Dirancang dengan keanggunan motif pusaka, potongan pola simetris, dan material pilihan berkualitas.'}
                   </p>
                 )}
 
@@ -776,6 +800,7 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     handle
     title
     productType
+    availableForSale
     tags
     featuredImage {
       id

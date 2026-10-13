@@ -36,6 +36,7 @@ async function loadCriticalData({ context, request }) {
       variables: {
         ...paginationVariables,
       },
+      cache: context.storefront.CacheShort(),
     }),
   ]);
 

@@ -30,6 +30,7 @@ async function loadCriticalData({ context, request }) {
   const [{ collections }] = await Promise.all([
     context.storefront.query(COLLECTIONS_QUERY, {
       variables: paginationVariables,
+      cache: context.storefront.CacheShort(),
     }),
   ]);
 
@@ -76,7 +77,7 @@ const SCATTER_STYLES = [
     tapeAngle: 'rotate-2',
     stamp: 'WARISAN',
     plate: 'ARC-04',
-    note: 'Kemeja Furing Hero Halus',
+    note: 'Kemeja Batik Pola Simetris',
   },
   {
     tilt: '-rotate-2 sm:-rotate-1.5',
@@ -180,7 +181,7 @@ export default function Collections() {
           </div>
 
           <p className="text-[11px] sm:text-sm text-[#5A5550] font-light leading-relaxed max-w-2xl mx-auto px-2">
-            Lembar arsip kurasi mahakarya Batik Smile. Dari kemegahan Sarimbit Tiga Kasta berfuring hero halus, kemeja pria pola simetris, hingga helaian kain batik tulis canting tembaga asli Jawa Tengah.
+            Lembar arsip kurasi mahakarya Batik Smile. Dari kemegahan Sarimbit Tiga Kasta, kemeja pria pola simetris, hingga helaian kain batik tulis canting tembaga asli Jawa Tengah.
           </p>
 
           {/* Quick Category Anchors (Horizontal swipeable on mobile) */}

@@ -11,7 +11,7 @@ import { formatRupiah } from '~/lib/currency';
  * - Zero-Radius (0px) precision geometry aligned with Quiet Luxury Nusantara standards.
  * - Tailored themes for each collection tier:
  *   - 'exclusive': Obsidian Canvas, Sutra ATBM & Prada Emas gold typography.
- *   - 'premium': Warm Ivory Canvas, Tenun Dobby & Furing Hero crisp typography.
+ *   - 'premium': Warm Ivory Canvas, Tenun Dobby & Lapis Trikot crisp typography.
  *   - 'default': Clean Mori Linen Canvas, Soga Matang accents & modern editorial layout.
  *
  * @param {{
@@ -32,6 +32,8 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
   const isOnSale =
     compareAtPrice &&
     parseFloat(compareAtPrice.amount) > parseFloat(price?.amount || 0);
+  const isOutOfStock = product.availableForSale === false;
+  const effectiveBadge = badge || (isOutOfStock ? 'HABIS TERJUAL' : null);
 
   const rawTitle = product.title || '';
   const displayTitle = rawTitle.toUpperCase();
@@ -79,19 +81,21 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
           </div>
         )}
 
-        {/* Status Badge: Custom Badge only if explicitly provided (No automatic 'PENAWARAN' badge) */}
-        {badge && (
+        {/* Status Badge: Custom Badge or Sold Out indicator synced from Shopify */}
+        {effectiveBadge && (
           <div className="absolute top-2.5 left-2.5 z-10">
             <span
               className={`text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold px-2.5 py-1 shadow-xs ${
-                isExclusive
+                isOutOfStock && !badge
+                  ? 'bg-[#111111]/85 text-white/90 border border-white/20 backdrop-blur-xs'
+                  : isExclusive
                   ? 'bg-[#111111]/90 text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-xs'
                   : isPremium
                   ? 'bg-[#7C3F1D] text-[#FAF8F5] border border-[#C5A059]/40'
                   : 'bg-[#111111] text-white'
               }`}
             >
-              {badge}
+              {effectiveBadge}
             </span>
           </div>
         )}

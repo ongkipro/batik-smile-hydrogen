@@ -44,10 +44,10 @@ export function SarimbitBentoSection({ collections = [] }) {
       handle: 'premium-series',
       title: 'Premium Series',
       subtitle:
-        'Tekstur tenun dobby berpadu furing katun hero sejuk untuk kenyamanan resepsi pernikahan dan jamuan resmi.',
+        'Tekstur tenun dobby dengan opsi lapisan trikot kokoh untuk kenyamanan resepsi pernikahan dan jamuan resmi.',
       stamp: 'PREMIUM',
       plate: 'SRM-02',
-      note: 'TENUN DOBBY & FURING HERO',
+      note: 'TENUN DOBBY & LAPIS TRIKOT',
       cta: 'LIHAT PREMIUM',
     },
     {
@@ -83,11 +83,12 @@ export function SarimbitBentoSection({ collections = [] }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pt-2 pb-2">
           {sarimbitPillars.map((pillar, idx) => {
             const found = collections.find((c) => c.handle === pillar.handle);
+            const displayTitle = found?.title || pillar.title;
             const imageUrl =
               found?.image?.url ||
               defaultFallbackImages[pillar.handle] ||
               '/banners/hero_editorial_banner.jpg';
-            const altText = found?.image?.altText || pillar.title;
+            const altText = found?.image?.altText || displayTitle;
 
             const isPillarPremium = pillar.handle === 'premium-series' || pillar.handle === 'sarimbit-premium';
             const isPillarLuxury = pillar.handle === 'luxury-series' || pillar.handle === 'sarimbit-luxury';
@@ -134,7 +135,7 @@ export function SarimbitBentoSection({ collections = [] }) {
                       </span>
 
                       <h3 className="font-serif text-xl sm:text-2xl font-normal leading-snug text-white group-hover:text-[#C5A059] transition-colors mb-2">
-                        {pillar.title}
+                        {displayTitle}
                       </h3>
 
                       <p className="text-[11px] text-[#E2DFD8]/85 font-light line-clamp-2 mb-3.5">

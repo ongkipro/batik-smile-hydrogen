@@ -42,6 +42,7 @@ async function loadCriticalData({ context, request, params }) {
         blogHandle: params.blogHandle,
         ...paginationVariables,
       },
+      cache: context.storefront.CacheShort(),
     }),
   ]);
 

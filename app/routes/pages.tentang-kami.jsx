@@ -82,7 +82,7 @@ export default function TentangKamiPage() {
               Dengan menggabungkan motif tradisional sarat filosofi dan sentuhan kontemporer, Batik Smile menghadirkan busana
               berkarakter dengan potongan yang nyaman serta pilihan palet warna yang elegan. Mulai dari katun primisima sejuk,
               tenun dobby timbul bertekstur anggun, hingga mahakarya sutra ATBM dan prada emas, setiap helai busana disempurnakan
-              dengan furing hero katun serta trikot premium demi kenyamanan terbaik saat dikenakan.
+              dengan jahitan presisi serta lapisan trikot pilihan demi kenyamanan terbaik saat dikenakan.
             </p>
 
             <p>
@@ -124,7 +124,7 @@ export default function TentangKamiPage() {
                 Kenyamanan Sejati
               </h3>
               <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
-                Pemilihan mori primisima adem, tenun dobby timbul, dan jahitan lapis furing katun hero standar butik keluarga.
+                Pemilihan mori primisima adem, tenun dobby timbul, dan jahitan presisi standar butik keluarga.
               </p>
             </div>
 

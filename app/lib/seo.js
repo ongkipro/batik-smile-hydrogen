@@ -196,7 +196,7 @@ export function generateCollectionMeta(collection, isAll = false) {
 
   if (isAll) {
     const title = `Katalog Lengkap Busana Batik — ${SITE_NAME}`;
-    const description = 'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga 3 kasta, kemeja pria lapis furing, dan kain batik tulis asli Batik Smile Semarang.';
+    const description = 'Jelajahi seluruh katalog busana batik modern, sarimbit keluarga 3 kasta, kemeja batik pria, busana wanita, dan kain batik tulis asli Batik Smile Semarang.';
     const canonicalUrl = `${ROOT_DOMAIN}/collections/all`;
     return buildSocialMeta({
       title,
@@ -231,7 +231,7 @@ export function generateCollectionMeta(collection, isAll = false) {
  */
 export function generateCollectionIndexMeta() {
   const title = `Koleksi Busana Batik & Sarimbit Keluarga — ${SITE_NAME}`;
-  const description = 'Koleksi lengkap busana batik modern, sarimbit keluarga 3 kasta, kemeja pria furing katun hero, dan kain batik tulis asli dari Butik Batik Smile Semarang.';
+  const description = 'Koleksi lengkap busana batik modern, sarimbit keluarga 3 kasta, kemeja batik pria, busana wanita, dan kain batik tulis asli dari Butik Batik Smile Semarang.';
   const canonicalUrl = `${ROOT_DOMAIN}/collections`;
 
   return buildSocialMeta({
@@ -391,7 +391,7 @@ export function generateSearchMeta(term) {
   const title = term
     ? `Pencarian: "${term}" — ${SITE_NAME}`
     : `Pencarian Katalog Busana Batik — ${SITE_NAME}`;
-  const description = 'Cari koleksi sarimbit keluarga, batik wanita modern, kemeja pria lapis furing hero, dan kain batik tulis asli Batik Smile Semarang.';
+  const description = 'Cari koleksi sarimbit keluarga, batik wanita modern, kemeja batik pria, dan kain batik tulis asli Batik Smile Semarang.';
   const canonicalUrl = `${ROOT_DOMAIN}/search`;
 
   return buildSocialMeta({

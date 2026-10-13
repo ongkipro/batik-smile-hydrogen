@@ -122,7 +122,7 @@ export function CartMain({ layout, cart: originalCart }) {
                 STANDAR BUTIK BATIK SMILE
               </span>
               <p className="leading-relaxed">
-                Garansi sambung pola simetris 100%, furing katun hero adem, dan layanan bebas penukaran ukuran jika busana kurang pas dicoba.
+                Garansi 100% Batik Indonesia, potongan pola simetris rapi, dan layanan bebas penukaran ukuran dalam 7 hari jika busana kurang pas dicoba.
               </p>
             </div>
           </div>
@@ -261,7 +261,7 @@ function CartEmpty({ layout }) {
       </h3>
       <div className="w-12 h-px bg-[#C5A059] mx-auto mb-4" />
       <p className="text-xs text-[#5A5550] font-light max-w-md mx-auto mb-8 leading-relaxed">
-        Eksplorasi mahakarya sarimbit keluarga 3 kasta, kemeja batik pria lapis furing katun hero sejuk, atau kain batik tulis canting 1-of-1 dari butik resmi kami di Semarang.
+        Eksplorasi mahakarya sarimbit keluarga 3 kasta, kemeja batik pria, busana wanita modern, atau kain batik tulis canting dari butik resmi kami di Semarang.
       </p>
 
       <div className="mb-10">

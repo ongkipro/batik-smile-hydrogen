@@ -18,7 +18,9 @@ export const meta = () => {
 export async function loader({ context }) {
   let shopData = null;
   try {
-    shopData = await context.storefront.query(POLICIES_QUERY);
+    shopData = await context.storefront.query(POLICIES_QUERY, {
+      cache: context.storefront.CacheShort(),
+    });
   } catch {
     // Graceful fallback
   }

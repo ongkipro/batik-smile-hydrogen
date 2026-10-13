@@ -141,6 +141,8 @@ export default function SearchPage() {
   );
 }
 
+const RETIRED_PAGE_HANDLES = new Set(['layanan-seragam', 'fasilitas-store']);
+
 /**
  * Regular search query
  */
@@ -164,10 +166,14 @@ async function regularSearch({ request, context }) {
       searchTerm: term,
       ...variables,
     },
+    cache: storefront.CacheShort(),
   });
 
-  const total = search?.totalCount ?? 0;
-  return { type: 'regular', term, result: { total, ...search } };
+  const filteredNodes = (search?.nodes || []).filter(
+    (node) => !(node.__typename === 'Page' && RETIRED_PAGE_HANDLES.has(node.handle)),
+  );
+  const total = filteredNodes.length;
+  return { type: 'regular', term, result: { total, ...search, nodes: filteredNodes } };
 }
 
 /**
@@ -188,6 +194,7 @@ async function predictiveSearch({ request, context }) {
       PREDICTIVE_SEARCH_QUERY,
       {
         variables: { limit, limitScope: 'EACH', searchTerm: term },
+        cache: storefront.CacheShort(),
       },
     );
 
@@ -195,7 +202,9 @@ async function predictiveSearch({ request, context }) {
     const products = safeResult.products || [];
     const collections = safeResult.collections || [];
     const articles = safeResult.articles || [];
-    const pages = safeResult.pages || [];
+    const pages = (safeResult.pages || []).filter(
+      (p) => !RETIRED_PAGE_HANDLES.has(p.handle),
+    );
     const queries = safeResult.queries || [];
 
     // Extract unique tags from products
@@ -210,6 +219,7 @@ async function predictiveSearch({ request, context }) {
       term,
       result: {
         ...safeResult,
+        pages,
         total,
         tags,
         items: {

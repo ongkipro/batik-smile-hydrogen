@@ -36,6 +36,7 @@ async function loadCriticalData({ context, request, params }) {
         country: context.storefront.i18n?.country,
         language: context.storefront.i18n?.language,
       },
+      cache: context.storefront.CacheShort(),
     }),
   ]);
 

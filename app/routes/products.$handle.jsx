@@ -38,25 +38,47 @@ function parseShopifyDescription(html) {
   if (!html) return { story: '', specs: [] };
 
   // Extract paragraphs (excluding ul)
-  const pMatches = html.match(/<p[^>]*>([\s\S]*?)<\/p>/gi) || [];
-  const story = pMatches
+  const withoutLists = html.replace(/<ul[^>]*>[\s\S]*?<\/ul>/gi, '').replace(/<ol[^>]*>[\s\S]*?<\/ol>/gi, '');
+  const pMatches = withoutLists.match(/<p[^>]*>([\s\S]*?)<\/p>/gi) || [];
+  let story = pMatches
     .map((p) => p.replace(/<[^>]+>/g, '').trim())
     .filter(Boolean)
     .join('\n\n');
 
+  if (!story) {
+    story = withoutLists
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/div>/gi, '\n\n')
+      .replace(/<[^>]+>/g, '')
+      .trim();
+  }
+
   // Extract li items
   const liMatches = html.match(/<li[^>]*>([\s\S]*?)<\/li>/gi) || [];
-  const specs = liMatches.map((li) => {
-    const raw = li.replace(/<\/?li[^>]*>/gi, '').trim();
-    const strongMatch = raw.match(/<strong[^>]*>([\s\S]*?)<\/strong>/i);
-    const label = strongMatch ? strongMatch[1].replace(/[:\s]+$/, '').trim() : '';
-    const value = raw
-      .replace(/<strong[^>]*>[\s\S]*?<\/strong>/i, '')
-      .replace(/<[^>]+>/g, '')
-      .replace(/^[:\s]+/, '')
-      .trim();
-    return { label, value: value || raw.replace(/<[^>]+>/g, '').trim() };
-  });
+  const specs = liMatches
+    .map((li) => {
+      const raw = li.replace(/<\/?li[^>]*>/gi, '').trim();
+      const strongMatch = raw.match(/<(?:strong|b)[^>]*>([\s\S]*?)<\/(?:strong|b)>/i);
+      if (strongMatch) {
+        const label = strongMatch[1].replace(/<[^>]+>/g, '').replace(/[:\s]+$/, '').trim();
+        const value = raw
+          .replace(/<(?:strong|b)[^>]*>[\s\S]*?<\/(?:strong|b)>/i, '')
+          .replace(/<[^>]+>/g, '')
+          .replace(/^[:\s]+/, '')
+          .trim();
+        return { label, value: value || raw.replace(/<[^>]+>/g, '').trim() };
+      }
+      const cleanText = raw.replace(/<[^>]+>/g, '').trim();
+      const colonIdx = cleanText.indexOf(':');
+      if (colonIdx > 0 && colonIdx < 35) {
+        return {
+          label: cleanText.slice(0, colonIdx).trim(),
+          value: cleanText.slice(colonIdx + 1).trim(),
+        };
+      }
+      return { label: '', value: cleanText };
+    })
+    .filter((item) => item.value);
 
   return { story, specs };
 }
@@ -103,6 +125,7 @@ async function loadCriticalData({ context, params, request }) {
   const [{ product }] = await Promise.all([
     storefront.query(PRODUCT_QUERY, {
       variables: { handle, selectedOptions: getSelectedProductOptions(request) },
+      cache: storefront.CacheShort(),
     }),
   ]);
 
@@ -755,7 +778,7 @@ export default function Product() {
 
             {/* Variant Option Selection (Only rendered if multiple variants exist) */}
             {hasMultipleVariants && (
-              <div>
+              <div className="space-y-4">
                 {productOptions.map((option) => (
                   <div key={option.name}>
                     <div className="mb-2.5">
@@ -774,13 +797,16 @@ export default function Product() {
                     <div className="flex flex-wrap gap-2.5">
                       {option.optionValues.map((val) => {
                         const isSelected = val.name === option.value;
+                        const isOptionAvailable = val.available !== false;
                         return (
                           <NavLink
                             key={val.name}
                             to={val.to}
                             preventScrollReset
                             replace
-                            className={`w-12 h-12 flex items-center justify-center text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors cursor-pointer ${
+                            className={`min-w-12 h-11 px-3.5 flex items-center justify-center text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors cursor-pointer ${
+                              !isOptionAvailable ? 'opacity-45 line-through' : ''
+                            } ${
                               isSelected
                                 ? isExclusiveTier
                                   ? 'bg-[#C5A059] !text-[#111111] font-bold border border-[#C5A059]'
@@ -1315,6 +1341,7 @@ const PRODUCT_FRAGMENT = `#graphql
             title
             handle
             productType
+            availableForSale
             priceRange {
               minVariantPrice {
                 amount

@@ -82,7 +82,7 @@ const SHOPIFY_MENU = {
     title: 'Luxury Series (Kasta Tertinggi)',
     handle: 'luxury-series',
     badge: 'Sutra Alam ATBM',
-    tailoringNotice: 'Layanan Jahitan Sarimbit & Seragam (Tanpa Minimal Order)',
+    allHref: '/collections/luxury-series',
     subcategories: [
       {
         name: 'Pria • Baju Kerja',
@@ -135,25 +135,25 @@ const SHOPIFY_MENU = {
     ],
     featuredProducts: [
       {
-        title: 'Sarimbit Mustard Gold',
-        price: 'Rp 1.450.000',
-        href: '/products/sarimbit-mustard-gold',
+        title: 'Sarimbit Sutra Pasangan',
+        price: 'Rp 1.850.000',
+        href: '/products/sarimbit-sutra-pasangan',
         image: 'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/WhatsApp_Image_2026-09-01_at_18.47.23.jpg?v=1788413858',
         tag: 'Luxury',
       },
       {
-        title: 'Sarimbit Charcoal Hitam',
-        price: 'Rp 1.250.000',
-        href: '/products/sarimbit-charcoal-hitam',
+        title: 'Sarimbit Royal Navy',
+        price: 'Rp 1.350.000',
+        href: '/products/sarimbit-royal-navy-1',
         image: 'https://cdn.shopify.com/s/files/1/0813/3224/0441/files/WhatsApp_Image_2026-09-01_at_18.47.24.jpg?v=1788413906',
         tag: 'Luxury',
       },
       {
-        title: 'Kemeja Motif Semarangan',
-        price: 'Rp 525.000',
-        href: '/products/kemeja-motif-semarangan',
+        title: 'Kebaya Encim Modern',
+        price: 'Rp 720.000',
+        href: '/products/kebaya-encim-modern',
         image: '/banners/hero_editorial_banner.jpg',
-        tag: 'Signature',
+        tag: 'Luxury',
       },
     ],
     editorial: {
@@ -171,7 +171,7 @@ const SHOPIFY_MENU = {
     title: 'Premium Series (Tenun Dobby)',
     handle: 'premium-series',
     badge: 'Tenun Dobby Timbul',
-    tailoringNotice: 'Layanan Jahitan Sarimbit & Seragam (Tanpa Minimal Order)',
+    allHref: '/collections/premium-series',
     subcategories: [
       {
         name: 'Pria • Baju Kerja',
@@ -717,9 +717,9 @@ export function MegaMenu({ onMenuStateChange }) {
                 {/* Bottom Bar: Trust Guarantees & Hotline */}
                 <div className="mt-6 pt-3.5 border-t border-[#E2DFD8] flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] text-[#5A5550] uppercase tracking-[0.14em]">
                   <div className="flex items-center gap-3 text-[#5A5550]">
-                    <span>&bull; Garansi 100% Batik Asli</span>
+                    <span>&bull; 100% Batik Indonesia</span>
                     <span>&bull; Bebas Tukar Ukuran 7 Hari</span>
-                    <span>&bull; Layanan Jahit Tanpa Minimal Order</span>
+                    <span>&bull; Pengiriman Seluruh Indonesia</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-[#9E7D3B] font-semibold">Hotline WhatsApp:</span>

@@ -14,40 +14,40 @@ export function ShowroomO2O() {
           <div className="lg:col-span-7 flex flex-col justify-between">
             <div>
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
-                PENGALAMAN OFFLINE-TO-ONLINE (O2O)
+                SHOWROOM &amp; BUTIK RESMI SEMARANG
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight">
-                Showroom Butik 3 Lantai &amp; Layanan Bespoke
+                Batik Smile Sampokong &amp; Batik Smile Sukun
               </h2>
               <p className="text-[#E2DFD8] text-xs sm:text-sm leading-relaxed mb-6 font-light">
-                Didirikan sejak 2007 di Semarang, Batik Smile menghadirkan butik fisik 3 lantai yang
-                nyaman di Simongan serta cabang Banyumanik. Rasakan langsung kemewahan tenun sutra ATBM
-                dan konsultasikan kebutuhan busana dan seragam keluarga Anda langsung di showroom kami.
+                Didirikan sejak 2007 di Semarang, Batik Smile menghadirkan showroom butik yang
+                nyaman di Simongan (Sampokong) serta Sukun (Banyumanik). Rasakan langsung kehalusan tenun sutra ATBM,
+                dobby bertekstur, hingga katun primisima untuk kebutuhan busana dan seragam keluarga Anda.
               </p>
 
-              {/* 3 Floors Breakdown Cards (0px radius) */}
+              {/* 2 Showroom Cards (0px radius) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div className="p-6 bg-[#1C1C1C] border border-white/10 hover:border-[#C5A059]/40 transition-colors">
                   <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
-                    LANTAI 1 &bull; RTW &amp; FITTING
+                    JL. SIMONGAN RAYA NO. 109
                   </span>
                   <h3 className="font-serif text-base font-semibold text-white mb-1.5">
-                    Ready-to-Wear Eksklusif
+                    Batik Smile Sampokong
                   </h3>
                   <p className="text-[11px] text-[#A69F96] leading-relaxed font-light">
-                    Koleksi sarimbit keluarga, kemeja pria lapis furing hero, blus &amp; dress wanita siap pakai dengan ruang ganti privat.
+                    Koleksi sarimbit keluarga, kemeja pria, blus &amp; dress wanita siap pakai, serta galeri kain batik tulis dengan ruang ganti yang nyaman.
                   </p>
                 </div>
 
                 <div className="p-6 bg-[#1C1C1C] border border-white/10 hover:border-[#C5A059]/40 transition-colors">
                   <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
-                    LANTAI 2 &bull; KAIN &amp; BESPOKE
+                    JL. SUKUN RAYA NO. 23
                   </span>
                   <h3 className="font-serif text-base font-semibold text-white mb-1.5">
-                    Galeri Kain Tulis &amp; VIP Lounge
+                    Batik Smile Sukun
                   </h3>
                   <p className="text-[11px] text-[#A69F96] leading-relaxed font-light">
-                    Ribuan lembaran kain batik tulis, cap, dobby timbul, sutra ATBM, dan lounge konsultasi jahit tanpa minimal order.
+                    Showroom strategis di kawasan Banyumanik dengan koleksi lengkap busana kerja, kasual harian, sarimbit keluarga, dan batik anak.
                   </p>
                 </div>
               </div>
@@ -68,7 +68,7 @@ export function ShowroomO2O() {
             <div className="border border-[#C5A059]/40 relative group overflow-hidden bg-[#1C1C1C] w-full min-h-[440px] sm:min-h-[500px] flex flex-col justify-end">
               <img
                 src="/brand/showroom/showroom_interior_textiles.jpeg"
-                alt="Showroom Butik Batik Smile Simongan"
+                alt="Showroom Butik Batik Smile Sampokong"
                 width="800"
                 height="1000"
                 loading="lazy"
@@ -77,10 +77,10 @@ export function ShowroomO2O() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end z-10">
                 <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-[#C5A059] mb-1">
-                  SEMARANG FLAGSHIP SHOWROOM
+                  BUTIK &amp; SHOWROOM RESMI
                 </span>
                 <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-1.5">
-                  Gedung Batik Smile 3 Lantai
+                  Batik Smile Sampokong
                 </h3>
                 <p className="text-xs text-[#E2DFD8] mb-2 font-light">
                   Jl. Simongan Raya No. 109, Pamularsih, Semarang
@@ -92,7 +92,7 @@ export function ShowroomO2O() {
                   to="/pages/lokasi-toko"
                   className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#C5A059] hover:text-white flex items-center gap-1.5"
                 >
-                  <span>Lihat Petunjuk Arah &amp; Cabang Banyumanik</span>
+                  <span>Lihat Petunjuk Arah &amp; Batik Smile Sukun</span>
                   <span>&rarr;</span>
                 </Link>
               </div>

@@ -59,12 +59,47 @@ export async function loader({ context }) {
   const fallbackProducts = data?.fallbackProducts?.nodes || [];
   const allNewest = data?.newestProducts?.nodes || [];
 
-  const womenFromTags = allNewest.filter((p) =>
-    (p.tags || []).map((t) => t.toLowerCase()).includes('wanita'),
-  );
-  const menFromTags = allNewest.filter((p) =>
-    (p.tags || []).map((t) => t.toLowerCase()).includes('pria'),
-  );
+  const isSarimbitItem = (p) => {
+    const tags = (p.tags || []).map((t) => t.toLowerCase());
+    const title = (p.title || '').toLowerCase();
+    return (
+      (tags.includes('wanita') && tags.includes('pria')) ||
+      title.includes('sarimbit') ||
+      title.includes('couple')
+    );
+  };
+
+  const allWomenTagged = allNewest.filter((p) => {
+    const tags = (p.tags || []).map((t) => t.toLowerCase());
+    const title = (p.title || '').toLowerCase();
+    return (
+      tags.includes('wanita') ||
+      title.includes('kebaya') ||
+      title.includes('gamis') ||
+      title.includes('blus') ||
+      title.includes('tunik') ||
+      title.includes('outer') ||
+      title.includes('daster')
+    );
+  });
+  const dedicatedWomen = allWomenTagged.filter((p) => !isSarimbitItem(p));
+  const sharedWomen = allWomenTagged.filter((p) => isSarimbitItem(p));
+  const womenFromTags = [...dedicatedWomen, ...sharedWomen];
+
+  const allMenTagged = allNewest.filter((p) => {
+    const tags = (p.tags || []).map((t) => t.toLowerCase());
+    const title = (p.title || '').toLowerCase();
+    return (
+      tags.includes('pria') ||
+      title.includes('kemeja') ||
+      title.includes('hem ') ||
+      title.startsWith('hem-') ||
+      title.includes('celana')
+    );
+  });
+  const dedicatedMen = allMenTagged.filter((p) => !isSarimbitItem(p));
+  const sharedMen = allMenTagged.filter((p) => isSarimbitItem(p));
+  const menFromTags = [...dedicatedMen, ...sharedMen];
 
   const womenProducts =
     womenFromTags.length > 0
@@ -100,7 +135,7 @@ export async function loader({ context }) {
       ? anakFromCollectionOrTags.slice(0, 6)
       : fallbackProducts.slice(0, 6);
 
-  // 8 Recent Newest Products feed (sorted by CREATED_AT reverse from Shopify)
+  // 8 Recent Updated/Newest Products feed (sorted by UPDATED_AT reverse from Shopify)
   let newestProducts = allNewest.slice(0, 8);
   if (newestProducts.length < 8 && fallbackProducts.length > 0) {
     const existingIds = new Set(newestProducts.map((p) => p.id));
@@ -195,6 +230,7 @@ const HOMEPAGE_QUERY = `#graphql
     title
     handle
     productType
+    availableForSale
     priceRange {
       minVariantPrice {
         amount
@@ -291,7 +327,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    newestProducts: products(first: 30, sortKey: CREATED_AT, reverse: true) {
+    newestProducts: products(first: 50, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...ProductCardItem
         tags
@@ -303,7 +339,7 @@ const HOMEPAGE_QUERY = `#graphql
         }
       }
     }
-    fallbackProducts: products(first: 8, sortKey: UPDATED_AT, reverse: true) {
+    fallbackProducts: products(first: 8, sortKey: CREATED_AT, reverse: true) {
       nodes {
         ...ProductCardItem
       }
