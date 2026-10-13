@@ -39,7 +39,7 @@ export const meta = ({ data }) => {
     handle: 'layanan-seragam',
     customTitle: 'Layanan Seragam & Jahit Kustom — Tanpa Minimal Order | Batik Smile',
     customDescription:
-      'Spesialis pengadaan seragam batik instansi medis, korporat, dan keluarga pernikahan tanpa minimal order. Portofolio RS Bhayangkara, RSUD dr. Adhyatma, dan perbankan.',
+      'Spesialis pengadaan busana seragam batik instansi, kantor, korporasi, dan keluarga pernikahan tanpa minimal order di Semarang.',
   });
 };
 
@@ -116,46 +116,7 @@ export default function LayananSeragamPage() {
           </div>
         </div>
 
-        {/* 3. Client Portfolio (Frameless Clean Architecture) */}
-        <div className="pt-14 sm:pt-16 border-t border-[#E2DFD8] mb-16 sm:mb-20">
-          <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-1.5">
-              PORTOFOLIO KLIEN
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal tracking-wide">
-              Dipercaya Medis &amp; Korporasi
-            </h2>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-left sm:text-center">
-            <div className="pt-4 border-t border-[#E2DFD8]">
-              <strong className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#111111] mb-1">
-                RS Bhayangkara Semarang
-              </strong>
-              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
-                Pengadaan seragam batik medis &amp; staf rumah sakit.
-              </p>
-            </div>
-
-            <div className="pt-4 border-t border-[#E2DFD8]">
-              <strong className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#111111] mb-1">
-                RSUD Tugurejo Semarang
-              </strong>
-              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
-                Busana batik formal tenaga kesehatan Jawa Tengah.
-              </p>
-            </div>
-
-            <div className="pt-4 border-t border-[#E2DFD8]">
-              <strong className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#111111] mb-1">
-                Perbankan &amp; Publik
-              </strong>
-              <p className="text-[11px] text-[#5A5550] font-light leading-relaxed">
-                Seragam frontliner, wisuda, &amp; jamuan keluarga besar.
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* 4. Simple 4-Step Flow (Frameless) */}
         <div className="pt-14 sm:pt-16 border-t border-[#E2DFD8] mb-16 sm:mb-20">
