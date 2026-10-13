@@ -381,7 +381,7 @@ export default function Collection() {
               {/* Left Column: Collection Title & Shopify Description */}
               <div className="lg:col-span-7 flex flex-col justify-center">
                 <span className="text-xs sm:text-sm uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] block mb-2 sm:mb-3">
-                  KATALOG BUSANA BATIK NUSANTARA
+                  {isEkonomi ? 'EKONOMI SERIES • KATUN PRIMISIMA SEJUK' : 'KATALOG BUSANA BATIK NUSANTARA'}
                 </span>
 
                 <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] leading-tight mb-3 sm:mb-4">
@@ -406,9 +406,11 @@ export default function Collection() {
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#7C3F1D] font-medium pt-4 border-t border-[#E2DFD8]">
                   {isEkonomi ? (
                     <>
-                      <span>100% Katun Adem</span>
+                      <span>Harga Terjangkau</span>
                       <span className="text-[#C5A059]">&bull;</span>
-                      <span>Bebas Tukar Ukuran</span>
+                      <span>Nyaman Dipakai</span>
+                      <span className="text-[#C5A059]">&bull;</span>
+                      <span>Awet untuk Aktivitas</span>
                     </>
                   ) : (
                     <>
