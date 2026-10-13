@@ -42,11 +42,11 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
   }, []);
 
   return (
-    <div className="sticky top-0 z-40 w-full transition-all">
+    <>
       <AnnouncementBar />
 
       <header
-        className={`w-full transition-all duration-300 relative z-50 ${
+        className={`sticky top-0 z-40 w-full transition-all duration-300 relative ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-[#E2DFD8] shadow-[0_2px_15px_rgba(0,0,0,0.04)]'
             : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
@@ -113,7 +113,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
           </div>
         </div>
       </header>
-    </div>
+    </>
   );
 }
 

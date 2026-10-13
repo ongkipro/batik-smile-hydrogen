@@ -6,7 +6,7 @@ import { CartForm } from '@shopify/hydrogen';
  * Master Footer: Quiet Luxury Nusantara
  * - Brand: BATIK SMILE (without 'Nusantara')
  * - High-legibility typography hierarchy (no micro-fonts < 11px)
- * - Official Showroom locations (Flagship Simongan 109 3-Lantai & Banyumanik 23)
+ * - Official Showroom locations (Batik Smile Sampokong & Batik Smile Sukun)
  * - Zero Border Radius (0px), Quad-Harmonic Palette, Pristine Craftsmanship
  */
 export function Footer() {
@@ -114,10 +114,7 @@ export function Footer() {
             </h4>
             <div className="space-y-5 text-[#C5BFB8] leading-relaxed text-[13px] sm:text-sm">
               <div className="border-l border-[#C5A059] pl-3.5 space-y-1">
-                <div className="flex items-center justify-between">
-                  <strong className="text-white font-medium text-sm">Flagship Store (3 Lantai):</strong>
-                  <span className="text-[10px] uppercase tracking-wider bg-white/10 text-[#C5A059] px-2 py-0.5 font-bold font-mono border border-[#C5A059]/40">UTAMA</span>
-                </div>
+                <strong className="text-white font-medium text-sm block">Batik Smile Sampokong</strong>
                 <span className="block text-[#D1CCC5]">Jl. Simongan Raya No. 109, Pamularsih, Semarang</span>
                 <span className="text-xs text-[#9E978E] block">
                   Lt. 1: RTW &amp; Fitting • Lt. 2: VIP Sutra &amp; Lounge • Lt. 3: Suvenir
@@ -131,8 +128,8 @@ export function Footer() {
                 </span>
               </div>
 
-              <div className="border-l border-[#C5A059]/50 pl-3.5 space-y-1">
-                <strong className="text-white font-medium text-sm block">Cabang Semarang Atas:</strong>
+              <div className="border-l border-[#C5A059] pl-3.5 space-y-1">
+                <strong className="text-white font-medium text-sm block">Batik Smile Sukun</strong>
                 <span className="block text-[#D1CCC5]">Jl. Sukun Raya No. 23, Banyumanik, Semarang</span>
                 <span className="text-[#C5A059] inline-flex items-center gap-1.5 pt-1 text-xs font-medium">
                   <svg className="w-3.5 h-3.5 text-[#C5A059]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -369,40 +366,28 @@ export function Footer() {
           </div>
         </div>
 
-        {/* 4. BOTTOM BAR: PROFESSIONAL TRUST GUARANTEES & LEGAL COMPLIANCE */}
-        <div className="pt-8 border-t border-white/10 space-y-4">
-          {/* Trust Guarantees */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2 text-[11px] sm:text-xs text-[#E2DFD8] uppercase tracking-[0.16em] font-medium">
-            <span>100% BATIK ASLI</span>
-            <span className="text-[#C5A059]">&bull;</span>
-            <span>BEBAS TUKAR UKURAN</span>
-            <span className="text-[#C5A059]">&bull;</span>
-            <span>PENGIRIMAN SELURUH INDONESIA</span>
+        {/* 4. BOTTOM BAR: PROFESSIONAL COPYRIGHT & LEGAL COMPLIANCE */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#A69F96] tracking-[0.12em] uppercase">
+          <div className="text-center md:text-left">
+            &copy; {new Date().getFullYear()} BATIK SMILE. SELURUH HAK CIPTA DILINDUNGI.
           </div>
 
-          {/* Professional Copyright & Legal Compliance Bar */}
-          <div className="pt-3 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#A69F96] tracking-[0.12em] uppercase">
-            <div className="text-center md:text-left">
-              &copy; {new Date().getFullYear()} BATIK SMILE. SELURUH HAK CIPTA DILINDUNGI.
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-center">
-              <NavLink to="/policies/privacy-policy" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
-                KEBIJAKAN PRIVASI
-              </NavLink>
-              <span className="text-white/20">|</span>
-              <NavLink to="/policies/terms-of-service" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
-                SYARAT &amp; KETENTUAN
-              </NavLink>
-              <span className="text-white/20">|</span>
-              <NavLink to="/policies/refund-policy" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
-                GARANSI &amp; PENGEMBALIAN
-              </NavLink>
-              <span className="text-white/20">|</span>
-              <NavLink to="/sitemap.xml" reloadDocument className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
-                PETA SITUS
-              </NavLink>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-center">
+            <NavLink to="/policies/privacy-policy" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+              KEBIJAKAN PRIVASI
+            </NavLink>
+            <span className="text-white/20">|</span>
+            <NavLink to="/policies/terms-of-service" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+              SYARAT &amp; KETENTUAN
+            </NavLink>
+            <span className="text-white/20">|</span>
+            <NavLink to="/policies/refund-policy" className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+              GARANSI &amp; PENGEMBALIAN
+            </NavLink>
+            <span className="text-white/20">|</span>
+            <NavLink to="/sitemap.xml" reloadDocument className="hover:text-[#C5A059] transition-colors whitespace-nowrap">
+              PETA SITUS
+            </NavLink>
           </div>
         </div>
       </div>
