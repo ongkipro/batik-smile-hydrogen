@@ -248,9 +248,8 @@ const SHOPIFY_MENU = {
     editorial: {
       image: '/banners/hero_editorial_banner.jpg',
       eyebrow: 'KASTA II • TENUN DOBBY',
-      headline: 'Harmoni Tekstur & Kenyamanan Pesta',
       description:
-        'Kombinasi serat tenun dobby bertekstur timbul mewah dengan furing hero katun sejuk. Tahan kusut untuk perhelatan seharian.',
+        'Koleksi batik dengan pilihan bahan berkualitas yang menghadirkan kenyamanan dan tampilan elegan. Tersedia dengan opsi lapisan trikot untuk memberikan struktur yang lebih rapi dan kokoh, sesuai kebutuhan dan preferensi Anda.',
       ctaText: 'JELAJAHI PREMIUM SERIES',
       ctaHref: '/collections/premium-series',
       isExternal: false,

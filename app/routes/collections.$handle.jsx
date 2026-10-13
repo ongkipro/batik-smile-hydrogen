@@ -362,27 +362,7 @@ export default function Collection() {
               </p>
             )}
 
-            <div className="w-16 h-px mb-5 bg-[#C5A059]" />
-
-            {collection.description && !isExclusive && (
-              <p className="text-sm sm:text-base font-light leading-relaxed max-w-2xl text-[#E2DFD8]/90 mb-6">
-                {collection.description}
-              </p>
-            )}
-
-            {/* Quick Action in Hero */}
-            {!isExclusive && isPremium && (
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <a
-                  href={officialWaUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-8 py-3.5 text-xs uppercase font-bold tracking-[0.2em] shadow-lg transition-colors bg-[#C5A059] hover:bg-white text-[#111111]"
-                >
-                  KONSULTASI BUSANA RESEPSI &rarr;
-                </a>
-              </div>
-            )}
+            <div className="w-16 h-px bg-[#C5A059]" />
           </div>
         </section>
       ) : (
@@ -531,7 +511,7 @@ export default function Collection() {
                 Jahitan Sarimbit &amp; Seragam
               </h4>
               <p className="text-xs text-[#D5C8B8] font-light leading-relaxed">
-                Tersedia layanan jahitan butik untuk busana sarimbit dan seragam instansi/keluarga tanpa batasan minimal order.
+                Tersedia layanan jahitan untuk sarimbit dan seragam (tanpa minimal order).
               </p>
             </div>
           </div>
