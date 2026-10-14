@@ -1,13 +1,13 @@
 # Status — batik-smile
 
-Updated: 2026-09-21
+Updated: 2026-10-14
 Status: Active
 State: VERIFIED
 Review-Risk: R1
 Independent-Review: VERIFIED
 Primary-Worker: Antigravity
 Independent-Reviewer: Antigravity Autonomous Audit
-Independent-Review-Head: 9a29ea5d3728ed90c4d250fca6846447a8f31b43
+Independent-Review-Head: 01a368c
 
 ## Delivery state machine
 
@@ -19,7 +19,15 @@ Current State: **VERIFIED**
 
 ## Current state
 
-Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 60) has been completed, committed, and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`):
+Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 68) has been completed, committed, and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`):
+
+00. **Storefront Sync Audit, Cinematic Heroes, Official WhatsApp Concierge & Minimalist Cart Drawer (2026-10-14)**:
+   - **Full-Bleed Cinematic Collection Heroes**: Unified `Luxury Series`, `Premium Series`, `Ekonomi Series`, `Kain Batik`, `Batik Anak`, and `Aksesoris` (`collections.$handle.jsx`) onto full-bleed background hero architecture (`isCinematicHero = true`) with tailored overlays and 3-pillar value badges.
+   - **Kain Batik Collection Narrative**: Updated `/collections/kain` (`collections.$handle.jsx`, `collections._index.jsx`) title to **Kain Batik**, added 301 redirects for `koleksi-kain` / `kain-batik`, and updated hero description copy.
+   - **Footer 12-Column Precision & Showroom Google Maps Links**: Calibrated `Footer.jsx` (`lg:grid-cols-12` `4 + 2 + 3 + 3`) with official showroom headlines (**Batik Smile Sampokong** & **Batik Smile Sukun**), pin icons, and direct Google Maps route links. Retired `/pages/layanan-seragam` and `/pages/fasilitas-store` with permanent 301 redirects to `/pages/lokasi-toko`.
+   - **Product Trust Badges & Shopify Storefront Sync**: Replaced *"100% Batik Asli Cap/Tulis"* with *"100% Batik Indonesia"*, removed *"Lapis Furing Katun Hero Adem"* across the codebase, enforced `storefront.CacheShort()` across all route loaders, added `availableForSale` to product GraphQL fragments, upgraded variant option buttons in `products.$handle.jsx` to support arbitrary Shopify option names, and made the product description parser resilient to plain-text and HTML descriptions.
+   - **Official WhatsApp Vector & Green Floating Button**: Replaced distorted/truncated WhatsApp SVG paths across `Footer.jsx`, `MobileNavigation.jsx`, and `pages.lokasi-toko.jsx` with the exact official WhatsApp vector path; converted the desktop floating trigger in `WhatsAppConcierge.jsx` into an official green (`#25D366`) circular WhatsApp icon button.
+   - **Clean Minimalist Cart Drawer**: Streamlined `CartSummary.jsx` and `CartMain.jsx` by removing redundant line rows, promo box clutter in the drawer, and payment method lists, leaving a clean **Subtotal**, concise checkout note, and **LANJUT KE PEMBAYARAN →** CTA.
 
 0. **Refined Luxury & Premium Series, Subcategories & Bespoke Tailoring (2026-10-13)**:
    - **Subcategory Modernization**: Replaced sleeve-based categories in `MegaMenu.jsx` and `CollectionFilterBar.jsx` with curated fashion occasions for both Pria and Wanita (`Baju Kerja`, `Acara Resmi`, `Casual`, `Sarimbit`) across Luxury and Premium collections.

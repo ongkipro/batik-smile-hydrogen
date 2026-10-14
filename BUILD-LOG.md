@@ -1523,11 +1523,29 @@
 - `npm run build`: Exit code 0 (SSR + Oxygen client build in 1.69s).
 - All tier surfaces rendered and verified on desktop and mobile viewports.
 
+---
 
+## Milestone 55: Storefront Sync Audit, Cinematic Heroes, Official WhatsApp Concierge & Minimalist Cart Drawer (2026-10-14)
+**Date**: 2026-10-14 | **Execution**: Full Shopify–Hydrogen synchronization, full-bleed collection heroes, precision 12-column footer with Google Maps links, official WhatsApp vector & green floating button, Kain Batik narrative, and clean minimalist Cart Drawer
 
+### 1. Architectural & UI/UX Updates
+- **Full-Bleed Cinematic Collection Heroes (`app/routes/collections.$handle.jsx`, `app/routes/collections._index.jsx`)**:
+  - Standardized all core collections (`Luxury Series`, `Premium Series`, `Ekonomi Series`, `Kain Batik`, `Batik Anak`, `Aksesoris`) onto full-bleed background hero banners (`isCinematicHero = true`) with curated value badges.
+  - Updated `/collections/kain` title to **Kain Batik**, added 301 redirects for `koleksi-kain` and `kain-batik`, and updated the hero description copy.
+- **Footer 12-Column Precision & Showroom Google Maps Links (`app/components/Footer.jsx`, `app/routes/pages.lokasi-toko.jsx`)**:
+  - Calibrated `Footer.jsx` to a 12-column grid (`4 + 2 + 3 + 3`) featuring official showroom headlines (**Batik Smile Sampokong** & **Batik Smile Sukun**), pin icons, and direct Google Maps links.
+  - Retired `/pages/layanan-seragam` and `/pages/fasilitas-store` via permanent 301 redirects to `/pages/lokasi-toko`.
+- **Shopify–Hydrogen Sync & Product Trust Badges (`app/routes/products.$handle.jsx`, `app/routes/_index.jsx`, `app/routes/collections.all.jsx`)**:
+  - Enforced `storefront.CacheShort()` across all route loaders, added `availableForSale` to product GraphQL fragments, updated homepage queries to `sortKey: UPDATED_AT`, added `?gender=` and `?sleeve=` filtering to `/collections/all`, and made PDP option buttons and description parsing resilient to dynamic Shopify product updates.
+  - Updated product guarantee badge to *"100% Batik Indonesia"* and removed all *"Furing Katun Hero"* references.
+- **Official WhatsApp Vector & Green Floating Button (`app/components/WhatsAppConcierge.jsx`, `app/components/Footer.jsx`, `app/components/MobileNavigation.jsx`)**:
+  - Replaced distorted/truncated WhatsApp SVG paths across the storefront with the mathematically exact official WhatsApp vector path.
+  - Replaced the desktop floating text pill with an official green (`#25D366`) circular WhatsApp icon button (`w-14 h-14 rounded-full`).
+- **Clean Minimalist Cart Drawer (`app/components/CartSummary.jsx`, `app/components/CartMain.jsx`)**:
+  - Simplified the Cart Drawer summary to display **Subtotal**, a concise single-line checkout note (*"Ongkos kirim & kode promo dihitung saat checkout."*), and the **LANJUT KE PEMBAYARAN →** CTA button, eliminating redundant rows and payment method lists.
 
-
-
-
-
-
+### 2. Verification & Deployment Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (SSR + Oxygen client build).
+- Deployed to Shopify Oxygen via GitHub Actions runs `38465725685` (`ed989bb`), `38468185212` (`4a047af`), `38468618670` (`4e0844f`), and `38468914337` (`01a368c`).
+- Verified live HTTP 200 OK across `https://batiksmile.com/` and `https://batiksmile.com/collections/kain`.

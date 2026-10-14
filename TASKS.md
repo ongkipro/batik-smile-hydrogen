@@ -1351,19 +1351,32 @@
     - Updated Premium Series copy and 2-option Lapisan Trikot (*Dengan Trikot* vs *Tanpa Trikot*) across storefront and synced to Shopify Admin Collection metadata via GraphQL mutation.
   - *Evidence*: `npm run lint` 0 errors, 0 warnings; `npm run build` exit code 0; localhost:3000 (`revenleather.com`) and localhost:3001 (`batiksmile`) verified HTTP 200 OK.
 
+---
 
+## Phase 67: Cinematic Collection Heroes, Showroom Footer Precision & Shopify Storefront Sync (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/routes/collections.$handle.jsx, app/components/Footer.jsx, app/routes/products.$handle.jsx, app/routes/_index.jsx, app/routes/collections.all.jsx*
 
+- [x] **Task 67.1: Full-Bleed Cinematic Hero Across Core Collections**
+  - *Action*: Unified `Ekonomi Series`, `Kain Batik`, `Batik Anak`, and `Aksesoris` (`collections.$handle.jsx`) onto full-bleed background hero architecture (`isCinematicHero = true`) with tailored scrim overlays and 3-pillar value badges. Removed *"Jahit Bespoke Tanpa MOQ • Garansi Butik Resmi"* from Kain hero.
+  - *Evidence*: Verified HTTP 200 and full-bleed hero markup on `/collections/ekonomi-series`, `/collections/kain`, `/collections/batik-anak`, and `/collections/aksesoris`.
+- [x] **Task 67.2: Announcement Bar, Footer 12-Col Grid & Showroom Google Maps Links**
+  - *Action*: Made announcement bar non-sticky with copy *"BATIK BERKUALITAS • LAYANAN MAKSIMAL • HARGA BERSAHABAT"*. Updated `Footer.jsx` to precision 12-column grid (`4 + 2 + 3 + 3`) with official showroom titles (**Batik Smile Sampokong** & **Batik Smile Sukun**), pin icons, and Google Maps route links. Retired `/pages/layanan-seragam` and `/pages/fasilitas-store` via permanent 301 redirects to `/pages/lokasi-toko`.
+  - *Evidence*: Verified 301 redirects and footer layout on `localhost:3001` and `batiksmile.com`.
+- [x] **Task 67.3: Product Badges & Full Shopify Storefront Sync Audit**
+  - *Action*: Replaced *"100% Batik Asli Cap/Tulis"* with *"100% Batik Indonesia"* and purged all *"Furing Katun Hero"* references. Enforced `storefront.CacheShort()` across all route loaders, added `availableForSale` to product GraphQL fragments, updated `_index.jsx` to `sortKey: UPDATED_AT`, added `?gender=` and `?sleeve=` filtering to `collections.all.jsx`, and made `products.$handle.jsx` option buttons and description parser resilient to dynamic Shopify product updates.
+  - *Evidence*: Deployed via commit `ed989bb` (GitHub Actions run `38465725685`), verified HTTP 200 on live production.
 
+---
 
+## Phase 68: Official WhatsApp Concierge Icons, Kain Batik Narrative & Clean Minimalist Cart Drawer (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/components/Footer.jsx, app/components/WhatsAppConcierge.jsx, app/components/MobileNavigation.jsx, app/routes/collections.$handle.jsx, app/components/CartSummary.jsx, app/components/CartMain.jsx*
 
-
-
-
-
-
-
-
-
-
-
-
+- [x] **Task 68.1: Official WhatsApp SVG Vector & Green Floating Concierge Button**
+  - *Action*: Replaced distorted/truncated WhatsApp SVG paths in `Footer.jsx`, `MobileNavigation.jsx`, and `pages.lokasi-toko.jsx` with the complete official WhatsApp vector path. Replaced the desktop floating text pill in `WhatsAppConcierge.jsx` with an official green (`#25D366`) circular WhatsApp icon button (`w-14 h-14 rounded-full`).
+  - *Evidence*: Deployed via commit `4a047af` (GitHub Actions run `38468185212`).
+- [x] **Task 68.2: Kain Batik Collection Title & Editorial Copy**
+  - *Action*: Updated `/collections/kain` (`collections.$handle.jsx` and `collections._index.jsx`) to display **Kain Batik** as collection title with the new editorial description: *"Temukan beragam pilihan kain batik dengan motif dan warna yang memikat, mulai dari sentuhan klasik hingga desain modern. Cocok untuk kreasi busana personal, seragam, maupun kebutuhan sarimbit, dengan pilihan kain yang dapat disesuaikan dengan gaya dan kebutuhan Anda."*
+  - *Evidence*: Deployed via commit `4e0844f` (GitHub Actions run `38468618670`), verified live on `https://batiksmile.com/collections/kain`.
+- [x] **Task 68.3: Clean Minimalist Cart Drawer UI/UX**
+  - *Action*: Streamlined `CartSummary.jsx` and `CartMain.jsx` aside drawer by removing redundant headers, duplicate cost breakdown rows, promo input clutter in the drawer, and payment method lists, keeping only a clean **Subtotal** row, concise checkout note (*"Ongkos kirim & kode promo dihitung saat checkout."*), and **LANJUT KE PEMBAYARAN →** CTA.
+  - *Evidence*: Deployed via commit `01a368c` (GitHub Actions run `38468914337`), `npm run lint` 0 errors, `npm run build` exit code 0, verified live on `https://batiksmile.com`.
