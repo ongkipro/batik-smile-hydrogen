@@ -7,14 +7,14 @@
 
 ## 1. Active Release Manifest
 
-- **Release ID**: `REL-20260903-SPECS-V2`
-- **Base Commit**: `HEAD`
-- **Target Environment**: Production (`Shopify Oxygen Global Edge`)
-- **Declared Risk**: `R0` (Architecture & Specification Verification)
-- **Review Risk**: `R0`
-- **Effective Release Risk**: `R0` (Documentation, Design Tokens, & Static Asset Baseline)
-- **Independent Review**: `PENDING`
-- **Readiness Status**: `READY_FOR_SCAFFOLDING`
+- **Release ID**: `REL-20261014-PRODUCTION-SYNC`
+- **Base Commit**: `01a368c` (`HEAD`)
+- **Target Environment**: Production (`Shopify Oxygen Global Edge` — `https://batiksmile.com`)
+- **Declared Risk**: `R2` (Storefront UI/UX, Route Loaders, Real-Time CacheShort Sync & Cart Drawer Streamlining)
+- **Review Risk**: `R2`
+- **Effective Release Risk**: `R2`
+- **Independent Review**: `PASSED`
+- **Readiness Status**: `VERIFIED_IN_PRODUCTION`
 
 ---
 
@@ -51,11 +51,12 @@ git push origin main
 
 ## 4. Verification & Release Gate Checklist
 
-- [x] All 6 canonical Markdown specifications verified and cross-referenced with zero drift.
+- [x] All canonical Markdown specifications verified and cross-referenced with zero drift.
 - [x] Official brand logo asset copied to `public/brand/batik-smile-logo.png`.
-- [x] Three Quiet Luxury editorial banner assets generated and stored in `public/banners/`.
-- [x] Dual-engine commerce architecture verified (RTW 3-Tier + Raw Fabric & Bespoke Tailoring).
-- [x] Verified company profile details incorporated (Simongan Flagship 3 Floors & Banyumanik store).
-- [ ] Framework scaffolding verification (`npm run build` exits with code 0).
-- [ ] Storefront API GraphQL query cost verified (< 250 points).
-- [ ] Post-deploy edge probes pass 100% in `OBSERVABILITY.md`.
+- [x] Quiet Luxury editorial banner assets generated and stored in `public/banners/`.
+- [x] 6 Core Collections (`luxury-series`, `premium-series`, `ekonomi-series`, `kain`, `batik-anak`, `aksesoris`) verified with full-bleed cinematic heroes and 30+ legacy 301 redirects.
+- [x] Official showroom names (**Batik Smile Sampokong** & **Batik Smile Sukun**) with Google Maps deep-links and retired pages (`/pages/layanan-seragam`, `/pages/fasilitas-store`) 301-redirected to `/pages/lokasi-toko`.
+- [x] Official WhatsApp SVG geometry, green circular floating concierge button (`#25D366`), **Kain Batik** editorial copy, and clean minimalist Cart Drawer verified.
+- [x] Framework build and lint verification (`npm run lint` 0 errors, `npm run build` exits with code 0).
+- [x] Storefront API GraphQL query cost verified (< 250 points) with `CacheShort()` real-time synchronization.
+- [x] Post-deploy edge probes pass 100% in `OBSERVABILITY.md` (GitHub Actions run `38468914337` green).

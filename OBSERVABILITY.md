@@ -56,22 +56,22 @@ Batik Smile Nusantara enforces strict quiet-luxury performance budgets to ensure
    - Ultra-lean client bundle (< 180kb gzipped total JavaScript).
    - Island hydration: Static text and product grids render purely via edge SSR; client islands only hydrate interactive elements (Drawer Cart, Family Bundle Builder, Predictive Search).
    - React Router v7 optimistic UI actions for instant 0ms cart updates.
-4. **Oxygen Edge Optimization (TTFB < 80ms)**:
+4. **Oxygen Edge Optimization & Real-Time Sync (TTFB < 80ms)**:
    - Global Anycast edge network with sub-50ms routing from Southeast Asia (Singapore / Jakarta edge nodes).
-   - Static collection and product detail subrequests leverage Oxygen `CacheLong()` (`max-age=3600`, `stale-while-revalidate=86400`).
+   - Storefront queries and SSR responses enforce Oxygen `CacheShort()` (`max-age=1, stale-while-revalidate=9`) so Shopify Admin product, collection, and page updates propagate in real time while serving cached edge responses seamlessly.
    - Zero heavy Node.js runtime bloat; 100% compliant with Cloudflare V8 Workers runtime.
 
 ---
 
 ## 3. Storefront API Cost & Caching Directives
 
-1. **Static Data Caching**:
-   - Collections, Metaobjects, and Product detail queries utilize Oxygen `CacheLong()` (`max-age=3600`, `stale-while-revalidate=86400`).
-2. **Dynamic Data Directives**:
-   - Cart, Customer Account, and Search queries utilize `CacheNone()` or `CacheShort()` (`max-age=1`).
+1. **Real-Time Edge Caching (`CacheShort`)**:
+   - All Storefront API queries (Collections, Products, Pages, Blogs, Menus) default to `storefront.CacheShort()` (`max-age=1, stale-while-revalidate=9`) via `app/lib/context.js` and `app/entry.server.jsx` to ensure zero stale data after Shopify Admin edits.
+2. **Dynamic Session Directives**:
+   - Cart mutations and Customer Account session operations utilize `CacheNone()`.
 3. **GraphQL Query Cost Budget**:
    - Single page subrequests must not exceed 250 GraphQL query points.
-   - Images fetched via Storefront API must include Shopify CDN width and format transforms (`crop: 'center', maxWidth: 1200, format: 'webp'`).
+   - Images fetched via Storefront API include Shopify CDN width and format transforms (`crop: 'center', maxWidth: 1200, format: 'webp'`).
 
 ---
 
@@ -85,11 +85,14 @@ curl -I -sS https://batiksmile.com | grep -E "HTTP|content-type|x-request-id"
 
 # 2. Critical Route Verification
 curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/
-curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/sarimbit-exclusive
-curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/sarimbit-premium
-curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/kain-batik-tulis
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/luxury-series
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/premium-series
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/ekonomi-series
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/kain
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/batik-anak
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/collections/aksesoris
 curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/pages/lokasi-toko
-curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/pages/layanan-seragam
+curl -s -o /dev/null -w "%{http_code}\n" https://batiksmile.com/pages/tentang-kami
 
 # 3. Security Headers Verification
 curl -I -sS https://batiksmile.com | grep -E "strict-transport-security|x-content-type-options|x-frame-options"

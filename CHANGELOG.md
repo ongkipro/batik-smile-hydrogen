@@ -1,3 +1,15 @@
+# Batik Smile Nusantara — Storefront Changelog
+
+## 2026-10-14 — Storefront Polish, Official WhatsApp Vector, Kain Batik Copy & Minimalist Cart Drawer
+
+### Storefront Changes
+- **Clean Minimalist Cart Drawer (`01a368c`)**: Streamlined `CartSummary.jsx` and `CartMain.jsx` in slide-over drawer mode (`layout === 'aside'`) to display only a single **Subtotal** row, concise checkout note (*"Ongkos kirim & kode promo dihitung saat checkout."*), and **LANJUT KE PEMBAYARAN →** CTA.
+- **Kain Batik Collection Title & Editorial Copy (`4e0844f`)**: Updated `/collections/kain` in `collections.$handle.jsx` and `collections._index.jsx` with the **Kain Batik** headline, curated editorial description, and 301 redirects for `koleksi-kain` and `kain-batik`.
+- **Official WhatsApp SVG & Green Floating Concierge Button (`4a047af`)**: Standardized all WhatsApp icons (`Footer.jsx`, `MobileNavigation.jsx`, `pages.lokasi-toko.jsx`) to the exact official WhatsApp vector path and replaced the floating text pill in `WhatsAppConcierge.jsx` with a circular `#25D366` green icon button.
+- **Real-Time Shopify Sync & 6-Collection Cinematic Heroes (`b89d9b2` – `5a8fb71`)**: Harmonized all route loaders to `storefront.CacheShort()`, enabled full-bleed cinematic heroes across all 6 core collections (`luxury-series`, `premium-series`, `ekonomi-series`, `kain`, `batik-anak`, `aksesoris`), standardized showroom names to **Batik Smile Sampokong** and **Batik Smile Sukun** with Google Maps links, replaced `Furing Katun Hero` with `Lapisan Trikot` & `100% Batik Indonesia`, and 301-redirected retired pages (`/pages/layanan-seragam`, `/pages/fasilitas-store`) to `/pages/lokasi-toko`.
+
+---
+
 # skeleton
 
 ## 2026.4.6

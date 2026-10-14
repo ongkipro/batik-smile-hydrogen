@@ -13,32 +13,32 @@
 
 ## 1. Executive Summary & Brand Positioning
 
-**Batik Smile Nusantara** adalah butik batik modern dan spesialis sarimbit keluarga premium yang berdiri sejak tahun **2007** di Semarang, Jawa Tengah.
+**Batik Smile Nusantara** adalah butik batik modern dan spesialis sarimbit keluarga premium yang berdiri **Sejak 2007** di Semarang, Jawa Tengah.
 
 ### Showroom & Galeri Resmi:
-- **Flagship Showroom Simongan (3 Lantai)**: Jl. Simongan Raya No. 109, Pamularsih, Semarang
+- **Batik Smile Sampokong (3 Lantai)**: Jl. Simongan Raya No. 109, Pamularsih, Semarang
   - **Lantai 1**: Koleksi busana batik siap pakai (*Ready-to-Wear*) eksklusif & ruang ganti (*fitting room*) nyaman.
-  - **Lantai 2**: Galeri kain batik otentik (tulis, dobby, sutra ATBM) dengan sofa lounge konsultasi pribadi.
+  - **Lantai 2**: Galeri kain batik otentik (tulis, dobby, sutra ATBM) dengan VIP lounge konsultasi pribadi.
   - **Lantai 3**: Galeri kerajinan khas & oleh-oleh premium Semarang (rotan, kalung, bros, blangkon).
-- **Cabang Banyumanik**: Jl. Sukun Raya No. 23, Banyumanik, Semarang
-- **Kontak Resmi**: WhatsApp Concierge `081-390-8888-09` | Instagram `@batiksmile.official`
+- **Batik Smile Sukun**: Jl. Sukun Raya No. 23, Banyumanik, Semarang
+- **Kontak Resmi**: WhatsApp Concierge `081-390-8888-09` | Instagram `@batiksmile_official` | Email `butik@batiksmile.com`
 
-Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
-1. **Ready-To-Wear (RTW) Collections**: Kemeja Pria, Dress/Blouse/Outer Wanita, dan Sarimbit Keluarga (3-Tier: Mahakarya, Signature, Essential).
-2. **Haute Artistry & Custom Tailoring ("Kain + Jasa Jahit")**: Penjualan lembaran kain batik tulis otentik Nusantara ("Choose Your Batik") yang dapat dibeli tersendiri atau digabungkan langsung dengan layanan jahit kustom standar butik (*bespoke tailoring*).
+Storefront ini mengoperasikan **Dual-Engine Commercial Model & 6 Core Collections**:
+1. **Ready-To-Wear (RTW) 3-Tier Collections**: Kemeja Pria, Dress/Blouse/Outer Wanita, dan Sarimbit Keluarga (`luxury-series`, `premium-series`, `ekonomi-series`).
+2. **Specialist & Raw Fabric Collections ("Kain Batik", "Batik Anak", & "Aksesoris")**: Pilihan kain batik klasik hingga modern (`/collections/kain`) untuk kreasi busana personal, seragam, maupun sarimbit, serta koleksi anak (`/collections/batik-anak`) dan aksesoris etnik (`/collections/aksesoris`).
 
 ### Unique Selling Proposition (USP):
-1. **Filosofi Pelayanan 3S 1C 1T & 1H**: Senyum, Salam, Sapa, Cepat, Tanggap, dan selalu melayani dengan Hati.
+1. **Pelayanan Hangat Sepenuh Hati Sejak 2007**: Konsultasi personal yang ramah, responsif, dan terpercaya baik di showroom maupun secara online.
 2. **Jasa Jahit Satuan & Seragam Tanpa Minimal Order**: Kualitas jahitan butik berstandar tinggi yang dipercaya oleh institusi besar (RS Bhayangkara, RSUD dr. Adhyatma) serta ribuan keluarga untuk wisuda, lamaran, dan resepsi.
-3. **3-Tier Product & Sarimbit Collection Hierarchy**:
-   - **Kasta I: Sarimbit Exclusive** (`sarimbit-exclusive` — Rp 1.250.000 – Rp 3.500.000+): Sutra Alam ATBM Halus & Batik Tulis Prada Emas. Kasta tertinggi dengan diferensiasi UI/UX bespoke VIP.
-   - **Kasta II: Sarimbit Premium** (`sarimbit-premium` — Rp 650.000 – Rp 1.200.000): Tenun Dobby Timbul & Katun Primisima Furing Pesta. Tampilan Quiet Luxury kontemporer untuk resepsi dan perayaan formal.
-   - **Kasta III: Sarimbit Ekonomis** (`sarimbit-ekonomis` — Rp 225.000 – Rp 550.000): Katun Primisima Sanforized harian. Simpel, adem, dan terjangkau untuk silaturahmi keluarga.
-   - **Aturan Koleksi**: Koleksi `sarimbit-exclusive` dan `sarimbit-premium` strict terisolasi tanpa duplikasi produk lintas tier.
-4. **"Choose Your Batik" Raw Fabric Gallery**: Pilihan kain batik tulis asli pengrajin (Pekalongan, Cirebon, Solo, Lasem) dengan kode motif dan sertifikat keaslian.
-5. **Kenyamanan Standar Butik**: Seluruh pakaian jadi dilapisi furing katun hero halus yang adem dan menyerap keringat di iklim tropis.
+3. **3-Tier Product & Collection Hierarchy**:
+   - **Kasta I: Luxury Series** (`/collections/luxury-series` — Rp 1.250.000 – Rp 3.500.000+): Sutra Alam ATBM Halus, 100% Batik Indonesia & Lapisan Trikot. Kasta tertinggi dengan diferensiasi UI/UX bespoke VIP.
+   - **Kasta II: Premium Series** (`/collections/premium-series` — Rp 650.000 – Rp 1.200.000): Tenun Dobby Timbul, 100% Batik Indonesia & Lapisan Trikot. Tampilan Quiet Luxury Soga Earth untuk resepsi dan perayaan formal.
+   - **Kasta III: Ekonomi Series** (`/collections/ekonomi-series` — Rp 225.000 – Rp 550.000): 100% Katun Primisima Sanforized harian. Simpel, adem, dan terjangkau untuk silaturahmi keluarga.
+   - **Aturan Koleksi**: Koleksi `luxury-series` dan `premium-series` strict terisolasi tanpa duplikasi produk lintas tier.
+4. **Koleksi Kain Batik (`/collections/kain`)**: Beragam pilihan kain batik dengan motif dan warna yang memikat, mulai dari sentuhan klasik hingga desain modern—cocok untuk kreasi busana personal, seragam, maupun kebutuhan sarimbit.
+5. **Kenyamanan Standar Butik**: Busana Luxury dan Premium dilapisi **Lapisan Trikot** halus dan terstruktur yang rapi serta nyaman di iklim tropis.
 6. **Presisi Sambung Pola**: Potongan motif simetris di saku depan, kerah, dan belahan kancing.
-7. **Concierge & Layanan O2O**: Konsultasi ukuran kustom dan pemesanan keluarga/seragam via WhatsApp Concierge interaktif (`081-390-8888-09`).
+7. **Concierge & Layanan O2O**: Konsultasi ukuran kustom dan pemesanan keluarga/seragam via tombol mengambang WhatsApp resmi warna hijau (`#25D366` — `081-390-8888-09`).
 
 ---
 
@@ -46,10 +46,10 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
 
 | Persona | Profil & Kebutuhan | Solusi di Storefront Hydrogen |
 |---|---|---|
-| **Pencinta Batik Mewah / Kolektor (30–60 th)** | Mencari kain batik tulis halus asli daerah dengan motif eksklusif untuk koleksi atau dijahit khusus. | **"Choose Your Batik" Gallery & Tailoring Service**: Grid kain 4 kolom dengan detail pengrajin, sertifikat motif, dan opsi jahit langsung. |
+| **Pencinta Batik Mewah / Kolektor (30–60 th)** | Mencari kain batik tulis halus asli daerah dengan motif eksklusif untuk koleksi atau dijahit khusus. | **"Choose Your Batik" Gallery & Koleksi Kain Batik (`/collections/kain`)**: Grid kain dengan detail pengrajin, kode motif, dan konsultasi jahit butik. |
 | **Ibu Rumah Tangga / Family Planner (30–50 th)** | Mencari sarimbit serasi untuk resepsi, lebaran, atau wisuda keluarga (Ayah, Ibu, Anak). Frustrasi dengan kerumitan checkout multi-halaman. | **Family Bundle Builder (PDP)**: Form multi-select ukuran seluruh anggota keluarga dalam 1 halaman + 1-Click batch add to cart. |
-| **Pria Profesional / Eksekutif (28–55 th)** | Butuh kemeja batik berwibawa untuk rapat kerja, kondangan, dan acara formal. Mengutamakan kenyamanan furing dan siluet pas. | **Koleksi Kemeja Best Sellers & Microcopy Fit**: Tab switcher cepat, fit model reference (TB/BB), dan checkout instan via Shopify. |
-| **Koordinator Seragam Kantor / Panitia Nikah** | Mencari seragam instansi/keluarga besar dengan kepastian bahan, form ukur badan, dan konsultasi privat. | **Halaman Layanan Seragam & Direct WhatsApp Concierge**: Konsultasi langsung ke penjahit butik dengan auto-attach katalog produk. |
+| **Pria Profesional / Eksekutif (28–55 th)** | Butuh kemeja batik berwibawa untuk rapat kerja, kondangan, dan acara formal. Mengutamakan kenyamanan lapisan trikot dan siluet pas. | **Koleksi Kemeja Best Sellers & Microcopy Fit**: Tab switcher cepat, fit model reference (TB/BB), dan checkout instan via Shopify. |
+| **Koordinator Seragam Kantor / Panitia Nikah** | Mencari seragam instansi/keluarga besar dengan kepastian bahan, form ukur badan, dan konsultasi privat. | **Showroom O2O & Direct WhatsApp Concierge**: Konsultasi langsung ke penjahit butik via WhatsApp Concierge resmi. |
 
 ---
 
@@ -60,65 +60,61 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
   ├── [AnnouncementBar]: Minimalist single-line notification & direct WhatsApp link
   ├── [Header]:
   │     ├── Logo: Tracked luxury serif "B A T I K  S M I L E" (Desktop left-aligned, Mobile dead-center enlarged h-10/h-11)
-  │     ├── Desktop Nav: VOGUE | SARIMBIT | KAIN TULIS | JASA JAHIT | TENTANG KAMI
+  │     ├── Desktop Nav: HOME | LUXURY SERIES | PREMIUM SERIES | EKONOMI SERIES | KAIN | ANAK | AKSESORIS | SHOWROOM
   │     ├── Mobile Burger Drawer: Accordion collections, cultural journals, boutique services & sticky customer account footer
   │     └── Actions:
-  │           ├── Desktop: Search Trigger (Modal), Customer Account (/account), Direct Cart (/cart)
-  │           └── Mobile: Clean Tripartite (Hamburger Left, Center Logo, Direct Cart Right)
+  │           ├── Desktop: Search Trigger (Modal), Customer Account (/account), Cart Drawer / Direct Cart
+  │           └── Mobile: Clean Tripartite (Hamburger Left, Center Logo, Cart Right)
   ├── [/] (Homepage Editorial Flow):
   │     ├── HeroEditorial: Full-bleed lifestyle imagery/video + centered down-arrow scroll cue
-  │     ├── SarimbitBentoSection: 3 Scattered atelier moodboard cards (Exclusive, Premium, Ekonomis)
+  │     ├── SarimbitBentoSection: 3 Scattered atelier moodboard cards (Luxury Series, Premium Series, Ekonomi Series)
   │     ├── BestSellersTabs: "OUR BEST SELLERS" tabbed switcher (WOMEN | MEN | SARIMBIT) in 3-col portrait grid
   │     ├── HeritageVideoBanner: "FINEST HANDMADE" craftsmanship video with player controls
   │     ├── ChooseYourBatik: "CHOOSE YOUR BATIK" 4-col raw fabric grid (Pekalongan, Solo, Cirebon)
   │     ├── ShoppableLookbook: Hotspot pins pada foto keluarga (Metaobject: lookbook_spotlight)
   │     ├── LoveNotesTestimonials: "LOVE NOTES FROM OUR CUSTOMER" quote slider
   │     ├── TrustGuarantees: 4 core pillars (Free Delivery, Tukar Size, Top Support, Secure Payment)
-  │     └── ShowroomO2O: Flagship Simongan (3 Lantai) & Cabang Banyumanik Semarang
-  ├── [/collections/:handle] & [/collections/all] (Dynamic PLP — Tier-Differentiated UI/UX):
-  │     ├── Pure Typographic Filter Bar (SEMUA, TERBARU, HARGA RENDAH, HARGA TINGGI)
-  │     ├── 2-Column Split Hero (Title & sub-narrative separated by hairline vertical border)
+  │     └── ShowroomO2O: Batik Smile Sampokong (3 Lantai) & Batik Smile Sukun Semarang + Google Maps
+  ├── [/collections/:handle] & [/collections/all] (Dynamic PLP — Full-Bleed Cinematic Hero Across All 6 Core Collections):
+  │     ├── Pure Typographic Filter Bar (SEMUA, TERBARU, HARGA RENDAH, HARGA TINGGI + Gender & Lengan filters)
+  │     ├── Full-Bleed Cinematic Dark Editorial Hero (`isCinematicHero = true` across all collections)
   │     ├── Single-Line Breadcrumb (BERANDA / KOLEKSI / [TITLE])
   │     ├── Grid-Proportional Pagination (12 items per page = 4 columns x 3 rows)
-  │     ├── [Exclusive Collection: /collections/sarimbit-exclusive]:
-  │     │     ├── Dark-Luxe / Antique Champagne Gold Hero Banner (`#A68A56`)
+  │     ├── [Luxury Series: /collections/luxury-series]:
+  │     │     ├── Dark-Luxe / Imperial Antique Gold Hero Banner (`#C5A059`)
   │     │     ├── 2-Column to 3-Column expansive editorial card layout with generous whitespace
   │     │     ├── "Mahakarya Nusantara" gold seal badge & artisan origin storytelling block
   │     │     └── Private VIP WhatsApp Concierge booking banner
-  │     ├── [Premium Collection: /collections/sarimbit-premium]:
-  │     │     ├── Mori Linen canvas (`#FAF8F5`) with crisp Obsidian borders (`#1C1C1C`)
+  │     ├── [Premium Series: /collections/premium-series]:
+  │     │     ├── Deep Soga Espresso (`#201610`) & Mori Linen (`#FAF8F5`) with Soga Matang accents (`#7C3F1D`)
   │     │     ├── 3-Column to 4-Column responsive grid with "Signature Dobby" tier badge
   │     │     └── Fast Family Sarimbit Filter & Quick Fabric Preview
-  │     └── [Standard / Ekonomis Collections]:
-  │           ├── High-speed conversion grid with direct add-to-bag cues
-  │           └── Regional and garment type filter chips
+  │     └── [Ekonomi Series & Specialist Collections: /collections/ekonomi-series, /collections/kain, /collections/batik-anak, /collections/aksesoris]:
+  │           ├── Full-bleed cinematic editorial hero (including "Kain Batik" custom narrative)
+  │           └── High-speed 4-column conversion grid on Mori Linen canvas
   ├── [/products/:handle] (Dynamic PDP — Tier-Differentiated UI/UX):
-  │     ├── Mobile Touch-Swipe Gallery (snap-x horizontal scroll) & 4:5 vertical portrait thumbnails
+  │     ├── Mobile Touch-Swipe Gallery (snap-x horizontal scroll), 4:5 video lookbook & 4:5 vertical portrait thumbnails
   │     ├── Indonesian Rupiah currency formatting without decimals `,00` (`formatRupiah`)
-  │     ├── [Exclusive Tier PDP (Sutra / Mahakarya)]:
+  │     ├── [Luxury Tier PDP (Sutra / Mahakarya)]:
   │     │     ├── Full-bleed 4:5 vertical portrait viewer with micro-zoom & fabric drape video
-  │     │     ├── Antique Champagne Gold trim badge: "MAHAKARYA EXCLUSIVE • SUTRA ATBM"
-  │     │     ├── Sertifikat Keaslian Motif digital seal & Garansi Bahan Tulis Asli
+  │     │     ├── Imperial Antique Gold trim badge: "100% BATIK INDONESIA • LAPISAN TRIKOT"
+  │     │     ├── Sertifikat Keaslian Motif digital seal & Garansi Bahan Asli
   │     │     ├── Direct VIP Concierge Booking modal (Private fitting di Showroom / Home visit)
   │     │     └── Bespoke Tailoring measurement form & Premium Wooden Gift Box option
   │     ├── [Premium Tier PDP (Dobby / Signature)]:
   │     │     ├── Clean Quiet Luxury 4:5 vertical media gallery with thumbnail carousel
-  │     │     ├── "SIGNATURE PREMIER" badge + Full Furing Hero guarantee card
+  │     │     ├── "SIGNATURE PREMIER" badge + Lapisan Trikot guarantee card
   │     │     ├── FamilyBundleBuilder (Multi-variant selector kemeja pria + dress/tunik wanita dalam 1 PDP)
   │     │     └── Interactive Model Fit Reference (TB/BB slider) + Sizing Chart drawer
-  │     └── [Ekonomis / Daily Tier PDP]:
+  │     └── [Ekonomi / Daily Tier PDP]:
   │           ├── Minimalist 3-word product title display (`NAME [TYPE]`)
   │           ├── Rectangular variant selector pills with instant stock feedback
   │           └── Sticky Mobile Buy Bar for friction-free conversion
-  ├── [/cart] (Dedicated 2-Column Zero-Box Cart Page):
-  │     ├── 2-Column Architectural Split (Line Items Left, Sticky Order Summary Right)
+  ├── [Slide-Over Cart Drawer (Aside) & Dedicated /cart Page]:
+  │     ├── Clean Minimalist Cart Drawer (`layout === 'aside'`): Single Subtotal row, concise note (*"Ongkos kirim & kode promo dihitung saat checkout."*), and `LANJUT KE PEMBAYARAN →` CTA
+  │     ├── Dedicated 2-Column `/cart` Page: Line Items Left, Sticky Order Summary Right with discount input & checkout handoff
   │     ├── Zero-Box Streaming (Stripped nested card boxes, borders, and shadows)
-  │     ├── Synthetic Variant Suppression (Automatically hides `Title: Default Title`)
-  │     ├── Unified Single Focused CTA (`Lanjutkan Belanja →`)
-  │     ├── Free Shipping progress indicator & Bespoke tailoring notes field
-  │     ├── Whispered Horizontal Assurance Line (*• Garansi Keaslian Butik 100% • Bebas Penyesuaian Ukuran • Pengiriman Terproteksi Asuransi*)
-  │     ├── Pure Typographic Payment Method Trust Strip (*QRIS • BCA • Mandiri • BNI • BRI • Visa • Mastercard*)
-  │     └── Direct handoff to Shopify Hosted Checkout
+  │     └── Synthetic Variant Suppression (Automatically hides `Title: Default Title`)
   ├── [In-Modal Live Predictive Search Engine] (LuxurySearchModal.jsx):
   │     ├── Pure in-modal instant search (Zero redirects to /search page)
   │     ├── 250ms debounced live search + instant Enter/CARI submit
@@ -134,10 +130,9 @@ Storefront ini mengoperasikan **Dual-Engine Commercial Model**:
   │     ├── Whispered in-modal live search trigger and WhatsApp concierge link
   │     └── Strict dual-layer SEO protection: HTML `<meta name="robots" content="noindex, nofollow" />` + HTTP `X-Robots-Tag: noindex, nofollow`
   └── [/pages/:handle]:
-        ├── /pages/tentang-kami (Kisah Butik Sejak 2007 & Budaya 3S 1C 1T 1H)
-        ├── /pages/layanan-seragam (Layanan Jahit Kustom & Korporat Tanpa Minimal Order)
-        ├── /pages/fasilitas-store (Showroom & Fasilitas Belanja 3 Lantai Simongan)
-        ├── /pages/lokasi-toko (Showroom Simongan & Cabang Banyumanik Semarang)
+        ├── /pages/tentang-kami (Kisah & Filosofi Sejak 2007)
+        ├── /pages/lokasi-toko (Batik Smile Sampokong & Batik Smile Sukun + Google Maps)
+        ├── /pages/layanan-seragam & /pages/fasilitas-store (Retired — 301 Redirected to /pages/lokasi-toko)
         ├── /pages/contact & /pages/hubungi-kami (Customer Care & WhatsApp Concierge)
         ├── /pages/panduan-ukuran (Panduan Ukuran Pria, Wanita, Anak & Bespoke Fitting)
         ├── /pages/panduan-perawatan (Panduan Perawatan Batik Tulis, Dobby, & Sutra ATBM)

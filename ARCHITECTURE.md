@@ -41,43 +41,43 @@
 │   │   ├── BatikOrnaments.jsx       # SVG filigree dividers & corner brackets
 │   │   ├── BestSellersTabs.jsx      # "OUR BEST SELLERS" tabbed switcher (Women | Men | Sarimbit)
 │   │   ├── CartLineItem.jsx         # Zero-box cart line item with 4:5 thumbnail & formatRupiah
-│   │   ├── CartMain.jsx             # 2-Column zero-box cart page container & empty state
-│   │   ├── CartSummary.jsx          # Sticky order summary, discount form & trust assurance
+│   │   ├── CartMain.jsx             # Cart container & streamlined minimalist Cart Drawer layout
+│   │   ├── CartSummary.jsx          # Minimalist drawer summary (Subtotal + checkout note + CTA) & full-page cart summary
 │   │   ├── ChooseYourBatikGrid.jsx  # "CHOOSE YOUR BATIK" 4-column raw fabric gallery
 │   │   ├── CollectionExclusive.jsx  # Dark champagne editorial header, 2-col expansive cards & artisan stories
 │   │   ├── CollectionFilterBar.jsx  # Pure typographic filter bar & count badge
-│   │   ├── CollectionPremium.jsx    # Mori linen balanced grid with signature dobby badges
-│   │   ├── CraftsmanshipZoom.jsx    # Macro trust proof cards (Furing, Sambung Saku)
+│   │   ├── CollectionPremium.jsx    # Deep Soga Espresso balanced grid with signature dobby badges
+│   │   ├── CraftsmanshipZoom.jsx    # Macro trust proof cards (Lapisan Trikot, Sambung Saku)
 │   │   ├── CustomerLoveNotes.jsx    # "LOVE NOTES FROM OUR CUSTOMER" testimonial quote slider
 │   │   ├── FamilyBundleBuilder.jsx  # Multi-variant PDP bundle selector
-│   │   ├── Footer.jsx               # Minimalist luxury footer
+│   │   ├── Footer.jsx               # 4-Column Quiet Luxury footer (Batik Smile Sampokong & Batik Smile Sukun + Google Maps)
 │   │   ├── Header.jsx               # Tripartite mobile header & desktop editorial navigation
 │   │   ├── HeritageVideoBanner.jsx  # "FINEST HANDMADE" craftsmanship video with player controls
 │   │   ├── HeroEditorial.jsx        # Full-bleed lifestyle hero with scroll cue button
 │   │   ├── LuxurySearchModal.jsx    # In-modal live predictive search with multi-entity tabs
-│   │   ├── MobileNavigation.jsx     # Sticky bottom mobile action bar
-│   │   ├── ProductExclusiveLayout.jsx # Ultra-zoom, digital certificate, bespoke tailoring & VIP concierge modal
+│   │   ├── MobileNavigation.jsx     # Sticky bottom mobile action bar with official WhatsApp vector
+│   │   ├── ProductExclusiveLayout.jsx # Ultra-zoom, digital certificate, Lapisan Trikot & VIP concierge modal
 │   │   ├── ProductItem.jsx          # Strict 4:5 vertical portrait product card
-│   │   ├── ProductPremiumLayout.jsx   # Family bundle builder, model fit reference widget & full furing badge
+│   │   ├── ProductPremiumLayout.jsx   # Family bundle builder, model fit reference widget & Lapisan Trikot badge
 │   │   ├── SarimbitBentoSection.jsx # 3 Scattered atelier moodboard cards
 │   │   ├── ShoppableLookbook.jsx    # Interactive hotspot pins on family photography
-│   │   ├── ShowroomO2O.jsx          # Flagship Simongan (3 Floors) & Banyumanik Showroom
+│   │   ├── ShowroomO2O.jsx          # Batik Smile Sampokong (3 Floors) & Batik Smile Sukun Showroom
 │   │   ├── StickyMobileBar.jsx      # Floating smart mobile purchase bar
 │   │   ├── TierExperience.jsx       # 3-Tier interactive collection switcher
 │   │   ├── TrustGuaranteeBar.jsx    # 4 Core Trust Pillars (Free Delivery, Tukar Size, etc.)
-│   │   └── WhatsAppConcierge.jsx    # Floating concierge consultation widget
+│   │   └── WhatsAppConcierge.jsx    # Official green (#25D366) circular floating WhatsApp concierge icon button & modal
 │   ├── routes/                # React Router v7 nested routes
 │   │   ├── _index.jsx               # Homepage (Editorial flow)
-│   │   ├── collections.$handle.jsx  # Tier-Differentiated Dynamic PLP
+│   │   ├── collections.$handle.jsx  # Tier-Differentiated Dynamic PLP (Full-bleed cinematic hero across all 6 core collections + 30+ legacy 301 redirects)
 │   │   ├── collections.all.jsx      # All Collections Catalog with 12 items/page pagination
-│   │   ├── collections._index.jsx   # All Collections Directory
-│   │   ├── products.$handle.jsx     # Tier-Differentiated Dynamic PDP
+│   │   ├── collections._index.jsx   # All Collections Directory (including Kain Batik editorial card)
+│   │   ├── products.$handle.jsx     # Tier-Differentiated Dynamic PDP (100% Batik Indonesia & Lapisan Trikot)
 │   │   ├── cart.jsx                 # Dedicated 2-column zero-box cart page
 │   │   ├── search.jsx               # Predictive search loader (clamped limit 1..10)
-│   │   ├── pages.layanan-seragam.jsx # Bespoke tailoring & uniform service interactive route
-│   │   ├── pages.tentang-kami.jsx   # Interactive brand story & 3S 1C 1T & 1H culture
-│   │   ├── pages.fasilitas-store.jsx # 3-Storey Simongan Showroom visual tour
-│   │   ├── pages.lokasi-toko.jsx    # Store locator, hours & interactive Google Maps
+│   │   ├── pages.layanan-seragam.jsx # 301 Permanent Redirect to /pages/lokasi-toko (retired page)
+│   │   ├── pages.tentang-kami.jsx   # Interactive brand story & Sejak 2007 heritage
+│   │   ├── pages.fasilitas-store.jsx # 301 Permanent Redirect to /pages/lokasi-toko (retired page)
+│   │   ├── pages.lokasi-toko.jsx    # Store locator (Batik Smile Sampokong & Batik Smile Sukun), hours & Google Maps links
 │   │   ├── pages.$handle.jsx        # Dynamic Shopify CMS Pages fallback loader
 │   │   ├── blogs._index.jsx         # All blogs directory
 │   │   ├── blogs.$blogHandle._index.jsx # Jurnal Batik editorial index (12 articles grid)
@@ -88,7 +88,7 @@
 │   ├── styles/
 │   │   ├── app.css            # Tailwind CSS v4 entry & Quiet Luxury theme tokens
 │   │   └── reset.css          # CSS reset
-│   ├── entry.server.jsx       # Server entry with X-Robots-Tag 404 header enforcement
+│   ├── entry.server.jsx       # Server entry with X-Robots-Tag 404 header & CacheShort SSR headers
 │   └── root.jsx               # Root layout, Google Fonts, and ErrorBoundary
 ├── .github/workflows/         # Official Shopify Oxygen CI/CD workflow
 ├── .env                       # Local environment variables (gitignored)
@@ -109,24 +109,25 @@ In a modern headless Shopify storefront powered by Hydrogen and React Router v7,
 
 ### A. Dynamic Product Listing Pages (PLP — `/collections/$handle` & `/collections/all`)
 - **Route**: `app/routes/collections.$handle.jsx` and `app/routes/collections.all.jsx`.
-- **Parameter Resolution**: Resolves `$handle` against Shopify Storefront API `collection(handle: $handle)`.
-- **Sort & Filter Management**: Parses URL query parameters (`sort`, `direction`) and maps them to Storefront API `ProductCollectionSortKeys` (`BEST_SELLING`, `CREATED`, `PRICE`, `REVERSE`).
+- **Parameter Resolution**: Resolves `$handle` against Shopify Storefront API `collection(handle: $handle)` with `storefront.CacheShort()` real-time synchronization and a 30+ legacy handle 301 redirect map.
+- **Full-Bleed Cinematic Editorial Hero**: All 6 core collections (`luxury-series`, `premium-series`, `ekonomi-series`, `kain`, `batik-anak`, `aksesoris`) render a full-bleed dark editorial hero (`isCinematicHero = true`) with tailored luxury copy (including **Kain Batik** editorial headline and description).
+- **Sort & Filter Management**: Parses URL query parameters (`sort`, `direction`, `gender`, `sleeve`) and maps them to Storefront API `ProductCollectionSortKeys` (`BEST_SELLING`, `CREATED`, `PRICE`, `REVERSE`).
 - **Grid-Proportional Pagination**: Uses cursor-based pagination clamped to **12 items per page** (`pageBy: 12`), ensuring a harmonious 4-column x 3-row desktop grid without single orphaned cards.
-- **Tier Differentiation Engine**: Evaluates handle and metafields (`custom.tier_kasta`) to dynamically render specialized layouts (`CollectionExclusive` for Mahakarya, `CollectionPremium` for Dobby, standard studio for RTW).
+- **Tier Differentiation Engine**: Evaluates handle and metafields (`custom.tier_kasta`) to dynamically render specialized layouts (`luxury-series` Mahakarya, `premium-series` Signature Soga Earth, `ekonomi-series` & specialist collections).
 - **Single-Line Breadcrumbs**: `BERANDA / KOLEKSI / [COLLECTION TITLE]` with uppercase tracking.
 
 ### B. Dynamic Product Detail Pages (PDP — `/products/$handle`)
 - **Route**: `app/routes/products.$handle.jsx`.
 - **Variant & Inventory Resolution**: Resolves `$handle` and matches selected option query parameters (`Color`, `Size`) to concrete `ProductVariant` instances with real-time `availableForSale` checks.
-- **Media Presentation**: Strict 4:5 vertical portrait aspect ratio (`aspect-[4/5]`) with mobile touch-swipe (`snap-x`) gallery and thumbnail synchronization.
+- **Media Presentation**: Strict 4:5 vertical portrait aspect ratio (`aspect-[4/5]`) with mobile touch-swipe (`snap-x`) gallery, 4:5 video lookbook support, and thumbnail synchronization.
 - **Indonesian Currency Purity**: Standardized `formatRupiah` avoiding noisy `,00` decimals.
 - **Synthetic Variant Suppression**: Automatically hides generic options (`Title: Default Title`) when products have no merchant-defined options.
-- **Tier-Differentiated PDP**: Renders `ProductExclusiveLayout` (gold trim, digital certificate, bespoke tailoring notes, private fitting modal) or `ProductPremiumLayout` (bundle builder, model fit reference, furing guarantee).
-- **Friction-Free Mobile Conversion**: Sticky mobile purchase bar with instant variant switcher and cart handoff.
+- **Tier-Differentiated PDP & Material Copy**: Renders `ProductExclusiveLayout` or `ProductPremiumLayout` with `100% Batik Indonesia` and `Lapisan Trikot` badges (replacing legacy `Furing Katun Hero`).
+- **Friction-Free Mobile Conversion**: Sticky mobile purchase bar with instant variant switcher and minimalist Cart Drawer handoff.
 
 ### C. Dynamic Storefront CMS Pages (`/pages/$handle`)
-- **Route**: Specific high-touch routes take precedence (`pages.tentang-kami.jsx`, `pages.layanan-seragam.jsx`, `pages.fasilitas-store.jsx`, `pages.lokasi-toko.jsx`).
-- **Dynamic Fallback**: `app/routes/pages.$handle.jsx` dynamically queries Shopify Storefront API `page(handle: $handle)` to render any merchant-created CMS page (e.g. `panduan-ukuran`, `kebijakan-pengembalian`) with Quiet Luxury typography prose.
+- **Route**: Specific high-touch routes take precedence (`pages.tentang-kami.jsx`, `pages.lokasi-toko.jsx`), while retired routes (`pages.layanan-seragam.jsx`, `pages.fasilitas-store.jsx`) permanently 301-redirect to `/pages/lokasi-toko`.
+- **Dynamic Fallback**: `app/routes/pages.$handle.jsx` dynamically queries Shopify Storefront API `page(handle: $handle)` with `storefront.CacheShort()` to render any merchant-created CMS page (e.g. `panduan-ukuran`, `kebijakan-pengembalian`) with Quiet Luxury typography prose.
 
 ### D. Dynamic Cultural Journal & Blogs (`/blogs/$blogHandle/$articleHandle`)
 - **Route**: `app/routes/blogs.$blogHandle.$articleHandle.jsx`.

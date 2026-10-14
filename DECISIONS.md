@@ -116,16 +116,14 @@
 
 ---
 
-## ADR-009: Real Shopify Collection Slugs & Single Source of Truth Alignment
+## ADR-009: Real Shopify Collection Slugs & 6-Collection Tree Taxonomy Alignment
 
-- **Status**: Accepted (2026-09-03)
-- **Context**: The storefront initially contained speculative mock collection handles (`sarimbit`, `sarimbit-mahakarya-heritage`, `sarimbit-signature-elegance`, `kain-batik-tulis`) that resulted in HTTP 404 errors when queried against the live Shopify store (`23ahbp-sq.myshopify.com`).
+- **Status**: Accepted (2026-09-03, Updated 2026-10-14)
+- **Context**: The storefront initially contained speculative mock collection handles (`sarimbit`, `sarimbit-mahakarya-heritage`, `sarimbit-signature-elegance`, `kain-batik-tulis`) and later 27 granular collection handles that fragmented discovery.
 - **Decision**:
-  1. The live Shopify catalog is the sole source of truth for collection handles:
-     - Sarimbit: `sarimbit-exclusive`, `sarimbit-premium`, `sarimbit-ekonomis`.
-     - Fabrics: `jarik-kain-batik`.
-  2. All internal navigation links, MegaMenu entries, and query loaders must point strictly to these canonical handles.
-  3. An HTTP 301 Permanent Redirect lookup table is maintained in `app/routes/collections.$handle.jsx` to catch legacy bookmarks and redirect them cleanly without 404s.
+  1. The live Shopify catalog is consolidated into **6 Core Collections** (`luxury-series`, `premium-series`, `ekonomi-series`, `kain` [**Kain Batik**], `batik-anak`, `aksesoris`) plus the master catalog index (`shop`).
+  2. All internal navigation links, MegaMenu entries, and query loaders point strictly to these canonical handles with optional URL filter parameters (`gender`, `sleeve`).
+  3. An HTTP 301 Permanent Redirect lookup table (`LEGACY_COLLECTION_REDIRECTS` with 30+ legacy handles including `sarimbit-exclusive`, `sarimbit-premium`, `sarimbit-ekonomis`, `jarik-kain-batik`, `kain-batik-tulis`, `koleksi-kain`, `kain-batik`) is maintained in `app/routes/collections.$handle.jsx` to catch legacy bookmarks and redirect them cleanly without 404s.
   4. Product slugs with single-variant suffixes (`?Title=Default+Title`) are permanently redirected via 301 and cleaned in the client history.
 - **Consequences**:
   - *Positive*: 100% HTTP 200/301 route integrity across the entire catalog; zero broken links.
@@ -135,12 +133,12 @@
 
 ## ADR-010: Storefront Auto-Sync via Default Edge Sub-Minute CacheShort & Stale-While-Revalidate Caching
 
-- **Status**: Accepted (2026-09-20)
+- **Status**: Accepted (2026-09-20, Verified 2026-10-14)
 - **Context**: Content, inventory, pricing, and tag updates made in Shopify Admin previously suffered from edge caching delays (up to 1 hour or 1 day under `CacheLong()`), requiring manual Cloudflare/Oxygen edge cache purges or redeployments to reflect changes.
 - **Decision**:
   1. Intercept `storefront.query` within `app/lib/context.js` to automatically default all unconfigured queries to `storefront.CacheShort()` (`maxAge: 1s, staleWhileRevalidate: 9s`).
   2. In `app/entry.server.jsx`, inject edge caching headers (`Cache-Control: public, max-age=1, stale-while-revalidate=9`) into all successful SSR responses.
-  3. Harmonize layout, navigation menu, and static page loaders in `app/root.jsx` and `app/routes/pages.*.jsx` from `CacheLong()` to `CacheShort()`.
+  3. Harmonize layout, navigation menu, collection, blog, policy, and static page loaders across `app/root.jsx` and `app/routes/*.jsx` from `CacheLong()` to `CacheShort()`.
 - **Consequences**:
   - *Positive*: Storefront data updates in Shopify Admin reflect across the global Oxygen edge within seconds while retaining instant edge streaming performance for users.
   - *Negative*: Slightly increases Storefront API query traffic, well within Shopify API rate limits.
@@ -165,12 +163,12 @@
 ## ADR-012: Tri-Tier Color Space Realization (Signature Soga Earth Elevation)
 
 - **Status**: Accepted (2026-09-20)
-- **Context**: The 3-tier Sarimbit catalog (`sarimbit-exclusive`, `sarimbit-premium`, `sarimbit-ekonomis`) lacked clear visual differentiation for the middle tier (Signature Premium), which previously resembled the dark obsidian palette of the top tier (Mahakarya Exclusive).
+- **Context**: The 3-tier Sarimbit catalog (`luxury-series`, `premium-series`, `ekonomi-series`) lacked clear visual differentiation for the middle tier (Signature Premium), which previously resembled the dark obsidian palette of the top tier (Mahakarya Exclusive).
 - **Decision**:
   1. Anchor the three collection tiers with distinct, authentic Nusantara luxury color palettes:
-     - **Mahakarya Exclusive**: Obsidian Deep (`#111111`) + Charcoal Ink (`#1C1C1C`) + Imperial Antique Gold (`#C5A059`).
-     - **Signature Premium**: Deep Soga Espresso (`#201610`, `#281C15`) + Soga Matang accents (`#7C3F1D`, `#9E7D3B`) + warm Mori cream text (`#FAF8F5`, `#D5C8B8`) + delicate gold hairlines (`#C5A059`/40).
-     - **Essential / RTW (Ekonomis)**: Mori Linen (`#FAF8F5`) + Charcoal Ink (`#1C1C1C`) + crisp light hairlines (`#E2DFD8`).
+     - **Luxury Series (`luxury-series`)**: Obsidian Deep (`#111111`) + Charcoal Ink (`#1C1C1C`) + Imperial Antique Gold (`#C5A059`).
+     - **Premium Series (`premium-series`)**: Deep Soga Espresso (`#201610`, `#281C15`) + Soga Matang accents (`#7C3F1D`, `#9E7D3B`) + warm Mori cream text (`#FAF8F5`, `#D5C8B8`) + delicate gold hairlines (`#C5A059`/40).
+     - **Ekonomi Series (`ekonomi-series`)**: Mori Linen (`#FAF8F5`) + Charcoal Ink (`#1C1C1C`) + crisp light hairlines (`#E2DFD8`).
   2. Systematically apply the Signature Soga Earth palette across all key touchpoints: `collections.$handle.jsx`, `products.$handle.jsx`, `StickyMobileBar.jsx`, `ProductItem.jsx`, and `ProductTierStorySection.jsx`.
 - **Consequences**:
   - *Positive*: Immediate visual hierarchy and storytelling that celebrates natural Javanese soga dye heritage while elevating average order value (AOV).
@@ -205,4 +203,36 @@
 - **Consequences**:
   - *Positive*: Restores uncompromised high-fashion editorial prestige, strictly upholding DESIGN.md zero-radius and architectural minimalism standards.
   - *Negative*: Developers and designers must not introduce casual playful CSS decorations into the production codebase.
+
+---
+
+## ADR-015: Full-Bleed Cinematic Collection Heroes, Showroom Nomenclature & Retired Route Consolidation
+
+- **Status**: Accepted (2026-10-14)
+- **Context**: Collection headers needed a unified full-bleed cinematic presentation across all 6 core collections, showroom naming required standardization to **Batik Smile Sampokong** and **Batik Smile Sukun** with direct Google Maps links, material terminology needed updating from `Furing Katun Hero` to `Lapisan Trikot` and `100% Batik Indonesia`, and standalone pages `/pages/layanan-seragam` and `/pages/fasilitas-store` were retired.
+- **Decision**:
+  1. Enable `isCinematicHero = true` across all collections in `app/routes/collections.$handle.jsx`, rendering full-bleed background photography with dark gradient overlays for `luxury-series`, `premium-series`, `ekonomi-series`, `kain` (**Kain Batik**), `batik-anak`, and `aksesoris`.
+  2. Standardize showroom names across `Footer.jsx`, `ShowroomO2O.jsx`, and `pages.lokasi-toko.jsx` to **Batik Smile Sampokong** (Jl. Simongan Raya No. 109) and **Batik Smile Sukun** (Jl. Sukun Raya No. 23) with interactive Google Maps pin links.
+  3. Permanently 301-redirect `/pages/layanan-seragam` and `/pages/fasilitas-store` to `/pages/lokasi-toko` and remove their links from the footer.
+  4. Replace `Furing Katun Hero` with `Lapisan Trikot` (for Luxury & Premium) and `100% Batik Asli Cap/Tulis` with `100% Batik Indonesia` across PDP and storefront copy.
+- **Consequences**:
+  - *Positive*: Cohesive cinematic collection entry experience, accurate showroom branding, and cleaner footer navigation.
+  - *Negative*: Legacy links to retired pages rely on 301 redirects to `/pages/lokasi-toko`.
+
+---
+
+## ADR-016: Official WhatsApp Vector Geometry & Clean Minimalist Cart Drawer UI/UX
+
+- **Status**: Accepted (2026-10-14)
+- **Context**:
+  1. Custom/truncated WhatsApp SVG paths in the footer and mobile navigation appeared distorted, and the desktop floating WhatsApp pill button (`KONSULTASI VIA WHATSAPP`) occupied excessive horizontal screen space.
+  2. The slide-over Cart Drawer (`CartSummary.jsx` / `CartMain.jsx`) was visually overloaded with multi-row shipping/insurance breakdowns, a promo code form, trust badges, and payment method lists.
+- **Decision**:
+  1. Standardize all WhatsApp icons across `Footer.jsx`, `MobileNavigation.jsx`, `pages.lokasi-toko.jsx`, and `WhatsAppConcierge.jsx` to the complete, mathematically exact official WhatsApp SVG path (`M12.04 2c-5.46 0-9.91 4.45-9.91 9.91...`).
+  2. Replace the desktop floating text pill in `WhatsAppConcierge.jsx` with a clean, universally recognizable official green (`#25D366`) circular WhatsApp icon button (`w-14 h-14 rounded-full`).
+  3. Streamline the slide-over Cart Drawer (`layout === 'aside'`) in `CartSummary.jsx` and `CartMain.jsx` to display only a single **Subtotal** row, a concise checkout note (*"Ongkos kirim & kode promo dihitung saat checkout."*), and a sharp **LANJUT KE PEMBAYARAN →** CTA button.
+- **Consequences**:
+  - *Positive*: Crisp brand iconography, unobtrusive floating concierge trigger, and a fast, frictionless luxury Cart Drawer experience.
+  - *Negative*: Discount codes are entered on the dedicated `/cart` page or directly within Shopify Hosted Checkout rather than inside the compact slide-over drawer.
+
 

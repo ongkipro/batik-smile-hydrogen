@@ -63,7 +63,7 @@ Managed at: **Shopify Admin $\rightarrow$ Settings $\rightarrow$ Custom Data $\r
 | `custom` | `product_type_label` | Single line text | Category label for bracketed title: `[OUTER]`, `[KEMEJA PRIA]`, `[SELENDANG]`, `[KAIN TULIS]`. |
 | `custom` | `fabric_origin` | Single line text | Artisan regional origin (Pekalongan, Solo, Cirebon, Yogya, Lasem). |
 | `custom` | `motif_code` | Single line text | Authentic artisan motif code (e.g. `K-K25L-V-667979`). |
-| `custom` | `material_furing` | Single line text | Specifies lining & fabric (e.g. "Lapis Furing Katun Hero Halus"). |
+| `custom` | `material_furing` | Single line text | Specifies lining & fabric (e.g. "Lapisan Trikot Halus"). |
 | `custom` | `filosofi_motif` | Multi-line text / Rich text | Displays historical & philosophical meaning in PDP accordion. |
 | `custom` | `model_fit_reference` | Single line text | Sizing cue (e.g. "Model Pria TB 178cm / BB 75kg mengenakan Size L"). |
 | `custom` | `tailoring_eligible` | Boolean | True if item can be ordered with custom bespoke tailoring. |
@@ -442,14 +442,14 @@ query Collection(
 
 | Collection Title | Handle | ID (`gid://shopify/Collection/...`) | Sub-Categories (URL Filter / Tags) | Description / Tier |
 |---|---|---|---|---|
-| **Luxury Series** | `luxury-series` | `480517193785` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta I: Sutra Alam ATBM, canting prada emas |
-| **Premium Series** | `premium-series` | `480517390393` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta II: Tenun Dobby timbul, furing hero katun sejuk |
+| **Luxury Series** | `luxury-series` | `480517193785` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta I: Sutra Alam ATBM, 100% Batik Indonesia & Lapisan Trikot |
+| **Premium Series** | `premium-series` | `480517390393` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta II: Tenun Dobby timbul, 100% Batik Indonesia & Lapisan Trikot |
 | **Ekonomi Series** | `ekonomi-series` | `480517455929` | `pria`, `wanita` &times; `lengan-panjang`, `lengan-pendek` | Kasta III: 100% Katun Primisima adem harian |
-| **Kain** | `kain` | `480516636729` | Flat (No subcategories) | Kain batik tulis canting tembaga & jarik wiru |
+| **Kain Batik** | `kain` | `480516636729` | Flat (No subcategories) | Temukan beragam pilihan kain batik dengan motif dan warna yang memikat, mulai dari sentuhan klasik hingga desain modern. Cocok untuk kreasi busana personal, seragam, maupun kebutuhan sarimbit, dengan pilihan kain yang dapat disesuaikan dengan gaya dan kebutuhan Anda. |
 | **Aksesoris** | `aksesoris` | `480517128249` | Flat (No subcategories) | Blangkon tradisional, selendang adat Jawa |
 | **Batik Anak** | `batik-anak` | `480517062713` | `putra`, `putri` &times; `lengan-panjang`, `lengan-pendek` | Setelan surjan anak, kemeja anak, dress katun balita |
 | **Shop (All)** | `shop` | `480517488697` | Master catalog umbrella | All active products index |
 
 ### SEO Redirection Contract
-All 27 obsolete legacy collection handles (e.g. `sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `sarimbit-exclusive`, `sarimbit-ekonomis`, `batik-wanita`, `batik-pria`, `jarik-kain-batik`, `blangkon-tradisional`, `blus-batik-wanita`, etc.) are permanently 301-redirected in `app/routes/collections.$handle.jsx` to preserve indexing equity.
+All 30+ legacy collection handles (including `sarimbit-luxury`, `sarimbit-premium`, `sarimbit-ekonomi`, `sarimbit-exclusive`, `sarimbit-ekonomis`, `batik-wanita`, `batik-pria`, `jarik-kain-batik`, `kain-batik-tulis`, `koleksi-kain`, `kain-batik`, `blangkon-tradisional`, `blus-batik-wanita`, etc.) are permanently 301-redirected in `app/routes/collections.$handle.jsx` to preserve indexing equity.
 

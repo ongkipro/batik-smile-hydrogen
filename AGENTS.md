@@ -7,15 +7,15 @@
 
 ## 1. Project Context & Brand Identity
 
-- **Brand**: **Batik Smile Nusantara** (Established 2007, Semarang, Central Java).
-- **Physical Footprint**: 
-  - **Flagship Showroom (3 Floors)**: Jl. Simongan Raya No. 109, Pamularsih, Semarang (Floor 1: RTW & fitting, Floor 2: Raw fabrics & VIP lounge, Floor 3: Crafts & souvenirs).
-  - **Branch**: Jl. Sukun Raya No. 23, Banyumanik, Semarang.
-- **Service Standard**: **3S 1C 1T & 1H** (*Senyum, Salam, Sapa, Cepat, Tanggap, Hati*).
-- **Commerce Model**: **Dual-Engine Commerce**:
-  1. **Ready-To-Wear (RTW)**: 3-Tier Collection (`sarimbit-exclusive`, `sarimbit-premium`, `sarimbit-ekonomis`).
-  2. **Haute Artistry & Tailoring**: Raw artisan Kain Batik Tulis ("Choose Your Batik") + Bespoke Tailoring without MOQ.
-- **Official Channels**: WhatsApp Concierge `081-390-8888-09` | Instagram `@batiksmile.official`.
+- **Brand**: **Batik Smile Nusantara** (Sejak 2007, Semarang, Jawa Tengah).
+- **Physical Showrooms**: 
+  - **Batik Smile Sampokong (3 Lantai)**: Jl. Simongan Raya No. 109, Pamularsih, Semarang (Lt. 1: RTW & Fitting • Lt. 2: VIP Sutra & Lounge • Lt. 3: Suvenir).
+  - **Batik Smile Sukun**: Jl. Sukun Raya No. 23, Banyumanik, Semarang.
+- **Service Standard**: Pelayanan Hangat Sepenuh Hati & Presisi Jahitan Butik.
+- **Commerce Model**: **6 Core Collections & Dual-Engine Commerce**:
+  1. **Ready-To-Wear (RTW) 3-Tier**: `luxury-series` (Sutra ATBM & Lapisan Trikot), `premium-series` (Tenun Dobby & Lapisan Trikot), `ekonomi-series` (100% Katun Primisima).
+  2. **Specialist & Raw Fabric Collections**: `kain` (**Kain Batik** — klasik hingga modern untuk busana personal, seragam, & sarimbit), `batik-anak`, dan `aksesoris`.
+- **Official Channels**: WhatsApp Concierge `081-390-8888-09` | Instagram `@batiksmile_official` | Email `butik@batiksmile.com`.
 
 ---
 
