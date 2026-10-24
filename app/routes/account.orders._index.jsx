@@ -6,10 +6,10 @@ import {
 } from 'react-router';
 import { useRef } from 'react';
 import {
-  Money,
   getPaginationVariables,
   flattenConnection,
 } from '@shopify/hydrogen';
+import { BoutiqueMoney } from '~/lib/currency';
 import {
   buildOrderSearchQuery,
   parseOrderFilters,
@@ -118,7 +118,7 @@ function EmptyOrders({ hasFilters = false }) {
         to={hasFilters ? '/account/orders' : '/collections/luxury-series'}
         className="inline-block px-6 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
       >
-        {hasFilters ? 'HAPUS FILTER' : 'MULAI BELANJA &rarr;'}
+        {hasFilters ? 'HAPUS FILTER' : 'MULAI BELANJA →'}
       </Link>
     </div>
   );
@@ -220,7 +220,7 @@ function OrderItem({ order }) {
         <div className="text-right">
           <span className="text-[10px] uppercase tracking-wider text-[#A69F96] block">Total</span>
           <span className="text-sm font-semibold text-[#111111]">
-            <Money data={order.totalPrice} />
+            <BoutiqueMoney data={order.totalPrice} />
           </span>
         </div>
 

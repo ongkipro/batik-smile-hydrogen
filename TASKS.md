@@ -1380,3 +1380,39 @@
 - [x] **Task 68.3: Clean Minimalist Cart Drawer UI/UX**
   - *Action*: Streamlined `CartSummary.jsx` and `CartMain.jsx` aside drawer by removing redundant headers, duplicate cost breakdown rows, promo input clutter in the drawer, and payment method lists, keeping only a clean **Subtotal** row, concise checkout note (*"Ongkos kirim & kode promo dihitung saat checkout."*), and **LANJUT KE PEMBAYARAN →** CTA.
   - *Evidence*: Deployed via commit `01a368c` (GitHub Actions run `38468914337`), `npm run lint` 0 errors, `npm run build` exit code 0, verified live on `https://batiksmile.com`.
+
+---
+
+## Phase 69: Comprehensive Precision Audit & Storefront Refinement (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/styles/app.css, app/components/*, app/routes/*, app/lib/schema.js, package.json*
+
+- [x] **Task 69.1: CSS Cascade Fix for Circular WhatsApp Button & Sticky Header Precision**
+  - *Action*: Removed `!important` from `@layer base { border-radius: 0px; }` in `app/styles/app.css` and added explicit `borderRadius: '9999px'` to `WhatsAppConcierge.jsx` so the official green floating WhatsApp button renders as a true circle while preserving `0px` Zero-Radius across all other elements. Removed conflicting `relative` class from `sticky top-0` `<header>` in `Header.jsx`.
+  - *Evidence*: Verified via SSR and CSS inspection (`hasCircularWa: true`).
+- [x] **Task 69.2: HeroSlider Timer Leak Fix, Single-H1 Semantics & Editorial Journal Typo**
+  - *Action*: Fixed `setInterval` cleanup leak inside `setTimeout` in `HeroSlider.jsx`, updated Slide 2 secondary CTA from broken `#lookbook` to `#best-sellers`, and rendered `<h1>` only on Slide 0 (`<h2>` on subsequent slides). Fixed typo `FILOSOFI WASRA` -> `FILOSOFI WASTRA` in `EditorialJournalSection.jsx`.
+  - *Evidence*: Verified via SSR inspection (`hasWastraFixed: true`).
+- [x] **Task 69.3: Rectilinear Collections Index & Full-Featured `/collections/all` Catalog**
+  - *Action*: Straightened cards in `collections._index.jsx` to 0-degree rectilinear Quiet Luxury geometry without washi tape clutter, mapped eyebrows accurately by `collection.handle` (`COLLECTION_NOTES`), and updated `KAIN` chip to `KAIN BATIK`. Upgraded `collections.all.jsx` and `CollectionFilterBar.jsx` to render the 2-column desktop `CollectionSidebar` + `CollectionFilterHeader` and support Gender & Category filtering across desktop and mobile.
+  - *Evidence*: Verified HTTP 200 and DOM structure on `/collections`, `/collections/all`, and `/collections/all?gender=wanita`.
+- [x] **Task 69.4: PDP 2x2 Trust Grid, Functional Cart Note, Showroom Symmetry & Account/Schema Polish**
+  - *Action*: Added 4th trust badge (*"Presisi Jahitan Butik"*) to PDP `grid-cols-2` Trust Guarantee Grid and normalized `relatedCollectionTitle` for `kain` to **Kain Batik** in `products.$handle.jsx`. Wired `/cart` order note to `CartForm.ACTIONS.NoteUpdate` in `cart.jsx` and `CartMain.jsx`. Added symmetrical `CHAT KONSULTAN →` button to Sampokong showroom card in `pages.lokasi-toko.jsx`. Standardized `SITE_NAME` (`Batik Smile`) in `schema.js`, fixed article URL and `BoutiqueMoney` in `SearchResults.jsx`, fixed unparsed `&rarr;` strings and `BoutiqueMoney` in `account.*.jsx`, and pinned `@shopify/hydrogen` to `~2026.4.5` in `package.json`.
+  - *Evidence*: `npm run lint` 0 errors, `npm run build` exit code 0, all 12 tested SSR routes returned HTTP 200 OK.
+
+---
+
+## Phase 70: Luxury Series Eyebrow Cleanup, Final Shipping Policy, PDP "Produk Serupa" & Visual Revisions (COMPLETED ✅)
+*Semantic Risk: R1 | Primary Boundary: app/routes/collections.$handle.jsx, app/routes/policies.$handle.jsx, app/routes/policies._index.jsx, app/routes/pages.$handle.jsx, app/routes/products.$handle.jsx, app/lib/currency.js, app/components/Header.jsx, app/components/SarimbitBentoSection.jsx, app/routes/collections._index.jsx, app/components/CollectionFilterBar.jsx*
+
+- [x] **Task 70.1: Remove `ARSIP BUTIK • SUTRA ATBM & PRADA EMAS` on Luxury Series**
+  - *Action*: Removed `ARSIP BUTIK • SUTRA ATBM & PRADA EMAS` from the Luxury Series hero in `collections.$handle.jsx` and cleaned up corresponding notes in `SarimbitBentoSection.jsx` and `collections._index.jsx`.
+  - *Evidence*: Verified via SSR on `/collections/luxury-series` (`hasRemovedArsipSutra: true`).
+- [x] **Task 70.2: Publish Final 10-Point "Kebijakan Pengiriman" with Sukun & Sampokong Outlets**
+  - *Action*: Updated `DEFAULT_POLICIES['shipping-policy']` in `policies.$handle.jsx` (and prioritized it for `shipping-policy` / `kebijakan-pengiriman`), updated `policies._index.jsx`, and added a 301 redirect in `pages.$handle.jsx` for `/pages/kebijakan-pengiriman`. Included all 10 sections plus the `Hubungi Kami` block with WhatsApp `081.390.8888.09`, **Outlet Batik Smile Sukun**, and **Outlet Batik Smile Sampokong**.
+  - *Evidence*: Verified via SSR on `/policies/shipping-policy` (`hasTagline: true, has10Points: true, hasOutlets: true`).
+- [x] **Task 70.3: PDP Revisions (`IDR` Prefix, Shipping/Pickup Notes, Sukun & Sampokong Accordion, Entity/Legacy Clean, & "Produk Serupa")**
+  - *Action*: Updated `formatRupiah` in `app/lib/currency.js` (and filter labels in `CollectionFilterBar.jsx`) from `Rp` to `IDR`. Updated the 4th PDP trust item to *"Biaya pengiriman dihitung saat checkout"*, added Semarang Gojek/Grab Express and `Shop Location` (`/pages/lokasi-toko`) notes under `BELI SEKARANG`, updated the shipping accordion to *"Showroom Batik Smile Sukun & Sampokong Semarang"*, decoded HTML entities (`&amp;` -> `&`) and sanitized legacy `Katun Hero` in `products.$handle.jsx`, and added `recommendedProducts` fallback pool so **"Produk Serupa"** always displays 4 items.
+  - *Evidence*: Verified via SSR on `/products/sarimbit-royal-navy-1` (`hasIDR: true, hasCheckoutShipping: true, hasGojekGrab: true, hasShopLocation: true, hasProdukSerupa: true, noKatunHero: true`).
+- [x] **Task 70.4: Collection Seragam Showcase (A, B, C) & Tablet Header Collision Fix**
+  - *Action*: Updated the collection Seragam section in `collections.$handle.jsx` with the new headline (*"Pemesanan Seragam Acara Keluarga & Kebutuhan Korporat"*), updated description paragraph, 3-column showcase grid (`SERAGAM A`, `SERAGAM B`, `SERAGAM C`), and CTA (*"KONSULTASI SERAGAM →"*). Updated `Header.jsx` responsive layout at `lg` (`1024px`) to prevent navbar overlap on iPad screens.
+  - *Evidence*: `npm run lint` 0 errors, `npm run build` exit code 0, verified via SSR on `/collections/premium-series` (`hasHeadline: true, hasCopy: true, hasShowcaseABC: true, hasCta: true`).

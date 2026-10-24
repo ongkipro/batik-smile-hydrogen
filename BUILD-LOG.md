@@ -1549,3 +1549,54 @@
 - `npm run build`: Exit code 0 (SSR + Oxygen client build).
 - Deployed to Shopify Oxygen via GitHub Actions runs `38465725685` (`ed989bb`), `38468185212` (`4a047af`), `38468618670` (`4e0844f`), and `38468914337` (`01a368c`).
 - Verified live HTTP 200 OK across `https://batiksmile.com/` and `https://batiksmile.com/collections/kain`.
+
+---
+
+## Milestone 56: Comprehensive Precision Audit & Storefront Refinement (2026-10-24)
+**Date**: 2026-10-24 | **Execution**: End-to-end codebase audit and precision fixes across CSS cascade layers, sticky header, HeroSlider lifecycle, rectilinear collection cards, `/collections/all` desktop sidebar & gender/category filters, PDP 2x2 trust grid, functional cart notes, showroom symmetry, JSON-LD schema brand parity, and account routes
+
+### 1. Precision Refinements Executed
+- **CSS Cascade & Circular Floating WhatsApp Trigger (`app/styles/app.css`, `app/components/WhatsAppConcierge.jsx`)**:
+  - Removed `!important` from `@layer base { *, ::before, ::after { border-radius: 0px; } }` and added explicit `borderRadius: '9999px'` to `WhatsAppConcierge.jsx` so the official green floating WhatsApp button renders as a true circle while all other storefront elements stay strictly `0px` Zero-Radius.
+- **Sticky Header & HeroSlider Lifecycle (`app/components/Header.jsx`, `app/components/HeroSlider.jsx`, `app/components/EditorialJournalSection.jsx`)**:
+  - Removed conflicting `relative` class from `sticky top-0` `<header>`.
+  - Fixed `setInterval` memory/timer leak inside `setTimeout` in `HeroSlider.jsx`, restricted `<h1>` to slide 0 (`<h2>` on slides 1–4), and updated Slide 2 secondary CTA from `#lookbook` to `#best-sellers`.
+  - Fixed category label typo `FILOSOFI WASRA` -> `FILOSOFI WASTRA` in `EditorialJournalSection.jsx`.
+- **Rectilinear Collections Index & Full-Featured `/collections/all` Catalog (`app/routes/collections._index.jsx`, `app/routes/collections.all.jsx`, `app/components/CollectionFilterBar.jsx`)**:
+  - Straightened `/collections` cards to 0-degree rectilinear Quiet Luxury geometry (purging legacy `SCATTER_STYLES` rotation and washi tape overlays), mapped collection eyebrows by `collection.handle` (`COLLECTION_NOTES`), and updated `KAIN` quick-chip to `KAIN BATIK`.
+  - Upgraded `/collections/all` to render the 2-column desktop `CollectionSidebar` + `CollectionFilterHeader` layout, enabled Gender & Category filters on `/collections/all`, and synchronized tag + title filtering.
+- **PDP 2x2 Trust Grid, Functional Cart Order Note, Showroom Symmetry & Account/Schema Polish**:
+  - Restored 4th trust badge (*"Presisi Jahitan Butik"*) to the `grid-cols-2` Trust Guarantee Grid and normalized `relatedCollectionTitle` for `kain` to **Kain Batik** in `products.$handle.jsx`.
+  - Wired `/cart` order note `<textarea>` to `CartForm.ACTIONS.NoteUpdate` in `cart.jsx` and `CartMain.jsx`.
+  - Added symmetrical `CHAT KONSULTAN →` action button to `Batik Smile Sampokong` showroom card in `pages.lokasi-toko.jsx`.
+  - Standardized `SITE_NAME` (`Batik Smile`) across `app/lib/schema.js`, fixed article URL and `BoutiqueMoney` in `SearchResults.jsx`, fixed unparsed `&rarr;` strings and `BoutiqueMoney` in `account.*.jsx`, and pinned `@shopify/hydrogen` to `~2026.4.5` in `package.json`.
+
+### 2. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0 (Vite client + SSR Oxygen bundle).
+- Live local SSR verification across 12 routes (`/`, `/collections`, `/collections/all`, `/collections/all?gender=wanita`, `/collections/all?gender=pria`, `/collections/kain`, `/pages/tentang-kami`, `/pages/lokasi-toko`, `/blogs`, `/policies`, `/cart`, `/products/hem-lurik-hitam`): 100% HTTP 200 OK and all DOM invariants verified.
+
+---
+
+## Milestone 57: Luxury Series Eyebrow Cleanup, Final Shipping Policy, PDP "Produk Serupa" & Visual Revisions (2026-10-24)
+**Date**: 2026-10-24 | **Execution**: Removed `ARSIP BUTIK • SUTRA ATBM & PRADA EMAS` on Luxury Series, published final 10-point **Kebijakan Pengiriman** with Outlet Sukun & Sampokong, implemented all PDP Screenshot 1 revisions (`IDR` currency prefix, checkout shipping badge, Gojek/Grab Express + `Shop Location` notes, Sukun & Sampokong accordion, HTML entity & legacy `Katun Hero` sanitization, and guaranteed 4-card **Produk Serupa** section), implemented Collection Screenshot 2 Seragam revisions (`Pemesanan Seragam Acara Keluarga & Kebutuhan Korporat`, new paragraph copy, 3-column showcase examples A/B/C, and `KONSULTASI SERAGAM →`), and resolved `1024px` tablet header navigation overlap
+
+### 1. Revisions Executed
+- **Luxury Series Eyebrow Removal (`app/routes/collections.$handle.jsx`, `app/components/SarimbitBentoSection.jsx`, `app/routes/collections._index.jsx`)**:
+  - Removed `ARSIP BUTIK • SUTRA ATBM & PRADA EMAS` from the Luxury Series hero banner and collection cards.
+- **Final 10-Point "Kebijakan Pengiriman" (`app/routes/policies.$handle.jsx`, `app/routes/policies._index.jsx`, `app/routes/pages.$handle.jsx`)**:
+  - Published the complete 10-point **Kebijakan Pengiriman** (*Batik Smile — Batikku Yo Batik Smile*, sections 1 through 10) and **Hubungi Kami** block with WhatsApp `081.390.8888.09` (`081-390-8888-09`), **Outlet Batik Smile Sukun** (`Jl. Sukun Raya No. 23, Banyumanik, Semarang`), and **Outlet Batik Smile Sampokong** (`Jl. Simongan Raya No. 109, Pamularsih, Semarang`).
+- **PDP Revisions & Guaranteed "Produk Serupa" (`app/routes/products.$handle.jsx`, `app/lib/currency.js`, `app/components/CollectionFilterBar.jsx`)**:
+  - Changed currency display prefix from `Rp` to `IDR` (`IDR 1.250.000`).
+  - Updated the 4th item in the trust grid under `BELI SEKARANG` to *"Biaya pengiriman dihitung saat checkout"* and added the two local delivery/pickup notes (*"Pengiriman instan tersedia melalui Gojek / Grab Express di area Semarang."* and *"Pengambilan produk dapat dilakukan di Shop Location."*) linked to `/pages/lokasi-toko`.
+  - Updated `PENGIRIMAN & GARANSI TUKAR` accordion to *"Showroom Batik Smile Sukun & Sampokong Semarang"*.
+  - Decoded HTML entities (`&amp;` -> `&`) and sanitized legacy `Katun Hero` in `parseShopifyDescription` and loader product descriptions.
+  - Added `recommendedProducts` fallback query in `PRODUCT_QUERY` and updated the related section heading to **Produk Serupa** so every product page always displays 4 similar products.
+- **Collection Seragam Showcase (A, B, C) & Tablet Header Overlap Fix (`app/routes/collections.$handle.jsx`, `app/components/Header.jsx`)**:
+  - Updated the Seragam section headline to *"Pemesanan Seragam Acara Keluarga & Kebutuhan Korporat"*, updated the description copy, added 3 visual showcase cards (*Contoh Seragam A: Instansi & Pemerintahan*, *B: Kantor & Perusahaan*, *C: Resepsi & Acara Keluarga*), and updated the button to *"KONSULTASI SERAGAM →"*.
+  - Calibrated `Header.jsx` responsive flex layout and typography at `lg` (`1024px`) so the left brand logo, center navigation links, and right action icons never collide on iPad/tablet viewports.
+
+### 2. Verification Evidence
+- `npm run lint`: 0 errors, 0 warnings.
+- `npm run build`: Exit code 0.
+- Live SSR verification on `localhost:3002`: Confirmed all updated routes (`/collections/luxury-series`, `/collections/premium-series`, `/policies/shipping-policy`, `/products/sarimbit-royal-navy-1`) render HTTP 200 OK with 100% of requested revisions present.

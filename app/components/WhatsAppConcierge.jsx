@@ -108,6 +108,7 @@ export function WhatsAppConcierge() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
+        style={{ borderRadius: '9999px' }}
         className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white flex items-center justify-center shadow-[0_8px_24px_rgba(37,211,102,0.42)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.58)] hover:scale-105 transition-all duration-300 cursor-pointer"
         aria-label="Buka Layanan Konsultasi WhatsApp"
         title="Konsultasi via WhatsApp Resmi"

@@ -149,7 +149,7 @@ export default function AccountProfile() {
             disabled={state !== 'idle'}
             className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
           >
-            {state !== 'idle' ? 'MENYIMPAN PERUBAHAN...' : 'SIMPAN PERUBAHAN &rarr;'}
+            {state !== 'idle' ? 'MENYIMPAN PERUBAHAN...' : 'SIMPAN PERUBAHAN →'}
           </button>
         </div>
       </Form>

@@ -38,120 +38,22 @@ async function loadCriticalData({ context, request }) {
 }
 
 /**
- * Scatter styles array to create the artistic atelier "kartu berantakan" moodboard effect.
- * Each card gets a deliberate organic tilt, vertical stagger offset, translucent washi tape accent,
- * and serial plate stamp. On hover, the card smoothly straightens up (rotate-0) and scales up.
+ * Curated collection eyebrow notes mapped by collection handle for accurate editorial hierarchy.
  */
-const SCATTER_STYLES = [
-  {
-    tilt: '-rotate-1 sm:-rotate-2',
-    offset: 'lg:translate-y-2',
-    tapePos: 'left-8 -top-2.5',
-    tapeAngle: '-rotate-2',
-    stamp: 'SERI I',
-    plate: 'ARC-01',
-    note: 'Sarimbit Sutra ATBM 3 Kasta',
-  },
-  {
-    tilt: 'rotate-1 sm:rotate-2',
-    offset: 'lg:-translate-y-4',
-    tapePos: 'right-8 -top-2.5',
-    tapeAngle: 'rotate-3',
-    stamp: 'HAUTE',
-    plate: 'ARC-02',
-    note: 'Tenun Dobby & Katun Prima',
-  },
-  {
-    tilt: '-rotate-1.5 sm:-rotate-2.5',
-    offset: 'lg:translate-y-5',
-    tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
-    tapeAngle: '-rotate-1',
-    stamp: 'MASTERPIECE',
-    plate: 'ARC-03',
-    note: 'Canting Tembaga & Soga Alami',
-  },
-  {
-    tilt: 'rotate-1.5 sm:rotate-2',
-    offset: 'lg:-translate-y-3',
-    tapePos: 'left-6 -top-2.5',
-    tapeAngle: 'rotate-2',
-    stamp: 'WARISAN',
-    plate: 'ARC-04',
-    note: 'Kemeja Batik Pola Simetris',
-  },
-  {
-    tilt: '-rotate-2 sm:-rotate-1.5',
-    offset: 'lg:translate-y-4',
-    tapePos: 'right-6 -top-2.5',
-    tapeAngle: '-rotate-3',
-    stamp: 'ATELIER',
-    plate: 'ARC-05',
-    note: 'Blus & Dress Pesta Modern',
-  },
-  {
-    tilt: 'rotate-1 sm:rotate-1.5',
-    offset: 'lg:-translate-y-2',
-    tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
-    tapeAngle: 'rotate-1',
-    stamp: 'LIMITED',
-    plate: 'ARC-06',
-    note: 'Koleksi Balita & Anak Tradisional',
-  },
-  {
-    tilt: '-rotate-1 sm:-rotate-2',
-    offset: 'lg:translate-y-3',
-    tapePos: 'left-8 -top-2.5',
-    tapeAngle: '-rotate-2',
-    stamp: 'EXCLUSIVE',
-    plate: 'ARC-07',
-    note: 'Blazer & Outerwear Elegan',
-  },
-  {
-    tilt: 'rotate-2 sm:rotate-2.5',
-    offset: 'lg:-translate-y-4',
-    tapePos: 'right-8 -top-2.5',
-    tapeAngle: 'rotate-2',
-    stamp: 'PREMIUM',
-    plate: 'ARC-08',
-    note: 'Tunik & Gamis Pesta Mewah',
-  },
-  {
-    tilt: '-rotate-1.5 sm:-rotate-1',
-    offset: 'lg:translate-y-5',
-    tapePos: 'left-6 -top-2.5',
-    tapeAngle: '-rotate-1',
-    stamp: 'SEMARANG',
-    plate: 'ARC-09',
-    note: 'Jarik Wiru & Sarung Batik',
-  },
-  {
-    tilt: 'rotate-1 sm:rotate-2',
-    offset: 'lg:-translate-y-3',
-    tapePos: 'right-6 -top-2.5',
-    tapeAngle: 'rotate-3',
-    stamp: 'ORIGINAL',
-    plate: 'ARC-10',
-    note: 'Kebaya Bordir & Encim Pesisir',
-  },
-  {
-    tilt: '-rotate-2 sm:-rotate-1.5',
-    offset: 'lg:translate-y-2',
-    tapePos: 'left-1/2 -translate-x-1/2 -top-2.5',
-    tapeAngle: '-rotate-2',
-    stamp: 'BUTIK',
-    plate: 'ARC-11',
-    note: 'Inner Busana & Manset Lembut',
-  },
-  {
-    tilt: 'rotate-1.5 sm:rotate-2',
-    offset: 'lg:-translate-y-5',
-    tapePos: 'right-8 -top-2.5',
-    tapeAngle: 'rotate-1',
-    stamp: 'KLASIK',
-    plate: 'ARC-12',
-    note: 'Kain Panjang Pola Keraton',
-  },
-];
+const COLLECTION_NOTES = {
+  'luxury-series': '',
+  'sarimbit-luxury': '',
+  'premium-series': 'Tenun Dobby Timbul & Lapisan Trikot',
+  'sarimbit-premium': 'Tenun Dobby Timbul & Lapisan Trikot',
+  'ekonomi-series': 'Katun Primisima Sejuk & Harmonis',
+  'sarimbit-ekonomi': 'Katun Primisima Sejuk & Harmonis',
+  'sarimbit': 'Koleksi Busana Serasi Keluarga',
+  'kain': 'Kain Batik Klasik & Kontemporer',
+  'jarik-kain-batik': 'Jarik Wiru & Lembaran Kain Batik',
+  'batik-anak': 'Koleksi Busana Batik Anak & Balita',
+  'aksesoris': 'Pelengkap Busana & Aksesoris Tradisional',
+  'blangkon-tradisional': 'Blangkon & Pelengkap Adat Jawa',
+};
 
 export default function Collections() {
   /** @type {LoaderReturnData} */
@@ -190,7 +92,7 @@ export default function Collections() {
               { label: 'LUXURY SERIES', href: '/collections/luxury-series' },
               { label: 'PREMIUM SERIES', href: '/collections/premium-series' },
               { label: 'EKONOMI SERIES', href: '/collections/ekonomi-series' },
-              { label: 'KAIN', href: '/collections/kain' },
+              { label: 'KAIN BATIK', href: '/collections/kain' },
               { label: 'AKSESORIS', href: '/collections/aksesoris' },
               { label: 'BATIK ANAK', href: '/collections/batik-anak' },
             ].map((cat, idx) => (
@@ -255,21 +157,16 @@ function CollectionItem({ collection, index }) {
     fallbackImages[collection.handle] ||
     '/banners/hero_editorial_banner.jpg';
 
-  const style = SCATTER_STYLES[index % SCATTER_STYLES.length];
+  const collectionNote =
+    collection.handle in COLLECTION_NOTES
+      ? COLLECTION_NOTES[collection.handle]
+      : 'Koleksi Pilihan Butik Batik Smile';
 
   return (
-    <div
-      className={`relative group transition-all duration-500 ease-out ${style.offset} hover:z-30`}
-    >
-      {/* Translucent Archival Washi Tape Accent */}
-      <div
-        aria-hidden="true"
-        className={`absolute ${style.tapePos} ${style.tapeAngle} z-20 w-12 sm:w-16 h-3 sm:h-3.5 bg-[#F3EDE2]/85 border border-[#C5A059]/40 backdrop-blur-xs shadow-xs pointer-events-none group-hover:opacity-60 transition-opacity`}
-      />
-
-      {/* Strict 5:4 Landscape Aspect Ratio Curated Card */}
+    <div className="relative group transition-all duration-500 ease-out">
+      {/* Strict 5:4 Landscape Aspect Ratio Curated Card (Zero-Tilt Rectilinear Architecture) */}
       <Link
-        className={`block relative aspect-[5/4] bg-[#111111] overflow-hidden border border-[#E2DFD8] shadow-[0_6px_22px_rgba(0,0,0,0.06)] group-hover:shadow-[0_20px_45px_rgba(197,160,89,0.20)] group-hover:border-[#C5A059] transition-all duration-500 transform ${style.tilt} group-hover:rotate-0 group-hover:scale-[1.02] no-underline`}
+        className="block relative aspect-[5/4] bg-[#111111] overflow-hidden border border-[#E2DFD8] shadow-[0_6px_22px_rgba(0,0,0,0.06)] group-hover:shadow-[0_20px_45px_rgba(197,160,89,0.20)] group-hover:border-[#C5A059] transition-all duration-500 no-underline"
         key={collection.id}
         to={`/collections/${collection.handle}`}
         prefetch="intent"
@@ -279,16 +176,18 @@ function CollectionItem({ collection, index }) {
           src={imageUrl}
           alt={collection.image?.altText || collection.title}
           loading={index < 4 ? 'eager' : 'lazy'}
-          className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700 opacity-85 group-hover:opacity-100"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-85 group-hover:opacity-100"
         />
 
         {/* Full-bleed Editorial Gradient Overlay (Quiet Luxury Scrim) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 p-4 sm:p-6 flex flex-col justify-end text-white">
           {/* Bottom Bar: Collection Editorial Info */}
           <div>
-            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
-              ARSIP BUTIK &bull; {style.note}
-            </span>
+            {collectionNote && (
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+                ARSIP BUTIK &bull; {collectionNote}
+              </span>
+            )}
 
             <h2 className="font-serif text-xl sm:text-2xl lg:text-2xl font-normal leading-tight text-white group-hover:text-[#C5A059] transition-colors mb-1.5 line-clamp-1">
               {collection.handle === 'kain' ? 'Kain Batik' : collection.title}

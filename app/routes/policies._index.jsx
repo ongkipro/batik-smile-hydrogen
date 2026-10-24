@@ -26,7 +26,6 @@ export async function loader({ context }) {
   }
 
   const shop = shopData?.shop;
-  const shippingPage = shopData?.shippingPage;
   const refundPage = shopData?.refundPage;
   const termsPage = shopData?.termsPage;
 
@@ -35,9 +34,9 @@ export async function loader({ context }) {
     {
       id: 'shipping-policy',
       handle: 'shipping-policy',
-      title: shippingPage?.title || shop?.shippingPolicy?.title || 'Kebijakan Pengiriman Seluruh Nusantara',
-      badge: 'LOGISTIK & ASURANSI',
-      summary: 'Layanan pengiriman terpercaya ke seluruh penjuru Indonesia (Pulau Jawa 1-3 hari, Luar Jawa 2-5 hari) dengan asuransi pengiriman penuh dan nomor resi otomatis via WhatsApp & Email.',
+      title: 'Kebijakan Pengiriman',
+      badge: 'LOGISTIK & PENGIRIMAN',
+      summary: 'Komitmen pemrosesan pesanan 1–2 hari kerja via JNE, J&T Express, SiCepat, dan ekspedisi resmi lainnya ke seluruh Indonesia, lengkap dengan layanan pelanggan Outlet Sukun & Sampokong.',
     },
     {
       id: 'privacy-policy',
@@ -80,7 +79,7 @@ export async function loader({ context }) {
       to: '/pages/lokasi-toko',
       title: 'Lokasi Butik & Showroom Resmi',
       category: 'SHOWROOM RESMI',
-      description: 'Kunjungi showroom Batik Smile di Pamularsih dan Banyumanik untuk pengalaman fitting busana langsung dan konsultasi koleksi.',
+      description: 'Kunjungi Outlet Batik Smile Sukun (Banyumanik) dan Outlet Sampokong (Simongan) untuk pengalaman fitting busana langsung dan konsultasi koleksi.',
     },
   ];
 

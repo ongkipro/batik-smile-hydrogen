@@ -27,7 +27,7 @@ const SLIDES = [
     ctaText: 'KOLEKSI WANITA',
     ctaLink: '/collections/luxury-series?gender=wanita',
     secondaryCtaText: 'LIHAT LOOKBOOK',
-    secondaryCtaLink: '#lookbook',
+    secondaryCtaLink: '#best-sellers',
     image: '/banners/hero_slider_2.jpg',
   },
   {
@@ -83,15 +83,18 @@ export function HeroSlider() {
 
   useEffect(() => {
     if (isPaused) return;
+    let intervalId = null;
     // Editorial pacing: Allow 12s initial reading time before first auto-advance, then 8s per slide
     const initialDelay = setTimeout(() => {
-      const interval = setInterval(() => {
+      intervalId = setInterval(() => {
         setCurrent((prev) => (prev + 1) % SLIDES.length);
       }, 8000);
-      return () => clearInterval(interval);
     }, 12000);
 
-    return () => clearTimeout(initialDelay);
+    return () => {
+      clearTimeout(initialDelay);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, [isPaused]);
 
   const prevSlide = () => {
@@ -132,6 +135,7 @@ export function HeroSlider() {
         if (index > 0 && !isMounted) return null;
 
         const isActive = index === current;
+        const HeadingTag = index === 0 ? 'h1' : 'h2';
         return (
           <div
             key={slide.id}
@@ -201,9 +205,9 @@ export function HeroSlider() {
                   </span>
 
                   {/* Headline */}
-                  <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-2">
+                  <HeadingTag className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-2">
                     {slide.title}
-                  </h1>
+                  </HeadingTag>
 
                   {/* Subtitle */}
                   <p className="font-serif text-base sm:text-xl text-[#FAF8F5]/90 italic font-light mb-4">

@@ -46,16 +46,16 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
       <AnnouncementBar />
 
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 relative ${
+        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md border-b border-[#E2DFD8] shadow-[0_2px_15px_rgba(0,0,0,0.04)]'
             : 'bg-[#FAF8F5] border-b border-[#E2DFD8]'
         }`}
       >
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 h-20 sm:h-21 lg:h-20 flex items-center justify-between relative">
+        <div className="w-full px-4 sm:px-8 lg:px-6 xl:px-12 2xl:px-16 h-20 sm:h-21 lg:h-20 flex items-center justify-between relative">
           
           {/* 1. LEFT: Mobile Burger Trigger & Desktop Brand Logo (Pure Logo, No Subtitle) */}
-          <div className="flex items-center z-10">
+          <div className="flex items-center z-10 shrink-0">
             {/* Mobile Burger Menu Button */}
             <button
               type="button"
@@ -70,7 +70,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
 
             {/* Desktop Brand Logo (Majestic Quiet Luxury Gold + Soga Patina) */}
             <NavLink to="/" className="hidden lg:flex items-center group flex-shrink-0">
-              <span className="font-serif text-[20px] xl:text-[22px] font-normal uppercase tracking-[0.24em] bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
+              <span className="font-serif text-[16px] xl:text-[20px] 2xl:text-[22px] font-normal uppercase tracking-[0.18em] xl:tracking-[0.24em] whitespace-nowrap bg-gradient-to-r from-[#4A2E1B] via-[#C5A059] to-[#7C3F1D] text-transparent bg-clip-text transition-all duration-700 leading-none">
                 BATIK SMILE
               </span>
             </NavLink>
@@ -85,10 +85,10 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
             </NavLink>
           </div>
 
-          {/* 3. CENTER: Desktop Navigation Menu (Dead Center Precision, Strictly 1 Line, No Submenus) */}
+          {/* 3. CENTER: Desktop Navigation Menu (Collision-Free Flex Center on Tablet/Laptop, Dead Center on 2XL) */}
           <nav
             aria-label="Navigasi Utama Butik"
-            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-5 xl:gap-8 2xl:gap-9 whitespace-nowrap z-10 text-[12px] xl:text-[13px] font-medium uppercase tracking-[0.18em]"
+            className="hidden lg:flex flex-1 2xl:flex-initial 2xl:absolute 2xl:left-1/2 2xl:top-1/2 2xl:-translate-x-1/2 2xl:-translate-y-1/2 items-center justify-center gap-3.5 xl:gap-6 2xl:gap-8 whitespace-nowrap z-10 text-[10.5px] xl:text-[12px] 2xl:text-[13px] font-medium uppercase tracking-[0.12em] xl:tracking-[0.16em] 2xl:tracking-[0.18em] px-3 2xl:px-0"
           >
             {NAV_ITEMS.map((item) => (
               <NavLink
@@ -108,7 +108,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
           </nav>
 
           {/* 4. RIGHT: Actions (Search, Account, Cart — Zero WhatsApp CTA) */}
-          <div className="flex items-center justify-end z-10 gap-1 sm:gap-1.5">
+          <div className="flex items-center justify-end z-10 gap-1 sm:gap-1.5 shrink-0">
             <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
           </div>
         </div>

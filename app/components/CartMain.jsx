@@ -1,5 +1,5 @@
-import React from 'react';
-import { useOptimisticCart } from '@shopify/hydrogen';
+import React, { useState } from 'react';
+import { useOptimisticCart, CartForm } from '@shopify/hydrogen';
 import { Link } from 'react-router';
 import { useAside } from '~/components/Aside';
 import { CartLineItem } from '~/components/CartLineItem';
@@ -97,24 +97,7 @@ export function CartMain({ layout, cart: originalCart }) {
             </div>
 
             {/* Shopify Order Notes (Catatan Pesanan Khusus - Zero Card Box) */}
-            <div className="pt-6 border-t border-[#E2DFD8]">
-              <label
-                htmlFor="cart-note"
-                className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1"
-              >
-                CATATAN PESANAN (OPSIONAL)
-              </label>
-              <p className="text-xs text-[#5A5550] font-light mb-2.5">
-                Tambahkan permintaan ukuran khusus, instruksi kurir, atau ucapan kartu untuk kado:
-              </p>
-              <textarea
-                id="cart-note"
-                name="note"
-                rows={2}
-                placeholder="Tuliskan catatan pesanan Anda di sini..."
-                className="w-full p-3 text-base sm:text-xs text-[#111111] placeholder:text-[#888888] bg-white/70 border border-[#E2DFD8] focus:border-[#111111] focus:bg-white focus:outline-hidden transition-colors"
-              />
-            </div>
+            <CartOrderNote initialNote={cart?.note ?? ''} />
 
             {/* Whispered Quality Guarantee (No Card Box) */}
             <div className="pt-5 border-t border-[#E2DFD8] text-xs text-[#5A5550] space-y-1.5 font-light">
@@ -181,6 +164,73 @@ export function CartMain({ layout, cart: originalCart }) {
           <CartSummary cart={cart} layout={layout} />
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * Interactive Order Note form wired to CartForm.ACTIONS.NoteUpdate
+ * @param {{ initialNote?: string }} props
+ */
+function CartOrderNote({ initialNote = '' }) {
+  const [note, setNote] = useState(initialNote);
+  const [saved, setSaved] = useState(false);
+
+  return (
+    <div className="pt-6 border-t border-[#E2DFD8]">
+      <div className="flex items-center justify-between mb-1">
+        <label
+          htmlFor="cart-note"
+          className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block"
+        >
+          CATATAN PESANAN (OPSIONAL)
+        </label>
+        {saved && (
+          <span className="text-[9px] uppercase tracking-[0.16em] text-[#2A5C3F] font-semibold">
+            ✓ Catatan Tersimpan
+          </span>
+        )}
+      </div>
+      <p className="text-xs text-[#5A5550] font-light mb-2.5">
+        Tambahkan permintaan ukuran khusus, instruksi kurir, atau ucapan kartu untuk kado:
+      </p>
+      <CartForm
+        route="/cart"
+        action={CartForm.ACTIONS.NoteUpdate}
+        inputs={{ note }}
+      >
+        {(fetcher) => {
+          const isSaving = fetcher.state !== 'idle';
+          return (
+            <div className="space-y-2">
+              <textarea
+                id="cart-note"
+                name="note"
+                rows={2}
+                value={note}
+                onChange={(e) => {
+                  setNote(e.target.value);
+                  if (saved) setSaved(false);
+                }}
+                placeholder="Tuliskan catatan pesanan Anda di sini..."
+                className="w-full p-3 text-base sm:text-xs text-[#111111] placeholder:text-[#888888] bg-white/70 border border-[#E2DFD8] focus:border-[#111111] focus:bg-white focus:outline-hidden transition-colors"
+              />
+              {note !== initialNote && (
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    disabled={isSaving}
+                    onClick={() => setSaved(true)}
+                    className="px-4 py-1.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[9px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer"
+                  >
+                    {isSaving ? 'MENYIMPAN...' : 'SIMPAN CATATAN'}
+                  </button>
+                </div>
+              )}
+            </div>
+          );
+        }}
+      </CartForm>
     </div>
   );
 }

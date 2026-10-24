@@ -15,13 +15,13 @@ export function generateOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'ClothingStore',
     '@id': `${ROOT_DOMAIN}/#organization`,
-    name: 'Batik Smile Nusantara',
+    name: SITE_NAME,
     alternateName: SITE_NAME,
     url: ROOT_DOMAIN,
     logo: {
       '@type': 'ImageObject',
       url: `${ROOT_DOMAIN}/brand/batik-smile-logo.png`,
-      caption: 'Logo Resmi Batik Smile Nusantara',
+      caption: 'Logo Resmi Batik Smile',
     },
     image: `${ROOT_DOMAIN}/og-image.jpg`,
     description:
@@ -92,7 +92,7 @@ export function generateWebSiteSchema() {
     '@type': 'WebSite',
     '@id': `${ROOT_DOMAIN}/#website`,
     url: ROOT_DOMAIN,
-    name: 'Batik Smile Nusantara',
+    name: SITE_NAME,
     alternateName: SITE_NAME,
     publisher: {
       '@id': `${ROOT_DOMAIN}/#organization`,
@@ -158,7 +158,7 @@ export function generateProductSchema(product) {
       itemCondition: 'https://schema.org/NewCondition',
       seller: {
         '@type': 'Organization',
-        name: 'Batik Smile Nusantara',
+        name: SITE_NAME,
       },
       url: canonicalUrl,
     },
@@ -230,7 +230,7 @@ export function generateArticleSchema(article, blogHandle = 'news') {
     publisher: {
       '@id': `${ROOT_DOMAIN}/#organization`,
       '@type': 'Organization',
-      name: 'Batik Smile Nusantara',
+      name: SITE_NAME,
       logo: {
         '@type': 'ImageObject',
         url: `${ROOT_DOMAIN}/brand/batik-smile-logo.png`,

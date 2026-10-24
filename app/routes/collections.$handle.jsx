@@ -360,12 +360,6 @@ export default function Collection() {
               className="flex justify-center mb-6"
             />
 
-            {isExclusive && (
-              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
-                ARSIP BUTIK &bull; SUTRA ATBM &amp; PRADA EMAS
-              </span>
-            )}
-
             {isPremium && (
               <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
                 SIGNATURE ATELIER &bull; RESEPSI &amp; FORMAL
@@ -729,10 +723,10 @@ export default function Collection() {
               PRIVATE VIP ATELIER
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-3">
-              Fitting Privat di VIP Lounge Simongan Semarang
+              Fitting Privat di Showroom Sukun &amp; Sampokong Semarang
             </h3>
             <p className="text-xs mb-6 font-light tracking-wide text-[#A69F96] max-w-xl mx-auto leading-relaxed">
-              Nikmati layanan concierge privat di Lantai 2 Flagship Butik Batik Smile Simongan dengan ruang ukur privat dan pendamping busana pribadi.
+              Nikmati layanan konsultasi busana privat di Outlet Batik Smile Sukun (Banyumanik) maupun Outlet Sampokong (Simongan) bersama pendamping busana pribadi kami.
             </p>
             <a
               href={officialWaUrl}
@@ -743,38 +737,107 @@ export default function Collection() {
               RESERVASI VIP CONCIERGE &rarr;
             </a>
           </div>
-        ) : isPremium ? (
-          <div className="mt-20 text-center pt-14 border-t border-[#7C3F1D]/50">
-            <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-2">
-              LAYANAN JAHIT SERAGAM KELUARGA
-            </span>
-            <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-3">
-              Pemesanan Seragam Resepsi &amp; Acara Keluarga
-            </h3>
-            <p className="text-xs mb-6 font-light tracking-wide text-[#D5C8B8] max-w-xl mx-auto leading-relaxed">
-              Tersedia penyesuaian ukuran dari balita hingga 4XL tanpa minimal pemesanan. Konsultasikan kebutuhan seragam keluarga besar Anda bersama konsultan butik kami.
-            </p>
-            <a
-              href={officialWaUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block px-8 py-3.5 bg-[#7C3F1D] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
-            >
-              KONSULTASI SERAGAM RESEPSI &rarr;
-            </a>
-          </div>
         ) : (
-          <div className="mt-20 text-center pt-10 border-t border-[#E2DFD8]">
-            <p className="text-xs mb-4 font-light tracking-wide text-[#5A5550]">
-              Butuh bantuan ukuran sarimbit keluarga atau pemesanan seragam dinas tanpa minimal order?
+          <div
+            className={`mt-20 text-center pt-14 border-t ${
+              isPremium ? 'border-[#7C3F1D]/50' : 'border-[#E2DFD8]'
+            }`}
+          >
+            <span
+              className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-2 ${
+                isPremium ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
+              }`}
+            >
+              LAYANAN JAHIT SERAGAM KELUARGA &amp; KORPORAT
+            </span>
+            <h3
+              className={`font-serif text-2xl sm:text-3xl font-normal mb-3 ${
+                isPremium ? 'text-white' : 'text-[#111111]'
+              }`}
+            >
+              Pemesanan Seragam Acara Keluarga &amp; Kebutuhan Korporat
+            </h3>
+            <p
+              className={`text-xs sm:text-sm mb-8 font-light tracking-wide max-w-2xl mx-auto leading-relaxed ${
+                isPremium ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
+              }`}
+            >
+              Hadirkan tampilan serasi &amp; berkesan melalui seragam batik yang dirancang sesuai kebutuhan Anda. Kami siap melayani pemesanan seragam untuk resepsi pernikahan, acara keluarga, kantor, perusahaan &amp; instansi, dengan pilihan motif, warna, &amp; model yang dapat disesuaikan.
             </p>
+
+            {/* 3-Column Showcase Examples: Seragam Instansi & Keluarga (A, B, C) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto mb-9 text-left">
+              {[
+                {
+                  code: 'SERAGAM A • INSTANSI & DINAS',
+                  title: 'Seragam Instansi & Pemerintahan',
+                  desc: 'Potongan formal berpola simetris dengan opsi lapisan trikot rapi untuk kewibawaan kerja harian.',
+                  img: '/banners/bespoke_tailoring_banner.jpg',
+                },
+                {
+                  code: 'SERAGAM B • PERUSAHAAN & KORPORAT',
+                  title: 'Seragam Kantor & Perusahaan',
+                  desc: 'Penyesuaian motif, warna korporat, dan model kemeja maupun blus profesional bagi tim Anda.',
+                  img: '/banners/hero_editorial_banner.jpg',
+                },
+                {
+                  code: 'SERAGAM C • KELUARGA & RESEPSI',
+                  title: 'Seragam Resepsi & Acara Keluarga',
+                  desc: 'Harmoni busana sarimbit dan seragam keluarga besar lintas generasi dari ukuran anak hingga 4XL.',
+                  img: '/banners/sarimbit_family_banner.jpg',
+                },
+              ].map((item) => (
+                <div
+                  key={item.code}
+                  className={`group overflow-hidden border transition-all duration-300 ${
+                    isPremium
+                      ? 'bg-[#18120E] border-[#7C3F1D]/50 hover:border-[#C5A059]'
+                      : 'bg-white border-[#E2DFD8] hover:border-[#C5A059]'
+                  }`}
+                >
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#111111] relative">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                    />
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-1 bg-black/80 text-[#C5A059] border border-[#C5A059]/40 text-[8px] uppercase tracking-[0.18em] font-semibold">
+                      {item.code}
+                    </span>
+                  </div>
+                  <div className="p-4 sm:p-5">
+                    <h4
+                      className={`font-serif text-base sm:text-lg font-normal mb-1.5 ${
+                        isPremium ? 'text-white' : 'text-[#111111]'
+                      }`}
+                    >
+                      {item.title}
+                    </h4>
+                    <p
+                      className={`text-[11px] font-light leading-relaxed ${
+                        isPremium ? 'text-[#D5C8B8]/85' : 'text-[#5A5550]'
+                      }`}
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <a
               href={officialWaUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm"
+              className={`inline-block px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm ${
+                isPremium
+                  ? 'bg-[#7C3F1D] hover:bg-[#C5A059] text-white hover:text-[#111111]'
+                  : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111]'
+              }`}
             >
-              KONSULTASI DENGAN KONSULTAN BUTIK &rarr;
+              KONSULTASI SERAGAM &rarr;
             </a>
           </div>
         )}

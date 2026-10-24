@@ -190,7 +190,8 @@ export function CollectionSidebar({
   const isLuxury = handle.includes('luxury');
   const isPremium = handle.includes('premium');
   const isEkonomi = handle.includes('ekonomi');
-  const isFashion = isSarimbit || isLuxury || isPremium || isEkonomi;
+  const isAllCatalog = !handle || handle === 'all';
+  const isFashion = isSarimbit || isLuxury || isPremium || isEkonomi || isAllCatalog;
   const isLuxuryOrPremium = isLuxury || isPremium;
 
   // Custom price input local state
@@ -616,7 +617,7 @@ export function CollectionSidebar({
                   )}
                 </div>
                 <span className={`text-xs sm:text-sm ${isUnder500 ? textColor + ' font-semibold' : mutedTextColor}`}>
-                  &lt; Rp 500.000
+                  &lt; IDR 500.000
                 </span>
               </button>
 
@@ -641,7 +642,7 @@ export function CollectionSidebar({
                   )}
                 </div>
                 <span className={`text-xs sm:text-sm ${is500To1M ? textColor + ' font-semibold' : mutedTextColor}`}>
-                  Rp 500.000 – Rp 1.000.000
+                  IDR 500.000 – IDR 1.000.000
                 </span>
               </button>
 
@@ -666,7 +667,7 @@ export function CollectionSidebar({
                   )}
                 </div>
                 <span className={`text-xs sm:text-sm ${isAbove1M ? textColor + ' font-semibold' : mutedTextColor}`}>
-                  &gt; Rp 1.000.000
+                  &gt; IDR 1.000.000
                 </span>
               </button>
             </div>
@@ -1005,11 +1006,11 @@ export function CollectionFilterHeader({
               <span>
                 Harga:{' '}
                 {isUnder500
-                  ? '< Rp 500rb'
+                  ? '< IDR 500rb'
                   : is500To1M
-                  ? 'Rp 500rb – 1jt'
+                  ? 'IDR 500rb – 1jt'
                   : isAbove1M
-                  ? '> Rp 1jt'
+                  ? '> IDR 1jt'
                   : `${minPrice || '0'} – ${maxPrice || '...'}`}
               </span>
               <span className="font-bold text-[#9E7D3B] hover:text-current">&times;</span>
@@ -1090,7 +1091,8 @@ export function CollectionMobileDrawer({
   const isLuxury = handle.includes('luxury');
   const isPremium = handle.includes('premium');
   const isEkonomi = handle.includes('ekonomi');
-  const isFashion = isSarimbit || isLuxury || isPremium || isEkonomi;
+  const isAllCatalog = !handle || handle === 'all';
+  const isFashion = isSarimbit || isLuxury || isPremium || isEkonomi || isAllCatalog;
   const isLuxuryOrPremium = isLuxury || isPremium;
 
   const [localMin, setLocalMin] = useState(minPrice);
@@ -1338,7 +1340,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isUnder500 ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {isUnder500 && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className={`text-xs sm:text-sm ${isUnder500 ? textColor + ' font-bold' : mutedTextColor}`}>&lt; Rp 500.000</span>
+                <span className={`text-xs sm:text-sm ${isUnder500 ? textColor + ' font-bold' : mutedTextColor}`}>&lt; IDR 500.000</span>
               </button>
               <button
                 type="button"
@@ -1348,7 +1350,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${is500To1M ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {is500To1M && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className={`text-xs sm:text-sm ${is500To1M ? textColor + ' font-bold' : mutedTextColor}`}>Rp 500.000 – Rp 1.000.000</span>
+                <span className={`text-xs sm:text-sm ${is500To1M ? textColor + ' font-bold' : mutedTextColor}`}>IDR 500.000 – IDR 1.000.000</span>
               </button>
               <button
                 type="button"
@@ -1358,7 +1360,7 @@ export function CollectionMobileDrawer({
                 <div className={`w-4 h-4 border flex items-center justify-center shrink-0 ${isAbove1M ? activeBg : 'border-[#D5D0C7] bg-white'}`}>
                   {isAbove1M && <svg className="w-2.5 h-2.5 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="square" d="M5 13l4 4L19 7" /></svg>}
                 </div>
-                <span className={`text-xs sm:text-sm ${isAbove1M ? textColor + ' font-bold' : mutedTextColor}`}>&gt; Rp 1.000.000</span>
+                <span className={`text-xs sm:text-sm ${isAbove1M ? textColor + ' font-bold' : mutedTextColor}`}>&gt; IDR 1.000.000</span>
               </button>
             </div>
 

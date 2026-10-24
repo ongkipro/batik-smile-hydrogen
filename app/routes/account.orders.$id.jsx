@@ -1,6 +1,7 @@
 import { redirect, useLoaderData, Link } from 'react-router';
-import { Money, Image } from '@shopify/hydrogen';
+import { Image } from '@shopify/hydrogen';
 import { CUSTOMER_ORDER_QUERY } from '~/graphql/customer-account/CustomerOrderQuery';
+import { BoutiqueMoney } from '~/lib/currency';
 
 /**
  * @type {Route.MetaFunction}
@@ -146,7 +147,7 @@ export default function OrderRoute() {
                     {lineItem.quantity}
                   </td>
                   <td className="py-4 px-4 text-right font-semibold text-[#111111]">
-                    <Money data={lineItem.price} />
+                    <BoutiqueMoney data={lineItem.price} />
                   </td>
                 </tr>
               ))}
@@ -161,7 +162,7 @@ export default function OrderRoute() {
                     {discountPercentage ? (
                       <span>-{discountPercentage}%</span>
                     ) : (
-                      <Money data={discountValue} />
+                      <BoutiqueMoney data={discountValue} />
                     )}
                   </td>
                 </tr>
@@ -171,7 +172,7 @@ export default function OrderRoute() {
                   Subtotal
                 </td>
                 <td className="py-2.5 px-4 text-right font-medium text-[#111111]">
-                  <Money data={order.subtotal} />
+                  <BoutiqueMoney data={order.subtotal} />
                 </td>
               </tr>
               <tr className="border-t border-[#E2DFD8] text-sm">
@@ -179,7 +180,7 @@ export default function OrderRoute() {
                   Total Pembayaran
                 </td>
                 <td className="py-3 px-4 text-right font-bold text-[#111111]">
-                  <Money data={order.totalPrice} />
+                  <BoutiqueMoney data={order.totalPrice} />
                 </td>
               </tr>
             </tfoot>

@@ -15,7 +15,7 @@ import {
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Addresses'}];
+  return [{title: 'Buku Alamat — Butik Batik Smile'}];
 };
 
 /**
@@ -326,7 +326,7 @@ function NewAddressForm() {
             type="submit"
             className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
           >
-            {stateForMethod('POST') !== 'idle' ? 'MENYIMPAN...' : 'TAMBAH ALAMAT BARU &rarr;'}
+            {stateForMethod('POST') !== 'idle' ? 'MENYIMPAN...' : 'TAMBAH ALAMAT BARU →'}
           </button>
         </div>
       )}

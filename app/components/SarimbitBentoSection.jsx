@@ -34,10 +34,10 @@ export function SarimbitBentoSection({ collections = [] }) {
       handle: 'luxury-series',
       title: 'Luxury Series',
       subtitle:
-        'Kemewahan tenun sutra ATBM berpola presisi dengan sentuhan prada emas untuk perhelatan teragung keluarga.',
+        'Koleksi Luxury Batik Smile yang merepresentasikan kemewahan, keanggunan, dan kualitas dalam setiap detail untuk melengkapi momen berharga.',
       stamp: 'LUXURY',
       plate: 'SRM-01',
-      note: 'SUTRA ATBM & PRADA EMAS',
+      note: '',
       cta: 'JELAJAHI LUXURY',
     },
     {
@@ -130,9 +130,11 @@ export function SarimbitBentoSection({ collections = [] }) {
                   >
                     {/* Bottom Bar: Collection Editorial Info */}
                     <div>
-                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
-                        ARSIP BUTIK &bull; {pillar.note}
-                      </span>
+                      {pillar.note && (
+                        <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+                          ARSIP BUTIK &bull; {pillar.note}
+                        </span>
+                      )}
 
                       <h3 className="font-serif text-xl sm:text-2xl font-normal leading-snug text-white group-hover:text-[#C5A059] transition-colors mb-2">
                         {displayTitle}

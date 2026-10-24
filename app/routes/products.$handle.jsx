@@ -31,6 +31,28 @@ import { generateProductSchema, generateBreadcrumbSchema } from '~/lib/schema';
 import { NotFoundView } from '~/components/NotFoundView';
 
 /**
+ * Decode HTML entities and sanitize legacy fabric/showroom terms in plain text
+ * @param {string} text
+ */
+function cleanDescriptionText(text) {
+  if (!text) return '';
+  return text
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&bull;/gi, '•')
+    .replace(/&ndash;/gi, '–')
+    .replace(/&mdash;/gi, '—')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/Katun\s+Hero/gi, 'Lapisan Furing Pilihan')
+    .replace(/Flagship\s+Showroom\s+Batik\s+Smile\s+Simongan/gi, 'Showroom Batik Smile Sukun & Sampokong')
+    .replace(/Showroom\s+Simongan/gi, 'Showroom Sukun & Sampokong')
+    .trim();
+}
+
+/**
  * Parse Shopify product description HTML into narrative story and structured specifications
  * @param {string} html
  */
@@ -41,16 +63,17 @@ function parseShopifyDescription(html) {
   const withoutLists = html.replace(/<ul[^>]*>[\s\S]*?<\/ul>/gi, '').replace(/<ol[^>]*>[\s\S]*?<\/ol>/gi, '');
   const pMatches = withoutLists.match(/<p[^>]*>([\s\S]*?)<\/p>/gi) || [];
   let story = pMatches
-    .map((p) => p.replace(/<[^>]+>/g, '').trim())
+    .map((p) => cleanDescriptionText(p.replace(/<[^>]+>/g, '')))
     .filter(Boolean)
     .join('\n\n');
 
   if (!story) {
-    story = withoutLists
-      .replace(/<br\s*\/?>/gi, '\n')
-      .replace(/<\/div>/gi, '\n\n')
-      .replace(/<[^>]+>/g, '')
-      .trim();
+    story = cleanDescriptionText(
+      withoutLists
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/div>/gi, '\n\n')
+        .replace(/<[^>]+>/g, ''),
+    );
   }
 
   // Extract li items
@@ -60,15 +83,21 @@ function parseShopifyDescription(html) {
       const raw = li.replace(/<\/?li[^>]*>/gi, '').trim();
       const strongMatch = raw.match(/<(?:strong|b)[^>]*>([\s\S]*?)<\/(?:strong|b)>/i);
       if (strongMatch) {
-        const label = strongMatch[1].replace(/<[^>]+>/g, '').replace(/[:\s]+$/, '').trim();
-        const value = raw
-          .replace(/<(?:strong|b)[^>]*>[\s\S]*?<\/(?:strong|b)>/i, '')
-          .replace(/<[^>]+>/g, '')
-          .replace(/^[:\s]+/, '')
-          .trim();
-        return { label, value: value || raw.replace(/<[^>]+>/g, '').trim() };
+        const label = cleanDescriptionText(
+          strongMatch[1].replace(/<[^>]+>/g, '').replace(/[:\s]+$/, ''),
+        );
+        const value = cleanDescriptionText(
+          raw
+            .replace(/<(?:strong|b)[^>]*>[\s\S]*?<\/(?:strong|b)>/i, '')
+            .replace(/<[^>]+>/g, '')
+            .replace(/^[:\s]+/, ''),
+        );
+        return {
+          label,
+          value: value || cleanDescriptionText(raw.replace(/<[^>]+>/g, '')),
+        };
       }
-      const cleanText = raw.replace(/<[^>]+>/g, '').trim();
+      const cleanText = cleanDescriptionText(raw.replace(/<[^>]+>/g, ''));
       const colonIdx = cleanText.indexOf(':');
       if (colonIdx > 0 && colonIdx < 35) {
         return {
@@ -122,7 +151,7 @@ async function loadCriticalData({ context, params, request }) {
     throw redirect(url.pathname + (url.search ? url.search : ''), 301);
   }
 
-  const [{ product }] = await Promise.all([
+  const [{ product, recommendedProducts }] = await Promise.all([
     storefront.query(PRODUCT_QUERY, {
       variables: { handle, selectedOptions: getSelectedProductOptions(request) },
       cache: storefront.CacheShort(),
@@ -135,14 +164,26 @@ async function loadCriticalData({ context, params, request }) {
 
   redirectIfHandleIsLocalized(request, { handle, data: product });
 
+  if (product.descriptionHtml) {
+    product.descriptionHtml = product.descriptionHtml
+      .replace(/Katun\s+Hero/gi, 'Lapisan Furing Pilihan')
+      .replace(/Flagship\s+Showroom\s+Batik\s+Smile\s+Simongan/gi, 'Showroom Batik Smile Sukun & Sampokong');
+  }
+  if (product.description) {
+    product.description = product.description
+      .replace(/Katun\s+Hero/gi, 'Lapisan Furing Pilihan')
+      .replace(/Flagship\s+Showroom\s+Batik\s+Smile\s+Simongan/gi, 'Showroom Batik Smile Sukun & Sampokong');
+  }
+
   return {
     product,
+    recommendedProducts: recommendedProducts?.nodes || [],
   };
 }
 
 export default function Product() {
   /** @type {LoaderReturnData} */
-  const { product } = useLoaderData();
+  const { product, recommendedProducts = [] } = useLoaderData();
 
   const selectedVariant = useOptimisticVariant(
     product.selectedOrFirstAvailableVariant,
@@ -308,7 +349,7 @@ export default function Product() {
   // Parse structured description from Shopify
   const parsedDescription = parseShopifyDescription(descriptionHtml);
 
-  // Resolve related products from the exact same collection
+  // Resolve related products from the exact same collection + fallback pool so "Produk Serupa" always shows 4 items
   const rawCollections = product.collections?.nodes || [];
   const matchedCollection =
     rawCollections.find(
@@ -321,12 +362,28 @@ export default function Product() {
     rawCollections.find((c) => c.products?.nodes?.some((p) => p.id !== product.id)) ||
     rawCollections[0];
 
-  const relatedProducts = (matchedCollection?.products?.nodes || [])
-    .filter((p) => p.id !== product.id)
-    .slice(0, 4);
+  const relatedProducts = (() => {
+    const seenIds = new Set([product.id]);
+    const list = [];
+    const primaryPool = matchedCollection?.products?.nodes || [];
+    const secondaryPool = rawCollections.flatMap((c) => c.products?.nodes || []);
+    const candidatePools = [...primaryPool, ...secondaryPool, ...recommendedProducts];
 
-  const relatedCollectionTitle = matchedCollection?.title;
+    for (const item of candidatePools) {
+      if (item?.id && !seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        list.push(item);
+        if (list.length >= 4) break;
+      }
+    }
+    return list;
+  })();
+
   const relatedCollectionHandle = matchedCollection?.handle;
+  const relatedCollectionTitle =
+    relatedCollectionHandle === 'kain'
+      ? 'Kain Batik'
+      : matchedCollection?.title;
 
   // Tier-Differentiated Theme Classification (Mirroring Sarimbit Collection Tiers)
   const collectionHandles = rawCollections.map((c) => c.handle?.toLowerCase() || '');
@@ -909,9 +966,9 @@ export default function Product() {
               </AddToCartButton>
             </div>
 
-            {/* Trust Guarantee Grid (Frameless) */}
+            {/* Trust Guarantee Grid & Local Shipping / Pickup Info (Frameless) */}
             <div
-              className={`grid grid-cols-2 gap-x-6 gap-y-2.5 pt-4.5 border-t text-[11px] sm:text-xs ${
+              className={`pt-4.5 border-t space-y-3 text-[11px] sm:text-xs ${
                 isExclusiveTier
                   ? 'border-[#262626] text-[#E2DFD8]/75'
                   : isPremiumTier
@@ -919,17 +976,55 @@ export default function Product() {
                   : 'border-[#E2DFD8] text-[#5A5550]'
               }`}
             >
-              <div className="flex items-center gap-2">
-                <span className="text-[#C5A059] text-[8px]">&bull;</span>
-                <span>Bebas Tukar Ukuran 7 Hari</span>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span>Bebas Tukar Ukuran 7 Hari</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span>100% Batik Indonesia</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span>Pengiriman Seluruh Indonesia</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span>Biaya pengiriman dihitung saat checkout</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[#C5A059] text-[8px]">&bull;</span>
-                <span>100% Batik Indonesia</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[#C5A059] text-[8px]">&bull;</span>
-                <span>Pengiriman Seluruh Indonesia</span>
+
+              <div
+                className={`pt-2.5 border-t space-y-1.5 text-[11px] sm:text-xs font-light leading-relaxed ${
+                  isExclusiveTier
+                    ? 'border-[#262626]/70 text-[#E2DFD8]/80'
+                    : isPremiumTier
+                    ? 'border-[#7C3F1D]/30 text-[#D5C8B8]/90'
+                    : 'border-[#E2DFD8]/80 text-[#5A5550]'
+                }`}
+              >
+                <p className="flex items-start gap-2">
+                  <span className="text-[#C5A059] text-[8px] mt-1 shrink-0">&bull;</span>
+                  <span>Pengiriman instan tersedia melalui Gojek / Grab Express di area Semarang.</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-[#C5A059] text-[8px] mt-1 shrink-0">&bull;</span>
+                  <span>
+                    Pengambilan produk dapat dilakukan di{' '}
+                    <Link
+                      to="/pages/lokasi-toko"
+                      className={`font-medium underline underline-offset-3 transition-colors ${
+                        isDarkPDP
+                          ? 'text-[#C5A059] hover:text-white'
+                          : 'text-[#111111] hover:text-[#9E7D3B]'
+                      }`}
+                    >
+                      Shop Location
+                    </Link>
+                    .
+                  </span>
+                </p>
               </div>
             </div>
 
@@ -1047,7 +1142,7 @@ export default function Product() {
                             isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                         >
-                          Seluruh pesanan dikemas aman dan dikirim langsung dari Flagship Showroom Batik Smile Simongan Semarang ke seluruh Indonesia.
+                          Seluruh pesanan dikemas aman dan dikirim langsung dari Showroom Batik Smile Sukun &amp; Sampokong Semarang ke seluruh Indonesia.
                         </p>
                       </div>
                     </div>
@@ -1136,7 +1231,7 @@ export default function Product() {
                   isDarkPDP ? 'text-white' : 'text-[#111111]'
                 }`}
               >
-                Rekomendasi {relatedCollectionTitle || 'Koleksi Sejenis'}
+                Produk Serupa
               </h2>
             </div>
 
@@ -1231,6 +1326,44 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
     unitPrice {
       amount
       currencyCode
+    }
+  }
+`;
+
+const RELATED_PRODUCT_ITEM_FRAGMENT = `#graphql
+  fragment RelatedProductItem on Product {
+    id
+    title
+    handle
+    productType
+    availableForSale
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    featuredImage {
+      id
+      url
+      altText
+      width
+      height
+    }
+    images(first: 2) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
     }
   }
 `;
@@ -1337,39 +1470,7 @@ const PRODUCT_FRAGMENT = `#graphql
         title
         products(first: 8) {
           nodes {
-            id
-            title
-            handle
-            productType
-            availableForSale
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            compareAtPriceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            featuredImage {
-              id
-              url
-              altText
-              width
-              height
-            }
-            images(first: 2) {
-              nodes {
-                id
-                url
-                altText
-                width
-                height
-              }
-            }
+            ...RelatedProductItem
           }
         }
       }
@@ -1380,6 +1481,7 @@ const PRODUCT_FRAGMENT = `#graphql
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
+  ${RELATED_PRODUCT_ITEM_FRAGMENT}
 `;
 
 const PRODUCT_QUERY = `#graphql
@@ -1391,6 +1493,11 @@ const PRODUCT_QUERY = `#graphql
   ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       ...Product
+    }
+    recommendedProducts: products(first: 10, sortKey: UPDATED_AT) {
+      nodes {
+        ...RelatedProductItem
+      }
     }
   }
   ${PRODUCT_FRAGMENT}

@@ -2,7 +2,7 @@ import React from 'react';
 
 /**
  * Deterministic Indonesian Rupiah currency formatter without decimals.
- * Converts { amount: "1250000.0", currencyCode: "IDR" } -> "Rp 1.250.000"
+ * Converts { amount: "1250000.0", currencyCode: "IDR" } -> "IDR 1.250.000"
  *
  * @param {import('@shopify/hydrogen/storefront-api-types').MoneyV2 | { amount: string | number, currencyCode?: string } | null | undefined} money
  * @returns {string}
@@ -12,7 +12,7 @@ export function formatRupiah(money) {
   const num = Math.round(parseFloat(money.amount));
   if (isNaN(num)) return '';
   const formatted = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  return `Rp ${formatted}`;
+  return `IDR ${formatted}`;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router';
+import { useLoaderData, redirect } from 'react-router';
 import { redirectIfHandleIsLocalized } from '~/lib/redirect';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePageMeta } from '~/lib/seo';
@@ -27,6 +27,10 @@ export async function loader(args) {
 async function loadCriticalData({ context, request, params }) {
   if (!params.handle) {
     throw new Error('Missing page handle');
+  }
+
+  if (params.handle === 'kebijakan-pengiriman' || params.handle === 'shipping-policy') {
+    throw redirect('/policies/shipping-policy', 301);
   }
 
   const [{ page, shop }] = await Promise.all([

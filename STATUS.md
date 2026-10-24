@@ -1,13 +1,13 @@
 # Status — batik-smile
 
-Updated: 2026-10-14
+Updated: 2026-10-24
 Status: Active
 State: VERIFIED
 Review-Risk: R1
 Independent-Review: VERIFIED
 Primary-Worker: Antigravity
 Independent-Reviewer: Antigravity Autonomous Audit
-Independent-Review-Head: 01a368c
+Independent-Review-Head: c8e651c
 
 ## Delivery state machine
 
@@ -19,7 +19,20 @@ Current State: **VERIFIED**
 
 ## Current state
 
-Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 68) has been completed, committed, and deployed to Shopify Oxygen Global Edge Network (`https://batiksmile.com`):
+Full autonomous execution of [TASKS.md](file:///Users/ongki/Projects/batik-smile-hydrogen/TASKS.md) (Phases 1 through 70) has been completed and verified:
+
+0000. **Luxury Series Eyebrow Cleanup, Final Shipping Policy, PDP "Produk Serupa" & Annotated Visual Revisions (2026-10-24)**:
+   - **Luxury Series Eyebrow Removal (`app/routes/collections.$handle.jsx`, `app/components/SarimbitBentoSection.jsx`, `app/routes/collections._index.jsx`)**: Removed `ARSIP BUTIK • SUTRA ATBM & PRADA EMAS` from the Luxury Series hero and pillar/collection cards.
+   - **Final 10-Point "Kebijakan Pengiriman" (`app/routes/policies.$handle.jsx`, `app/routes/policies._index.jsx`, `app/routes/pages.$handle.jsx`)**: Published the authoritative 10-point **Kebijakan Pengiriman** (*Batik Smile — Batikku Yo Batik Smile*, sections 1–10) along with the **Hubungi Kami** block featuring WhatsApp `081.390.8888.09` (`081-390-8888-09`), **Outlet Batik Smile Sukun** (`Jl. Sukun Raya No. 23, Banyumanik`), and **Outlet Batik Smile Sampokong** (`Jl. Simongan Raya No. 109, Pamularsih`), plus a 301 redirect from `/pages/kebijakan-pengiriman` to `/policies/shipping-policy`.
+   - **PDP Revisions & Guaranteed "Produk Serupa" (`app/routes/products.$handle.jsx`, `app/lib/currency.js`, `app/components/CollectionFilterBar.jsx`)**: Updated currency prefix from `Rp` to `IDR` (`IDR 1.250.000`), set the 4th trust badge to *"Biaya pengiriman dihitung saat checkout"*, added Semarang instant delivery (*"Pengiriman instan tersedia melalui Gojek / Grab Express di area Semarang."*) and store pickup (*"Pengambilan produk dapat dilakukan di Shop Location."*) notes under `BELI SEKARANG`, updated shipping accordion to *"Showroom Batik Smile Sukun & Sampokong Semarang"*, decoded HTML entities (`&amp;` -> `&`) and sanitized legacy `Katun Hero` in `parseShopifyDescription`, and added a fallback product pool (`recommendedProducts`) so **"Produk Serupa"** always renders 4 items on every product page.
+   - **Collection Seragam Showcase Section & Tablet Header Collision Fix (`app/routes/collections.$handle.jsx`, `app/components/Header.jsx`)**: Updated the collection Seragam section headline to *"Pemesanan Seragam Acara Keluarga & Kebutuhan Korporat"*, updated the body copy and CTA button (*"KONSULTASI SERAGAM →"*), added the 3-column showcase grid (*Contoh Seragam A: Instansi & Pemerintahan*, *B: Kantor & Perusahaan*, *C: Resepsi & Acara Keluarga*), and calibrated `Header.jsx` flex layout at `lg` (`1024px`) so `BATIK SMILE`, center nav links, and right icons never overlap on iPad/tablet screens.
+
+000. **Comprehensive Precision Audit & Storefront Refinement (2026-10-24)**:
+   - **CSS Cascade & Circular WhatsApp Floating Button (`app/styles/app.css`, `app/components/WhatsAppConcierge.jsx`)**: Resolved CSS cascade layer conflict where `@layer base { border-radius: 0px !important; }` overrode `@layer utilities` (`rounded-full`), restoring true circular geometry (`border-radius: 9999px`) on the official green WhatsApp floating button while keeping `0px` Zero-Radius across the rest of the storefront.
+   - **Sticky Header Positioning & Hero Slider Stability (`app/components/Header.jsx`, `app/components/HeroSlider.jsx`)**: Removed conflicting `relative` utility class from `sticky top-0` `<header>`, fixed `setInterval` cleanup leak inside `setTimeout` in `HeroSlider.jsx`, restricted `<h1>` to slide 0 (`<h2>` on secondary slides) for single-H1 SEO semantics, and fixed Slide 2 secondary CTA link from `#lookbook` to `#best-sellers`.
+   - **Rectilinear Collections Index & Accurate Eyebrows (`app/routes/collections._index.jsx`)**: Straightened collection cards to 0-degree rectilinear Quiet Luxury architecture (removing tilted `SCATTER_STYLES` and washi tape clutter), mapped collection eyebrows accurately by `collection.handle` (`COLLECTION_NOTES`), and updated the quick-anchor chip from `KAIN` to `KAIN BATIK`.
+   - **Full-Featured `/collections/all` Catalog Layout & Filtering (`app/routes/collections.all.jsx`, `app/components/CollectionFilterBar.jsx`)**: Integrated 2-column desktop `CollectionSidebar` + `CollectionFilterHeader` on `/collections/all`, enabled Gender (`Pria`/`Wanita`) and Category (`Baju Kerja`, `Acara Resmi`, `Casual`, `Sarimbit`) filters in both desktop sidebar and mobile drawer (`isAllCatalog`), and synchronized client/loader tag + title filtering.
+   - **PDP 2x2 Trust Grid, Functional Cart Order Note & Account/Schema Polish (`app/routes/products.$handle.jsx`, `app/routes/cart.jsx`, `app/components/CartMain.jsx`, `app/routes/pages.lokasi-toko.jsx`, `app/lib/schema.js`, `app/components/SearchResults.jsx`, `app/routes/account.*.jsx`, `package.json`)**: Restored 4th trust pillar (*"Presisi Jahitan Butik"*) for 2x2 symmetry on PDP, normalized `relatedCollectionTitle` for `kain` to **Kain Batik**, wired `/cart` order note textarea to `CartForm.ACTIONS.NoteUpdate`, made showroom action buttons symmetrical on `/pages/lokasi-toko`, fixed typo `FILOSOFI WASRA` -> `FILOSOFI WASTRA`, standardized `SITE_NAME` (`Batik Smile`) in JSON-LD schemas, fixed unparsed `&rarr;` strings and `BoutiqueMoney` in `account.*` & `SearchResults.jsx`, and pinned `@shopify/hydrogen` to `~2026.4.5`.
 
 00. **Storefront Sync Audit, Cinematic Heroes, Official WhatsApp Concierge & Minimalist Cart Drawer (2026-10-14)**:
    - **Full-Bleed Cinematic Collection Heroes**: Unified `Luxury Series`, `Premium Series`, `Ekonomi Series`, `Kain Batik`, `Batik Anak`, and `Aksesoris` (`collections.$handle.jsx`) onto full-bleed background hero architecture (`isCinematicHero = true`) with tailored overlays and 3-pillar value badges.

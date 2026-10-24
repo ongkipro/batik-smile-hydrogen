@@ -2,7 +2,7 @@
 
 @layer base {
   *, ::before, ::after {
-    border-radius: 0px !important;
+    border-radius: 0px;
   }
 
   body {

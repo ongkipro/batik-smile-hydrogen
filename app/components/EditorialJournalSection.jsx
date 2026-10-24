@@ -30,7 +30,7 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
 
   const displayArticles = articles.slice(0, 3);
 
-  const categories = ['ARSIP BUDAYA', 'SERAGAM SARIMBIT', 'FILOSOFI WASRA'];
+  const categories = ['ARSIP BUDAYA', 'SERAGAM SARIMBIT', 'FILOSOFI WASTRA'];
 
   return (
     <section className="py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5]">

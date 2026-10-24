@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
-import { Image, Money, Pagination } from '@shopify/hydrogen';
+import { Image, Pagination } from '@shopify/hydrogen';
 import { urlWithTrackingParams } from '~/lib/search';
+import { BoutiqueMoney } from '~/lib/currency';
 
 /**
  * @param {Omit<SearchResultsProps, 'error' | 'type'>}
@@ -51,8 +52,9 @@ function SearchResultsArticles({ term, articles }) {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {articles.nodes.map((article) => {
+          const blogHandle = article.blog?.handle || 'news';
           const articleUrl = urlWithTrackingParams({
-            baseUrl: `/blogs/${article.handle}`,
+            baseUrl: `/blogs/${blogHandle}/${article.handle}`,
             trackingParams: article.trackingParameters,
             term,
           });
@@ -208,7 +210,7 @@ function SearchResultsProducts({ term, products }) {
 
                         <div className="mt-2.5 text-center">
                           <span className="text-sm sm:text-base font-semibold text-[#111111] tracking-wide">
-                            {price && <Money data={price} withoutTrailingZeros as="span" />}
+                            {price && <BoutiqueMoney data={price} />}
                           </span>
                         </div>
                       </div>
