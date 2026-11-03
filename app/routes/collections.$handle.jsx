@@ -392,7 +392,7 @@ export default function Collection() {
 
             {isAksesoris && (
               <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
-                AKSESORIS &bull; SENTUHAN ELEGAN NUSANTARA
+                AKSESORIS &bull; PELENGKAP BUSANA BATIK
               </span>
             )}
 
@@ -438,7 +438,7 @@ export default function Collection() {
 
             {isAksesoris && (
               <p className="font-serif text-sm sm:text-base lg:text-lg text-[#E2DFD8] mb-4 max-w-3xl leading-relaxed font-normal">
-                {collection.description || 'Pelengkap busana adat dan formal nusantara, mulai dari blangkon lipat khas Jawa, selendang, hingga aksesori pelengkap busana pria dan wanita untuk menyempurnakan penampilan berwibawa.'}
+                Koleksi aksesori dan pelengkap busana batik yang dirancang untuk menyempurnakan penampilan Anda, sekaligus hadir dalam pilihan Batik Gift Set yang berkesan. Dibuat dari pilihan kain tulis dan lukis, katun cap, hingga katun printing dengan perpaduan motif modern dan klasik khas Batik Smile.
               </p>
             )}
 
@@ -460,11 +460,11 @@ export default function Collection() {
 
             {isKain && (
               <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
-                <span>Kain Tulis &amp; Cap</span>
+                <span>Kain Tulis dan Lukis</span>
                 <span className="text-[#C5A059]">&bull;</span>
-                <span>Katun Primisima Halus</span>
+                <span>Katun Cap dan Katun Printing</span>
                 <span className="text-[#C5A059]">&bull;</span>
-                <span>Motif Tradisi Adiluhung</span>
+                <span>Motif Modern dan Klasik</span>
               </div>
             )}
 
@@ -480,11 +480,11 @@ export default function Collection() {
 
             {isAksesoris && (
               <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs uppercase tracking-[0.16em] text-[#E2DFD8] font-medium pt-3 mt-1 border-t border-white/20">
-                <span>Sentuhan Klasik</span>
+                <span>Aksesori Batik</span>
                 <span className="text-[#C5A059]">&bull;</span>
-                <span>Kualitas Presisi</span>
+                <span>Pelengkap Busana Batik</span>
                 <span className="text-[#C5A059]">&bull;</span>
-                <span>Penyempurna Penampilan</span>
+                <span>Batik Gift Set</span>
               </div>
             )}
 
