@@ -44,18 +44,21 @@ export function Footer() {
     <footer className="bg-[#111111] text-white pt-16 pb-[max(6rem,calc(env(safe-area-inset-bottom)+5.5rem))] lg:pb-16 border-t border-[#1C1C1C]">
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
 
-        {/* 1. NEWSLETTER STRIP: WARTA EKSKLUSIF BUTIK */}
+        {/* 1. MEMBER & NEWSLETTER STRIP: PROGRAM MEMBER BATIK SMILE */}
         <div className="border-b border-white/10 pb-12 mb-14">
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
-                WARTA EKSKLUSIF WASTRA
+                PROGRAM KEANGGOTAAN RESMI
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal leading-snug">
-                Bergabung dengan Lingkar Sahabat Batik Smile
+                Bergabung Menjadi Member Batik Smile
               </h3>
               <p className="text-xs sm:text-[13px] text-[#C5BFB8] font-light mt-1.5 max-w-lg leading-relaxed">
-                Dapatkan rilis motif pusaka terbatas, undangan VIP fitting, dan panduan wastra adiluhung langsung di email Anda.
+                Nikmati Birthday Privilege, Exclusive Collection Access, Member Special Offers, undangan event eksklusif, serta Member Reward.{' '}
+                <NavLink to="/pages/member" className="text-[#C5A059] hover:text-white underline underline-offset-4 font-normal">
+                  Lihat Syarat &amp; Benefit &rarr;
+                </NavLink>
               </p>
             </div>
 
@@ -288,6 +291,12 @@ export function Footer() {
                 <NavLink to="/policies" className="hover:text-white transition-colors flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
                   Garansi Butik &amp; Syarat Ketentuan
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/pages/member" className="hover:text-white transition-colors flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:scale-125 transition-transform" />
+                  Member Batik Smile
                 </NavLink>
               </li>
               <li>

@@ -14,6 +14,7 @@ export async function loader({request, params, context: {storefront}}) {
       { loc: `${baseUrl}/collections/all`, priority: '0.9', changefreq: 'daily' },
       { loc: `${baseUrl}/collections`, priority: '0.8', changefreq: 'daily' },
       { loc: `${baseUrl}/blogs`, priority: '0.8', changefreq: 'weekly' },
+      { loc: `${baseUrl}/pages/member`, priority: '0.8', changefreq: 'monthly' },
       { loc: `${baseUrl}/pages/tentang-kami`, priority: '0.8', changefreq: 'monthly' },
       { loc: `${baseUrl}/pages/lokasi-toko`, priority: '0.8', changefreq: 'monthly' },
       { loc: `${baseUrl}/pages/panduan-ukuran`, priority: '0.7', changefreq: 'monthly' },

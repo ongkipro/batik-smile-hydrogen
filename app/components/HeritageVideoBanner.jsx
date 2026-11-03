@@ -1,125 +1,155 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 
-/**
- * HeritageVideoBanner: Engrasia Archetype Craftsmanship Video Section
- * "FINEST HANDMADE" with player controls and Graceful Fallback to generated craftsmanship banner
- *
- * @param {{
- *   videoData?: any;
- * }} props
- */
-export function HeritageVideoBanner({ videoData }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+const HOMEPAGE_HIGHLIGHTS = [
+  {
+    id: 'corporate-uniform',
+    eyebrow: '01 • CORPORATE UNIFORM',
+    headline: 'Bangun identitas tim dengan seragam batik yang berkarakter',
+    subheadline:
+      'Dari pemilihan motif hingga produksi, Batik Smile hadir sebagai partner kebutuhan seragam batik perusahaan, instansi, dan organisasi dengan pilihan kualitas ekonomis, premium, hingga luxury.',
+    ctaText: 'Konsultasikan kebutuhan seragam batik Anda',
+    ctaHref:
+      'https://wa.me/6281390888809?text=' +
+      encodeURIComponent(
+        'Halo Batik Smile, saya ingin konsultasi kebutuhan seragam batik untuk perusahaan/instansi.',
+      ),
+    isExternal: true,
+    image: '/banners/seragam_korporasi_gold.jpg',
+    secondaryImage: '/banners/seragam_korporasi_navy.jpg',
+    alt: 'Seragam Batik Korporasi & Instansi Batik Smile Semarang',
+  },
+  {
+    id: 'family-set',
+    eyebrow: '02 • FAMILY SET',
+    headline: 'Tampil serasi, ciptakan momen istimewa bersama keluarga',
+    subheadline:
+      'Temukan koleksi batik keluarga dengan pilihan motif, warna, dan model untuk setiap anggota keluarga. Hadirkan kehangatan dan kebersamaan dalam setiap momen berharga.',
+    ctaText: 'Konsultasikan family set',
+    ctaHref:
+      'https://wa.me/6281390888809?text=' +
+      encodeURIComponent(
+        'Halo Batik Smile, saya ingin konsultasi koleksi Family Set (busana batik keluarga).',
+      ),
+    isExternal: true,
+    image: '/banners/sarimbit_family_banner.jpg',
+    alt: 'Koleksi Family Set Sarimbit Keluarga Batik Smile',
+  },
+  {
+    id: 'kain-batik',
+    eyebrow: '03 • KAIN BATIK',
+    headline: 'Setiap lembaran kain batik punya cerita, menyatukan seni, tradisi, dan makna',
+    subheadline:
+      'Jelajahi koleksi kain batik dengan beragam motif dan karakter istimewa untuk mewujudkan berbagai inspirasi busana, maupun kreasi personal Anda.',
+    ctaText: 'Jelajahi koleksi kain',
+    ctaHref: '/collections/kain',
+    isExternal: false,
+    image: '/banners/collection_kain_tulis_banner.jpg',
+    alt: 'Koleksi Lembaran Kain Batik Nusantara Batik Smile',
+  },
+];
 
-  // Graceful Fallback Strategy
-  const heading = videoData?.heading?.value || 'FINEST HANDMADE';
-  const eyebrow = videoData?.eyebrow?.value || 'PROUDLY MADE IN INDONESIA';
-  const narrative =
-    videoData?.narrative?.value ||
-    'Setiap cantingan malam panas di atas Mori primisima adalah sembah bakti pengrajin kami terhadap warisan leluhur. Ketelitian goresan tangan yang tidak pernah dapat digantikan oleh mesin.';
-  
-  const posterUrl =
-    videoData?.poster?.reference?.image?.url ||
-    videoData?.poster?.value ||
-    '/banners/craftsmanship_canting_banner.jpg';
-
-  const videoUrl = videoData?.video_url?.value || null;
-
+export function HeritageVideoBanner() {
   return (
-    <section className="relative w-full bg-[#111111] text-white py-16 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden">
-      {/* Background Media with 0px Radius */}
-      <div className="absolute inset-0 w-full h-full">
-        {videoUrl && isPlaying ? (
-          <video
-            src={videoUrl}
-            autoPlay
-            controls
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <img
-            src={posterUrl}
-            alt="Craftsmanship Canting Batik Tulis"
-            width="1920"
-            height="1080"
-            decoding="async"
-            loading="lazy"
-            className="w-full h-full object-cover object-center filter grayscale contrast-125 opacity-70"
-          />
-        )}
-        {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-        {/* Left Column: Editorial Storytelling */}
-        <div className="lg:col-span-7 flex flex-col items-start">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
-            {eyebrow}
-          </span>
-
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-4">
-            {heading}
-          </h2>
-
-          <p className="text-xs sm:text-sm text-[#E2DFD8] leading-relaxed font-light mb-8">
-            {narrative}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              to="/collections/kain"
-              className="px-8 py-4 bg-[#C5A059] text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-[#9E7D3B] hover:text-white transition-colors duration-300"
+    <section
+      aria-label="Layanan Seragam Korporasi, Family Set, dan Koleksi Kain Batik"
+      className="relative w-full bg-[#111111] text-white py-16 sm:py-24 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-[#C5A059]/30"
+    >
+      <div className="w-full max-w-7xl mx-auto space-y-14 sm:space-y-20">
+        {HOMEPAGE_HIGHLIGHTS.map((item, idx) => {
+          const isReversed = idx % 2 === 1;
+          return (
+            <div
+              key={item.id}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              LIHAT KAIN TULIS ASLI
-            </Link>
+              {/* Media Column */}
+              <div
+                className={`lg:col-span-6 ${
+                  isReversed ? 'lg:order-2' : 'lg:order-1'
+                }`}
+              >
+                {item.secondaryImage ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="relative aspect-[16/10] sm:aspect-[4/5] bg-[#1C1C1C] border border-[#C5A059]/40 overflow-hidden group">
+                      <img
+                        src={item.secondaryImage}
+                        alt="Seragam Korporasi Eksekutif Batik Smile"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <span className="absolute bottom-2.5 left-2.5 px-2.5 py-1 bg-black/80 text-[#C5A059] border border-[#C5A059]/40 text-[8px] uppercase tracking-[0.18em] font-semibold">
+                        SERAGAM PERUSAHAAN
+                      </span>
+                    </div>
+                    <div className="relative aspect-[16/10] sm:aspect-[4/5] bg-[#1C1C1C] border border-[#C5A059]/40 overflow-hidden group">
+                      <img
+                        src={item.image}
+                        alt={item.alt}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <span className="absolute bottom-2.5 left-2.5 px-2.5 py-1 bg-black/80 text-[#C5A059] border border-[#C5A059]/40 text-[8px] uppercase tracking-[0.18em] font-semibold">
+                        SERAGAM INSTANSI &amp; ORGANISASI
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative aspect-[16/10] bg-[#1C1C1C] border border-[#C5A059]/40 overflow-hidden group">
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                )}
+              </div>
 
-            <Link
-              to="/pages/tentang-kami"
-              className="px-8 py-4 bg-transparent border border-white/40 text-white text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-white/10 hover:border-white transition-colors duration-300"
-            >
-              KISAH PENGRAJIN KAMI
-            </Link>
-          </div>
-        </div>
+              {/* Copywriting Column */}
+              <div
+                className={`lg:col-span-6 flex flex-col items-start ${
+                  isReversed ? 'lg:order-1' : 'lg:order-2'
+                }`}
+              >
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.24em] text-[#C5A059] font-semibold block mb-2.5">
+                  {item.eyebrow}
+                </span>
 
-        {/* Right Column: Video Play Trigger & Duration Counter */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center w-full">
-          <div className="relative w-full max-w-xl aspect-[16/10] bg-[#1C1C1C] border border-[#C5A059]/40 overflow-hidden shadow-2xl group flex items-center justify-center">
-            <img
-              src={posterUrl}
-              alt="Batik Smile Canting Preview"
-              width="800"
-              height="500"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
-            />
+                <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white font-normal tracking-wide leading-snug mb-3.5">
+                  {item.headline}
+                </h2>
 
-            {/* Centered Play Button */}
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              aria-label="Play Craftsmanship Video"
-              className="absolute w-16 h-16 bg-[#111111]/80 border border-[#C5A059] flex items-center justify-center text-[#C5A059] group-hover:bg-[#C5A059] group-hover:text-[#111111] transition-all duration-300 cursor-pointer shadow-lg"
-            >
-              {isPlaying ? (
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
+                <div className="w-12 h-px bg-[#C5A059] mb-4" />
 
-            {/* Bottom Duration Badge */}
-            <div className="absolute bottom-3 right-3 px-2.5 py-1 bg-black/80 text-[10px] tracking-widest text-[#E2DFD8] border border-white/10">
-              0:18 / FINEST PROCESS
+                <p className="text-xs sm:text-sm text-[#E2DFD8]/90 leading-relaxed font-light mb-7 max-w-xl">
+                  {item.subheadline}
+                </p>
+
+                {item.isExternal ? (
+                  <a
+                    href={item.ctaHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-7 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+                  >
+                    {item.ctaText} &rarr;
+                  </a>
+                ) : (
+                  <Link
+                    to={item.ctaHref}
+                    className="px-7 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+                  >
+                    {item.ctaText} &rarr;
+                  </Link>
+                )}
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </section>
   );

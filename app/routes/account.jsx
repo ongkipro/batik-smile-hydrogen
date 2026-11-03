@@ -96,6 +96,9 @@ function AccountMenu() {
       <NavLink to="/account/addresses" className={navClass}>
         BUKU ALAMAT
       </NavLink>
+      <NavLink to="/pages/member" className={navClass}>
+        MEMBER BATIK SMILE
+      </NavLink>
     </nav>
   );
 }

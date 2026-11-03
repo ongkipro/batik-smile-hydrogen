@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useFetcher } from 'react-router';
+import { NavLink, useFetcher, useLocation } from 'react-router';
 import { CartForm } from '@shopify/hydrogen';
 
 const STORAGE_KEY_DISMISSED = 'batik_smile_vip_discount_dismissed_at';
 const STORAGE_KEY_CLAIMED = 'batik_smile_vip_discount_claimed';
-const DISCOUNT_CODE = 'BATIK25';
 const DISMISS_COOLDOWN_MS = 5 * 24 * 60 * 60 * 1000; // 5 days cooldown
 
 /**
- * VIP Email Newsletter & Discount Modal
+ * Member Batik Smile Privilege Modal
  * - Quiet Luxury Nusantara Zero-Radius aesthetics.
  * - Mobile zero-zoom input compliance (minimum 16px font size on mobile).
- * - Automatic 25% discount voucher reveal with one-click copy and auto-apply link.
  * - Live Shopify connection: syncs subscriber email to Shopify Cart Buyer Identity.
  * - Non-intrusive delayed trigger with localStorage persistence.
  */
 export function VipDiscountModal() {
   const fetcher = useFetcher();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [copied, setCopied] = useState(false);
+
+  const isMemberPage = location.pathname.includes('/pages/member');
 
   useEffect(() => {
+    if (isMemberPage) {
+      setIsOpen(false);
+      return;
+    }
     // Check if already claimed or recently dismissed
     try {
       const isClaimed = localStorage.getItem(STORAGE_KEY_CLAIMED);
@@ -62,7 +66,7 @@ export function VipDiscountModal() {
       if (timerId) clearTimeout(timerId);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isMemberPage]);
 
   // Handle ESC key to dismiss
   useEffect(() => {
@@ -118,14 +122,6 @@ export function VipDiscountModal() {
     }
   };
 
-  const handleCopyCode = () => {
-    if (navigator?.clipboard?.writeText) {
-      navigator.clipboard.writeText(DISCOUNT_CODE);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 3000);
-    }
-  };
-
   if (!isOpen) return null;
 
   return (
@@ -159,7 +155,7 @@ export function VipDiscountModal() {
 
         {/* Whispered Eyebrow */}
         <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block mb-2">
-          HAK ISTIMEWA PELANGGAN
+          PROGRAM KEANGGOTAAN RESMI
         </span>
 
         {!isSubmitted ? (
@@ -169,16 +165,24 @@ export function VipDiscountModal() {
               id="vip-discount-title"
               className="font-serif text-3xl sm:text-4xl text-[#111111] font-normal tracking-wide mb-3 leading-tight"
             >
-              Hak Istimewa Diskon 25%
+              Member Batik Smile
             </h2>
 
             {/* Editorial Description */}
-            <p className="text-xs sm:text-[13px] text-[#5A5550] font-light leading-relaxed mb-6 max-w-md mx-auto">
-              Daftarkan email Anda untuk menerima kode voucher eksklusif potongan 25% pada pesanan pertama, rilis wastra pusaka terbatas, dan layanan fitting VIP di Showroom Simongan.
+            <p className="text-xs sm:text-[13px] text-[#5A5550] font-light leading-relaxed mb-4 max-w-md mx-auto">
+              Bergabung menjadi Member Batik Smile (minimum pembelanjaan Rp 500.000 dalam 1 nota transaksi) dan nikmati 5 keistimewaan eksklusif:
             </p>
 
+            <ul className="text-left text-[11px] sm:text-xs text-[#111111] space-y-1.5 mb-5 bg-white border border-[#E2DFD8] p-3.5">
+              <li><strong>1. Birthday Privilege:</strong> Hadiah / voucher spesial di bulan ulang tahun</li>
+              <li><strong>2. Exclusive Collection Access:</strong> Akses lebih awal ke koleksi terbaru</li>
+              <li><strong>3. Member Special Offers:</strong> Promo &amp; penawaran khusus member</li>
+              <li><strong>4. Exclusive Event Invitation:</strong> Undangan workshop, trunk show &amp; event</li>
+              <li><strong>5. Member Reward:</strong> Reward dari transaksi &amp; aktivitas member</li>
+            </ul>
+
             {/* Subscription Form with Mobile Zero-Zoom 16px Font Input */}
-            <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
+            <form onSubmit={handleSubmit} className="space-y-3 text-left">
               <div>
                 <label htmlFor="vip-discount-email" className="sr-only">
                   Alamat Email Anda
@@ -190,7 +194,7 @@ export function VipDiscountModal() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Masukkan alamat email Anda..."
-                  className="w-full px-4 py-3.5 text-base sm:text-sm text-[#111111] placeholder:text-[#888888] bg-white border border-[#E2DFD8] focus:border-[#C5A059] focus:outline-none rounded-none transition-colors"
+                  className="w-full px-4 py-3 text-base sm:text-sm text-[#111111] placeholder:text-[#888888] bg-white border border-[#E2DFD8] focus:border-[#C5A059] focus:outline-none rounded-none transition-colors"
                 />
               </div>
 
@@ -198,12 +202,18 @@ export function VipDiscountModal() {
                 type="submit"
                 className="w-full py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[11px] font-bold uppercase tracking-[0.22em] transition-colors rounded-none cursor-pointer shadow-sm min-h-[44px]"
               >
-                KLAIM DISKON 25% SEKARANG
+                GABUNG MEMBER BATIK SMILE
               </button>
             </form>
 
             <div className="mt-4 flex items-center justify-between text-[10px] tracking-wider text-[#888888]">
-              <span className="font-light">Privasi terlindungi &bull; Tanpa spam</span>
+              <NavLink
+                to="/pages/member"
+                onClick={handleDismiss}
+                className="uppercase tracking-[0.14em] text-[#9E7D3B] hover:text-[#111111] font-semibold underline underline-offset-4"
+              >
+                Lihat Syarat &amp; Formulir Lengkap &rarr;
+              </NavLink>
               <button
                 type="button"
                 onClick={handleDismiss}
@@ -220,41 +230,21 @@ export function VipDiscountModal() {
               id="vip-discount-title"
               className="font-serif text-3xl sm:text-4xl text-[#111111] font-normal tracking-wide leading-tight"
             >
-              Selamat! Hak Istimewa Aktif
+              Selamat Bergabung di Batik Smile
             </h2>
 
             <p className="text-xs sm:text-[13px] text-[#5A5550] font-light leading-relaxed max-w-md mx-auto">
-              Terima kasih telah bergabung. Salin kode voucher eksklusif Anda di bawah ini dan gunakan saat checkout:
+              Email Anda telah tercatat untuk menerima informasi koleksi terbaru dan promo Member Batik Smile. Lengkapi data tanggal lahir &amp; nomor WA Anda di halaman Member untuk Birthday Privilege:
             </p>
-
-            {/* Voucher Box (Quiet Luxury Hairline Card) */}
-            <div className="bg-white border border-[#C5A059]/60 py-4 px-6 flex items-center justify-between gap-4 my-4 shadow-xs">
-              <div className="text-left">
-                <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block">
-                  KODE VOUCHER
-                </span>
-                <span className="font-mono text-2xl font-bold tracking-[0.2em] text-[#111111]">
-                  {DISCOUNT_CODE}
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleCopyCode}
-                className="px-4 py-2 text-[10px] uppercase font-bold tracking-[0.16em] bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] transition-colors rounded-none cursor-pointer min-h-[38px]"
-              >
-                {copied ? '✓ TERSALIN' : 'SALIN KODE'}
-              </button>
-            </div>
 
             {/* Action Buttons */}
             <div className="space-y-2 pt-2">
               <NavLink
-                to={`/discount/${DISCOUNT_CODE}?redirect=/collections/all`}
+                to="/pages/member"
                 onClick={handleDismiss}
                 className="w-full block py-3.5 px-6 bg-[#C5A059] hover:bg-[#111111] text-[#111111] hover:text-white text-[11px] font-bold uppercase tracking-[0.22em] transition-colors rounded-none text-center min-h-[44px]"
               >
-                GUNAKAN DISKON 25% &amp; MULAI BELANJA &rarr;
+                LENGKAPI FORMULIR MEMBER BATIK SMILE &rarr;
               </NavLink>
 
               <button

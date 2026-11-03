@@ -9,12 +9,12 @@ import { AnnouncementBar } from './AnnouncementBar';
  * Core Categories: Luxury Series, Premium Series, Ekonomi Series, Batik Anak, Kain, Aksesoris
  */
 const NAV_ITEMS = [
-  { label: 'Luxury Series', desc: 'Sutra ATBM & Prada Emas', to: '/collections/luxury-series' },
-  { label: 'Premium Series', desc: 'Tenun Dobby & Lapis Trikot', to: '/collections/premium-series' },
-  { label: 'Ekonomi Series', desc: 'Katun Primisima Sejuk', to: '/collections/ekonomi-series' },
+  { label: 'Luxury Series', desc: 'Elegant dalam Setiap Detail', to: '/collections/luxury-series' },
+  { label: 'Premium Series', desc: 'Pilihan Berkualitas untuk Kenyamanan Istimewa', to: '/collections/premium-series' },
+  { label: 'Ekonomi Series', desc: 'Pesona Batik yang Lebih Terjangkau', to: '/collections/ekonomi-series' },
   { label: 'Batik Anak', desc: 'Putra & Putri', to: '/collections/batik-anak' },
-  { label: 'Kain', desc: 'Kain Tulis Canting 1-of-1', to: '/collections/kain' },
-  { label: 'Aksesoris', desc: 'Blangkon & Aksesori', to: '/collections/aksesoris' },
+  { label: 'Kain', desc: 'Pesona Balutan Nusantara', to: '/collections/kain' },
+  { label: 'Aksesoris', desc: 'Pelengkap Busana Batik', to: '/collections/aksesoris' },
 ];
 
 /**
@@ -283,6 +283,13 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
 
           {/* Secondary Editorial Links (Whispered Sans, Generous Tracking) */}
           <div className="flex flex-col space-y-3 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium text-[#5A5550]">
+            <NavLink
+              to="/pages/member"
+              onClick={close}
+              className="text-[#9E7D3B] hover:text-[#111111] font-semibold transition-colors block py-0.5"
+            >
+              Member Batik Smile
+            </NavLink>
             <NavLink
               to="/pages/tentang-kami"
               onClick={close}

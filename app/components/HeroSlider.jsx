@@ -3,71 +3,73 @@ import { Link } from 'react-router';
 
 const SLIDES = [
   {
-    id: 'luxury-series',
-    eyebrow: 'SEMARANG • SEJAK 2007',
-    title: 'Mahakarya Sarimbit Nusantara',
-    subtitle: 'Keagungan Sutra ATBM & Canting Prada Emas',
+    id: 'seragam-korporasi',
+    eyebrow: '01 • CORPORATE UNIFORM — SERAGAM BATIK',
+    title: 'Seragam Korporasi',
+    subtitle: 'Bangun Identitas Tim dengan Seragam Batik yang Berkarakter',
     description:
-      'Menenun keselarasan busana pasangan dan keluarga agung dengan jahitan butik berstandar tinggi untuk momen sakral resepsi pernikahan.',
-    ctaText: 'JELAJAHI LUXURY',
-    ctaLink: '/collections/luxury-series',
-    secondaryCtaText: 'KONSULTASI WA',
-    secondaryCtaLink:
+      'Dari pemilihan motif hingga produksi, Batik Smile hadir sebagai partner seragam perusahaan, instansi, dan organisasi kualitas ekonomis hingga luxury.',
+    ctaText: 'KONSULTASI SERAGAM (WHATSAPP)',
+    ctaLink:
+      'https://wa.me/6281390888809?text=' +
+      encodeURIComponent('Halo Batik Smile, saya ingin konsultasi kebutuhan seragam batik perusahaan/instansi.'),
+    image: '/banners/seragam_korporasi_navy.jpg',
+    imagePosition: 'object-[center_22%]',
+    hasAvif: false,
+  },
+  {
+    id: 'premium-series',
+    eyebrow: '02 • KOLEKSI UTAMA — PREMIUM SERIES',
+    title: 'Premium Series',
+    subtitle: 'Pilihan Berkualitas untuk Kenyamanan Istimewa',
+    description:
+      'Perpaduan bahan berkualitas berkarakter dengan jahitan presisi butik. Menghadirkan kenyamanan ekstra untuk acara resmi, keluarga, maupun instansi.',
+    ctaText: 'JELAJAHI PREMIUM SERIES',
+    ctaLink: '/collections/premium-series',
+    image: '/banners/seragam_korporasi_gold.jpg',
+    imagePosition: 'object-[center_18%]',
+    hasAvif: false,
+  },
+  {
+    id: 'luxury-series',
+    eyebrow: '03 • KOLEKSI UTAMA — LUXURY SERIES',
+    title: 'Luxury Series',
+    subtitle: 'Elegant dalam Setiap Detail',
+    description:
+      'Mahakarya busana dan sarimbit Sutra ATBM berlapis trikot pilihan. Hadirkan kemewahan dan keanggunan berkelas di setiap momen istimewa Anda.',
+    ctaText: 'KONSULTASI LUXURY (WHATSAPP)',
+    ctaLink:
       'https://wa.me/6281390888809?text=' +
       encodeURIComponent('Halo Batik Smile, saya ingin konsultasi koleksi Luxury Series.'),
     image: '/banners/hero_slider_1.jpg',
+    imagePosition: 'object-center',
+    hasAvif: true,
   },
   {
-    id: 'sarimbit-wanita',
-    eyebrow: 'HAUTE COUTURE WANITA',
-    title: 'Kemewahan Yang Bersahaja',
-    subtitle: 'Gaun, Gamis & Kebaya Sutra Modern',
+    id: 'ekonomi-series',
+    eyebrow: '04 • KOLEKSI UTAMA — EKONOMI SERIES',
+    title: 'Ekonomi Series',
+    subtitle: 'Pesona Batik yang Lebih Terjangkau',
     description:
-      'Siluet anggun kontemporer berpadu warisan canting soga Jawa. Dirancang khusus untuk memancarkan pesona ningrat yang abadi dan memikat.',
-    ctaText: 'KOLEKSI WANITA',
-    ctaLink: '/collections/luxury-series?gender=wanita',
-    secondaryCtaText: 'LIHAT LOOKBOOK',
-    secondaryCtaLink: '#best-sellers',
-    image: '/banners/hero_slider_2.jpg',
-  },
-  {
-    id: 'sarimbit-pria',
-    eyebrow: 'PRESISI POLA & JAHITAN BUTIK',
-    title: 'Karisma Kemeja Pria Eksekutif',
-    subtitle: 'Jahitan Sambung Motif & Katun Sejuk',
-    description:
-      'Kenyamanan sejuk sepanjang hari dengan potongan presisi simetris pada saku dan belahan kancing, mencerminkan wibawa sang pemimpin.',
-    ctaText: 'KOLEKSI KEMEJA PRIA',
-    ctaLink: '/collections/premium-series?gender=pria',
-    secondaryCtaText: 'KUNJUNGI SHOWROOM',
-    secondaryCtaLink: '/pages/lokasi-toko',
-    image: '/banners/hero_slider_3.jpg',
-  },
-  {
-    id: 'sarimbit-keluarga',
-    eyebrow: 'HARMONI KELUARGA BESAR',
-    title: 'Kehangatan Silaturahmi Keluarga',
-    subtitle: 'Koleksi Sarimbit Ayah, Ibu & Anak',
-    description:
-      'Koleksi busana serasi untuk seluruh anggota keluarga tercinta dengan bahan katun primisima yang sejuk, nyaman, dan ramah di kulit anak.',
-    ctaText: 'BUSANA KELUARGA',
+      'Koleksi batik katun primisima pilihan yang sejuk dan nyaman dipakai. Solusi busana harian, keluarga, dan seragam dengan harga terjangkau.',
+    ctaText: 'JELAJAHI EKONOMI SERIES',
     ctaLink: '/collections/ekonomi-series',
-    secondaryCtaText: 'BATIK ANAK',
-    secondaryCtaLink: '/collections/batik-anak',
-    image: '/banners/hero_slider_4.jpg',
+    image: '/banners/sarimbit_family_banner.jpg',
+    imagePosition: 'object-center',
+    hasAvif: false,
   },
   {
-    id: 'kain-tulis',
-    eyebrow: 'WARISAN ADILUHUNG PENGRAJIN',
-    title: 'Kain Batik Tulis Mahakarya',
-    subtitle: 'Goresan Canting Tangan Asli Pengrajin Solo & Pekalongan',
+    id: 'kain-batik',
+    eyebrow: '05 • KOLEKSI UTAMA — KAIN BATIK',
+    title: 'Koleksi Kain Batik',
+    subtitle: 'Pesona Balutan Nusantara',
     description:
-      'Setiap goresan lilin malam panas di atas kain Mori adalah doa dan ketekunan maestro batik. Tersedia lembaran kain atau dipadukan dengan jasa jahit butik.',
-    ctaText: 'PILIH LEMBARAN KAIN',
+      'Setiap lembaran kain batik menyimpan cerita, menyatukan seni dan tradisi. Tersedia motif klasik hingga modern untuk kreasi busana Anda.',
+    ctaText: 'JELAJAHI KOLEKSI KAIN',
     ctaLink: '/collections/kain',
-    secondaryCtaText: 'KISAH PENGRAJIN',
-    secondaryCtaLink: '/pages/tentang-kami',
     image: '/banners/hero_slider_5.jpg',
+    imagePosition: 'object-center',
+    hasAvif: true,
   },
 ];
 
@@ -144,107 +146,74 @@ export function HeroSlider() {
             }`}
           >
             {/* Background Image with Subtle Slow Pan & AVIF Next-Gen Format */}
-            {index === 0 ? (
-              <picture>
-                <source
-                  media="(max-width: 640px)"
-                  srcSet="/banners/hero_slider_1_mobile.avif"
-                  type="image/avif"
-                />
-                <source
-                  media="(max-width: 640px)"
-                  srcSet="/banners/hero_slider_1_mobile.jpg"
-                  type="image/jpeg"
-                />
+            <picture>
+              {slide.hasAvif && (
                 <source
                   srcSet={slide.image.replace('.jpg', '.avif')}
                   type="image/avif"
                 />
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  fetchPriority="high"
-                  loading="eager"
-                  decoding="sync"
-                  width="1920"
-                  height="1080"
-                  className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
-                    isActive ? 'scale-105' : 'scale-100'
-                  }`}
-                />
-              </picture>
-            ) : (
-              <picture>
-                <source srcSet={slide.image.replace('.jpg', '.avif')} type="image/avif" />
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  fetchPriority="auto"
-                  loading="lazy"
-                  decoding="async"
-                  width="1920"
-                  height="1080"
-                  className={`w-full h-full object-cover object-center transform transition-transform duration-7000 ease-out ${
-                    isActive ? 'scale-105' : 'scale-100'
-                  }`}
-                />
-              </picture>
-            )}
+              )}
+              <img
+                src={slide.image}
+                alt={slide.title}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding={index === 0 ? 'sync' : 'async'}
+                width="1920"
+                height="1080"
+                className={`w-full h-full object-cover ${slide.imagePosition || 'object-center'} transform transition-transform duration-7000 ease-out ${
+                  isActive ? 'scale-105' : 'scale-100'
+                }`}
+              />
+            </picture>
 
-            {/* Quiet Luxury Dark & Amber Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/35" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30" />
+            {/* Quiet Luxury Bottom-Left Scrim so All Faces in Group Photos Stay Unobstructed & Bright */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
 
-            {/* Content Container */}
-            <div className="absolute inset-0 flex items-center">
+            {/* Content Container (Static Bottom-Left Template so Group Photo Faces Are Never Covered) */}
+            <div className="absolute inset-0 flex items-end pb-20 sm:pb-24 lg:pb-24">
               <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
-                <div className="max-w-2xl text-white pt-8 sm:pt-0">
-                  {/* Eyebrow Label */}
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium block mb-3 drop-shadow-sm">
+                <div className="max-w-xl text-white">
+                  {/* Eyebrow Label (Fixed 1-line height) */}
+                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.24em] text-[#C5A059] font-semibold block mb-2.5 truncate drop-shadow-xs">
                     {slide.eyebrow}
                   </span>
 
-                  {/* Headline */}
-                  <HeadingTag className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-wide leading-tight mb-2">
+                  {/* Headline (Fixed 1-line height) */}
+                  <HeadingTag className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-white font-normal tracking-wide leading-tight mb-1.5 truncate drop-shadow-sm">
                     {slide.title}
                   </HeadingTag>
 
-                  {/* Subtitle */}
-                  <p className="font-serif text-base sm:text-xl text-[#FAF8F5]/90 italic font-light mb-4">
+                  {/* Subtitle (Fixed 1-line height) */}
+                  <p className="font-serif text-sm sm:text-lg lg:text-xl text-[#FAF8F5]/95 italic font-light mb-3.5 truncate drop-shadow-xs">
                     {slide.subtitle}
                   </p>
 
-                  <div className="w-12 h-px bg-[#C5A059] mb-5" />
+                  <div className="w-12 h-px bg-[#C5A059] mb-4" />
 
-                  {/* Narrative Description */}
-                  <p className="text-xs sm:text-sm text-[#E2DFD8] max-w-lg mb-8 leading-relaxed font-light">
+                  {/* Narrative Description (Fixed 2-line height so button position never shifts) */}
+                  <p className="text-xs sm:text-sm text-[#E2DFD8] max-w-lg min-h-[2.75rem] sm:min-h-[2.85rem] mb-6 leading-relaxed font-light line-clamp-2 drop-shadow-xs">
                     {slide.description}
                   </p>
 
-                  {/* CTA Buttons with Zero-Radius */}
-                  <div className="flex flex-wrap items-center gap-4">
-                    <Link
-                      to={slide.ctaLink}
-                      className="px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
-                    >
-                      {slide.ctaText} &rarr;
-                    </Link>
-
-                    {slide.secondaryCtaLink.startsWith('http') ? (
+                  {/* Single CTA Button with Uniform Width & Zero-Radius */}
+                  <div className="flex items-center">
+                    {slide.ctaLink.startsWith('http') ? (
                       <a
-                        href={slide.secondaryCtaLink}
+                        href={slide.ctaLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-8 py-3.5 bg-transparent hover:bg-white/10 text-white rounded-none border border-white/40 hover:border-white text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors"
+                        className="inline-flex items-center justify-center min-w-[260px] sm:min-w-[280px] px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
                       >
-                        {slide.secondaryCtaText}
+                        {slide.ctaText} &rarr;
                       </a>
                     ) : (
                       <Link
-                        to={slide.secondaryCtaLink}
-                        className="px-8 py-3.5 bg-transparent hover:bg-white/10 text-white rounded-none border border-white/40 hover:border-white text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors"
+                        to={slide.ctaLink}
+                        className="inline-flex items-center justify-center min-w-[260px] sm:min-w-[280px] px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
                       >
-                        {slide.secondaryCtaText}
+                        {slide.ctaText} &rarr;
                       </Link>
                     )}
                   </div>

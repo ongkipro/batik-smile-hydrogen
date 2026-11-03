@@ -138,14 +138,20 @@ export default function CollectionAll() {
               pTitle.includes('kemeja') ||
               pTitle.includes('hem') ||
               pTitle.includes('putra') ||
-              pTitle.includes('bapak')
+              pTitle.includes('bapak') ||
+              pTitle.includes('surjan') ||
+              pTitle.includes('setelan') ||
+              pTitle.includes('celana')
             : pTitle.includes('wanita') ||
               pTitle.includes('blus') ||
               pTitle.includes('gamis') ||
               pTitle.includes('dress') ||
               pTitle.includes('tunik') ||
               pTitle.includes('putri') ||
-              pTitle.includes('ibu');
+              pTitle.includes('ibu') ||
+              pTitle.includes('kebaya') ||
+              pTitle.includes('outer') ||
+              pTitle.includes('daster');
         if (!matchesGenderTag && !matchesGenderTitle) return false;
       }
 

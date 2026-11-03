@@ -179,20 +179,22 @@ const DEFAULT_POLICIES = {
     `,
   },
   'refund-policy': {
-    title: 'Garansi Bebas Tukar Size & Pengembalian',
+    title: 'Garansi Penukaran Ukuran 7 Hari & Pengiriman',
     body: `
-      <h2>1. Garansi 100% Bebas Tukar Size</h2>
-      <p>Kami memahami kenyamanan siluet dan fitting yang pas adalah elemen terpenting dalam mengenakan batik. Batik Smile memberikan <strong>Garansi Bebas Tukar Size 100%</strong> untuk seluruh produk Ready-To-Wear (Kemeja Pria, Blus &amp; Gamis Wanita, dan Sarimbit Keluarga).</p>
+      <h2>1. Pengiriman Aman ke Seluruh Indonesia</h2>
+      <p>Setiap pesanan dikemas dengan aman &amp; dikirim langsung dari showroom <strong>Batik Smile Sukun</strong> dan <strong>Batik Smile Sampookong Semarang</strong> ke berbagai wilayah di Indonesia.</p>
 
-      <h2>2. Syarat &amp; Ketentuan Penukaran</h2>
+      <h2>2. Layanan Penukaran Ukuran 7 Hari</h2>
+      <p>Ukuran kurang sesuai? Ajukan penukaran maksimal <strong>7 hari kalender</strong> sejak pesanan diterima, dengan memenuhi syarat dan ketentuan penukaran:</p>
       <ul>
-        <li>Konfirmasi penukaran dapat dilakukan maksimal <strong>7 hari kalender</strong> sejak paket diterima pelanggan berdasarkan tracking ekspedisi.</li>
-        <li>Busana dalam kondisi baru: belum pernah dicuci, label hangtag butik masih terpasang utuh, dan aroma kain masih asli.</li>
-        <li>Penukaran dapat dilakukan langsung ke Outlet Batik Smile Sukun &amp; Sampokong Semarang atau dikirimkan kembali melalui ekspedisi.</li>
+        <li>Produk belum dicuci atau digunakan.</li>
+        <li>Label &amp; pricetag masih terpasang utuh.</li>
+        <li>Produk masih dalam kondisi baik.</li>
+        <li>Penukaran dapat dilakukan langsung ke Showroom Batik Smile Sukun &amp; Sampookong Semarang atau dikirimkan kembali melalui ekspedisi.</li>
       </ul>
 
-      <h2>3. Prosedur Klaim Penukaran</h2>
-      <p>Hubungi staf WhatsApp Concierge kami di <code>081-390-8888-09</code> dengan menyertakan nomor pesanan dan ukuran pengganti yang diinginkan. Staf kami akan langsung mengamankan stok ukuran baru untuk Anda.</p>
+      <h2>3. Layanan Jahit Sarimbit dan Seragam</h2>
+      <p>Wujudkan busana serasi untuk keluarga maupun instansi melalui layanan jahit seragam di Batik Smile. Kami siap membantu kebutuhan busana dengan berbagai pilihan model dan motif sesuai dengan kebutuhan dan karakter Anda. Tersedia layanan konsultasi hubungi WA bisnis kami di <code>081-390-8888-09</code>.</p>
 
       <h2>4. Garansi Cacat Produksi</h2>
       <p>Apabila terdapat cacat jahitan atau ketidaksesuaian pesanan karena kelalaian produksi butik, seluruh biaya ongkos kirim bolak-balik ditanggung 100% oleh Batik Smile.</p>

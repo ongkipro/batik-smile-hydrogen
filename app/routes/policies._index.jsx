@@ -64,22 +64,22 @@ export async function loader({ context }) {
   // Secondary customer care and atelier guides
   const serviceGuides = [
     {
+      to: '/pages/member',
+      title: 'Program Member Batik Smile',
+      category: 'KEANGGOTAAN RESMI',
+      description: 'Syarat bergabung menjadi Member Batik Smile serta 5 keuntungan eksklusif: Birthday Privilege, Exclusive Collection Access, Special Offers, Event Invitation, & Member Reward.',
+    },
+    {
       to: '/pages/panduan-ukuran',
       title: 'Panduan Ukuran (Size Guide)',
       category: 'STANDAR FITTING BUTIK',
       description: 'Tabel ukuran presisi lingkar dada (LD) & panjang baju untuk kemeja pria reguler/slim, gamis wanita, dan sarimbit anak.',
     },
     {
-      to: '/pages/panduan-perawatan',
-      title: 'Panduan Perawatan Batik',
-      category: 'PERAWATAN WASTRA',
-      description: 'Langkah tepat merawat batik tulis canting & tenun dobby menggunakan sabun lerak alami agar serat dan warna tetap abadi.',
-    },
-    {
       to: '/pages/lokasi-toko',
       title: 'Lokasi Butik & Showroom Resmi',
       category: 'SHOWROOM RESMI',
-      description: 'Kunjungi Outlet Batik Smile Sukun (Banyumanik) dan Outlet Sampokong (Simongan) untuk pengalaman fitting busana langsung dan konsultasi koleksi.',
+      description: 'Kunjungi Showroom Batik Smile Sukun (Banyumanik) dan Batik Smile Sampookong (Simongan) untuk pengalaman fitting busana langsung dan konsultasi koleksi.',
     },
   ];
 

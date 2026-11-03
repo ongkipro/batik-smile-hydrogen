@@ -41,18 +41,18 @@ async function loadCriticalData({ context, request }) {
  * Curated collection eyebrow notes mapped by collection handle for accurate editorial hierarchy.
  */
 const COLLECTION_NOTES = {
-  'luxury-series': '',
-  'sarimbit-luxury': '',
-  'premium-series': 'Tenun Dobby Timbul & Lapisan Trikot',
-  'sarimbit-premium': 'Tenun Dobby Timbul & Lapisan Trikot',
-  'ekonomi-series': 'Katun Primisima Sejuk & Harmonis',
-  'sarimbit-ekonomi': 'Katun Primisima Sejuk & Harmonis',
+  'luxury-series': 'Elegant dalam Setiap Detail',
+  'sarimbit-luxury': 'Elegant dalam Setiap Detail',
+  'premium-series': 'Pilihan Berkualitas untuk Kenyamanan Istimewa',
+  'sarimbit-premium': 'Pilihan Berkualitas untuk Kenyamanan Istimewa',
+  'ekonomi-series': 'Pesona Batik yang Lebih Terjangkau',
+  'sarimbit-ekonomi': 'Pesona Batik yang Lebih Terjangkau',
   'sarimbit': 'Koleksi Busana Serasi Keluarga',
-  'kain': 'Kain Batik Klasik & Kontemporer',
-  'jarik-kain-batik': 'Jarik Wiru & Lembaran Kain Batik',
-  'batik-anak': 'Koleksi Busana Batik Anak & Balita',
-  'aksesoris': 'Pelengkap Busana & Aksesoris Tradisional',
-  'blangkon-tradisional': 'Blangkon & Pelengkap Adat Jawa',
+  'kain': 'Pesona Balutan Nusantara',
+  'jarik-kain-batik': 'Pesona Balutan Nusantara',
+  'batik-anak': 'Putra & Putri',
+  'aksesoris': 'Pelengkap Busana Batik',
+  'blangkon-tradisional': 'Pelengkap Busana Batik',
 };
 
 export default function Collections() {
@@ -92,9 +92,9 @@ export default function Collections() {
               { label: 'LUXURY SERIES', href: '/collections/luxury-series' },
               { label: 'PREMIUM SERIES', href: '/collections/premium-series' },
               { label: 'EKONOMI SERIES', href: '/collections/ekonomi-series' },
+              { label: 'BATIK ANAK', href: '/collections/batik-anak' },
               { label: 'KAIN BATIK', href: '/collections/kain' },
               { label: 'AKSESORIS', href: '/collections/aksesoris' },
-              { label: 'BATIK ANAK', href: '/collections/batik-anak' },
             ].map((cat, idx) => (
               <Link
                 key={idx}

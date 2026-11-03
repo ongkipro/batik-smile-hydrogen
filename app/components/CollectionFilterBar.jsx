@@ -10,12 +10,12 @@ export const SORT_OPTIONS = [
 ];
 
 export const OFFICIAL_COLLECTIONS = [
-  { handle: 'luxury-series', label: 'Luxury Series', tier: 'Mahakarya Sutra ATBM' },
-  { handle: 'premium-series', label: 'Premium Series', tier: 'Tenun Dobby Furing' },
-  { handle: 'ekonomi-series', label: 'Ekonomi Series', tier: 'Katun Primis Harian' },
-  { handle: 'kain', label: 'Kain Batik', tier: 'Kain Mori & Tulis' },
-  { handle: 'aksesoris', label: 'Aksesoris', tier: 'Pelengkap Tradisional' },
+  { handle: 'luxury-series', label: 'Luxury Series', tier: 'Elegant dalam Setiap Detail' },
+  { handle: 'premium-series', label: 'Premium Series', tier: 'Pilihan Berkualitas untuk Kenyamanan Istimewa' },
+  { handle: 'ekonomi-series', label: 'Ekonomi Series', tier: 'Pesona Batik yang Lebih Terjangkau' },
   { handle: 'batik-anak', label: 'Batik Anak', tier: 'Putra & Putri' },
+  { handle: 'kain', label: 'Kain Batik', tier: 'Pesona Balutan Nusantara' },
+  { handle: 'aksesoris', label: 'Aksesoris', tier: 'Pelengkap Busana Batik' },
 ];
 
 /**
@@ -270,7 +270,7 @@ export function CollectionSidebar({
         </button>
 
         {openSections.collections && (
-          <div className="mt-3 space-y-1.5">
+          <div className="mt-3 space-y-2">
             {OFFICIAL_COLLECTIONS.map((col) => {
               const isActive = col.handle === handle;
               return (
@@ -278,7 +278,7 @@ export function CollectionSidebar({
                   key={col.handle}
                   to={`/collections/${col.handle}`}
                   prefetch="intent"
-                  className={`block py-2 pl-3 border-l-2 transition-all cursor-pointer ${
+                  className={`block py-2.5 pl-3 pr-2 border-l-2 transition-all cursor-pointer ${
                     isActive
                       ? isDark
                         ? 'border-[#C5A059] bg-white/5 text-white font-semibold'
@@ -288,13 +288,13 @@ export function CollectionSidebar({
                       : 'border-transparent text-[#5A5550] hover:text-[#111111] hover:border-[#E2DFD8]'
                   }`}
                 >
-                  <div className="flex items-center justify-between pr-2">
-                    <span className="text-xs sm:text-sm tracking-wide">{col.label}</span>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs sm:text-sm tracking-wide leading-tight">{col.label}</span>
                     {isActive && (
-                      <span className="w-1.5 h-1.5 bg-[#C5A059] rounded-none" />
+                      <span className="w-1.5 h-1.5 bg-[#C5A059] rounded-none shrink-0" />
                     )}
                   </div>
-                  <span className="block text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#9E7D3B]">
+                  <span className="mt-1 block text-[10px] sm:text-[10.5px] uppercase tracking-[0.08em] leading-snug text-[#9E7D3B]">
                     {col.tier}
                   </span>
                 </Link>
@@ -1153,7 +1153,7 @@ export function CollectionMobileDrawer({
             <span className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-bold block mb-3 ${textColor}`}>
               Koleksi Busana
             </span>
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               {OFFICIAL_COLLECTIONS.map((col) => {
                 const isActive = col.handle === handle;
                 return (
@@ -1161,7 +1161,7 @@ export function CollectionMobileDrawer({
                     key={col.handle}
                     to={`/collections/${col.handle}`}
                     onClick={onClose}
-                    className={`block py-2 pl-3 border-l-2 transition-all ${
+                    className={`block py-2.5 pl-3 pr-2 border-l-2 transition-all ${
                       isActive
                         ? isDark
                           ? 'border-[#C5A059] bg-white/5 text-white font-semibold'
@@ -1171,11 +1171,11 @@ export function CollectionMobileDrawer({
                         : 'border-transparent text-[#5A5550]'
                     }`}
                   >
-                    <div className="flex items-center justify-between pr-2">
-                      <span className="text-xs sm:text-sm">{col.label}</span>
-                      {isActive && <span className="w-1.5 h-1.5 bg-[#C5A059]" />}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs sm:text-sm leading-tight">{col.label}</span>
+                      {isActive && <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />}
                     </div>
-                    <span className="block text-[10px] sm:text-[11px] uppercase tracking-[0.16em] text-[#9E7D3B]">
+                    <span className="mt-1 block text-[10px] sm:text-[10.5px] uppercase tracking-[0.08em] leading-snug text-[#9E7D3B]">
                       {col.tier}
                     </span>
                   </Link>

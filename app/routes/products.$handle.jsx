@@ -46,7 +46,8 @@ function cleanDescriptionText(text) {
     .replace(/&ndash;/gi, '–')
     .replace(/&mdash;/gi, '—')
     .replace(/&nbsp;/gi, ' ')
-    .replace(/Katun\s+Hero/gi, 'Lapisan Furing Pilihan')
+    .replace(/Furing\s+Katun\s+Hero/gi, 'Lapisan Furing Trikot')
+    .replace(/Katun\s+Hero/gi, 'Lapisan Trikot')
     .replace(/Flagship\s+Showroom\s+Batik\s+Smile\s+Simongan/gi, 'Showroom Batik Smile Sukun & Sampokong')
     .replace(/Showroom\s+Simongan/gi, 'Showroom Sukun & Sampokong')
     .trim();
@@ -284,12 +285,9 @@ export default function Product() {
     const videoItems = rawItems.filter((item) => item.isVideo || item.isExternalVideo);
     const nonVideoItems = rawItems.filter((item) => !item.isVideo && !item.isExternalVideo);
 
-    // If both photography and video exist:
-    // [0] = Primary featured image cover
-    // [1] = 1st Video Lookbook (2nd mini thumbnail)
-    // [2..n] = Remaining photography, followed by additional video/3D assets
+    let ordered = rawItems;
     if (videoItems.length > 0 && nonVideoItems.length > 0) {
-      return [
+      ordered = [
         nonVideoItems[0],
         videoItems[0],
         ...nonVideoItems.slice(1),
@@ -297,8 +295,62 @@ export default function Product() {
       ];
     }
 
-    return rawItems;
-  }, [media?.nodes, images?.nodes, product.featuredImage, title]);
+    // Ensure apparel products (especially Luxury Series / Wanita / Pria) have 5 gallery items
+    // where the 5th photo is the official Panduan Ukuran (Size Chart)
+    const lowerHandle = (product.handle || '').toLowerCase();
+    const isNonApparel =
+      lowerHandle.includes('kain') ||
+      lowerHandle.includes('blangkon') ||
+      lowerHandle.includes('aksesoris');
+
+    if (!isNonApparel && ordered.length > 0) {
+      const siblingPool = (product.collections?.nodes || [])
+        .flatMap((c) => c.products?.nodes || [])
+        .flatMap((p) => p.images?.nodes || (p.featuredImage ? [p.featuredImage] : []));
+
+      const paddedPhotos = [...ordered];
+      let sibIdx = 0;
+      while (paddedPhotos.length < 4 && siblingPool.length > 0 && sibIdx < siblingPool.length) {
+        const candidate = siblingPool[sibIdx++];
+        if (candidate?.url && !paddedPhotos.some((m) => m.url === candidate.url)) {
+          paddedPhotos.push({
+            id: `Lookbook-Detail-${paddedPhotos.length + 1}`,
+            __typename: 'MediaImage',
+            isVideo: false,
+            isExternalVideo: false,
+            isModel: false,
+            url: candidate.url,
+            previewUrl: candidate.url,
+            altText: `${title} - Detail Lookbook (${paddedPhotos.length + 1})`,
+          });
+        }
+      }
+      while (paddedPhotos.length < 4) {
+        const baseItem = ordered[paddedPhotos.length % ordered.length];
+        paddedPhotos.push({
+          ...baseItem,
+          id: `${baseItem.id || 'media'}-view-${paddedPhotos.length + 1}`,
+          altText: `${title} - Tampilan ${paddedPhotos.length + 1}`,
+        });
+      }
+
+      const firstFour = paddedPhotos.slice(0, 4);
+      const sizeChartSlide = {
+        id: `${product.id}-size-chart`,
+        __typename: 'MediaImage',
+        isVideo: false,
+        isExternalVideo: false,
+        isModel: false,
+        isSizeChart: true,
+        url: '/banners/size_chart_butik.jpg',
+        previewUrl: '/banners/size_chart_butik.jpg',
+        altText: `${title} - Panduan Ukuran (Size Chart)`,
+      };
+      return [...firstFour, sizeChartSlide];
+    }
+
+    return ordered;
+  }, [media?.nodes, images?.nodes, product.featuredImage, product.handle, product.id, product.collections?.nodes, title]);
 
   const [activeMedia, setActiveMedia] = useState(() => {
     if (selectedVariant?.image?.url) {
@@ -350,7 +402,7 @@ export default function Product() {
   const parsedDescription = parseShopifyDescription(descriptionHtml);
 
   // Resolve related products from the exact same collection + fallback pool so "Produk Serupa" always shows 4 items
-  const rawCollections = product.collections?.nodes || [];
+  const rawCollections = React.useMemo(() => product.collections?.nodes || [], [product.collections?.nodes]);
   const matchedCollection =
     rawCollections.find(
       (c) =>
@@ -420,6 +472,184 @@ export default function Product() {
     : null;
 
   const isDarkPDP = isExclusiveTier || isPremiumTier;
+
+  // Build 6 Standardized Informasi Produk Rows:
+  // 1. Bahan, 2. Material/ Bahan, 3. Detail Furing, 4. Detail Produk, 5. Koleksi, 6. Panduan Perawatan
+  const structuredProductSpecs = React.useMemo(() => {
+    const rawSpecs = parsedDescription.specs || [];
+    const findSpec = (keywords) => {
+      const found = rawSpecs.find((s) =>
+        keywords.some((kw) => (s.label || '').toLowerCase().includes(kw)),
+      );
+      return found?.value || '';
+    };
+
+    const bahanVal =
+      findSpec(['bahan']) ||
+      (isExclusiveTier
+        ? 'Sutra ATBM & Katun Sutra Primisima Halus'
+        : isPremiumTier
+        ? 'Tenun Dobby Timbul & Katun Primisima Pilihan'
+        : '100% Katun Primisima Halus');
+
+    const materialVal =
+      findSpec(['material', 'tekstur', 'karakter']) ||
+      (isExclusiveTier
+        ? 'Serat sutra berkilau alami, jatuh anggun, lembut, dan sejuk di kulit'
+        : isPremiumTier
+        ? 'Tekstur tenun timbul berkarakter, adem, dan tidak mudah kusut'
+        : 'Serat katun rapat, adem, menyerap keringat, dan nyaman dipakai seharian');
+
+    const furingVal =
+      findSpec(['furing', 'lapis', 'trikot']) ||
+      (isExclusiveTier
+        ? 'Lapisan Furing Trikot Premium (struktur rapi, kokoh, dan sejuk)'
+        : isPremiumTier
+        ? 'Tersedia opsi Dengan Lapisan Trikot (kokoh & rapi) atau Tanpa Trikot (jatuh alami)'
+        : 'Tanpa Furing (Katun Primisima sejuk langsung di kulit)');
+
+    const detailVal =
+      findSpec(['detail', 'konstruksi', 'potongan', 'model', 'ukuran', 'dimensi']) ||
+      'Jahitan butik presisi, pola sambung motif simetris, dan potongan nyaman di badan';
+
+    const koleksiVal =
+      findSpec(['koleksi']) ||
+      relatedCollectionTitle ||
+      (isExclusiveTier
+        ? 'Luxury Series'
+        : isPremiumTier
+        ? 'Premium Series'
+        : 'Koleksi Butik Batik Smile');
+
+    const perawatanVal =
+      findSpec(['perawatan', 'cuci']) ||
+      'Cuci manual dengan sabun lembut/lerak, hindari pemutih, jemur di tempat teduh, setrika suhu sedang';
+
+    return [
+      { label: '1. Bahan', value: bahanVal },
+      { label: '2. Material / Bahan', value: materialVal },
+      { label: '3. Detail Furing', value: furingVal },
+      { label: '4. Detail Produk', value: detailVal },
+      { label: '5. Koleksi', value: koleksiVal },
+      { label: '6. Panduan Perawatan', value: perawatanVal },
+    ];
+  }, [parsedDescription.specs, isExclusiveTier, isPremiumTier, relatedCollectionTitle]);
+
+  // Build "1 Motif Beda Model & Gender" items (Pria: Lengan Panjang & Lengan Pendek; Wanita: Blus, Tunik, Gamis, Outer)
+  const [sameMotifFilter, setSameMotifFilter] = useState('all');
+  const allCatalogPool = React.useMemo(() => {
+    const map = new Map();
+    const primaryPool = matchedCollection?.products?.nodes || [];
+    const secondaryPool = rawCollections.flatMap((c) => c.products?.nodes || []);
+    for (const item of [...primaryPool, ...secondaryPool, ...recommendedProducts]) {
+      if (item?.handle && !map.has(item.handle)) {
+        map.set(item.handle, item);
+      }
+    }
+    return Array.from(map.values());
+  }, [matchedCollection?.products?.nodes, rawCollections, recommendedProducts]);
+
+  const sameMotifModels = React.useMemo(() => {
+    const findByHandleOrKeyword = (preferredHandles, keywords) => {
+      for (const h of preferredHandles) {
+        const match = allCatalogPool.find((p) => p.handle === h && p.id !== product.id);
+        if (match) return match;
+      }
+      return (
+        allCatalogPool.find(
+          (p) =>
+            p.id !== product.id &&
+            keywords.some((kw) => (p.title || '').toLowerCase().includes(kw)),
+        ) || product
+      );
+    };
+
+    const priaPanjang = findByHandleOrKeyword(
+      ['kemeja-sido-asih', 'kemeja-motif-semarangan', 'sarimbit-royal-navy-1'],
+      ['kemeja'],
+    );
+    const priaPendek = findByHandleOrKeyword(
+      ['hem-dobby-maroon', 'hem-lurik-hitam', 'sarimbit-royal-navy'],
+      ['hem'],
+    );
+    const wanitaBlus = findByHandleOrKeyword(
+      ['blus-royal-navy', 'kebaya-encim-modern'],
+      ['blus', 'kebaya'],
+    );
+    const wanitaTunik = findByHandleOrKeyword(
+      ['tunik-senyum-floral', 'sarimbit-sutra-pasangan'],
+      ['tunik'],
+    );
+    const wanitaGamis = findByHandleOrKeyword(
+      ['gamis-parang-kusumo', 'sarimbit-mustard-gold', 'sarimbit-kondangan-gold'],
+      ['gamis', 'sarimbit'],
+    );
+    const wanitaOuter = findByHandleOrKeyword(
+      ['outer-terracotta-gold', 'kebaya-encim-modern'],
+      ['outer'],
+    );
+
+    return [
+      {
+        key: 'pria-panjang',
+        gender: 'pria',
+        badge: 'PRIA • LENGAN PANJANG',
+        modelLabel: 'Kemeja Pria Lengan Panjang',
+        subtitle: 'Motif Selaras • Furing Trikot Penuh',
+        product: priaPanjang,
+      },
+      {
+        key: 'pria-pendek',
+        gender: 'pria',
+        badge: 'PRIA • LENGAN PENDEK',
+        modelLabel: 'Kemeja Pria Lengan Pendek',
+        subtitle: 'Motif Selaras • Potongan Reguler Rapi',
+        product: priaPendek,
+      },
+      {
+        key: 'wanita-blus',
+        gender: 'wanita',
+        badge: 'WANITA • BLUS',
+        modelLabel: 'Model Blus Wanita',
+        subtitle: 'Motif Selaras • Siluet Anggun Modern',
+        product: wanitaBlus,
+      },
+      {
+        key: 'wanita-tunik',
+        gender: 'wanita',
+        badge: 'WANITA • TUNIK',
+        modelLabel: 'Model Tunik Wanita',
+        subtitle: 'Motif Selaras • Potongan Panjang Elegan',
+        product: wanitaTunik,
+      },
+      {
+        key: 'wanita-gamis',
+        gender: 'wanita',
+        badge: 'WANITA • GAMIS',
+        modelLabel: 'Model Gamis Wanita',
+        subtitle: 'Motif Selaras • Resepsi & Acara Resmi',
+        product: wanitaGamis,
+      },
+      {
+        key: 'wanita-outer',
+        gender: 'wanita',
+        badge: 'WANITA • OUTER',
+        modelLabel: 'Model Outer Wanita',
+        subtitle: 'Motif Selaras • Lapisan Kontemporer',
+        product: wanitaOuter,
+      },
+    ];
+  }, [allCatalogPool, product]);
+
+  const visibleSameMotifModels = React.useMemo(() => {
+    if (sameMotifFilter === 'pria') {
+      return sameMotifModels.filter((m) => m.gender === 'pria');
+    }
+    if (sameMotifFilter === 'wanita') {
+      return sameMotifModels.filter((m) => m.gender === 'wanita');
+    }
+    return sameMotifModels;
+  }, [sameMotifModels, sameMotifFilter]);
 
   // Active media index & current media item
   const activeIndex = Math.max(
@@ -567,7 +797,9 @@ export default function Product() {
               >
                 {mediaList.map((item, idx) => {
                   const isActive = activeIndex === idx;
-                  const thumbUrl = item.previewUrl?.includes('?')
+                  const thumbUrl = item.previewUrl?.startsWith('/')
+                    ? item.previewUrl
+                    : item.previewUrl?.includes('?')
                     ? `${item.previewUrl}&width=160`
                     : `${item.previewUrl}?width=160`;
                   return (
@@ -588,7 +820,13 @@ export default function Product() {
                           ? 'border-transparent opacity-60 hover:opacity-100 hover:border-[#7C3F1D]'
                           : 'border-transparent opacity-75 hover:opacity-100 hover:border-[#E2DFD8]'
                       }`}
-                      aria-label={item.isVideo || item.isExternalVideo ? `Putar video lookbook produk` : `Pilih media produk ${idx + 1}`}
+                      aria-label={
+                        item.isSizeChart
+                          ? 'Lihat Panduan Ukuran (Size Chart)'
+                          : item.isVideo || item.isExternalVideo
+                          ? 'Putar video lookbook produk'
+                          : `Pilih media produk ${idx + 1}`
+                      }
                     >
                       <img
                         src={thumbUrl}
@@ -599,6 +837,11 @@ export default function Product() {
                         height="100"
                         className="w-full h-full object-cover"
                       />
+                      {item.isSizeChart && (
+                        <div className="absolute inset-x-0 bottom-0 bg-black/80 text-[#C5A059] py-0.5 text-[7px] font-bold uppercase tracking-[0.14em] text-center">
+                          SIZE CHART
+                        </div>
+                      )}
                       {(item.isVideo || item.isExternalVideo) && (
                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/45 backdrop-blur-[0.5px]">
                           <span className="w-6 h-6 flex items-center justify-center bg-black/80 text-[#C5A059] border border-[#C5A059]/70 text-[9px] pl-0.5 shadow-sm">
@@ -712,7 +955,9 @@ export default function Product() {
                   {currentMedia ? (
                     <img
                       src={
-                        currentMedia.url?.includes('?')
+                        currentMedia.url?.startsWith('/')
+                          ? currentMedia.url
+                          : currentMedia.url?.includes('?')
                           ? `${currentMedia.url}&width=1000`
                           : `${currentMedia.url}?width=1000`
                       }
@@ -1038,7 +1283,7 @@ export default function Product() {
                   : 'border-[#E2DFD8] divide-[#E2DFD8]'
               }`}
             >
-              {/* Accordion 1: Deskripsi & Spesifikasi (Auto Show / Open by default) */}
+              {/* Accordion 1: Bagian Informasi Produk (Auto Show / Open by default) */}
               <div className="py-3.5">
                 <button
                   type="button"
@@ -1047,7 +1292,7 @@ export default function Product() {
                     isDarkPDP ? 'text-white' : 'text-[#111111]'
                   }`}
                 >
-                  <span>DESKRIPSI &amp; SPESIFIKASI KARYA</span>
+                  <span>INFORMASI PRODUK</span>
                   <span className={`text-sm font-normal ${isDarkPDP ? 'text-[#C5A059]' : ''}`}>
                     {openSections.deskripsi ? '−' : '+'}
                   </span>
@@ -1066,47 +1311,36 @@ export default function Product() {
                       </p>
                     )}
 
-                    {/* Frameless Atelier Specifications List (Zero Cards/Frames) */}
-                    {parsedDescription.specs.length > 0 ? (
-                      <div
-                        className={`divide-y pt-1 ${
-                          isExclusiveTier ? 'divide-[#262626]/80' : isPremiumTier ? 'divide-[#7C3F1D]/30' : 'divide-[#E2DFD8]/80'
-                        }`}
-                      >
-                        {parsedDescription.specs.map((item, idx) => (
-                          <div key={idx} className="py-2 flex items-baseline justify-between gap-4">
-                            <span
-                              className={`text-[10px] uppercase tracking-[0.18em] font-medium shrink-0 ${
-                                isDarkPDP ? 'text-[#C5A059]' : 'text-[#888888]'
-                              }`}
-                            >
-                              {item.label || 'Spesifikasi'}
-                            </span>
-                            <span
-                              className={`text-right text-xs font-light ${
-                                isDarkPDP ? 'text-white' : 'text-[#111111]'
-                              }`}
-                            >
-                              {item.value}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      descriptionHtml && (
-                        <div
-                          className={`text-xs leading-relaxed font-light space-y-2 ${
-                            isExclusiveTier ? 'text-[#E2DFD8]/80' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
-                          }`}
-                          dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-                        />
-                      )
-                    )}
+                    {/* 6 Standardized Informasi Produk Rows */}
+                    <div
+                      className={`divide-y pt-1 ${
+                        isExclusiveTier ? 'divide-[#262626]/80' : isPremiumTier ? 'divide-[#7C3F1D]/30' : 'divide-[#E2DFD8]/80'
+                      }`}
+                    >
+                      {structuredProductSpecs.map((item, idx) => (
+                        <div key={idx} className="py-2.5 flex items-baseline justify-between gap-4">
+                          <span
+                            className={`text-[10px] uppercase tracking-[0.18em] font-medium shrink-0 ${
+                              isDarkPDP ? 'text-[#C5A059]' : 'text-[#888888]'
+                            }`}
+                          >
+                            {item.label}
+                          </span>
+                          <span
+                            className={`text-right text-xs font-light ${
+                              isDarkPDP ? 'text-white' : 'text-[#111111]'
+                            }`}
+                          >
+                            {item.value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
 
-              {/* Accordion 2: Pengiriman & Garansi (Short, clean title) */}
+              {/* Accordion 2: Bagian Pengiriman dan Garansi Tukar */}
               <div className="py-3.5">
                 <button
                   type="button"
@@ -1128,76 +1362,75 @@ export default function Product() {
                     }`}
                   >
                     <div className="py-2.5 flex items-start gap-3">
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">1.</span>
                       <div className="min-w-0">
                         <span
                           className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
                             isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
-                          Pengiriman Cepat &amp; Terlindungi
+                          Pengiriman Aman ke Seluruh Indonesia
                         </span>
                         <p
                           className={`text-xs font-light leading-relaxed ${
                             isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                         >
-                          Seluruh pesanan dikemas aman dan dikirim langsung dari Showroom Batik Smile Sukun &amp; Sampokong Semarang ke seluruh Indonesia.
+                          Setiap pesanan dikemas dengan aman &amp; dikirim langsung dari showroom Batik Smile Sukun dan Batik Smile Sampokong Semarang ke berbagai wilayah di Indonesia.
                         </p>
                       </div>
                     </div>
 
                     <div className="py-2.5 flex items-start gap-3">
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">2.</span>
                       <div className="min-w-0">
                         <span
                           className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
                             isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
-                          Garansi Bebas Tukar Ukuran 7 Hari
+                          Layanan Penukaran Ukuran 7 Hari
                         </span>
                         <p
                           className={`text-xs font-light leading-relaxed ${
                             isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
                           }`}
                         >
-                          Bebas tukar ukuran dalam 7 hari kalender setelah pesanan diterima apabila ukuran kurang pas di badan.
+                          Ukuran kurang sesuai? Ajukan penukaran maksimal 7 hari kalender sejak pesanan diterima, dengan memenuhi syarat dan ketentuan penukaran. (Produk belum dicuci/digunakan, label &amp; pricetag masih terpasang utuh, serta produk masih dalam kondisi baik)
                         </p>
                       </div>
                     </div>
 
-                    {(isExclusiveTier || isPremiumTier) && (
-                      <div className="py-2.5 flex items-start gap-3">
-                        <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">◆</span>
-                        <div className="min-w-0">
-                          <span
-                            className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
-                              isDarkPDP ? 'text-white' : 'text-[#111111]'
+                    <div className="py-2.5 flex items-start gap-3">
+                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">3.</span>
+                      <div className="min-w-0">
+                        <span
+                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                            isDarkPDP ? 'text-white' : 'text-[#111111]'
+                          }`}
+                        >
+                          Layanan Jahit Sarimbit dan Seragam
+                        </span>
+                        <p
+                          className={`text-xs font-light leading-relaxed ${
+                            isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
+                          }`}
+                        >
+                          Wujudkan busana serasi untuk keluarga maupun instansi melalui layanan jahit seragam di Batik Smile. Kami siap membantu kebutuhan busana dengan berbagai pilihan model dan motif sesuai dengan kebutuhan dan karakter Anda. (Tersedia layanan konsultasi hubungi WA bisnis kami{' '}
+                          <a
+                            href="https://wa.me/6281390888809"
+                            target="_blank"
+                            rel="noreferrer"
+                            className={`font-medium underline underline-offset-2 transition-colors ${
+                              isDarkPDP ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
                             }`}
                           >
-                            Layanan Jahitan Sarimbit &amp; Seragam
-                          </span>
-                          <p
-                            className={`text-xs font-light leading-relaxed ${
-                              isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
-                            }`}
-                          >
-                            Tersedia layanan jahit busana sarimbit keluarga dan seragam instansi tanpa minimal order. Hubungi WhatsApp Concierge{' '}
-                            <a
-                              href="https://wa.me/6281390888809"
-                              target="_blank"
-                              rel="noreferrer"
-                              className={`font-medium underline underline-offset-2 transition-colors ${
-                                isDarkPDP ? 'text-[#C5A059] hover:text-white' : 'text-[#9E7D3B] hover:text-[#111111]'
-                              }`}
-                            >
-                              081-390-8888-09
-                            </a>.
-                          </p>
-                        </div>
+                            081-390-8888-09
+                          </a>
+                          )
+                        </p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -1211,7 +1444,129 @@ export default function Product() {
           productTitle={title}
         />
 
-        {/* Related Products: "Koleksi Selaras" (Strict 4:5 Vertical Cards, Calibrated Spacing) */}
+        {/* NEW SECTION BEFORE PRODUK SERUPA: 1 Motif Beda Model & Gender (Pria L.Panjang & L.Pendek | Wanita Blus, Tunik, Gamis, Outer) */}
+        <div
+          className={`mt-16 sm:mt-20 pt-12 border-t ${
+            isExclusiveTier ? 'border-[#262626]' : isPremiumTier ? 'border-[#7C3F1D]/40' : 'border-[#E2DFD8]'
+          }`}
+        >
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
+            <div>
+              <span
+                className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-1.5 ${
+                  isDarkPDP ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
+                }`}
+              >
+                SATU MOTIF &bull; BEDA MODEL &amp; GENDER
+              </span>
+              <h2
+                className={`font-serif text-2xl sm:text-3xl font-normal tracking-wide ${
+                  isDarkPDP ? 'text-white' : 'text-[#111111]'
+                }`}
+              >
+                Pilihan Model Pria &amp; Wanita (Satu Motif)
+              </h2>
+              <p
+                className={`text-xs font-light mt-1.5 max-w-2xl ${
+                  isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
+                }`}
+              >
+                Padukan motif yang selaras dengan pilihan model Pria (Lengan Panjang &amp; Lengan Pendek) serta Wanita (Blus, Tunik, Gamis, &amp; Outer).
+              </p>
+            </div>
+
+            {/* Filter Tabs: Semua | Pria (L.Pjg & L.Pdk) | Wanita (Blus, Tunik, Gamis, Outer) */}
+            <div className="flex flex-wrap items-center gap-2">
+              {[
+                { id: 'all', label: 'Semua Model (6)' },
+                { id: 'pria', label: 'Pilihan Pria (L.Pjg & L.Pdk)' },
+                { id: 'wanita', label: 'Pilihan Wanita (Blus, Tunik, Gamis, Outer)' },
+              ].map((tab) => {
+                const active = sameMotifFilter === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setSameMotifFilter(tab.id)}
+                    className={`px-3.5 py-2 text-[10px] uppercase tracking-[0.16em] font-semibold border transition-colors cursor-pointer ${
+                      active
+                        ? 'bg-[#C5A059] text-[#111111] border-[#C5A059]'
+                        : isDarkPDP
+                        ? 'bg-transparent text-[#E2DFD8] border-white/20 hover:border-[#C5A059]'
+                        : 'bg-white text-[#111111] border-[#E2DFD8] hover:border-[#111111]'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            {visibleSameMotifModels.map((entry) => {
+              const targetProduct = entry.product;
+              const imgUrl =
+                targetProduct?.featuredImage?.url ||
+                targetProduct?.images?.nodes?.[0]?.url ||
+                '/banners/hero_editorial_banner.jpg';
+              const priceData = targetProduct?.priceRange?.minVariantPrice;
+              return (
+                <Link
+                  key={entry.key}
+                  to={`/products/${targetProduct?.handle || product.handle}`}
+                  className={`group block border transition-all no-underline ${
+                    isExclusiveTier
+                      ? 'bg-[#161616] border-[#262626] hover:border-[#C5A059]'
+                      : isPremiumTier
+                      ? 'bg-[#281C15] border-[#7C3F1D]/50 hover:border-[#C5A059]'
+                      : 'bg-white border-[#E2DFD8] hover:border-[#C5A059]'
+                  }`}
+                >
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#111111]">
+                    <img
+                      src={imgUrl.includes('?') ? `${imgUrl}&width=500` : `${imgUrl}?width=500`}
+                      alt={`${entry.modelLabel} - ${targetProduct?.title || title}`}
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <span className="absolute top-2 left-2 px-2 py-0.5 bg-black/85 text-[#C5A059] border border-[#C5A059]/40 text-[8px] uppercase tracking-[0.15em] font-semibold">
+                      {entry.badge}
+                    </span>
+                  </div>
+                  <div className="p-3 sm:p-3.5">
+                    <h3
+                      className={`font-serif text-sm sm:text-base font-normal leading-snug mb-1 group-hover:text-[#C5A059] transition-colors ${
+                        isDarkPDP ? 'text-white' : 'text-[#111111]'
+                      }`}
+                    >
+                      {entry.modelLabel}
+                    </h3>
+                    <p
+                      className={`text-[10px] font-light mb-2 line-clamp-1 ${
+                        isDarkPDP ? 'text-[#A9A49C]' : 'text-[#5A5550]'
+                      }`}
+                    >
+                      {entry.subtitle}
+                    </p>
+                    {priceData && (
+                      <div
+                        className={`text-xs font-semibold font-sans ${
+                          isDarkPDP ? 'text-[#C5A059]' : 'text-[#111111]'
+                        }`}
+                      >
+                        <BoutiqueMoney data={priceData} />
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Related Products: "Produk Serupa" — Motif dan Warna Lain untuk Pilihan Lain */}
         {relatedProducts.length > 0 && (
           <div
             className={`mt-16 sm:mt-20 pt-12 border-t ${
@@ -1224,7 +1579,7 @@ export default function Product() {
                   isDarkPDP ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
                 }`}
               >
-                KOLEKSI SELARAS
+                MOTIF DAN WARNA LAIN UNTUK PILIHAN LAIN
               </span>
               <h2
                 className={`font-serif text-2xl sm:text-3xl font-normal tracking-wide ${
@@ -1233,6 +1588,13 @@ export default function Product() {
               >
                 Produk Serupa
               </h2>
+              <p
+                className={`text-xs font-light mt-1.5 ${
+                  isExclusiveTier ? 'text-[#E2DFD8]/75' : isPremiumTier ? 'text-[#D5C8B8]' : 'text-[#5A5550]'
+                }`}
+              >
+                Rekomendasi motif dan warna lain dari kurasi koleksi butik kami.
+              </p>
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 lg:gap-y-12">
@@ -1241,7 +1603,7 @@ export default function Product() {
                   key={relProduct.id}
                   product={relProduct}
                   variant={isExclusiveTier ? 'exclusive' : isPremiumTier ? 'premium' : 'default'}
-                  loading="lazy"
+                  loading="eager"
                 />
               ))}
             </div>
@@ -1376,6 +1738,8 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    encodedVariantExistence
+    encodedVariantAvailability
     featuredImage {
       id
       url
@@ -1494,7 +1858,7 @@ const PRODUCT_QUERY = `#graphql
     product(handle: $handle) {
       ...Product
     }
-    recommendedProducts: products(first: 10, sortKey: UPDATED_AT) {
+    recommendedProducts: products(first: 25, sortKey: UPDATED_AT) {
       nodes {
         ...RelatedProductItem
       }

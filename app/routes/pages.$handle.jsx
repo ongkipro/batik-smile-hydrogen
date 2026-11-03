@@ -32,6 +32,9 @@ async function loadCriticalData({ context, request, params }) {
   if (params.handle === 'kebijakan-pengiriman' || params.handle === 'shipping-policy') {
     throw redirect('/policies/shipping-policy', 301);
   }
+  if (params.handle === 'membership' || params.handle === 'member-batik-smile') {
+    throw redirect('/pages/member', 301);
+  }
 
   const [{ page, shop }] = await Promise.all([
     context.storefront.query(PAGE_QUERY, {

@@ -221,8 +221,8 @@ export default function Collection() {
         const targetGender = genderParam.toLowerCase().replace(/[\s_]+/g, '-');
         const matchesGenderTag = pTags.includes(targetGender);
         const matchesGenderTitle = targetGender === 'pria' || targetGender === 'putra'
-          ? (pTitle.includes('pria') || pTitle.includes('kemeja') || pTitle.includes('hem') || pTitle.includes('putra') || pTitle.includes('bapak'))
-          : (pTitle.includes('wanita') || pTitle.includes('blus') || pTitle.includes('gamis') || pTitle.includes('dress') || pTitle.includes('tunik') || pTitle.includes('putri') || pTitle.includes('ibu'));
+          ? (pTitle.includes('pria') || pTitle.includes('kemeja') || pTitle.includes('hem') || pTitle.includes('putra') || pTitle.includes('bapak') || pTitle.includes('surjan') || pTitle.includes('setelan') || pTitle.includes('celana'))
+          : (pTitle.includes('wanita') || pTitle.includes('blus') || pTitle.includes('gamis') || pTitle.includes('dress') || pTitle.includes('tunik') || pTitle.includes('putri') || pTitle.includes('ibu') || pTitle.includes('kebaya') || pTitle.includes('outer') || pTitle.includes('daster'));
         if (!matchesGenderTag && !matchesGenderTitle) return false;
       }
 
@@ -360,21 +360,27 @@ export default function Collection() {
               className="flex justify-center mb-6"
             />
 
+            {isExclusive && (
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
+                LUXURY SERIES &bull; ELEGANT DALAM SETIAP DETAIL
+              </span>
+            )}
+
             {isPremium && (
               <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#C5A059]">
-                SIGNATURE ATELIER &bull; RESEPSI &amp; FORMAL
+                PREMIUM SERIES &bull; PILIHAN BERKUALITAS UNTUK KENYAMANAN ISTIMEWA
               </span>
             )}
 
             {isEkonomi && (
               <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
-                ESSENTIAL DAILY &bull; KATUN PRIMISIMA SEJUK
+                EKONOMI SERIES &bull; PESONA BATIK YANG LEBIH TERJANGKAU
               </span>
             )}
 
             {isKain && (
               <span className="text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold block mb-3 text-[#D5B066]">
-                ARSIP WASTRA &bull; KAIN TULIS CANTING &amp; CAP PRIMISIMA
+                KAIN BATIK &bull; PESONA BALUTAN NUSANTARA
               </span>
             )}
 
@@ -772,13 +778,13 @@ export default function Collection() {
                   code: 'SERAGAM A • INSTANSI & DINAS',
                   title: 'Seragam Instansi & Pemerintahan',
                   desc: 'Potongan formal berpola simetris dengan opsi lapisan trikot rapi untuk kewibawaan kerja harian.',
-                  img: '/banners/bespoke_tailoring_banner.jpg',
+                  img: '/banners/seragam_korporasi_gold.jpg',
                 },
                 {
                   code: 'SERAGAM B • PERUSAHAAN & KORPORAT',
                   title: 'Seragam Kantor & Perusahaan',
                   desc: 'Penyesuaian motif, warna korporat, dan model kemeja maupun blus profesional bagi tim Anda.',
-                  img: '/banners/hero_editorial_banner.jpg',
+                  img: '/banners/seragam_korporasi_navy.jpg',
                 },
                 {
                   code: 'SERAGAM C • KELUARGA & RESEPSI',

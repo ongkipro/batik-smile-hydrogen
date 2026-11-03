@@ -1,13 +1,14 @@
 {
-  "name": "skeleton",
+  "name": "batik-smile-hydrogen",
   "private": true,
   "sideEffects": false,
   "version": "2026.4.6",
   "type": "module",
   "scripts": {
-    "build": "shopify hydrogen build --codegen",
+    "build": "shopify hydrogen build --codegen --no-bundle-stats",
     "dev": "shopify hydrogen dev --codegen",
     "preview": "shopify hydrogen preview --build",
+    "deploy": "shopify hydrogen deploy",
     "lint": "eslint --no-error-on-unmatched-pattern .",
     "codegen": "shopify hydrogen codegen && react-router typegen"
   },
