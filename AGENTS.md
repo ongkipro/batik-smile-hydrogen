@@ -83,3 +83,7 @@ Resolve all specifications through the repository documentation suite:
    - Never say "it works" without executing verification checks (`npm run build`, `npm run lint`).
    - Browser-visible UI must be verified for responsiveness and visual alignment.
 
+| Test layer | Command | Boundary |
+|---|---|---|
+| Unit | `npm test` | Checkout decision against synthetic Shopify mutation results; no network or credentials. |
+

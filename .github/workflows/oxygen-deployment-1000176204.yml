@@ -1,41 +1,59 @@
 name: Storefront 1000176204
-on: [push]
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
-permissions:
-  contents: read
-  deployments: write
+permissions: {}
+
+env:
+  SHOPIFY_CLI_NO_ANALYTICS: '1'
 
 jobs:
+  verify:
+    name: Verify storefront
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
   deploy:
     name: Deploy to Oxygen
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    environment: production
+    permissions:
+      contents: read
+      deployments: write
+    concurrency:
+      group: batik-smile-oxygen-production
+      cancel-in-progress: false
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Setup node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "lts/*"
-          check-latest: true
-
-      - name: Cache node modules
-        id: cache-npm
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        env:
-          cache-name: cache-node-modules
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Install dependencies
-        run: npm ci
-
+          node-version: '24'
+          cache: npm
+      - run: npm ci
       - name: Build and Publish to Oxygen
-        run: npx shopify hydrogen deploy
+        # Oxygen provides its deployment-specific asset base during this build.
+        run: npm run deploy -- --env-branch main
         env:
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000176204 }}

@@ -28,6 +28,30 @@ export function resolveCheckoutUrl(
 }
 
 /**
+ * @param {{
+ *   cart?: {checkoutUrl?: string | null} | null,
+ *   errors?: unknown[] | null,
+ *   userErrors?: unknown[] | null,
+ *   warnings?: {code: string}[] | null,
+ * }} result
+ * @param {string} [customDomain]
+ */
+export function getCartCheckoutRedirect({cart, errors, userErrors, warnings}, customDomain) {
+  if (
+    !cart?.checkoutUrl ||
+    errors?.length ||
+    userErrors?.length ||
+    warnings?.some(({code}) =>
+      code === 'MERCHANDISE_NOT_ENOUGH_STOCK' || code === 'MERCHANDISE_OUT_OF_STOCK',
+    )
+  ) {
+    return null;
+  }
+
+  return resolveCheckoutUrl(cart.checkoutUrl, customDomain);
+}
+
+/**
  * Resolves customer account URLs to the dedicated account domain.
  *
  * @param {string} [path=''] - Subpath on the account domain (e.g. '/orders')

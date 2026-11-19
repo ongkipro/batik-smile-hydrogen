@@ -3,7 +3,7 @@ import { CartForm } from '@shopify/hydrogen';
 import { CartMain } from '~/components/CartMain';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generateCartMeta } from '~/lib/seo';
-import { resolveCheckoutUrl } from '~/lib/checkout';
+import { getCartCheckoutRedirect } from '~/lib/checkout';
 import { NotFoundView } from '~/components/NotFoundView';
 
 /**
@@ -78,25 +78,25 @@ export async function action({ request, context }) {
 
   const cartId = result?.cart?.id;
   const actionResponseHeaders = cartId ? cart.setCartId(result.cart.id) : new Headers();
-  const { cart: cartResult, errors, warnings } = result;
+  const { cart: cartResult, errors, userErrors, warnings } = result;
 
-  const redirectTo = formData.get('redirectTo') ?? null;
-  if (typeof redirectTo === 'string') {
-    status = 303;
-    const targetUrl =
-      redirectTo === 'checkout'
-        ? resolveCheckoutUrl(
-            cartResult?.checkoutUrl,
-            context.env?.PUBLIC_CHECKOUT_DOMAIN,
-          )
-        : redirectTo;
-    actionResponseHeaders.set('Location', targetUrl);
+  if (
+    cartAction === CartForm.ACTIONS.LinesAdd &&
+    formData.get('redirectTo') === 'checkout'
+  ) {
+    const checkoutUrl = getCartCheckoutRedirect(
+      result,
+      context.env?.PUBLIC_CHECKOUT_DOMAIN,
+    );
+    status = checkoutUrl ? 303 : 422;
+    if (checkoutUrl) actionResponseHeaders.set('Location', checkoutUrl);
   }
 
   return data(
     {
       cart: cartResult,
       errors,
+      userErrors,
       warnings,
       analytics: {
         cartId,
