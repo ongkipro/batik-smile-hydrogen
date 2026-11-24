@@ -9,7 +9,10 @@ import {
   ScrollRestoration,
   useRouteLoaderData,
 } from 'react-router';
-import favicon from '~/assets/favicon.svg';
+import favicon from '~/assets/favicon.svg?url';
+import favicon32 from '~/assets/favicon-32x32.png?url';
+import icon192 from '~/assets/icon-192.png?url';
+import appleTouchIcon from '~/assets/apple-touch-icon.png?url';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
@@ -79,6 +82,9 @@ export function links() {
       href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap',
     },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'icon', type: 'image/png', sizes: '32x32', href: favicon32},
+    {rel: 'icon', type: 'image/png', sizes: '192x192', href: icon192},
+    {rel: 'apple-touch-icon', sizes: '180x180', href: appleTouchIcon},
   ];
 }
 
