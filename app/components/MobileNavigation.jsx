@@ -18,7 +18,7 @@ export function MobileNavigation() {
         to="/"
         end
         className={({ isActive }) =>
-          `flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium transition-colors ${
+          `flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-xs uppercase tracking-wider font-medium transition-colors ${
             isActive ? 'text-[#9E7D3B] font-semibold' : 'text-[#5A5550] hover:text-[#111111]'
           }`
         }
@@ -37,7 +37,7 @@ export function MobileNavigation() {
       <button
         type="button"
         onClick={() => open('mobile')}
-        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
+        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-xs uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
         aria-label="Buka menu kategori"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -54,7 +54,7 @@ export function MobileNavigation() {
       <button
         type="button"
         onClick={() => open('search')}
-        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
+        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-xs uppercase tracking-wider font-medium text-[#5A5550] hover:text-[#111111] transition-colors cursor-pointer"
         aria-label="Buka pencarian produk"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@ export function MobileNavigation() {
       <NavLink
         to="/blogs"
         className={({ isActive }) =>
-          `flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium transition-colors ${
+          `flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-xs uppercase tracking-wider font-medium transition-colors ${
             isActive ? 'text-[#9E7D3B] font-semibold' : 'text-[#5A5550] hover:text-[#111111]'
           }`
         }
@@ -91,7 +91,7 @@ export function MobileNavigation() {
         href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20batik"
         target="_blank"
         rel="noreferrer"
-        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-[10px] uppercase tracking-wider font-medium text-[#25D366] hover:opacity-80 transition-opacity"
+        className="flex flex-col items-center justify-center min-h-[44px] min-w-[52px] py-1 gap-1 text-xs uppercase tracking-wider font-medium text-[#25D366] hover:opacity-80 transition-opacity"
         aria-label="Konsultasi WhatsApp Customer Service"
       >
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

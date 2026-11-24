@@ -55,7 +55,7 @@ export function HeritageVideoBanner({ videoData }) {
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
         {/* Left Column: Editorial Storytelling */}
         <div className="lg:col-span-7 flex flex-col items-start">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
+          <span className="text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
             {eyebrow}
           </span>
 
@@ -70,14 +70,14 @@ export function HeritageVideoBanner({ videoData }) {
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/collections/kain"
-              className="px-8 py-4 bg-[#C5A059] text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-[#9E7D3B] hover:text-white transition-colors duration-300"
+              className="px-8 py-4 bg-[#C5A059] text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] hover:bg-[#9E7D3B] hover:text-white transition-colors duration-300"
             >
               LIHAT KAIN TULIS ASLI
             </Link>
 
             <Link
               to="/pages/tentang-kami"
-              className="px-8 py-4 bg-transparent border border-white/40 text-white text-[11px] uppercase font-semibold tracking-[0.18em] hover:bg-white/10 hover:border-white transition-colors duration-300"
+              className="px-8 py-4 bg-transparent border border-white/40 text-white text-xs uppercase font-semibold tracking-[0.18em] hover:bg-white/10 hover:border-white transition-colors duration-300"
             >
               KISAH PENGRAJIN KAMI
             </Link>
@@ -115,7 +115,7 @@ export function HeritageVideoBanner({ videoData }) {
             </button>
 
             {/* Bottom Duration Badge */}
-            <div className="absolute bottom-3 right-3 px-2.5 py-1 bg-black/80 text-[10px] tracking-widest text-[#E2DFD8] border border-white/10">
+            <div className="absolute bottom-3 right-3 px-2.5 py-1 bg-black/80 text-xs tracking-widest text-[#E2DFD8] border border-white/10">
               0:18 / FINEST PROCESS
             </div>
           </div>

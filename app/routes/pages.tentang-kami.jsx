@@ -52,7 +52,7 @@ export default function TentangKamiPage() {
 
         {/* 1. Header Hero */}
         <div className="text-center mb-14 sm:mb-16">
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2.5">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2.5">
             SEMARANG &bull; SEJAK 2007
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight max-w-2xl mx-auto">
@@ -104,39 +104,39 @@ export default function TentangKamiPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
             {/* Value 1 */}
             <div className="space-y-1.5">
-              <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
+              <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
                 NILAI I
               </span>
               <h3 className="font-serif text-lg text-[#111111] font-normal tracking-wide">
                 Keaslian Motif Pusaka
               </h3>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
+              <p className="text-xs text-[#5A5550] leading-relaxed font-light">
                 Menjaga pakem filosofi corak batik klasik Jawa Tengah dan ketelitian goresan canting malam para pembatik binaan.
               </p>
             </div>
 
             {/* Value 2 */}
             <div className="space-y-1.5">
-              <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
+              <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
                 NILAI II
               </span>
               <h3 className="font-serif text-lg text-[#111111] font-normal tracking-wide">
                 Kenyamanan Sejati
               </h3>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
+              <p className="text-xs text-[#5A5550] leading-relaxed font-light">
                 Pemilihan mori primisima adem, tenun dobby timbul, dan jahitan presisi standar butik keluarga.
               </p>
             </div>
 
             {/* Value 3 */}
             <div className="space-y-1.5">
-              <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
+              <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-bold block">
                 NILAI III
               </span>
               <h3 className="font-serif text-lg text-[#111111] font-normal tracking-wide">
                 Bebas Minimal Order
               </h3>
-              <p className="text-[11px] text-[#5A5550] leading-relaxed font-light">
+              <p className="text-xs text-[#5A5550] leading-relaxed font-light">
                 Layanan jahit seragam keluarga maupun instansi tanpa batasan kuota minimum pemesanan (1 potong pun dilayani).
               </p>
             </div>
@@ -145,7 +145,7 @@ export default function TentangKamiPage() {
 
         {/* 5. Matur Nuwun Closing (Frameless Minimalist Signature) */}
         <div className="pt-12 sm:pt-14 border-t border-[#E2DFD8] text-center max-w-xl mx-auto">
-          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-bold block mb-2">
             UNGKAPAN HORMAT
           </span>
           <h4 className="font-serif text-2xl sm:text-3xl text-[#111111] italic font-normal mb-2.5">
@@ -156,7 +156,7 @@ export default function TentangKamiPage() {
           </p>
           <Link
             to="/collections/all"
-            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
+            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
           >
             JELAJAHI KOLEKSI KAMI &rarr;
           </Link>

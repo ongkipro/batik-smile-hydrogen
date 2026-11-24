@@ -24,6 +24,8 @@ export function Aside({children, heading, type}) {
     const abortController = new AbortController();
 
     if (expanded) {
+      const previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
       document.addEventListener(
         'keydown',
         function handler(event) {
@@ -33,6 +35,10 @@ export function Aside({children, heading, type}) {
         },
         {signal: abortController.signal},
       );
+      return () => {
+        document.body.style.overflow = previousOverflow;
+        abortController.abort();
+      };
     }
     return () => abortController.abort();
   }, [close, expanded]);
@@ -40,7 +46,7 @@ export function Aside({children, heading, type}) {
   return (
     <div
       aria-modal
-      className={`fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
+      className={`fixed inset-0 z-[100] transition-all duration-300 ease-in-out ${
         expanded ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
       }`}
       role="dialog"
@@ -66,20 +72,21 @@ export function Aside({children, heading, type}) {
         }`}
       >
         {/* Top Header Bar with Architectural Precision */}
-        <header className="flex flex-shrink-0 items-center justify-between px-5 sm:px-8 py-3.5 sm:py-4 border-b border-[#E2DFD8] bg-white z-10 shrink-0">
+        <header className="flex flex-shrink-0 items-center justify-between px-5 sm:px-8 py-4 border-b border-[#E2DFD8] bg-white z-10 shrink-0">
           <div className="flex items-center gap-2.5">
             <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
-            <h3 id={id} className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.24em] text-[#111111] m-0">
+            <h3 id={id} className="text-xs sm:text-[13px] font-bold uppercase tracking-[0.2em] text-[#111111] m-0">
               {heading}
             </h3>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-block text-[9px] uppercase tracking-[0.2em] text-[#888888]">
-              [ESC] TUTUP
+            <span className="hidden sm:inline-block text-xs uppercase tracking-[0.16em] text-[#6E6862]">
+              [ESC]
             </span>
             <button 
-              className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-base font-light text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
+              type="button"
+              className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-lg font-normal text-[#111111] hover:text-[#C5A059] transition-colors cursor-pointer"
               onClick={close} 
               aria-label="Tutup panel samping"
             >

@@ -838,16 +838,16 @@ export default function Product() {
                         className="w-full h-full object-cover"
                       />
                       {item.isSizeChart && (
-                        <div className="absolute inset-x-0 bottom-0 bg-black/80 text-[#C5A059] py-0.5 text-[7px] font-bold uppercase tracking-[0.14em] text-center">
+                        <div className="absolute inset-x-0 bottom-0 bg-black/80 text-[#C5A059] py-0.5 text-xs font-bold uppercase tracking-[0.14em] text-center">
                           SIZE CHART
                         </div>
                       )}
                       {(item.isVideo || item.isExternalVideo) && (
                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/45 backdrop-blur-[0.5px]">
-                          <span className="w-6 h-6 flex items-center justify-center bg-black/80 text-[#C5A059] border border-[#C5A059]/70 text-[9px] pl-0.5 shadow-sm">
+                          <span className="w-6 h-6 flex items-center justify-center bg-black/80 text-[#C5A059] border border-[#C5A059]/70 text-xs pl-0.5 shadow-sm">
                             ▶
                           </span>
-                          <span className="text-[7.5px] text-white/95 font-medium tracking-[0.16em] uppercase mt-1">
+                          <span className="text-xs text-white/95 font-medium tracking-[0.16em] uppercase mt-1">
                             VIDEO
                           </span>
                         </div>
@@ -903,7 +903,7 @@ export default function Product() {
                   </video>
 
                   {/* Video Lookbook Pill Badge */}
-                  <div className="absolute top-3 left-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-10 flex items-center gap-1.5 bg-black/75 text-[#C5A059] border border-[#C5A059]/40 pointer-events-none">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 text-xs uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-10 flex items-center gap-1.5 bg-black/75 text-[#C5A059] border border-[#C5A059]/40 pointer-events-none">
                     <span className="inline-block w-1.5 h-1.5 bg-[#C5A059] animate-pulse" />
                     VIDEO LOOKBOOK
                   </div>
@@ -920,7 +920,7 @@ export default function Product() {
                       }
                     }}
                     aria-label={isMuted ? 'Nyalakan audio video lookbook' : 'Senyapkan audio video lookbook'}
-                    className="absolute top-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-20 flex items-center gap-1.5 bg-black/75 hover:bg-black/90 text-white border border-[#C5A059]/40 transition-all cursor-pointer shadow-sm"
+                    className="absolute top-3 right-3 px-2.5 py-1 text-xs uppercase tracking-[0.18em] font-medium backdrop-blur-sm z-20 flex items-center gap-1.5 bg-black/75 hover:bg-black/90 text-white border border-[#C5A059]/40 transition-all cursor-pointer shadow-sm"
                   >
                     {isMuted ? (
                       <>
@@ -1012,7 +1012,7 @@ export default function Product() {
               {/* Counter Badge */}
               {mediaList.length > 1 && (
                 <div
-                  className={`absolute bottom-3 right-3 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] font-medium backdrop-blur-sm z-10 pointer-events-none ${
+                  className={`absolute bottom-3 right-3 px-2.5 py-1 text-xs uppercase tracking-[0.16em] font-medium backdrop-blur-sm z-10 pointer-events-none ${
                     isExclusiveTier
                       ? 'bg-[#111111]/85 text-[#C5A059] border border-[#C5A059]/40'
                       : isPremiumTier
@@ -1031,7 +1031,7 @@ export default function Product() {
             {/* Header Block */}
             <div>
               {/* Category & Tier Whispered Eyebrow */}
-              <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.24em] font-bold mb-2">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] font-bold mb-2">
                 {isExclusiveTier ? (
                   <span className="text-[#C5A059] flex items-center gap-1.5">
                     <span className="inline-block w-1.5 h-1.5 rotate-45 bg-[#C5A059]" />
@@ -1213,7 +1213,7 @@ export default function Product() {
 
             {/* Trust Guarantee Grid & Local Shipping / Pickup Info (Frameless) */}
             <div
-              className={`pt-4.5 border-t space-y-3 text-[11px] sm:text-xs ${
+              className={`pt-4.5 border-t space-y-3 text-xs ${
                 isExclusiveTier
                   ? 'border-[#262626] text-[#E2DFD8]/75'
                   : isPremiumTier
@@ -1223,25 +1223,25 @@ export default function Product() {
             >
               <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span className="text-[#C5A059] text-xs">&bull;</span>
                   <span>Bebas Tukar Ukuran 7 Hari</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span className="text-[#C5A059] text-xs">&bull;</span>
                   <span>100% Batik Indonesia</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span className="text-[#C5A059] text-xs">&bull;</span>
                   <span>Pengiriman Seluruh Indonesia</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#C5A059] text-[8px]">&bull;</span>
+                  <span className="text-[#C5A059] text-xs">&bull;</span>
                   <span>Biaya pengiriman dihitung saat checkout</span>
                 </div>
               </div>
 
               <div
-                className={`pt-2.5 border-t space-y-1.5 text-[11px] sm:text-xs font-light leading-relaxed ${
+                className={`pt-2.5 border-t space-y-1.5 text-xs font-light leading-relaxed ${
                   isExclusiveTier
                     ? 'border-[#262626]/70 text-[#E2DFD8]/80'
                     : isPremiumTier
@@ -1250,11 +1250,11 @@ export default function Product() {
                 }`}
               >
                 <p className="flex items-start gap-2">
-                  <span className="text-[#C5A059] text-[8px] mt-1 shrink-0">&bull;</span>
+                  <span className="text-[#C5A059] text-xs mt-1 shrink-0">&bull;</span>
                   <span>Pengiriman instan tersedia melalui Gojek / Grab Express di area Semarang.</span>
                 </p>
                 <p className="flex items-start gap-2">
-                  <span className="text-[#C5A059] text-[8px] mt-1 shrink-0">&bull;</span>
+                  <span className="text-[#C5A059] text-xs mt-1 shrink-0">&bull;</span>
                   <span>
                     Pengambilan produk dapat dilakukan di{' '}
                     <Link
@@ -1320,7 +1320,7 @@ export default function Product() {
                       {structuredProductSpecs.map((item, idx) => (
                         <div key={idx} className="py-2.5 flex items-baseline justify-between gap-4">
                           <span
-                            className={`text-[10px] uppercase tracking-[0.18em] font-medium shrink-0 ${
+                            className={`text-xs uppercase tracking-[0.18em] font-medium shrink-0 ${
                               isDarkPDP ? 'text-[#C5A059]' : 'text-[#888888]'
                             }`}
                           >
@@ -1362,10 +1362,10 @@ export default function Product() {
                     }`}
                   >
                     <div className="py-2.5 flex items-start gap-3">
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">1.</span>
+                      <span className="text-[#C5A059] text-xs mt-0.5 shrink-0">1.</span>
                       <div className="min-w-0">
                         <span
-                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                          className={`text-xs uppercase font-bold tracking-[0.16em] block mb-0.5 ${
                             isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
@@ -1382,10 +1382,10 @@ export default function Product() {
                     </div>
 
                     <div className="py-2.5 flex items-start gap-3">
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">2.</span>
+                      <span className="text-[#C5A059] text-xs mt-0.5 shrink-0">2.</span>
                       <div className="min-w-0">
                         <span
-                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                          className={`text-xs uppercase font-bold tracking-[0.16em] block mb-0.5 ${
                             isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
@@ -1402,10 +1402,10 @@ export default function Product() {
                     </div>
 
                     <div className="py-2.5 flex items-start gap-3">
-                      <span className="text-[#C5A059] text-[9px] mt-0.5 shrink-0">3.</span>
+                      <span className="text-[#C5A059] text-xs mt-0.5 shrink-0">3.</span>
                       <div className="min-w-0">
                         <span
-                          className={`text-[10px] uppercase font-bold tracking-[0.16em] block mb-0.5 ${
+                          className={`text-xs uppercase font-bold tracking-[0.16em] block mb-0.5 ${
                             isDarkPDP ? 'text-white' : 'text-[#111111]'
                           }`}
                         >
@@ -1453,7 +1453,7 @@ export default function Product() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
             <div>
               <span
-                className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-1.5 ${
+                className={`text-xs uppercase tracking-[0.24em] font-bold block mb-1.5 ${
                   isDarkPDP ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
                 }`}
               >
@@ -1488,7 +1488,7 @@ export default function Product() {
                     key={tab.id}
                     type="button"
                     onClick={() => setSameMotifFilter(tab.id)}
-                    className={`px-3.5 py-2 text-[10px] uppercase tracking-[0.16em] font-semibold border transition-colors cursor-pointer ${
+                    className={`px-3.5 py-2 text-xs uppercase tracking-[0.16em] font-semibold border transition-colors cursor-pointer ${
                       active
                         ? 'bg-[#C5A059] text-[#111111] border-[#C5A059]'
                         : isDarkPDP
@@ -1531,7 +1531,7 @@ export default function Product() {
                       decoding="async"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
-                    <span className="absolute top-2 left-2 px-2 py-0.5 bg-black/85 text-[#C5A059] border border-[#C5A059]/40 text-[8px] uppercase tracking-[0.15em] font-semibold">
+                    <span className="absolute top-2 left-2 px-2 py-0.5 bg-black/85 text-[#C5A059] border border-[#C5A059]/40 text-xs uppercase tracking-[0.15em] font-semibold">
                       {entry.badge}
                     </span>
                   </div>
@@ -1544,7 +1544,7 @@ export default function Product() {
                       {entry.modelLabel}
                     </h3>
                     <p
-                      className={`text-[10px] font-light mb-2 line-clamp-1 ${
+                      className={`text-xs font-light mb-2 line-clamp-1 ${
                         isDarkPDP ? 'text-[#A9A49C]' : 'text-[#5A5550]'
                       }`}
                     >
@@ -1575,7 +1575,7 @@ export default function Product() {
           >
             <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
               <span
-                className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-1.5 ${
+                className={`text-xs uppercase tracking-[0.24em] font-bold block mb-1.5 ${
                   isDarkPDP ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
                 }`}
               >
@@ -1612,7 +1612,7 @@ export default function Product() {
               <div className="text-center mt-8 sm:mt-10">
                 <Link
                   to={`/collections/${relatedCollectionHandle}`}
-                  className={`inline-block px-8 py-3.5 text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline ${
+                  className={`inline-block px-8 py-3.5 text-xs uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline ${
                     isExclusiveTier
                       ? 'bg-[#181818] border border-[#C5A059]/50 hover:bg-[#C5A059] !text-[#C5A059] hover:!text-[#111111]'
                       : isPremiumTier

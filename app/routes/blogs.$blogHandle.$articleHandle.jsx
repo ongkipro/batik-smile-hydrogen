@@ -135,7 +135,7 @@ export default function Article() {
 
         {/* Grand Editorial Header (Centered in max-w-3xl) */}
         <header className="mb-12 sm:mb-14 text-center max-w-3xl mx-auto">
-          <span className="inline-block text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-bold mb-4">
+          <span className="inline-block text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-bold mb-4">
             CATATAN &amp; FILOSOFI WASTRA
           </span>
 
@@ -143,7 +143,7 @@ export default function Article() {
             {title}
           </h1>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#5A5550]">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.18em] text-[#5A5550]">
             <span className="font-semibold text-[#111111]">{author?.name || 'Batik Smile Editorial'}</span>
             <span>&bull;</span>
             <time dateTime={publishedAt}>{publishedDate}</time>
@@ -163,7 +163,7 @@ export default function Article() {
                 className="w-full h-full object-cover object-center"
               />
             </div>
-            <figcaption className="text-[10px] sm:text-[11px] text-[#888888] uppercase tracking-[0.16em] mt-3 text-center font-light">
+            <figcaption className="text-xs text-[#888888] uppercase tracking-[0.16em] mt-3 text-center font-light">
               Dokumentasi Arsip Wastra &bull; Butik Batik Smile Semarang
             </figcaption>
           </figure>
@@ -179,7 +179,7 @@ export default function Article() {
           {/* Curator Provenance Signature Stamp */}
           <div className="mt-14 pt-8 border-t border-[#E2DFD8] flex items-start justify-between gap-4">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] block mb-1">
+              <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] block mb-1">
                 Kurasi Redaksi Butik Batik Smile
               </span>
               <p className="text-xs text-[#5A5550] font-light leading-relaxed max-w-md">
@@ -190,7 +190,7 @@ export default function Article() {
           </div>
 
           {/* Refined Minimalist Action & Share Toolbar */}
-          <div className="mt-8 pt-4 border-t border-[#E2DFD8] flex items-center justify-between text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
+          <div className="mt-8 pt-4 border-t border-[#E2DFD8] flex items-center justify-between text-xs uppercase tracking-[0.2em] font-semibold text-[#111111]">
             <Link
               to="/blogs"
               className="hover:text-[#9E7D3B] transition-colors flex items-center gap-1.5 no-underline"
@@ -216,7 +216,7 @@ export default function Article() {
           <section className="w-full mb-16 sm:mb-20">
             <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
               <div>
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+                <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
                   SHOP THE STORY
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
@@ -225,7 +225,7 @@ export default function Article() {
               </div>
               <Link
                 to="/collections/all"
-                className="text-[10px] uppercase tracking-[0.18em] text-[#111111] hover:text-[#C5A059] transition-colors no-underline font-semibold"
+                className="text-xs uppercase tracking-[0.18em] text-[#111111] hover:text-[#C5A059] transition-colors no-underline font-semibold"
               >
                 SEMUA KOLEKSI &rarr;
               </Link>
@@ -244,7 +244,7 @@ export default function Article() {
           <section className="w-full mb-16 sm:mb-20">
             <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
               <div>
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+                <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
                   REKOMENDASI JURNAL
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
@@ -253,7 +253,7 @@ export default function Article() {
               </div>
               <Link
                 to="/blogs"
-                className="text-[10px] uppercase tracking-[0.18em] text-[#111111] hover:text-[#C5A059] transition-colors no-underline font-semibold"
+                className="text-xs uppercase tracking-[0.18em] text-[#111111] hover:text-[#C5A059] transition-colors no-underline font-semibold"
               >
                 LIHAT SEMUA &rarr;
               </Link>
@@ -291,7 +291,7 @@ export default function Article() {
                       </div>
 
                       {/* Micro Index & Metadata (Matching Homepage) */}
-                      <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold mb-2.5">
+                      <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold mb-2.5">
                         <span>0{idx + 1}</span>
                         <span>/</span>
                         <span>{category}</span>
@@ -314,7 +314,7 @@ export default function Article() {
                       )}
 
                       {/* Subtle Text Action Link */}
-                      <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+                      <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
                         <span className="border-b border-[#111111]/30 group-hover:border-[#9E7D3B] pb-0.5 transition-colors">
                           BACA CATATAN
                         </span>
@@ -333,7 +333,7 @@ export default function Article() {
         {/* Bespoke Concierge Consultation Banner */}
         <div className="w-full p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
+            <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
               LAYANAN KONSULTASI WASTRA
             </span>
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-2 leading-tight">
@@ -349,7 +349,7 @@ export default function Article() {
             )}`}
             target="_blank"
             rel="noreferrer"
-            className="px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors whitespace-nowrap shadow-sm no-underline cursor-pointer"
+            className="px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] transition-colors whitespace-nowrap shadow-sm no-underline cursor-pointer"
           >
             KONSULTASI VIA WHATSAPP &rarr;
           </a>

@@ -257,7 +257,7 @@ export default function Addresses() {
     <div>
       <div className="border-b border-[#E2DFD8] pb-4 mb-8 flex items-center justify-between">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
             BUKU ALAMAT
           </span>
           <h2 className="font-serif text-2xl font-normal text-[#111111]">
@@ -324,7 +324,7 @@ function NewAddressForm() {
             disabled={stateForMethod('POST') !== 'idle'}
             formMethod="POST"
             type="submit"
-            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
+            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
           >
             {stateForMethod('POST') !== 'idle' ? 'MENYIMPAN...' : 'TAMBAH ALAMAT BARU →'}
           </button>
@@ -353,7 +353,7 @@ function ExistingAddresses({ addresses, defaultAddress }) {
                   disabled={stateForMethod('PUT') !== 'idle'}
                   formMethod="PUT"
                   type="submit"
-                  className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] text-white text-[10px] uppercase font-semibold tracking-[0.16em] transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] text-white text-xs uppercase font-semibold tracking-[0.16em] transition-colors cursor-pointer"
                 >
                   {stateForMethod('PUT') !== 'idle' ? '...' : 'SIMPAN'}
                 </button>
@@ -361,7 +361,7 @@ function ExistingAddresses({ addresses, defaultAddress }) {
                   disabled={stateForMethod('DELETE') !== 'idle'}
                   formMethod="DELETE"
                   type="submit"
-                  className="px-4 py-2 bg-transparent hover:bg-red-50 text-red-600 border border-red-200 text-[10px] uppercase font-semibold tracking-[0.16em] transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-transparent hover:bg-red-50 text-red-600 border border-red-200 text-xs uppercase font-semibold tracking-[0.16em] transition-colors cursor-pointer"
                 >
                   {stateForMethod('DELETE') !== 'idle' ? '...' : 'HAPUS'}
                 </button>
@@ -397,7 +397,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor={`firstName-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`firstName-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             NAMA DEPAN*
           </label>
           <input
@@ -411,7 +411,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
           />
         </div>
         <div>
-          <label htmlFor={`lastName-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`lastName-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             NAMA BELAKANG*
           </label>
           <input
@@ -427,7 +427,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
       </div>
 
       <div>
-        <label htmlFor={`address1-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+        <label htmlFor={`address1-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
           ALAMAT LENGKAP*
         </label>
         <input
@@ -443,7 +443,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label htmlFor={`city-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`city-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             KOTA / KABUPATEN*
           </label>
           <input
@@ -457,7 +457,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
           />
         </div>
         <div>
-          <label htmlFor={`zoneCode-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`zoneCode-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             PROVINSI*
           </label>
           <input
@@ -471,7 +471,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
           />
         </div>
         <div>
-          <label htmlFor={`zip-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`zip-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             KODE POS*
           </label>
           <input
@@ -488,7 +488,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor={`phoneNumber-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`phoneNumber-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             NO. TELEPON / WHATSAPP
           </label>
           <input
@@ -501,7 +501,7 @@ export function AddressForm({ addressId, address, defaultAddress, children }) {
           />
         </div>
         <div>
-          <label htmlFor={`territoryCode-${addressId}`} className="text-[10px] uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
+          <label htmlFor={`territoryCode-${addressId}`} className="text-xs uppercase font-semibold tracking-[0.14em] text-[#111111] block mb-1">
             KODE NEGARA*
           </label>
           <input

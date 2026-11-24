@@ -294,7 +294,7 @@ export function CollectionSidebar({
                       <span className="w-1.5 h-1.5 bg-[#C5A059] rounded-none shrink-0" />
                     )}
                   </div>
-                  <span className="mt-1 block text-[10px] sm:text-[10.5px] uppercase tracking-[0.08em] leading-snug text-[#9E7D3B]">
+                  <span className="mt-1 block text-xs uppercase tracking-[0.08em] leading-snug text-[#9E7D3B]">
                     {col.tier}
                   </span>
                 </Link>
@@ -546,11 +546,11 @@ export function CollectionSidebar({
               <circle cx="6" cy="18" r="3" />
               <path strokeLinecap="square" strokeLinejoin="miter" d="M20 4L8.7 15.3M8.7 8.7L20 20" />
             </svg>
-            <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#C5A059]">
+            <span className="text-xs uppercase font-bold tracking-[0.16em] text-[#C5A059]">
               LAYANAN JAHITAN BUTIK
             </span>
           </div>
-          <p className={`text-[11px] leading-relaxed ${isDark ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
+          <p className={`text-xs leading-relaxed ${isDark ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
             Tersedia layanan jahitan untuk sarimbit keluarga dan seragam kantor tanpa batasan minimal order.
           </p>
         </div>
@@ -679,7 +679,7 @@ export function CollectionSidebar({
               </span>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[10px] uppercase tracking-wider text-[#888888] block mb-0.5">Min (Rp)</label>
+                  <label className="text-xs uppercase tracking-wider text-[#888888] block mb-0.5">Min (Rp)</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -692,7 +692,7 @@ export function CollectionSidebar({
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] uppercase tracking-wider text-[#888888] block mb-0.5">Maks (Rp)</label>
+                  <label className="text-xs uppercase tracking-wider text-[#888888] block mb-0.5">Maks (Rp)</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -864,7 +864,7 @@ export function CollectionFilterHeader({
             </svg>
             <span>Filter</span>
             {activeFilterCount > 0 && (
-              <span className={`inline-flex items-center justify-center w-4 h-4 text-[9px] font-mono font-bold ${
+              <span className={`inline-flex items-center justify-center w-4 h-4 text-xs font-mono font-bold ${
                 hasActiveFilters
                   ? isDark ? 'bg-[#111111] text-[#C5A059]' : 'bg-white text-[#111111]'
                   : 'bg-[#C5A059] text-[#111111]'
@@ -950,7 +950,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setGender('')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -966,7 +966,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setCategory('')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -997,7 +997,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setPriceBracket('all')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -1022,7 +1022,7 @@ export function CollectionFilterHeader({
             <button
               type="button"
               onClick={() => setSort('featured')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] sm:text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs uppercase tracking-wider border cursor-pointer transition-colors ${
                 isDark
                   ? 'bg-white/10 border-white/25 text-white hover:border-[#C5A059]'
                   : 'bg-white border-[#E2DFD8] text-[#111111] hover:border-[#111111]'
@@ -1113,7 +1113,7 @@ export function CollectionMobileDrawer({
       role="dialog"
       aria-modal="true"
       aria-labelledby={`${id}-title`}
-      className="fixed inset-0 z-50 flex"
+      className="fixed inset-0 z-[100] flex"
     >
       {/* Backdrop */}
       <div
@@ -1175,7 +1175,7 @@ export function CollectionMobileDrawer({
                       <span className="text-xs sm:text-sm leading-tight">{col.label}</span>
                       {isActive && <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />}
                     </div>
-                    <span className="mt-1 block text-[10px] sm:text-[10.5px] uppercase tracking-[0.08em] leading-snug text-[#9E7D3B]">
+                    <span className="mt-1 block text-xs uppercase tracking-[0.08em] leading-snug text-[#9E7D3B]">
                       {col.tier}
                     </span>
                   </Link>
@@ -1306,11 +1306,11 @@ export function CollectionMobileDrawer({
                   <circle cx="6" cy="18" r="3" />
                   <path strokeLinecap="square" strokeLinejoin="miter" d="M20 4L8.7 15.3M8.7 8.7L20 20" />
                 </svg>
-                <span className="text-[10px] uppercase font-bold tracking-[0.16em] text-[#C5A059]">
+                <span className="text-xs uppercase font-bold tracking-[0.16em] text-[#C5A059]">
                   LAYANAN JAHITAN BUTIK
                 </span>
               </div>
-              <p className={`text-[11px] leading-relaxed ${isDark ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
+              <p className={`text-xs leading-relaxed ${isDark ? 'text-[#D5C8B8]' : 'text-[#5A5550]'}`}>
                 Tersedia layanan jahitan untuk sarimbit keluarga dan seragam kantor tanpa batasan minimal order.
               </p>
             </div>

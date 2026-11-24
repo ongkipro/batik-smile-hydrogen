@@ -86,10 +86,10 @@ export default function BlogsIndex() {
 
         {/* Archive Label */}
         <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
+          <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[#111111]">
             ARSIP TULISAN TERKURASI
           </span>
-          <span className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] font-medium">
+          <span className="text-xs uppercase tracking-[0.16em] text-[#9E7D3B] font-medium">
             {articles.length} CATATAN
           </span>
         </div>
@@ -149,7 +149,7 @@ function FeaturedHeroCard({ article, blogHandle }) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent lg:hidden" />
           <div className="absolute top-4 left-4 z-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/75 backdrop-blur-md border border-[#C5A059]/50 text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-black/75 backdrop-blur-md border border-[#C5A059]/50 text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold">
               <span className="w-1.5 h-1.5 bg-[#C5A059]" />
               ULASAN UTAMA
             </span>
@@ -159,7 +159,7 @@ function FeaturedHeroCard({ article, blogHandle }) {
         {/* Text Container (5 Cols on Desktop) */}
         <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between text-white border-t lg:border-t-0 lg:border-l border-white/10">
           <div>
-            <div className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-medium mb-3">
+            <div className="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-[#C5A059] font-medium mb-3">
               <time dateTime={article.publishedAt}>{publishedDate}</time>
               <span>•</span>
               <span className="text-[#A69F96]">
@@ -178,7 +178,7 @@ function FeaturedHeroCard({ article, blogHandle }) {
             )}
           </div>
 
-          <div className="pt-4 border-t border-white/15 flex items-center justify-between text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold">
+          <div className="pt-4 border-t border-white/15 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold">
             <span>BACA ULASAN LENGKAP</span>
             <span className="transform group-hover:translate-x-2 transition-transform duration-300">
               &rarr;
@@ -223,7 +223,7 @@ function EditorialArticleCard({ article, blogHandle, loading }) {
         </div>
 
         {/* Metadata */}
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mb-2">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mb-2">
           <time dateTime={article.publishedAt}>{publishedDate}</time>
           <span className="text-[#A69F96]">•</span>
           <span className="text-[#A69F96] font-normal">
@@ -244,7 +244,7 @@ function EditorialArticleCard({ article, blogHandle, loading }) {
         )}
 
         {/* Subtle Text Action Link */}
-        <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
           <span className="border-b border-[#111111]/30 group-hover:border-[#9E7D3B] pb-0.5 transition-colors">
             BACA CATATAN
           </span>

@@ -67,7 +67,7 @@ export function SarimbitBentoSection({ collections = [] }) {
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <span className="text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
             PILIHAN KASTA BUSANA KELUARGA
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
@@ -131,7 +131,7 @@ export function SarimbitBentoSection({ collections = [] }) {
                     {/* Bottom Bar: Collection Editorial Info */}
                     <div>
                       {pillar.note && (
-                        <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+                        <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
                           ARSIP BUTIK &bull; {pillar.note}
                         </span>
                       )}
@@ -140,13 +140,13 @@ export function SarimbitBentoSection({ collections = [] }) {
                         {displayTitle}
                       </h3>
 
-                      <p className="text-[11px] text-[#E2DFD8]/85 font-light line-clamp-2 mb-3.5">
+                      <p className="text-xs text-[#E2DFD8]/85 font-light line-clamp-2 mb-3.5">
                         {pillar.subtitle}
                       </p>
 
                       {/* Action Line */}
                       <div className="flex items-center justify-between pt-2.5 border-t border-white/20">
-                        <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
+                        <span className="text-xs uppercase tracking-[0.2em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
                           <span
                             className={`w-1.5 h-1.5 group-hover:rotate-45 transition-transform duration-300 ${
                               isPillarPremium ? 'bg-[#D5B066]' : 'bg-[#C5A059]'

@@ -50,7 +50,7 @@ export default function SearchPage() {
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
             TEMUKAN KARYA NUSANTARA
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl font-normal tracking-wide text-[#111111] mb-2">
@@ -74,7 +74,7 @@ export default function SearchPage() {
                 />
                 <button
                   type="submit"
-                  className="px-4 sm:px-8 py-3 sm:py-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors cursor-pointer shadow-sm whitespace-nowrap"
+                  className="px-4 sm:px-8 py-3 sm:py-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs font-semibold uppercase tracking-[0.18em] transition-colors cursor-pointer shadow-sm whitespace-nowrap"
                 >
                   CARI &rarr;
                 </button>
@@ -83,7 +83,7 @@ export default function SearchPage() {
           </SearchForm>
 
           {/* Popular Tag Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-[10px]">
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs">
             <span className="text-[#5A5550] uppercase tracking-wider font-medium">Pencarian Populer:</span>
             {popularKeywords.map((kw) => (
               <NavLink
@@ -118,7 +118,7 @@ export default function SearchPage() {
             </p>
             <NavLink
               to="/collections/luxury-series"
-              className="inline-block px-8 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+              className="inline-block px-8 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
             >
               LIHAT KOLEKSI POPULER &rarr;
             </NavLink>

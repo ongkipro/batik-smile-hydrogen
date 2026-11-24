@@ -39,7 +39,7 @@ export function CraftsmanshipZoom() {
       <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
             STANDAR KUALITAS BUTIK
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111] leading-tight mb-3">
@@ -68,7 +68,7 @@ export function CraftsmanshipZoom() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-3 right-3">
-                    <span className="px-2.5 py-1 text-[8px] sm:text-[9px] uppercase font-bold tracking-widest bg-black/80 text-white border border-white/20">
+                    <span className="px-2.5 py-1 text-xs uppercase font-bold tracking-widest bg-black/80 text-white border border-white/20">
                       {item.tag}
                     </span>
                   </div>
@@ -77,7 +77,7 @@ export function CraftsmanshipZoom() {
                 <div className="p-6 sm:p-8">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="font-serif text-xl font-normal text-[#C5A059]">{item.number}</span>
-                    <span className="text-[9px] uppercase tracking-[0.18em] font-semibold text-[#888888]">
+                    <span className="text-xs uppercase tracking-[0.18em] font-semibold text-[#888888]">
                       {item.subtitle}
                     </span>
                   </div>

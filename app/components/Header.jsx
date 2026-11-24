@@ -88,7 +88,7 @@ export function Header({ _header, isLoggedIn, cart, _publicStoreDomain }) {
           {/* 3. CENTER: Desktop Navigation Menu (Collision-Free Flex Center on Tablet/Laptop, Dead Center on 2XL) */}
           <nav
             aria-label="Navigasi Utama Butik"
-            className="hidden lg:flex flex-1 2xl:flex-initial 2xl:absolute 2xl:left-1/2 2xl:top-1/2 2xl:-translate-x-1/2 2xl:-translate-y-1/2 items-center justify-center gap-3.5 xl:gap-6 2xl:gap-8 whitespace-nowrap z-10 text-[10.5px] xl:text-[12px] 2xl:text-[13px] font-medium uppercase tracking-[0.12em] xl:tracking-[0.16em] 2xl:tracking-[0.18em] px-3 2xl:px-0"
+            className="hidden lg:flex flex-1 2xl:flex-initial 2xl:absolute 2xl:left-1/2 2xl:top-1/2 2xl:-translate-x-1/2 2xl:-translate-y-1/2 items-center justify-center gap-3.5 xl:gap-6 2xl:gap-8 whitespace-nowrap z-10 text-xs 2xl:text-[13px] font-medium uppercase tracking-[0.12em] xl:tracking-[0.16em] 2xl:tracking-[0.18em] px-3 2xl:px-0"
           >
             {NAV_ITEMS.map((item) => (
               <NavLink
@@ -219,7 +219,7 @@ function CartBadge({ count }) {
 
       {/* Floating Precision Numeric Badge (Fixed position, Zero layout shift) */}
       {count > 0 && (
-        <span className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 bg-[#111111] text-[#C5A059] text-[9.5px] font-mono font-bold flex items-center justify-center border border-[#C5A059]/60 leading-none shadow-sm">
+        <span className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 bg-[#111111] text-[#C5A059] text-xs font-mono font-bold flex items-center justify-center border border-[#C5A059]/60 leading-none shadow-sm">
           {count > 99 ? '99+' : count}
         </span>
       )}
@@ -240,10 +240,10 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
         <div>
           {/* Whispered Brand Heritage Stamp */}
           <div className="mb-8">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#9E7D3B] block">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#9E7D3B] block">
               BUTIK BATIK SMILE
             </span>
-            <span className="text-[9px] uppercase tracking-[0.18em] text-[#777777] block mt-1 font-light">
+            <span className="text-xs uppercase tracking-[0.18em] text-[#777777] block mt-1 font-light">
               Semarang &bull; Sejak 2007
             </span>
           </div>
@@ -282,7 +282,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
           <div className="w-10 h-px bg-[#C5A059]/40 mb-8" />
 
           {/* Secondary Editorial Links (Whispered Sans, Generous Tracking) */}
-          <div className="flex flex-col space-y-3 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium text-[#5A5550]">
+          <div className="flex flex-col space-y-3 text-xs uppercase tracking-[0.2em] font-medium text-[#5A5550]">
             <NavLink
               to="/pages/member"
               onClick={close}
@@ -320,7 +320,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
             href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20busana"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.18em] text-[#7C3F1D] hover:text-[#111111] font-semibold transition-colors py-0.5"
+            className="inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.18em] text-[#7C3F1D] hover:text-[#111111] font-semibold transition-colors py-0.5"
           >
             <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
             <span>VIP Concierge: 081-390-8888-09</span>
@@ -328,7 +328,7 @@ export function HeaderMenu({ _menu, _viewport, _publicStoreDomain, _primaryDomai
           <NavLink
             to="/account"
             onClick={close}
-            className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.18em] text-[#5A5550] hover:text-[#111111] font-medium transition-colors py-0.5"
+            className="inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.18em] text-[#5A5550] hover:text-[#111111] font-medium transition-colors py-0.5"
           >
             <span>Akun Pelanggan &amp; Status Pesanan</span>
           </NavLink>

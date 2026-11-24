@@ -123,7 +123,7 @@ export function Footer() {
                     href="https://maps.google.com/?q=Batik+Smile+Simongan+Semarang"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-[#C5A059] hover:text-white font-medium uppercase tracking-wider transition-colors"
+                    className="inline-flex items-center gap-1 text-xs text-[#C5A059] hover:text-white font-medium uppercase tracking-wider transition-colors"
                     title="Buka rute Google Maps Batik Smile Sampokong"
                   >
                     <span>Peta</span>
@@ -168,7 +168,7 @@ export function Footer() {
                     href="https://maps.google.com/?q=Batik+Smile+Banyumanik+Semarang"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-[#C5A059] hover:text-white font-medium uppercase tracking-wider transition-colors"
+                    className="inline-flex items-center gap-1 text-xs text-[#C5A059] hover:text-white font-medium uppercase tracking-wider transition-colors"
                     title="Buka rute Google Maps Batik Smile Sukun"
                   >
                     <span>Peta</span>
@@ -424,7 +424,7 @@ export function Footer() {
         </div>
 
         {/* 4. BOTTOM BAR: PROFESSIONAL COPYRIGHT & LEGAL COMPLIANCE */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#A69F96] tracking-[0.12em] uppercase">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#A69F96] tracking-[0.12em] uppercase">
           <div className="text-center md:text-left">
             &copy; {new Date().getFullYear()} BATIK SMILE. SELURUH HAK CIPTA DILINDUNGI.
           </div>

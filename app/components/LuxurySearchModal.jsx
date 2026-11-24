@@ -155,7 +155,7 @@ export function LuxurySearchModal() {
       role="dialog"
       aria-modal="true"
       aria-label="Pencarian Butik Batik Smile"
-      className="fixed inset-0 z-50 flex flex-col justify-start items-center"
+      className="fixed inset-0 z-[110] flex flex-col justify-start items-center"
     >
       {/* 1. Velvety Dark Backdrop with Blur */}
       <div
@@ -171,13 +171,13 @@ export function LuxurySearchModal() {
         <div className="flex items-center justify-between px-4 sm:px-8 py-3.5 border-b border-[#E2DFD8] bg-white shrink-0">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#C5A059]" />
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.24em] text-[#111111]">
+            <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#111111]">
               BUTIK BATIK SMILE &bull; PENCARIAN EKSKLUSIF
             </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-block text-[9px] uppercase tracking-[0.2em] text-[#888888]">
+            <span className="hidden sm:inline-block text-xs uppercase tracking-[0.2em] text-[#888888]">
               [ESC] TUTUP
             </span>
             <button
@@ -223,7 +223,7 @@ export function LuxurySearchModal() {
               <button
                 type="button"
                 onClick={handleClear}
-                className="text-[10px] uppercase tracking-[0.16em] text-[#888888] hover:text-[#111111] px-2 py-1 cursor-pointer mr-2 transition-colors"
+                className="text-xs uppercase tracking-[0.16em] text-[#888888] hover:text-[#111111] px-2 py-1 cursor-pointer mr-2 transition-colors"
               >
                 Hapus
               </button>
@@ -231,15 +231,15 @@ export function LuxurySearchModal() {
 
             <button
               type="submit"
-              className="px-5 sm:px-7 py-2.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-bold tracking-[0.2em] transition-colors whitespace-nowrap cursor-pointer shrink-0"
+              className="px-5 sm:px-7 py-2.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-bold tracking-[0.2em] transition-colors whitespace-nowrap cursor-pointer shrink-0"
             >
               CARI
             </button>
           </div>
 
           {/* Trending Keywords Strip: Whispered Editorial Tags */}
-          <div className="flex items-center gap-2 mt-3 overflow-x-auto pb-1 scrollbar-none text-[10px]">
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-bold whitespace-nowrap">
+          <div className="flex items-center gap-2 mt-3 overflow-x-auto pb-1 scrollbar-none text-xs">
+            <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-bold whitespace-nowrap">
               TREN:
             </span>
             <div className="flex items-center gap-2.5 whitespace-nowrap text-[#5A5550]">
@@ -248,7 +248,7 @@ export function LuxurySearchModal() {
                   key={kw}
                   type="button"
                   onClick={() => handleSelectKeyword(kw)}
-                  className="hover:text-[#111111] transition-colors cursor-pointer text-[10px] tracking-wide"
+                  className="hover:text-[#111111] transition-colors cursor-pointer text-xs tracking-wide"
                 >
                   {kw}
                   {idx < TRENDING_KEYWORDS.length - 1 && (
@@ -262,7 +262,7 @@ export function LuxurySearchModal() {
 
         {/* Minimalist Tabbed Navigation Bar (Visible when user has typed) */}
         {hasTypedQuery && total > 0 && (
-          <div className="px-4 sm:px-8 bg-white border-b border-[#E2DFD8] flex items-center gap-6 overflow-x-auto scrollbar-none shrink-0 text-[10px] sm:text-[11px] uppercase tracking-[0.18em]">
+          <div className="px-4 sm:px-8 bg-white border-b border-[#E2DFD8] flex items-center gap-6 overflow-x-auto scrollbar-none shrink-0 text-xs uppercase tracking-[0.18em]">
             <button
               type="button"
               onClick={() => setActiveTab('all')}
@@ -340,7 +340,7 @@ export function LuxurySearchModal() {
           {isLoading && (
             <div className="py-14 text-center">
               <span className="inline-block w-6 h-6 border-2 border-[#C5A059] border-t-transparent animate-spin mb-3" />
-              <p className="text-[10px] uppercase tracking-[0.22em] text-[#5A5550]">
+              <p className="text-xs uppercase tracking-[0.22em] text-[#5A5550]">
                 Mencari kurasi karya butik...
               </p>
             </div>
@@ -352,11 +352,11 @@ export function LuxurySearchModal() {
               <div className="flex items-center justify-between border-b border-[#E2DFD8] pb-2.5 mb-6">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-[#C5A059]" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#111111]">
+                  <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#111111]">
                     REKOMENDASI KARYA TERLARIS
                   </span>
                 </div>
-                <span className="text-[9px] uppercase tracking-wider text-[#888888]">
+                <span className="text-xs uppercase tracking-wider text-[#888888]">
                   Kurasi Butik Batik Smile
                 </span>
               </div>
@@ -390,7 +390,7 @@ export function LuxurySearchModal() {
 
                           {/* Slide-up Minimal Action Bar */}
                           <div className="absolute inset-x-0 bottom-0 p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out bg-gradient-to-t from-black/65 via-black/25 to-transparent">
-                            <div className="w-full py-2 px-2 text-[9px] font-bold uppercase tracking-[0.2em] text-center bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] transition-colors shadow-sm">
+                            <div className="w-full py-2 px-2 text-xs font-bold uppercase tracking-[0.2em] text-center bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] transition-colors shadow-sm">
                               LIHAT DETAIL
                             </div>
                           </div>
@@ -399,7 +399,7 @@ export function LuxurySearchModal() {
                         {/* Minimalist Editorial Metadata */}
                         <div className="pt-3 pb-1 flex flex-col flex-grow justify-between text-center items-center">
                           <div>
-                            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-0.5">
+                            <span className="text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-0.5">
                               BATIK SMILE
                             </span>
                             <Link
@@ -411,7 +411,7 @@ export function LuxurySearchModal() {
                             </Link>
                           </div>
                           <div className="mt-1.5 text-center">
-                            <span className="text-[11px] sm:text-xs font-semibold text-[#111111] tracking-wide">
+                            <span className="text-xs font-semibold text-[#111111] tracking-wide">
                               {price ? formatRupiah(price) : (price && <Money data={price} withoutTrailingZeros as="span" />)}
                             </span>
                           </div>
@@ -448,7 +448,7 @@ export function LuxurySearchModal() {
                     key={kw}
                     type="button"
                     onClick={() => handleSelectKeyword(kw)}
-                    className="px-3.5 py-1.5 bg-white text-[10px] uppercase tracking-[0.14em] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors cursor-pointer border border-[#E2DFD8]/60"
+                    className="px-3.5 py-1.5 bg-white text-xs uppercase tracking-[0.14em] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors cursor-pointer border border-[#E2DFD8]/60"
                   >
                     {kw}
                   </button>
@@ -471,7 +471,7 @@ export function LuxurySearchModal() {
                         KOLEKSI BUTIK TERKAIT
                       </span>
                     </div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#888888]">
+                    <span className="text-xs uppercase tracking-wider text-[#888888]">
                       Kategori Resmi
                     </span>
                   </div>
@@ -500,7 +500,7 @@ export function LuxurySearchModal() {
                             </div>
                           )}
                           <div className="min-w-0">
-                            <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block">
+                            <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block">
                               KOLEKSI RESMI
                             </span>
                             <span className="text-sm font-serif text-[#111111] group-hover:text-[#9E7D3B] transition-colors truncate block">
@@ -548,7 +548,7 @@ export function LuxurySearchModal() {
                         BUSANA &amp; KARYA
                       </span>
                     </div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#888888]">
+                    <span className="text-xs uppercase tracking-wider text-[#888888]">
                       Koleksi Pilihan
                     </span>
                   </div>
@@ -590,7 +590,7 @@ export function LuxurySearchModal() {
                           {/* Editorial Typography Metadata */}
                           <div className="pt-3.5 pb-1 flex flex-col flex-grow justify-between text-center items-center">
                             <div>
-                              <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1">
+                              <span className="text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1">
                                 BATIK SMILE
                               </span>
                               <Link
@@ -645,7 +645,7 @@ export function LuxurySearchModal() {
         </div>
 
         {/* Quiet Luxury Footer Status Bar */}
-        <div className="px-4 sm:px-8 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-white border-t border-[#E2DFD8] flex items-center justify-between text-[10px] text-[#777777] shrink-0">
+        <div className="px-4 sm:px-8 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-white border-t border-[#E2DFD8] flex items-center justify-between text-xs text-[#777777] shrink-0">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#C5A059]" />
             <span>Butik Resmi Semarang &bull; Sejak 2007</span>

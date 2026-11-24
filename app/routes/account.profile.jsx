@@ -88,7 +88,7 @@ export default function AccountProfile() {
   return (
     <div className="max-w-xl">
       <div className="border-b border-[#E2DFD8] pb-4 mb-8">
-        <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+        <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
           DATA PRIBADI
         </span>
         <h2 className="font-serif text-2xl font-normal text-[#111111]">
@@ -101,7 +101,7 @@ export default function AccountProfile() {
           <div>
             <label
               htmlFor="firstName"
-              className="text-[10px] uppercase font-semibold tracking-[0.16em] text-[#111111] block mb-2"
+              className="text-xs uppercase font-semibold tracking-[0.16em] text-[#111111] block mb-2"
             >
               NAMA DEPAN
             </label>
@@ -120,7 +120,7 @@ export default function AccountProfile() {
           <div>
             <label
               htmlFor="lastName"
-              className="text-[10px] uppercase font-semibold tracking-[0.16em] text-[#111111] block mb-2"
+              className="text-xs uppercase font-semibold tracking-[0.16em] text-[#111111] block mb-2"
             >
               NAMA BELAKANG
             </label>
@@ -147,7 +147,7 @@ export default function AccountProfile() {
           <button
             type="submit"
             disabled={state !== 'idle'}
-            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
+            className="px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer disabled:bg-[#A69F96]"
           >
             {state !== 'idle' ? 'MENYIMPAN PERUBAHAN...' : 'SIMPAN PERUBAHAN →'}
           </button>

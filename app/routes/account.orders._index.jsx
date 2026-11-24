@@ -62,7 +62,7 @@ export default function Orders() {
     <div>
       <div className="border-b border-[#E2DFD8] pb-4 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
             DAFTAR TRANSAKSI
           </span>
           <h2 className="font-serif text-2xl font-normal text-[#111111]">
@@ -116,7 +116,7 @@ function EmptyOrders({ hasFilters = false }) {
       </p>
       <Link
         to={hasFilters ? '/account/orders' : '/collections/luxury-series'}
-        className="inline-block px-6 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+        className="inline-block px-6 py-3 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
       >
         {hasFilters ? 'HAPUS FILTER' : 'MULAI BELANJA →'}
       </Link>
@@ -162,7 +162,7 @@ function OrderSearchForm({ currentFilters }) {
       <button
         type="submit"
         disabled={isSearching}
-        className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-wider transition-colors cursor-pointer shadow-sm"
+        className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-wider transition-colors cursor-pointer shadow-sm"
       >
         {isSearching ? '...' : 'CARI'}
       </button>
@@ -198,16 +198,16 @@ function OrderItem({ order }) {
           >
             Pesanan #{order.number}
           </Link>
-          <span className="text-[9px] px-2 py-0.5 bg-[#FAF8F5] border border-[#E2DFD8] text-[#5A5550] uppercase tracking-wider">
+          <span className="text-xs px-2 py-0.5 bg-[#FAF8F5] border border-[#E2DFD8] text-[#5A5550] uppercase tracking-wider">
             {order.financialStatus}
           </span>
           {fulfillmentStatus && (
-            <span className="text-[9px] px-2 py-0.5 bg-[#FAF8F5] border border-[#C5A059] text-[#9E7D3B] uppercase tracking-wider">
+            <span className="text-xs px-2 py-0.5 bg-[#FAF8F5] border border-[#C5A059] text-[#9E7D3B] uppercase tracking-wider">
               {fulfillmentStatus}
             </span>
           )}
         </div>
-        <p className="text-[11px] text-[#A69F96]">
+        <p className="text-xs text-[#A69F96]">
           {new Date(order.processedAt).toLocaleDateString('id-ID', {
             day: 'numeric',
             month: 'long',
@@ -218,7 +218,7 @@ function OrderItem({ order }) {
 
       <div className="flex items-center gap-6">
         <div className="text-right">
-          <span className="text-[10px] uppercase tracking-wider text-[#A69F96] block">Total</span>
+          <span className="text-xs uppercase tracking-wider text-[#A69F96] block">Total</span>
           <span className="text-sm font-semibold text-[#111111]">
             <BoutiqueMoney data={order.totalPrice} />
           </span>
@@ -226,7 +226,7 @@ function OrderItem({ order }) {
 
         <Link
           to={`/account/orders/${btoa(order.id)}`}
-          className="px-4 py-2.5 bg-[#FAF8F5] hover:bg-[#111111] text-[#111111] hover:text-white border border-[#E2DFD8] text-[10px] uppercase font-semibold tracking-[0.16em] transition-colors whitespace-nowrap"
+          className="px-4 py-2.5 bg-[#FAF8F5] hover:bg-[#111111] text-[#111111] hover:text-white border border-[#E2DFD8] text-xs uppercase font-semibold tracking-[0.16em] transition-colors whitespace-nowrap"
         >
           DETAIL &rarr;
         </Link>

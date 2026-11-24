@@ -53,7 +53,7 @@ export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
       {/* Editorial Content Center-Bottom */}
       <div className="relative z-10 h-full w-full px-4 sm:px-8 lg:px-12 xl:px-16 flex flex-col justify-end pb-16 sm:pb-20 text-center items-center">
         {/* Whispered Eyebrow */}
-        <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium mb-3 sm:mb-4 drop-shadow-sm">
+        <span className="text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium mb-3 sm:mb-4 drop-shadow-sm">
           SEMARANG • SEJAK 2007
         </span>
 
@@ -71,14 +71,14 @@ export function HeroEditorial({ data, scrollAnchorId = '#best-sellers' }) {
         <div className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-5 w-full sm:w-auto">
           <Link
             to={ctaLink}
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#FFFFFF] text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] border border-white hover:bg-[#C5A059] hover:text-white hover:border-[#C5A059] transition-all duration-300 shadow-sm"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#FFFFFF] text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] border border-white hover:bg-[#C5A059] hover:text-white hover:border-[#C5A059] transition-all duration-300 shadow-sm"
           >
             {ctaText}
           </Link>
 
           <Link
             to={secondaryCtaLink}
-            className="w-full sm:w-auto px-8 py-3.5 bg-transparent text-white text-[11px] uppercase font-semibold tracking-[0.18em] border border-white/70 hover:bg-white/10 hover:border-white transition-all duration-300"
+            className="w-full sm:w-auto px-8 py-3.5 bg-transparent text-white text-xs uppercase font-semibold tracking-[0.18em] border border-white/70 hover:bg-white/10 hover:border-white transition-all duration-300"
           >
             {secondaryCtaText}
           </Link>

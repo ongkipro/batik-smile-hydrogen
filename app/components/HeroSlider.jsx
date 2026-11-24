@@ -177,7 +177,7 @@ export function HeroSlider({ slides } = {}) {
               <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
                 <div className="max-w-xl text-white">
                   {/* Eyebrow Label (Fixed 1-line height) */}
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.24em] text-[#C5A059] font-semibold block mb-2.5 truncate drop-shadow-xs">
+                  <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-semibold block mb-2.5 truncate drop-shadow-xs">
                     {slide.eyebrow}
                   </span>
 
@@ -205,14 +205,14 @@ export function HeroSlider({ slides } = {}) {
                         href={slide.ctaLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center justify-center min-w-[260px] sm:min-w-[280px] px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+                        className="inline-flex items-center justify-center min-w-[260px] sm:min-w-[280px] px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-xs uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
                       >
                         {slide.ctaText} &rarr;
                       </a>
                     ) : (
                       <Link
                         to={slide.ctaLink}
-                        className="inline-flex items-center justify-center min-w-[260px] sm:min-w-[280px] px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+                        className="inline-flex items-center justify-center min-w-[260px] sm:min-w-[280px] px-8 py-3.5 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white rounded-none text-xs uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
                       >
                         {slide.ctaText} &rarr;
                       </Link>
@@ -250,7 +250,7 @@ export function HeroSlider({ slides } = {}) {
           </div>
 
           {/* Numerical Slide Counter */}
-          <div className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium font-serif">
+          <div className="text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium font-serif">
             <span>0{current + 1}</span>
             <span className="text-white/40 mx-1.5">/</span>
             <span className="text-white/40">0{activeSlides.length}</span>

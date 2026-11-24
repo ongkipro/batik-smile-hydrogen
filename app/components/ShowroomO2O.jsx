@@ -13,7 +13,7 @@ export function ShowroomO2O() {
           {/* Left Column: Authentic Brand Narrative */}
           <div className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
+              <span className="text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium block mb-2">
                 SHOWROOM &amp; BUTIK RESMI SEMARANG
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight">
@@ -28,25 +28,25 @@ export function ShowroomO2O() {
               {/* 2 Showroom Cards (0px radius) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div className="p-6 bg-[#1C1C1C] border border-white/10 hover:border-[#C5A059]/40 transition-colors">
-                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
+                  <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
                     JL. SIMONGAN RAYA NO. 109
                   </span>
                   <h3 className="font-serif text-base font-semibold text-white mb-1.5">
                     Batik Smile Sampokong
                   </h3>
-                  <p className="text-[11px] text-[#A69F96] leading-relaxed font-light">
+                  <p className="text-xs text-[#A69F96] leading-relaxed font-light">
                     Koleksi sarimbit keluarga, kemeja pria, blus &amp; dress wanita siap pakai, serta galeri kain batik tulis dengan ruang ganti yang nyaman.
                   </p>
                 </div>
 
                 <div className="p-6 bg-[#1C1C1C] border border-white/10 hover:border-[#C5A059]/40 transition-colors">
-                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
+                  <span className="text-xs font-semibold tracking-[0.16em] uppercase text-[#C5A059] block mb-1.5">
                     JL. SUKUN RAYA NO. 23
                   </span>
                   <h3 className="font-serif text-base font-semibold text-white mb-1.5">
                     Batik Smile Sukun
                   </h3>
-                  <p className="text-[11px] text-[#A69F96] leading-relaxed font-light">
+                  <p className="text-xs text-[#A69F96] leading-relaxed font-light">
                     Showroom strategis di kawasan Banyumanik dengan koleksi lengkap busana kerja, kasual harian, sarimbit keluarga, dan batik anak.
                   </p>
                 </div>
@@ -56,7 +56,7 @@ export function ShowroomO2O() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 to="/pages/lokasi-toko"
-                className="px-8 py-4 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white font-semibold text-[11px] uppercase tracking-[0.18em] transition-colors"
+                className="px-8 py-4 bg-[#C5A059] hover:bg-[#9E7D3B] text-[#111111] hover:text-white font-semibold text-xs uppercase tracking-[0.18em] transition-colors"
               >
                 PANDUAN LENGKAP LOKASI BUTIK &rarr;
               </Link>
@@ -76,7 +76,7 @@ export function ShowroomO2O() {
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end z-10">
-                <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-[#C5A059] mb-1">
+                <span className="text-xs uppercase font-bold tracking-[0.2em] text-[#C5A059] mb-1">
                   BUTIK &amp; SHOWROOM RESMI
                 </span>
                 <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-1.5">
@@ -85,12 +85,12 @@ export function ShowroomO2O() {
                 <p className="text-xs text-[#E2DFD8] mb-2 font-light">
                   Jl. Simongan Raya No. 109, Pamularsih, Semarang
                 </p>
-                <p className="text-[11px] text-[#A69F96] mb-4">
+                <p className="text-xs text-[#A69F96] mb-4">
                   Buka Setiap Hari: 09.00 - 21.00 WIB
                 </p>
                 <Link
                   to="/pages/lokasi-toko"
-                  className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#C5A059] hover:text-white flex items-center gap-1.5"
+                  className="text-xs uppercase tracking-[0.18em] font-semibold text-[#C5A059] hover:text-white flex items-center gap-1.5"
                 >
                   <span>Lihat Petunjuk Arah &amp; Batik Smile Sukun</span>
                   <span>&rarr;</span>

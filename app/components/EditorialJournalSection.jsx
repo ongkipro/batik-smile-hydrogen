@@ -70,7 +70,7 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
                   </div>
 
                   {/* Micro Index & Metadata */}
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold mb-2.5">
+                  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold mb-2.5">
                     <span>0{idx + 1}</span>
                     <span>/</span>
                     <span>{category}</span>
@@ -93,7 +93,7 @@ export function EditorialJournalSection({ articles = [], blogHandle = 'news' }) 
                   )}
 
                   {/* Subtle Text Action Link */}
-                  <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+                  <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
                     <span className="border-b border-[#111111]/30 group-hover:border-[#9E7D3B] pb-0.5 transition-colors">
                       BACA CATATAN
                     </span>

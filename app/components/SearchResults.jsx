@@ -65,7 +65,7 @@ function SearchResultsArticles({ term, articles }) {
               key={article.id}
             >
               <Link prefetch="intent" to={articleUrl} className="block">
-                <span className="text-[9px] uppercase tracking-[0.2em] text-[#9E7D3B] block mb-1 font-semibold">
+                <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] block mb-1 font-semibold">
                   CATATAN BUDAYA
                 </span>
                 <h4 className="font-serif text-lg font-normal text-[#111111] group-hover:text-[#C5A059] transition-colors leading-snug">
@@ -143,7 +143,7 @@ function SearchResultsProducts({ term, products }) {
           return (
             <div>
               <div className="text-center mb-6">
-                <PreviousLink className="inline-block px-6 py-2.5 bg-white border border-[#E2DFD8] text-[10px] uppercase font-semibold tracking-[0.16em] text-[#111111] hover:border-[#111111] transition-colors">
+                <PreviousLink className="inline-block px-6 py-2.5 bg-white border border-[#E2DFD8] text-xs uppercase font-semibold tracking-[0.16em] text-[#111111] hover:border-[#111111] transition-colors">
                   {isLoading ? 'MEMUAT...' : '↑ LIHAT SEBELUMNYA'}
                 </PreviousLink>
               </div>
@@ -196,7 +196,7 @@ function SearchResultsProducts({ term, products }) {
                       {/* Editorial Metadata */}
                       <div className="pt-3.5 pb-1 flex flex-col flex-grow justify-between text-center items-center">
                         <div>
-                          <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1.5">
+                          <span className="text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1.5">
                             BATIK SMILE
                           </span>
                           <Link
@@ -220,7 +220,7 @@ function SearchResultsProducts({ term, products }) {
               </div>
 
               <div className="text-center mt-10">
-                <NextLink className="inline-block px-8 py-3 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors">
+                <NextLink className="inline-block px-8 py-3 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors">
                   {isLoading ? 'MEMUAT...' : 'MUAT LEBIH BANYAK ↓'}
                 </NextLink>
               </div>

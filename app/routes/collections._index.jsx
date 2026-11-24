@@ -67,7 +67,7 @@ export default function Collections() {
 
         {/* Curated Editorial Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E2DFD8] text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#9E7D3B] font-semibold mb-3 sm:mb-4 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E2DFD8] text-xs uppercase tracking-[0.22em] sm:tracking-[0.24em] text-[#9E7D3B] font-semibold mb-3 sm:mb-4 shadow-xs">
             <span className="w-1.5 h-1.5 bg-[#C5A059]"></span>
             <span>PAPAN KURASI ARSIP &bull; BUTIK SIMONGAN</span>
           </div>
@@ -82,7 +82,7 @@ export default function Collections() {
             <div className="w-10 sm:w-12 h-px bg-[#E2DFD8]" />
           </div>
 
-          <p className="text-[11px] sm:text-sm text-[#5A5550] font-light leading-relaxed max-w-2xl mx-auto px-2">
+          <p className="text-xs sm:text-sm text-[#5A5550] font-light leading-relaxed max-w-2xl mx-auto px-2">
             Lembar arsip kurasi mahakarya Batik Smile. Dari kemegahan Sarimbit Tiga Kasta, kemeja pria pola simetris, hingga helaian kain batik tulis canting tembaga asli Jawa Tengah.
           </p>
 
@@ -99,7 +99,7 @@ export default function Collections() {
               <Link
                 key={idx}
                 to={cat.href}
-                className="whitespace-nowrap px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white hover:bg-[#111111] text-[#111111] hover:text-white border border-[#E2DFD8] hover:border-[#C5A059] text-[8px] sm:text-[9px] uppercase font-semibold tracking-[0.14em] sm:tracking-[0.16em] transition-all no-underline shadow-xs flex-shrink-0"
+                className="whitespace-nowrap px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white hover:bg-[#111111] text-[#111111] hover:text-white border border-[#E2DFD8] hover:border-[#C5A059] text-xs uppercase font-semibold tracking-[0.14em] sm:tracking-[0.16em] transition-all no-underline shadow-xs flex-shrink-0"
               >
                 {cat.label}
               </Link>
@@ -184,7 +184,7 @@ function CollectionItem({ collection, index }) {
           {/* Bottom Bar: Collection Editorial Info */}
           <div>
             {collectionNote && (
-              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+              <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
                 ARSIP BUTIK &bull; {collectionNote}
               </span>
             )}
@@ -194,7 +194,7 @@ function CollectionItem({ collection, index }) {
             </h2>
 
             {(collection.handle === 'kain' || collection.description) && (
-              <p className="text-[11px] text-[#E2DFD8]/80 font-light line-clamp-1 mb-2 hidden sm:block">
+              <p className="text-xs text-[#E2DFD8]/80 font-light line-clamp-1 mb-2 hidden sm:block">
                 {collection.handle === 'kain'
                   ? 'Temukan beragam pilihan kain batik dengan motif dan warna yang memikat, mulai dari sentuhan klasik hingga desain modern. Cocok untuk kreasi busana personal, seragam, maupun kebutuhan sarimbit, dengan pilihan kain yang dapat disesuaikan dengan gaya dan kebutuhan Anda.'
                   : collection.description}
@@ -203,7 +203,7 @@ function CollectionItem({ collection, index }) {
 
             {/* Action Line */}
             <div className="flex items-center justify-between pt-2 border-t border-white/20">
-              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
+              <span className="text-xs uppercase tracking-[0.18em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
                 <span className="w-1 h-1 bg-[#C5A059] group-hover:rotate-45 transition-transform duration-300" />
                 <span>JELAJAHI KOLEKSI</span>
               </span>

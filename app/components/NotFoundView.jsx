@@ -77,7 +77,7 @@ export function NotFoundView({
         </div>
 
         {/* Whispered Eyebrow */}
-        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-[#9E7D3B] block mb-3">
+        <span className="text-xs font-bold uppercase tracking-[0.28em] text-[#9E7D3B] block mb-3">
           GALERI BUTIK &bull; KODE {statusCode}
         </span>
 
@@ -101,14 +101,14 @@ export function NotFoundView({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto mb-8">
           <Link
             to="/"
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] font-bold uppercase tracking-[0.22em] transition-all duration-300 text-center shadow-xs cursor-pointer"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs font-bold uppercase tracking-[0.22em] transition-all duration-300 text-center shadow-xs cursor-pointer"
           >
             KEMBALI KE BERANDA &rarr;
           </Link>
 
           <Link
             to="/collections/all"
-            className="w-full sm:w-auto px-7 py-3.5 bg-transparent border border-[#111111] hover:border-[#C5A059] text-[#111111] hover:text-[#9E7D3B] text-[10px] font-bold uppercase tracking-[0.22em] transition-all duration-300 text-center cursor-pointer"
+            className="w-full sm:w-auto px-7 py-3.5 bg-transparent border border-[#111111] hover:border-[#C5A059] text-[#111111] hover:text-[#9E7D3B] text-xs font-bold uppercase tracking-[0.22em] transition-all duration-300 text-center cursor-pointer"
           >
             JELAJAHI KOLEKSI
           </Link>
@@ -120,7 +120,7 @@ export function NotFoundView({
             <button
               type="button"
               onClick={handleSearchClick}
-              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#7C3F1D] hover:text-[#111111] transition-colors cursor-pointer group"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#7C3F1D] hover:text-[#111111] transition-colors cursor-pointer group"
             >
               <svg
                 className="w-3.5 h-3.5 text-[#9E7D3B] group-hover:scale-110 transition-transform"
@@ -142,7 +142,7 @@ export function NotFoundView({
           ) : (
             <Link
               to="/search"
-              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#7C3F1D] hover:text-[#111111] transition-colors group"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#7C3F1D] hover:text-[#111111] transition-colors group"
             >
               <svg
                 className="w-3.5 h-3.5 text-[#9E7D3B] group-hover:scale-110 transition-transform"
@@ -165,7 +165,7 @@ export function NotFoundView({
         </div>
 
         {/* Concierge Whispered Note */}
-        <div className="mt-12 pt-6 border-t border-[#E2DFD8]/60 text-[10px] text-[#777777] font-light">
+        <div className="mt-12 pt-6 border-t border-[#E2DFD8]/60 text-xs text-[#777777] font-light">
           <span>Butuh panduan motif &amp; ukuran? Hubungi WhatsApp Concierge Resmi: </span>
           <a
             href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20butuh%20bantuan%20mencari%20busana"

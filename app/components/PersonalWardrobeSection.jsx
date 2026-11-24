@@ -119,7 +119,7 @@ export function PersonalWardrobeSection({ collections = [] }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 p-5 sm:p-7 flex flex-col justify-end text-white">
                     {/* Bottom Bar: Collection Editorial Info */}
                     <div>
-                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+                      <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
                         ARSIP BUTIK &bull; {pillar.note}
                       </span>
 
@@ -127,13 +127,13 @@ export function PersonalWardrobeSection({ collections = [] }) {
                         {pillar.title}
                       </h3>
 
-                      <p className="text-[11px] text-[#E2DFD8]/85 font-light line-clamp-2 mb-3.5">
+                      <p className="text-xs text-[#E2DFD8]/85 font-light line-clamp-2 mb-3.5">
                         {pillar.subtitle}
                       </p>
 
                       {/* Action Line */}
                       <div className="flex items-center justify-between pt-2.5 border-t border-white/20">
-                        <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
+                        <span className="text-xs uppercase tracking-[0.2em] font-bold text-white group-hover:text-[#C5A059] transition-colors flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 bg-[#C5A059] group-hover:rotate-45 transition-transform duration-300" />
                           <span>{pillar.cta}</span>
                         </span>

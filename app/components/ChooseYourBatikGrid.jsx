@@ -18,7 +18,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-10">
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
             KURASI KARYA TERANYAR
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] tracking-wide font-normal mb-3 leading-tight">
@@ -53,7 +53,7 @@ export function ChooseYourBatikGrid({ products = [] }) {
         <div className="text-center mt-8 sm:mt-10">
           <Link
             to="/collections/all"
-            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] sm:text-[11px] uppercase font-semibold tracking-[0.2em] transition-colors duration-300 shadow-sm"
+            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] transition-colors duration-300 shadow-sm"
           >
             LIHAT SEMUA KOLEKSI &rarr;
           </Link>

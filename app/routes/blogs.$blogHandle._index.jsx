@@ -84,10 +84,10 @@ export default function Blog() {
 
         {/* Curatorial Archive Label */}
         <div className="flex items-center justify-between pb-3 mb-8 border-b border-[#E2DFD8]">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111]">
+          <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[#111111]">
             DAFTAR ARTIKEL TERKURASI
           </span>
-          <span className="text-[10px] uppercase tracking-[0.16em] text-[#9E7D3B] font-medium">
+          <span className="text-xs uppercase tracking-[0.16em] text-[#9E7D3B] font-medium">
             {articlesList.length} TULISAN
           </span>
         </div>
@@ -150,7 +150,7 @@ function ArticleItem({ article, loading }) {
         </div>
 
         {/* Metadata */}
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mb-2">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold mb-2">
           <time dateTime={article.publishedAt}>{publishedAt}</time>
           <span className="text-[#A69F96]">•</span>
           <span className="text-[#A69F96] font-normal">
@@ -171,7 +171,7 @@ function ArticleItem({ article, loading }) {
         )}
 
         {/* Subtle Text Action Link */}
-        <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
           <span className="border-b border-[#111111]/30 group-hover:border-[#9E7D3B] pb-0.5 transition-colors">
             BACA CATATAN
           </span>

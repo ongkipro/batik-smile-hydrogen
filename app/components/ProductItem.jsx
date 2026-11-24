@@ -85,7 +85,7 @@ export function ProductItem({ product, loading = 'lazy', badge, variant = 'defau
         {effectiveBadge && (
           <div className="absolute top-2.5 left-2.5 z-10">
             <span
-              className={`text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold px-2.5 py-1 shadow-xs ${
+              className={`text-xs uppercase tracking-[0.2em] font-semibold px-2.5 py-1 shadow-xs ${
                 isOutOfStock && !badge
                   ? 'bg-[#111111]/85 text-white/90 border border-white/20 backdrop-blur-xs'
                   : isExclusive

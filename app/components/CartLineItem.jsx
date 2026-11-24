@@ -59,7 +59,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
         {/* Product Details & Stepper Row */}
         <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
           <div>
-            <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-0.5">
+            <span className="text-xs uppercase tracking-[0.18em] text-[#9E7D3B] font-semibold block mb-0.5">
               BATIK SMILE
             </span>
             <Link
@@ -75,7 +75,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
 
             {/* Variant specifications (Size, Color/Pattern) - Hidden if Default Title or empty */}
             {realOptions.length > 0 && (
-              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[11px] text-[#5A5550] uppercase tracking-wider mb-1">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-xs text-[#5A5550] uppercase tracking-wider mb-1">
                 {realOptions.map((option) => (
                   <span key={option.name}>
                     {option.name}: <strong className="text-[#111111]">{option.value}</strong>
@@ -85,7 +85,7 @@ export function CartLineItem({ layout, line, childrenMap }) {
             )}
 
             {/* Unit Price */}
-            <div className="text-xs sm:text-sm text-[#777777]">
+            <div className="text-sm text-[#5A5550]">
               {unitPrice ? formatRupiah(unitPrice) : '-'}
             </div>
           </div>
@@ -149,13 +149,13 @@ function CartLineQuantity({ line }) {
           disabled={quantity <= 1 || !!isOptimistic}
           name="decrease-quantity"
           value={prevQuantity}
-          className="w-8 h-8 flex items-center justify-center text-sm text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+          className="w-10 h-10 flex items-center justify-center text-base text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
         >
           &#8722;
         </button>
       </CartLineUpdateButton>
 
-      <span className="w-8 text-center text-xs sm:text-sm font-semibold text-[#111111]">
+      <span className="w-9 text-center text-sm font-semibold text-[#111111]">
         {quantity}
       </span>
 
@@ -165,7 +165,7 @@ function CartLineQuantity({ line }) {
           name="increase-quantity"
           value={nextQuantity}
           disabled={!!isOptimistic}
-          className="w-8 h-8 flex items-center justify-center text-sm text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
+          className="w-10 h-10 flex items-center justify-center text-base text-[#111111] hover:bg-[#FAF8F5] disabled:opacity-30 cursor-pointer transition-colors"
         >
           &#43;
         </button>
@@ -193,7 +193,7 @@ function CartLineRemoveButton({ lineIds, disabled }) {
       <button
         disabled={disabled}
         type="submit"
-        className="text-[10px] uppercase tracking-wider text-[#888888] hover:text-[#7C3F1D] transition-colors cursor-pointer underline underline-offset-2 p-1"
+        className="text-xs uppercase tracking-wider text-[#5A5550] hover:text-[#7C3F1D] transition-colors cursor-pointer underline underline-offset-4 px-2 py-2 min-h-[40px]"
       >
         Hapus
       </button>

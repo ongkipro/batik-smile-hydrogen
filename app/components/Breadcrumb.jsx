@@ -90,7 +90,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
       aria-label="Navigasi Breadcrumb"
       className={`w-full overflow-hidden mb-5 sm:mb-8 select-none ${className}`}
     >
-      <ol className="flex items-center flex-nowrap overflow-x-auto scrollbar-none py-1 -my-1 text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium leading-none">
+      <ol className="flex items-center flex-nowrap overflow-x-auto scrollbar-none py-1 -my-1 text-xs uppercase tracking-[0.18em] sm:tracking-[0.2em] font-medium leading-none">
         {/* 1. Root: Beranda with Zero-Radius Architectural Icon */}
         <li className="flex items-center shrink-0">
           <NavLink
@@ -119,7 +119,7 @@ export function Breadcrumb({ items = [], isDark = false, tier = null, className 
             <li key={index} className="flex items-center shrink-0">
               {/* Refined Whispered Slash Separator */}
               <span
-                className={`mx-2 sm:mx-3 text-[11px] select-none ${separatorClass}`}
+                className={`mx-2 sm:mx-3 text-xs select-none ${separatorClass}`}
                 aria-hidden="true"
               >
                 /

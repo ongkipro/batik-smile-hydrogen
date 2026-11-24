@@ -58,10 +58,10 @@ export function TrustGuaranteeBar() {
           >
             <div className="text-[#C5A059] flex-shrink-0">{pillar.icon}</div>
             <div>
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#111111]">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#111111]">
                 {pillar.title}
               </h3>
-              <p className="text-[10px] text-[#5A5550] mt-0.5 tracking-wide">
+              <p className="text-xs text-[#5A5550] mt-0.5 tracking-wide">
                 {pillar.desc}
               </p>
             </div>

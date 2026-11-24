@@ -55,7 +55,7 @@ export default function AccountLayout() {
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
             PORTAL PELANGGAN BUTIK
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl font-normal tracking-wide text-[#111111] mb-2">
@@ -81,7 +81,7 @@ export default function AccountLayout() {
 
 function AccountMenu() {
   const navClass = ({ isActive }) =>
-    `py-3 px-4 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all border-b-2 -mb-2.5 ${
+    `py-3 px-4 text-xs font-semibold uppercase tracking-[0.18em] transition-all border-b-2 -mb-2.5 ${
       isActive
         ? 'border-[#C5A059] text-[#111111]'
         : 'border-transparent text-[#5A5550] hover:text-[#111111]'
@@ -110,7 +110,7 @@ function Logout() {
     <Form className="account-logout" method="POST" action="/account/logout">
       <button
         type="submit"
-        className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors cursor-pointer"
+        className="px-4 py-2 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs font-semibold uppercase tracking-[0.16em] transition-colors cursor-pointer"
       >
         KELUAR (SIGN OUT)
       </button>

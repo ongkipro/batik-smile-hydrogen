@@ -101,7 +101,7 @@ export default function Policies() {
 
         {/* Editorial Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
             STANDAR PELAYANAN &amp; TRANSPARANSI HUKUM
           </span>
           <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-4">
@@ -116,7 +116,7 @@ export default function Policies() {
         {/* Section 1: 4 Core Legal Policies (2x2 Grid) */}
         <div className="mb-16 sm:mb-20">
           <div className="border-b border-[#E2DFD8] pb-3 mb-8">
-            <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+            <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
               DOKUMEN LEGAL &amp; TRANSAKSI
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
@@ -165,7 +165,7 @@ export default function Policies() {
                           </svg>
                         )}
                       </div>
-                      <span className="text-[9px] uppercase tracking-[0.2em] font-semibold text-[#9E7D3B] px-2.5 py-1 bg-[#FAF8F5] border border-[#E2DFD8]">
+                      <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[#9E7D3B] px-2.5 py-1 bg-[#FAF8F5] border border-[#E2DFD8]">
                         {policy.badge}
                       </span>
                     </div>
@@ -178,7 +178,7 @@ export default function Policies() {
                     </p>
                   </div>
 
-                  <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors pt-4 border-t border-[#F0ECE1]">
+                  <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors pt-4 border-t border-[#F0ECE1]">
                     <span>BACA DOKUMEN LENGKAP</span>
                     <span className="transform group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
                   </div>
@@ -191,7 +191,7 @@ export default function Policies() {
         {/* Section 2: Panduan Pelayanan & Layanan Terkait (3-Column Grid) */}
         <div className="mb-16 sm:mb-20">
           <div className="border-b border-[#E2DFD8] pb-3 mb-8">
-            <span className="text-[9px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+            <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
               STANDAR LAYANAN BUTIK
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
@@ -207,7 +207,7 @@ export default function Policies() {
                 className="group block p-6 bg-white border border-[#E2DFD8] hover:border-[#C5A059] transition-colors no-underline flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-[9px] uppercase tracking-[0.2em] font-semibold text-[#9E7D3B] block mb-2">
+                  <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[#9E7D3B] block mb-2">
                     {guide.category}
                   </span>
                   <h3 className="font-serif text-lg sm:text-xl font-normal text-[#111111] group-hover:text-[#9E7D3B] transition-colors mb-2.5 leading-snug">
@@ -217,7 +217,7 @@ export default function Policies() {
                     {guide.description}
                   </p>
                 </div>
-                <div className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
+                <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] font-semibold text-[#111111] group-hover:text-[#9E7D3B] transition-colors">
                   <span>LIHAT PANDUAN</span>
                   <span>&rarr;</span>
                 </div>
@@ -229,7 +229,7 @@ export default function Policies() {
         {/* Section 3: Concierge Direct Assistance Banner */}
         <div className="p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
+            <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
               LAYANAN KONSULTASI RESMI
             </span>
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-2">
@@ -243,7 +243,7 @@ export default function Policies() {
             href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20mengenai%20kebijakan%20layanan"
             target="_blank"
             rel="noreferrer"
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] uppercase font-bold tracking-[0.2em] transition-colors whitespace-nowrap text-center no-underline cursor-pointer"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-xs uppercase font-bold tracking-[0.2em] transition-colors whitespace-nowrap text-center no-underline cursor-pointer"
           >
             KONSULTASI VIA WHATSAPP &rarr;
           </a>

@@ -69,7 +69,7 @@ export default function OrderRoute() {
       <div className="mb-6">
         <Link
           to="/account/orders"
-          className="text-[10px] uppercase font-semibold tracking-[0.18em] text-[#5A5550] hover:text-[#111111] transition-colors"
+          className="text-xs uppercase font-semibold tracking-[0.18em] text-[#5A5550] hover:text-[#111111] transition-colors"
         >
           &larr; KEMBALI KE RIWAYAT PESANAN
         </Link>
@@ -78,7 +78,7 @@ export default function OrderRoute() {
       {/* Header */}
       <div className="border-b border-[#E2DFD8] pb-4 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-1">
             DETAIL TRANSAKSI
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111]">
@@ -95,10 +95,10 @@ export default function OrderRoute() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[10px] px-3 py-1 bg-[#FAF8F5] border border-[#E2DFD8] text-[#111111] uppercase font-medium tracking-wider">
+          <span className="text-xs px-3 py-1 bg-[#FAF8F5] border border-[#E2DFD8] text-[#111111] uppercase font-medium tracking-wider">
             {order.financialStatus}
           </span>
-          <span className="text-[10px] px-3 py-1 bg-[#FAF8F5] border border-[#C5A059] text-[#9E7D3B] uppercase font-semibold tracking-wider">
+          <span className="text-xs px-3 py-1 bg-[#FAF8F5] border border-[#C5A059] text-[#9E7D3B] uppercase font-semibold tracking-wider">
             {fulfillmentStatus}
           </span>
         </div>
@@ -109,7 +109,7 @@ export default function OrderRoute() {
         {/* Line Items Table */}
         <div className="lg:col-span-2 overflow-x-auto">
           <table className="w-full text-left text-xs border border-[#E2DFD8]">
-            <thead className="bg-[#FAF8F5] border-b border-[#E2DFD8] text-[10px] uppercase tracking-wider text-[#5A5550]">
+            <thead className="bg-[#FAF8F5] border-b border-[#E2DFD8] text-xs uppercase tracking-wider text-[#5A5550]">
               <tr>
                 <th className="py-3 px-4 font-semibold">Produk Batik</th>
                 <th className="py-3 px-4 font-semibold text-center">Jumlah</th>
@@ -136,7 +136,7 @@ export default function OrderRoute() {
                           {lineItem.title}
                         </p>
                         {lineItem.variantTitle && (
-                          <span className="text-[10px] text-[#A69F96] block uppercase tracking-wider">
+                          <span className="text-xs text-[#A69F96] block uppercase tracking-wider">
                             Ukuran/Varian: {lineItem.variantTitle}
                           </span>
                         )}
@@ -190,7 +190,7 @@ export default function OrderRoute() {
         {/* Shipping & Delivery Sidebar */}
         <div className="space-y-6">
           <div className="p-6 bg-[#FAF8F5] border border-[#E2DFD8]">
-            <h4 className="text-[10px] uppercase font-semibold tracking-[0.18em] text-[#9E7D3B] mb-3">
+            <h4 className="text-xs uppercase font-semibold tracking-[0.18em] text-[#9E7D3B] mb-3">
               ALAMAT PENGIRIMAN
             </h4>
             {order?.shippingAddress ? (
@@ -215,7 +215,7 @@ export default function OrderRoute() {
               target="_blank"
               href={order.statusPageUrl}
               rel="noreferrer"
-              className="block w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[10px] font-semibold uppercase tracking-[0.18em] text-center transition-colors"
+              className="block w-full py-3.5 px-4 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs font-semibold uppercase tracking-[0.18em] text-center transition-colors"
             >
               LACAK STATUS PENGIRIMAN &rarr;
             </a>

@@ -129,7 +129,7 @@ export function VipDiscountModal() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="vip-discount-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 select-none animate-fadeIn"
+      className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6 select-none animate-fadeIn"
     >
       {/* Backdrop */}
       <div
@@ -154,7 +154,7 @@ export function VipDiscountModal() {
         <div className="w-12 h-0.5 bg-[#C5A059] mx-auto mb-5" />
 
         {/* Whispered Eyebrow */}
-        <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block mb-2">
+        <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#9E7D3B] block mb-2">
           PROGRAM KEANGGOTAAN RESMI
         </span>
 
@@ -173,7 +173,7 @@ export function VipDiscountModal() {
               Bergabung menjadi Member Batik Smile (minimum pembelanjaan Rp 500.000 dalam 1 nota transaksi) dan nikmati 5 keistimewaan eksklusif:
             </p>
 
-            <ul className="text-left text-[11px] sm:text-xs text-[#111111] space-y-1.5 mb-5 bg-white border border-[#E2DFD8] p-3.5">
+            <ul className="text-left text-xs text-[#111111] space-y-1.5 mb-5 bg-white border border-[#E2DFD8] p-3.5">
               <li><strong>1. Birthday Privilege:</strong> Hadiah / voucher spesial di bulan ulang tahun</li>
               <li><strong>2. Exclusive Collection Access:</strong> Akses lebih awal ke koleksi terbaru</li>
               <li><strong>3. Member Special Offers:</strong> Promo &amp; penawaran khusus member</li>
@@ -200,13 +200,13 @@ export function VipDiscountModal() {
 
               <button
                 type="submit"
-                className="w-full py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[11px] font-bold uppercase tracking-[0.22em] transition-colors rounded-none cursor-pointer shadow-sm min-h-[44px]"
+                className="w-full py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs font-bold uppercase tracking-[0.22em] transition-colors rounded-none cursor-pointer shadow-sm min-h-[44px]"
               >
                 GABUNG MEMBER BATIK SMILE
               </button>
             </form>
 
-            <div className="mt-4 flex items-center justify-between text-[10px] tracking-wider text-[#888888]">
+            <div className="mt-4 flex items-center justify-between text-xs tracking-wider text-[#888888]">
               <NavLink
                 to="/pages/member"
                 onClick={handleDismiss}
@@ -242,7 +242,7 @@ export function VipDiscountModal() {
               <NavLink
                 to="/pages/member"
                 onClick={handleDismiss}
-                className="w-full block py-3.5 px-6 bg-[#C5A059] hover:bg-[#111111] text-[#111111] hover:text-white text-[11px] font-bold uppercase tracking-[0.22em] transition-colors rounded-none text-center min-h-[44px]"
+                className="w-full block py-3.5 px-6 bg-[#C5A059] hover:bg-[#111111] text-[#111111] hover:text-white text-xs font-bold uppercase tracking-[0.22em] transition-colors rounded-none text-center min-h-[44px]"
               >
                 LENGKAPI FORMULIR MEMBER BATIK SMILE &rarr;
               </NavLink>
@@ -250,7 +250,7 @@ export function VipDiscountModal() {
               <button
                 type="button"
                 onClick={handleDismiss}
-                className="text-[10px] uppercase tracking-[0.16em] text-[#777777] hover:text-[#111111] transition-colors cursor-pointer py-1"
+                className="text-xs uppercase tracking-[0.16em] text-[#777777] hover:text-[#111111] transition-colors cursor-pointer py-1"
               >
                 Tutup Jendela
               </button>

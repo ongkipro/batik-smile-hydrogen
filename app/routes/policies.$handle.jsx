@@ -306,7 +306,7 @@ export default function Policy() {
 
         {/* Header */}
         <div className="border-b border-[#E2DFD8] pb-8 mb-12">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-2">
             DOKUMEN RESMI BUTIK
           </span>
           <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-wide text-[#111111] mb-3 leading-tight">
@@ -326,7 +326,7 @@ export default function Policy() {
         {/* Direct Contact Banner */}
         <div className="p-8 sm:p-10 bg-[#111111] text-white border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
+            <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
               LAYANAN KONSULTASI KLIEN
             </span>
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-white mb-2">
@@ -340,7 +340,7 @@ export default function Policy() {
             href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile%2C%20saya%20ingin%20konsultasi%20mengenai%20kebijakan%20layanan"
             target="_blank"
             rel="noreferrer"
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[10px] uppercase font-bold tracking-[0.2em] transition-colors whitespace-nowrap text-center no-underline cursor-pointer"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-xs uppercase font-bold tracking-[0.2em] transition-colors whitespace-nowrap text-center no-underline cursor-pointer"
           >
             HUBUNGI CONCIERGE &rarr;
           </a>

@@ -63,7 +63,7 @@ export function BestSellersTabs({
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-6 sm:px-8 py-3 min-h-[44px] inline-flex items-center justify-center text-[11px] sm:text-xs uppercase tracking-[0.2em] font-medium transition-all relative cursor-pointer ${
+                  className={`px-6 sm:px-8 py-3 min-h-[44px] inline-flex items-center justify-center text-xs uppercase tracking-[0.2em] font-medium transition-all relative cursor-pointer ${
                     isActive
                       ? 'text-[#111111] font-semibold'
                       : 'text-[#5A5550] hover:text-[#111111]'
@@ -102,7 +102,7 @@ export function BestSellersTabs({
         <div className="text-center mt-8 sm:mt-10">
           <Link
             to={currentTabData.viewAllLink}
-            className="inline-block px-10 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.2em] transition-colors duration-300 shadow-sm"
+            className="inline-block px-10 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] transition-colors duration-300 shadow-sm"
           >
             LIHAT SEMUA KOLEKSI {currentTabData.label} &rarr;
           </Link>

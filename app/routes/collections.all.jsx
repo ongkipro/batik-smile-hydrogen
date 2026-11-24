@@ -289,7 +289,7 @@ export default function CollectionAll() {
             {/* 4:5 Products Grid */}
             {filteredConnection?.nodes?.length === 0 ? (
               <div className="text-center py-16 px-4 border border-[#E2DFD8] bg-white mb-12">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
+                <span className="text-xs uppercase tracking-[0.2em] text-[#9E7D3B] font-semibold block mb-2">
                   FILTER TIDAK MENEMUKAN HASIL
                 </span>
                 <p className="font-serif text-xl text-[#111111] mb-2">
@@ -300,7 +300,7 @@ export default function CollectionAll() {
                 </p>
                 <Link
                   to="/collections/all"
-                  className="inline-block px-6 py-2.5 bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] text-[10px] uppercase font-bold tracking-[0.2em] transition-colors no-underline"
+                  className="inline-block px-6 py-2.5 bg-[#111111] text-white hover:bg-[#C5A059] hover:text-[#111111] text-xs uppercase font-bold tracking-[0.2em] transition-colors no-underline"
                 >
                   Reset Filter Katalog
                 </Link>

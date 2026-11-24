@@ -55,7 +55,7 @@ export default function LokasiTokoPage() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
             KUNJUNGI BUTIK KAMI DI SEMARANG
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-normal tracking-wide leading-tight">
@@ -72,7 +72,7 @@ export default function LokasiTokoPage() {
           {/* Batik Smile Sampokong (3 Lantai) */}
           <div className="border-t border-[#E2DFD8] pt-6 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] uppercase font-semibold tracking-[0.22em] text-[#9E7D3B] block mb-2">
+              <span className="text-xs uppercase font-semibold tracking-[0.22em] text-[#9E7D3B] block mb-2">
                 SHOWROOM UTAMA &bull; 3 LANTAI
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-2">
@@ -120,7 +120,7 @@ export default function LokasiTokoPage() {
                 href="https://maps.google.com/?q=Batik+Smile+Simongan+Semarang"
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] text-center transition-colors shadow-sm no-underline"
+                className="flex-1 py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] text-center transition-colors shadow-sm no-underline"
               >
                 PETUNJUK ARAH &rarr;
               </a>
@@ -128,7 +128,7 @@ export default function LokasiTokoPage() {
                 href={officialWaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 bg-transparent !text-[#111111] hover:!text-[#C5A059] text-[10px] uppercase font-semibold tracking-[0.2em] text-center block border border-[#111111] hover:border-[#C5A059] transition-colors no-underline"
+                className="flex-1 py-3 px-4 bg-transparent !text-[#111111] hover:!text-[#C5A059] text-xs uppercase font-semibold tracking-[0.2em] text-center block border border-[#111111] hover:border-[#C5A059] transition-colors no-underline"
               >
                 CHAT KONSULTAN &rarr;
               </a>
@@ -138,7 +138,7 @@ export default function LokasiTokoPage() {
           {/* Batik Smile Sukun */}
           <div className="border-t border-[#E2DFD8] pt-6 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] uppercase font-semibold tracking-[0.22em] text-[#9E7D3B] block mb-2">
+              <span className="text-xs uppercase font-semibold tracking-[0.22em] text-[#9E7D3B] block mb-2">
                 SHOWROOM SEMARANG ATAS
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-2">
@@ -186,7 +186,7 @@ export default function LokasiTokoPage() {
                 href="https://maps.google.com/?q=Batik+Smile+Banyumanik+Semarang"
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] text-center transition-colors shadow-sm no-underline"
+                className="flex-1 py-3 px-4 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] text-center transition-colors shadow-sm no-underline"
               >
                 PETUNJUK ARAH &rarr;
               </a>
@@ -194,7 +194,7 @@ export default function LokasiTokoPage() {
                 href={officialWaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 bg-transparent !text-[#111111] hover:!text-[#C5A059] text-[10px] uppercase font-semibold tracking-[0.2em] text-center block border border-[#111111] hover:border-[#C5A059] transition-colors no-underline"
+                className="flex-1 py-3 px-4 bg-transparent !text-[#111111] hover:!text-[#C5A059] text-xs uppercase font-semibold tracking-[0.2em] text-center block border border-[#111111] hover:border-[#C5A059] transition-colors no-underline"
               >
                 CHAT KONSULTAN &rarr;
               </a>
@@ -204,7 +204,7 @@ export default function LokasiTokoPage() {
 
         {/* Showroom Visit Support - Clean Editorial Frameless */}
         <div className="pt-12 sm:pt-16 border-t border-[#E2DFD8] text-center max-w-2xl mx-auto">
-          <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-2">
             LAYANAN KONSULTASI &amp; RUTE
           </span>
           <h3 className="font-serif text-2xl sm:text-3xl text-[#111111] font-normal mb-2">
@@ -217,7 +217,7 @@ export default function LokasiTokoPage() {
             href={officialWaUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
+            className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.2em] transition-colors shadow-sm no-underline"
           >
             HUBUNGI CONCIERGE &rarr;
           </a>

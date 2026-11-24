@@ -75,7 +75,7 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
     <div className="bg-[#FAF8F5] p-6 sm:p-8 rounded-none border border-[#E2DFD8] relative my-8">
       {/* Header */}
       <div className="mb-6">
-        <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
+        <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block mb-1">
           PAKET BUSANA KELUARGA
         </span>
         <h3 className="font-serif text-2xl font-normal text-[#111111]">
@@ -114,7 +114,7 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
 
             {member.enabled && (
               <div className="pt-2 border-t border-[#E2DFD8] flex flex-wrap items-center gap-2">
-                <span className="text-[11px] text-[#5A5550] font-medium mr-1">Pilih Size:</span>
+                <span className="text-xs text-[#5A5550] font-medium mr-1">Pilih Size:</span>
                 {member.sizes.map((sz) => (
                   <button
                     key={sz}
@@ -138,7 +138,7 @@ export function FamilyBundleBuilder({ product, selectedVariant }) {
       {/* Live Total & Batch Add Button */}
       <div className="p-5 sm:p-6 rounded-none bg-[#111111] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md border border-[#C5A059]/30">
         <div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-[#E2DFD8] block">
+          <span className="text-xs uppercase tracking-[0.2em] text-[#E2DFD8] block">
             Total Paket ({activeMembers.length} Pcs Busana)
           </span>
           <span className="text-xl sm:text-2xl font-semibold text-[#C5A059]">

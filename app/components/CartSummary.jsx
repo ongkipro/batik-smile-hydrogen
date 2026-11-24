@@ -29,18 +29,18 @@ export function CartSummary({ cart, layout }) {
       <div className="flex justify-between items-baseline mb-1.5">
         <span
           id={!isPage ? summaryId : undefined}
-          className="text-xs uppercase tracking-[0.16em] font-semibold text-[#111111]"
+          className="text-sm uppercase tracking-[0.14em] font-semibold text-[#111111]"
         >
           Subtotal
         </span>
-        <span className="font-serif text-lg sm:text-xl font-normal text-[#111111]">
+        <span className="font-serif text-xl sm:text-2xl font-normal text-[#111111]">
           {cart?.cost?.subtotalAmount?.amount
             ? formatRupiah(cart.cost.subtotalAmount)
             : '-'}
         </span>
       </div>
 
-      <p className="text-[11px] text-[#777777] font-light mb-4">
+      <p className="text-xs sm:text-sm text-[#5A5550] font-normal mb-4">
         Ongkos kirim &amp; kode promo dihitung saat checkout.
       </p>
 
@@ -69,7 +69,7 @@ function CartCheckoutActions({ checkoutUrl }) {
       <a
         href={resolvedCheckoutUrl}
         target="_self"
-        className="w-full block text-center py-3.5 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[11px] uppercase font-semibold tracking-[0.18em] transition-all cursor-pointer"
+        className="w-full block text-center py-4 px-6 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs sm:text-sm uppercase font-semibold tracking-[0.16em] transition-all cursor-pointer"
       >
         LANJUT KE PEMBAYARAN &rarr;
       </a>
@@ -103,7 +103,7 @@ function CartDiscounts({ discountCodes, discountCodeInputId }) {
                 <button
                   type="submit"
                   aria-label="Hapus kode promo"
-                  className="text-[10px] uppercase tracking-wider text-[#777777] hover:text-[#111111] transition-colors cursor-pointer"
+                  className="text-xs uppercase tracking-wider text-[#777777] hover:text-[#111111] transition-colors cursor-pointer"
                 >
                   &times;
                 </button>
@@ -128,7 +128,7 @@ function CartDiscounts({ discountCodes, discountCodeInputId }) {
           <button
             type="submit"
             aria-label="Gunakan kode promo"
-            className="px-3.5 py-2 bg-[#FAF8F5] hover:bg-[#111111] text-[#111111] hover:text-white border-l border-[#E2DFD8] text-[10px] uppercase font-semibold tracking-wider transition-colors shrink-0 cursor-pointer"
+            className="px-3.5 py-2 bg-[#FAF8F5] hover:bg-[#111111] text-[#111111] hover:text-white border-l border-[#E2DFD8] text-xs uppercase font-semibold tracking-wider transition-colors shrink-0 cursor-pointer"
           >
             PAKAI
           </button>

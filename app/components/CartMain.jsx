@@ -53,11 +53,11 @@ export function CartMain({ layout, cart: originalCart }) {
         <div className="mb-6 pb-3 border-b border-[#E2DFD8] flex items-center justify-between text-xs">
           <div className="flex items-center gap-2 text-[#7C3F1D]">
             <span className="w-1.5 h-1.5 bg-[#C5A059] shrink-0" />
-            <span className="font-semibold tracking-[0.12em] uppercase text-[10px] sm:text-[11px]">
+            <span className="font-semibold tracking-[0.12em] uppercase text-xs">
               PENGIRIMAN AMAN &amp; BERASURANSI SE-INDONESIA
             </span>
           </div>
-          <span className="hidden sm:inline text-[10px] text-[#888888] tracking-wider uppercase font-light">
+          <span className="hidden sm:inline text-xs text-[#888888] tracking-wider uppercase font-light">
             Butik Resmi Semarang
           </span>
         </div>
@@ -69,7 +69,7 @@ export function CartMain({ layout, cart: originalCart }) {
             {/* Products Stream */}
             <div>
               <div className="pb-2 mb-1 border-b border-[#111111]">
-                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#111111]">
+                <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#111111]">
                   DAFTAR BUSANA ({cart.totalQuantity})
                 </span>
               </div>
@@ -91,7 +91,7 @@ export function CartMain({ layout, cart: originalCart }) {
               </ul>
 
               {/* Bottom Info Row */}
-              <div className="pt-3 border-t border-[#E2DFD8] flex items-center justify-between text-[11px] text-[#888888] font-light">
+              <div className="pt-3 border-t border-[#E2DFD8] flex items-center justify-between text-xs text-[#888888] font-light">
                 <span>Total {cart.totalQuantity} busana pilihan butik</span>
               </div>
             </div>
@@ -101,7 +101,7 @@ export function CartMain({ layout, cart: originalCart }) {
 
             {/* Whispered Quality Guarantee (No Card Box) */}
             <div className="pt-5 border-t border-[#E2DFD8] text-xs text-[#5A5550] space-y-1.5 font-light">
-              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#7C3F1D] block mb-1">
+              <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#7C3F1D] block mb-1">
                 STANDAR BUTIK BATIK SMILE
               </span>
               <p className="leading-relaxed">
@@ -119,14 +119,14 @@ export function CartMain({ layout, cart: originalCart }) {
 
             {/* Concierge Link (Pure Text Whisper) */}
             <div className="text-center pt-2">
-              <p className="text-[11px] text-[#5A5550] font-light mb-1">
+              <p className="text-xs text-[#5A5550] font-light mb-1">
                 Butuh bantuan fitting atau pengiriman kilat?
               </p>
               <a
                 href="https://wa.me/6281390888809?text=Halo%20Batik%20Smile,%20saya%20ingin%20konsultasi%20pesanan%20tas%20belanja"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#7C3F1D] hover:text-[#111111] transition-colors inline-flex items-center gap-1.5"
+                className="text-xs uppercase tracking-[0.18em] font-semibold text-[#7C3F1D] hover:text-[#111111] transition-colors inline-flex items-center gap-1.5"
               >
                 <span>WhatsApp Butik 081-390-8888-09</span>
                 <span>&rarr;</span>
@@ -181,12 +181,12 @@ function CartOrderNote({ initialNote = '' }) {
       <div className="flex items-center justify-between mb-1">
         <label
           htmlFor="cart-note"
-          className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block"
+          className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-semibold block"
         >
           CATATAN PESANAN (OPSIONAL)
         </label>
         {saved && (
-          <span className="text-[9px] uppercase tracking-[0.16em] text-[#2A5C3F] font-semibold">
+          <span className="text-xs uppercase tracking-[0.16em] text-[#2A5C3F] font-semibold">
             ✓ Catatan Tersimpan
           </span>
         )}
@@ -221,7 +221,7 @@ function CartOrderNote({ initialNote = '' }) {
                     type="submit"
                     disabled={isSaving}
                     onClick={() => setSaved(true)}
-                    className="px-4 py-1.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-[9px] uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer"
+                    className="px-4 py-1.5 bg-[#111111] hover:bg-[#C5A059] text-white hover:text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors cursor-pointer"
                   >
                     {isSaving ? 'MENYIMPAN...' : 'SIMPAN CATATAN'}
                   </button>
@@ -290,7 +290,7 @@ function CartEmpty({ layout }) {
         </svg>
       </div>
 
-      <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+      <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
         GALERI BELANJA BUTIK
       </span>
       <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111] mb-3">
@@ -306,7 +306,7 @@ function CartEmpty({ layout }) {
           to="/collections/all"
           onClick={close}
           prefetch="viewport"
-          className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-[10px] uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
+          className="inline-block px-8 py-3.5 bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111] text-xs uppercase font-semibold tracking-[0.18em] transition-colors shadow-sm"
         >
           MULAI JELAJAHI KOLEKSI &rarr;
         </Link>
@@ -315,7 +315,7 @@ function CartEmpty({ layout }) {
       {/* Recommended Atelier Pillars (Rendered on /cart page) */}
       {layout === 'page' && (
         <div className="mt-8 pt-10 border-t border-[#E2DFD8] text-left max-w-4xl mx-auto">
-          <span className="text-[10px] uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1 text-center">
+          <span className="text-xs uppercase tracking-[0.22em] text-[#7C3F1D] font-semibold block mb-1 text-center">
             REKOMENDASI KOLEKSI PILIHAN
           </span>
           <p className="text-xs text-[#5A5550] font-light text-center mb-6">
@@ -338,7 +338,7 @@ function CartEmpty({ layout }) {
                 <h4 className="font-serif text-base text-[#111111] group-hover:text-[#C5A059] transition-colors mb-0.5">
                   {item.title}
                 </h4>
-                <p className="text-[11px] text-[#777777] font-light">
+                <p className="text-xs text-[#777777] font-light">
                   {item.desc}
                 </p>
               </Link>

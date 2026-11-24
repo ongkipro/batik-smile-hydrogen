@@ -136,7 +136,7 @@ export default function MemberPage() {
       {/* Hero Banner */}
       <section className="relative bg-[#111111] text-white py-16 sm:py-22 px-4 sm:px-8 lg:px-12 xl:px-16 border-b border-[#C5A059]/40">
         <div className="max-w-5xl mx-auto text-center">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A059] font-semibold block mb-3">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#C5A059] font-semibold block mb-3">
             PROGRAM KEANGGOTAAN RESMI BUTIK
           </span>
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-white mb-4">
@@ -162,7 +162,7 @@ export default function MemberPage() {
           {/* Left Column: Syarat bergabung menjadi member batik smile (1 - 8) */}
           <div className="lg:col-span-7 bg-white border border-[#E2DFD8] p-6 sm:p-9 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
+              <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
                 KETENTUAN KEANGGOTAAN
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111] mb-3">
@@ -176,7 +176,7 @@ export default function MemberPage() {
                     key={idx}
                     className="py-3 flex items-start gap-3.5 text-xs sm:text-sm text-[#111111] font-light leading-relaxed"
                   >
-                    <span className="w-6 h-6 shrink-0 bg-[#111111] text-[#C5A059] font-mono text-[11px] font-bold flex items-center justify-center mt-0.5">
+                    <span className="w-6 h-6 shrink-0 bg-[#111111] text-[#C5A059] font-mono text-xs font-bold flex items-center justify-center mt-0.5">
                       {idx + 1}
                     </span>
                     <span className="pt-0.5">{req}</span>
@@ -191,7 +191,7 @@ export default function MemberPage() {
               </span>
               <Link
                 to="/pages/lokasi-toko"
-                className="text-[11px] uppercase tracking-[0.15em] font-semibold text-[#9E7D3B] hover:text-[#111111] underline underline-offset-4"
+                className="text-xs uppercase tracking-[0.15em] font-semibold text-[#9E7D3B] hover:text-[#111111] underline underline-offset-4"
               >
                 Lokasi Toko &amp; GMaps &rarr;
               </Link>
@@ -201,7 +201,7 @@ export default function MemberPage() {
           {/* Right Column: Member Benefits (1 - 5) */}
           <div className="lg:col-span-5 bg-[#111111] text-white border border-[#C5A059]/40 p-6 sm:p-9 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
+              <span className="text-xs uppercase tracking-[0.22em] text-[#C5A059] font-bold block mb-2">
                 KEUNTUNGAN MEMBER
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-normal text-white mb-3">
@@ -212,7 +212,7 @@ export default function MemberPage() {
               <ol className="divide-y divide-white/10">
                 {benefits.map((benefit) => (
                   <li key={benefit.number} className="py-4 flex items-start gap-3.5">
-                    <span className="w-6 h-6 shrink-0 bg-[#C5A059] text-[#111111] font-mono text-[11px] font-bold flex items-center justify-center mt-0.5">
+                    <span className="w-6 h-6 shrink-0 bg-[#C5A059] text-[#111111] font-mono text-xs font-bold flex items-center justify-center mt-0.5">
                       {benefit.number}
                     </span>
                     <div>
@@ -230,7 +230,7 @@ export default function MemberPage() {
 
             <div className="mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-[#E2DFD8]/75">
               <span>Berlaku di seluruh Showroom Batik Smile</span>
-              <span className="text-[#C5A059] font-mono uppercase tracking-wider text-[11px]">VIP PRIVILEGE</span>
+              <span className="text-[#C5A059] font-mono uppercase tracking-wider text-xs">VIP PRIVILEGE</span>
             </div>
           </div>
         </section>
@@ -239,7 +239,7 @@ export default function MemberPage() {
         <section className="mt-8 sm:mt-12 bg-white border border-[#E2DFD8] p-6 sm:p-10">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8">
-              <span className="text-[10px] uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
+              <span className="text-xs uppercase tracking-[0.22em] text-[#9E7D3B] font-bold block mb-2">
                 REGISTRASI KEANGGOTAAN
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#111111] mb-2">
@@ -256,7 +256,7 @@ export default function MemberPage() {
                 <div>
                   <label
                     htmlFor="member-fullname"
-                    className="block text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
+                    className="block text-xs uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
                   >
                     Nama Lengkap *
                   </label>
@@ -274,7 +274,7 @@ export default function MemberPage() {
                 <div>
                   <label
                     htmlFor="member-wa"
-                    className="block text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
+                    className="block text-xs uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
                   >
                     Nomor WA *
                   </label>
@@ -292,7 +292,7 @@ export default function MemberPage() {
                 <div>
                   <label
                     htmlFor="member-email"
-                    className="block text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
+                    className="block text-xs uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
                   >
                     Email *
                   </label>
@@ -310,7 +310,7 @@ export default function MemberPage() {
                 <div>
                   <label
                     htmlFor="member-birthdate"
-                    className="block text-[10px] uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
+                    className="block text-xs uppercase tracking-[0.18em] text-[#111111] font-semibold mb-1.5"
                   >
                     Tanggal Lahir (Untuk Birthday Privilege) *
                   </label>
@@ -344,7 +344,7 @@ export default function MemberPage() {
                 </span>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto shrink-0 whitespace-nowrap py-3.5 px-8 bg-[#111111] hover:bg-[#9E7D3B] text-[#C5A059] hover:text-white text-[11px] font-bold uppercase tracking-[0.2em] transition-colors cursor-pointer"
+                  className="w-full sm:w-auto shrink-0 whitespace-nowrap py-3.5 px-8 bg-[#111111] hover:bg-[#9E7D3B] text-[#C5A059] hover:text-white text-xs font-bold uppercase tracking-[0.2em] transition-colors cursor-pointer"
                 >
                   DAFTAR MEMBER BATIK SMILE &rarr;
                 </button>

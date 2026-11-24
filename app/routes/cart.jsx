@@ -134,7 +134,7 @@ export default function Cart() {
         {Boolean(cart?.totalQuantity) && (
           <div className="flex flex-wrap items-end justify-between gap-4 pb-5 mb-8 border-b border-[#111111]">
             <div>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-1">
+              <span className="text-xs uppercase tracking-[0.25em] text-[#9E7D3B] font-semibold block mb-1">
                 PESANAN BUTIK RESMI
               </span>
               <h1 className="font-serif text-3xl sm:text-4xl font-normal tracking-wide text-[#111111]">
@@ -143,7 +143,7 @@ export default function Cart() {
             </div>
             <Link
               to="/collections/all"
-              className="text-[10px] uppercase tracking-[0.18em] font-semibold text-[#111111] hover:text-[#C5A059] transition-colors pb-1 inline-flex items-center gap-1.5"
+              className="text-xs uppercase tracking-[0.18em] font-semibold text-[#111111] hover:text-[#C5A059] transition-colors pb-1 inline-flex items-center gap-1.5"
             >
               <span>Lanjutkan Belanja</span>
               <span>&rarr;</span>
@@ -158,7 +158,7 @@ export default function Cart() {
 
         {/* Whispered Quiet Luxury Assurance Line (Zero Box, Zero Frame) */}
         <div className="pt-8 sm:pt-10 mt-8 sm:mt-10 border-t border-[#E2DFD8] text-center">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] sm:text-[11px] uppercase tracking-[0.16em] text-[#777777]">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-[0.16em] text-[#777777]">
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 bg-[#C5A059]" />
               <span>Garansi Keaslian Butik 100%</span>

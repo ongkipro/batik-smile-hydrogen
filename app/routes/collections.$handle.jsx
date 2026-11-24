@@ -566,7 +566,7 @@ export default function Collection() {
                     alt={collection.image?.altText || collection.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute bottom-3 left-3 bg-black/85 text-white text-[8px] sm:text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 border border-white/15 backdrop-blur-xs">
+                  <div className="absolute bottom-3 left-3 bg-black/85 text-white text-xs uppercase tracking-[0.2em] px-2.5 py-1 border border-white/15 backdrop-blur-xs">
                     {collection.title}
                   </div>
                 </div>
@@ -583,7 +583,7 @@ export default function Collection() {
         {isExclusive && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 p-6 sm:p-8 bg-[#161616] border border-[#C5A059]/35">
             <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+              <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 PILAR 01
               </span>
               <h4 className="font-serif text-lg text-white font-normal mb-2">Material &amp; Furing Premium</h4>
@@ -592,7 +592,7 @@ export default function Collection() {
               </p>
             </div>
             <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#C5A059]/20">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+              <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 PILAR 02
               </span>
               <h4 className="font-serif text-lg text-white font-normal mb-2">Jahitan Penjahit Teredukasi</h4>
@@ -601,7 +601,7 @@ export default function Collection() {
               </p>
             </div>
             <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+              <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 PILAR 03
               </span>
               <h4 className="font-serif text-lg text-white font-normal mb-2">Jahitan Sarimbit &amp; Seragam</h4>
@@ -616,7 +616,7 @@ export default function Collection() {
         {isPremium && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14 p-6 sm:p-8 bg-[#281C15]/90 backdrop-blur-sm border border-[#7C3F1D]/50 shadow-sm">
             <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+              <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 PILIHAN LAPISAN 01
               </span>
               <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
@@ -627,7 +627,7 @@ export default function Collection() {
               </p>
             </div>
             <div className="text-center p-4 border-y md:border-y-0 md:border-x border-[#7C3F1D]/40">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+              <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 PILIHAN LAPISAN 02
               </span>
               <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
@@ -638,7 +638,7 @@ export default function Collection() {
               </p>
             </div>
             <div className="text-center p-4">
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
+              <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-1.5">
                 LAYANAN BUTIK 03
               </span>
               <h4 className="font-sans text-sm uppercase font-semibold text-white mb-2 tracking-wide">
@@ -682,7 +682,7 @@ export default function Collection() {
                     : 'border-[#E2DFD8] bg-white'
                 }`}
               >
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-2">
+                <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-2">
                   FILTER TIDAK MENEMUKAN HASIL
                 </span>
                 <p className={`font-serif text-xl mb-2 ${isExclusive || isPremium ? 'text-white' : 'text-[#111111]'}`}>
@@ -693,7 +693,7 @@ export default function Collection() {
                 </p>
                 <Link
                   to={`/collections/${handle}`}
-                  className={`inline-block px-6 py-2.5 text-[10px] uppercase font-bold tracking-[0.2em] transition-colors ${
+                  className={`inline-block px-6 py-2.5 text-xs uppercase font-bold tracking-[0.2em] transition-colors ${
                     isExclusive
                       ? 'bg-[#C5A059] text-[#111111] hover:bg-white'
                       : isPremium
@@ -725,7 +725,7 @@ export default function Collection() {
         {/* Bottom Callouts: Tailored per Tier */}
         {isExclusive ? (
           <div className="mt-20 text-center pt-14 border-t border-[#C5A059]/30">
-            <span className="text-[9px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-2">
+            <span className="text-xs uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-2">
               PRIVATE VIP ATELIER
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-3">
@@ -738,7 +738,7 @@ export default function Collection() {
               href={officialWaUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-block px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-lg"
+              className="inline-block px-8 py-3.5 bg-[#C5A059] hover:bg-white text-[#111111] text-xs font-semibold uppercase tracking-[0.18em] transition-colors shadow-lg"
             >
               RESERVASI VIP CONCIERGE &rarr;
             </a>
@@ -750,7 +750,7 @@ export default function Collection() {
             }`}
           >
             <span
-              className={`text-[9px] uppercase tracking-[0.24em] font-bold block mb-2 ${
+              className={`text-xs uppercase tracking-[0.24em] font-bold block mb-2 ${
                 isPremium ? 'text-[#C5A059]' : 'text-[#9E7D3B]'
               }`}
             >
@@ -809,7 +809,7 @@ export default function Collection() {
                       decoding="async"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                     />
-                    <span className="absolute top-2.5 left-2.5 px-2.5 py-1 bg-black/80 text-[#C5A059] border border-[#C5A059]/40 text-[8px] uppercase tracking-[0.18em] font-semibold">
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-1 bg-black/80 text-[#C5A059] border border-[#C5A059]/40 text-xs uppercase tracking-[0.18em] font-semibold">
                       {item.code}
                     </span>
                   </div>
@@ -822,7 +822,7 @@ export default function Collection() {
                       {item.title}
                     </h4>
                     <p
-                      className={`text-[11px] font-light leading-relaxed ${
+                      className={`text-xs font-light leading-relaxed ${
                         isPremium ? 'text-[#D5C8B8]/85' : 'text-[#5A5550]'
                       }`}
                     >
@@ -837,7 +837,7 @@ export default function Collection() {
               href={officialWaUrl}
               target="_blank"
               rel="noreferrer"
-              className={`inline-block px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm ${
+              className={`inline-block px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-colors shadow-sm ${
                 isPremium
                   ? 'bg-[#7C3F1D] hover:bg-[#C5A059] text-white hover:text-[#111111]'
                   : 'bg-[#111111] hover:bg-[#C5A059] !text-white hover:!text-[#111111]'

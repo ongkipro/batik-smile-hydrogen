@@ -46,7 +46,7 @@ export function CustomerLoveNotes({ testimonials }) {
     <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FAF8F5] border-b border-[#E2DFD8]">
       <div className="max-w-4xl mx-auto text-center">
         {/* Eyebrow & Title */}
-        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
+        <span className="text-xs uppercase tracking-[0.24em] text-[#9E7D3B] font-semibold block mb-2">
           TESTIMONI RESMI BUTIK
         </span>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] tracking-wide font-normal mb-8 leading-tight">
@@ -68,10 +68,10 @@ export function CustomerLoveNotes({ testimonials }) {
         </blockquote>
 
         {/* Author & Location Attribution */}
-        <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-semibold text-[#111111] mb-1">
+        <div className="text-xs uppercase tracking-[0.2em] font-semibold text-[#111111] mb-1">
           {currentNote.author || currentNote?.author_name?.value}
         </div>
-        <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#7C3F1D]">
+        <div className="text-xs uppercase tracking-[0.16em] text-[#7C3F1D]">
           {currentNote.location || currentNote?.city_occasion?.value}
         </div>
 
