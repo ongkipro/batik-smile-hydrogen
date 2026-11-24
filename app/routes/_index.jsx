@@ -138,8 +138,37 @@ export async function loader({ context }) {
     }
   }
 
-  // Extract metaobjects
-  const heroData = data?.heroBanners?.nodes?.[0] || null;
+  // Extract live hero_banner Metaobjects sorted by sort_order (falls back to HeroSlider defaults if empty)
+  const heroSlides = (data?.heroBanners?.nodes || [])
+    .map((node) => {
+      const fields = Object.fromEntries(
+        (node.fields || []).map((f) => [f.key, f]),
+      );
+      const imageUrl =
+        fields.featured_image?.reference?.image?.url ||
+        fields.image_url_fallback?.value ||
+        '';
+      if (!imageUrl || !fields.title?.value) return null;
+      return {
+        id: node.handle,
+        eyebrow: fields.tier_badge?.value || '',
+        title: fields.title?.value || '',
+        subtitle: fields.subtitle?.value || '',
+        description: fields.description?.value || '',
+        ctaText: fields.cta_label?.value || 'JELAJAHI KOLEKSI',
+        ctaLink: fields.cta_url?.value || '/collections/all',
+        image: imageUrl,
+        imagePosition: fields.image_position?.value || 'object-center',
+        hasAvif:
+          !fields.featured_image?.reference?.image?.url &&
+          (imageUrl === '/banners/hero_slider_1.jpg' ||
+            imageUrl === '/banners/hero_slider_5.jpg'),
+        sortOrder: Number(fields.sort_order?.value || 99),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
+
   const videoData = data?.heritageVideos?.nodes?.[0] || null;
   const featuredCollections = data?.featuredCollections?.nodes || [];
 
@@ -149,7 +178,7 @@ export async function loader({ context }) {
   const editorialBlogHandle = primaryBlog?.handle || 'news';
 
   return {
-    heroData,
+    heroSlides,
     videoData,
     featuredCollections,
     womenProducts,
@@ -166,7 +195,7 @@ export async function loader({ context }) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const {
-    _heroData,
+    heroSlides,
     videoData,
     featuredCollections,
     womenProducts,
@@ -181,7 +210,7 @@ export default function Homepage() {
   return (
     <div className="w-full bg-[#FAF8F5] text-[#111111]">
       {/* 1. Master Full-Bleed 5-Slide Quiet Luxury Hero Carousel */}
-      <HeroSlider />
+      <HeroSlider slides={heroSlides} />
 
       {/* 2. Signature Sarimbit 3-Pillar Scattered Atelier Moodboard */}
       <SarimbitBentoSection collections={featuredCollections} />
@@ -257,6 +286,25 @@ const HOMEPAGE_QUERY = `#graphql
     shop {
       name
       description
+    }
+    heroBanners: metaobjects(type: "hero_banner", first: 10) {
+      nodes {
+        handle
+        fields {
+          key
+          value
+          reference {
+            ... on MediaImage {
+              image {
+                url
+                altText
+                width
+                height
+              }
+            }
+          }
+        }
+      }
     }
     luxuryCollection: collection(handle: "luxury-series") {
       id

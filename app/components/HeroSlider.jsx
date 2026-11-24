@@ -73,7 +73,8 @@ const SLIDES = [
   },
 ];
 
-export function HeroSlider() {
+export function HeroSlider({ slides } = {}) {
+  const activeSlides = slides && slides.length > 0 ? slides : SLIDES;
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -89,7 +90,7 @@ export function HeroSlider() {
     // Editorial pacing: Allow 12s initial reading time before first auto-advance, then 8s per slide
     const initialDelay = setTimeout(() => {
       intervalId = setInterval(() => {
-        setCurrent((prev) => (prev + 1) % SLIDES.length);
+        setCurrent((prev) => (prev + 1) % activeSlides.length);
       }, 8000);
     }, 12000);
 
@@ -97,14 +98,14 @@ export function HeroSlider() {
       clearTimeout(initialDelay);
       if (intervalId) clearInterval(intervalId);
     };
-  }, [isPaused]);
+  }, [isPaused, activeSlides.length]);
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
+    setCurrent((prev) => (prev === 0 ? activeSlides.length - 1 : prev - 1));
   };
 
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % SLIDES.length);
+    setCurrent((prev) => (prev + 1) % activeSlides.length);
   };
 
   const handleTouchStart = (e) => {
@@ -132,7 +133,7 @@ export function HeroSlider() {
       aria-label="Carousel Hero Butik Batik Smile"
     >
       {/* Background Slides with Cross-Fade */}
-      {SLIDES.map((slide, index) => {
+      {activeSlides.map((slide, index) => {
         // Defer non-primary slides until client hydration to avoid initial LCP bandwidth competition
         if (index > 0 && !isMounted) return null;
 
@@ -147,7 +148,7 @@ export function HeroSlider() {
           >
             {/* Background Image with Subtle Slow Pan & AVIF Next-Gen Format */}
             <picture>
-              {slide.hasAvif && (
+              {slide.hasAvif && slide.image?.endsWith('.jpg') && (
                 <source
                   srcSet={slide.image.replace('.jpg', '.avif')}
                   type="image/avif"
@@ -229,7 +230,7 @@ export function HeroSlider() {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 flex items-center justify-between">
           {/* Progress Indicator Lines */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {SLIDES.map((_, idx) => (
+            {activeSlides.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -252,7 +253,7 @@ export function HeroSlider() {
           <div className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#C5A059] font-medium font-serif">
             <span>0{current + 1}</span>
             <span className="text-white/40 mx-1.5">/</span>
-            <span className="text-white/40">0{SLIDES.length}</span>
+            <span className="text-white/40">0{activeSlides.length}</span>
           </div>
         </div>
       </div>

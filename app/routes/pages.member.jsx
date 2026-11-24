@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { Breadcrumb } from '~/components/Breadcrumb';
 import { generatePageMeta } from '~/lib/seo';
 import { JsonLd } from '~/components/JsonLd';
@@ -13,6 +13,52 @@ export const meta = () => {
       'Bergabung menjadi Member Batik Smile dan nikmati Birthday Privilege, Exclusive Collection Access, Member Special Offers, Exclusive Event Invitation, serta Member Reward.',
   });
 };
+
+/**
+ * @param {import('./+types/pages.member').Route.LoaderArgs} args
+ */
+export async function loader({ context }) {
+  const data = await context.storefront
+    .query(MEMBER_PROGRAM_QUERY, {
+      cache: context.storefront.CacheShort(),
+    })
+    .catch(() => null);
+
+  const fields = Object.fromEntries(
+    (data?.metaobject?.fields || []).map((f) => [f.key, f.value]),
+  );
+
+  let requirements = MEMBER_REQUIREMENTS;
+  if (fields.requirements) {
+    try {
+      const parsed = JSON.parse(fields.requirements);
+      if (Array.isArray(parsed) && parsed.length > 0) requirements = parsed;
+    } catch {
+      // keep fallback
+    }
+  }
+
+  let benefits = MEMBER_BENEFITS;
+  if (fields.benefits) {
+    try {
+      const parsed = JSON.parse(fields.benefits);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        benefits = parsed.map((entry, idx) => {
+          const [title, ...rest] = String(entry).split('|');
+          return {
+            number: String(idx + 1),
+            title: (title || '').trim(),
+            description: rest.join('|').trim(),
+          };
+        });
+      }
+    } catch {
+      // keep fallback
+    }
+  }
+
+  return { requirements, benefits };
+}
 
 const MEMBER_REQUIREMENTS = [
   'Minimum pembelanjaan Rp 500.000 (dalam 1 nota transaksi)',
@@ -54,6 +100,9 @@ const MEMBER_BENEFITS = [
 ];
 
 export default function MemberPage() {
+  const loaderData = useLoaderData();
+  const requirements = loaderData?.requirements || MEMBER_REQUIREMENTS;
+  const benefits = loaderData?.benefits || MEMBER_BENEFITS;
   const [formData, setFormData] = useState({
     fullName: '',
     whatsapp: '',
@@ -122,7 +171,7 @@ export default function MemberPage() {
               <div className="w-12 h-px bg-[#C5A059] mb-5" />
 
               <ol className="divide-y divide-[#E2DFD8]">
-                {MEMBER_REQUIREMENTS.map((req, idx) => (
+                {requirements.map((req, idx) => (
                   <li
                     key={idx}
                     className="py-3 flex items-start gap-3.5 text-xs sm:text-sm text-[#111111] font-light leading-relaxed"
@@ -161,7 +210,7 @@ export default function MemberPage() {
               <div className="w-12 h-px bg-[#C5A059] mb-5" />
 
               <ol className="divide-y divide-white/10">
-                {MEMBER_BENEFITS.map((benefit) => (
+                {benefits.map((benefit) => (
                   <li key={benefit.number} className="py-4 flex items-start gap-3.5">
                     <span className="w-6 h-6 shrink-0 bg-[#C5A059] text-[#111111] font-mono text-[11px] font-bold flex items-center justify-center mt-0.5">
                       {benefit.number}
@@ -313,3 +362,16 @@ export default function MemberPage() {
     </div>
   );
 }
+
+const MEMBER_PROGRAM_QUERY = `#graphql
+  query MemberProgram($country: CountryCode, $language: LanguageCode)
+    @inContext(country: $country, language: $language) {
+    metaobject(handle: {type: "member_program", handle: "default"}) {
+      handle
+      fields {
+        key
+        value
+      }
+    }
+  }
+`;
