@@ -17,6 +17,8 @@ export function shouldRevalidate() {
  */
 export async function loader({ context }) {
   const { customerAccount } = context;
+  await customerAccount.handleAuthStatus();
+
   const { data, errors } = await customerAccount.query(CUSTOMER_DETAILS_QUERY, {
     variables: {
       language: customerAccount.i18n.language,
@@ -31,7 +33,7 @@ export async function loader({ context }) {
     { customer: data.customer },
     {
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Cache-Control': 'private, no-store',
       },
     },
   );

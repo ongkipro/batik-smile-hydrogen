@@ -26,9 +26,25 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - name: Guard against static mock catalog JSON in app/
+        run: |
+          if grep -rnE "from ['\"].*(mock|dummy|data/.*\.json)['\"]" app/; then
+            echo "ERROR: Static mock JSON import detected in app/." >&2
+            exit 1
+          fi
+      - name: Check standard Shopify routes & GraphQL codegen
+        run: |
+          npx shopify hydrogen check routes
+          npm run codegen
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - name: Verify zero private tokens leaked into client bundle
+        run: |
+          if grep -rnE "shpat_[0-9a-fA-F]{16,}|shpss_[0-9a-fA-F]{16,}|shpca_[0-9a-fA-F]{16,}|PRIVATE_STOREFRONT_API_TOKEN" dist/client/; then
+            echo "ERROR: Private token pattern found in dist/client!" >&2
+            exit 1
+          fi
 
   deploy:
     name: Deploy to Oxygen

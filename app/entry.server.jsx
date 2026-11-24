@@ -2,6 +2,7 @@ import {ServerRouter} from 'react-router';
 import {isbot} from 'isbot';
 import {renderToReadableStream} from 'react-dom/server';
 import {createContentSecurityPolicy} from '@shopify/hydrogen';
+import {applyOxygenCacheHeaders} from '~/lib/cache-headers';
 
 /**
  * @param {Request} request
@@ -81,16 +82,7 @@ export default async function handleRequest(
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
 
-  if (!responseHeaders.has('Cache-Control')) {
-    responseHeaders.set(
-      'Cache-Control',
-      'public, max-age=1, stale-while-revalidate=9',
-    );
-  }
-
-  if (responseStatusCode === 404) {
-    responseHeaders.set('X-Robots-Tag', 'noindex, nofollow');
-  }
+  applyOxygenCacheHeaders(request, responseStatusCode, responseHeaders);
 
   return new Response(body, {
     headers: responseHeaders,

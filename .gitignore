@@ -6,7 +6,11 @@ node_modules
 /public/build
 /.mf
 .env
+.env.*
+!.env.example
 .shopify
 .shopify.bak
 .react-router
 scratch/
+startup.cpuprofile
+h2_deploy_log.json

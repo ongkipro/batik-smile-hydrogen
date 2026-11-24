@@ -43,8 +43,8 @@ export async function createHydrogenRouterContext(
       cache,
       waitUntil,
       session,
-      // Or detect from URL path based on locale subpath, cookies, or any other strategy
-      i18n: {language: 'EN', country: 'US'},
+      // Store operates on Indonesia (IDR) market as verified via Storefront API localization
+      i18n: {language: 'ID', country: 'ID'},
       cart: {
         queryFragment: CART_QUERY_FRAGMENT,
       },

@@ -16,7 +16,12 @@ export const meta = () => {
 /**
  * @type {HeadersFunction}
  */
-export const headers = ({ actionHeaders }) => actionHeaders;
+export const headers = ({ actionHeaders }) => {
+  const result = new Headers(actionHeaders);
+  result.set('Cache-Control', 'private, no-store');
+  result.delete('Oxygen-Cache-Control');
+  return result;
+};
 
 /**
  * @param {Route.ActionArgs}
@@ -78,6 +83,7 @@ export async function action({ request, context }) {
 
   const cartId = result?.cart?.id;
   const actionResponseHeaders = cartId ? cart.setCartId(result.cart.id) : new Headers();
+  actionResponseHeaders.set('Cache-Control', 'private, no-store');
   const { cart: cartResult, errors, userErrors, warnings } = result;
 
   if (

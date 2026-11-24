@@ -252,21 +252,21 @@ export async function loader({ params, context }) {
     // Graceful fallback
   }
 
-  // Priority 0: Authoritative Final Shipping Policy ('shipping-policy' / 'kebijakan-pengiriman')
-  // Priority 1: ShopPolicy from Shopify Admin if it has rich body
-  // Priority 2: Native Shopify Page if it exists
-  // Priority 3: Curated Quiet Luxury Fallback
+  // Priority 1: ShopPolicy from Shopify Admin (keeps Storefront + Checkout footer synced)
+  // Priority 2: Curated final shipping policy when Admin shop.shippingPolicy is still empty
+  // Priority 3: Native Shopify Page if it exists
+  // Priority 4: Curated Quiet Luxury Fallback
   let finalTitle = config.fallbackTitle;
   let finalBody = '';
 
   const isShippingPolicy = handle === 'shipping-policy' || handle === 'kebijakan-pengiriman';
 
-  if (isShippingPolicy) {
-    finalTitle = DEFAULT_POLICIES['shipping-policy'].title;
-    finalBody = DEFAULT_POLICIES['shipping-policy'].body;
-  } else if (shopPolicy && shopPolicy.body && shopPolicy.body.trim().length > 50) {
+  if (shopPolicy && shopPolicy.body && shopPolicy.body.trim().length > 50) {
     finalTitle = shopPolicy.title || config.fallbackTitle;
     finalBody = shopPolicy.body;
+  } else if (isShippingPolicy) {
+    finalTitle = DEFAULT_POLICIES['shipping-policy'].title;
+    finalBody = DEFAULT_POLICIES['shipping-policy'].body;
   } else if (shopifyPage && shopifyPage.body && shopifyPage.body.trim().length > 50) {
     finalTitle = shopifyPage.title || config.fallbackTitle;
     finalBody = shopifyPage.body;
