@@ -1,7 +1,9 @@
 import React, { useId } from 'react';
+import { Link } from 'react-router';
 import { CartForm } from '@shopify/hydrogen';
 import { formatRupiah } from '~/lib/currency';
 import { resolveCheckoutUrl } from '~/lib/checkout';
+import { useAside } from '~/components/Aside';
 
 /**
  * Architectural Quiet Luxury Cart Summary Component
@@ -53,19 +55,20 @@ export function CartSummary({ cart, layout }) {
       )}
 
       {/* Checkout Action Button */}
-      <CartCheckoutActions checkoutUrl={cart?.checkoutUrl} />
+      <CartCheckoutActions checkoutUrl={cart?.checkoutUrl} isPage={isPage} />
     </div>
   );
 }
 
 /**
- * @param {{checkoutUrl?: string}}
+ * @param {{checkoutUrl?: string; isPage?: boolean}}
  */
-function CartCheckoutActions({ checkoutUrl }) {
+function CartCheckoutActions({ checkoutUrl, isPage }) {
   const resolvedCheckoutUrl = resolveCheckoutUrl(checkoutUrl);
+  const { close } = useAside();
 
   return (
-    <div>
+    <div className="space-y-2.5">
       <a
         href={resolvedCheckoutUrl}
         target="_self"
@@ -73,6 +76,15 @@ function CartCheckoutActions({ checkoutUrl }) {
       >
         LANJUT KE PEMBAYARAN &rarr;
       </a>
+      {!isPage && (
+        <Link
+          to="/cart"
+          onClick={close}
+          className="w-full block text-center py-2.5 text-xs uppercase tracking-[0.16em] font-semibold text-[#5A5550] hover:text-[#111111] underline underline-offset-4 transition-colors"
+        >
+          Lihat Tas Belanja &amp; Kode Promo
+        </Link>
+      )}
     </div>
   );
 }

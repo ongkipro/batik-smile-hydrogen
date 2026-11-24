@@ -21,33 +21,32 @@ export function HeritageVideoBanner({ videoData }) {
   
   const posterUrl =
     videoData?.poster?.reference?.image?.url ||
-    videoData?.poster?.value ||
+    videoData?.video_file?.reference?.previewImage?.url ||
     '/banners/craftsmanship_canting_banner.jpg';
 
-  const videoUrl = videoData?.video_url?.value || null;
+  const uploadedVideoUrl =
+    videoData?.video_file?.reference?.sources?.find((s) =>
+      s.mimeType?.includes('mp4'),
+    )?.url ||
+    videoData?.video_file?.reference?.sources?.[0]?.url ||
+    videoData?.video_file?.reference?.url ||
+    null;
+
+  const videoUrl = uploadedVideoUrl || videoData?.video_url?.value || null;
 
   return (
     <section className="relative w-full bg-[#111111] text-white py-16 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden">
       {/* Background Media with 0px Radius */}
       <div className="absolute inset-0 w-full h-full">
-        {videoUrl && isPlaying ? (
-          <video
-            src={videoUrl}
-            autoPlay
-            controls
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <img
-            src={posterUrl}
-            alt="Craftsmanship Canting Batik Tulis"
-            width="1920"
-            height="1080"
-            decoding="async"
-            loading="lazy"
-            className="w-full h-full object-cover object-center filter grayscale contrast-125 opacity-70"
-          />
-        )}
+        <img
+          src={posterUrl}
+          alt="Craftsmanship Canting Batik Tulis"
+          width="1920"
+          height="1080"
+          decoding="async"
+          loading="lazy"
+          className="w-full h-full object-cover object-center filter grayscale contrast-125 opacity-70"
+        />
         {/* Dark Vignette Overlay */}
         <div className="absolute inset-0 bg-black/60" />
       </div>
@@ -84,40 +83,48 @@ export function HeritageVideoBanner({ videoData }) {
           </div>
         </div>
 
-        {/* Right Column: Video Play Trigger & Duration Counter */}
+        {/* Right Column: Video Player / Preview Frame */}
         <div className="lg:col-span-5 flex flex-col items-center justify-center w-full">
           <div className="relative w-full max-w-xl aspect-[16/10] bg-[#1C1C1C] border border-[#C5A059]/40 overflow-hidden shadow-2xl group flex items-center justify-center">
-            <img
-              src={posterUrl}
-              alt="Batik Smile Canting Preview"
-              width="800"
-              height="500"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
-            />
+            {videoUrl && isPlaying ? (
+              <video
+                src={videoUrl}
+                poster={posterUrl}
+                autoPlay
+                controls
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <>
+                <img
+                  src={posterUrl}
+                  alt="Batik Smile Canting Preview"
+                  width="800"
+                  height="500"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-700"
+                />
 
-            {/* Centered Play Button */}
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              aria-label="Play Craftsmanship Video"
-              className="absolute w-16 h-16 bg-[#111111]/80 border border-[#C5A059] flex items-center justify-center text-[#C5A059] group-hover:bg-[#C5A059] group-hover:text-[#111111] transition-all duration-300 cursor-pointer shadow-lg"
-            >
-              {isPlaying ? (
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
+                {videoUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setIsPlaying(true)}
+                    aria-label="Putar Video Craftsmanship"
+                    className="absolute w-16 h-16 bg-[#111111]/80 border border-[#C5A059] flex items-center justify-center text-[#C5A059] group-hover:bg-[#C5A059] group-hover:text-[#111111] transition-all duration-300 cursor-pointer shadow-lg"
+                  >
+                    <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </button>
+                )}
 
-            {/* Bottom Duration Badge */}
-            <div className="absolute bottom-3 right-3 px-2.5 py-1 bg-black/80 text-xs tracking-widest text-[#E2DFD8] border border-white/10">
-              0:18 / FINEST PROCESS
-            </div>
+                <div className="absolute bottom-3 right-3 px-2.5 py-1 bg-black/80 text-xs tracking-widest text-[#E2DFD8] border border-white/10">
+                  FINEST PROCESS
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

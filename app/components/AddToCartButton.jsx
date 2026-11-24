@@ -54,7 +54,7 @@ export function AddToCartButton({
       <button
         type="submit"
         onClick={onClick}
-        disabled={disabled ?? fetcher.state !== 'idle'}
+        disabled={Boolean(disabled) || fetcher.state !== 'idle'}
         className={className}
       >
         {fetcher.state !== 'idle' ? 'Memproses...' : children}

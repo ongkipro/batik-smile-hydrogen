@@ -169,7 +169,10 @@ export async function loader({ context }) {
     .filter(Boolean)
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
-  const videoData = data?.heritageVideos?.nodes?.[0] || null;
+  const heritageVideoFields = Object.fromEntries(
+    (data?.heritageVideo?.fields || []).map((f) => [f.key, f]),
+  );
+  const videoData = Object.keys(heritageVideoFields).length > 0 ? heritageVideoFields : null;
   const featuredCollections = data?.featuredCollections?.nodes || [];
 
   // Extract editorial articles
@@ -302,6 +305,36 @@ const HOMEPAGE_QUERY = `#graphql
                 height
               }
             }
+          }
+        }
+      }
+    }
+    heritageVideo: metaobject(handle: {type: "heritage_video", handle: "default"}) {
+      handle
+      fields {
+        key
+        value
+        reference {
+          ... on MediaImage {
+            image {
+              url
+              altText
+              width
+              height
+            }
+          }
+          ... on Video {
+            sources {
+              url
+              mimeType
+            }
+            previewImage {
+              url
+              altText
+            }
+          }
+          ... on GenericFile {
+            url
           }
         }
       }

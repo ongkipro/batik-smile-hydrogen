@@ -57,6 +57,7 @@ export async function loader({request, context, params}) {
 
   // Update cart id in cookie
   const headers = cart.setCartId(cartResult.id);
+  headers.set('Cache-Control', 'private, no-store');
 
   // redirect to checkout
   if (cartResult.checkoutUrl) {
